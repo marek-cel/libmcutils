@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief 4 elements column vector class.
  */
-class MCUTILEXPORT Vector4 final : public Vector<4>
+class MCUTILSEXPORT Vector4 final : public Vector<4>
 {
 public:
 

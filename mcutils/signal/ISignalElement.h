@@ -34,7 +34,7 @@ namespace mc
 /**
  * @brief Interface class for signal processing elements classes.
  */
-class MCUTILEXPORT ISignalElement
+class MCUTILSEXPORT ISignalElement
 {
 public:
 

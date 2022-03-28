@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief Numerical integration interface class.
  */
-class MCUTILEXPORT IIntegrator
+class MCUTILSEXPORT IIntegrator
 {
 public:
 

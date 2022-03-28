@@ -49,7 +49,7 @@ namespace mc
  *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
  * </ul>
  */
-class MCUTILEXPORT Lag final : public ISignalElement
+class MCUTILSEXPORT Lag final : public ISignalElement
 {
 public:
 

@@ -43,7 +43,7 @@ namespace mc
  * @param val double precision value to test
  * @return function returns TRUE if tested value is Infinite
  */
-inline bool MCUTILEXPORT isInf( const double &val )
+inline bool MCUTILSEXPORT isInf( const double &val )
 {
 #   ifdef _MSC_VER
     return !( _finite( val ) );
@@ -58,7 +58,7 @@ inline bool MCUTILEXPORT isInf( const double &val )
  * @param val double precision value to test
  * @return function returns TRUE if tested value is NaN
  */
-inline bool MCUTILEXPORT isNaN( const double &val )
+inline bool MCUTILSEXPORT isNaN( const double &val )
 {
     return ( val != val );
 }
@@ -69,7 +69,7 @@ inline bool MCUTILEXPORT isNaN( const double &val )
  * @param val double precision value to test
  * @return function returns FALSE if tested value is Infinite or NaN
  */
-inline bool MCUTILEXPORT isValid( const double &val )
+inline bool MCUTILSEXPORT isValid( const double &val )
 {
     return !( isNaN( val ) || isInf( val ) );
 }
@@ -81,7 +81,7 @@ inline bool MCUTILEXPORT isValid( const double &val )
  * @param size the size of given array
  * @return function returns FALSE if tested array is Infinite or NaN
  */
-inline bool MCUTILEXPORT isValid( const double array[], unsigned int size )
+inline bool MCUTILSEXPORT isValid( const double array[], unsigned int size )
 {
     for ( unsigned int i = 0; i < size; ++i )
     {

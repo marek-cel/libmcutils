@@ -53,7 +53,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILEXPORT Matrix3x3 final : public MatrixSquare<3>
+class MCUTILSEXPORT Matrix3x3 final : public MatrixSquare<3>
 {
 public:
 

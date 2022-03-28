@@ -32,7 +32,7 @@ namespace mc
 {
 
 /** Geodetic coordinates. */
-struct MCUTILEXPORT Geo
+struct MCUTILSEXPORT Geo
 {
     double lat;                     ///< [rad] geodetic latitude (positive north)
     double lon;                     ///< [rad] geodetic longitude (positive east)

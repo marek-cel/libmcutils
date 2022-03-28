@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief Logging class.
  */
-class MCUTILEXPORT Log
+class MCUTILSEXPORT Log
 {
 public:
 

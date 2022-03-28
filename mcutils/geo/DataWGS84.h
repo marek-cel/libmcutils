@@ -43,28 +43,28 @@ namespace mc
 namespace DataWGS84
 {
 
-MCUTILEXPORT static constexpr double a   = 6378137.0;               ///< [m] equatorial radius
-MCUTILEXPORT static constexpr double b   = 6356752.3142;            ///< [m] polar radius
-MCUTILEXPORT static constexpr double f   = 1.0 / 298.257223563;     ///< [-] ellipsoid flattening
+MCUTILSEXPORT static constexpr double a   = 6378137.0;               ///< [m] equatorial radius
+MCUTILSEXPORT static constexpr double b   = 6356752.3142;            ///< [m] polar radius
+MCUTILSEXPORT static constexpr double f   = 1.0 / 298.257223563;     ///< [-] ellipsoid flattening
 
-MCUTILEXPORT static constexpr double r1  = ( 2.0 * a + b ) / 3.0;   ///< [m] mean radius
-MCUTILEXPORT static constexpr double r2  = 6371007.1809;            ///< [m] radius of sphere of equal area
-MCUTILEXPORT static constexpr double r3  = 6371000.7900;            ///< [m] radius of sphere of equal volume
-MCUTILEXPORT static constexpr double a2  = a * a;                   ///< [m^2] equatorial radius squared
-MCUTILEXPORT static constexpr double b2  = b * b;                   ///< [m^2] polar radius squared
-MCUTILEXPORT static constexpr double e2  = 6.6943799901400e-3;      ///< [-] ellipsoid first eccentricity squared
-MCUTILEXPORT static constexpr double e   = 8.1819190842622e-2;      ///< [-] ellipsoid first eccentricity
-MCUTILEXPORT static constexpr double ep2 = 6.7394967422800e-3;      ///< [-] ellipsoid second eccentricity squared
-MCUTILEXPORT static constexpr double ep  = 8.2094437949696e-2;      ///< [-] ellipsoid second eccentricity
+MCUTILSEXPORT static constexpr double r1  = ( 2.0 * a + b ) / 3.0;   ///< [m] mean radius
+MCUTILSEXPORT static constexpr double r2  = 6371007.1809;            ///< [m] radius of sphere of equal area
+MCUTILSEXPORT static constexpr double r3  = 6371000.7900;            ///< [m] radius of sphere of equal volume
+MCUTILSEXPORT static constexpr double a2  = a * a;                   ///< [m^2] equatorial radius squared
+MCUTILSEXPORT static constexpr double b2  = b * b;                   ///< [m^2] polar radius squared
+MCUTILSEXPORT static constexpr double e2  = 6.6943799901400e-3;      ///< [-] ellipsoid first eccentricity squared
+MCUTILSEXPORT static constexpr double e   = 8.1819190842622e-2;      ///< [-] ellipsoid first eccentricity
+MCUTILSEXPORT static constexpr double ep2 = 6.7394967422800e-3;      ///< [-] ellipsoid second eccentricity squared
+MCUTILSEXPORT static constexpr double ep  = 8.2094437949696e-2;      ///< [-] ellipsoid second eccentricity
 
-MCUTILEXPORT static constexpr double me      = 5.9733328e24;        ///< [kg] mass of the Earth (including atmosphere)
-MCUTILEXPORT static constexpr double gm      = 3986004.418e8;       ///< [m^3/s^2] Earth’s gravitational constant (mass of Earth’s atmosphere included)
-MCUTILEXPORT static constexpr double omega   = 7.2921151467e-5;     ///< [rad/s] angular velocity of the Earth ( 360deg / 23:56:04.091 )
-MCUTILEXPORT static constexpr double gamma   = 9.7976432222;        ///< [m/s^2] theoretical (normal) gravity mean value
-MCUTILEXPORT static constexpr double gamma_e = 9.7803253359;        ///< [m/s^2] theoretical (normal) gravity at the equator (on the ellipsoid)
-MCUTILEXPORT static constexpr double gamma_p = 9.8321849378;        ///< [m/s^2] theoretical (normal) gravity at the pole (on the ellipsoid)
-MCUTILEXPORT static constexpr double k       = 0.00193185265241;    ///< [-] theoretical (normal) gravity formula constant
-MCUTILEXPORT static constexpr double m       = 0.00344978650684;    ///< [-] m = omega^2 * a^2 * b / GM
+MCUTILSEXPORT static constexpr double me      = 5.9733328e24;        ///< [kg] mass of the Earth (including atmosphere)
+MCUTILSEXPORT static constexpr double gm      = 3986004.418e8;       ///< [m^3/s^2] Earth’s gravitational constant (mass of Earth’s atmosphere included)
+MCUTILSEXPORT static constexpr double omega   = 7.2921151467e-5;     ///< [rad/s] angular velocity of the Earth ( 360deg / 23:56:04.091 )
+MCUTILSEXPORT static constexpr double gamma   = 9.7976432222;        ///< [m/s^2] theoretical (normal) gravity mean value
+MCUTILSEXPORT static constexpr double gamma_e = 9.7803253359;        ///< [m/s^2] theoretical (normal) gravity at the equator (on the ellipsoid)
+MCUTILSEXPORT static constexpr double gamma_p = 9.8321849378;        ///< [m/s^2] theoretical (normal) gravity at the pole (on the ellipsoid)
+MCUTILSEXPORT static constexpr double k       = 0.00193185265241;    ///< [-] theoretical (normal) gravity formula constant
+MCUTILSEXPORT static constexpr double m       = 0.00344978650684;    ///< [-] m = omega^2 * a^2 * b / GM
 
 } // DataWGS84
 } // mc

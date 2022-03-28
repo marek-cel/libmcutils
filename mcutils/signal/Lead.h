@@ -46,7 +46,7 @@ namespace mc
  *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
  * </ul>
  */
-class MCUTILEXPORT Lead final : public ISignalElement
+class MCUTILSEXPORT Lead final : public ISignalElement
 {
 public:
 

@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief Table and linear interpolation class.
  */
-class MCUTILEXPORT Table final
+class MCUTILSEXPORT Table final
 {
 public:
 

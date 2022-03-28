@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )
  */
-class MCUTILEXPORT HighPassFilter final : public ISignalElement
+class MCUTILSEXPORT HighPassFilter final : public ISignalElement
 {
 public:
 

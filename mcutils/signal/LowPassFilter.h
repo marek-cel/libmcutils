@@ -41,7 +41,7 @@ namespace mc
  *
  * First-order low-pass filter is based on a first-order lag element.
  */
-class MCUTILEXPORT LowPassFilter final : public ISignalElement
+class MCUTILSEXPORT LowPassFilter final : public ISignalElement
 {
 public:
 

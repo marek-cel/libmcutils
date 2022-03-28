@@ -25,23 +25,23 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #if defined(_MSC_VER)
-#   if defined(MCUTIL_DLL_EXPORTS)
-#       define MCUTIL_DLL_SPEC __declspec(dllexport)
-#   elif defined(MCUTIL_DLL_IMPORTS)
-#       define MCUTIL_DLL_SPEC __declspec(dllimport)
+#   if defined(MCUTILS_DLL_EXPORTS)
+#       define MCUTILS_DLL_SPEC __declspec(dllexport)
+#   elif defined(MCUTILS_DLL_IMPORTS)
+#       define MCUTILS_DLL_SPEC __declspec(dllimport)
 #   else
-#       define MCUTIL_DLL_SPEC
+#       define MCUTILS_DLL_SPEC
 #   endif
 #else
-#   define MCUTIL_DLL_SPEC
+#   define MCUTILS_DLL_SPEC
 #endif
 
 #if defined(__cplusplus)
-#   define MCUTILEXPORT MCUTIL_DLL_SPEC
+#   define MCUTILSEXPORT MCUTILS_DLL_SPEC
 #endif
 
-#if !defined(MCUTILEXPORT)
-#   define MCUTILEXPORT
+#if !defined(MCUTILSEXPORT)
+#   define MCUTILSEXPORT
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////

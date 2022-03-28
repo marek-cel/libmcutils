@@ -40,7 +40,7 @@ namespace mc
 /**
  * @brief XML node class.
  */
-class MCUTILEXPORT XmlNode
+class MCUTILSEXPORT XmlNode
 {
 public:
 

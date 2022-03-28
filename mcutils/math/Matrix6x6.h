@@ -37,7 +37,7 @@ namespace mc
 /**
  * @brief 6 by 6 matrix class.
  */
-class MCUTILEXPORT Matrix6x6 final : public MatrixSquare<6>
+class MCUTILSEXPORT Matrix6x6 final : public MatrixSquare<6>
 {
 public:
 

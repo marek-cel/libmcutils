@@ -43,7 +43,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILEXPORT MovingMedianFilter final : public ISignalElement
+class MCUTILSEXPORT MovingMedianFilter final : public ISignalElement
 {
 public:
 

@@ -80,7 +80,7 @@ using FunPtr = double (*)(double);
  * - Specific fuel consumption: g/kWh (grams per kilowatt-hour)
  * - Thrust Specific fuel consumption: g/kNs (grams per kilonewton-socond)
  */
-FunPtr MCUTILEXPORT getUnitConverter( const char *name );
+FunPtr MCUTILSEXPORT getUnitConverter( const char *name );
 
 ////////////////////////////////////////////////////////////////////////////////
 // ANGLE
@@ -92,7 +92,7 @@ FunPtr MCUTILEXPORT getUnitConverter( const char *name );
  * @param ang angle expressed in degrees
  * @return angle expressed in radians
  */
-MCUTILEXPORT inline double deg2rad( double ang = 1.0 )
+MCUTILSEXPORT inline double deg2rad( double ang = 1.0 )
 {
     return ang * M_PI / 180.0;
 }
@@ -103,7 +103,7 @@ MCUTILEXPORT inline double deg2rad( double ang = 1.0 )
  * @param ang angle expressed in radians
  * @return angle expressed in degrees
  */
-MCUTILEXPORT inline double rad2deg( double ang = 1.0 )
+MCUTILSEXPORT inline double rad2deg( double ang = 1.0 )
 {
     return ang * 180.0 / M_PI;
 }
@@ -118,7 +118,7 @@ MCUTILEXPORT inline double rad2deg( double ang = 1.0 )
  * @param len length expressed in metres
  * @return length expressed in feet
  */
-MCUTILEXPORT inline double m2ft( double len = 1.0 )
+MCUTILSEXPORT inline double m2ft( double len = 1.0 )
 {
     return len * 3.2808399;
 }
@@ -129,7 +129,7 @@ MCUTILEXPORT inline double m2ft( double len = 1.0 )
  * @param len length expressed in metres
  * @return length expressed in inches
  */
-MCUTILEXPORT inline double m2in( double len = 1.0 )
+MCUTILSEXPORT inline double m2in( double len = 1.0 )
 {
     return len * 39.3700787;
 }
@@ -140,7 +140,7 @@ MCUTILEXPORT inline double m2in( double len = 1.0 )
  * @param len length expressed in metres
  * @return length expressed in miles
  */
-MCUTILEXPORT inline double m2mi( double len = 1.0 )
+MCUTILSEXPORT inline double m2mi( double len = 1.0 )
 {
     return len * 0.000621371192;
 }
@@ -151,7 +151,7 @@ MCUTILEXPORT inline double m2mi( double len = 1.0 )
  * @param len length expressed in metres
  * @return length expressed in nautical miles
  */
-MCUTILEXPORT inline double m2nmi( double len = 1.0 )
+MCUTILSEXPORT inline double m2nmi( double len = 1.0 )
 {
     return len * 0.000539956803;
 }
@@ -162,7 +162,7 @@ MCUTILEXPORT inline double m2nmi( double len = 1.0 )
  * @param len length expressed in metres
  * @return length expressed in kilometres
  */
-MCUTILEXPORT inline double m2km( double len = 1.0 )
+MCUTILSEXPORT inline double m2km( double len = 1.0 )
 {
     return len * 0.001;
 }
@@ -173,7 +173,7 @@ MCUTILEXPORT inline double m2km( double len = 1.0 )
  * @param len length expressed in feet
  * @return length expressed in metres
  */
-MCUTILEXPORT inline double ft2m( double len = 1.0 )
+MCUTILSEXPORT inline double ft2m( double len = 1.0 )
 {
     return len * 0.3048;
 }
@@ -184,7 +184,7 @@ MCUTILEXPORT inline double ft2m( double len = 1.0 )
  * @param len length expressed in feet
  * @return length expressed in kilometres
  */
-MCUTILEXPORT inline double ft2km( double len = 1.0 )
+MCUTILSEXPORT inline double ft2km( double len = 1.0 )
 {
     return len * 0.0003048;
 }
@@ -195,7 +195,7 @@ MCUTILEXPORT inline double ft2km( double len = 1.0 )
  * @param len length expressed in feet
  * @return length expressed in miles
  */
-MCUTILEXPORT inline double ft2mi( double len = 1.0 )
+MCUTILSEXPORT inline double ft2mi( double len = 1.0 )
 {
     return len * 0.000189393939;
 }
@@ -206,7 +206,7 @@ MCUTILEXPORT inline double ft2mi( double len = 1.0 )
  * @param len length expressed in feet
  * @return length expressed in nautical miles
  */
-MCUTILEXPORT inline double ft2nmi( double len = 1.0 )
+MCUTILSEXPORT inline double ft2nmi( double len = 1.0 )
 {
     return len * 0.000164578834;
 }
@@ -217,7 +217,7 @@ MCUTILEXPORT inline double ft2nmi( double len = 1.0 )
  * @param len length expressed in inches
  * @return length expressed in metres
  */
-MCUTILEXPORT inline double in2m( double len = 1.0 )
+MCUTILSEXPORT inline double in2m( double len = 1.0 )
 {
     return len * 0.0254;
 }
@@ -228,7 +228,7 @@ MCUTILEXPORT inline double in2m( double len = 1.0 )
  * @param len length expressed in kilometres
  * @return length expressed in metres
  */
-MCUTILEXPORT inline double km2m( double len = 1.0 )
+MCUTILSEXPORT inline double km2m( double len = 1.0 )
 {
     return len * 1000.0;
 }
@@ -239,7 +239,7 @@ MCUTILEXPORT inline double km2m( double len = 1.0 )
  * @param len length expressed in kilometres
  * @return length expressed in feet
  */
-MCUTILEXPORT inline double km2ft( double len = 1.0 )
+MCUTILSEXPORT inline double km2ft( double len = 1.0 )
 {
     return len * 3280.8399;
 }
@@ -250,7 +250,7 @@ MCUTILEXPORT inline double km2ft( double len = 1.0 )
  * @param len length expressed in kilometres
  * @return length expressed in miles
  */
-MCUTILEXPORT inline double km2mi( double len = 1.0 )
+MCUTILSEXPORT inline double km2mi( double len = 1.0 )
 {
     return len * 0.621371192;
 }
@@ -261,7 +261,7 @@ MCUTILEXPORT inline double km2mi( double len = 1.0 )
  * @param len length expressed in kilometres
  * @return length expressed in nautical miles
  */
-MCUTILEXPORT inline double km2nmi( double len = 1.0 )
+MCUTILSEXPORT inline double km2nmi( double len = 1.0 )
 {
     return len * 0.539956803;
 }
@@ -272,7 +272,7 @@ MCUTILEXPORT inline double km2nmi( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in metres
  */
-MCUTILEXPORT inline double mi2m( double len = 1.0 )
+MCUTILSEXPORT inline double mi2m( double len = 1.0 )
 {
     return len * 1609.344;
 }
@@ -283,7 +283,7 @@ MCUTILEXPORT inline double mi2m( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in feet
  */
-MCUTILEXPORT inline double mi2ft( double len = 1.0 )
+MCUTILSEXPORT inline double mi2ft( double len = 1.0 )
 {
     return len * 5280.0;
 }
@@ -294,7 +294,7 @@ MCUTILEXPORT inline double mi2ft( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in kilometres
  */
-MCUTILEXPORT inline double mi2km( double len = 1.0 )
+MCUTILSEXPORT inline double mi2km( double len = 1.0 )
 {
     return len * 1.609344;
 }
@@ -305,7 +305,7 @@ MCUTILEXPORT inline double mi2km( double len = 1.0 )
  * @param len length expressed in miles
  * @return length expressed in nautical miles
  */
-MCUTILEXPORT inline double mi2nmi( double len = 1.0 )
+MCUTILSEXPORT inline double mi2nmi( double len = 1.0 )
 {
     return len * 0.868976242;
 }
@@ -316,7 +316,7 @@ MCUTILEXPORT inline double mi2nmi( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in metres
  */
-MCUTILEXPORT inline double nmi2m( double len = 1.0 )
+MCUTILSEXPORT inline double nmi2m( double len = 1.0 )
 {
     return len * 1852.0;
 }
@@ -327,7 +327,7 @@ MCUTILEXPORT inline double nmi2m( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in feet
  */
-MCUTILEXPORT inline double nmi2ft( double len = 1.0 )
+MCUTILSEXPORT inline double nmi2ft( double len = 1.0 )
 {
     return len * 6076.11549;
 }
@@ -338,7 +338,7 @@ MCUTILEXPORT inline double nmi2ft( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in kilometres
  */
-MCUTILEXPORT inline double nmi2km( double len = 1.0 )
+MCUTILSEXPORT inline double nmi2km( double len = 1.0 )
 {
     return len * 1.852;
 }
@@ -349,7 +349,7 @@ MCUTILEXPORT inline double nmi2km( double len = 1.0 )
  * @param len length expressed in nautical miles
  * @return length expressed in miles
  */
-MCUTILEXPORT inline double nmi2mi( double len = 1.0 )
+MCUTILSEXPORT inline double nmi2mi( double len = 1.0 )
 {
     return len * 1.15077945;
 }
@@ -364,7 +364,7 @@ MCUTILEXPORT inline double nmi2mi( double len = 1.0 )
  * @param area area expressed in square meters
  * @return area expressed in square feet
  */
-MCUTILEXPORT inline double sqm2sqft( double area = 1.0 )
+MCUTILSEXPORT inline double sqm2sqft( double area = 1.0 )
 {
     return area * 10.7639104;
 }
@@ -375,7 +375,7 @@ MCUTILEXPORT inline double sqm2sqft( double area = 1.0 )
  * @param area area expressed in square feet
  * @return area expressed in square meters
  */
-MCUTILEXPORT inline double sqft2sqm( double area = 1.0 )
+MCUTILSEXPORT inline double sqft2sqm( double area = 1.0 )
 {
     return area * 0.09290304;
 }
@@ -390,7 +390,7 @@ MCUTILEXPORT inline double sqft2sqm( double area = 1.0 )
  * @param vol volume expressed in cubic feet
  * @return volume expressed in cubic metres
  */
-MCUTILEXPORT inline double cuft2cum( double vol = 1.0 )
+MCUTILSEXPORT inline double cuft2cum( double vol = 1.0 )
 {
     return vol * 0.0283168466;
 }
@@ -402,7 +402,7 @@ MCUTILEXPORT inline double cuft2cum( double vol = 1.0 )
  * @param vol volume expressed in cubic inches
  * @return volume expressed in cubic metres
  */
-MCUTILEXPORT inline double cuin2cum( double vol = 1.0 )
+MCUTILSEXPORT inline double cuin2cum( double vol = 1.0 )
 {
     return vol * 0.000016387064;
 }
@@ -413,7 +413,7 @@ MCUTILEXPORT inline double cuin2cum( double vol = 1.0 )
  * @param vol volume expressed in cubic metres
  * @return volume expressed in cubic feet
  */
-MCUTILEXPORT inline double cum2cuft( double vol = 1.0 )
+MCUTILSEXPORT inline double cum2cuft( double vol = 1.0 )
 {
     return vol * 35.3146667;
 }
@@ -424,7 +424,7 @@ MCUTILEXPORT inline double cum2cuft( double vol = 1.0 )
  * @param vol volume expressed in litress
  * @return volume expressed in cubic metres
  */
-MCUTILEXPORT inline double l2cum( double vol = 1.0 )
+MCUTILSEXPORT inline double l2cum( double vol = 1.0 )
 {
     return vol / 1000.0;
 }
@@ -439,7 +439,7 @@ MCUTILEXPORT inline double l2cum( double vol = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in ft/min
  */
-MCUTILEXPORT inline double mps2fpm( double vel = 1.0 )
+MCUTILSEXPORT inline double mps2fpm( double vel = 1.0 )
 {
     return vel * 196.850394;
 }
@@ -450,7 +450,7 @@ MCUTILEXPORT inline double mps2fpm( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in ft/s
  */
-MCUTILEXPORT inline double mps2fps( double vel = 1.0 )
+MCUTILSEXPORT inline double mps2fps( double vel = 1.0 )
 {
     return vel * 3.2808399;
 }
@@ -461,7 +461,7 @@ MCUTILEXPORT inline double mps2fps( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in km/h
  */
-MCUTILEXPORT inline double mps2kmh( double vel = 1.0 )
+MCUTILSEXPORT inline double mps2kmh( double vel = 1.0 )
 {
     return vel * 3.6;
 }
@@ -472,7 +472,7 @@ MCUTILEXPORT inline double mps2kmh( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in knots
  */
-MCUTILEXPORT inline double mps2kts( double vel = 1.0 )
+MCUTILSEXPORT inline double mps2kts( double vel = 1.0 )
 {
     return vel * 1.943844491;
 }
@@ -483,7 +483,7 @@ MCUTILEXPORT inline double mps2kts( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double mps2mph( double vel = 1.0 )
+MCUTILSEXPORT inline double mps2mph( double vel = 1.0 )
 {
     return vel * 2.23693629;
 }
@@ -494,7 +494,7 @@ MCUTILEXPORT inline double mps2mph( double vel = 1.0 )
  * @param vel velocity expressed in ft/min
  * @return velocity expressed in ft/s
  */
-MCUTILEXPORT inline double fpm2fps( double vel = 1.0 )
+MCUTILSEXPORT inline double fpm2fps( double vel = 1.0 )
 {
     return vel * 0.0166666666667;
 }
@@ -505,7 +505,7 @@ MCUTILEXPORT inline double fpm2fps( double vel = 1.0 )
  * @param vel velocity expressed in ft/min
  * @return velocity expressed in km/h
  */
-MCUTILEXPORT inline double fpm2kmh( double vel = 1.0 )
+MCUTILSEXPORT inline double fpm2kmh( double vel = 1.0 )
 {
     return vel * 0.018288;
 }
@@ -516,7 +516,7 @@ MCUTILEXPORT inline double fpm2kmh( double vel = 1.0 )
  * @param vel velocity expressed in ft/min
  * @return velocity expressed in knots
  */
-MCUTILEXPORT inline double fpm2kts( double vel = 1.0 )
+MCUTILSEXPORT inline double fpm2kts( double vel = 1.0 )
 {
     return vel * 0.00987473001;
 }
@@ -527,7 +527,7 @@ MCUTILEXPORT inline double fpm2kts( double vel = 1.0 )
  * @param vel velocity expressed in ft/min
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double fpm2mph( double vel = 1.0 )
+MCUTILSEXPORT inline double fpm2mph( double vel = 1.0 )
 {
     return vel * 0.0113636364;
 }
@@ -538,7 +538,7 @@ MCUTILEXPORT inline double fpm2mph( double vel = 1.0 )
  * @param vel velocity expressed in ft/min
  * @return velocity expressed in m/s
  */
-MCUTILEXPORT inline double fpm2mps( double vel = 1.0 )
+MCUTILSEXPORT inline double fpm2mps( double vel = 1.0 )
 {
     return vel * 0.00508;
 }
@@ -549,7 +549,7 @@ MCUTILEXPORT inline double fpm2mps( double vel = 1.0 )
  * @param vel velocity expressed in ft/s
  * @return velocity expressed in ft/min
  */
-MCUTILEXPORT inline double fps2fpm( double vel = 1.0 )
+MCUTILSEXPORT inline double fps2fpm( double vel = 1.0 )
 {
     return vel * 60.0;
 }
@@ -560,7 +560,7 @@ MCUTILEXPORT inline double fps2fpm( double vel = 1.0 )
  * @param vel velocity expressed in ft/s
  * @return velocity expressed in km/h
  */
-MCUTILEXPORT inline double fps2kmh( double vel = 1.0 )
+MCUTILSEXPORT inline double fps2kmh( double vel = 1.0 )
 {
     return vel * 1.09728;
 }
@@ -571,7 +571,7 @@ MCUTILEXPORT inline double fps2kmh( double vel = 1.0 )
  * @param vel velocity expressed in ft/s
  * @return velocity expressed in knots
  */
-MCUTILEXPORT inline double fps2kts( double vel = 1.0 )
+MCUTILSEXPORT inline double fps2kts( double vel = 1.0 )
 {
     return vel * 0.592483801;
 }
@@ -582,7 +582,7 @@ MCUTILEXPORT inline double fps2kts( double vel = 1.0 )
  * @param vel velocity expressed in ft/s
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double fps2mph( double vel = 1.0 )
+MCUTILSEXPORT inline double fps2mph( double vel = 1.0 )
 {
     return vel * 0.681818182;
 }
@@ -593,7 +593,7 @@ MCUTILEXPORT inline double fps2mph( double vel = 1.0 )
  * @param vel velocity expressed in ft/s
  * @return velocity expressed in m/s
  */
-MCUTILEXPORT inline double fps2mps( double vel = 1.0 )
+MCUTILSEXPORT inline double fps2mps( double vel = 1.0 )
 {
     return vel * 0.3048;
 }
@@ -604,7 +604,7 @@ MCUTILEXPORT inline double fps2mps( double vel = 1.0 )
  * @param vel velocity expressed in km/h
  * @return velocity expressed in ft/min
  */
-MCUTILEXPORT inline double kmh2fpm( double vel = 1.0 )
+MCUTILSEXPORT inline double kmh2fpm( double vel = 1.0 )
 {
     return vel * 54.6806649;
 }
@@ -615,7 +615,7 @@ MCUTILEXPORT inline double kmh2fpm( double vel = 1.0 )
  * @param vel velocity expressed in km/h
  * @return velocity expressed in ft/s
  */
-MCUTILEXPORT inline double kmh2fps( double vel = 1.0 )
+MCUTILSEXPORT inline double kmh2fps( double vel = 1.0 )
 {
     return vel * 0.911344415;
 }
@@ -626,7 +626,7 @@ MCUTILEXPORT inline double kmh2fps( double vel = 1.0 )
  * @param vel velocity expressed in km/h
  * @return velocity expressed in knots
  */
-MCUTILEXPORT inline double kmh2kts( double vel = 1.0 )
+MCUTILSEXPORT inline double kmh2kts( double vel = 1.0 )
 {
     return vel * 0.539956803;
 }
@@ -637,7 +637,7 @@ MCUTILEXPORT inline double kmh2kts( double vel = 1.0 )
  * @param vel velocity expressed in km/h
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double kmh2mph( double vel = 1.0 )
+MCUTILSEXPORT inline double kmh2mph( double vel = 1.0 )
 {
     return vel * 0.621371192;
 }
@@ -648,7 +648,7 @@ MCUTILEXPORT inline double kmh2mph( double vel = 1.0 )
  * @param vel velocity expressed in km/h
  * @return velocity expressed in m/s
  */
-MCUTILEXPORT inline double kmh2mps( double vel = 1.0 )
+MCUTILSEXPORT inline double kmh2mps( double vel = 1.0 )
 {
     return vel * 0.2777777777778;
 }
@@ -659,7 +659,7 @@ MCUTILEXPORT inline double kmh2mps( double vel = 1.0 )
  * @param vel velocity expressed in knots
  * @return velocity expressed in ft/min
  */
-MCUTILEXPORT inline double kts2fpm( double vel = 1.0 )
+MCUTILSEXPORT inline double kts2fpm( double vel = 1.0 )
 {
     return vel * 101.2685916;
 }
@@ -670,7 +670,7 @@ MCUTILEXPORT inline double kts2fpm( double vel = 1.0 )
  * @param vel velocity expressed in knots
  * @return velocity expressed in ft/s
  */
-MCUTILEXPORT inline double kts2fps( double vel = 1.0 )
+MCUTILSEXPORT inline double kts2fps( double vel = 1.0 )
 {
     return vel * 1.68780986;
 }
@@ -681,7 +681,7 @@ MCUTILEXPORT inline double kts2fps( double vel = 1.0 )
  * @param vel velocity expressed in knots
  * @return velocity expressed in km/h
  */
-MCUTILEXPORT inline double kts2kmh( double vel = 1.0 )
+MCUTILSEXPORT inline double kts2kmh( double vel = 1.0 )
 {
     return vel * 1.852;
 }
@@ -692,7 +692,7 @@ MCUTILEXPORT inline double kts2kmh( double vel = 1.0 )
  * @param vel velocity expressed in knots
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double kts2mph( double vel = 1.0 )
+MCUTILSEXPORT inline double kts2mph( double vel = 1.0 )
 {
     return vel * 1.15077945;
 }
@@ -703,7 +703,7 @@ MCUTILEXPORT inline double kts2mph( double vel = 1.0 )
  * @param vel velocity expressed in knots
  * @return velocity expressed in m/s
  */
-MCUTILEXPORT inline double kts2mps( double vel = 1.0 )
+MCUTILSEXPORT inline double kts2mps( double vel = 1.0 )
 {
     return vel * 0.5144444444444;
 }
@@ -714,7 +714,7 @@ MCUTILEXPORT inline double kts2mps( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in ft/min
  */
-MCUTILEXPORT inline double mph2fpm( double vel = 1.0 )
+MCUTILSEXPORT inline double mph2fpm( double vel = 1.0 )
 {
     return vel * 88.0;
 }
@@ -725,7 +725,7 @@ MCUTILEXPORT inline double mph2fpm( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in ft/s
  */
-MCUTILEXPORT inline double mph2fps( double vel = 1.0 )
+MCUTILSEXPORT inline double mph2fps( double vel = 1.0 )
 {
     return vel * 1.46666667;
 }
@@ -736,7 +736,7 @@ MCUTILEXPORT inline double mph2fps( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in km/h
  */
-MCUTILEXPORT inline double mph2kmh( double vel = 1.0 )
+MCUTILSEXPORT inline double mph2kmh( double vel = 1.0 )
 {
     return vel * 1.609344;
 }
@@ -747,7 +747,7 @@ MCUTILEXPORT inline double mph2kmh( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in knots
  */
-MCUTILEXPORT inline double mph2kts( double vel = 1.0 )
+MCUTILSEXPORT inline double mph2kts( double vel = 1.0 )
 {
     return vel * 0.868976242;
 }
@@ -758,7 +758,7 @@ MCUTILEXPORT inline double mph2kts( double vel = 1.0 )
  * @param vel velocity expressed in m/s
  * @return velocity expressed in miles per hour
  */
-MCUTILEXPORT inline double mph2mps( double vel = 1.0 )
+MCUTILSEXPORT inline double mph2mps( double vel = 1.0 )
 {
     return vel * 0.44704;
 }
@@ -773,7 +773,7 @@ MCUTILEXPORT inline double mph2mps( double vel = 1.0 )
  * @param ang_vel angular velocity expressed in revolutions per minute
  * @return velocity expressed in radians per second
  */
-MCUTILEXPORT inline double rpm2rad_s( double ang_vel = 1.0 )
+MCUTILSEXPORT inline double rpm2rad_s( double ang_vel = 1.0 )
 {
     return M_PI * ang_vel / 30.0;
 }
@@ -784,7 +784,7 @@ MCUTILEXPORT inline double rpm2rad_s( double ang_vel = 1.0 )
  * @param ang_vel angular velocity expressed in radians per second
  * @return velocity expressed in revolutions per minute
  */
-MCUTILEXPORT inline double rad_s2rpm( double ang_vel = 1.0 )
+MCUTILSEXPORT inline double rad_s2rpm( double ang_vel = 1.0 )
 {
     return 30.0 * ang_vel / M_PI;
 }
@@ -799,7 +799,7 @@ MCUTILEXPORT inline double rad_s2rpm( double ang_vel = 1.0 )
  * @param mass mass expressed in kilograms
  * @return mass expressed in pounds
  */
-MCUTILEXPORT inline double kg2lb( double mass = 1.0 )
+MCUTILSEXPORT inline double kg2lb( double mass = 1.0 )
 {
     return mass * 2.20462262;
 }
@@ -810,7 +810,7 @@ MCUTILEXPORT inline double kg2lb( double mass = 1.0 )
  * @param mass mass expressed in pounds
  * @return mass expressed in kilograms
  */
-MCUTILEXPORT inline double lb2kg( double mass = 1.0 )
+MCUTILSEXPORT inline double lb2kg( double mass = 1.0 )
 {
     return mass * 0.45359237;
 }
@@ -825,7 +825,7 @@ MCUTILEXPORT inline double lb2kg( double mass = 1.0 )
  * @param force force expressed in newtons
  * @return force expressed in pounds
  */
-MCUTILEXPORT inline double n2lbf( double force = 1.0 )
+MCUTILSEXPORT inline double n2lbf( double force = 1.0 )
 {
     return force * 0.224808943;
 }
@@ -836,7 +836,7 @@ MCUTILEXPORT inline double n2lbf( double force = 1.0 )
  * @param force force expressed in pounds
  * @return force expressed in newtons
  */
-MCUTILEXPORT inline double lbf2n( double force = 1.0 )
+MCUTILSEXPORT inline double lbf2n( double force = 1.0 )
 {
     return force * 4.4482216152605;
 }
@@ -851,7 +851,7 @@ MCUTILEXPORT inline double lbf2n( double force = 1.0 )
  * @param press pressure expressed in pascals
  * @return pressure expressed in inches Hg
  */
-MCUTILEXPORT inline double pa2inhg( double press = 1.0 )
+MCUTILSEXPORT inline double pa2inhg( double press = 1.0 )
 {
     return press * 0.000295333727;
 }
@@ -862,7 +862,7 @@ MCUTILEXPORT inline double pa2inhg( double press = 1.0 )
  * @param press pressure expressed in pascals
  * @return pressure expressed in millibars
  */
-MCUTILEXPORT inline double pa2mb( double press = 1.0 )
+MCUTILSEXPORT inline double pa2mb( double press = 1.0 )
 {
     return press * 0.01;
 }
@@ -873,7 +873,7 @@ MCUTILEXPORT inline double pa2mb( double press = 1.0 )
  * @param press pressure expressed in pascals
  * @return pressure expressed in psf
  */
-MCUTILEXPORT inline double pa2psf( double mass = 1.0 )
+MCUTILSEXPORT inline double pa2psf( double mass = 1.0 )
 {
     return mass * 0.020885434273039;
 }
@@ -884,7 +884,7 @@ MCUTILEXPORT inline double pa2psf( double mass = 1.0 )
  * @param press pressure expressed in pascals
  * @return pressure expressed in psi
  */
-MCUTILEXPORT inline double pa2psi( double press = 1.0 )
+MCUTILSEXPORT inline double pa2psi( double press = 1.0 )
 {
     return press * 0.000145037738;
 }
@@ -895,7 +895,7 @@ MCUTILEXPORT inline double pa2psi( double press = 1.0 )
  * @param press pressure expressed in psf
  * @return pressure expressed in pascals
  */
-MCUTILEXPORT inline double psf2pa( double mass = 1.0 )
+MCUTILSEXPORT inline double psf2pa( double mass = 1.0 )
 {
     return mass * 47.880259;
 }
@@ -906,7 +906,7 @@ MCUTILEXPORT inline double psf2pa( double mass = 1.0 )
  * @param press pressure expressed in psi
  * @return pressure expressed in pascals
  */
-MCUTILEXPORT inline double psi2pa( double press = 1.0 )
+MCUTILSEXPORT inline double psi2pa( double press = 1.0 )
 {
     return press * 6894.75729;
 }
@@ -917,7 +917,7 @@ MCUTILEXPORT inline double psi2pa( double press = 1.0 )
  * @param press pressure expressed in psi
  * @return pressure expressed in inches Hg
  */
-MCUTILEXPORT inline double psi2inhg( double press = 1.0 )
+MCUTILSEXPORT inline double psi2inhg( double press = 1.0 )
 {
     return press * 2.03625437;
 }
@@ -928,7 +928,7 @@ MCUTILEXPORT inline double psi2inhg( double press = 1.0 )
  * @param press pressure expressed in psi
  * @return pressure expressed in millibars
  */
-MCUTILEXPORT inline double psi2mb( double press = 1.0 )
+MCUTILSEXPORT inline double psi2mb( double press = 1.0 )
 {
     return press * 68.9475729;
 }
@@ -939,7 +939,7 @@ MCUTILEXPORT inline double psi2mb( double press = 1.0 )
  * @param press pressure expressed in inches Hg
  * @return pressure expressed in pascals
  */
-MCUTILEXPORT inline double inhg2pa( double press = 1.0 )
+MCUTILSEXPORT inline double inhg2pa( double press = 1.0 )
 {
     return press * 3386.0;
 }
@@ -950,7 +950,7 @@ MCUTILEXPORT inline double inhg2pa( double press = 1.0 )
  * @param press pressure expressed in inches Hg
  * @return pressure expressed in psi
  */
-MCUTILEXPORT inline double inhg2psi( double press = 1.0 )
+MCUTILSEXPORT inline double inhg2psi( double press = 1.0 )
 {
     return press * 0.49109778;
 }
@@ -961,7 +961,7 @@ MCUTILEXPORT inline double inhg2psi( double press = 1.0 )
  * @param press pressure expressed in inches Hg
  * @return pressure expressed in millibars
  */
-MCUTILEXPORT inline double inhg2mb( double press = 1.0 )
+MCUTILSEXPORT inline double inhg2mb( double press = 1.0 )
 {
     return press * 33.86;
 }
@@ -972,7 +972,7 @@ MCUTILEXPORT inline double inhg2mb( double press = 1.0 )
  * @param press pressure expressed in millibars
  * @return pressure expressed in pascals
  */
-MCUTILEXPORT inline double mb2pa( double press = 1.0 )
+MCUTILSEXPORT inline double mb2pa( double press = 1.0 )
 {
     return press * 100.0;
 }
@@ -983,7 +983,7 @@ MCUTILEXPORT inline double mb2pa( double press = 1.0 )
  * @param press pressure expressed in millibars
  * @return pressure expressed in psi
  */
-MCUTILEXPORT inline double mb2psi( double press = 1.0 )
+MCUTILSEXPORT inline double mb2psi( double press = 1.0 )
 {
     return press * 0.0145037738;
 }
@@ -994,7 +994,7 @@ MCUTILEXPORT inline double mb2psi( double press = 1.0 )
  * @param press pressure expressed in millibars
  * @return pressure expressed in inches Hg
  */
-MCUTILEXPORT inline double mb2inhg( double press = 1.0 )
+MCUTILSEXPORT inline double mb2inhg( double press = 1.0 )
 {
     return press * 0.0295333727;
 }
@@ -1009,7 +1009,7 @@ MCUTILEXPORT inline double mb2inhg( double press = 1.0 )
  * @param pwr power expressed in (metric) horsepower
  * @return power expressed in (mechanical) horsepower
  */
-MCUTILEXPORT inline double ps2hp( double pwr = 1.0 )
+MCUTILSEXPORT inline double ps2hp( double pwr = 1.0 )
 {
     return pwr * 0.98632005756;
 }
@@ -1020,7 +1020,7 @@ MCUTILEXPORT inline double ps2hp( double pwr = 1.0 )
  * @param pwr power expressed in (metric) horsepower
  * @return power expressed in watts
  */
-MCUTILEXPORT inline double ps2w( double pwr = 1.0 )
+MCUTILSEXPORT inline double ps2w( double pwr = 1.0 )
 {
     return pwr * 735.498749992;
 }
@@ -1031,7 +1031,7 @@ MCUTILEXPORT inline double ps2w( double pwr = 1.0 )
  * @param pwr power expressed in (metric) horsepower
  * @return power expressed in kilowatts
  */
-MCUTILEXPORT inline double ps2kw( double pwr = 1.0 )
+MCUTILSEXPORT inline double ps2kw( double pwr = 1.0 )
 {
     return pwr * 0.735498749992;
 }
@@ -1042,7 +1042,7 @@ MCUTILEXPORT inline double ps2kw( double pwr = 1.0 )
  * @param pwr power expressed in (mechanical) horsepower
  * @return power expressed in (metric) horsepower
  */
-MCUTILEXPORT inline double hp2ps( double pwr = 1.0 )
+MCUTILSEXPORT inline double hp2ps( double pwr = 1.0 )
 {
     return pwr * 1.01386967884;
 }
@@ -1053,7 +1053,7 @@ MCUTILEXPORT inline double hp2ps( double pwr = 1.0 )
  * @param pwr power expressed in (mechanical) horsepower
  * @return power expressed in watts
  */
-MCUTILEXPORT inline double hp2w( double pwr = 1.0 )
+MCUTILSEXPORT inline double hp2w( double pwr = 1.0 )
 {
     return pwr * 745.699881448;
 }
@@ -1064,7 +1064,7 @@ MCUTILEXPORT inline double hp2w( double pwr = 1.0 )
  * @param pwr power expressed in (mechanical) horsepower
  * @return power expressed in kilowatts
  */
-MCUTILEXPORT inline double hp2kw( double pwr = 1.0 )
+MCUTILSEXPORT inline double hp2kw( double pwr = 1.0 )
 {
     return pwr * 0.745699881448;
 }
@@ -1075,7 +1075,7 @@ MCUTILEXPORT inline double hp2kw( double pwr = 1.0 )
  * @param pwr power expressed in watts
  * @return power expressed in (metric) horsepower
  */
-MCUTILEXPORT inline double w2ps( double pwr = 1.0 )
+MCUTILSEXPORT inline double w2ps( double pwr = 1.0 )
 {
     return pwr * 0.00135962161;
 }
@@ -1086,7 +1086,7 @@ MCUTILEXPORT inline double w2ps( double pwr = 1.0 )
  * @param pwr power expressed in watts
  * @return power expressed in (mechanical) horsepower
  */
-MCUTILEXPORT inline double w2hp( double pwr = 1.0 )
+MCUTILSEXPORT inline double w2hp( double pwr = 1.0 )
 {
     return pwr * 0.00134102207;
 }
@@ -1097,7 +1097,7 @@ MCUTILEXPORT inline double w2hp( double pwr = 1.0 )
  * @param pwr power expressed in watts
  * @return power expressed in kilowatts
  */
-MCUTILEXPORT inline double w2kw( double pwr = 1.0 )
+MCUTILSEXPORT inline double w2kw( double pwr = 1.0 )
 {
     return pwr * 0.001;
 }
@@ -1108,7 +1108,7 @@ MCUTILEXPORT inline double w2kw( double pwr = 1.0 )
  * @param pwr power expressed in kilowatts
  * @return power expressed in (metric) horsepower
  */
-MCUTILEXPORT inline double kw2ps( double pwr = 1.0 )
+MCUTILSEXPORT inline double kw2ps( double pwr = 1.0 )
 {
     return pwr * 1.35962161732;
 }
@@ -1119,7 +1119,7 @@ MCUTILEXPORT inline double kw2ps( double pwr = 1.0 )
  * @param pwr power expressed in kilowatts
  * @return power expressed in (mechanical) horsepower
  */
-MCUTILEXPORT inline double kw2hp( double pwr = 1.0 )
+MCUTILSEXPORT inline double kw2hp( double pwr = 1.0 )
 {
     return pwr * 1.34102207185;
 }
@@ -1130,7 +1130,7 @@ MCUTILEXPORT inline double kw2hp( double pwr = 1.0 )
  * @param pwr power expressed in kilowatts
  * @return power expressed in watts
  */
-MCUTILEXPORT inline double kw2w( double pwr = 1.0 )
+MCUTILSEXPORT inline double kw2w( double pwr = 1.0 )
 {
     return pwr * 1000.0;
 }
@@ -1145,7 +1145,7 @@ MCUTILEXPORT inline double kw2w( double pwr = 1.0 )
  * @param temp temperature expressed in degrees Celsius
  * @return temperature expressed in degrees Fehrenheit
  */
-MCUTILEXPORT inline double c2f( double temp )
+MCUTILSEXPORT inline double c2f( double temp )
 {
     return ( 9.0 * temp / 5.0 ) + 32.0;
 }
@@ -1156,7 +1156,7 @@ MCUTILEXPORT inline double c2f( double temp )
  * @param temp temperature expressed in degrees Celsius
  * @return temperature expressed in Kelvins
  */
-MCUTILEXPORT inline double c2k( double temp )
+MCUTILSEXPORT inline double c2k( double temp )
 {
     return temp + 273.15;
 }
@@ -1167,7 +1167,7 @@ MCUTILEXPORT inline double c2k( double temp )
  * @param temp temperature expressed in degrees Fahrenheit
  * @return temperature expressed in degrees Celsius
  */
-MCUTILEXPORT inline double f2c( double temp )
+MCUTILSEXPORT inline double f2c( double temp )
 {
     return 5.0 * ( temp - 32.0 ) / 9.0;
 }
@@ -1178,7 +1178,7 @@ MCUTILEXPORT inline double f2c( double temp )
  * @param temp temperature expressed in degrees Fahrenheit
  * @return temperature expressed in Kelvins
  */
-MCUTILEXPORT inline double f2k( double temp )
+MCUTILSEXPORT inline double f2k( double temp )
 {
     return ( 5.0 * ( temp - 32.0 ) / 9.0 ) + 273.15;
 }
@@ -1189,7 +1189,7 @@ MCUTILEXPORT inline double f2k( double temp )
  * @param temp temperature expressed in Kelvins
  * @return temperature expressed in degrees Celsius
  */
-MCUTILEXPORT inline double k2c( double temp )
+MCUTILSEXPORT inline double k2c( double temp )
 {
     return ( temp - 273.15 );
 }
@@ -1200,7 +1200,7 @@ MCUTILEXPORT inline double k2c( double temp )
  * @param temp temperature expressed in Kelvins
  * @return temperature expressed in degrees Fahrenheit
  */
-MCUTILEXPORT inline double k2f( double temp )
+MCUTILSEXPORT inline double k2f( double temp )
 {
     return ( 9.0 * ( temp - 273.15 ) / 5.0 ) + 32.0;
 }
@@ -1215,7 +1215,7 @@ MCUTILEXPORT inline double k2f( double temp )
  * @param sfc specific fuel consumption expressed in g/kWh
  * @return specific fuel consumption expressed in kg/Ws
  */
-MCUTILEXPORT inline double g_kWh_2_kg_Ws( double sfc = 1.0 )
+MCUTILSEXPORT inline double g_kWh_2_kg_Ws( double sfc = 1.0 )
 {
      return sfc / ( 3.6e9 );
 }
@@ -1230,7 +1230,7 @@ MCUTILEXPORT inline double g_kWh_2_kg_Ws( double sfc = 1.0 )
  * @param tsfc thrust specific fuel consumption expressed in g/kNs
  * @return thrust specific fuel consumption expressed in kg/Ns
  */
-MCUTILEXPORT inline double g_kNs_2_kg_Ns( double tsfc = 1.0 )
+MCUTILSEXPORT inline double g_kNs_2_kg_Ns( double tsfc = 1.0 )
 {
     return tsfc / ( 1.0e6 );
 }

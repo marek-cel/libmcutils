@@ -44,7 +44,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILEXPORT Angles final
+class MCUTILSEXPORT Angles final
 {
 public:
 

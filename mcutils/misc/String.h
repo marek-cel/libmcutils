@@ -41,7 +41,7 @@ namespace mc { namespace String
  * @param str string to be processed
  * @return string first line
  */
-MCUTILEXPORT std::string getFirstLine( const std::string &str );
+MCUTILSEXPORT std::string getFirstLine( const std::string &str );
 
 /**
  * @brief Compares strings. This function is case insensitive.
@@ -50,7 +50,7 @@ MCUTILEXPORT std::string getFirstLine( const std::string &str );
  * @param str_2 2nd string to compare
  * @return integer result of the comparison (returns 0 if strings are equal)
  */
-MCUTILEXPORT int icompare( const std::string &str_1,
+MCUTILSEXPORT int icompare( const std::string &str_1,
                            const std::string &str_2 );
 
 /**
@@ -60,7 +60,7 @@ MCUTILEXPORT int icompare( const std::string &str_1,
  * @param sep string separator
  * @return vector of strings
  */
-MCUTILEXPORT std::vector<std::string> splitString( const std::string &str,
+MCUTILSEXPORT std::vector<std::string> splitString( const std::string &str,
                                                    const std::string &sep );
 
 /**
@@ -69,7 +69,7 @@ MCUTILEXPORT std::vector<std::string> splitString( const std::string &str,
  * @param str string to be processed
  * @return string with leading white spaces removed
  */
-MCUTILEXPORT std::string stripLeadingSpaces( const std::string &str );
+MCUTILSEXPORT std::string stripLeadingSpaces( const std::string &str );
 
 /**
  * @brief Returns string with trailing white spaces removed.
@@ -77,7 +77,7 @@ MCUTILEXPORT std::string stripLeadingSpaces( const std::string &str );
  * @param str string to be processed
  * @return string with trailing white spaces removed
  */
-MCUTILEXPORT std::string stripTrailingSpaces( const std::string &str );
+MCUTILSEXPORT std::string stripTrailingSpaces( const std::string &str );
 
 /**
  * @brief Returns string with both leading and trailing white spaces removed.
@@ -85,7 +85,7 @@ MCUTILEXPORT std::string stripTrailingSpaces( const std::string &str );
  * @param str string to be processed
  * @return string with leading and trailing white spaces removed
  */
-MCUTILEXPORT std::string stripSpaces( const std::string &str );
+MCUTILSEXPORT std::string stripSpaces( const std::string &str );
 
 /**
  * @brief Converts string into variable.
@@ -94,7 +94,7 @@ MCUTILEXPORT std::string stripSpaces( const std::string &str );
  * @param def default value
  * @return result value
  */
-MCUTILEXPORT bool toBool( const std::string &str,
+MCUTILSEXPORT bool toBool( const std::string &str,
                           bool def = std::numeric_limits<bool>::quiet_NaN() );
 
 /**
@@ -104,7 +104,7 @@ MCUTILEXPORT bool toBool( const std::string &str,
  * @param def default value
  * @return result value
  */
-MCUTILEXPORT int toInt( const std::string &str,
+MCUTILSEXPORT int toInt( const std::string &str,
                         int def = std::numeric_limits<int>::quiet_NaN() );
 
 /**
@@ -114,7 +114,7 @@ MCUTILEXPORT int toInt( const std::string &str,
  * @param def default value
  * @return result value
  */
-MCUTILEXPORT double toDouble( const std::string &str,
+MCUTILSEXPORT double toDouble( const std::string &str,
                               double def = std::numeric_limits<double>::quiet_NaN() );
 
 /**
@@ -123,7 +123,7 @@ MCUTILEXPORT double toDouble( const std::string &str,
  * @param val value to be processed
  * @return result string
  */
-MCUTILEXPORT std::string toString( int val );
+MCUTILSEXPORT std::string toString( int val );
 
 /**
  * @brief Converts variable into string.
@@ -131,7 +131,7 @@ MCUTILEXPORT std::string toString( int val );
  * @param val value to be processed
  * @return result string
  */
-MCUTILEXPORT std::string toString( float val );
+MCUTILSEXPORT std::string toString( float val );
 
 /**
  * @brief Converts variable into string.
@@ -139,7 +139,7 @@ MCUTILEXPORT std::string toString( float val );
  * @param val value to be processed
  * @return result string
  */
-MCUTILEXPORT std::string toString( double val );
+MCUTILSEXPORT std::string toString( double val );
 
 /**
  * @brief Converts string to lower case.
@@ -147,7 +147,7 @@ MCUTILEXPORT std::string toString( double val );
  * @param str string to be processed
  * @return result string
  */
-MCUTILEXPORT std::string toLower( const std::string &str );
+MCUTILSEXPORT std::string toLower( const std::string &str );
 
 /**
  * @brief Converts string to upper case.
@@ -155,7 +155,7 @@ MCUTILEXPORT std::string toLower( const std::string &str );
  * @param str string to be processed
  * @return result string
  */
-MCUTILEXPORT std::string toUpper( const std::string &str );
+MCUTILSEXPORT std::string toUpper( const std::string &str );
 
 } // String
 } // mc

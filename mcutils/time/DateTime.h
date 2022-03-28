@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief The date and time struct
  */
-struct MCUTILEXPORT DateTime
+struct MCUTILSEXPORT DateTime
 {
     uint16_t year;      ///< year
     uint8_t  month;     ///< month
