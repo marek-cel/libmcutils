@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_GEO_DATAMARS_H_
-#define MCUTIL_GEO_DATAMARS_H_
+#ifndef LIBMCUTILS_GEO_DATAMARS_H_
+#define LIBMCUTILS_GEO_DATAMARS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <cmath>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -71,4 +71,4 @@ MCUTILEXPORT static constexpr double mm    = 6.4171e23;             ///< [kg] ma
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_GEO_DATAMARS_H_
+#endif // LIBMCUTILS_GEO_DATAMARS_H_

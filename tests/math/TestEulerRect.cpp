@@ -2,7 +2,7 @@
 
 #include <functional>
 
-#include <mcutil/math/EulerRect.h>
+#include <mcutils/math/EulerRect.h>
 
 #include <DiffEquationSolver.h>
 

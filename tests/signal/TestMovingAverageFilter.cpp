@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/signal/MovingAverageFilter.h>
-#include <mcutil/math/Random.h>
+#include <mcutils/signal/MovingAverageFilter.h>
+#include <mcutils/math/Random.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

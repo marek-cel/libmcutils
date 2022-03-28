@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/signal/LeadLag.h>
+#include <mcutils/signal/LeadLag.h>
 
 #include <XcosBinFileReader.h>
 

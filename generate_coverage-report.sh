@@ -11,8 +11,8 @@ then
     rm -f coverage_full.info
     rm -f coverage.info
     rm -r -f coverage-report
-    cd bin; ./libmcutil_tests; cd ..;
-    lcov --capture --base-directory ./mcutil --no-external --directory $build_dir --output-file coverage_full.info
+    cd bin; ./libmcutils_tests; cd ..;
+    lcov --capture --base-directory ./mcutils --no-external --directory $build_dir --output-file coverage_full.info
     lcov --remove coverage_full.info \
         "$(pwd)/tests/*" \
         "*math/IIntegrator.h" \

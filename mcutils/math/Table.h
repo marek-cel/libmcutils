@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_TABLE_H_
-#define MCUTIL_MATH_TABLE_H_
+#ifndef LIBMCUTILS_MATH_TABLE_H_
+#define LIBMCUTILS_MATH_TABLE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -29,7 +29,7 @@
 #include <utility>
 #include <vector>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -263,4 +263,4 @@ inline Table operator* ( double val, const Table &table )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_TABLE_H_
+#endif // LIBMCUTILS_MATH_TABLE_H_

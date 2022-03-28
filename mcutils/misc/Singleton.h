@@ -19,12 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MISC_SINGLETON_H_
-#define MCUTIL_MISC_SINGLETON_H_
+#ifndef LIBMCUTILS_MISC_SINGLETON_H_
+#define LIBMCUTILS_MISC_SINGLETON_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -65,4 +65,4 @@ template <class TYPE> TYPE* Singleton<TYPE>::_instance = nullptr;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MISC_SINGLETON_H_
+#endif // LIBMCUTILS_MISC_SINGLETON_H_

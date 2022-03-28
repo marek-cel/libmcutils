@@ -20,14 +20,14 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/Angles.h>
+#include <mcutils/math/Angles.h>
 
 #include <iomanip>
 #include <sstream>
 #include <string>
 
-#include <mcutil/misc/Check.h>
-#include <mcutil/misc/Units.h>
+#include <mcutils/misc/Check.h>
+#include <mcutils/misc/Units.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

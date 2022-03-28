@@ -20,14 +20,14 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/xml/XmlNode.h>
+#include <mcutils/xml/XmlNode.h>
 
 #include <cstring>
 
 #include <string>
 #include <utility>
 
-#include <mcutil/misc/String.h>
+#include <mcutils/misc/String.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

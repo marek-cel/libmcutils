@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MISC_LOG_H_
-#define MCUTIL_MISC_LOG_H_
+#ifndef LIBMCUTILS_MISC_LOG_H_
+#define LIBMCUTILS_MISC_LOG_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <sstream>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -61,4 +61,4 @@ public:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MISC_LOG_H_
+#endif // LIBMCUTILS_MISC_LOG_H_

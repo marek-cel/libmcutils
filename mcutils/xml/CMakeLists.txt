@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutilXml )
+set( TARGET_NAME mcutils_xml )
 
 ################################################################################
 
@@ -28,5 +28,5 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 
 install( TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutil/xml
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/xml
 )

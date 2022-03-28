@@ -19,16 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_RANDOM_H_
-#define MCUTIL_MATH_RANDOM_H_
+#ifndef LIBMCUTILS_MATH_RANDOM_H_
+#define LIBMCUTILS_MATH_RANDOM_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <mutex>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/misc/Singleton.h>
+#include <mcutils/misc/Singleton.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -127,4 +127,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_RANDOM_H_
+#endif // LIBMCUTILS_MATH_RANDOM_H_

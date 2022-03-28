@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-#include <mcutil/math/Angles.h>
-#include <mcutil/math/Quaternion.h>
+#include <mcutils/math/Angles.h>
+#include <mcutils/math/Quaternion.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

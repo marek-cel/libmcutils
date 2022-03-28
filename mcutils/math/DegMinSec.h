@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_DEGMINSEC_H_
-#define MCUTIL_MATH_DEGMINSEC_H_
+#ifndef LIBMCUTILS_MATH_DEGMINSEC_H_
+#define LIBMCUTILS_MATH_DEGMINSEC_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -101,4 +101,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_DEGMINSEC_H_
+#endif // LIBMCUTILS_MATH_DEGMINSEC_H_

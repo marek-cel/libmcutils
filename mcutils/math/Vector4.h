@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_VECTOR4_H_
-#define MCUTIL_MATH_VECTOR4_H_
+#ifndef LIBMCUTILS_MATH_VECTOR4_H_
+#define LIBMCUTILS_MATH_VECTOR4_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Vector.h>
+#include <mcutils/math/Vector.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -101,4 +101,4 @@ inline Vector4 operator* ( double value, const Vector4 &vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_VECTOR4_H_
+#endif // LIBMCUTILS_MATH_VECTOR4_H_

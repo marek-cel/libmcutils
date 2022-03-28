@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_MATRIXSQUARE_H_
-#define MCUTIL_MATH_MATRIXSQUARE_H_
+#ifndef LIBMCUTILS_MATH_MATRIXSQUARE_H_
+#define LIBMCUTILS_MATH_MATRIXSQUARE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Matrix.h>
+#include <mcutils/math/Matrix.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -187,4 +187,4 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_MATRIXSQUARE_H_
+#endif // LIBMCUTILS_MATH_MATRIXSQUARE_H_

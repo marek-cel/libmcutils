@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_TIME_DATETIME_H_
-#define MCUTIL_TIME_DATETIME_H_
+#ifndef LIBMCUTILS_TIME_DATETIME_H_
+#define LIBMCUTILS_TIME_DATETIME_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <cstdint>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -51,4 +51,4 @@ struct MCUTILEXPORT DateTime
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_TIME_DATETIME_H_
+#endif // LIBMCUTILS_TIME_DATETIME_H_

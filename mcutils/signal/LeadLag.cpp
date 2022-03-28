@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/LeadLag.h>
+#include <mcutils/signal/LeadLag.h>
 
 #include <algorithm>
 #include <cmath>

@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_GEOMETRY_H_
-#define MCUTIL_MATH_GEOMETRY_H_
+#ifndef LIBMCUTILS_MATH_GEOMETRY_H_
+#define LIBMCUTILS_MATH_GEOMETRY_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -80,4 +80,4 @@ Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_GEOMETRY_H_
+#endif // LIBMCUTILS_MATH_GEOMETRY_H_

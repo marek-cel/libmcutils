@@ -19,16 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MISC_MAP_H_
-#define MCUTIL_MISC_MAP_H_
+#ifndef LIBMCUTILS_MISC_MAP_H_
+#define LIBMCUTILS_MISC_MAP_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <map>
 #include <utility>
 
-#include <mcutil/defs.h>
-#include <mcutil/Result.h>
+#include <mcutils/defs.h>
+#include <mcutils/Result.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -79,4 +79,4 @@ TYPE_ITEM getMapItemByKey( std::map< TYPE_KEY, TYPE_ITEM > *map, TYPE_KEY key )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MISC_MAP_H_
+#endif // LIBMCUTILS_MISC_MAP_H_

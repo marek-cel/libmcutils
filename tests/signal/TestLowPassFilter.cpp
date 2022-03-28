@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include <mcutil/signal/LowPassFilter.h>
+#include <mcutils/signal/LowPassFilter.h>
 
 #include <XcosBinFileReader.h>
 

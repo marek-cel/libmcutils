@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/math/DegMinSec.h>
-#include <mcutil/misc/Units.h>
+#include <mcutils/math/DegMinSec.h>
+#include <mcutils/misc/Units.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

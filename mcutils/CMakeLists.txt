@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutil )
+set( TARGET_NAME mcutils )
 
 ################################################################################
 
@@ -20,7 +20,7 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 )
 
 install( TARGETS ${TARGET_NAME}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutil
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils
 )
 
 ################################################################################

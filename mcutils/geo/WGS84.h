@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_GEO_WGS84_H_
-#define MCUTIL_GEO_WGS84_H_
+#ifndef LIBMCUTILS_GEO_WGS84_H_
+#define LIBMCUTILS_GEO_WGS84_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/geo/ECEF.h>
+#include <mcutils/geo/ECEF.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -124,4 +124,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_GEO_WGS84_H_
+#endif // LIBMCUTILS_GEO_WGS84_H_

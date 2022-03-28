@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_VECTOR_H_
-#define MCUTIL_MATH_VECTOR_H_
+#ifndef LIBMCUTILS_MATH_VECTOR_H_
+#define LIBMCUTILS_MATH_VECTOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -31,9 +31,9 @@
 #include <string>
 #include <utility>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/misc/Check.h>
+#include <mcutils/misc/Check.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -383,4 +383,4 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_VECTOR_H_
+#endif // LIBMCUTILS_MATH_VECTOR_H_

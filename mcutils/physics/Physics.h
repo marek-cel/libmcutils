@@ -19,17 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_PHYSICS_PHYSICS_H_
-#define MCUTIL_PHYSICS_PHYSICS_H_
+#ifndef LIBMCUTILS_PHYSICS_PHYSICS_H_
+#define LIBMCUTILS_PHYSICS_PHYSICS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <cmath>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Matrix3x3.h>
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Matrix3x3.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -122,4 +122,4 @@ MCUTILEXPORT inline Matrix3x3 parallelAxisInertia( double m, const Matrix3x3 &i,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_PHYSICS_PHYSICS_H_
+#endif // LIBMCUTILS_PHYSICS_PHYSICS_H_

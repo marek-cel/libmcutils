@@ -19,17 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_TABLE2D_H_
-#define MCUTIL_MATH_TABLE2D_H_
+#ifndef LIBMCUTILS_MATH_TABLE2D_H_
+#define LIBMCUTILS_MATH_TABLE2D_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
 #include <vector>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Table.h>
+#include <mcutils/math/Table.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -172,4 +172,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_TABLE2D_H_
+#endif // LIBMCUTILS_MATH_TABLE2D_H_

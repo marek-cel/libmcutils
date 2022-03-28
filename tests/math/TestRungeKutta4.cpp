@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/math/RungeKutta4.h>
+#include <mcutils/math/RungeKutta4.h>
 
 #include <DiffEquationSolver.h>
 

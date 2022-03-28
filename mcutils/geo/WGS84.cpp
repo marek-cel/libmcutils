@@ -20,9 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/geo/WGS84.h>
+#include <mcutils/geo/WGS84.h>
 
-#include <mcutil/geo/DataWGS84.h>
+#include <mcutils/geo/DataWGS84.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

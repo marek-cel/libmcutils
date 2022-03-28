@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_SIGNAL_LAG2_H_
-#define MCUTIL_SIGNAL_LAG2_H_
+#ifndef LIBMCUTILS_SIGNAL_LAG2_H_
+#define LIBMCUTILS_SIGNAL_LAG2_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/signal/Lag.h>
+#include <mcutils/signal/Lag.h>
 
-#include <mcutil/signal/ISignalElement.h>
+#include <mcutils/signal/ISignalElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -110,4 +110,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_SIGNAL_LAG2_H_
+#endif // LIBMCUTILS_SIGNAL_LAG2_H_

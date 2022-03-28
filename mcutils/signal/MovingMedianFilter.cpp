@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/MovingMedianFilter.h>
+#include <mcutils/signal/MovingMedianFilter.h>
 
 #include <algorithm>
 #include <vector>

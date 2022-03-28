@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutilGeo )
+set( TARGET_NAME mcutils_geo )
 
 ################################################################################
 
@@ -33,5 +33,5 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 
 install( TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutil/geo
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/geo
 )

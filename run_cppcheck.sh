@@ -4,6 +4,6 @@
 
 rm -f out_cppcheck.txt
 
-cppcheck --enable=style --std=c++17 -I ./include ./mcutil 2> out_cppcheck.txt
+cppcheck --enable=style --std=c++17 -I ./mcutils 2> out_cppcheck.txt
 
 ################################################################################

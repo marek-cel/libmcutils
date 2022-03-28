@@ -20,14 +20,14 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/DegMinSec.h>
+#include <mcutils/math/DegMinSec.h>
 
 #include <iomanip>
 #include <sstream>
 #include <string>
 
-#include <mcutil/misc/Check.h>
-#include <mcutil/misc/Units.h>
+#include <mcutils/misc/Check.h>
+#include <mcutils/misc/Units.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/signal/MovingMedianFilter.h>
-#include <mcutil/math/Random.h>
+#include <mcutils/signal/MovingMedianFilter.h>
+#include <mcutils/math/Random.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

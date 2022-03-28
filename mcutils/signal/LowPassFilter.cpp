@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/LowPassFilter.h>
+#include <mcutils/signal/LowPassFilter.h>
 
 #include <algorithm>
 #include <cmath>

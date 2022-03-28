@@ -19,16 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_TIME_ISO8601_H_
-#define MCUTIL_TIME_ISO8601_H_
+#ifndef LIBMCUTILS_TIME_ISO8601_H_
+#define LIBMCUTILS_TIME_ISO8601_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/time/DateTime.h>
+#include <mcutils/time/DateTime.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -92,4 +92,4 @@ inline std::string MCUTILEXPORT toISO8601( const DateTime &dt,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_TIME_ISO8601_H_
+#endif // LIBMCUTILS_TIME_ISO8601_H_

@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/geo/ECEF.h>
+#include <mcutils/geo/ECEF.h>
 
-#include <mcutil/geo/DataMars.h>
-#include <mcutil/geo/DataWGS84.h>
+#include <mcutils/geo/DataMars.h>
+#include <mcutils/geo/DataWGS84.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

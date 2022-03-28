@@ -20,15 +20,15 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/Quaternion.h>
+#include <mcutils/math/Quaternion.h>
 
 #include <cmath>
 #include <string>
 
-#include <mcutil/math/Matrix3x3.h>
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Matrix3x3.h>
+#include <mcutils/math/Vector3.h>
 
-#include <mcutil/misc/Check.h>
+#include <mcutils/misc/Check.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

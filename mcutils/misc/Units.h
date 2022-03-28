@@ -19,15 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MISC_UNITS_H_
-#define MCUTIL_MISC_UNITS_H_
+#ifndef LIBMCUTILS_MISC_UNITS_H_
+#define LIBMCUTILS_MISC_UNITS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <cmath>
 #include <string>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1240,4 +1240,4 @@ MCUTILEXPORT inline double g_kNs_2_kg_Ns( double tsfc = 1.0 )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MISC_UNITS_H_
+#endif // LIBMCUTILS_MISC_UNITS_H_

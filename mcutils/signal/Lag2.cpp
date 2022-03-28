@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/Lag2.h>
+#include <mcutils/signal/Lag2.h>
 
 #include <cmath>
 

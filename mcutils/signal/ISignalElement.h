@@ -19,12 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_SIGNAL_ISIGNALELEMENT_H_
-#define MCUTIL_SIGNAL_ISIGNALELEMENT_H_
+#ifndef LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_
+#define LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -61,4 +61,4 @@ public:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_SIGNAL_ISIGNALELEMENT_H_
+#endif // LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_

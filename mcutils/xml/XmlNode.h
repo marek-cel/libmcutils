@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_XML_XMLNODE_H_
-#define MCUTIL_XML_XMLNODE_H_
+#ifndef LIBMCUTILS_XML_XMLNODE_H_
+#define LIBMCUTILS_XML_XMLNODE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@
 
 #include <libxml/tree.h>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -252,4 +252,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_XML_XMLNODE_H_
+#endif // LIBMCUTILS_XML_XMLNODE_H_

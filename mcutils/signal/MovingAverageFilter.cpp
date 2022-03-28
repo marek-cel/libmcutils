@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/MovingAverageFilter.h>
+#include <mcutils/signal/MovingAverageFilter.h>
 
 #include <algorithm>
 

@@ -20,13 +20,13 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/VectorN.h>
+#include <mcutils/math/VectorN.h>
 
 #include <limits>
 #include <sstream>
 #include <string>
 
-#include <mcutil/misc/Check.h>
+#include <mcutils/misc/Check.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

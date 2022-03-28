@@ -19,17 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_MATRIX3X3_H_
-#define MCUTIL_MATH_MATRIX3X3_H_
+#ifndef LIBMCUTILS_MATH_MATRIX3X3_H_
+#define LIBMCUTILS_MATH_MATRIX3X3_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Angles.h>
-#include <mcutil/math/MatrixSquare.h>
-#include <mcutil/math/Quaternion.h>
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Angles.h>
+#include <mcutils/math/MatrixSquare.h>
+#include <mcutils/math/Quaternion.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -192,4 +192,4 @@ inline Matrix3x3 operator* ( double value, const Matrix3x3 &matrix )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_MATRIX3X3_H_
+#endif // LIBMCUTILS_MATH_MATRIX3X3_H_

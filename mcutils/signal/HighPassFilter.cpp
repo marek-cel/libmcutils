@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/HighPassFilter.h>
+#include <mcutils/signal/HighPassFilter.h>
 
 #include <algorithm>
 #include <cmath>

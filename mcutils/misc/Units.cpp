@@ -20,9 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/misc/Units.h>
+#include <mcutils/misc/Units.h>
 
-#include <mcutil/misc/String.h>
+#include <mcutils/misc/String.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

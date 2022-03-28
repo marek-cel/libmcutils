@@ -1,9 +1,9 @@
 cmake_minimum_required( VERSION 2.8 )
 
-project( mcutil )
+project( mcutils )
 
-set( MCUTIL_VERSION_MAJOR 1 )
-set( MCUTIL_VERSION_MINOR 0 )
+set( MCUTIL_VERSION_MAJOR 0 )
+set( MCUTIL_VERSION_MINOR 1 )
 set( MCUTIL_VERSION_PATCH 0 )
 set( MCUTIL_VERSION_STRING
     ${MCUTIL_VERSION_MAJOR}.${MCUTIL_VERSION_MINOR}.${MCUTIL_VERSION_PATCH}
@@ -70,6 +70,6 @@ find_package( LibXml2 REQUIRED )
 
 ################################################################################
 
-add_subdirectory( mcutil )
+add_subdirectory( mcutils )
 
 ################################################################################

@@ -20,9 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/geo/Mercator.h>
+#include <mcutils/geo/Mercator.h>
 
-#include <mcutil/misc/Units.h>
+#include <mcutils/misc/Units.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

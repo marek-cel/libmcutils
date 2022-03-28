@@ -5,7 +5,7 @@ TEMPLATE = app
 ################################################################################
 
 DESTDIR = $$PWD/../bin
-TARGET = libmcutil_tests
+TARGET = libmcutils_tests
 
 ################################################################################
 
@@ -68,4 +68,4 @@ LIBS += \
 ################################################################################
 
 include(tests.pri)
-include(../mcutil/mcutil.pri)
+include(../mcutils/mcutils.pri)

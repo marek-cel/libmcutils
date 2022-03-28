@@ -3,14 +3,14 @@ TEMPLATE = subdirs
 ################################################################################
 
 SUBDIRS += \
-    mcutil \
+    mcutils \
     tests
 
 ################################################################################
 
-mcutil.subdir = mcutil
-tests.subdir  = tests
+mcutils.subdir = mcutils
+tests.subdir   = tests
 
 ################################################################################
 
-tests.depends = mcutil
+tests.depends = mcutils

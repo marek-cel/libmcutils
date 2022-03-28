@@ -19,17 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_QUATERNION_H_
-#define MCUTIL_MATH_QUATERNION_H_
+#ifndef LIBMCUTILS_MATH_QUATERNION_H_
+#define LIBMCUTILS_MATH_QUATERNION_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <string>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/Angles.h>
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Angles.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -191,4 +191,4 @@ inline Quaternion operator* ( double val, const Quaternion &quat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_QUATERNION_H_
+#endif // LIBMCUTILS_MATH_QUATERNION_H_

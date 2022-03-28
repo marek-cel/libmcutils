@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/Table2D.h>
+#include <mcutils/math/Table2D.h>
 
 #include <cmath>
 #include <limits>
@@ -28,7 +28,7 @@
 #include <string>
 #include <vector>
 
-#include <mcutil/misc/Check.h>
+#include <mcutils/misc/Check.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

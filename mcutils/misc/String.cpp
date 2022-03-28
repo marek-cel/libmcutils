@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/misc/String.h>
+#include <mcutils/misc/String.h>
 
 #include <cstdio>
 #include <sstream>
@@ -29,7 +29,7 @@
 #include <string>
 #include <vector>
 
-#include <mcutil/misc/Check.h>
+#include <mcutils/misc/Check.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

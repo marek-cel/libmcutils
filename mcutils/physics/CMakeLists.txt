@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutilPhysics )
+set( TARGET_NAME mcutils_physics )
 
 ################################################################################
 
@@ -23,5 +23,5 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 )
 
 install( TARGETS ${TARGET_NAME}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutil/physics
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/physics
 )

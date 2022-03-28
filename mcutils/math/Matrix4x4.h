@@ -19,15 +19,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_MATRIX4X4_H_
-#define MCUTIL_MATH_MATRIX4X4_H_
+#ifndef LIBMCUTILS_MATH_MATRIX4X4_H_
+#define LIBMCUTILS_MATH_MATRIX4X4_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/MatrixSquare.h>
-#include <mcutil/math/Vector4.h>
+#include <mcutils/math/MatrixSquare.h>
+#include <mcutils/math/Vector4.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -105,4 +105,4 @@ inline Matrix4x4 operator* ( double value, const Matrix4x4 &matrix )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_MATRIX4X4_H_
+#endif // LIBMCUTILS_MATH_MATRIX4X4_H_

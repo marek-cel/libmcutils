@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/Matrix3x3.h>
+#include <mcutils/math/Matrix3x3.h>
 
 #ifdef _MSC_VER
 #   include <algorithm>

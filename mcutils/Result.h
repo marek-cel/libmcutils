@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_RESULT_H_
-#define MCUTIL_RESULT_H_
+#ifndef LIBMCUTILS_RESULT_H_
+#define LIBMCUTILS_RESULT_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -40,4 +40,4 @@ enum class Result : int
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_RESULT_H_
+#endif // LIBMCUTILS_RESULT_H_

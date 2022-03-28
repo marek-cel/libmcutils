@@ -19,17 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_IINTEGRATOR_H_
-#define MCUTIL_MATH_IINTEGRATOR_H_
+#ifndef LIBMCUTILS_MATH_IINTEGRATOR_H_
+#define LIBMCUTILS_MATH_IINTEGRATOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <functional>
 #include <memory>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/math/VectorN.h>
+#include <mcutils/math/VectorN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -85,4 +85,4 @@ using IIntegratorPtrW = std::weak_ptr   < IIntegrator >;
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_IINTEGRATOR_H_
+#endif // LIBMCUTILS_MATH_IINTEGRATOR_H_

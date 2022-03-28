@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/signal/Filter2.h>
+#include <mcutils/signal/Filter2.h>
 
 #include <XcosBinFileReader.h>
 

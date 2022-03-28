@@ -20,13 +20,13 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/PID.h>
+#include <mcutils/signal/PID.h>
 
 #include <algorithm>
 #include <cmath>
 #include <limits>
 
-#include <mcutil/math/Math.h>
+#include <mcutils/math/Math.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

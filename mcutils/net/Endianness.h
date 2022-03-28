@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_NET_ENDIANNESS_H_
-#define MCUTIL_NET_ENDIANNESS_H_
+#ifndef LIBMCUTILS_NET_ENDIANNESS_H_
+#define LIBMCUTILS_NET_ENDIANNESS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <cstdint>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -70,4 +70,4 @@ MCUTILEXPORT float hostToNet( float val );
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_NET_ENDIANNESS_H_
+#endif // LIBMCUTILS_NET_ENDIANNESS_H_

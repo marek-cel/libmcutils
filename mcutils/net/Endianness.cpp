@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/net/Endianness.h>
+#include <mcutils/net/Endianness.h>
 
 #ifdef _LINUX_
 #   include <arpa/inet.h>

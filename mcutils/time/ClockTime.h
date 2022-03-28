@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_TIME_CLOCKTIME_H_
-#define MCUTIL_TIME_CLOCKTIME_H_
+#ifndef LIBMCUTILS_TIME_CLOCKTIME_H_
+#define LIBMCUTILS_TIME_CLOCKTIME_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <ctime>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -50,4 +50,4 @@ inline double MCUTILEXPORT getClockTime()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_TIME_CLOCKTIME_H_
+#endif // LIBMCUTILS_TIME_CLOCKTIME_H_

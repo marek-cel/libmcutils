@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/math/Random.h>
+#include <mcutils/math/Random.h>
 
 #include <cstdlib>
 #include <ctime>

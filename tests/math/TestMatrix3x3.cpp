@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/math/Matrix3x3.h>
+#include <mcutils/math/Matrix3x3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 

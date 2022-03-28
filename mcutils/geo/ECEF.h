@@ -19,19 +19,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_GEO_ECEF_H_
-#define MCUTIL_GEO_ECEF_H_
+#ifndef LIBMCUTILS_GEO_ECEF_H_
+#define LIBMCUTILS_GEO_ECEF_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
-#include <mcutil/geo/Geo.h>
+#include <mcutils/geo/Geo.h>
 
-#include <mcutil/math/Angles.h>
-#include <mcutil/math/Matrix3x3.h>
-#include <mcutil/math/Quaternion.h>
-#include <mcutil/math/Vector3.h>
+#include <mcutils/math/Angles.h>
+#include <mcutils/math/Matrix3x3.h>
+#include <mcutils/math/Quaternion.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -262,4 +262,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_GEO_ECEF_H_
+#endif // LIBMCUTILS_GEO_ECEF_H_

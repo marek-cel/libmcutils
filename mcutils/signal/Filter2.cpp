@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutil/signal/Filter2.h>
+#include <mcutils/signal/Filter2.h>
 
 #include <algorithm>
 #include <cmath>

@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutilMath )
+set( TARGET_NAME mcutils_math )
 
 ################################################################################
 
@@ -62,5 +62,5 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 
 install( TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutil/math
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/math
 )

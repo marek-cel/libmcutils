@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MISC_STRING_H_
-#define MCUTIL_MISC_STRING_H_
+#ifndef LIBMCUTILS_MISC_STRING_H_
+#define LIBMCUTILS_MISC_STRING_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@
 #include <string>
 #include <vector>
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -162,4 +162,4 @@ MCUTILEXPORT std::string toUpper( const std::string &str );
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MISC_STRING_H_
+#endif // LIBMCUTILS_MISC_STRING_H_

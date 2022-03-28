@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutil/signal/Lag2.h>
+#include <mcutils/signal/Lag2.h>
 
 #include <XcosBinFileReader.h>
 

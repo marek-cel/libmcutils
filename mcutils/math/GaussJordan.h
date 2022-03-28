@@ -19,16 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_GAUSSJORDAN_H_
-#define MCUTIL_MATH_GAUSSJORDAN_H_
+#ifndef LIBMCUTILS_MATH_GAUSSJORDAN_H_
+#define LIBMCUTILS_MATH_GAUSSJORDAN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
-#include <mcutil/Result.h>
+#include <mcutils/defs.h>
+#include <mcutils/Result.h>
 
-#include <mcutil/math/Matrix.h>
-#include <mcutil/math/Vector.h>
+#include <mcutils/math/Matrix.h>
+#include <mcutils/math/Vector.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -117,4 +117,4 @@ Result solve( const Matrix<SIZE, SIZE> &mtr, const Vector<SIZE> &rhs,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_GAUSSJORDAN_H_
+#endif // LIBMCUTILS_MATH_GAUSSJORDAN_H_

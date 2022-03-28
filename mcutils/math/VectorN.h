@@ -19,12 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_MATH_VECTORN_H_
-#define MCUTIL_MATH_VECTORN_H_
+#ifndef LIBMCUTILS_MATH_VECTORN_H_
+#define LIBMCUTILS_MATH_VECTORN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutil/defs.h>
+#include <mcutils/defs.h>
 
 #include <string>
 
@@ -197,4 +197,4 @@ inline VectorN operator* ( double val, const VectorN & vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_MATH_VECTORN_H_
+#endif // LIBMCUTILS_MATH_VECTORN_H_

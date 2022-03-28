@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTIL_DEFS_H_
-#define MCUTIL_DEFS_H_
+#ifndef LIBMCUTILS_DEFS_H_
+#define LIBMCUTILS_DEFS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,4 +46,4 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTIL_DEFS_H_
+#endif // LIBMCUTILS_DEFS_H_
