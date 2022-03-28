@@ -1,0 +1,83 @@
+/****************************************************************************//*
+ * Copyright (C) 2022 Marek M. Cel
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom
+ * the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ ******************************************************************************/
+#ifndef MCUTIL_MATH_GEOMETRY_H_
+#define MCUTIL_MATH_GEOMETRY_H_
+
+////////////////////////////////////////////////////////////////////////////////
+
+#include <mcutil/defs.h>
+
+#include <mcutil/math/Vector3.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc { namespace Geometry
+{
+
+/**
+ * @brief Checks if intersection occurs.
+ *
+ * Checks if there is an intersection between the given line segment and
+ * the given plane.
+ *
+ * <h3>Refernces:</h3>
+ * <ul>
+ *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
+ *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
+ * </ul>
+ *
+ * @param b segment beginning
+ * @param e segment end
+ * @param r any point on the plane coordinates
+ * @param n plane normal vector
+ * @return true if there is an intersection, false otherwise
+ */
+bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
+                          const Vector3 &r, const Vector3 &n );
+
+/**
+ * @brief Returns segment and plane intersection point.
+ *
+ * Gets an intersection point between the given line segment and
+ * the given plane.
+ *
+ * <h3>Refernces:</h3>
+ * <ul>
+ *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
+ *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
+ * </ul>
+ *
+ * @param b segment beginning
+ * @param e segment end
+ * @param r any point on the plane coordinates
+ * @param n plane normal vector
+ * @return intersection point
+ */
+Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
+                              const Vector3 &r, const Vector3 &n );
+
+} // Geometry
+} // mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTIL_MATH_GEOMETRY_H_
