@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_GEO_DATAMARS_H_
-#define LIBMCUTILS_GEO_DATAMARS_H_
+#ifndef MCUTILS_GEO_DATAMARS_H_
+#define MCUTILS_GEO_DATAMARS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -66,9 +66,9 @@ MCUTILSEXPORT static constexpr double omega = 7.0900303093e-5;       ///< [rad/s
 MCUTILSEXPORT static constexpr double gamma = 3.72076;               ///< [m/s^2] theoretical (normal) gravity mean value
 MCUTILSEXPORT static constexpr double mm    = 6.4171e23;             ///< [kg] mass of the Mars
 
-} // DataMars
-} // mc
+} // namespace DataMars
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_GEO_DATAMARS_H_
+#endif // MCUTILS_GEO_DATAMARS_H_

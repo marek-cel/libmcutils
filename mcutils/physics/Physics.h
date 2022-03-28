@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_PHYSICS_PHYSICS_H_
-#define LIBMCUTILS_PHYSICS_PHYSICS_H_
+#ifndef MCUTILS_PHYSICS_PHYSICS_H_
+#define MCUTILS_PHYSICS_PHYSICS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -117,9 +117,9 @@ MCUTILSEXPORT inline Matrix3x3 parallelAxisInertia( double m, const Matrix3x3 &i
     return ( i + m * a );
 }
 
-} // Physics
-} // mc
+} // namespace Physics
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_PHYSICS_PHYSICS_H_
+#endif // MCUTILS_PHYSICS_PHYSICS_H_

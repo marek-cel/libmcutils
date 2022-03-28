@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_VECTOR_H_
-#define LIBMCUTILS_MATH_VECTOR_H_
+#ifndef MCUTILS_MATH_VECTOR_H_
+#define MCUTILS_MATH_VECTOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -379,8 +379,8 @@ protected:
     double _items[ SIZE ];      ///< vector items
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_VECTOR_H_
+#endif // MCUTILS_MATH_VECTOR_H_

@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_VECTOR6_H_
-#define LIBMCUTILS_MATH_VECTOR6_H_
+#ifndef MCUTILS_MATH_VECTOR6_H_
+#define MCUTILS_MATH_VECTOR6_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -97,8 +97,8 @@ inline Vector6 operator* ( double value, const Vector6 & vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_VECTOR6_H_
+#endif // MCUTILS_MATH_VECTOR6_H_

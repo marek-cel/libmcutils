@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_TIME_CLOCKTIME_H_
-#define LIBMCUTILS_TIME_CLOCKTIME_H_
+#ifndef MCUTILS_TIME_CLOCKTIME_H_
+#define MCUTILS_TIME_CLOCKTIME_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,8 +46,8 @@ inline double MCUTILSEXPORT getClockTime()
 #   endif
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_TIME_CLOCKTIME_H_
+#endif // MCUTILS_TIME_CLOCKTIME_H_

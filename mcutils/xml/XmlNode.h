@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_XML_XMLNODE_H_
-#define LIBMCUTILS_XML_XMLNODE_H_
+#ifndef MCUTILS_XML_XMLNODE_H_
+#define MCUTILS_XML_XMLNODE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -248,8 +248,8 @@ private:
     xmlNodePtr  _node;  ///< XML node pointer
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_XML_XMLNODE_H_
+#endif // MCUTILS_XML_XMLNODE_H_

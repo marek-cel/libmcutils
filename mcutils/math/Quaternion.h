@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_QUATERNION_H_
-#define LIBMCUTILS_MATH_QUATERNION_H_
+#ifndef MCUTILS_MATH_QUATERNION_H_
+#define MCUTILS_MATH_QUATERNION_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -187,8 +187,8 @@ inline Quaternion operator* ( double val, const Quaternion &quat )
     return quat * val;
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_QUATERNION_H_
+#endif // MCUTILS_MATH_QUATERNION_H_

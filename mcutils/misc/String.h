@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_STRING_H_
-#define LIBMCUTILS_MISC_STRING_H_
+#ifndef MCUTILS_MISC_STRING_H_
+#define MCUTILS_MISC_STRING_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -157,9 +157,9 @@ MCUTILSEXPORT std::string toLower( const std::string &str );
  */
 MCUTILSEXPORT std::string toUpper( const std::string &str );
 
-} // String
-} // mc
+} // namespace String
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_STRING_H_
+#endif // MCUTILS_MISC_STRING_H_

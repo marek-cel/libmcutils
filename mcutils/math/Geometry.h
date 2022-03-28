@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_GEOMETRY_H_
-#define LIBMCUTILS_MATH_GEOMETRY_H_
+#ifndef MCUTILS_MATH_GEOMETRY_H_
+#define MCUTILS_MATH_GEOMETRY_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -75,9 +75,9 @@ bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
 Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
                               const Vector3 &r, const Vector3 &n );
 
-} // Geometry
-} // mc
+} // namespace Geometry
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_GEOMETRY_H_
+#endif // MCUTILS_MATH_GEOMETRY_H_

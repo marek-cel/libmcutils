@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_MATH_H_
-#define LIBMCUTILS_MATH_MATH_H_
+#ifndef MCUTILS_MATH_MATH_H_
+#define MCUTILS_MATH_MATH_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -254,9 +254,9 @@ MCUTILSEXPORT inline double stdDev( const double x[], int n )
     return stdDev( sum, sum_sq, n );
 }
 
-} // Math
-} // mc
+} // namespace Math
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_MATH_H_
+#endif // MCUTILS_MATH_MATH_H_

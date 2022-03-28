@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_MATRIX3X3_H_
-#define LIBMCUTILS_MATH_MATRIX3X3_H_
+#ifndef MCUTILS_MATH_MATRIX3X3_H_
+#define MCUTILS_MATH_MATRIX3X3_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -188,8 +188,8 @@ inline Matrix3x3 operator* ( double value, const Matrix3x3 &matrix )
     return ( matrix * value );
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_MATRIX3X3_H_
+#endif // MCUTILS_MATH_MATRIX3X3_H_

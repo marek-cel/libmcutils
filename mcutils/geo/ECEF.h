@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_GEO_ECEF_H_
-#define LIBMCUTILS_GEO_ECEF_H_
+#ifndef MCUTILS_GEO_ECEF_H_
+#define MCUTILS_GEO_ECEF_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -258,8 +258,8 @@ private:
     void updateMatrices();
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_GEO_ECEF_H_
+#endif // MCUTILS_GEO_ECEF_H_

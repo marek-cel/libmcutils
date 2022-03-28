@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_MAP_H_
-#define LIBMCUTILS_MISC_MAP_H_
+#ifndef MCUTILS_MISC_MAP_H_
+#define MCUTILS_MISC_MAP_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -75,8 +75,8 @@ TYPE_ITEM getMapItemByKey( std::map< TYPE_KEY, TYPE_ITEM > *map, TYPE_KEY key )
     return TYPE_ITEM {};
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_MAP_H_
+#endif // MCUTILS_MISC_MAP_H_

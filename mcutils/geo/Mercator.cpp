@@ -115,4 +115,4 @@ double Mercator::t_inv( double t, double max_error, unsigned int max_iterations 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // mc
+} // namespace mc

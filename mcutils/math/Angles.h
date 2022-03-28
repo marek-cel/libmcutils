@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_ANGLES_H_
-#define LIBMCUTILS_MATH_ANGLES_H_
+#ifndef MCUTILS_MATH_ANGLES_H_
+#define MCUTILS_MATH_ANGLES_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -114,8 +114,8 @@ private:
     double _psi;    ///< [rad] angle of rotation about z-axis
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_ANGLES_H_
+#endif // MCUTILS_MATH_ANGLES_H_

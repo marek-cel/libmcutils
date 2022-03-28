@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_GEO_GEO_H_
-#define LIBMCUTILS_GEO_GEO_H_
+#ifndef MCUTILS_GEO_GEO_H_
+#define MCUTILS_GEO_GEO_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,8 +39,8 @@ struct MCUTILSEXPORT Geo
     double alt;                     ///< [m] altitude above mean sea level
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_GEO_GEO_H_
+#endif // MCUTILS_GEO_GEO_H_

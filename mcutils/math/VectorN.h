@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_VECTORN_H_
-#define LIBMCUTILS_MATH_VECTORN_H_
+#ifndef MCUTILS_MATH_VECTORN_H_
+#define MCUTILS_MATH_VECTORN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -193,8 +193,8 @@ inline VectorN operator* ( double val, const VectorN & vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_VECTORN_H_
+#endif // MCUTILS_MATH_VECTORN_H_

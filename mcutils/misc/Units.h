@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_UNITS_H_
-#define LIBMCUTILS_MISC_UNITS_H_
+#ifndef MCUTILS_MISC_UNITS_H_
+#define MCUTILS_MISC_UNITS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -1235,9 +1235,9 @@ MCUTILSEXPORT inline double g_kNs_2_kg_Ns( double tsfc = 1.0 )
     return tsfc / ( 1.0e6 );
 }
 
-} // Units
-} // mc
+} // namespace Units
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_UNITS_H_
+#endif // MCUTILS_MISC_UNITS_H_

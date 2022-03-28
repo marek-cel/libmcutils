@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_CHECK_H_
-#define LIBMCUTILS_MISC_CHECK_H_
+#ifndef MCUTILS_MISC_CHECK_H_
+#define MCUTILS_MISC_CHECK_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -91,8 +91,8 @@ inline bool MCUTILSEXPORT isValid( const double array[], unsigned int size )
     return true;
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_CHECK_H_
+#endif // MCUTILS_MISC_CHECK_H_

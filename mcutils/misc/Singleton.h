@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_SINGLETON_H_
-#define LIBMCUTILS_MISC_SINGLETON_H_
+#ifndef MCUTILS_MISC_SINGLETON_H_
+#define MCUTILS_MISC_SINGLETON_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -61,8 +61,8 @@ private:
 
 template <class TYPE> TYPE* Singleton<TYPE>::_instance = nullptr;
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_SINGLETON_H_
+#endif // MCUTILS_MISC_SINGLETON_H_

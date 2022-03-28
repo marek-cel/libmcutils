@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_TIME_DATETIME_H_
-#define LIBMCUTILS_TIME_DATETIME_H_
+#ifndef MCUTILS_TIME_DATETIME_H_
+#define MCUTILS_TIME_DATETIME_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,8 +47,8 @@ struct MCUTILSEXPORT DateTime
     uint16_t msec;      ///< millisecond
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_TIME_DATETIME_H_
+#endif // MCUTILS_TIME_DATETIME_H_

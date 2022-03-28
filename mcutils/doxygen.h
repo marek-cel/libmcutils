@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_DOXYGEN_H_
-#define LIBMCUTILS_DOXYGEN_H_
+#ifndef MCUTILS_DOXYGEN_H_
+#define MCUTILS_DOXYGEN_H_
 
 /***************************************************************************//**
  * @author Marek M. Cel
@@ -60,4 +60,4 @@
  *
  ******************************************************************************/
 
-#endif // LIBMCUTILS_DOXYGEN_H_
+#endif // MCUTILS_DOXYGEN_H_

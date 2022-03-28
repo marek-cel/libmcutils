@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_RESULT_H_
-#define LIBMCUTILS_RESULT_H_
+#ifndef MCUTILS_RESULT_H_
+#define MCUTILS_RESULT_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,8 +36,8 @@ enum class Result : int
     Failure = 1     ///< failure
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_RESULT_H_
+#endif // MCUTILS_RESULT_H_

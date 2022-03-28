@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_GEO_MERCATOR_H_
-#define LIBMCUTILS_GEO_MERCATOR_H_
+#ifndef MCUTILS_GEO_MERCATOR_H_
+#define MCUTILS_GEO_MERCATOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -128,8 +128,8 @@ private:
     double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_GEO_MERCATOR_H_
+#endif // MCUTILS_GEO_MERCATOR_H_

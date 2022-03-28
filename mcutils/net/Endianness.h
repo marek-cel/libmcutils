@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_NET_ENDIANNESS_H_
-#define LIBMCUTILS_NET_ENDIANNESS_H_
+#ifndef MCUTILS_NET_ENDIANNESS_H_
+#define MCUTILS_NET_ENDIANNESS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -65,9 +65,9 @@ MCUTILSEXPORT double hostToNet( double val );
  */
 MCUTILSEXPORT float hostToNet( float val );
 
-} // Endianess
-} // mc
+} // namespace Endianess
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_NET_ENDIANNESS_H_
+#endif // MCUTILS_NET_ENDIANNESS_H_

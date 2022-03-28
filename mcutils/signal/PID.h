@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_SIGNAL_PID_H_
-#define LIBMCUTILS_SIGNAL_PID_H_
+#ifndef MCUTILS_SIGNAL_PID_H_
+#define MCUTILS_SIGNAL_PID_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -219,8 +219,8 @@ private:
     bool _saturation;       ///< specifies if saturation is enabled
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_SIGNAL_PID_H_
+#endif // MCUTILS_SIGNAL_PID_H_

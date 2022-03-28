@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_IINTEGRATOR_H_
-#define LIBMCUTILS_MATH_IINTEGRATOR_H_
+#ifndef MCUTILS_MATH_IINTEGRATOR_H_
+#define MCUTILS_MATH_IINTEGRATOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -81,8 +81,8 @@ using IIntegratorPtrS = std::shared_ptr < IIntegrator >;
 using IIntegratorPtrU = std::unique_ptr < IIntegrator >;
 using IIntegratorPtrW = std::weak_ptr   < IIntegrator >;
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_IINTEGRATOR_H_
+#endif // MCUTILS_MATH_IINTEGRATOR_H_

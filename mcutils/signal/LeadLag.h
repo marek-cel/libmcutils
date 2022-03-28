@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_SIGNAL_LEADLAG_H_
-#define LIBMCUTILS_SIGNAL_LEADLAG_H_
+#ifndef MCUTILS_SIGNAL_LEADLAG_H_
+#define MCUTILS_SIGNAL_LEADLAG_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -101,8 +101,8 @@ private:
     double _y;              ///< current value
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_SIGNAL_LEADLAG_H_
+#endif // MCUTILS_SIGNAL_LEADLAG_H_

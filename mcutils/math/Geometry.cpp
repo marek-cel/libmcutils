@@ -81,5 +81,5 @@ Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // Geometry
-} // mc
+} // namespace Geometry
+} // namespace mc

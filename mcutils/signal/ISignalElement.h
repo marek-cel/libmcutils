@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_
-#define LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_
+#ifndef MCUTILS_SIGNAL_ISIGNALELEMENT_H_
+#define MCUTILS_SIGNAL_ISIGNALELEMENT_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -57,8 +57,8 @@ public:
     virtual void update( double dt, double u ) = 0;
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_SIGNAL_ISIGNALELEMENT_H_
+#endif // MCUTILS_SIGNAL_ISIGNALELEMENT_H_

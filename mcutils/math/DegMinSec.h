@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_DEGMINSEC_H_
-#define LIBMCUTILS_MATH_DEGMINSEC_H_
+#ifndef MCUTILS_MATH_DEGMINSEC_H_
+#define MCUTILS_MATH_DEGMINSEC_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -97,8 +97,8 @@ private:
     double _sec;    ///< second part (always greater than or equal to 0)
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_DEGMINSEC_H_
+#endif // MCUTILS_MATH_DEGMINSEC_H_

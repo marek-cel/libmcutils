@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MISC_LOG_H_
-#define LIBMCUTILS_MISC_LOG_H_
+#ifndef MCUTILS_MISC_LOG_H_
+#define MCUTILS_MISC_LOG_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -57,8 +57,8 @@ public:
     static std::ostream& timeTag();
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MISC_LOG_H_
+#endif // MCUTILS_MISC_LOG_H_

@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_MATH_RANDOM_H_
-#define LIBMCUTILS_MATH_RANDOM_H_
+#ifndef MCUTILS_MATH_RANDOM_H_
+#define MCUTILS_MATH_RANDOM_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -123,8 +123,8 @@ private:
     Random();
 };
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_MATH_RANDOM_H_
+#endif // MCUTILS_MATH_RANDOM_H_

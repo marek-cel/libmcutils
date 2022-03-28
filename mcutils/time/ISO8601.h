@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef LIBMCUTILS_TIME_ISO8601_H_
-#define LIBMCUTILS_TIME_ISO8601_H_
+#ifndef MCUTILS_TIME_ISO8601_H_
+#define MCUTILS_TIME_ISO8601_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -88,8 +88,8 @@ inline std::string MCUTILSEXPORT toISO8601( const DateTime &dt,
                       dt.hour, dt.minute, dt.second, dt.msec, show_msec );
 }
 
-} // mc
+} // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCUTILS_TIME_ISO8601_H_
+#endif // MCUTILS_TIME_ISO8601_H_
