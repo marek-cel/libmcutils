@@ -2,11 +2,11 @@ cmake_minimum_required( VERSION 2.8 )
 
 project( mcutils )
 
-set( MCUTIL_VERSION_MAJOR 0 )
-set( MCUTIL_VERSION_MINOR 1 )
-set( MCUTIL_VERSION_PATCH 0 )
-set( MCUTIL_VERSION_STRING
-    ${MCUTIL_VERSION_MAJOR}.${MCUTIL_VERSION_MINOR}.${MCUTIL_VERSION_PATCH}
+set( MCUTILS_VERSION_MAJOR 0 )
+set( MCUTILS_VERSION_MINOR 1 )
+set( MCUTILS_VERSION_PATCH 0 )
+set( MCUTILS_VERSION_STRING
+    ${MCUTILS_VERSION_MAJOR}.${MCUTILS_VERSION_MINOR}.${MCUTILS_VERSION_PATCH}
 )
 
 ################################################################################
