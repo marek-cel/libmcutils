@@ -48,9 +48,9 @@ namespace mc
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-std::string MCUTILSEXPORT toISO8601( int year, int mon, int day,
-                                    int hour, int min, int sec, int msec,
-                                    bool show_msec = true );
+MCUTILSEXPORT std::string toISO8601( int year, int mon, int day,
+                                     int hour, int min, int sec, int msec,
+                                     bool show_msec = true );
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -60,7 +60,7 @@ std::string MCUTILSEXPORT toISO8601( int year, int mon, int day,
  * @param day
  * @return ISO-8601 date and time string
  */
-std::string MCUTILSEXPORT toISO8601( int year, int mon, int day );
+MCUTILSEXPORT std::string toISO8601( int year, int mon, int day );
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -71,8 +71,8 @@ std::string MCUTILSEXPORT toISO8601( int year, int mon, int day );
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-std::string MCUTILSEXPORT toISO8601( int hour, int min, int sec, int msec,
-                                    bool show_msec = true );
+MCUTILSEXPORT std::string toISO8601( int hour, int min, int sec, int msec,
+                                     bool show_msec = true );
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -81,8 +81,8 @@ std::string MCUTILSEXPORT toISO8601( int hour, int min, int sec, int msec,
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-inline std::string MCUTILSEXPORT toISO8601( const DateTime &dt,
-                                           bool show_msec = true )
+MCUTILSEXPORT inline std::string toISO8601( const DateTime &dt,
+                                            bool show_msec = true )
 {
     return toISO8601( dt.year, dt.month, dt.day,
                       dt.hour, dt.minute, dt.second, dt.msec, show_msec );

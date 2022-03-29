@@ -45,7 +45,7 @@ public:
 
     using Fun = std::function<void(const VectorN &, VectorN *)>;
 
-    virtual ~IIntegrator() {};
+    virtual ~IIntegrator() {}
 
     /**
      * @brief Integrates given vector.
