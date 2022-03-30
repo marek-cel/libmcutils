@@ -3,7 +3,7 @@
 ################################################################################
 
 cd bin
-./libmcutils_tests --gtest_break_on_failure
+./tests --gtest_break_on_failure
 
 read -p "Press any key to continue... " -n1 -s
 

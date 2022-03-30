@@ -1,0 +1,3 @@
+$(pwd)/tests/*
+*math/IIntegrator.h
+*signal/ISignalElement.h
