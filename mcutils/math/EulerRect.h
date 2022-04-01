@@ -28,7 +28,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/IIntegrator.h>
+#include <mcutils/math/Integrator.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -48,7 +48,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Euler_method">Euler method - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSEXPORT EulerRect final : public IIntegrator
+class MCUTILSEXPORT EulerRect final : public Integrator
 {
 public:
 
@@ -69,32 +69,7 @@ public:
      */
     void integrate( double step, VectorN *vect ) override;
 
-    /**
-     * @brief Sets a function which calculates vector derivative.
-     *
-     * Function should take current vector as first argument and resulting
-     * vector derivative pointer as second argument.
-     *
-     * @param fun function which calculates vector derivative
-     */
-    void setDerivFun( Fun fun ) override
-    {
-        _fun = fun;
-    }
-
-    /**
-     * @brief Checks if function which calculates vector derivative is set.
-     *
-     * @return true if function which calculates vector derivative is set, false otherwise
-     */
-    inline bool isDerivFunSet() const override
-    {
-        return static_cast<bool>( _fun );
-    }
-
 private:
-
-    Fun _fun;           ///< function which calculates vector derivative
 
     VectorN _k0;        ///< auxiliary vector
     VectorN _xt;        ///< auxiliary vector

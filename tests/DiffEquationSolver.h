@@ -3,7 +3,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutils/math/IIntegrator.h>
+#include <mcutils/math/Integrator.h>
 #include <mcutils/math/VectorN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ public:
      * @param c damping
      */
     DiffEquationSolver( double m, double k, double c,
-                        mc::IIntegrator *integrator );
+                        mc::Integrator *integrator );
 
     /**
      * @brief solve
@@ -120,7 +120,7 @@ public:
 
 private:
 
-    mc::IIntegrator *_integrator;
+    mc::Integrator *_integrator;
 
     double _m;      ///< [kg]       mass
     double _k;      ///< [N/m]      stiffness

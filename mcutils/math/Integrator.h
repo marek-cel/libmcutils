@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_IINTEGRATOR_H_
-#define MCUTILS_MATH_IINTEGRATOR_H_
+#ifndef MCUTILS_MATH_INTEGRATOR_H_
+#define MCUTILS_MATH_INTEGRATOR_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,15 +37,18 @@ namespace mc
 {
 
 /**
- * @brief Numerical integration interface class.
+ * @brief Abstract numerical integration base class.
  */
-class MCUTILSEXPORT IIntegrator
+class MCUTILSEXPORT Integrator
 {
 public:
 
     using Fun = std::function<void(const VectorN &, VectorN *)>;
 
-    virtual ~IIntegrator() {}
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
+    virtual ~Integrator() {}
+    // LCOV_EXCL_STOP
 
     /**
      * @brief Integrates given vector.
@@ -58,31 +61,39 @@ public:
     virtual void integrate( double step, VectorN *vect ) = 0;
 
     /**
-     * @brief Pure virtual function to Sets a function which calculates vector
-     * derivative.
+     * @brief Sets a function which calculates vector derivative.
      *
      * Function should take current vector as first argument and resulting
      * vector derivative pointer as second argument.
      *
      * @param fun function which calculates vector derivative
      */
-    virtual void setDerivFun( Fun fun ) = 0;
+    void setDerivFun( Fun fun )
+    {
+        _fun = fun;
+    }
 
     /**
-     * @brief Pure virtual function to Checks if function which calculates
-     * vector derivative is set.
+     * @brief Checks if function which calculates vector derivative is set.
      *
      * @return true if function which calculates vector derivative is set, false otherwise
      */
-    virtual bool isDerivFunSet() const = 0;
+    inline bool isDerivFunSet() const
+    {
+        return static_cast<bool>( _fun );
+    }
+
+protected:
+
+    Fun _fun;   ///< function which calculates vector derivative
 };
 
-using IIntegratorPtrS = std::shared_ptr < IIntegrator >;
-using IIntegratorPtrU = std::unique_ptr < IIntegrator >;
-using IIntegratorPtrW = std::weak_ptr   < IIntegrator >;
+using IntegratorPtrS = std::shared_ptr < Integrator >;
+using IntegratorPtrU = std::unique_ptr < Integrator >;
+using IntegratorPtrW = std::weak_ptr   < Integrator >;
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MATH_IINTEGRATOR_H_
+#endif // MCUTILS_MATH_INTEGRATOR_H_

@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 DiffEquationSolver::DiffEquationSolver( double m, double k, double c,
-                                        mc::IIntegrator *integrator )
+                                        mc::Integrator *integrator )
 {
     _m = m;
     _k = k;

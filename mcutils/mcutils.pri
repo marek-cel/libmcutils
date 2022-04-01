@@ -26,7 +26,7 @@ HEADERS += \
     $$PWD/math/EulerRect.h \
     $$PWD/math/GaussJordan.h \
     $$PWD/math/Geometry.h \
-    $$PWD/math/IIntegrator.h \
+    $$PWD/math/Integrator.h \
     $$PWD/math/Math.h \
     $$PWD/math/Matrix.h \
     $$PWD/math/Matrix3x3.h \
