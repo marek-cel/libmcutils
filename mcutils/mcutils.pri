@@ -32,7 +32,7 @@ HEADERS += \
     $$PWD/math/Matrix3x3.h \
     $$PWD/math/Matrix4x4.h \
     $$PWD/math/Matrix6x6.h \
-    $$PWD/math/MatrixSquare.h \
+    $$PWD/math/MatrixSq.h \
     $$PWD/math/Quaternion.h \
     $$PWD/math/Random.h \
     $$PWD/math/RungeKutta4.h \

@@ -27,7 +27,7 @@
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Angles.h>
-#include <mcutils/math/MatrixSquare.h>
+#include <mcutils/math/MatrixSq.h>
 #include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
 
@@ -53,7 +53,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSEXPORT Matrix3x3 final : public MatrixSquare<3>
+class MCUTILSEXPORT Matrix3x3 final : public MatrixSq<3>
 {
 public:
 

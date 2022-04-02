@@ -110,7 +110,7 @@ public:
     }
 
     /** @brief Sets matrix items from given array. */
-    void setArray( const double items[] )
+    void setArray( const double *items )
     {
         std::memcpy( _items, items, sizeof(_items) );
     }

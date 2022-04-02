@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_MATRIXSQUARE_H_
-#define MCUTILS_MATH_MATRIXSQUARE_H_
+#ifndef MCUTILS_MATH_MATRIXSQ_H_
+#define MCUTILS_MATH_MATRIXSQ_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,32 +39,32 @@ namespace mc
  * @tparam N number of rows and columns
  */
 template <unsigned int N>
-class MatrixSquare : public Matrix<N, N>
+class MatrixSq : public Matrix<N, N>
 {
 public:
 
     /** @brief Constructor. */
-    MatrixSquare() :
+    MatrixSq() :
         Matrix<N, N>()
     {}
 
     /** @brief Copy constructor. */
-    MatrixSquare( const MatrixSquare<N> &matrix ) :
+    MatrixSq( const MatrixSq<N> &matrix ) :
         Matrix<N, N>( matrix )
     {}
 
     /** @brief Constructor. */
-    explicit MatrixSquare( const double items[] ) :
+    explicit MatrixSq( const double items[] ) :
         Matrix<N, N>( items )
     {}
 
     /** @brief Destructor. */
-    virtual ~MatrixSquare() = default;
+    virtual ~MatrixSq() {}
 
     /** @brief Transposes matrix. */
     void transpose()
     {
-        MatrixSquare<N> temp( *this );
+        MatrixSq<N> temp( *this );
 
         for ( unsigned int r = 0; r < N; ++r )
         {
@@ -75,84 +75,92 @@ public:
         }
     }
 
-    /** @brief Assignment operator. */
-    MatrixSquare<N>& operator= ( const MatrixSquare<N> &matrix )
+    /** @brief Returns transposed matrix. */
+    MatrixSq<N> getTransposed() const
     {
-        setArray( matrix._items );
+        MatrixSq<N> result( *this );
+        result.transpose();
+        return result;
+    }
+
+    /** @brief Assignment operator. */
+    MatrixSq<N>& operator= ( const MatrixSq<N> &matrix )
+    {
+        std::memcpy( this->_items, matrix._items, sizeof(this->_items) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    MatrixSquare<N> operator+ ( const MatrixSquare<N> &matrix ) const
+    MatrixSq<N> operator+ ( const MatrixSq<N> &matrix ) const
     {
-        MatrixSquare<N> result( *this );
+        MatrixSq<N> result( *this );
         result.add( matrix );
         return result;
     }
 
     /** @brief Negation operator. */
-    MatrixSquare<N> operator- () const
+    MatrixSq<N> operator- () const
     {
-        MatrixSquare<N> result( *this );
+        MatrixSq<N> result( *this );
         result.negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    MatrixSquare<N> operator- ( const MatrixSquare<N> &matrix ) const
+    MatrixSq<N> operator- ( const MatrixSq<N> &matrix ) const
     {
-        MatrixSquare<N> result( *this );
+        MatrixSq<N> result( *this );
         result.substract( matrix );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixSquare<N> operator* ( double value ) const
+    MatrixSq<N> operator* ( double value ) const
     {
-        MatrixSquare<N> result( *this );
+        MatrixSq<N> result( *this );
         result.multiplyByValue( value );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixSquare<N> operator* ( const MatrixSquare<N> &matrix ) const
+    MatrixSq<N> operator* ( const MatrixSq<N> &matrix ) const
     {
-        MatrixSquare<N> result( *this );
-        multiplyByMatrix( matrix, result );
+        MatrixSq<N> result( *this );
+        multiplyByMatrix( matrix, &result );
         return result;
     }
 
     /** @brief Division operator (by scalar). */
-    MatrixSquare<N> operator/ ( double value ) const
+    MatrixSq<N> operator/ ( double value ) const
     {
-        MatrixSquare<N> result( *this );
+        MatrixSq<N> result( *this );
         result.divideByValue( value );
         return result;
     }
 
     /** @brief Unary addition operator. */
-    MatrixSquare<N>& operator+= ( const MatrixSquare<N> &matrix )
+    MatrixSq<N>& operator+= ( const MatrixSq<N> &matrix )
     {
         this->add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixSquare<N>& operator-= ( const MatrixSquare<N> &matrix )
+    MatrixSq<N>& operator-= ( const MatrixSq<N> &matrix )
     {
         this->substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    MatrixSquare<N>& operator*= ( double value )
+    MatrixSq<N>& operator*= ( double value )
     {
         this->multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    MatrixSquare<N>& operator/= ( double value )
+    MatrixSq<N>& operator/= ( double value )
     {
         this->divideByValue( value );
         return (*this);
@@ -166,7 +174,7 @@ protected:
      * @param matrix
      * @param result
      */
-    void multiplyByMatrix( const MatrixSquare<N> &matrix, MatrixSquare<N> *result ) const
+    void multiplyByMatrix( const MatrixSq<N> &matrix, MatrixSq<N> *result ) const
     {
         for ( unsigned int r = 0; r < N; ++r )
         {
@@ -187,4 +195,4 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MATH_MATRIXSQUARE_H_
+#endif // MCUTILS_MATH_MATRIXSQ_H_

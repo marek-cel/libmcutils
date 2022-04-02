@@ -43,7 +43,7 @@ Matrix3x3 Matrix3x3::identityMatrix()
 ////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3::Matrix3x3()
-    : MatrixSquare<3>()
+    : MatrixSq<3>()
 
     , _xx ( _items[ 0 ] )
     , _xy ( _items[ 1 ] )
@@ -59,7 +59,7 @@ Matrix3x3::Matrix3x3()
 ////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
-    : MatrixSquare<3>( mtrx )
+    : MatrixSq<3>( mtrx )
 
     , _xx ( _items[ 0 ] )
     , _xy ( _items[ 1 ] )
@@ -75,7 +75,7 @@ Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
 ////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3::Matrix3x3( const double items[] )
-    : MatrixSquare<3>( items )
+    : MatrixSq<3>( items )
 
     , _xx ( _items[ 0 ] )
     , _xy ( _items[ 1 ] )

@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/MatrixSquare.h>
+#include <mcutils/math/MatrixSq.h>
 #include <mcutils/math/Vector6.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ namespace mc
 /**
  * @brief 6 by 6 matrix class.
  */
-class MCUTILSEXPORT Matrix6x6 final : public MatrixSquare<6>
+class MCUTILSEXPORT Matrix6x6 final : public MatrixSq<6>
 {
 public:
 

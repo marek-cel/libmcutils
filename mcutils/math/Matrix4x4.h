@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/MatrixSquare.h>
+#include <mcutils/math/MatrixSq.h>
 #include <mcutils/math/Vector4.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -37,7 +37,7 @@ namespace mc
 /**
  * @brief 4 by 4 matrix class.
  */
-class MCUTILSEXPORT Matrix4x4 final : public MatrixSquare<4>
+class MCUTILSEXPORT Matrix4x4 final : public MatrixSq<4>
 {
 public:
 
