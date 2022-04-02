@@ -88,8 +88,8 @@ MCUTILSEXPORT inline double inertia( double u, double y, double dt, double tc )
  * </ul>
  */
 MCUTILSEXPORT inline double pacejkaFormula( double kappa,
-                                           double b = 10.0, double c = 1.9,
-                                           double d = 1.0,  double e = 0.97 )
+                                            double b = 10.0, double c = 1.9,
+                                            double d = 1.0,  double e = 0.97 )
 {
     return d * sin( c * atan( b*( 1.0 - e )*kappa + e*atan( b*kappa ) ) );
 }
