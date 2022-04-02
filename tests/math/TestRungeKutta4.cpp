@@ -84,9 +84,9 @@ TEST_F(TestRungeKutta4, CanSolve)
 TEST_F(TestRungeKutta4, CanSetDerivFun)
 {
     mc::RungeKutta4 rk;
-    EXPECT_NO_THROW( rk.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    EXPECT_NO_THROW( rk.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
     {
-        for ( int i = 0; i < ds->getSize(); ++i )
+        for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {
             (*ds)(i) = 1.0;
         }
@@ -100,9 +100,9 @@ TEST_F(TestRungeKutta4, CanCheckIfDerivFunIsSet)
 {
     mc::RungeKutta4 rk;
     EXPECT_FALSE( rk.isDerivFunSet() );
-    rk.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    rk.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
     {
-        for ( int i = 0; i < ds->getSize(); ++i )
+        for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {
             (*ds)(i) = 1.0;
         }
