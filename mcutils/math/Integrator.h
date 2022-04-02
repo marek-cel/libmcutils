@@ -47,6 +47,7 @@ public:
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
+    /** @brief Destructor. */
     virtual ~Integrator() {}
     // LCOV_EXCL_STOP
 

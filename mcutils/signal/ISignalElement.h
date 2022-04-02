@@ -38,8 +38,11 @@ class MCUTILSEXPORT ISignalElement
 {
 public:
 
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
     /** @brief Destructor. */
-    virtual ~ISignalElement() = default;
+    virtual ~ISignalElement() {}
+    // LCOV_EXCL_STOP
 
     /**
      * @brief Pure virtual function to get the current output value.
