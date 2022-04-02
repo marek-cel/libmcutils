@@ -78,3 +78,34 @@ TEST_F(TestRungeKutta4, CanSolve)
     DiffEquationSolver des6( 1.0, 1.0, 1.0, &rk6 );
     EXPECT_TRUE( des6.solve( 1.0, 1.0 ) );
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestRungeKutta4, CanSetDerivFun)
+{
+    mc::RungeKutta4 rk;
+    EXPECT_NO_THROW( rk.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    {
+        for ( int i = 0; i < ds->getSize(); ++i )
+        {
+            (*ds)(i) = 1.0;
+        }
+    } ) );
+    EXPECT_TRUE( rk.isDerivFunSet() );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestRungeKutta4, CanCheckIfDerivFunIsSet)
+{
+    mc::RungeKutta4 rk;
+    EXPECT_FALSE( rk.isDerivFunSet() );
+    rk.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    {
+        for ( int i = 0; i < ds->getSize(); ++i )
+        {
+            (*ds)(i) = 1.0;
+        }
+    } );
+    EXPECT_TRUE( rk.isDerivFunSet() );
+}

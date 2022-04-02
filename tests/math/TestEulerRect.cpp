@@ -80,3 +80,34 @@ TEST_F(TestEulerRect, CanSolve)
     DiffEquationSolver des6( 1.0, 1.0, 1.0, &er6 );
     EXPECT_TRUE( des6.solve( 1.0, 1.0 ) );
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestEulerRect, CanSetDerivFun)
+{
+    mc::EulerRect er;
+    EXPECT_NO_THROW( er.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    {
+        for ( int i = 0; i < ds->getSize(); ++i )
+        {
+            (*ds)(i) = 1.0;
+        }
+    } ) );
+    EXPECT_TRUE( er.isDerivFunSet() );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestEulerRect, CanCheckIfDerivFunIsSet)
+{
+    mc::EulerRect er;
+    EXPECT_FALSE( er.isDerivFunSet() );
+    er.setDerivFun( [](const mc::VectorN &s, mc::VectorN *ds)
+    {
+        for ( int i = 0; i < ds->getSize(); ++i )
+        {
+            (*ds)(i) = 1.0;
+        }
+    } );
+    EXPECT_TRUE( er.isDerivFunSet() );
+}
