@@ -104,7 +104,7 @@ TEST_F(TestPhysics, IsStandardGravityCorrect)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestPhysics, CanComputeInerti)
+TEST_F(TestPhysics, CanComputeInertia)
 {
     std::vector<double> vals;
 
