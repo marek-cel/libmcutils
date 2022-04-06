@@ -24,9 +24,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <sstream>
+#include <ostream>
 
 #include <mcutils/defs.h>
+
+#include <mcutils/misc/Singleton.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,25 +38,94 @@ namespace mc
 /**
  * @brief Logging class.
  */
-class MCUTILSEXPORT Log
+class MCUTILSEXPORT Log : private Singleton<Log>
 {
+    friend class Singleton< Log >;
+
 public:
 
-    static std::ostream &_out;  ///< log output stream
-
-    inline static std::ostream& i() { return ( timeTag() << "[INFO] "    ); }
-    inline static std::ostream& w() { return ( timeTag() << "[WARNING] " ); }
-    inline static std::ostream& e() { return ( timeTag() << "[ERROR] "   ); }
-    inline static std::ostream& o() { return _out; }
-
-    inline static std::ostream& out() { return _out; }
+    /**
+     * @brief The verbose level enum
+     */
+    enum class VerboseLevel
+    {
+        Error   = 0x0,      ///< critical error
+        Warning = 0x1,      ///< warning
+        Info    = 0x2,      ///< information
+        Debug   = 0x3       ///< debug output
+    };
 
     /**
-     * @brief Creates time tag.
-     *
+     * @brief Prints error log message.
+     * @param format message format
+     */
+    static void e( const char *format, ... );
+
+    /**
+     * @brief Prints warning log message.
+     * @param format message format
+     */
+    static void w( const char *format, ... );
+
+    /**
+     * @brief Prints info log message.
+     * @param format message format
+     */
+    static void i( const char *format, ... );
+
+    /**
+     * @brief Prints debug log message.
+     * @param format message format
+     */
+    static void d( const char *format, ... );
+
+    /**
+     * @brief Gets output stream.
      * @return output stream
      */
-    static std::ostream& timeTag();
+    static std::ostream& out();
+
+    /**
+     * @brief Sets output stream.
+     * @param outputStream output stream
+     */
+    static void setOutputStream( std::ostream *outputStream );
+
+    /**
+     * @brief Set syslog output status.
+     * @param syslogOutput syslog output status (true enabled, false disabled)
+     */
+    static void setSyslogOutput( bool syslogOutput );
+
+    /**
+     * @brief Sets verbose level.
+     * @param verboseLevel verbose level
+     */
+    static void setVerboseLevel( VerboseLevel verboseLevel );
+
+private:
+
+    std::ostream *_outputStream;    ///< output stream (default std::cout)
+    VerboseLevel _verboseLevel;     ///< verbose level (default Info)
+
+#   ifdef _LINUX_
+    bool _syslogOutput;             ///< specifies if syslog is enabled (default true)
+#   endif // _LINUX_
+
+    /**
+     * You should use static function instance() due to get refernce
+     * to Random class instance.
+     */
+    Log();
+
+    /**
+     * @brief Prints log message.
+     * @param level verbose level
+     * @param format message format
+     */
+    void print( VerboseLevel level, const char *format, ... );
+
+    std::string timestamp();
 };
 
 } // namespace mc
