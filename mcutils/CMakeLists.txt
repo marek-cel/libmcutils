@@ -5,6 +5,7 @@ set( TARGET_NAME mcutils )
 set( HEADERS
     defs.h
     Result.h
+    Types.h
 )
 
 ################################################################################

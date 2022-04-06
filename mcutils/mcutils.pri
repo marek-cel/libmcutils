@@ -1,7 +1,8 @@
 HEADERS += \
     $$PWD/defs.h \
     $$PWD/doxygen.h \
-    $$PWD/Result.h
+    $$PWD/Result.h \
+    $$PWD/Types.h
 
 ################################################################################
 

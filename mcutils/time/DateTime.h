@@ -27,6 +27,7 @@
 #include <cstdint>
 
 #include <mcutils/defs.h>
+#include <mcutils/Types.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,13 +39,13 @@ namespace mc
  */
 struct MCUTILSEXPORT DateTime
 {
-    uint16_t year;      ///< year
-    uint8_t  month;     ///< month
-    uint8_t  day;       ///< day
-    uint8_t  hour;      ///< hour
-    uint8_t  minute;    ///< minute
-    uint8_t  second;    ///< second
-    uint16_t msec;      ///< millisecond
+    UInt16 year;        ///< year
+    UInt8  month;       ///< month
+    UInt8  day;          ///< day
+    UInt8  hour;        ///< hour
+    UInt8  minute;      ///< minute
+    UInt8  second;      ///< second
+    UInt16 msec;        ///< millisecond
 };
 
 } // namespace mc

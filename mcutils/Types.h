@@ -19,63 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-
-#include <mcutils/net/Endianness.h>
-
-#ifdef _LINUX_
-#   include <arpa/inet.h>
-#   include <netinet/in.h>
-#endif
-
-#ifdef WIN32
-#   include <windows.h>
-#endif
+#ifndef MCUTILS_TYPES_H_
+#define MCUTILS_TYPES_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace mc { namespace Endianess
+#if __cplusplus > 199711L
+#   include <stdint.h>
+#endif // __cplusplus > 199711L
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
 {
 
-////////////////////////////////////////////////////////////////////////////////
+#if __cplusplus > 199711L
+typedef uint8_t        UInt8;   ///< 8-bits unsigned integer type
+typedef uint16_t       UInt16;  ///< 16-bits unsigned integer type
+typedef uint32_t       UInt32;  ///< 32-bits unsigned integer type
+#else
+typedef unsigned char  UInt8;   ///< 8-bits unsigned integer type
+typedef unsigned short UInt16;  ///< 16-bits unsigned integer type
+typedef unsigned int   UInt32;  ///< 32-bits unsigned integer type
+#endif // __cplusplus > 199711L
 
-UInt32 hostToNet( UInt32 val )
-{
-    return htonl( val );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-UInt16 hostToNet( UInt16 val )
-{
-    return htons( val );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-double hostToNet( double val )
-{
-    unsigned int *val_ptr = reinterpret_cast<unsigned int*>( &val );
-    unsigned int temp = val_ptr[ 0 ];
-
-    val_ptr[ 0 ] = htonl( val_ptr[ 1 ] );
-    val_ptr[ 1 ] = htonl( temp );
-
-    return val;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-float hostToNet( float val )
-{
-    unsigned int *val_ptr = reinterpret_cast<unsigned int*>( &val );
-    unsigned int temp = val_ptr[ 0 ];
-
-    val_ptr[ 0 ] = htonl( temp );
-
-    return val;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-} // namespace Endianess
 } // namespace mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTILS_TYPES_H_

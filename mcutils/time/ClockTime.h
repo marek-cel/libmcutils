@@ -33,7 +33,7 @@
 namespace mc
 {
 
-inline double MCUTILSEXPORT getClockTime()
+MCUTILSEXPORT inline double getClockTime()
 {
 #   ifdef _LINUX_
     timespec ts;

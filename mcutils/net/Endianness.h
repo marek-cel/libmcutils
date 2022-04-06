@@ -27,6 +27,7 @@
 #include <cstdint>
 
 #include <mcutils/defs.h>
+#include <mcutils/Types.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +40,7 @@ namespace mc { namespace Endianess
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-MCUTILSEXPORT unsigned int hostToNet( unsigned int val );
+MCUTILSEXPORT UInt32 hostToNet( UInt32 val );
 
 /**
  * @brief Converts values between host and network byte order.
@@ -47,7 +48,7 @@ MCUTILSEXPORT unsigned int hostToNet( unsigned int val );
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-MCUTILSEXPORT uint16_t hostToNet( uint16_t val );
+MCUTILSEXPORT UInt16 hostToNet( UInt16 val );
 
 /**
  * @brief Converts values between host and network byte order.
