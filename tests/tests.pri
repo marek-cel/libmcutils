@@ -47,7 +47,8 @@ SOURCES += \
 SOURCES += \
     $$PWD/misc/TestCheck.cpp \
     $$PWD/misc/TestLog.cpp \
-    $$PWD/misc/TestString.cpp
+    $$PWD/misc/TestString.cpp \
+    $$PWD/misc/TestUnits.cpp
 
 ################################################################################
 
