@@ -80,7 +80,7 @@ using FunPtr = double (*)(double);
  * - Specific fuel consumption: g/kWh (grams per kilowatt-hour)
  * - Thrust Specific fuel consumption: g/kNs (grams per kilonewton-socond)
  */
-FunPtr MCUTILSEXPORT getUnitConverter( const char *name );
+MCUTILSEXPORT FunPtr getUnitConverter( const char *name );
 
 ////////////////////////////////////////////////////////////////////////////////
 // ANGLE
