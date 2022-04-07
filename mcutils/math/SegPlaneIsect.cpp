@@ -20,17 +20,17 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/Geometry.h>
+#include <mcutils/math/SegPlaneIsect.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace mc { namespace Geometry
+namespace mc
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
-                          const Vector3 &r, const Vector3 &n )
+bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
+                      const Vector3 &r, const Vector3 &n )
 {
     double num = n * ( r - b );
     double den = n * ( e - b );
@@ -49,8 +49,8 @@ bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
-                              const Vector3 &r, const Vector3 &n )
+Vector3 getSegPlaneIsect( const Vector3 &b, const Vector3 &e,
+                          const Vector3 &r, const Vector3 &n )
 {
     Vector3 r_i = e;
 
@@ -81,5 +81,4 @@ Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace Geometry
 } // namespace mc

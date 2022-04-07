@@ -26,7 +26,6 @@ HEADERS += \
     $$PWD/math/DegMinSec.h \
     $$PWD/math/EulerRect.h \
     $$PWD/math/GaussJordan.h \
-    $$PWD/math/Geometry.h \
     $$PWD/math/Integrator.h \
     $$PWD/math/Math.h \
     $$PWD/math/Matrix.h \
@@ -37,6 +36,7 @@ HEADERS += \
     $$PWD/math/Quaternion.h \
     $$PWD/math/Random.h \
     $$PWD/math/RungeKutta4.h \
+    $$PWD/math/SegPlaneIsect.h \
     $$PWD/math/Table.h \
     $$PWD/math/Table2D.h \
     $$PWD/math/Vector.h \
@@ -49,13 +49,13 @@ SOURCES += \
     $$PWD/math/Angles.cpp \
     $$PWD/math/DegMinSec.cpp \
     $$PWD/math/EulerRect.cpp \
-    $$PWD/math/Geometry.cpp \
     $$PWD/math/Matrix3x3.cpp \
     $$PWD/math/Matrix4x4.cpp \
     $$PWD/math/Matrix6x6.cpp \
     $$PWD/math/Quaternion.cpp \
     $$PWD/math/Random.cpp \
     $$PWD/math/RungeKutta4.cpp \
+    $$PWD/math/SegPlaneIsect.cpp \
     $$PWD/math/Table.cpp \
     $$PWD/math/Table2D.cpp \
     $$PWD/math/Vector3.cpp \

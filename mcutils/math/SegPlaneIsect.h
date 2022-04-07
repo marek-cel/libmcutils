@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_GEOMETRY_H_
-#define MCUTILS_MATH_GEOMETRY_H_
+#ifndef MCUTILS_MATH_SEGPLANEISECT_H_
+#define MCUTILS_MATH_SEGPLANEISECT_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace mc { namespace Geometry
+namespace mc
 {
 
 /**
@@ -49,10 +49,11 @@ namespace mc { namespace Geometry
  * @param e segment end
  * @param r any point on the plane coordinates
  * @param n plane normal vector
+ *
  * @return true if there is an intersection, false otherwise
  */
-bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
-                          const Vector3 &r, const Vector3 &n );
+bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
+                      const Vector3 &r, const Vector3 &n );
 
 /**
  * @brief Returns segment and plane intersection point.
@@ -70,14 +71,14 @@ bool isSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
  * @param e segment end
  * @param r any point on the plane coordinates
  * @param n plane normal vector
- * @return intersection point
+ *
+ * @return intersection point, or end point if there is no intersection, or beginning point if segment lies on the plane
  */
-Vector3 getSegmentPlaneIsect( const Vector3 &b, const Vector3 &e,
-                              const Vector3 &r, const Vector3 &n );
+Vector3 getSegPlaneIsect( const Vector3 &b, const Vector3 &e,
+                          const Vector3 &r, const Vector3 &n );
 
-} // namespace Geometry
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MATH_GEOMETRY_H_
+#endif // MCUTILS_MATH_SEGPLANEISECT_H_
