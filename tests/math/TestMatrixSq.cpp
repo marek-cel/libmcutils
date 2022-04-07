@@ -26,8 +26,14 @@ TEST_F(TestMatrixSq, CanConstruct)
 
 TEST_F(TestMatrixSq, CanDestruct)
 {
-    mc::MatrixSq<3> *m = new mc::MatrixSq<3>();
-    EXPECT_NO_THROW( delete m );
+    mc::MatrixSq<3> *m3 = new mc::MatrixSq<3>();
+    EXPECT_NO_THROW( delete m3 );
+
+    mc::MatrixSq<4> *m4 = new mc::MatrixSq<4>();
+    EXPECT_NO_THROW( delete m4 );
+
+    mc::MatrixSq<6> *m6 = new mc::MatrixSq<6>();
+    EXPECT_NO_THROW( delete m6 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

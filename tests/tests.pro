@@ -14,7 +14,14 @@ CONFIG -= app_bundle qt
 
 ################################################################################
 
-QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
+QMAKE_CXXFLAGS += -O0 \
+    --coverage \
+    -fno-default-inline \
+    -fno-inline \
+    -fno-inline-small-functions \
+    -fprofile-arcs \
+    -ftest-coverage \
+    -pedantic
 
 ################################################################################
 
@@ -59,7 +66,7 @@ unix: LIBS += \
 ################################################################################
 
 LIBS += \
-    -lgcov --coverage \
+    -lgcov \
     -lgtest \
     -lgtest_main \
     -pthread \

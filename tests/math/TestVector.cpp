@@ -26,8 +26,14 @@ TEST_F(TestVector, CanConstruct)
 
 TEST_F(TestVector, CanDestruct)
 {
-    mc::Vector<3> *v = new mc::Vector<3>();
-    EXPECT_NO_THROW( delete v );
+    mc::Vector<3> *v3 = new mc::Vector<3>();
+    EXPECT_NO_THROW( delete v3 );
+
+    mc::Vector<4> *v4 = new mc::Vector<4>();
+    EXPECT_NO_THROW( delete v4 );
+
+    mc::Vector<6> *v6 = new mc::Vector<6>();
+    EXPECT_NO_THROW( delete v6 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

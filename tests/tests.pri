@@ -24,7 +24,6 @@ SOURCES += \
     $$PWD/math/TestAngles.cpp \
     $$PWD/math/TestDegMinSec.cpp \
     $$PWD/math/TestEulerRect.cpp \
-    $$PWD/math/TestGeometry.cpp \
     $$PWD/math/TestMath.cpp \
     $$PWD/math/TestMatrix.cpp \
     $$PWD/math/TestMatrix3x3.cpp \
@@ -34,6 +33,7 @@ SOURCES += \
     $$PWD/math/TestQuaternion.cpp \
     $$PWD/math/TestRandom.cpp \
     $$PWD/math/TestRungeKutta4.cpp \
+    $$PWD/math/TestSegPlaneIsect.cpp \
     $$PWD/math/TestTable.cpp \
     $$PWD/math/TestTable2D.cpp \
     $$PWD/math/TestVector.cpp \

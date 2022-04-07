@@ -205,12 +205,14 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     mc::Angles a2( 0.0, M_PI, 0.0 );
     mc::Angles a3( 0.0, 0.0, M_PI );
     mc::Angles a4( M_PI_2, M_PI_2, M_PI_2 );
+    mc::Angles a5( -M_PI_4, 0.0, 0.0 );
 
     mc::Quaternion q0( a0 );
     mc::Quaternion q1( a1 );
     mc::Quaternion q2( a2 );
     mc::Quaternion q3( a3 );
     mc::Quaternion q4( a4 );
+    mc::Quaternion q5( a5 );
 
     mc::Matrix3x3 mq0( q0 );
     EXPECT_NEAR( mq0.xx(), 1.0, 1.0e-9 );
@@ -266,6 +268,17 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq4.zx(),  1.0, 1.0e-9 );
     EXPECT_NEAR( mq4.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq4.zz(),  0.0, 1.0e-9 );
+
+    mc::Matrix3x3 mq5( q5 );
+    EXPECT_NEAR( mq5.xx(),  1.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.xy(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.xz(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.yx(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.yy(), -1.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.yz(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.zx(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.zy(),  0.0, 1.0e-9 );
+    EXPECT_NEAR( mq5.zz(), -1.0, 1.0e-9 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
