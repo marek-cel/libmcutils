@@ -14,9 +14,7 @@ CONFIG -= app_bundle qt
 
 ################################################################################
 
-QMAKE_CXXFLAGS +=
-
-unix: QMAKE_CXXFLAGS += -O0 \
+QMAKE_CXXFLAGS += -O0 \
     --coverage \
     -fno-default-inline \
     -fno-inline \
@@ -30,19 +28,17 @@ unix: QMAKE_CXXFLAGS += -O0 \
 DEFINES += QT_DEPRECATED_WARNINGS
 DEFINES += _GTEST_ _TESTS_
 
-win32: DEFINES += \
+win32-msvc*: DEFINES += \
     NOMINMAX \
-    WIN32 \
-    _WINDOWS \
     _CRT_SECURE_NO_DEPRECATE \
     _SCL_SECURE_NO_WARNINGS \
     _USE_MATH_DEFINES
 
-win32: CONFIG(release, debug|release): DEFINES += NDEBUG
-win32: CONFIG(debug, debug|release):   DEFINES += _DEBUG
+win32-msvc*: CONFIG(release, debug|release): DEFINES += NDEBUG
+win32-msvc*: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 
 unix:  DEFINES += _LINUX_
-win32: DEFINES += WIN32
+win32: DEFINES += WIN32 _WINDOWS IN_LIBXML
 
 ################################################################################
 
@@ -50,31 +46,34 @@ INCLUDEPATH += ./ ../
 
 win32: INCLUDEPATH += \
     $(GTEST_DIR)/include \
-    $(LIBXML_DIR)/include
+    $(LIBXML_DIR)/include/libxml2
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
 
 ################################################################################
 
-win32: LIBS += \
-    -L$(GTEST_DIR)/lib \
-    -L$(LIBXML_DIR)/lib \
-    -llibxml2 \
-    -lws2_32
-
-unix: LIBS += \
-    -L/lib \
-    -L/usr/lib \
+LIBS += \
     -lgcov \
     -lgtest \
     -lgtest_main \
-    -pthread \
-    -lxml2
-
-LIBS += \
     -lgtest \
-    -lgtest_main
+    -lgtest_main \
+    -lxml2 \
+    -pthread
+
+win32: LIBS += \
+    -L$(GTEST_DIR)/lib \
+    -L$(LIBXML_DIR)/lib \
+    -lwsock32 \
+    -lws2_32
+
+win32-g++: LIBS += \
+    -liconv
+
+unix: LIBS += \
+    -L/lib \
+    -L/usr/lib
 
 ################################################################################
 
