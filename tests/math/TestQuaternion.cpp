@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+#include <mcutils/math/Matrix3x3.h>
 #include <mcutils/math/Quaternion.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -285,15 +286,15 @@ TEST_F(TestQuaternion, CanGetAngles)
     const mc::Angles a3( 0.0, 0.0, M_PI_4 );
     const mc::Angles a4( M_PI_4, M_PI_4, M_PI_4 );
 
-    mc::Quaternion q1( a1 );
-    mc::Quaternion q2( a2 );
-    mc::Quaternion q3( a3 );
-    mc::Quaternion q4( a4 );
+    mc::Quaternion qa1( a1 );
+    mc::Quaternion qa2( a2 );
+    mc::Quaternion qa3( a3 );
+    mc::Quaternion qa4( a4 );
 
-    mc::Angles ar1 = q1.getAngles();
-    mc::Angles ar2 = q2.getAngles();
-    mc::Angles ar3 = q3.getAngles();
-    mc::Angles ar4 = q4.getAngles();
+    mc::Angles ar1 = qa1.getAngles();
+    mc::Angles ar2 = qa2.getAngles();
+    mc::Angles ar3 = qa3.getAngles();
+    mc::Angles ar4 = qa4.getAngles();
 
     EXPECT_DOUBLE_EQ( ar1.phi(), a1.phi() );
     EXPECT_DOUBLE_EQ( ar1.tht(), a1.tht() );
@@ -310,6 +311,29 @@ TEST_F(TestQuaternion, CanGetAngles)
     EXPECT_DOUBLE_EQ( ar4.phi(), a4.phi() );
     EXPECT_DOUBLE_EQ( ar4.tht(), a4.tht() );
     EXPECT_DOUBLE_EQ( ar4.psi(), a4.psi() );
+
+    mc::Quaternion q1(  1.0, -1.0, 1.0, 1.0 );
+    mc::Quaternion q2( -1.0,  1.0, 1.0, 1.0 );
+
+    q1.normalize();
+    q2.normalize();
+
+    mc::Matrix3x3 mq1( q1 );
+    mc::Matrix3x3 mq2( q2 );
+
+    mc::Angles aq1 = q1.getAngles();
+    mc::Angles aq2 = q2.getAngles();
+
+    mc::Angles am1 = mq1.getAngles();
+    mc::Angles am2 = mq2.getAngles();
+
+    EXPECT_DOUBLE_EQ( aq1.phi(), am1.phi() );
+    EXPECT_DOUBLE_EQ( aq1.tht(), am1.tht() );
+    EXPECT_DOUBLE_EQ( aq1.psi(), am1.psi() );
+
+    EXPECT_DOUBLE_EQ( aq2.phi(), am2.phi() );
+    EXPECT_DOUBLE_EQ( aq2.tht(), am2.tht() );
+    EXPECT_DOUBLE_EQ( aq2.psi(), am2.psi() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
