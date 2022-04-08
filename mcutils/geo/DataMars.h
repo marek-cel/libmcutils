@@ -50,9 +50,9 @@ namespace mc
 namespace DataMars
 {
 
-static constexpr double a   = 3396190.0;                ///< [m] MCS equatorial radius
-static constexpr double b   = 3376200.0;                ///< [m] MCS polar radius
-static constexpr double f   = 0.005886007556;           ///< [-] MCS ellipsoid flattening
+static constexpr double a   = 3396190.0;                ///< [m] equatorial radius
+static constexpr double b   = 3376200.0;                ///< [m] polar radius
+static constexpr double f   = 0.005886007556;           ///< [-] ellipsoid flattening
 
 static constexpr double r1  = ( 2.0 * a + b ) / 3.0;    ///< [m] mean radius
 static constexpr double a2  = a * a;                    ///< [m^2] equatorial radius squared
