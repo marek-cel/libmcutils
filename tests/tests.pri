@@ -17,6 +17,7 @@ SOURCES += \
 
 SOURCES += \
     $$PWD/geo/TestDataMars.cpp \
+    $$PWD/geo/TestDataWGS84.cpp \
     $$PWD/geo/TestECEF.cpp
 
 ################################################################################
