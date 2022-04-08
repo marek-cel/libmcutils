@@ -50,8 +50,9 @@ int Random::getRandom( int min, int max )
     if ( max > 0 && max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
-        rand_s( &_rand );
+        //rand_s( &_rand );
         return min + _rand % ( max - min + 1 );
+        return min + rand() % ( max - min + 1 );
 #       else
         _mutex.lock();
         _rand = rand_r( &_seed );

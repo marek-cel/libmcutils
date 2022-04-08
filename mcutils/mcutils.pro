@@ -39,7 +39,7 @@ win32: CONFIG(release, debug|release): DEFINES += NDEBUG
 win32: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 
 unix:  DEFINES += _LINUX_
-win32: DEFINES += WIN32
+win32: DEFINES += WIN32 MCUTILS_DLL_EXPORTS
 
 ################################################################################
 
@@ -50,6 +50,13 @@ win32: INCLUDEPATH += \
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
+
+################################################################################
+
+win32: LIBS += \
+    -L$(LIBXML_DIR)/lib \
+    -llibxml2 \
+    -lws2_32
 
 ################################################################################
 

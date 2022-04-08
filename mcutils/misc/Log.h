@@ -92,7 +92,7 @@ public:
     static void setOutputStream( std::ostream *outputStream );
 
     /**
-     * @brief Set syslog output status.
+     * @brief Set syslog output status (unix only).
      * @param syslogOutput syslog output status (true enabled, false disabled)
      */
     static void setSyslogOutput( bool syslogOutput );
@@ -108,9 +108,7 @@ private:
     std::ostream *_outputStream;    ///< output stream (default std::cout)
     VerboseLevel _verboseLevel;     ///< verbose level (default Info)
 
-#   ifdef _LINUX_
     bool _syslogOutput;             ///< specifies if syslog is enabled (default true)
-#   endif // _LINUX_
 
     /**
      * You should use static function instance() due to get refernce

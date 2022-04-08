@@ -114,9 +114,7 @@ void Log::setVerboseLevel( VerboseLevel verboseLevel )
 Log::Log()
     : _outputStream ( &std::cout )
     , _verboseLevel ( VerboseLevel::Info )
-#   ifdef _LINUX_
     , _syslogOutput ( true )
-#   endif // _LINUX_
 {}
 
 //////////////////////////////////////////////////////////////////////////////////
