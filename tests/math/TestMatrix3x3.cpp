@@ -662,8 +662,8 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
     mc::Matrix3x3 mq0( mc::Quaternion::createZeroRotationQuaternion() );
     mc::Matrix3x3 mq1( mc::Quaternion( 0.6, 0.0, 0.0, 0.8 ) );
 
-    mc::Quaternion q0 =  mq0.getQuaternion();
-    mc::Quaternion q1 =  mq1.getQuaternion();
+    mc::Quaternion q0 = mq0.getQuaternion();
+    mc::Quaternion q1 = mq1.getQuaternion();
 
     EXPECT_NEAR( q0.e0(), 1.0, 1.0e-9 );
     EXPECT_NEAR( q0.ex(), 0.0, 1.0e-9 );
@@ -674,6 +674,54 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
     EXPECT_NEAR( q1.ex(), 0.0, 1.0e-9 );
     EXPECT_NEAR( q1.ey(), 0.0, 1.0e-9 );
     EXPECT_NEAR( q1.ez(), 0.8, 1.0e-9 );
+
+    mc::Matrix3x3 m1(  1.0,  0.0,  0.0,
+                       0.0,  1.0,  0.0,
+                       0.0,  0.0,  1.0 );
+    mc::Matrix3x3 m2( -1.0,  0.0,  0.0,
+                       0.0, -1.0,  0.0,
+                       0.0,  0.0,  1.0 );
+    mc::Matrix3x3 m3( -1.0,  0.0,  0.0,
+                       0.0,  1.0,  0.0,
+                       0.0,  0.0, -1.0 );
+    mc::Matrix3x3 m4(  1.0,  0.0,  0.0,
+                       0.0, -1.0,  0.0,
+                       0.0,  0.0, -1.0 );
+
+    mc::Angles a1 = m1.getAngles();
+    mc::Angles a2 = m2.getAngles();
+    mc::Angles a3 = m3.getAngles();
+    mc::Angles a4 = m4.getAngles();
+
+    mc::Quaternion qa1( a1 );
+    mc::Quaternion qa2( a2 );
+    mc::Quaternion qa3( a3 );
+    mc::Quaternion qa4( a4 );
+
+    mc::Quaternion qm1 = m1.getQuaternion();
+    mc::Quaternion qm2 = m2.getQuaternion();
+    mc::Quaternion qm3 = m3.getQuaternion();
+    mc::Quaternion qm4 = m4.getQuaternion();
+
+    EXPECT_NEAR( qa1.e0(), qm1.e0(), 1.0e-9 );
+    EXPECT_NEAR( qa1.ex(), qm1.ex(), 1.0e-9 );
+    EXPECT_NEAR( qa1.ey(), qm1.ey(), 1.0e-9 );
+    EXPECT_NEAR( qa1.ez(), qm1.ez(), 1.0e-9 );
+
+    EXPECT_NEAR( qa2.e0(), qm2.e0(), 1.0e-9 );
+    EXPECT_NEAR( qa2.ex(), qm2.ex(), 1.0e-9 );
+    EXPECT_NEAR( qa2.ey(), qm2.ey(), 1.0e-9 );
+    EXPECT_NEAR( qa2.ez(), qm2.ez(), 1.0e-9 );
+
+    EXPECT_NEAR( qa3.e0(), qm3.e0(), 1.0e-9 );
+    EXPECT_NEAR( qa3.ex(), qm3.ex(), 1.0e-9 );
+    EXPECT_NEAR( qa3.ey(), qm3.ey(), 1.0e-9 );
+    EXPECT_NEAR( qa3.ez(), qm3.ez(), 1.0e-9 );
+
+    EXPECT_NEAR( qa4.e0(), qm4.e0(), 1.0e-9 );
+    EXPECT_NEAR( qa4.ex(), qm4.ex(), 1.0e-9 );
+    EXPECT_NEAR( qa4.ey(), qm4.ey(), 1.0e-9 );
+    EXPECT_NEAR( qa4.ez(), qm4.ez(), 1.0e-9 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
