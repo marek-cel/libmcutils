@@ -41,13 +41,9 @@ Random::Random()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Random::~Random() {}
-
-////////////////////////////////////////////////////////////////////////////////
-
 int Random::getRandom( int min, int max )
 {
-    if ( max > 0 && max > min && max <= RAND_MAX )
+    if ( max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
         //rand_s( &_rand );

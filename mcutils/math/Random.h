@@ -80,9 +80,6 @@ public:
         return Random::instance()->getRandom( min, max );
     }
 
-    /** Destructor. */
-    virtual ~Random();
-
     /**
      * @brief Gets random number from the given range.
      *
