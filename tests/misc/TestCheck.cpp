@@ -20,6 +20,8 @@ protected:
 
 TEST_F(TestCheck, CanCheckIfIsInf)
 {
+    double zero = 0.0;
+
     EXPECT_FALSE( mc::isInf( 0.0 ) );
     EXPECT_FALSE( mc::isInf( DBL_MIN ) );
     EXPECT_FALSE( mc::isInf( DBL_MAX ) );
@@ -27,7 +29,7 @@ TEST_F(TestCheck, CanCheckIfIsInf)
     EXPECT_FALSE( mc::isInf( std::numeric_limits<double>::max() ) );
 
     EXPECT_TRUE( mc::isInf( std::numeric_limits<double>::infinity() ) );
-    EXPECT_TRUE( mc::isInf( 1.0 / 0.0 ) );
+    EXPECT_TRUE( mc::isInf( 1.0 / zero ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,6 +49,8 @@ TEST_F(TestCheck, CanCheckIfIsNaN)
 
 TEST_F(TestCheck, CanCheckIfIsValid)
 {
+    double zero = 0.0;
+
     EXPECT_TRUE( mc::isValid( 0.0 ) );
     EXPECT_TRUE( mc::isValid( DBL_MIN ) );
     EXPECT_TRUE( mc::isValid( DBL_MAX ) );
@@ -55,13 +59,15 @@ TEST_F(TestCheck, CanCheckIfIsValid)
 
     EXPECT_FALSE( mc::isValid( std::numeric_limits<double>::quiet_NaN() ) );
     EXPECT_FALSE( mc::isValid( std::numeric_limits<double>::infinity() ) );
-    EXPECT_FALSE( mc::isValid( 1.0 / 0.0 ) );
+    EXPECT_FALSE( mc::isValid( 1.0 / zero ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestCheck, CanCheckIfIsValidArray)
 {
+    double zero = 0.0;
+
     double a1[] = { 0.0, 1.0, 2.0 };
     EXPECT_TRUE( mc::isValid( a1, 3 ) );
 
@@ -83,6 +89,6 @@ TEST_F(TestCheck, CanCheckIfIsValidArray)
     double a7[] = { 0.0, 1.0, std::numeric_limits<double>::infinity() };
     EXPECT_FALSE( mc::isValid( a7, 3 ) );
 
-    double a8[] = { 0.0, 1.0, 1.0 / 0.0 };
+    double a8[] = { 0.0, 1.0, 1.0 / zero };
     EXPECT_FALSE( mc::isValid( a8, 3 ) );
 }

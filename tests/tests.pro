@@ -9,12 +9,14 @@ TARGET = tests
 
 ################################################################################
 
-CONFIG += console c++17 thread
+CONFIG += console c++17
 CONFIG -= app_bundle qt
 
 ################################################################################
 
-QMAKE_CXXFLAGS += -O0 \
+QMAKE_CXXFLAGS +=
+
+unix: QMAKE_CXXFLAGS += -O0 \
     --coverage \
     -fno-default-inline \
     -fno-inline \
@@ -47,7 +49,8 @@ win32: DEFINES += WIN32
 INCLUDEPATH += ./ ../
 
 win32: INCLUDEPATH += \
-    $(OSG_ROOT)/include/libxml2
+    $(GTEST_DIR)/include \
+    $(LIBXML_DIR)/include
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
@@ -55,22 +58,23 @@ unix: INCLUDEPATH += \
 ################################################################################
 
 win32: LIBS += \
-    -L$(OSG_ROOT)/lib \
-    -llibxml2
+    -L$(GTEST_DIR)/lib \
+    -L$(LIBXML_DIR)/lib \
+    -llibxml2 \
+    -lws2_32
 
 unix: LIBS += \
     -L/lib \
     -L/usr/lib \
-    -lxml2
-
-################################################################################
-
-LIBS += \
     -lgcov \
     -lgtest \
     -lgtest_main \
     -pthread \
     -lxml2
+
+LIBS += \
+    -lgtest \
+    -lgtest_main
 
 ################################################################################
 
