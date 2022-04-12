@@ -580,3 +580,52 @@ TEST_F(TestUnits, CanConvertMph2Mps)
     EXPECT_DOUBLE_EQ( mc::Units::mph2mps( 0.0 ), 0.0 );
     EXPECT_DOUBLE_EQ( mc::Units::mph2mps( 1.0 ), 0.44704 );
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertRpm2RadS)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::rpm2rad_s( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::rpm2rad_s( 60.0 ), 2.0 * M_PI );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertRadS2Rpm)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::rad_s2rpm( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::rad_s2rpm( 2.0 * M_PI ), 60.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKg2Lb)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::kg2lb( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::kg2lb( 1.0 ), 2.20462262 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertLb2Kg)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::lb2kg( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::lb2kg( 1.0 ), 0.45359237 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertN2Lbf)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::n2lbf( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::n2lbf( 1.0 ), 0.224808943 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertLbf2N)
+{
+    // 1 lbf = 0.45359237 kg * 9.80665 m/s^2 = 4.448221615
+    EXPECT_DOUBLE_EQ( mc::Units::lbf2n( 0.0 ), 0.0 );
+    EXPECT_NEAR( mc::Units::lbf2n( 1.0 ), 4.448221615, 1.0e-9 );
+}
