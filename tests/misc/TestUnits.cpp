@@ -16,7 +16,455 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestUnits, DISABLED_Dummy)
+TEST_F(TestUnits, CanGetUnitConverter)
 {
-    // TODO
+    EXPECT_EQ( nullptr, mc::Units::getUnitConverter( "gibberish" ) );
+
+    // angle
+    EXPECT_EQ( &mc::Units::dummy   , mc::Units::getUnitConverter( "rad" ) );
+    EXPECT_EQ( &mc::Units::deg2rad , mc::Units::getUnitConverter( "deg" ) );
+
+    // length
+    EXPECT_EQ( &mc::Units::dummy , mc::Units::getUnitConverter( "m"   ) );
+    EXPECT_EQ( &mc::Units::ft2m  , mc::Units::getUnitConverter( "ft"  ) );
+    EXPECT_EQ( &mc::Units::in2m  , mc::Units::getUnitConverter( "in"  ) );
+    EXPECT_EQ( &mc::Units::km2m  , mc::Units::getUnitConverter( "km"  ) );
+    EXPECT_EQ( &mc::Units::nmi2m , mc::Units::getUnitConverter( "nmi" ) );
+
+    // area
+    EXPECT_EQ( &mc::Units::dummy    , mc::Units::getUnitConverter( "sqm"  ) );
+    EXPECT_EQ( &mc::Units::sqft2sqm , mc::Units::getUnitConverter( "sqft" ) );
+
+    // volume
+    EXPECT_EQ( &mc::Units::dummy    , mc::Units::getUnitConverter( "cum"  ) );
+    EXPECT_EQ( &mc::Units::cuft2cum , mc::Units::getUnitConverter( "cuft" ) );
+    EXPECT_EQ( &mc::Units::cuin2cum , mc::Units::getUnitConverter( "cuin" ) );
+    EXPECT_EQ( &mc::Units::l2cum    , mc::Units::getUnitConverter( "l"    ) );
+
+    // velocity
+    EXPECT_EQ( &mc::Units::dummy   , mc::Units::getUnitConverter( "mps" ) );
+    EXPECT_EQ( &mc::Units::fpm2mps , mc::Units::getUnitConverter( "fpm" ) );
+    EXPECT_EQ( &mc::Units::fps2mps , mc::Units::getUnitConverter( "fps" ) );
+    EXPECT_EQ( &mc::Units::kmh2mps , mc::Units::getUnitConverter( "kmh" ) );
+    EXPECT_EQ( &mc::Units::kts2mps , mc::Units::getUnitConverter( "kts" ) );
+
+    // angular velocity
+    EXPECT_EQ( &mc::Units::dummy     , mc::Units::getUnitConverter( "rad/s" ) );
+    EXPECT_EQ( &mc::Units::deg2rad   , mc::Units::getUnitConverter( "deg/s" ) );
+    EXPECT_EQ( &mc::Units::rpm2rad_s , mc::Units::getUnitConverter( "rpm"   ) );
+
+    // mass
+    EXPECT_EQ( &mc::Units::dummy , mc::Units::getUnitConverter( "kg" ) );
+    EXPECT_EQ( &mc::Units::lb2kg , mc::Units::getUnitConverter( "lb" ) );
+
+    // force
+    EXPECT_EQ( &mc::Units::dummy , mc::Units::getUnitConverter( "N" ) );
+    EXPECT_EQ( &mc::Units::lbf2n , mc::Units::getUnitConverter( "lbf" ) );
+
+    // pressure
+    EXPECT_EQ( &mc::Units::dummy   , mc::Units::getUnitConverter( "Pa"   ) );
+    EXPECT_EQ( &mc::Units::psf2pa  , mc::Units::getUnitConverter( "psf"  ) );
+    EXPECT_EQ( &mc::Units::psi2pa  , mc::Units::getUnitConverter( "psi"  ) );
+    EXPECT_EQ( &mc::Units::inhg2pa , mc::Units::getUnitConverter( "inHg" ) );
+    EXPECT_EQ( &mc::Units::mb2pa   , mc::Units::getUnitConverter( "mb"   ) );
+
+    // power
+    EXPECT_EQ( &mc::Units::dummy , mc::Units::getUnitConverter( "W"  ) );
+    EXPECT_EQ( &mc::Units::ps2w  , mc::Units::getUnitConverter( "PS" ) );
+    EXPECT_EQ( &mc::Units::hp2w  , mc::Units::getUnitConverter( "hp" ) );
+    EXPECT_EQ( &mc::Units::kw2w  , mc::Units::getUnitConverter( "kW" ) );
+
+    // temperature
+    EXPECT_EQ( &mc::Units::dummy , mc::Units::getUnitConverter( "K"  ) );
+    EXPECT_EQ( &mc::Units::c2k   , mc::Units::getUnitConverter( "degC" ) );
+    EXPECT_EQ( &mc::Units::f2k   , mc::Units::getUnitConverter( "degF" ) );
+
+    // specific fuel consumption
+    EXPECT_EQ( &mc::Units::dummy         , mc::Units::getUnitConverter( "kg/Ws" ) );
+    EXPECT_EQ( &mc::Units::g_kWh_2_kg_Ws , mc::Units::getUnitConverter( "g/kWh" ) );
+
+    // thrust specific fuel consumption
+    EXPECT_EQ( &mc::Units::dummy         , mc::Units::getUnitConverter( "kg/Ns" ) );
+    EXPECT_EQ( &mc::Units::g_kNs_2_kg_Ns , mc::Units::getUnitConverter( "g/kNs" ) );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertDummy)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::dummy( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::dummy( 1.0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::dummy( 2.1 ), 2.1 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertDeg2Rad)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::deg2rad(   0.0 ), 0.0    );
+    EXPECT_DOUBLE_EQ( mc::Units::deg2rad(  45.0 ), M_PI_4 );
+    EXPECT_DOUBLE_EQ( mc::Units::deg2rad(  90.0 ), M_PI_2 );
+    EXPECT_DOUBLE_EQ( mc::Units::deg2rad( 180.0 ), M_PI   );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertRad2Deg)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::rad2deg( 0.0    ),   0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::rad2deg( M_PI_4 ),  45.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::rad2deg( M_PI_2 ),  90.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::rad2deg( M_PI   ), 180.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertM2Ft)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::m2ft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::m2ft( 1.0 ), 3.2808399 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertM2In)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::m2in( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::m2in( 1.0 ), 39.3700787 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertM2Mi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::m2mi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::m2mi( 1.0 ), 0.000621371192 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertM2Nmi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::m2nmi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::m2nmi( 1.0 ), 0.000539956803 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertM2Km)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::m2km( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::m2km( 1.0 ), 0.001 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFt2M)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::ft2m( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::ft2m( 1.0 ), 0.3048 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFt2Km)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::ft2km( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::ft2km( 1.0 ), 0.0003048 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFt2Mi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::ft2mi( 0.0 ), 0.0 );
+    EXPECT_NEAR( mc::Units::ft2mi( 1.0 ), 0.000189393939, 1.0e-9 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFt2Nmi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::ft2nmi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::ft2nmi( 1.0 ), 0.000164578834 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertIn2M)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::in2m( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::in2m( 1.0 ), 0.0254 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKm2M)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::km2m( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::km2m( 1.0 ), 1000.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKm2Ft)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::km2ft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::km2ft( 1.0 ), 3280.8399 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKm2Mi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::km2mi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::km2mi( 1.0 ), 0.621371192 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKm2Nmi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::km2nmi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::km2nmi( 1.0 ), 0.539956803 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMi2M)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mi2m( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mi2m( 1.0 ), 1609.344 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMi2Ft)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mi2ft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mi2ft( 1.0 ), 5280.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMi2Km)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mi2km( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mi2km( 1.0 ), 1.609344 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMi2Nmi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mi2nmi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mi2nmi( 1.0 ), 0.868976242 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertNmi2M)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2m( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2m( 1.0 ), 1852.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertNmi2Ft)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2ft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2ft( 1.0 ), 6076.11549 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertNmi2Km)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2km( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2km( 1.0 ), 1.852 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertNmi2Mi)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2mi( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::nmi2mi( 1.0 ), 1.15077945 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertSqM2SqFt)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::sqm2sqft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::sqm2sqft( 1.0 ), 10.7639104 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertSqFt2SqM)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::sqft2sqm( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::sqft2sqm( 1.0 ), 0.09290304 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertCuFt2CuM)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::cuft2cum( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::cuft2cum( 1.0 ), 0.0283168466 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertCuIn2CuM)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::cuin2cum( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::cuin2cum( 1.0 ), 1.6387064e-5 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertCuM2CuFt)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::cum2cuft( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::cum2cuft( 1.0 ), 35.3146667 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertL2CuM)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::l2cum( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::l2cum( 1.0 ), 0.001 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMps2Fpm)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mps2fpm( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mps2fpm( 1.0 ), 196.850394 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMps2Fps)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mps2fps( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mps2fps( 1.0 ), 3.2808399 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMps2Kmh)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mps2kmh( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mps2kmh( 1.0 ), 3.6 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMps2Kts)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mps2kts( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mps2kts( 1.0 ), 1.943844491 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertMps2Mph)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::mps2mph( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::mps2mph( 1.0 ), 2.23693629 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFpm2Fps)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2fps( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2fps( 1.0 ), 1.0 / 60.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFpm2Kmh)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2kmh( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2kmh( 1.0 ), 0.018288 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFpm2Kts)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2kts( 0.0 ), 0.0 );
+    EXPECT_NEAR( mc::Units::fpm2kts( 1.0 ), 0.00987473002, 1.0e-9 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFpm2Mph)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2mph( 0.0 ), 0.0 );
+    EXPECT_NEAR( mc::Units::fpm2mph( 1.0 ), 0.0113636364, 1.0e-9 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFpm2Mps)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2mps( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fpm2mps( 1.0 ), 0.00508 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFps2Fpm)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fps2fpm( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fps2fpm( 1.0 ), 60.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFps2Kmh)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fps2kmh( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fps2kmh( 1.0 ), 1.09728 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFps2Kts)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fps2kts( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fps2kts( 1.0 ), 0.592483801 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFps2Mph)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fps2mph( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fps2mph( 1.0 ), 0.681818182 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertFps2Mps)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::fps2mps( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::fps2mps( 1.0 ), 0.3048 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestUnits, CanConvertKmh2Fpm)
+{
+    EXPECT_DOUBLE_EQ( mc::Units::kmh2fpm( 0.0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( mc::Units::kmh2fpm( 1.0 ), 54.6806649 );
 }
