@@ -212,7 +212,8 @@ MCUTILSEXPORT inline double ft2km( double len = 1.0 )
  */
 MCUTILSEXPORT inline double ft2mi( double len = 1.0 )
 {
-    return len * 0.000189393939;
+    constexpr double coef = 1.0 / 5280.0;
+    return len * coef;
 }
 
 /**
@@ -511,7 +512,8 @@ MCUTILSEXPORT inline double mps2mph( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double fpm2fps( double vel = 1.0 )
 {
-    return vel * 0.0166666666667;
+    constexpr double coef = 1.0 / 60;
+    return vel * coef;
 }
 
 /**
@@ -533,7 +535,8 @@ MCUTILSEXPORT inline double fpm2kmh( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double fpm2kts( double vel = 1.0 )
 {
-    return vel * 0.00987473001;
+    constexpr double coef = 0.000164578834 * 60.0;
+    return vel * coef;
 }
 
 /**
@@ -544,7 +547,8 @@ MCUTILSEXPORT inline double fpm2kts( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double fpm2mph( double vel = 1.0 )
 {
-    return vel * 0.0113636364;
+    constexpr double coef = 60.0 / 5280.0;
+    return vel * coef;
 }
 
 /**
@@ -742,7 +746,8 @@ MCUTILSEXPORT inline double mph2fpm( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mph2fps( double vel = 1.0 )
 {
-    return vel * 1.46666667;
+    constexpr double coef = 5280.0 / 3600.0;
+    return vel * coef;
 }
 
 /**
