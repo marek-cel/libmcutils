@@ -31,13 +31,17 @@ namespace mc { namespace Units
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Units::FunPtr getUnitConverter( const char *name )
+Units::Converter getUnitConverter( const char *name )
 {
     // angle
-    if ( 0 == String::icompare( name, "deg" ) )
+    if ( 0 == String::icompare( name, "rad" ) )
+        return &dummy;
+    else if ( 0 == String::icompare( name, "deg" ) )
         return &deg2rad;
 
     // length
+    else if ( 0 == String::icompare( name, "m" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "ft" ) )
         return &ft2m;
     else if ( 0 == String::icompare( name, "in" ) )
@@ -48,10 +52,14 @@ Units::FunPtr getUnitConverter( const char *name )
         return &nmi2m;
 
     // area
+    else if ( 0 == String::icompare( name, "sqm" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "sqft" ) )
         return &sqft2sqm;
 
     // volume
+    else if ( 0 == String::icompare( name, "cum" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "cuft" ) )
         return &cuft2cum;
     else if ( 0 == String::icompare( name, "cuin" ) )
@@ -60,6 +68,8 @@ Units::FunPtr getUnitConverter( const char *name )
         return &l2cum;
 
     // velocity
+    else if ( 0 == String::icompare( name, "mps" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "fpm" ) )
         return &fpm2mps;
     else if ( 0 == String::icompare( name, "fps" ) )
@@ -70,20 +80,28 @@ Units::FunPtr getUnitConverter( const char *name )
         return &kts2mps;
 
     // angular velocity
+    else if ( 0 == String::icompare( name, "rad/s" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "deg/s" ) )
         return &deg2rad;
     else if ( 0 == String::icompare( name, "rpm" ) )
         return &rpm2rad_s;
 
     // mass
+    else if ( 0 == String::icompare( name, "kg" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "lb" ) )
         return &lb2kg;
 
     // force
+    else if ( 0 == String::icompare( name, "N" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "lbf" ) )
         return &lbf2n;
 
     // pressure
+    else if ( 0 == String::icompare( name, "Pa" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "psf" ) )
         return &psf2pa;
     else if ( 0 == String::icompare( name, "psi" ) )
@@ -94,6 +112,8 @@ Units::FunPtr getUnitConverter( const char *name )
         return &mb2pa;
 
     // power
+    else if ( 0 == String::icompare( name, "W" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "PS" ) )
         return &ps2w;
     else if ( 0 == String::icompare( name, "hp" ) )
@@ -102,16 +122,22 @@ Units::FunPtr getUnitConverter( const char *name )
         return &kw2w;
 
     // temperature
+    else if ( 0 == String::icompare( name, "K" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "degC" ) )
         return &c2k;
     else if ( 0 == String::icompare( name, "degF" ) )
         return &f2k;
 
     // specific fuel consumption
+    else if ( 0 == String::icompare( name, "kg/Ws" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "g/kWh" ) )
         return &g_kWh_2_kg_Ws;
 
     // thrust specific fuel consumption
+    else if ( 0 == String::icompare( name, "kg/Ns" ) )
+        return &dummy;
     else if ( 0 == String::icompare( name, "g/kNs" ) )
         return &g_kNs_2_kg_Ns;
 

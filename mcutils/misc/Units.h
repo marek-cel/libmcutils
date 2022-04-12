@@ -45,7 +45,7 @@ namespace mc
 namespace Units
 {
 
-using FunPtr = double (*)(double);
+using Converter = double (*)(double);
 
 /**
  * @brief Returns converter function pointer.
@@ -80,7 +80,22 @@ using FunPtr = double (*)(double);
  * - Specific fuel consumption: g/kWh (grams per kilowatt-hour)
  * - Thrust Specific fuel consumption: g/kNs (grams per kilonewton-socond)
  */
-MCUTILSEXPORT FunPtr getUnitConverter( const char *name );
+MCUTILSEXPORT Converter getUnitConverter( const char *name );
+
+////////////////////////////////////////////////////////////////////////////////
+// DUMMy
+////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief Dummy converter that always returns given value
+ *
+ * @param val given value
+ * @return given value
+ */
+MCUTILSEXPORT inline double dummy( double val = 1.0 )
+{
+    return val;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // ANGLE
