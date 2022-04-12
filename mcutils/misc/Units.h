@@ -157,7 +157,8 @@ MCUTILSEXPORT inline double m2in( double len = 1.0 )
  */
 MCUTILSEXPORT inline double m2mi( double len = 1.0 )
 {
-    return len * 0.000621371192;
+    constexpr double coef = 1.0 / 1609.344;
+    return len * coef;
 }
 
 /**
@@ -168,7 +169,8 @@ MCUTILSEXPORT inline double m2mi( double len = 1.0 )
  */
 MCUTILSEXPORT inline double m2nmi( double len = 1.0 )
 {
-    return len * 0.000539956803;
+    constexpr double coef = 1.0 / 1852.0;
+    return len * coef;
 }
 
 /**
@@ -490,7 +492,8 @@ MCUTILSEXPORT inline double mps2kmh( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mps2kts( double vel = 1.0 )
 {
-    return vel * 1.943844491;
+    constexpr double coef = 3600.0 / 1852.0;
+    return vel * coef;
 }
 
 /**
@@ -669,7 +672,8 @@ MCUTILSEXPORT inline double kmh2mph( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kmh2mps( double vel = 1.0 )
 {
-    return vel * 0.2777777777778;
+    constexpr double coef = 1000.0 / 3600.0;
+    return vel * coef;
 }
 
 /**
@@ -680,7 +684,8 @@ MCUTILSEXPORT inline double kmh2mps( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2fpm( double vel = 1.0 )
 {
-    return vel * 101.2685916;
+    constexpr double coef = 6076.11549 / 60.0;
+    return vel * coef;
 }
 
 /**
@@ -691,7 +696,8 @@ MCUTILSEXPORT inline double kts2fpm( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2fps( double vel = 1.0 )
 {
-    return vel * 1.68780986;
+    constexpr double coef = 6076.11549 / 3600.0;
+    return vel * coef;
 }
 
 /**
@@ -724,7 +730,8 @@ MCUTILSEXPORT inline double kts2mph( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2mps( double vel = 1.0 )
 {
-    return vel * 0.5144444444444;
+    constexpr double coef = 1852.0 / 3600.0;
+    return vel * coef;
 }
 
 /**
@@ -780,7 +787,8 @@ MCUTILSEXPORT inline double mph2kts( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mph2mps( double vel = 1.0 )
 {
-    return vel * 0.44704;
+    constexpr double coef = 1609.344 / 3600.0;
+    return vel * coef;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
