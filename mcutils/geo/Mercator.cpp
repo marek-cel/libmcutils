@@ -73,14 +73,6 @@ double Mercator::y( double lat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Mercator::k0( double lat_ts )
-{
-    double sinLat = sin( lat_ts );
-    return _a * cos( lat_ts ) / sqrt( 1.0 - _e2 * sinLat*sinLat );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 double Mercator::t( double lat )
 {
     double e_sinLat = _e * sin( lat );

@@ -89,14 +89,6 @@ public:
     double y( double lat );
 
     /**
-     * @brief Computes ellipsoid parallel radius.
-     *
-     * @param lat_ts [rad] geodetic latitude of true scale
-     * @return parallel radius [m]
-     */
-    double k0( double lat_ts );
-
-    /**
      * @brief Computes Isometric Latitude kernel.
      *
      * @param lat [rad] geodetic latitude
