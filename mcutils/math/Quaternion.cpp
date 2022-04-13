@@ -37,7 +37,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::createZeroRotationQuaternion()
+Quaternion Quaternion::zeroRotationQuaternion()
 {
     return Quaternion( 1.0, 0.0, 0.0, 0.0 );
 }

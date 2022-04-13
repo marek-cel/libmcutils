@@ -61,7 +61,7 @@ class MCUTILSEXPORT Quaternion final
 public:
 
     /** @brief Creates zero rotation quaternion. */
-    static Quaternion createZeroRotationQuaternion();
+    static Quaternion zeroRotationQuaternion();
 
     /** @brief Constructor. */
     Quaternion();
