@@ -55,14 +55,14 @@ public:
      *
      * @param ecef object to copy
      */
-    WGS84( const WGS84 &ecef );
+    WGS84( const WGS84 &wgs );
 
     /**
      * @brief Moving constructor.
      *
      * @param ecef object to move
      */
-    WGS84( WGS84 &&ecef );
+    WGS84( WGS84 &&wgs );
 
     /**
      * @brief Constructor.
@@ -74,18 +74,22 @@ public:
     /**
      * @brief Constructor.
      *
-     * @param pos_ecef [m] coordinates vector expressed in ECEF
+     * @param pos_wgs [m] coordinates vector expressed in ECEF
      */
-    explicit WGS84( const Vector3 &pos_ecef );
+    explicit WGS84( const Vector3 &pos_wgs );
 
     /** @brief Destructor. */
     virtual ~WGS84();
 
+    inline Vector3 getPos_WGS() const { return getPos_ECEF(); }
+
+    inline void setPos_WGS( const Vector3 &pos_wgs ) { setPos_ECEF( pos_wgs ); }
+
     /** @brief Assignment operator. */
-    WGS84& operator= ( const WGS84 &ecef );
+    WGS84& operator= ( const WGS84 &wgs );
 
     /** @brief Moving assignment operator. */
-    WGS84& operator= ( WGS84 &&ecef );
+    WGS84& operator= ( WGS84 &&wgs );
 
 private:
 
