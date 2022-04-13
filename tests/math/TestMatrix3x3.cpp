@@ -659,7 +659,7 @@ TEST_F(TestMatrix3x3, CanGetAngles)
 
 TEST_F(TestMatrix3x3, CanGetQuaternion)
 {
-    mc::Matrix3x3 mq0( mc::Quaternion::createZeroRotationQuaternion() );
+    mc::Matrix3x3 mq0( mc::Quaternion::zeroRotationQuaternion() );
     mc::Matrix3x3 mq1( mc::Quaternion( 0.6, 0.0, 0.0, 0.8 ) );
 
     mc::Quaternion q0 = mq0.getQuaternion();

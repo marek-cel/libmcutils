@@ -37,7 +37,7 @@ TEST_F(TestQuaternion, CanDestruct)
 
 TEST_F(TestQuaternion, CanCreateZeroRotationQuaternion)
 {
-    mc::Quaternion q0 = mc::Quaternion::createZeroRotationQuaternion();
+    mc::Quaternion q0 = mc::Quaternion::zeroRotationQuaternion();
 
     EXPECT_DOUBLE_EQ( q0.e0(), 1.0 );
     EXPECT_DOUBLE_EQ( q0.ex(), 0.0 );
