@@ -379,7 +379,7 @@ void ECEF::updateMatrices()
     _ned2ecef(2,1) =  0.0;
     _ned2ecef(2,2) = -sinLat;
 
-    _enu2ecef = _enu2ned * _ned2ecef;
+    _enu2ecef = _ned2ecef * _enu2ned;
 
     // ECF to NED
     _ecef2ned(0,0) = -cosLon * sinLat;
@@ -394,7 +394,7 @@ void ECEF::updateMatrices()
     _ecef2ned(2,1) = -sinLon * cosLat;
     _ecef2ned(2,2) = -sinLat;
 
-    _ecef2enu = _ecef2ned * _ned2enu;
+    _ecef2enu = _ned2enu * _ecef2ned;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
