@@ -100,8 +100,8 @@ void Angles::normalize()
     while ( _phi >  M_PI ) _phi -= 2.0 * M_PI;
     while ( _phi < -M_PI ) _phi += 2.0 * M_PI;
 
-    while ( _psi > 2.0 * M_PI ) _psi -= 2.0 * M_PI;
-    while ( _psi < 0.0        ) _psi += 2.0 * M_PI;
+    while ( _psi >= 2.0 * M_PI ) _psi -= 2.0 * M_PI;
+    while ( _psi <  0.0        ) _psi += 2.0 * M_PI;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
