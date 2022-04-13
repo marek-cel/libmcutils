@@ -161,8 +161,7 @@ MCUTILSEXPORT inline double m2in( double len = 1.0 )
  */
 MCUTILSEXPORT inline double m2mi( double len = 1.0 )
 {
-    constexpr double coef = 1.0 / 1609.344;
-    return len * coef;
+    return len * ( 1.0 / 1609.344 );
 }
 
 /**
@@ -173,8 +172,7 @@ MCUTILSEXPORT inline double m2mi( double len = 1.0 )
  */
 MCUTILSEXPORT inline double m2nmi( double len = 1.0 )
 {
-    constexpr double coef = 1.0 / 1852.0;
-    return len * coef;
+    return len * ( 1.0 / 1852.0 );
 }
 
 /**
@@ -207,7 +205,7 @@ MCUTILSEXPORT inline double ft2m( double len = 1.0 )
  */
 MCUTILSEXPORT inline double ft2km( double len = 1.0 )
 {
-    return len * 0.0003048;
+    return len * ( 1.0 / 3280.8399 );
 }
 
 /**
@@ -218,8 +216,7 @@ MCUTILSEXPORT inline double ft2km( double len = 1.0 )
  */
 MCUTILSEXPORT inline double ft2mi( double len = 1.0 )
 {
-    constexpr double coef = 1.0 / 5280.0;
-    return len * coef;
+    return len * ( 1.0 / 5280.0 );
 }
 
 /**
@@ -230,7 +227,7 @@ MCUTILSEXPORT inline double ft2mi( double len = 1.0 )
  */
 MCUTILSEXPORT inline double ft2nmi( double len = 1.0 )
 {
-    return len * 0.000164578834;
+    return len * ( 1.0 / 6076.11549 );
 }
 
 /**
@@ -388,7 +385,7 @@ MCUTILSEXPORT inline double nmi2mi( double len = 1.0 )
  */
 MCUTILSEXPORT inline double sqm2sqft( double area = 1.0 )
 {
-    return area * 10.7639104;
+    return area * ( 3.2808399 * 3.2808399 );
 }
 
 /**
@@ -399,7 +396,7 @@ MCUTILSEXPORT inline double sqm2sqft( double area = 1.0 )
  */
 MCUTILSEXPORT inline double sqft2sqm( double area = 1.0 )
 {
-    return area * 0.09290304;
+    return area * ( 0.3048 * 0.3048 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -414,7 +411,7 @@ MCUTILSEXPORT inline double sqft2sqm( double area = 1.0 )
  */
 MCUTILSEXPORT inline double cuft2cum( double vol = 1.0 )
 {
-    return vol * 0.0283168466;
+    return vol * ( 0.3048 * 0.3048 * 0.3048 );
 }
 
 
@@ -426,7 +423,7 @@ MCUTILSEXPORT inline double cuft2cum( double vol = 1.0 )
  */
 MCUTILSEXPORT inline double cuin2cum( double vol = 1.0 )
 {
-    return vol * 0.000016387064;
+    return vol * ( 0.0254 * 0.0254 * 0.0254 );
 }
 
 /**
@@ -437,7 +434,7 @@ MCUTILSEXPORT inline double cuin2cum( double vol = 1.0 )
  */
 MCUTILSEXPORT inline double cum2cuft( double vol = 1.0 )
 {
-    return vol * 35.3146667;
+    return vol * ( 3.2808399 * 3.2808399 * 3.2808399 );
 }
 
 /**
@@ -496,8 +493,7 @@ MCUTILSEXPORT inline double mps2kmh( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mps2kts( double vel = 1.0 )
 {
-    constexpr double coef = 3600.0 / 1852.0;
-    return vel * coef;
+    return vel * ( 3600.0 / 1852.0 );
 }
 
 /**
@@ -542,8 +538,7 @@ MCUTILSEXPORT inline double fpm2kmh( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double fpm2kts( double vel = 1.0 )
 {
-    constexpr double coef = 0.000164578834 * 60.0;
-    return vel * coef;
+    return vel * ( 0.000164578834 * 60.0 );
 }
 
 /**
@@ -554,8 +549,7 @@ MCUTILSEXPORT inline double fpm2kts( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double fpm2mph( double vel = 1.0 )
 {
-    constexpr double coef = 60.0 / 5280.0;
-    return vel * coef;
+    return vel * ( 60.0 / 5280.0 );
 }
 
 /**
@@ -676,8 +670,7 @@ MCUTILSEXPORT inline double kmh2mph( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kmh2mps( double vel = 1.0 )
 {
-    constexpr double coef = 1000.0 / 3600.0;
-    return vel * coef;
+    return vel * ( 1000.0 / 3600.0 );
 }
 
 /**
@@ -688,8 +681,7 @@ MCUTILSEXPORT inline double kmh2mps( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2fpm( double vel = 1.0 )
 {
-    constexpr double coef = 6076.11549 / 60.0;
-    return vel * coef;
+    return vel * ( 6076.11549 / 60.0 );
 }
 
 /**
@@ -700,8 +692,7 @@ MCUTILSEXPORT inline double kts2fpm( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2fps( double vel = 1.0 )
 {
-    constexpr double coef = 6076.11549 / 3600.0;
-    return vel * coef;
+    return vel * ( 6076.11549 / 3600.0 );
 }
 
 /**
@@ -734,8 +725,7 @@ MCUTILSEXPORT inline double kts2mph( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double kts2mps( double vel = 1.0 )
 {
-    constexpr double coef = 1852.0 / 3600.0;
-    return vel * coef;
+    return vel * ( 1852.0 / 3600.0 );
 }
 
 /**
@@ -757,8 +747,7 @@ MCUTILSEXPORT inline double mph2fpm( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mph2fps( double vel = 1.0 )
 {
-    constexpr double coef = 5280.0 / 3600.0;
-    return vel * coef;
+    return vel * ( 5280.0 / 3600.0 );
 }
 
 /**
@@ -791,8 +780,7 @@ MCUTILSEXPORT inline double mph2kts( double vel = 1.0 )
  */
 MCUTILSEXPORT inline double mph2mps( double vel = 1.0 )
 {
-    constexpr double coef = 1609.344 / 3600.0;
-    return vel * coef;
+    return vel * ( 1609.344 / 3600.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -905,9 +893,9 @@ MCUTILSEXPORT inline double pa2mb( double press = 1.0 )
  * @param press pressure expressed in pascals
  * @return pressure expressed in psf
  */
-MCUTILSEXPORT inline double pa2psf( double mass = 1.0 )
+MCUTILSEXPORT inline double pa2psf( double press = 1.0 )
 {
-    return mass * 0.020885434273039;
+    return press * 0.224808943 / ( 3.2808399 * 3.2808399 );
 }
 
 /**
@@ -918,7 +906,7 @@ MCUTILSEXPORT inline double pa2psf( double mass = 1.0 )
  */
 MCUTILSEXPORT inline double pa2psi( double press = 1.0 )
 {
-    return press * 0.000145037738;
+    return press * ( 0.224808943 * 0.0254 * 0.0254 );
 }
 
 /**
@@ -927,9 +915,9 @@ MCUTILSEXPORT inline double pa2psi( double press = 1.0 )
  * @param press pressure expressed in psf
  * @return pressure expressed in pascals
  */
-MCUTILSEXPORT inline double psf2pa( double mass = 1.0 )
+MCUTILSEXPORT inline double psf2pa( double press = 1.0 )
 {
-    return mass * 47.880259;
+    return press * ( 3.2808399 * 3.2808399 ) / 0.224808943;
 }
 
 /**
@@ -940,7 +928,7 @@ MCUTILSEXPORT inline double psf2pa( double mass = 1.0 )
  */
 MCUTILSEXPORT inline double psi2pa( double press = 1.0 )
 {
-    return press * 6894.75729;
+    return press / ( 0.224808943 * 0.0254 * 0.0254 );
 }
 
 /**
@@ -1017,7 +1005,7 @@ MCUTILSEXPORT inline double mb2pa( double press = 1.0 )
  */
 MCUTILSEXPORT inline double mb2psi( double press = 1.0 )
 {
-    return press * 0.0145037738;
+    return press * ( 100.0 * 0.224808943 * 0.0254 * 0.0254 );
 }
 
 /**
@@ -1264,7 +1252,7 @@ MCUTILSEXPORT inline double g_kWh_2_kg_Ws( double sfc = 1.0 )
  */
 MCUTILSEXPORT inline double g_kNs_2_kg_Ns( double tsfc = 1.0 )
 {
-    return tsfc / ( 1.0e6 );
+    return tsfc * ( 1.0e-6 );
 }
 
 } // namespace Units
