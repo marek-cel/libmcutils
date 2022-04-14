@@ -22,6 +22,8 @@
 
 #include <mcutils/xml/XmlDoc.h>
 
+#include <cstring>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -50,26 +52,28 @@ void XmlDoc::openFile( const char *fileName )
 {
     closeFile();
 
-    _doc = xmlParseFile( fileName );
-
-    if ( _doc == 0 )
+    if ( std::strlen( fileName ) > 0 )
     {
-        xmlFreeDoc( _doc );
-        return;
+        _doc = xmlParseFile( fileName );
+
+        if ( _doc == nullptr )
+        {
+            xmlFreeDoc( _doc );
+            return;
+        }
+
+        xmlNodePtr root = xmlDocGetRootElement( _doc );
+
+        if ( root == nullptr )
+        {
+            xmlFreeDoc( _doc );
+            return;
+        }
+
+        _root = new XmlNode( root, fileName );
+
+        _open = true;
     }
-
-    xmlNodePtr root = xmlDocGetRootElement( _doc );
-
-    if ( root == 0 )
-    {
-        xmlFreeNode( root );
-        xmlFreeDoc( _doc );
-        return;
-    }
-
-    _root = new XmlNode( root, fileName );
-
-    _open = true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,9 +82,11 @@ void XmlDoc::closeFile()
 {
     _open = false;
 
-    if ( _root ) { delete _root; } _root = nullptr;
+    if ( _root ) delete _root;
+    if ( _doc  ) xmlFreeDoc( _doc );
 
-    xmlFreeDoc( _doc );
+    _root = nullptr;
+    _doc  = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -52,6 +52,8 @@ public:
     /** @brief Copy constructor. */
     XmlNode( const XmlNode &node );
 
+    /** @brief Moving constructor. */
+    XmlNode( XmlNode &&node );
 
     XmlNode( xmlNodePtr node, const char *file );
 
@@ -238,6 +240,15 @@ public:
     {
         _file = node._file;
         _node = node._node;
+
+        return (*this);
+    }
+
+    /** @brief Moving assignment operator. */
+    inline XmlNode& operator= ( XmlNode &&node )
+    {
+        _file = std::move( node._file );
+        _node = std::move( node._node );
 
         return (*this);
     }

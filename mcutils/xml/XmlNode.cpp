@@ -48,6 +48,14 @@ XmlNode::XmlNode( const XmlNode &node )
 
 ////////////////////////////////////////////////////////////////////////////////
 
+XmlNode::XmlNode( XmlNode &&node )
+{
+    _node = std::move( node._node );
+    _file = std::move( node._file );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 XmlNode::XmlNode( xmlNodePtr node, const char *file )
     : _file ( file )
     , _node ( node )
@@ -197,7 +205,7 @@ XmlNode XmlNode::getNextSibling() const
 
     if ( isValid() )
     {
-        if ( _node->next != 0 )
+        if ( _node->next != nullptr )
         {
             result._node = _node->next;
             result._file = _file;
@@ -217,7 +225,7 @@ XmlNode XmlNode::getNextSiblingElement( const char *name ) const
     {
         xmlNodePtr next = _node->next;
 
-        while ( next != 0 )
+        while ( next != nullptr )
         {
             if ( next->type == XML_ELEMENT_NODE )
             {
