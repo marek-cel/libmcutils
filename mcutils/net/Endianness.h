@@ -40,14 +40,6 @@ namespace mc { namespace Endianess
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-MCUTILSEXPORT UInt32 hostToNet( UInt32 val );
-
-/**
- * @brief Converts values between host and network byte order.
- *
- * @param val value expressed in host byte order
- * @return value expressed in network byte order
- */
 MCUTILSEXPORT UInt16 hostToNet( UInt16 val );
 
 /**
@@ -56,7 +48,7 @@ MCUTILSEXPORT UInt16 hostToNet( UInt16 val );
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-MCUTILSEXPORT double hostToNet( double val );
+MCUTILSEXPORT UInt32 hostToNet( UInt32 val );
 
 /**
  * @brief Converts values between host and network byte order.
@@ -65,6 +57,14 @@ MCUTILSEXPORT double hostToNet( double val );
  * @return value expressed in network byte order
  */
 MCUTILSEXPORT float hostToNet( float val );
+
+/**
+ * @brief Converts values between host and network byte order.
+ *
+ * @param val value expressed in host byte order
+ * @return value expressed in network byte order
+ */
+MCUTILSEXPORT double hostToNet( double val );
 
 } // namespace Endianess
 } // namespace mc

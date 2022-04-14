@@ -38,6 +38,13 @@ namespace mc { namespace Endianess
 
 ////////////////////////////////////////////////////////////////////////////////
 
+UInt16 hostToNet( UInt16 val )
+{
+    return htons( val );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 UInt32 hostToNet( UInt32 val )
 {
     return htonl( val );
@@ -45,9 +52,14 @@ UInt32 hostToNet( UInt32 val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-UInt16 hostToNet( UInt16 val )
+float hostToNet( float val )
 {
-    return htons( val );
+    unsigned int *val_ptr = reinterpret_cast<unsigned int*>( &val );
+    unsigned int temp = val_ptr[ 0 ];
+
+    val_ptr[ 0 ] = htonl( temp );
+
+    return val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,18 +71,6 @@ double hostToNet( double val )
 
     val_ptr[ 0 ] = htonl( val_ptr[ 1 ] );
     val_ptr[ 1 ] = htonl( temp );
-
-    return val;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-float hostToNet( float val )
-{
-    unsigned int *val_ptr = reinterpret_cast<unsigned int*>( &val );
-    unsigned int temp = val_ptr[ 0 ];
-
-    val_ptr[ 0 ] = htonl( temp );
 
     return val;
 }
