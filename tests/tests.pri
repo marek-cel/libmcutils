@@ -57,6 +57,11 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
+    $$PWD/net/TestEndianness.cpp
+
+################################################################################
+
+SOURCES += \
     $$PWD/physics/TestPhysics.cpp
 
 ################################################################################
@@ -73,3 +78,14 @@ SOURCES += \
     $$PWD/signal/TestMovingMedianFilter.cpp \
     $$PWD/signal/TestPID.cpp
 
+################################################################################
+
+SOURCES += \
+    $$PWD/time/TestClockTime.cpp \
+    $$PWD/time/TestISO8601.cpp
+
+################################################################################
+
+SOURCES += \
+    $$PWD/xml/TestXmlDoc.cpp \
+    $$PWD/xml/TestXmlNode.cpp
