@@ -34,7 +34,7 @@ TEST_F(TestDataWGS84, IsPolarRadiusCorrect)
 TEST_F(TestDataWGS84, IsEllipsoidFlatteningCorrect)
 {
     // Department of Defence World Geodetic System 1984, NIMA, TR-8350.2, 2000, p.3-2
-    EXPECT_NEAR( mc::DataWGS84::f, 1.0 / 298.257223563, 1.0e-12 );
+    EXPECT_NEAR( mc::DataWGS84::f, 0.0033528106718309896, 1.0e-9 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ TEST_F(TestDataWGS84, IsMeanRadiusCorrect)
 TEST_F(TestDataWGS84, IsEquatorialRadiusSquaredCorrect)
 {
     // calculated with GNU Octave
-    // tests/geo/octave/test_geo_data_wgs84.m
+    // tests/geo/python/test_geo_data_wgs84.py
     EXPECT_NEAR( mc::DataWGS84::a2, 40680631590769.0, 1.0 );
 }
 
@@ -59,8 +59,8 @@ TEST_F(TestDataWGS84, IsEquatorialRadiusSquaredCorrect)
 TEST_F(TestDataWGS84, IsPolarRadiusSquaredCorrect)
 {
     // calculated with GNU Octave
-    // tests/geo/octave/test_geo_data_wgs84.m
-    EXPECT_NEAR( mc::DataWGS84::b2, 40408299984087.0546875, 1.0 );
+    // tests/geo/python/test_geo_data_wgs84.py
+    EXPECT_NEAR( mc::DataWGS84::b2, 40408299984087.055, 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
