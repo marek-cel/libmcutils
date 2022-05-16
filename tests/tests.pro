@@ -46,7 +46,7 @@ INCLUDEPATH += ./ ../
 
 win32: INCLUDEPATH += \
     $(GTEST_DIR)/include \
-    $(LIBXML_DIR)/include/libxml2
+    $(LIBXML_DIR)/include/
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
@@ -54,13 +54,10 @@ unix: INCLUDEPATH += \
 ################################################################################
 
 LIBS += \
-    -lgcov \
     -lgtest \
     -lgtest_main \
     -lgtest \
-    -lgtest_main \
-    -lxml2 \
-    -pthread
+    -lgtest_main
 
 win32: LIBS += \
     -L$(GTEST_DIR)/lib \
@@ -73,7 +70,9 @@ win32-g++: LIBS += \
 
 unix: LIBS += \
     -L/lib \
-    -L/usr/lib
+    -L/usr/lib \
+    -lgcov \
+    -pthread
 
 ################################################################################
 

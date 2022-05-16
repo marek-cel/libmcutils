@@ -13,4 +13,4 @@ tests.subdir   = tests
 
 ################################################################################
 
-tests.depends = mcutils
+#tests.depends = mcutils

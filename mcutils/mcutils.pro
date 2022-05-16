@@ -16,6 +16,8 @@ unix: target.path = /usr/local/lib
 
 CONFIG += c++17
 
+win32-msvc*: CONFIG += staticlib
+
 ################################################################################
 
 win32: CONFIG(release, debug|release): QMAKE_CXXFLAGS += -O2
@@ -46,17 +48,17 @@ win32-msvc*: DEFINES += MCUTILS_DLL_EXPORTS
 INCLUDEPATH += ../
 
 win32: INCLUDEPATH += \
-    $(LIBXML_DIR)/include/libxml2
+    $(LIBXML_DIR)/include/
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
 
 ################################################################################
 
-win32: LIBS += \
-    -L$(LIBXML_DIR)/lib \
-    -lxml2 \
-    -lws2_32
+#win32: LIBS += \
+#    -L$(LIBXML_DIR)/lib \
+#    -lxml2 \
+#    -lws2_32
 
 win32-g++: LIBS += \
     -liconv
