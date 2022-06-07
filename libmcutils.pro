@@ -10,4 +10,3 @@ SUBDIRS += \
 
 mcutils.subdir = mcutils
 tests.subdir   = tests
-

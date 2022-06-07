@@ -20,7 +20,6 @@ CONFIG += c++17
 
 unix:  CONFIG(release, debug|release): QMAKE_CXXFLAGS += -O2
 win32: CONFIG(release, debug|release): QMAKE_CXXFLAGS += -O2
-unix:  CONFIG(release, debug|release): QMAKE_CXXFLAGS += -O2
 
 win32-msvc*: QMAKE_LFLAGS += /INCREMENTAL:NO
 
