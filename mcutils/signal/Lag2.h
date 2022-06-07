@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
  */
-class MCUTILSEXPORT Lag2 final : public ISignalElement
+class MCUTILSAPI Lag2 final : public ISignalElement
 {
 public:
 

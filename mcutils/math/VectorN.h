@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief N elements dynamic allocated vector class.
  */
-class MCUTILSEXPORT VectorN
+class MCUTILSAPI VectorN
 {
 public:
 

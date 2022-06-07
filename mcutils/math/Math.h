@@ -41,7 +41,7 @@ namespace mc { namespace Math
  * @param val variable to test
  * @return true if val greater than min and less than max, false otherwise
  */
-MCUTILSEXPORT inline bool isInside( const double &min, const double &max, const double &val )
+MCUTILSAPI inline bool isInside( const double &min, const double &max, const double &val )
 {
     return min <= val && val <= max;
 }
@@ -54,7 +54,7 @@ MCUTILSEXPORT inline bool isInside( const double &min, const double &max, const 
  * @param val variable to test
  * @return true if val greater than min and less than max, false otherwise
  */
-MCUTILSEXPORT inline bool isOutside( const double &min, const double &max, const double &val )
+MCUTILSAPI inline bool isOutside( const double &min, const double &max, const double &val )
 {
     return min > val || val > max;
 }
@@ -65,7 +65,7 @@ MCUTILSEXPORT inline bool isOutside( const double &min, const double &max, const
  * @param val argument
  * @return power 2 (square)
  */
-MCUTILSEXPORT inline double pow2( const double &val )
+MCUTILSAPI inline double pow2( const double &val )
 {
     return val * val;
 }
@@ -76,7 +76,7 @@ MCUTILSEXPORT inline double pow2( const double &val )
  * @param val argument
  * @return power 3 (cube)
  */
-MCUTILSEXPORT inline double pow3( const double &val )
+MCUTILSAPI inline double pow3( const double &val )
 {
     return val * val * val;
 }
@@ -87,7 +87,7 @@ MCUTILSEXPORT inline double pow3( const double &val )
  * @param val argument
  * @return power 4
  */
-MCUTILSEXPORT inline double pow4( const double &val )
+MCUTILSAPI inline double pow4( const double &val )
 {
     return val * val * val * val;
 }
@@ -98,7 +98,7 @@ MCUTILSEXPORT inline double pow4( const double &val )
  * @param val argument
  * @return power 5
  */
-MCUTILSEXPORT inline double pow5( const double &val )
+MCUTILSAPI inline double pow5( const double &val )
 {
     return val * val * val * val * val;
 }
@@ -111,7 +111,7 @@ MCUTILSEXPORT inline double pow5( const double &val )
  * @param val variable to test
  * @return min if val less than min, max if val larger than max, val if val larger than min and less than max
  */
-MCUTILSEXPORT inline double satur( const double &min, const double &max, const double &val )
+MCUTILSAPI inline double satur( const double &min, const double &max, const double &val )
 {
     if      ( val < min ) return min;
     else if ( val > max ) return max;
@@ -125,7 +125,7 @@ MCUTILSEXPORT inline double satur( const double &min, const double &max, const d
  * @param val input value
  * @return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
-MCUTILSEXPORT inline double sign( const double &val )
+MCUTILSAPI inline double sign( const double &val )
 {
     if      ( val < 0.0 ) return -1.0;
     else if ( val > 0.0 ) return  1.0;
@@ -141,7 +141,7 @@ MCUTILSEXPORT inline double sign( const double &val )
  * @param x normalized input value <-1.0;1.0>
  * @return approximated sine wave
  */
-MCUTILSEXPORT inline float sineWave( float x )
+MCUTILSAPI inline float sineWave( float x )
 {
     float y = 4.0f * x - 4.0f * x * fabs( x );
     return 0.225f * ( y * fabs( y ) - y ) + y;
@@ -160,7 +160,7 @@ MCUTILSEXPORT inline float sineWave( float x )
  *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSEXPORT inline double smoothstep( const double &xmin, const double &xmax,
+MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
                                        double x )
 {
     x = satur( 0.0, 1.0, (x - xmin) / (xmax - xmin) );
@@ -178,7 +178,7 @@ MCUTILSEXPORT inline double smoothstep( const double &xmin, const double &xmax,
  *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSEXPORT inline double smoothstep( double x )
+MCUTILSAPI inline double smoothstep( double x )
 {
     return smoothstep( 0.0, 1.0, x );
 }
@@ -198,7 +198,7 @@ MCUTILSEXPORT inline double smoothstep( double x )
  *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSEXPORT inline double smoothstep( const double &xmin, const double &xmax,
+MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
                                        const double &ymin, const double &ymax,
                                        double x )
 {
@@ -219,7 +219,7 @@ MCUTILSEXPORT inline double smoothstep( const double &xmin, const double &xmax,
  *   <li><a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Algorithms for calculating variance - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSEXPORT inline double stdDev( double sum, double sum_sq, int n )
+MCUTILSAPI inline double stdDev( double sum, double sum_sq, int n )
 {
     double coef = 1.0 / ( static_cast<double>(n) - 1.0 );
     double s2 = sum_sq * coef - pow2( sum ) * coef / static_cast<double>(n);
@@ -240,7 +240,7 @@ MCUTILSEXPORT inline double stdDev( double sum, double sum_sq, int n )
  *   <li><a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Algorithms for calculating variance - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSEXPORT inline double stdDev( const double x[], int n )
+MCUTILSAPI inline double stdDev( const double x[], int n )
 {
     double sum = 0.0;
     double sum_sq = 0.0;

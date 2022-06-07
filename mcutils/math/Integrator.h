@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief Abstract numerical integration base class.
  */
-class MCUTILSEXPORT Integrator
+class MCUTILSAPI Integrator
 {
 public:
 

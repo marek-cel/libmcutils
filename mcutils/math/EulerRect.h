@@ -48,7 +48,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Euler_method">Euler method - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSEXPORT EulerRect final : public Integrator
+class MCUTILSAPI EulerRect final : public Integrator
 {
 public:
 

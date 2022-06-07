@@ -43,7 +43,7 @@ namespace mc
  *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA, TR-8350.2, 2000</a></li>
  * </ul>
  */
-class MCUTILSEXPORT WGS84 : public ECEF
+class MCUTILSAPI WGS84 : public ECEF
 {
 public:
 

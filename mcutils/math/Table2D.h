@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief 2D table and bilinear interpolation class.
  */
-class MCUTILSEXPORT Table2D final
+class MCUTILSAPI Table2D final
 {
 public:
 

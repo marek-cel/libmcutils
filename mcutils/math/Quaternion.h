@@ -56,7 +56,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSEXPORT Quaternion final
+class MCUTILSAPI Quaternion final
 {
 public:
 

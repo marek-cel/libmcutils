@@ -37,11 +37,11 @@
 #endif
 
 #if defined(__cplusplus)
-#   define MCUTILSEXPORT MCUTILS_DLL_SPEC
+#   define MCUTILSAPI MCUTILS_DLL_SPEC
 #endif
 
-#if !defined(MCUTILSEXPORT)
-#   define MCUTILSEXPORT
+#if !defined(MCUTILSAPI)
+#   define MCUTILSAPI
 #endif
 
 ////////////////////////////////////////////////////////////////////////////////

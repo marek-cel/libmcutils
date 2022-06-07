@@ -37,7 +37,7 @@ namespace mc
 /**
  * @brief 4 by 4 matrix class.
  */
-class MCUTILSEXPORT Matrix4x4 final : public MatrixSq<4>
+class MCUTILSAPI Matrix4x4 final : public MatrixSq<4>
 {
 public:
 

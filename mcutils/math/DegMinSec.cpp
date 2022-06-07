@@ -40,8 +40,8 @@ DegMinSec::DegMinSec()
 {
     _angle = 0.0;
 
-    _deg = 0.0;
-    _min = 0.0;
+    _deg = 0;
+    _min = 0;
     _sec = 0.0;
 }
 

@@ -45,7 +45,7 @@ namespace mc
  *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]</li>
  * </ul>
  */
-class MCUTILSEXPORT LeadLag final : public ISignalElement
+class MCUTILSAPI LeadLag final : public ISignalElement
 {
 public:
 

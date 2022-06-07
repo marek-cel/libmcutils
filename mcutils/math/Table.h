@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief Table and linear interpolation class.
  */
-class MCUTILSEXPORT Table final
+class MCUTILSAPI Table final
 {
 public:
 
@@ -78,7 +78,7 @@ public:
     double getKeyByIndex( unsigned int index ) const;
 
     /** */
-    inline unsigned int getSize() const { return _data.size(); }
+    inline unsigned int getSize() const { return static_cast<unsigned int>( _data.size() ); }
 
     /**
      * @brief Returns key of minimum table value.

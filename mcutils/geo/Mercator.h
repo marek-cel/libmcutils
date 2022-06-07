@@ -41,7 +41,7 @@ namespace mc
  *   <li>Deetz C., Adams O.: Elements of Map Projection, US Coast and Geodetic Survery, 1931, p.101</li>
  * </ul>
  */
-class MCUTILSEXPORT Mercator
+class MCUTILSAPI Mercator
 {
 public:
 

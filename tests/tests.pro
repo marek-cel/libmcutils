@@ -14,7 +14,7 @@ CONFIG -= app_bundle qt
 
 ################################################################################
 
-QMAKE_CXXFLAGS += -O0 \
+unix: QMAKE_CXXFLAGS += -O0 \
     --coverage \
     -fno-default-inline \
     -fno-inline \
@@ -38,42 +38,37 @@ win32-msvc*: CONFIG(release, debug|release): DEFINES += NDEBUG
 win32-msvc*: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 
 unix:  DEFINES += _LINUX_
-win32: DEFINES += WIN32 _WINDOWS IN_LIBXML
+win32: DEFINES += WIN32 _WINDOWS
 
 ################################################################################
 
 INCLUDEPATH += ./ ../
 
-win32: INCLUDEPATH += \
-    $(GTEST_DIR)/include \
-    $(LIBXML_DIR)/include/libxml2
-
 unix: INCLUDEPATH += \
     /usr/include/libxml2
+
+win32: INCLUDEPATH += \
+    $(GTEST_DIR)/include \
+    $(LIBXML_DIR)/include
 
 ################################################################################
 
 LIBS += \
+    -lgtest \
+    -lgtest_main
+
+unix: LIBS += \
+    -L/lib \
+    -L/usr/lib \
     -lgcov \
-    -lgtest \
-    -lgtest_main \
-    -lgtest \
-    -lgtest_main \
     -lxml2 \
     -pthread
 
 win32: LIBS += \
     -L$(GTEST_DIR)/lib \
     -L$(LIBXML_DIR)/lib \
-    -lwsock32 \
-    -lws2_32
-
-win32-g++: LIBS += \
-    -liconv
-
-unix: LIBS += \
-    -L/lib \
-    -L/usr/lib
+    -lws2_32  \
+    -llibxml2
 
 ################################################################################
 

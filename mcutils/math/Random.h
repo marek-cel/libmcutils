@@ -38,7 +38,7 @@ namespace mc
 /**
  * @brief Random number generator.
  */
-class MCUTILSEXPORT Random : public Singleton<Random>
+class MCUTILSAPI Random : public Singleton<Random>
 {
     friend class Singleton<Random>;
 

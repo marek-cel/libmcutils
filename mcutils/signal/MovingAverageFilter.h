@@ -43,7 +43,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Moving_average">Moving average - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSEXPORT MovingAverageFilter final : public ISignalElement
+class MCUTILSAPI MovingAverageFilter final : public ISignalElement
 {
 public:
 

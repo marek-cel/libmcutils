@@ -65,7 +65,7 @@ namespace mc
  *   <li><a href="https://www.scilab.org/pid-anti-windup-schemes">PID Anti-Windup Schemes</a></li>
  * </ul>
  */
-class MCUTILSEXPORT PID final : public ISignalElement
+class MCUTILSAPI PID final : public ISignalElement
 {
 public:
 

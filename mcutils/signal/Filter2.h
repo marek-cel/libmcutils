@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
  */
-class MCUTILSEXPORT Filter2 final : public ISignalElement
+class MCUTILSAPI Filter2 final : public ISignalElement
 {
 public:
 

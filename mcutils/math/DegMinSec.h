@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief Degree-Minute-Second representation of angle class.
  */
-class MCUTILSEXPORT DegMinSec final
+class MCUTILSAPI DegMinSec final
 {
 public:
 

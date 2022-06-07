@@ -87,7 +87,7 @@ Table::Table( const std::vector< double > &key_values,
 {
     if ( key_values.size() == table_data.size() )
     {
-        unsigned int size = key_values.size();
+        unsigned int size = static_cast<unsigned int>( key_values.size() );
 
         if ( size > 0 )
         {

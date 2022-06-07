@@ -68,7 +68,7 @@ void MovingMedianFilter::update( double, double u )
 
         if ( v.size() % 2 == 0 )
         {
-            int i1 = v.size() / 2;
+            int i1 = static_cast<int>( v.size() ) / 2;
             int i2 = i1 - 1;
 
             _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;

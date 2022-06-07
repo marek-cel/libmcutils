@@ -132,7 +132,7 @@ TEST_F(TestMath, CanCalculateSineWave)
 
         EXPECT_NEAR( y_test, y_sin, 1.0e-3 );
 
-        x += 0.1;
+        x += 0.1f;
     }
 }
 

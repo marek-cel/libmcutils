@@ -57,7 +57,7 @@ namespace mc
  *   <li>Zhu J.: Conversion of Earth-centered Earth-fixed coordinates to geodetic coordinates, 1994</li>
  * </ul>
  */
-class MCUTILSEXPORT ECEF
+class MCUTILSAPI ECEF
 {
 public:
 

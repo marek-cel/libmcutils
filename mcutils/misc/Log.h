@@ -38,7 +38,7 @@ namespace mc
 /**
  * @brief Logging class.
  */
-class MCUTILSEXPORT Log : private Singleton<Log>
+class MCUTILSAPI Log : private Singleton<Log>
 {
     friend class Singleton< Log >;
 
