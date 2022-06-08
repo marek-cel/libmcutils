@@ -46,16 +46,16 @@ namespace mc
 namespace Physics
 {
 
-MCUTILSAPI static constexpr double speedOfLight        = 299'792'458.0;   ///< [m/s] speed of light in vacuum
-MCUTILSAPI static constexpr double gravitationalConst  = 6.6732e-11;      ///< [N*m^2/kg^2] gravitational constant
-MCUTILSAPI static constexpr double avogadroConst       = 6.02214076e23;   ///< [1/kmol] Avogadro constant
-MCUTILSAPI static constexpr double boltzmannConst      = 1.380649e-23;    ///< [J/K] Boltzmann constant
-MCUTILSAPI static constexpr double universalGasConst   = 8.31434e3;       ///< [J/(kmol*K)] universal gas constant
-MCUTILSAPI static constexpr double faradayConst        = 9.64867e7;       ///< [C/kmol] Faraday constant
-MCUTILSAPI static constexpr double planckConst         = 6.62607015e-34;  ///< [J*s] Planck constant
-MCUTILSAPI static constexpr double elementaryCharge    = 1.602176634e-19; ///< [C] elementary (electron) charge
-MCUTILSAPI static constexpr double stefanBoltzmanConst = 5.66961e-8;      ///< [W/(m^2*K^4)] Stefan-Boltzmann constant
-MCUTILSAPI static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] standard acceleration due to gravity
+static constexpr double speedOfLight        = 299'792'458.0;   ///< [m/s] speed of light in vacuum
+static constexpr double gravitationalConst  = 6.6732e-11;      ///< [N*m^2/kg^2] gravitational constant
+static constexpr double avogadroConst       = 6.02214076e23;   ///< [1/kmol] Avogadro constant
+static constexpr double boltzmannConst      = 1.380649e-23;    ///< [J/K] Boltzmann constant
+static constexpr double universalGasConst   = 8.31434e3;       ///< [J/(kmol*K)] universal gas constant
+static constexpr double faradayConst        = 9.64867e7;       ///< [C/kmol] Faraday constant
+static constexpr double planckConst         = 6.62607015e-34;  ///< [J*s] Planck constant
+static constexpr double elementaryCharge    = 1.602176634e-19; ///< [C] elementary (electron) charge
+static constexpr double stefanBoltzmanConst = 5.66961e-8;      ///< [W/(m^2*K^4)] Stefan-Boltzmann constant
+static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] standard acceleration due to gravity
 
 /**
  * @brief Firt order inertia.

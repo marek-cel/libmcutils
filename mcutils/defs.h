@@ -26,11 +26,9 @@
 
 #if defined(_MSC_VER)
 #   if defined(MCUTILS_DLL_EXPORTS)
-#       define MCUTILS_DLL_SPEC __declspec(dllexport)
-#   elif defined(MCUTILS_DLL_IMPORTS)
-#       define MCUTILS_DLL_SPEC __declspec(dllimport)
+#       define MCUTILS_DLL_SPEC __declspec(dllexport)  
 #   else
-#       define MCUTILS_DLL_SPEC
+#       define MCUTILS_DLL_SPEC __declspec(dllimport)
 #   endif
 #else
 #   define MCUTILS_DLL_SPEC
