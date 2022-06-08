@@ -4,10 +4,12 @@ SOURCES += \
 ################################################################################
 
 HEADERS += \
+    $$PWD/CsvFileReader.h \
     $$PWD/DiffEquationSolver.h \
     $$PWD/XcosBinFileReader.h
 
 SOURCES += \
+    $$PWD/CsvFileReader.cpp \
     $$PWD/DiffEquationSolver.cpp \
     $$PWD/TestDummy.cpp \
     $$PWD/TestingEnvironment.cpp \

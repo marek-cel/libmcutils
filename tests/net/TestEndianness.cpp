@@ -17,7 +17,7 @@ protected:
 
 TEST_F(TestEndianness, CanConvertHostToNetUInt16)
 {
-    mc::UInt16 val_inp = 123456;
+    mc::UInt16 val_inp = 123456UL;
     mc::UInt16 val_out = mc::Endianess::hostToNet( val_inp );
 
     char *val_raw_inp = reinterpret_cast<char*>(&val_inp);

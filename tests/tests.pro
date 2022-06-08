@@ -40,9 +40,11 @@ win32-msvc*: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 unix:  DEFINES += _LINUX_
 win32: DEFINES += WIN32 _WINDOWS
 
+win32-msvc*: DEFINES += MCUTILS_DLL_IMPORTS
+
 ################################################################################
 
-INCLUDEPATH += ./ ../
+INCLUDEPATH += ./ $$PWD/../
 
 unix: INCLUDEPATH += \
     /usr/include/libxml2
@@ -54,8 +56,10 @@ win32: INCLUDEPATH += \
 ################################################################################
 
 LIBS += \
+    -L$$PWD/../lib \
     -lgtest \
-    -lgtest_main
+    -lgtest_main \
+    -lmcutils
 
 unix: LIBS += \
     -L/lib \
@@ -73,4 +77,3 @@ win32: LIBS += \
 ################################################################################
 
 include(tests.pri)
-include(../mcutils/mcutils.pri)

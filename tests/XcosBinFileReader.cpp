@@ -6,7 +6,7 @@
 
 bool XcosBinFileReader::readData( const char *filePath, std::vector< double > *vals )
 {
-    FILE *file = fopen( filePath, "r" );
+    FILE *file = fopen( filePath, "rb" );
 
     if ( file )
     {

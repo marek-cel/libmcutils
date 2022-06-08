@@ -2,6 +2,7 @@
 
 #include <mcutils/signal/Lag2.h>
 
+#include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,6 +159,40 @@ TEST_F(TestLag2, CanUpdate)
         EXPECT_NEAR( y, vals.at( i ), 1.0e-3 );
 
         t += TIME_STEP;
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLag2, CanUpdate2)
+{
+    std::vector<double> t_ref;
+    std::vector<double> y_ref;
+
+    // expected values calculated with GNU Octave
+    // tests/signal/octave/test_lag2.m
+    CsvFileReader::readData( "../tests/signal/data/test_lag2_1.csv", &t_ref, &y_ref );
+
+    EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
+    EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
+    EXPECT_EQ( t_ref.size(), y_ref.size() ) << "Reference data corrupted.";
+
+    mc::Lag2 lag( TIME_CONSTANT_1, TIME_CONSTANT_2 );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    double dt = 0.01;
+
+    for ( unsigned int i = 0; i < y_ref.size(); i++ )
+    {
+        double u = ( i == 0 ) ? 0.0 : 1.0;
+        lag.update( dt, u );
+        y = lag.getValue();
+        EXPECT_NEAR( y, y_ref.at( i ), 5.0e-3 ) << "Mismatch at time= " << t;
+
+        t += dt;
     }
 
 }

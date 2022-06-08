@@ -10,3 +10,5 @@ SUBDIRS += \
 
 mcutils.subdir = mcutils
 tests.subdir   = tests
+
+tests.depends = mcutils

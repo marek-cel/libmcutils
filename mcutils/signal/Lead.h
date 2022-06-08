@@ -88,7 +88,7 @@ private:
 
     double _tc;             ///< time constant
 
-    double _u;              ///< current input
+    double _u_prev;         ///< previous input
     double _y;              ///< current value
 };
 

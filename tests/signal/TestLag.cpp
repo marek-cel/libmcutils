@@ -2,6 +2,7 @@
 
 #include <mcutils/signal/Lag.h>
 
+#include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,6 +49,38 @@ TEST_F(TestLag, CanCalculate)
         EXPECT_NEAR( y, vals.at( i ), 1.0e-3 );
 
         t += TIME_STEP;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLag, CanCalculate2)
+{
+    std::vector<double> t_ref;
+    std::vector<double> y_ref;
+
+    // expected values calculated with GNU Octave
+    // tests/signal/octave/test_lag.m
+    CsvFileReader::readData( "../tests/signal/data/test_lag_1.csv", &t_ref, &y_ref );
+
+    EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
+    EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
+    EXPECT_EQ( t_ref.size(), y_ref.size() ) << "Reference data corrupted.";
+
+    double t = 0.0;
+    double y = 0.0;
+
+    double dt = 0.01;
+
+    for ( unsigned int i = 0; i < t_ref.size(); i++ )
+    {
+        double u = ( i == 0 ) ? 0.0 : 1.0;
+
+        y = mc::Lag::calculate( u, y, dt, TIME_CONSTANT );
+
+        EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
+
+        t += dt;
     }
 }
 
@@ -158,6 +191,41 @@ TEST_F(TestLag, CanUpdate)
         EXPECT_NEAR( y, vals.at( i ), 1.0e-3 );
 
         t += TIME_STEP;
+    }
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLag, CanUpdate2)
+{
+    std::vector<double> t_ref;
+    std::vector<double> y_ref;
+
+    // expected values calculated with GNU Octave
+    // tests/signal/octave/test_lag.m
+    CsvFileReader::readData( "../tests/signal/data/test_lag_1.csv", &t_ref, &y_ref );
+
+    EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
+    EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
+    EXPECT_EQ( t_ref.size(), y_ref.size() ) << "Reference data corrupted.";
+
+    mc::Lag lag( TIME_CONSTANT );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    double dt = 0.01;
+
+    for ( unsigned int i = 0; i < t_ref.size(); i++ )
+    {
+        double u = ( i == 0 ) ? 0.0 : 1.0;
+        lag.update( dt, u );
+        y = lag.getValue();
+
+        EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
+
+        t += dt;
     }
 
 }

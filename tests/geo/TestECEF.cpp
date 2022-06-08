@@ -128,13 +128,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 0E H=100m
@@ -143,13 +143,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0, 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0, 1.0e-4 );
 
     // 0N 90E
@@ -158,13 +158,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0    , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_2 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0    , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0    , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0    , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_2 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0    , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0    , 1.0e-4 );
 
     // 0N 180E
@@ -173,13 +173,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0  , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0  , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0  , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0  , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0  , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0  , 1.0e-4 );
 
     // 0N 90W
@@ -188,13 +188,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat,  0.0    , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, -M_PI_2 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat,  0.0    , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, -M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,  0.0    , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat,  0.0    , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, -M_PI_2 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat,  0.0    , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, -M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,  0.0    , 1.0e-4 );
 
     // 90N 0E
@@ -203,13 +203,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = mc::DataWGS84::b;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, M_PI_2 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0    , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0    , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0    , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, M_PI_2 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0    , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0    , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0    , 1.0e-4 );
 
     // 90S 0E
@@ -218,13 +218,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = -mc::DataWGS84::b;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, -M_PI_2 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon,  0.0    , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, -M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon,  0.0    , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,  0.0    , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, -M_PI_2 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon,  0.0    , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, -M_PI_2 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon,  0.0    , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,  0.0    , 1.0e-4 );
 
     // 0N 30E
@@ -235,13 +235,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI * 30.0 / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI * 30.0 / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI * 30.0 / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI * 30.0 / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 45E
@@ -252,13 +252,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat,    0.0 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat,    0.0 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,    0.0 , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat,    0.0 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat,    0.0 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt,    0.0 , 1.0e-4 );
 
     // 0N 60E
@@ -269,13 +269,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 0.0;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI * 60.0 / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI * 60.0 / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI * 60.0 / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI * 60.0 / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 45N 45E H=100m
@@ -286,13 +286,13 @@ TEST_F(TestECEF, CanConvertFromEcefToGeo)
     pos_ecef.z() = 4487419.119544039;
 
     ecef.ecef2geo( pos_ecef, &pos_geo );
-    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0  , 1.0e-4 );
 
     pos_geo = ecef.ecef2geo( pos_ecef );
-    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0  , 1.0e-4 );
 }
 
@@ -856,8 +856,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 0E
@@ -868,8 +868,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 0E H=100m
@@ -880,8 +880,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0, 1.0e-4 );
 
     // 0N 90E
@@ -892,8 +892,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_2, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_2, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 180E
@@ -904,8 +904,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 90W
@@ -916,8 +916,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, -M_PI_2, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, -M_PI_2, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 30E
@@ -930,8 +930,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 30.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 30.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 45E
@@ -944,8 +944,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 45.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 45.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 60E
@@ -958,8 +958,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 60.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 60.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 45N 45E H=100m
@@ -972,8 +972,8 @@ TEST_F(TestECEF, CanGetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0  , 1.0e-4 );
 }
 
@@ -1434,8 +1434,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 0E H=100m
@@ -1446,8 +1446,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 0.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0, 1.0e-4 );
 
     // 0N 90E
@@ -1458,8 +1458,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_2, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_2, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 180E
@@ -1470,8 +1470,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 90W
@@ -1482,8 +1482,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, -M_PI_2, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, -M_PI_2, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 30E
@@ -1494,8 +1494,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 30.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 30.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 45E
@@ -1506,8 +1506,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 45.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 45.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 0N 60E
@@ -1518,8 +1518,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, 60.0 * M_PI / 180.0, 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, 0.0, 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, 60.0 * M_PI / 180.0, 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 0.0, 1.0e-4 );
 
     // 45N 45E H=100m
@@ -1530,8 +1530,8 @@ TEST_F(TestECEF, CanSetPosGeo)
 
     pos_geo = ecef.getPos_Geo();
 
-    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-5 );
+    EXPECT_NEAR( pos_geo.lat, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
+    EXPECT_NEAR( pos_geo.lon, M_PI_4 , 1.0e-9 ); // ca. 6mm accuracy
     EXPECT_NEAR( pos_geo.alt, 100.0  , 1.0e-4 );
 }
 

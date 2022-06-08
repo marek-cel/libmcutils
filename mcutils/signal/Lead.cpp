@@ -39,7 +39,7 @@ Lead::Lead()
 
 Lead::Lead( double tc, double y )
     : _tc ( tc )
-    , _u ( 0.0 )
+    , _u_prev ( 0.0 )
     , _y ( y )
 {}
 
@@ -66,9 +66,9 @@ void Lead::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double du_dt = ( u - _u ) / dt;
+        double du_dt = ( u - _u_prev ) / dt;
         _y = _tc * du_dt + u;
-        _u = u;
+        _u_prev = u;
     }
 }
 
