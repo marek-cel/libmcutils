@@ -75,8 +75,11 @@ public:
         std::memcpy( _items, items, sizeof(_items) );
     }
 
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
     /** @brief Destructor. */
     virtual ~Vector() = default;
+    // LCOV_EXCL_STOP
 
     /** @return TRUE if all items are valid */
     bool isValid() const

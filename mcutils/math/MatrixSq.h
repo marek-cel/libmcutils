@@ -58,8 +58,11 @@ public:
         Matrix<N, N>( items )
     {}
 
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
     /** @brief Destructor. */
-    virtual ~MatrixSq() {}
+    virtual ~MatrixSq() = default;
+    // LCOV_EXCL_STOP
 
     /** @brief Transposes matrix. */
     void transpose()

@@ -40,7 +40,7 @@ namespace mc
  *
  * <h3>Refernces:</h3>
  * <ul>
- *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA, TR-8350.2, 2000</a></li>
+ *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA-TR-8350.2</a></li>
  * </ul>
  */
 class MCUTILSAPI WGS84 : public ECEF

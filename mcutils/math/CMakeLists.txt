@@ -7,13 +7,13 @@ set( HEADERS
     DegMinSec.h
     EulerRect.h
     GaussJordan.h
-    IIntegrator.h
+    Integrator.h
     Math.h
     Matrix3x3.h
     Matrix4x4.h
     Matrix6x6.h
     Matrix.h
-    MatrixSquare.h
+    MatrixSq.h
     Quaternion.h
     Random.h
     RungeKutta4.h
