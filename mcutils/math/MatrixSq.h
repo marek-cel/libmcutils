@@ -191,6 +191,10 @@ protected:
     }
 };
 
+template class MCUTILSAPI mc::MatrixSq<3>;
+template class MCUTILSAPI mc::MatrixSq<4>;
+template class MCUTILSAPI mc::MatrixSq<6>;
+
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////

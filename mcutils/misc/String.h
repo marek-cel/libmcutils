@@ -51,7 +51,7 @@ MCUTILSAPI std::string getFirstLine( const std::string &str );
  * @return integer result of the comparison (returns 0 if strings are equal)
  */
 MCUTILSAPI int icompare( const std::string &str_1,
-                            const std::string &str_2 );
+                         const std::string &str_2 );
 
 /**
  * @brief Splits string with the given delimeter.
@@ -61,7 +61,7 @@ MCUTILSAPI int icompare( const std::string &str_1,
  * @return vector of strings
  */
 MCUTILSAPI std::vector<std::string> splitString( const std::string &str,
-                                                    const std::string &sep );
+                                                 const std::string &sep );
 
 /**
  * @brief Returns string with leading white spaces removed.
@@ -95,7 +95,7 @@ MCUTILSAPI std::string stripSpaces( const std::string &str );
  * @return result value
  */
 MCUTILSAPI bool toBool( const std::string &str,
-                           bool def = std::numeric_limits<bool>::quiet_NaN() );
+                        bool def = std::numeric_limits<bool>::quiet_NaN() );
 
 /**
  * @brief Converts string into variable.
@@ -105,7 +105,7 @@ MCUTILSAPI bool toBool( const std::string &str,
  * @return result value
  */
 MCUTILSAPI int toInt( const std::string &str,
-                         int def = std::numeric_limits<int>::quiet_NaN() );
+                      int def = std::numeric_limits<int>::quiet_NaN() );
 
 /**
  * @brief Converts string into variable.
@@ -115,7 +115,7 @@ MCUTILSAPI int toInt( const std::string &str,
  * @return result value
  */
 MCUTILSAPI double toDouble( const std::string &str,
-                               double def = std::numeric_limits<double>::quiet_NaN() );
+                            double def = std::numeric_limits<double>::quiet_NaN() );
 
 /**
  * @brief Converts variable into string.

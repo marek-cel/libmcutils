@@ -379,6 +379,10 @@ protected:
     double _items[ SIZE ];      ///< vector items
 };
 
+template class MCUTILSAPI mc::Vector<3>;
+template class MCUTILSAPI mc::Vector<4>;
+template class MCUTILSAPI mc::Vector<6>;
+
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////

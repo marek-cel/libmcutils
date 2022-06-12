@@ -40,6 +40,8 @@ win32-msvc*: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 unix:  DEFINES += _LINUX_
 win32: DEFINES += WIN32 _WINDOWS
 
+#win32-msvc*: DEFINES += IN_LIBXML
+
 ################################################################################
 
 INCLUDEPATH += ./ $$PWD/../
@@ -57,7 +59,7 @@ LIBS += \
     -L$$PWD/../lib \
     -lgtest \
     -lgtest_main \
-    -lmcutils
+    -lmcutils0
 
 unix: LIBS += \
     -L/lib \

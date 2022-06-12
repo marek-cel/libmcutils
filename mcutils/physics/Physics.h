@@ -66,7 +66,7 @@ static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] stan
  * @param tc [s] time constant
  * @return firt order inertia output
  */
-MCUTILSAPI inline double inertia( double u, double y, double dt, double tc )
+inline double inertia( double u, double y, double dt, double tc )
 {
     return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
 }
@@ -87,9 +87,9 @@ MCUTILSAPI inline double inertia( double u, double y, double dt, double tc )
  *   <li><a href="https://www.mathworks.com/help/physmod/sdl/ref/tireroadinteractionmagicformula.html">Tire-road dynamics given by magic formula coefficients - MATLAB</a></li>
  * </ul>
  */
-MCUTILSAPI inline double pacejkaFormula( double kappa,
-                                            double b = 10.0, double c = 1.9,
-                                            double d = 1.0,  double e = 0.97 )
+inline double pacejkaFormula( double kappa,
+                              double b = 10.0, double c = 1.9,
+                              double d = 1.0,  double e = 0.97 )
 {
     return d * sin( c * atan( b*( 1.0 - e )*kappa + e*atan( b*kappa ) ) );
 }
@@ -108,7 +108,7 @@ MCUTILSAPI inline double pacejkaFormula( double kappa,
  *   <li><a href="https://en.wikipedia.org/wiki/Parallel_axis_theorem">Parallel axis theorem - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSAPI inline Matrix3x3 parallelAxisInertia( double m, const Matrix3x3 &i, const Vector3 &r )
+inline Matrix3x3 parallelAxisInertia( double m, const Matrix3x3 &i, const Vector3 &r )
 {
     Matrix3x3 a(  r.y()*r.y() + r.z()*r.z() , -r.x()*r.y()               , -r.x()*r.z(),
                  -r.y()*r.x()               ,  r.x()*r.x() + r.z()*r.z() , -r.y()*r.z(),
