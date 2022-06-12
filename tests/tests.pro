@@ -59,7 +59,7 @@ LIBS += \
     -L$$PWD/../lib \
     -lgtest \
     -lgtest_main \
-    -lmcutils0
+    -lmcutils
 
 unix: LIBS += \
     -L/lib \
