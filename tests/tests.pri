@@ -18,6 +18,20 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
+    $$PWD/control/TestFilter2.cpp \
+    $$PWD/control/TestHighPassFilter.cpp \
+    $$PWD/control/TestLag.cpp \
+    $$PWD/control/TestLag2.cpp \
+    $$PWD/control/TestLead.cpp \
+    $$PWD/control/TestLeadLag.cpp \
+    $$PWD/control/TestLowPassFilter.cpp \
+    $$PWD/control/TestMovingAverageFilter.cpp \
+    $$PWD/control/TestMovingMedianFilter.cpp \
+    $$PWD/control/TestPID.cpp
+
+################################################################################
+
+SOURCES += \
     $$PWD/geo/TestDataMars.cpp \
     $$PWD/geo/TestDataWGS84.cpp \
     $$PWD/geo/TestECEF.cpp \
@@ -65,20 +79,6 @@ SOURCES += \
 
 SOURCES += \
     $$PWD/physics/TestPhysics.cpp
-
-################################################################################
-
-SOURCES += \
-    $$PWD/signal/TestFilter2.cpp \
-    $$PWD/signal/TestHighPassFilter.cpp \
-    $$PWD/signal/TestLag.cpp \
-    $$PWD/signal/TestLag2.cpp \
-    $$PWD/signal/TestLead.cpp \
-    $$PWD/signal/TestLeadLag.cpp \
-    $$PWD/signal/TestLowPassFilter.cpp \
-    $$PWD/signal/TestMovingAverageFilter.cpp \
-    $$PWD/signal/TestMovingMedianFilter.cpp \
-    $$PWD/signal/TestPID.cpp
 
 ################################################################################
 

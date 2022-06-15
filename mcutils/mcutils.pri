@@ -7,6 +7,33 @@ HEADERS += \
 ################################################################################
 
 HEADERS += \
+    $$PWD/control/ISignalElement.h \
+    $$PWD/control/Filter2.h \
+    $$PWD/control/HighPassFilter.h \
+    $$PWD/control/LowPassFilter.h \
+    $$PWD/control/Lag.h \
+    $$PWD/control/Lag2.h \
+    $$PWD/control/Lead.h \
+    $$PWD/control/LeadLag.h \
+    $$PWD/control/MovingAverageFilter.h \
+    $$PWD/control/MovingMedianFilter.h \
+    $$PWD/control/PID.h
+
+SOURCES += \
+    $$PWD/control/Filter2.cpp \
+    $$PWD/control/HighPassFilter.cpp \
+    $$PWD/control/LowPassFilter.cpp \
+    $$PWD/control/Lag.cpp \
+    $$PWD/control/Lag2.cpp \
+    $$PWD/control/Lead.cpp \
+    $$PWD/control/LeadLag.cpp \
+    $$PWD/control/MovingAverageFilter.cpp \
+    $$PWD/control/MovingMedianFilter.cpp \
+    $$PWD/control/PID.cpp
+
+################################################################################
+
+HEADERS += \
     $$PWD/geo/DataMars.h \
     $$PWD/geo/DataWGS84.h \
     $$PWD/geo/ECEF.h \
@@ -92,33 +119,6 @@ HEADERS += \
     $$PWD/physics/Physics.h
 
 SOURCES += \
-
-################################################################################
-
-HEADERS += \
-    $$PWD/signal/ISignalElement.h \
-    $$PWD/signal/Filter2.h \
-    $$PWD/signal/HighPassFilter.h \
-    $$PWD/signal/LowPassFilter.h \
-    $$PWD/signal/Lag.h \
-    $$PWD/signal/Lag2.h \
-    $$PWD/signal/Lead.h \
-    $$PWD/signal/LeadLag.h \
-    $$PWD/signal/MovingAverageFilter.h \
-    $$PWD/signal/MovingMedianFilter.h \
-    $$PWD/signal/PID.h
-
-SOURCES += \
-    $$PWD/signal/Filter2.cpp \
-    $$PWD/signal/HighPassFilter.cpp \
-    $$PWD/signal/LowPassFilter.cpp \
-    $$PWD/signal/Lag.cpp \
-    $$PWD/signal/Lag2.cpp \
-    $$PWD/signal/Lead.cpp \
-    $$PWD/signal/LeadLag.cpp \
-    $$PWD/signal/MovingAverageFilter.cpp \
-    $$PWD/signal/MovingMedianFilter.cpp \
-    $$PWD/signal/PID.cpp
 
 ################################################################################
 

@@ -19,45 +19,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_DOXYGEN_H_
-#define MCUTILS_DOXYGEN_H_
 
-/***************************************************************************//**
- * @author Marek M. Cel
- *
- * @mainpage libmcutil
- *
- * @section Introduction
- *
- * <tt>libmcutil</tt> is a various utilities library.
- *
- * @section Modules
- *
- * @subsection control
- * This module contains classes representing common control elements.
- *
- * @subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
- *
- * @subsection math
- * This module contains utilities for various mathematical operations.
- *
- * @subsection misc
- * This module contains miscellaneous utilities.
- *
- * @subsection net
- * This module contains various networking utilities.
- *
- * @subsection physics
- * This module contains utilities for various physical computations.
- *
- * @subsection time
- * This module contains time and date ralted utilities.
- *
- * @subsection xml
- * This module contains XML documents parsing utilities.
- *
- ******************************************************************************/
+#include <mcutils/control/MovingAverageFilter.h>
 
-#endif // MCUTILS_DOXYGEN_H_
+#include <algorithm>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+////////////////////////////////////////////////////////////////////////////////
+
+MovingAverageFilter::MovingAverageFilter( unsigned int length , double y )
+    : _length ( length )
+    , _y ( y )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void MovingAverageFilter::setLength( unsigned int length )
+{
+    _length = length;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void MovingAverageFilter::update( double, double u )
+{
+    _fifo.push_back( u );
+
+    while ( _fifo.size() > _length )
+    {
+        _fifo.pop_front();
+    }
+
+    if ( _fifo.size() > 1 )
+    {
+        double sum = 0.0;
+
+        for ( double &val : _fifo )
+        {
+            sum += val;
+        }
+
+        _y = sum / static_cast<double>( _fifo.size() );
+    }
+    else
+    {
+        _y = u;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc

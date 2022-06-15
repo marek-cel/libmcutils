@@ -26,11 +26,11 @@ install( TARGETS ${TARGET_NAME}
 
 ################################################################################
 
+add_subdirectory( control )
 add_subdirectory( geo )
 add_subdirectory( math )
 add_subdirectory( misc )
 add_subdirectory( net )
 add_subdirectory( physics )
-add_subdirectory( signal )
 add_subdirectory( time )
 add_subdirectory( xml )

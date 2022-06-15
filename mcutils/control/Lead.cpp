@@ -19,45 +19,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_DOXYGEN_H_
-#define MCUTILS_DOXYGEN_H_
 
-/***************************************************************************//**
- * @author Marek M. Cel
- *
- * @mainpage libmcutil
- *
- * @section Introduction
- *
- * <tt>libmcutil</tt> is a various utilities library.
- *
- * @section Modules
- *
- * @subsection control
- * This module contains classes representing common control elements.
- *
- * @subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
- *
- * @subsection math
- * This module contains utilities for various mathematical operations.
- *
- * @subsection misc
- * This module contains miscellaneous utilities.
- *
- * @subsection net
- * This module contains various networking utilities.
- *
- * @subsection physics
- * This module contains utilities for various physical computations.
- *
- * @subsection time
- * This module contains time and date ralted utilities.
- *
- * @subsection xml
- * This module contains XML documents parsing utilities.
- *
- ******************************************************************************/
+#include <mcutils/control/Lead.h>
 
-#endif // MCUTILS_DOXYGEN_H_
+#include <cmath>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+////////////////////////////////////////////////////////////////////////////////
+
+Lead::Lead()
+    : Lead( 1.0, 0.0 )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Lead::Lead( double tc, double y )
+    : _tc ( tc )
+    , _u_prev ( 0.0 )
+    , _y ( y )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lead::setValue( double y )
+{
+    _y = y;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lead::setTimeConst( double tc )
+{
+    if ( tc > 0.0 )
+    {
+        _tc = tc;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lead::update( double dt, double u )
+{
+    if ( dt > 0.0 )
+    {
+        double du_dt = ( u - _u_prev ) / dt;
+        _y = _tc * du_dt + u;
+        _u_prev = u;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc

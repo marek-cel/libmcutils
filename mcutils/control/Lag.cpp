@@ -19,45 +19,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_DOXYGEN_H_
-#define MCUTILS_DOXYGEN_H_
 
-/***************************************************************************//**
- * @author Marek M. Cel
- *
- * @mainpage libmcutil
- *
- * @section Introduction
- *
- * <tt>libmcutil</tt> is a various utilities library.
- *
- * @section Modules
- *
- * @subsection control
- * This module contains classes representing common control elements.
- *
- * @subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
- *
- * @subsection math
- * This module contains utilities for various mathematical operations.
- *
- * @subsection misc
- * This module contains miscellaneous utilities.
- *
- * @subsection net
- * This module contains various networking utilities.
- *
- * @subsection physics
- * This module contains utilities for various physical computations.
- *
- * @subsection time
- * This module contains time and date ralted utilities.
- *
- * @subsection xml
- * This module contains XML documents parsing utilities.
- *
- ******************************************************************************/
+#include <mcutils/control/Lag.h>
 
-#endif // MCUTILS_DOXYGEN_H_
+#include <cmath>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+////////////////////////////////////////////////////////////////////////////////
+
+double Lag::calculate( double u, double y, double dt, double tc )
+{
+    return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Lag::Lag( double tc, double y )
+    : _tc ( tc )
+    , _y ( y )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lag::setValue( double y )
+{
+    _y = y;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lag::setTimeConst( double tc )
+{
+    if ( tc > 0.0 )
+    {
+        _tc = tc;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Lag::update( double dt, double u )
+{
+    if ( dt > 0.0 )
+    {
+        _y = calculate( u, _y, dt, _tc );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc
