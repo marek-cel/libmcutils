@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <gtest/gtest.h>
 
 #include <mcutils/signal/LeadLag.h>
@@ -10,7 +12,7 @@ class TestLeadLag : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.1 };
+    static constexpr double TIME_STEP { 0.01 };
 
     static constexpr double C_1 { 1.0 };
     static constexpr double C_2 { 0.0 };
@@ -153,13 +155,13 @@ TEST_F(TestLeadLag, CanSetValue)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLeadLag, CanUpdate)
+TEST_F(TestLeadLag, CanUpdateStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/signal/xcos/test_lead_lag.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lead_lag.bin", &vals );
+    XcosBinFileReader::readData( "../tests/signal/data/test_lead_lag_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -168,28 +170,47 @@ TEST_F(TestLeadLag, CanUpdate)
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
+    for ( unsigned int i = 0; i < vals.size(); i++ )
+    {
+        double u = ( i < 100 ) ? 0.0 : 1.0;
+
+        leadLag.update( TIME_STEP, u );
+        y = leadLag.getValue();
+
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+
+        t += TIME_STEP;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLeadLag, CanUpdateSine)
+{
+    std::vector<double> vals;
+
+    // expected values calculated with Scilab Xcos
+    // tests/signal/xcos/test_lead_lag.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_lead_lag_sine.bin", &vals );
+
+    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+
+    mc::LeadLag leadLag( C_1, C_2, C_3, C_4 );
+
+    double t = 0.0;
+    double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = sin( t );
 
-        leadLag.update( dt, u );
+        leadLag.update( TIME_STEP, u );
         y = leadLag.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-1 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
-
-        t += dt;
+        t += TIME_STEP;
     }
-
 }

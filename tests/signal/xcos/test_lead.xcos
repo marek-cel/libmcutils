@@ -51,12 +51,12 @@
               <ControlPort id="-3970764d:168cc132886:-7fe6" parent="-3970764d:168cc132886:-7fe7" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="ControlPort;align=center;verticalAlign=top;spacing=10.0" value=""/>
               <BasicBlock id="-3970764d:168cc132886:-7fe5" parent="-3970764d:168cc132888:-7ff9" interfaceFunctionName="EVTDLY_c" blockType="d" dependsOnU="0" dependsOnT="0" simulationFunctionName="evtdly4" simulationFunctionType="C_OR_FORTRAN" style="EVTDLY_c">
                 <ScilabString as="exprs" height="2" width="1">
-                  <data line="0" column="0" value="0.1"/>
-                  <data line="1" column="0" value="0.1"/>
+                  <data line="0" column="0" value="0.01"/>
+                  <data line="1" column="0" value="0.0"/>
                 </ScilabString>
                 <ScilabDouble as="realParameters" height="1" width="2">
-                  <data line="0" column="0" realPart="0.1"/>
-                  <data line="0" column="1" realPart="0.1"/>
+                  <data line="0" column="0" realPart="0.01"/>
+                  <data line="0" column="1" realPart="0.0"/>
                 </ScilabDouble>
                 <ScilabDouble as="integerParameters" height="0" width="0"/>
                 <Array as="objectsParameters" scilabClass="ScilabList"/>
@@ -73,7 +73,7 @@
                 <mxGeometry as="geometry" x="320.0" y="232.0" width="40.0" height="40.0"/>
               </BasicBlock>
               <ControlPort id="-3970764d:168cc132886:-7fe4" parent="-3970764d:168cc132886:-7fe5" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="ControlPort;align=center;verticalAlign=top;spacing=10.0" value=""/>
-              <CommandPort id="-3970764d:168cc132886:-7fe3" parent="-3970764d:168cc132886:-7fe5" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.1" style="CommandPort;align=center;verticalAlign=bottom;spacing=10.0" value=""/>
+              <CommandPort id="-3970764d:168cc132886:-7fe3" parent="-3970764d:168cc132886:-7fe5" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="CommandPort;align=center;verticalAlign=bottom;spacing=10.0" value=""/>
               <SplitBlock id="-3970764d:168cc132886:-7fe2" parent="-3970764d:168cc132888:-7ff9" interfaceFunctionName="CLKSPLIT_f" blockType="d" dependsOnU="0" dependsOnT="0" simulationFunctionName="split" simulationFunctionType="DEFAULT" style="CLKSPLIT_f">
                 <ScilabDouble as="exprs" height="0" width="0"/>
                 <ScilabDouble as="realParameters" height="0" width="0"/>
@@ -267,14 +267,14 @@
       <BasicBlock id="-3970764d:168cc132886:-7ff2" parent="0:2:0" interfaceFunctionName="WRITEC_f" blockType="d" dependsOnU="1" dependsOnT="0" simulationFunctionName="writec" simulationFunctionType="TYPE_2" style="WRITEC_f">
         <ScilabString as="exprs" height="5" width="1">
           <data line="0" column="0" value="1"/>
-          <data line="1" column="0" value="test_lead.bin"/>
+          <data line="1" column="0" value="test_lead_sine.bin"/>
           <data line="2" column="0" value="f"/>
           <data line="3" column="0" value="2"/>
           <data line="4" column="0" value="0"/>
         </ScilabString>
         <ScilabDouble as="realParameters" height="0" width="0"/>
-        <ScilabInteger as="integerParameters" height="1" width="19" intPrecision="sci_int32">
-          <data line="0" column="0" value="13"/>
+        <ScilabInteger as="integerParameters" height="1" width="24" intPrecision="sci_int32">
+          <data line="0" column="0" value="18"/>
           <data line="0" column="1" value="102"/>
           <data line="0" column="2" value="32"/>
           <data line="0" column="3" value="32"/>
@@ -289,10 +289,15 @@
           <data line="0" column="12" value="101"/>
           <data line="0" column="13" value="97"/>
           <data line="0" column="14" value="100"/>
-          <data line="0" column="15" value="46"/>
-          <data line="0" column="16" value="98"/>
+          <data line="0" column="15" value="95"/>
+          <data line="0" column="16" value="115"/>
           <data line="0" column="17" value="105"/>
           <data line="0" column="18" value="110"/>
+          <data line="0" column="19" value="101"/>
+          <data line="0" column="20" value="46"/>
+          <data line="0" column="21" value="98"/>
+          <data line="0" column="22" value="105"/>
+          <data line="0" column="23" value="110"/>
         </ScilabInteger>
         <Array as="objectsParameters" scilabClass="ScilabList"/>
         <ScilabInteger as="nbZerosCrossing" height="1" width="1" intPrecision="sci_int32">
@@ -316,7 +321,7 @@
       </BasicBlock>
       <ExplicitInputPort id="-3970764d:168cc132886:-7ff1" parent="-3970764d:168cc132886:-7ff2" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="ExplicitInputPort;align=left;verticalAlign=middle;spacing=10.0;rotation=0" value=""/>
       <ControlPort id="-3970764d:168cc132886:-7ff0" parent="-3970764d:168cc132886:-7ff2" ordering="1" dataType="REAL_MATRIX" dataColumns="1" dataLines="1" initialState="0.0" style="ControlPort;align=center;verticalAlign=top;spacing=10.0;rotation=90" value=""/>
-      <BasicBlock id="55520c21:16bdb295d9e:-7f9e" parent="0:2:0" interfaceFunctionName="CSCOPE" blockType="c" dependsOnU="1" dependsOnT="0" simulationFunctionName="cscope" simulationFunctionType="C_OR_FORTRAN" style="CSCOPE">
+      <BasicBlock id="55520c21:16bdb295d9e:-7f9e" parent="0:2:0" interfaceFunctionName="CSCOPE" blockType="c" dependsOnU="1" dependsOnT="0" simulationFunctionName="cscope" simulationFunctionType="C_OR_FORTRAN" style="CSCOPE;verticalLabelPosition=bottom;verticalAlign=top;spacing=2;displayedLabel=">
         <ScilabString as="exprs" height="10" width="1">
           <data line="0" column="0" value="1 3 5 7 9 11 13 15"/>
           <data line="1" column="0" value="-1"/>

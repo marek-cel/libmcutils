@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include <cmath>
+
+#include <gtest/gtest.h>
 
 #include <mcutils/signal/HighPassFilter.h>
 
@@ -12,7 +12,7 @@ class TestHighPassFilter : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.1 };
+    static constexpr double TIME_STEP { 0.01 };
 
     static constexpr double OMEGA { 2.0 };
 
@@ -102,86 +102,62 @@ TEST_F(TestHighPassFilter, CanSetCutoffFreq)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestHighPassFilter, CanUpdate1)
+TEST_F(TestHighPassFilter, CanUpdateStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_highpassfilter.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_highpassfilter.bin", &vals );
+    // tests/signal/xcos/test_hpf.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_hpf_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::HighPassFilter hpf1( OMEGA );
+    mc::HighPassFilter hpf( OMEGA );
 
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
-
-    for ( unsigned int i = 0; i < devider * vals.size(); i++ )
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        hpf1.update( dt, u );
-        y = hpf1.getValue();
+        hpf.update( TIME_STEP, u );
+        y = hpf.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                //std::cout << y << std::endl;
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-1 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
-
-        t += dt;
+        t += TIME_STEP;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestHighPassFilter, CanUpdate2)
+TEST_F(TestHighPassFilter, CanUpdateSine)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_highpassfilter_2.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_highpassfilter_2.bin", &vals );
+    // tests/signal/xcos/test_hpf.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_hpf_sine.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::HighPassFilter hpf2( OMEGA );
+    mc::HighPassFilter hpf( OMEGA );
 
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
-
-    for ( unsigned int i = 0; i < devider * vals.size(); i++ )
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = sin( t );
 
-        hpf2.update( dt, u );
-        y = hpf2.getValue();
+        hpf.update( TIME_STEP, u );
+        y = hpf.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                //std::cout << y << std::endl;
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-1 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
-
-        t += dt;
+        t += TIME_STEP;
     }
 }

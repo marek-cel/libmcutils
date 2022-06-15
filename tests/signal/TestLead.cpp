@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include <cmath>
+
+#include <gtest/gtest.h>
 
 #include <mcutils/signal/Lead.h>
 
@@ -12,7 +12,7 @@ class TestLead : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP     { 0.1 };
+    static constexpr double TIME_STEP     { 0.01 };
     static constexpr double TIME_CONSTANT { 0.3 };
 
     TestLead() {}
@@ -98,13 +98,13 @@ TEST_F(TestLead, CanSetTimeConst)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLead, CanUpdate)
+TEST_F(TestLead, CanUpdateSine)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/signal/xcos/test_lead.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lead.bin", &vals );
+    XcosBinFileReader::readData( "../tests/signal/data/test_lead_sine.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -115,19 +115,13 @@ TEST_F(TestLead, CanUpdate)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = TIME_STEP / (double)steps;
-            double tt = t + (double)j * dt;
+        double u = sin( t );
 
-            double u = sin( tt );
+        lead.update( TIME_STEP, u );
+        y = lead.getValue();
 
-            lead.update( dt, u );
-            y = lead.getValue();
-        }
-
-        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }

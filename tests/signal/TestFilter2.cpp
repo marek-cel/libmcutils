@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <gtest/gtest.h>
 
 #include <mcutils/signal/Filter2.h>
@@ -10,14 +12,7 @@ class TestFilter2 : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.1 };
-
-    static constexpr double C_1 { 2.0 };
-    static constexpr double C_2 { 2.0 };
-    static constexpr double C_3 { 2.0 };
-    static constexpr double C_4 { 1.0 };
-    static constexpr double C_5 { 2.0 };
-    static constexpr double C_6 { 4.0 };
+    static constexpr double TIME_STEP { 0.01 };
 
     TestFilter2() {}
     virtual ~TestFilter2() {}
@@ -195,43 +190,68 @@ TEST_F(TestFilter2, CanSetValue)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanUpdate)
+TEST_F(TestFilter2, CanUpdateOscillatorStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/signal/xcos/test_filter2.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_filter2.bin", &vals );
+    XcosBinFileReader::readData( "../tests/signal/data/test_oscillator_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::Filter2 filter( C_1, C_2, C_3, C_4, C_5, C_6 );
+    // harmonic oscillator
+    // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
+    // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
+    mc::Filter2 filter( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
 
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
-
-    for ( unsigned int i = 0; i < devider * vals.size(); i++ )
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        filter.update( dt, u );
+        filter.update( TIME_STEP, u );
         y = filter.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                //std::cout << y << std::endl;
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-1 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
+        t += TIME_STEP;
+    }
+}
 
-        t += dt;
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestFilter2, CanUpdateOscillatorSine)
+{
+    std::vector<double> vals;
+
+    // expected values calculated with Scilab Xcos
+    // tests/signal/xcos/test_filter2.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_oscillator_sine.bin", &vals );
+
+    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+
+    // harmonic oscillator
+    // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
+    // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
+    mc::Filter2 filter( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < vals.size(); i++ )
+    {
+        double u = sin( t );
+
+        filter.update( TIME_STEP, u );
+        y = filter.getValue();
+
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+
+        t += TIME_STEP;
     }
 }

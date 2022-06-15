@@ -11,7 +11,7 @@ class TestPID : public ::testing::Test
 {
 protected:
 
-    static constexpr double DT { 0.1 };
+    static constexpr double DT { 0.01 };
     static constexpr double TC { 5.0 };
     static constexpr double KP { 5.0 };
     static constexpr double KI { 0.5 };
@@ -359,21 +359,12 @@ TEST_F(TestPID, CanUpdate)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 4.99 ) ? 0.0 : 1.0;
+        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double e = u - y;
+        pid.update( DT, e );
+        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = DT / (double)steps;
-            double e = u - y;
-            pid.update( dt, e );
-            y = mc::Lag::calculate( pid.getValue(), y, dt, TC );
-        }
-
-        if ( t >= 5.0 )
-        {
-            EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
-        }
+        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
         t += DT;
     }
@@ -386,7 +377,7 @@ TEST_F(TestPID, CanUpdateAntiwindupCalculation)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_pid_antiwindup_calculation.xcos
+    // tests/signal/xcos/test_pid.xcos
     XcosBinFileReader::readData( "../tests/signal/data/test_pid_antiwindup_calculation.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
@@ -400,21 +391,12 @@ TEST_F(TestPID, CanUpdateAntiwindupCalculation)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 4.99 ) ? 0.0 : 1.0;
+        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double e = u - y;
+        pid.update( DT, e );
+        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = DT / (double)steps;
-            double e = u - y;
-            pid.update( dt, e );
-            y = mc::Lag::calculate( pid.getValue(), y, dt, TC );
-        }
-
-        if ( t >= 5.0 )
-        {
-            EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
-        }
+        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
         t += DT;
     }
@@ -427,7 +409,7 @@ TEST_F(TestPID, CanUpdateAntiwindupConditional)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_pid_antiwindup_conditional.xcos
+    // tests/signal/xcos/test_pid.xcos
     XcosBinFileReader::readData( "../tests/signal/data/test_pid_antiwindup_conditional.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
@@ -441,21 +423,12 @@ TEST_F(TestPID, CanUpdateAntiwindupConditional)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 4.99 ) ? 0.0 : 1.0;
+        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double e = u - y;
+        pid.update( DT, e );
+        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = DT / (double)steps;
-            double e = u - y;
-            pid.update( dt, e );
-            y = mc::Lag::calculate( pid.getValue(), y, dt, TC );
-        }
-
-        if ( t >= 5.0 )
-        {
-            EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
-        }
+        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
         t += DT;
     }
@@ -468,7 +441,7 @@ TEST_F(TestPID, CanUpdateAntiwindupFilter)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_pid_antiwindup_filter.xcos
+    // tests/signal/xcos/test_pid.xcos
     XcosBinFileReader::readData( "../tests/signal/data/test_pid_antiwindup_filter.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
@@ -483,21 +456,12 @@ TEST_F(TestPID, CanUpdateAntiwindupFilter)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 4.99 ) ? 0.0 : 1.0;
+        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double e = u - y;
+        pid.update( DT, e );
+        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = DT / (double)steps;
-            double e = u - y;
-            pid.update( dt, e );
-            y = mc::Lag::calculate( pid.getValue(), y, dt, TC );
-        }
-
-        if ( t >= 5.0 )
-        {
-            EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
-        }
+        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
         t += DT;
     }

@@ -11,4 +11,4 @@ g = 1.0 / ( ( 1.0 + 2.0*s ) * ( 1.0 + 3.0*s ) );
 
 disp( [t y] );
 plot( t, y );
-csvwrite( "../data/test_lag2_1.csv", [t y], "delimiter", " " );
+csvwrite( "../data/test_lag2_step.csv", [t y], "delimiter", " " );

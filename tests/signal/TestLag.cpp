@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <gtest/gtest.h>
 
 #include <mcutils/signal/Lag.h>
@@ -11,7 +13,7 @@ class TestLag : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP     { 0.1 };
+    static constexpr double TIME_STEP     { 0.01 };
     static constexpr double TIME_CONSTANT { 2.0 };
 
     TestLag() {}
@@ -28,7 +30,7 @@ TEST_F(TestLag, CanCalculate)
 
     // expected values calculated with Scilab Xcos
     // tests/signal/xcos/test_lag.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lag.bin", &vals );
+    XcosBinFileReader::readData( "../tests/signal/data/test_lag_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -37,16 +39,11 @@ TEST_F(TestLag, CanCalculate)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = ( i < 101 ) ? 0.0 : 1.0;
+        y = mc::Lag::calculate( u, y, TIME_STEP, TIME_CONSTANT );
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = TIME_STEP / (double)steps;
-            y = mc::Lag::calculate( u, y, dt, TIME_CONSTANT );
-        }
-
-        EXPECT_NEAR( y, vals.at( i ), 1.0e-3 );
+        double tolerance = std::max( 1.0e-3, 1.0e-3 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }
@@ -61,7 +58,7 @@ TEST_F(TestLag, CanCalculate2)
 
     // expected values calculated with GNU Octave
     // tests/signal/octave/test_lag.m
-    CsvFileReader::readData( "../tests/signal/data/test_lag_1.csv", &t_ref, &y_ref );
+    CsvFileReader::readData( "../tests/signal/data/test_lag_step.csv", &t_ref, &y_ref );
 
     EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
     EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
@@ -70,17 +67,14 @@ TEST_F(TestLag, CanCalculate2)
     double t = 0.0;
     double y = 0.0;
 
-    double dt = 0.01;
-
     for ( unsigned int i = 0; i < t_ref.size(); i++ )
     {
         double u = ( i == 0 ) ? 0.0 : 1.0;
-
-        y = mc::Lag::calculate( u, y, dt, TIME_CONSTANT );
+        y = mc::Lag::calculate( u, y, TIME_STEP, TIME_CONSTANT );
 
         EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
 
-        t += dt;
+        t += TIME_STEP;
     }
 }
 
@@ -161,13 +155,13 @@ TEST_F(TestLag, CanSetTimeConst)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanUpdate)
+TEST_F(TestLag, CanUpdateStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/signal/xcos/test_lag.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lag.bin", &vals );
+    XcosBinFileReader::readData( "../tests/signal/data/test_lag_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -178,33 +172,28 @@ TEST_F(TestLag, CanUpdate)
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = ( i < 101 ) ? 0.0 : 1.0;
 
-        int steps = 10;
-        for ( int j = 0; j < steps; j++ )
-        {
-            double dt = TIME_STEP / (double)steps;
-            lag.update( dt, u );
-            y = lag.getValue();
-        }
+        lag.update( TIME_STEP, u );
+        y = lag.getValue();
 
-        EXPECT_NEAR( y, vals.at( i ), 1.0e-3 );
+        double tolerance = std::max( 1.0e-3, 1.0e-3 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanUpdate2)
+TEST_F(TestLag, CanUpdateStep2)
 {
     std::vector<double> t_ref;
     std::vector<double> y_ref;
 
     // expected values calculated with GNU Octave
     // tests/signal/octave/test_lag.m
-    CsvFileReader::readData( "../tests/signal/data/test_lag_1.csv", &t_ref, &y_ref );
+    CsvFileReader::readData( "../tests/signal/data/test_lag_step.csv", &t_ref, &y_ref );
 
     EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
     EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
@@ -215,17 +204,46 @@ TEST_F(TestLag, CanUpdate2)
     double t = 0.0;
     double y = 0.0;
 
-    double dt = 0.01;
-
     for ( unsigned int i = 0; i < t_ref.size(); i++ )
     {
         double u = ( i == 0 ) ? 0.0 : 1.0;
-        lag.update( dt, u );
+
+        lag.update( TIME_STEP, u );
         y = lag.getValue();
 
         EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
 
-        t += dt;
+        t += TIME_STEP;
     }
+}
 
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLag, CanUpdateSine)
+{
+    std::vector<double> vals;
+
+    // expected values calculated with Scilab Xcos
+    // tests/signal/xcos/test_lag.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_lag_sine.bin", &vals );
+
+    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+
+    mc::Lag lag( TIME_CONSTANT );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < vals.size(); i++ )
+    {
+        double u = sin( t + TIME_STEP );
+
+        lag.update( TIME_STEP, u );
+        y = lag.getValue();
+
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+
+        t += TIME_STEP;
+    }
 }

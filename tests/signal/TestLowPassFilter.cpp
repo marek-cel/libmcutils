@@ -1,6 +1,6 @@
-#include <gtest/gtest.h>
-
 #include <cmath>
+
+#include <gtest/gtest.h>
 
 #include <mcutils/signal/LowPassFilter.h>
 
@@ -12,7 +12,7 @@ class TestLowPassFilter : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.1 };
+    static constexpr double TIME_STEP { 0.01 };
     static constexpr double OMEGA     { 0.5 };
 
     TestLowPassFilter() {}
@@ -103,13 +103,13 @@ TEST_F(TestLowPassFilter, CanSetCutoffFreq)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLowPassFilter, CanUpdate1)
+TEST_F(TestLowPassFilter, CanUpdateStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_lowpassfilter.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lowpassfilter.bin", &vals );
+    // tests/signal/xcos/test_lpf.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_lpf_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -118,40 +118,29 @@ TEST_F(TestLowPassFilter, CanUpdate1)
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
-
-    for ( unsigned int i = 0; i < devider * vals.size(); i++ )
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = ( t < 0.99 ) ? 0.0 : 1.0;
+        double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        lpf.update( dt, u );
+        lpf.update( TIME_STEP, u );
         y = lpf.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-2 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
-
-        t += dt;
+        t += TIME_STEP;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLowPassFilter, CanUpdate2)
+TEST_F(TestLowPassFilter, CanUpdateSine)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/signal/xcos/test_lowpassfilter_2.xcos
-    XcosBinFileReader::readData( "../tests/signal/data/test_lowpassfilter_2.bin", &vals );
+    // tests/signal/xcos/test_lpf.xcos
+    XcosBinFileReader::readData( "../tests/signal/data/test_lpf_sine.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -160,27 +149,16 @@ TEST_F(TestLowPassFilter, CanUpdate2)
     double t = 0.0;
     double y = 0.0;
 
-    int devider = 10;
-    int index = 0;
-    double dt = TIME_STEP / (double)devider;
-
-    for ( unsigned int i = 0; i < devider * vals.size(); i++ )
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = sin( t );
 
-        lpf.update( dt, u );
+        lpf.update( TIME_STEP, u );
         y = lpf.getValue();
 
-        if ( i % devider == 0 )
-        {
-            if ( index > 0 )
-            {
-                EXPECT_NEAR( y, vals.at( index - 1 ), 1.0e-2 );
-            }
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
-            index++;
-        }
-
-        t += dt;
+        t += TIME_STEP;
     }
 }
