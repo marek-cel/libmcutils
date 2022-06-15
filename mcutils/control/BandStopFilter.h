@@ -37,7 +37,7 @@ namespace mc
  * @brief First-order band-stop filter (BPF) or notch filter class.
  *
  * Transfer function:
- * G(s)  =  XXXX
+ * G(s)  =
  */
 class MCUTILSAPI BandStopFilter final : public IControlElement
 {
