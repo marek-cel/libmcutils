@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/control/ISignalElement.h>
+#include <mcutils/control/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +45,7 @@ namespace mc
  *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]</li>
  * </ul>
  */
-class MCUTILSAPI LeadLag final : public ISignalElement
+class MCUTILSAPI LeadLag final : public IControlElement
 {
 public:
 

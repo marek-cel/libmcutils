@@ -28,7 +28,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/control/ISignalElement.h>
+#include <mcutils/control/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Moving_average">Moving average - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI MovingAverageFilter final : public ISignalElement
+class MCUTILSAPI MovingAverageFilter final : public IControlElement
 {
 public:
 

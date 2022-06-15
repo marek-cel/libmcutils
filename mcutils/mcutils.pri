@@ -7,8 +7,7 @@ HEADERS += \
 ################################################################################
 
 HEADERS += \
-    $$PWD/control/ISignalElement.h \
-    $$PWD/control/Filter2.h \
+    $$PWD/control/IControlElement.h \
     $$PWD/control/HighPassFilter.h \
     $$PWD/control/LowPassFilter.h \
     $$PWD/control/Lag.h \
@@ -17,10 +16,10 @@ HEADERS += \
     $$PWD/control/LeadLag.h \
     $$PWD/control/MovingAverageFilter.h \
     $$PWD/control/MovingMedianFilter.h \
-    $$PWD/control/PID.h
+    $$PWD/control/PID.h \
+    $$PWD/control/System2.h
 
 SOURCES += \
-    $$PWD/control/Filter2.cpp \
     $$PWD/control/HighPassFilter.cpp \
     $$PWD/control/LowPassFilter.cpp \
     $$PWD/control/Lag.cpp \
@@ -29,7 +28,8 @@ SOURCES += \
     $$PWD/control/LeadLag.cpp \
     $$PWD/control/MovingAverageFilter.cpp \
     $$PWD/control/MovingMedianFilter.cpp \
-    $$PWD/control/PID.cpp
+    $$PWD/control/PID.cpp \
+    $$PWD/control/System2.cpp
 
 ################################################################################
 

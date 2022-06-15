@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/control/Filter2.h>
+#include <mcutils/control/System2.h>
 
 #include <algorithm>
 #include <cmath>
@@ -32,13 +32,13 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Filter2::Filter2()
-    : Filter2( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 )
+System2::System2()
+    : System2( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Filter2::Filter2( double c1, double c2, double c3,
+System2::System2( double c1, double c2, double c3,
                   double c4, double c5, double c6,
                   double y )
     : _c1 ( c1 )
@@ -56,56 +56,56 @@ Filter2::Filter2( double c1, double c2, double c3,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setValue( double y )
+void System2::setValue( double y )
 {
     _y = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC1( double c1 )
+void System2::setC1( double c1 )
 {
     _c1 = c1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC2( double c2 )
+void System2::setC2( double c2 )
 {
     _c2 = c2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC3( double c3 )
+void System2::setC3( double c3 )
 {
     _c3 = c3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC4( double c4 )
+void System2::setC4( double c4 )
 {
     _c4 = c4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC5( double c5 )
+void System2::setC5( double c5 )
 {
     _c5 = c5;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::setC6( double c6 )
+void System2::setC6( double c6 )
 {
     _c6 = c6;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Filter2::update( double dt, double u )
+void System2::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {

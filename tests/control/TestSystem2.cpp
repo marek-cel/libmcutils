@@ -2,195 +2,195 @@
 
 #include <gtest/gtest.h>
 
-#include <mcutils/control/Filter2.h>
+#include <mcutils/control/System2.h>
 
 #include <XcosBinFileReader.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class TestFilter2 : public ::testing::Test
+class TestSystem2 : public ::testing::Test
 {
 protected:
 
     static constexpr double TIME_STEP { 0.01 };
 
-    TestFilter2() {}
-    virtual ~TestFilter2() {}
+    TestSystem2() {}
+    virtual ~TestSystem2() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanConstruct)
+TEST_F(TestSystem2, CanConstruct)
 {
-    mc::Filter2 *f = nullptr;
-    EXPECT_NO_THROW( f = new mc::Filter2() );
-    delete f;
+    mc::System2 *s = nullptr;
+    EXPECT_NO_THROW( s = new mc::System2() );
+    delete s;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanDestruct)
+TEST_F(TestSystem2, CanDestruct)
 {
-    mc::Filter2 *f = new mc::Filter2();
-    EXPECT_NO_THROW( delete f );
+    mc::System2 *s = new mc::System2();
+    EXPECT_NO_THROW( delete s );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanInstantiate)
+TEST_F(TestSystem2, CanInstantiate)
 {
-    mc::Filter2 f;
+    mc::System2 s;
 
-    EXPECT_DOUBLE_EQ( f.getC1(), 0.0 );
-    EXPECT_DOUBLE_EQ( f.getC2(), 0.0 );
-    EXPECT_DOUBLE_EQ( f.getC3(), 0.0 );
-    EXPECT_DOUBLE_EQ( f.getC4(), 0.0 );
-    EXPECT_DOUBLE_EQ( f.getC5(), 0.0 );
-    EXPECT_DOUBLE_EQ( f.getC6(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 0.0 );
 
-    EXPECT_DOUBLE_EQ( f.getValue(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanInstantiateAndSetData)
+TEST_F(TestSystem2, CanInstantiateAndSetData)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
 
-    EXPECT_DOUBLE_EQ( f.getC1(), 1.0 );
-    EXPECT_DOUBLE_EQ( f.getC2(), 2.0 );
-    EXPECT_DOUBLE_EQ( f.getC3(), 3.0 );
-    EXPECT_DOUBLE_EQ( f.getC4(), 4.0 );
-    EXPECT_DOUBLE_EQ( f.getC5(), 5.0 );
-    EXPECT_DOUBLE_EQ( f.getC6(), 6.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
 
-    EXPECT_DOUBLE_EQ( f.getValue(), 99.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC1)
+TEST_F(TestSystem2, CanGetC1)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC1(), 1.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC2)
+TEST_F(TestSystem2, CanGetC2)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC2(), 2.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC3)
+TEST_F(TestSystem2, CanGetC3)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC3(), 3.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC4)
+TEST_F(TestSystem2, CanGetC4)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC4(), 4.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC5)
+TEST_F(TestSystem2, CanGetC5)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC5(), 5.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetC6)
+TEST_F(TestSystem2, CanGetC6)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getC6(), 6.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanGetValue)
+TEST_F(TestSystem2, CanGetValue)
 {
-    mc::Filter2 f( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
-    EXPECT_DOUBLE_EQ( f.getValue(), 99.0 );
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC1)
+TEST_F(TestSystem2, CanSetC1)
 {
-    mc::Filter2 f;
-    f.setC1( 1.0 );
-    EXPECT_DOUBLE_EQ( f.getC1(), 1.0 );
+    mc::System2 s;
+    s.setC1( 1.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC2)
+TEST_F(TestSystem2, CanSetC2)
 {
-    mc::Filter2 f;
-    f.setC2( 2.0 );
-    EXPECT_DOUBLE_EQ( f.getC2(), 2.0 );
+    mc::System2 s;
+    s.setC2( 2.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC3)
+TEST_F(TestSystem2, CanSetC3)
 {
-    mc::Filter2 f;
-    f.setC3( 3.0 );
-    EXPECT_DOUBLE_EQ( f.getC3(), 3.0 );
+    mc::System2 s;
+    s.setC3( 3.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC4)
+TEST_F(TestSystem2, CanSetC4)
 {
-    mc::Filter2 f;
-    f.setC4( 4.0 );
-    EXPECT_DOUBLE_EQ( f.getC4(), 4.0 );
+    mc::System2 s;
+    s.setC4( 4.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC5)
+TEST_F(TestSystem2, CanSetC5)
 {
-    mc::Filter2 f;
-    f.setC5( 5.0 );
-    EXPECT_DOUBLE_EQ( f.getC5(), 5.0 );
+    mc::System2 s;
+    s.setC5( 5.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetC6)
+TEST_F(TestSystem2, CanSetC6)
 {
-    mc::Filter2 f;
-    f.setC6( 6.0 );
-    EXPECT_DOUBLE_EQ( f.getC6(), 6.0 );
+    mc::System2 s;
+    s.setC6( 6.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanSetValue)
+TEST_F(TestSystem2, CanSetValue)
 {
-    mc::Filter2 f;
-    f.setValue( 99.0 );
-    EXPECT_DOUBLE_EQ( f.getValue(), 99.0 );
+    mc::System2 s;
+    s.setValue( 99.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanUpdateOscillatorStep)
+TEST_F(TestSystem2, CanUpdateOscillatorStep)
 {
     std::vector<double> vals;
 
@@ -203,7 +203,7 @@ TEST_F(TestFilter2, CanUpdateOscillatorStep)
     // harmonic oscillator
     // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
     // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
-    mc::Filter2 filter( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
+    mc::System2 s( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
 
     double t = 0.0;
     double y = 0.0;
@@ -212,8 +212,8 @@ TEST_F(TestFilter2, CanUpdateOscillatorStep)
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        filter.update( TIME_STEP, u );
-        y = filter.getValue();
+        s.update( TIME_STEP, u );
+        y = s.getValue();
 
         double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
@@ -224,7 +224,7 @@ TEST_F(TestFilter2, CanUpdateOscillatorStep)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestFilter2, CanUpdateOscillatorSine)
+TEST_F(TestSystem2, CanUpdateOscillatorSine)
 {
     std::vector<double> vals;
 
@@ -237,7 +237,7 @@ TEST_F(TestFilter2, CanUpdateOscillatorSine)
     // harmonic oscillator
     // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
     // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
-    mc::Filter2 filter( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
+    mc::System2 s( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
 
     double t = 0.0;
     double y = 0.0;
@@ -246,8 +246,8 @@ TEST_F(TestFilter2, CanUpdateOscillatorSine)
     {
         double u = sin( t );
 
-        filter.update( TIME_STEP, u );
-        y = filter.getValue();
+        s.update( TIME_STEP, u );
+        y = s.getValue();
 
         double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;

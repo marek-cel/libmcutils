@@ -26,7 +26,7 @@
 
 #include <mcutils/control/Lag.h>
 
-#include <mcutils/control/ISignalElement.h>
+#include <mcutils/control/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
  */
-class MCUTILSAPI Lag2 final : public ISignalElement
+class MCUTILSAPI Lag2 final : public IControlElement
 {
 public:
 

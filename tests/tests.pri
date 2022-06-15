@@ -18,7 +18,6 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
-    $$PWD/control/TestFilter2.cpp \
     $$PWD/control/TestHighPassFilter.cpp \
     $$PWD/control/TestLag.cpp \
     $$PWD/control/TestLag2.cpp \
@@ -27,7 +26,8 @@ SOURCES += \
     $$PWD/control/TestLowPassFilter.cpp \
     $$PWD/control/TestMovingAverageFilter.cpp \
     $$PWD/control/TestMovingMedianFilter.cpp \
-    $$PWD/control/TestPID.cpp
+    $$PWD/control/TestPID.cpp \
+    $$PWD/control/TestSystem2.cpp
 
 ################################################################################
 

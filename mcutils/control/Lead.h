@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/control/ISignalElement.h>
+#include <mcutils/control/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +46,7 @@ namespace mc
  *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
  * </ul>
  */
-class MCUTILSAPI Lead final : public ISignalElement
+class MCUTILSAPI Lead final : public IControlElement
 {
 public:
 

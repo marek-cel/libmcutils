@@ -19,12 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CONTROL_ISIGNALELEMENT_H_
-#define MCUTILS_CONTROL_ISIGNALELEMENT_H_
+#ifndef MCUTILS_CONTROL_SYSTEM2_H_
+#define MCUTILS_CONTROL_SYSTEM2_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <mcutils/defs.h>
+
+#include <mcutils/control/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,36 +34,71 @@ namespace mc
 {
 
 /**
- * @brief Interface class for signal processing elements classes.
+ * @brief Second-order system class.
+ *
+ * Transfer function:
+ * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
  */
-class MCUTILSAPI ISignalElement
+class MCUTILSAPI System2 final : public IControlElement
 {
 public:
 
-    // LCOV_EXCL_START
-    // excluded from coverage report due to deleting destructor calling issues
+    /** @brief Constructor. */
+    System2();
+
+    /** @brief Constructor. */
+    System2( double c1, double c2, double c3,
+             double c4, double c5, double c6,
+             double y = 0.0 );
+
     /** @brief Destructor. */
-    virtual ~ISignalElement() {}
-    // LCOV_EXCL_STOP
+    ~System2() = default;
+
+    inline double getValue() const override { return _y; }
+
+    inline double getC1() const { return _c1; }
+    inline double getC2() const { return _c2; }
+    inline double getC3() const { return _c3; }
+    inline double getC4() const { return _c4; }
+    inline double getC5() const { return _c5; }
+    inline double getC6() const { return _c6; }
+
+    void setValue( double y );
+
+    void setC1( double c1 );
+    void setC2( double c2 );
+    void setC3( double c3 );
+    void setC4( double c4 );
+    void setC5( double c5 );
+    void setC6( double c6 );
 
     /**
-     * @brief Pure virtual function to get the current output value.
-     *
-     * @return current output value
-     */
-    virtual double getValue() const = 0;
-
-    /**
-     * @brief Pure virtual function to update element due to time step and input value
-     *
+     * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    virtual void update( double dt, double u ) = 0;
+    void update( double dt, double u ) override;
+
+private:
+
+    double _c1;             ///< c1 coefficient
+    double _c2;             ///< c2 coefficient
+    double _c3;             ///< c3 coefficient
+    double _c4;             ///< c4 coefficient
+    double _c5;             ///< c5 coefficient
+    double _c6;             ///< c6 coefficient
+
+    double _u_prev_1;       ///<
+    double _u_prev_2;       ///<
+
+    double _y_prev_1;       ///<
+    double _y_prev_2;       ///<
+
+    double _y;              ///< current value
 };
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CONTROL_ISIGNALELEMENT_H_
+#endif // MCUTILS_CONTROL_SYSTEM2_H_
