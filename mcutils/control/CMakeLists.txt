@@ -3,7 +3,8 @@ set( TARGET_NAME mcutils_control )
 ################################################################################
 
 set( HEADERS
-    Filter2.h
+    BandPassFilter.h
+    BandStopFilter.h
     HighPassFilter.h
     ISignalElement.h
     Lag2.h
@@ -13,11 +14,12 @@ set( HEADERS
     LowPassFilter.h
     MovingAverageFilter.h
     MovingMedianFilter.h
+    Oscillator.h
     PID.h
+    System2.h
 )
 
 set( SOURCES
-    Filter2.cpp
     HighPassFilter.cpp
     Lag2.cpp
     Lag.cpp
@@ -27,6 +29,7 @@ set( SOURCES
     MovingAverageFilter.cpp
     MovingMedianFilter.cpp
     PID.cpp
+    System2.cpp
 )
 
 ################################################################################

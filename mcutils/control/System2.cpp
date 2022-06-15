@@ -110,14 +110,15 @@ void System2::update( double dt, double u )
     if ( dt > 0.0 )
     {
         double den = 4.0*_c4 + 2.0*_c5*dt + _c6*dt*dt;
+        double den_inv = 1.0 / den;
 
         double dt2 = dt * dt;
 
-        double ca = ( 4.0 * _c1       + 2.0 * _c2 * dt + _c3 * dt2 ) / den;
-        double cb = ( 2.0 * _c3 * dt2 - 8.0 * _c1                  ) / den;
-        double cc = ( 4.0 * _c1       - 2.0 * _c2 * dt + _c3 * dt2 ) / den;
-        double cd = ( 2.0 * _c6 * dt2 - 8.0 * _c4                  ) / den;
-        double ce = ( 4.0 * _c4       - 2.0 * _c5 * dt + _c6 * dt2 ) / den;
+        double ca = ( 4.0 * _c1       + 2.0 * _c2 * dt + _c3 * dt2 ) * den_inv;
+        double cb = ( 2.0 * _c3 * dt2 - 8.0 * _c1                  ) * den_inv;
+        double cc = ( 4.0 * _c1       - 2.0 * _c2 * dt + _c3 * dt2 ) * den_inv;
+        double cd = ( 2.0 * _c6 * dt2 - 8.0 * _c4                  ) * den_inv;
+        double ce = ( 4.0 * _c4       - 2.0 * _c5 * dt + _c6 * dt2 ) * den_inv;
 
         _y = u * ca + _u_prev_1 * cb + _u_prev_2 * cc
                     - _y_prev_1 * cd - _y_prev_2 * ce;

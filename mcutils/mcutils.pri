@@ -8,6 +8,8 @@ HEADERS += \
 
 HEADERS += \
     $$PWD/control/IControlElement.h \
+    $$PWD/control/BandPassFilter.h \
+    $$PWD/control/BandStopFilter.h \
     $$PWD/control/HighPassFilter.h \
     $$PWD/control/LowPassFilter.h \
     $$PWD/control/Lag.h \
@@ -16,6 +18,7 @@ HEADERS += \
     $$PWD/control/LeadLag.h \
     $$PWD/control/MovingAverageFilter.h \
     $$PWD/control/MovingMedianFilter.h \
+    $$PWD/control/Oscillator.h \
     $$PWD/control/PID.h \
     $$PWD/control/System2.h
 
