@@ -37,10 +37,14 @@ namespace mc
  * @brief Harmonic oscillator element class.
  *
  * Transfer function:
- * G(s)  =  omega^2 / ( s^2 + 2*xi*omega*s + omega^2 )
+ * G(s)  =  omega^2 / ( s^2 + 2*zeta*omega*s + omega^2 )
+ * where:
+ * omega [rad/s] undamped angular frequency
+ * zeta  [-] <0.0;1.0> damping ratio
  *
  * <h3>Refernces:</h3>
  * <ul>
+ *   <li><a href="https://en.wikipedia.org/wiki/Harmonic_oscillator">Harmonic oscillator - Wikipedia</a></li>
  *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.88. [in Polish]</li>
  *   <li>Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]</li>
  * </ul>
@@ -49,23 +53,44 @@ class MCUTILSAPI Oscillator final : public IControlElement
 {
 public:
 
+    /** @brief Constructor. */
+    Oscillator();
+
     /**
      * @brief Constructor.
-     *
-     * @param omega [rad/s] oscillation frequency
-     * @param xi [-] <0.0;1.0> dampipng coefficient
-     * @param y initial output value
+     * @param omega [rad/s] undamped angular frequency
+     * @param zeta [-] <0.0;1.0> dampipng ratio
+     * @param val initial output value
      */
-    Oscillator( double omega, double xi, double y = 0.0 );
+    Oscillator( double omega, double zeta, double val = 0.0 );
 
     /** @brief Destructor. */
     ~Oscillator() = default;
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const override { return mVal; }
+    inline double getOmega() const { return mOmega; }
+    inline double getDamping() const { return mZeta; }
+
+    /**
+     * @brief Sets undamped angular frequency.
+     * @param omega [rad/s] undamped angular frequency
+     */
+    void setOmega( double omega );
+
+    /**
+     * @brief Sets damping ratio.
+     * @param zeta [-] <0.0;1.0> damping ratio
+     */
+    void setDamping( double zeta );
+
+    /**
+     * @brief Sets output value
+     * @param youtput value
+     */
+    void setValue( double val );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */
@@ -73,9 +98,19 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] oscillation frequency
-    double _xi;             ///< [-] <0.0;1.0> dampipng coefficient
-    double _y;              ///< current value
+    double mOmega;          ///< [rad/s] undamped angular frequency
+    double mZeta;           ///< [-] <0.0;1.0> dampipng coefficient
+    double mVal;            ///< current value
+
+    double mC3;             ///< c3 coefficient
+    double mC5;             ///< c5 coefficient
+    double mC6;             ///< c6 coefficient
+
+    double mInp_prev_1;     ///< input value
+    double mInp_prev_2;     ///<
+
+    double mVal_prev_1;     ///<
+    double mVal_prev_2;     ///<
 };
 
 } // namespace mc

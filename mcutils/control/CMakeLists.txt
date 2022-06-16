@@ -28,6 +28,7 @@ set( SOURCES
     LowPassFilter.cpp
     MovingAverageFilter.cpp
     MovingMedianFilter.cpp
+    Oscillator.cpp
     PID.cpp
     System2.cpp
 )

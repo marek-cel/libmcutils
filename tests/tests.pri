@@ -26,6 +26,7 @@ SOURCES += \
     $$PWD/control/TestLowPassFilter.cpp \
     $$PWD/control/TestMovingAverageFilter.cpp \
     $$PWD/control/TestMovingMedianFilter.cpp \
+    $$PWD/control/TestOscillator.cpp \
     $$PWD/control/TestPID.cpp \
     $$PWD/control/TestSystem2.cpp
 

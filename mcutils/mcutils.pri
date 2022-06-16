@@ -31,6 +31,7 @@ SOURCES += \
     $$PWD/control/LeadLag.cpp \
     $$PWD/control/MovingAverageFilter.cpp \
     $$PWD/control/MovingMedianFilter.cpp \
+    $$PWD/control/Oscillator.cpp \
     $$PWD/control/PID.cpp \
     $$PWD/control/System2.cpp
 
