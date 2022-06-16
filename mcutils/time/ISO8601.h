@@ -37,7 +37,6 @@ namespace mc
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
- *
  * @param year
  * @param mon
  * @param day
@@ -54,7 +53,6 @@ MCUTILSAPI std::string toISO8601( int year, int mon, int day,
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
- *
  * @param year
  * @param mon
  * @param day
@@ -76,7 +74,6 @@ MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
- *
  * @param dt Date/Time structur
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string

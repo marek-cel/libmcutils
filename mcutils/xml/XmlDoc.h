@@ -52,7 +52,6 @@ public:
 
     /**
      * @brief Gets XML document root node.
-     *
      * @return XML document root node
      */
     inline XmlNode getRootNode()
@@ -62,7 +61,6 @@ public:
 
     /**
      * @brief Checks if XML document is open.
-     *
      * @return returns true if XML document is open
      */
     inline bool isOpen() const

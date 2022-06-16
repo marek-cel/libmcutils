@@ -105,7 +105,6 @@ public:
 
     /**
      * @brief Sets items of the matrix.
-     *
      * @param xx item at position xx
      * @param xy item at position xy
      * @param xz item at position xz

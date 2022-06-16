@@ -49,7 +49,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param length length of the sliding window
      */
     explicit MovingAverageFilter( unsigned int length = 1, double y = 0.0 );
@@ -63,14 +62,12 @@ public:
 
     /**
      * @brief Sets length of the sliding window
-     *
      * @param length length of the sliding window
      */
     void setLength( unsigned int length );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

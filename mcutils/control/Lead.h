@@ -64,21 +64,18 @@ public:
 
     /**
      * @brief Sets output value
-     *
      * @param youtput value
      */
     void setValue( double y );
 
     /**
      * @brief Sets time constant.
-     *
      * @param tc time constant
      */
     void setTimeConst( double tc );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

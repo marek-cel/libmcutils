@@ -69,21 +69,18 @@ public:
 
     /**
      * @brief Copy constructor.
-     *
      * @param ecef object to copy
      */
     ECEF( const ECEF &ecef );
 
     /**
      * @brief Moving constructor.
-     *
      * @param ecef object to move
      */
     ECEF( ECEF &&ecef );
 
     /**
      * @brief Constructor.
-     *
      * @param a [m] equatorial radius
      * @param f [-] ellipsoid flattening
      */
@@ -94,7 +91,6 @@ public:
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
-     *
      * @param lat [rad] geodetic latitude
      * @param lon [rad] geodetic longitude
      * @param alt [m] altitude above mean sea level
@@ -107,7 +103,6 @@ public:
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
-     *
      * @param lat [rad] geodetic latitude
      * @param lon [rad] geodetic longitude
      * @param alt [m] altitude above mean sea level
@@ -117,7 +112,6 @@ public:
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
-     *
      * @param pos_geo [m] geodetic coordinates
      * @return [m] resulting ECEF coordinates vector
      */
@@ -125,7 +119,6 @@ public:
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
-     *
      * @param pos_geo [m] geodetic coordinates
      * @param pos_ecef [m] resulting ECEF coordinates vector pointer
      */
@@ -133,7 +126,6 @@ public:
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
-     *
      * @param x [m] ECEF x-coordinate
      * @param y [m] ECEF y-coordinate
      * @param z [m] ECEF z-coordinate
@@ -146,7 +138,6 @@ public:
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
-     *
      * @param x [m] ECEF x-coordinate
      * @param y [m] ECEF y-coordinate
      * @param z [m] ECEF z-coordinate
@@ -156,7 +147,6 @@ public:
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
-     *
      * @param pos_ecef [m] ECEF coordinates vector
      * @return resulting geodetic coordinates
      */
@@ -164,7 +154,6 @@ public:
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
-     *
      * @param pos_ecef [m] ECEF coordinates vector
      * @param pos_geo resulting geodetic coordinates pointer
      */
@@ -172,7 +161,6 @@ public:
 
     /**
      * @brief Calculates coordinates moved by the given offset.
-     *
      * @param heading [rad] heading
      * @param offset_x [m] longitudinal offset
      * @param offset_y [m] lateral offset
@@ -252,7 +240,6 @@ private:
 
     /**
      * @brief Updates rotation matrices due to position.
-     *
      * This function updates rotation matrices due to current ECEF coordinates.
      */
     void updateMatrices();

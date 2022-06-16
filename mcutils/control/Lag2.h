@@ -51,7 +51,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param tc1 time constant 1
      * @param tc2 time constant 2
      * @param y initial output value
@@ -68,28 +67,24 @@ public:
 
     /**
      * @brief Sets output value
-     *
      * @param youtput value
      */
     void setValue( double y );
 
     /**
      * @brief Sets time constant tc1.
-     *
      * @param tc1 time constant tc1
      */
     void setTimeConst1( double tc1 );
 
     /**
      * @brief Sets time constant tc2.
-     *
      * @param tc2 time constant tc2
      */
     void setTimeConst2( double tc2 );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

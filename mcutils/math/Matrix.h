@@ -41,7 +41,6 @@ namespace mc
 
 /**
  * @brief Matrix base class template.
- *
  * @tparam ROWS matrix rows count
  * @tparam COLS matrix columns count
  */
@@ -93,10 +92,10 @@ public:
 
     /**
      * @brief  Gets matrix item of given indicies.
-     *
      * This function is bound-checked which may affect performance.
      * Throws an exception when row or column index is out of range.
-     *
+     * @param row item row number
+     * @param col item column number
      * @return matrix item of given indicies.
      */
     double getItem( unsigned int row, unsigned int col ) const
@@ -117,7 +116,9 @@ public:
 
     /**
      * @brief Sets matrix item of given indicies.
-     *
+     * @param row item row number
+     * @param col item column number
+     * @param value item value
      * This function is bound-checked which may affect performance.
      * Throws an exception when row or column index is out of range.
      */
@@ -162,10 +163,12 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int,int) or
      * setItem(int,int,double) functions.
+     * @param row item row number
+     * @param col item column number
+     * @return item value
      */
     inline double operator() ( unsigned int row, unsigned int col ) const
     {
@@ -174,10 +177,11 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int,int) or
      * setItem(int,int,double) functions.
+     * @param row item row number
+     * @param col item column number
      */
     inline double& operator() ( unsigned int row, unsigned int col )
     {

@@ -86,9 +86,7 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * Disables saturation.
-     *
      * @param kp proportional gain
      * @param ki integral gain
      * @param kd derivative gain
@@ -97,9 +95,7 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * Enables saturation.
-     *
      * @param kp proportional gain
      * @param ki integral gain
      * @param kd derivative gain
@@ -113,7 +109,6 @@ public:
 
     /**
      * @brief Updates controller.
-     *
      * @param dt [s] time step
      * @param u input value
      */
@@ -142,7 +137,6 @@ public:
 
     /**
      * @brief Sets parameters of parallel form.
-     *
      * @param kp proportional gain expressed in parallel form
      * @param ki integral coefficient expressed in parallel form
      * @param kd derivative coefficient expressed in parallel form
@@ -151,7 +145,6 @@ public:
 
     /**
      * @brief Sets parameters of series form.
-     *
      * @param k proportional gain expressed in series form
      * @param tau_i integral time expressed in series form
      * @param tau_d derivative time expressed in series form
@@ -160,7 +153,6 @@ public:
 
     /**
      * @brief Sets parameters of standard (ideal) form.
-     *
      * @param Kp proportional gain expressed in standard (ideal) form
      * @param Ti integral time expressed in standard (ideal) form
      * @param Td derivative time expressed in standard (ideal) form
@@ -169,14 +161,12 @@ public:
 
     /**
      * @brief Sets controller current error.
-     *
      * @param error current error value
      */
     void setError( double error );
 
     /**
      * @brief Sets controller output (resets error integral sum).
-     *
      * @param value output value
      */
     void setValue( double value );

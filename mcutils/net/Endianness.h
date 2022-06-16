@@ -36,7 +36,6 @@ namespace mc { namespace Endianess
 
 /**
  * @brief Converts values between host and network byte order.
- *
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
@@ -44,7 +43,6 @@ MCUTILSAPI UInt16 hostToNet( UInt16 val );
 
 /**
  * @brief Converts values between host and network byte order.
- *
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
@@ -52,7 +50,6 @@ MCUTILSAPI UInt32 hostToNet( UInt32 val );
 
 /**
  * @brief Converts values between host and network byte order.
- *
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
@@ -60,7 +57,6 @@ MCUTILSAPI float hostToNet( float val );
 
 /**
  * @brief Converts values between host and network byte order.
- *
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */

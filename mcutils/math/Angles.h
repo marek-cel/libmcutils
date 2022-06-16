@@ -50,7 +50,6 @@ public:
 
     /**
      * @brief Normalizes angle within [min,min+2*pi] range.
-     *
      * @param val angle to be normalized
      * @param min minimum value
      * @return normalized angle
@@ -65,7 +64,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param phi [rad] angle of rotation about x-axis
      * @param tht [rad] angle of rotation about y-axis
      * @param psi [rad] angle of rotation about z-axis
@@ -80,7 +78,6 @@ public:
 
     /**
      * @brief Normalizes angles.
-     *
      * Limits phi to [-pi,pi] theta to [-pi/2,pi/2] and psi to [0,2*pi].
      */
     void normalize();

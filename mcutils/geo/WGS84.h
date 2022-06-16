@@ -52,28 +52,24 @@ public:
 
     /**
      * @brief Copy constructor.
-     *
      * @param ecef object to copy
      */
     WGS84( const WGS84 &wgs );
 
     /**
      * @brief Moving constructor.
-     *
      * @param ecef object to move
      */
     WGS84( WGS84 &&wgs );
 
     /**
      * @brief Constructor.
-     *
      * @param pos_geo geodetic coordinates
      */
     explicit WGS84( const Geo &pos_geo );
 
     /**
      * @brief Constructor.
-     *
      * @param pos_wgs [m] coordinates vector expressed in ECEF
      */
     explicit WGS84( const Vector3 &pos_wgs );

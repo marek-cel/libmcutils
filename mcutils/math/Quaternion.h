@@ -107,7 +107,6 @@ public:
 
     /**
      * @brief Returns quaternion derivative due to given angular velocity.
-     *
      * @param omega angular velocity vector
      * @param lambda free parameter (usually set to a small multiple of the integration time step)
      * @return quaternion derivative

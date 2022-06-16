@@ -47,7 +47,6 @@ public:
 
     /**
      * @brief Constructor
-     *
      * @param a [m] ellipsoid semi major axis
      * @param e [-] ellipsoid first eccentricity
      */
@@ -55,7 +54,6 @@ public:
 
     /**
      * @brief Computes geodetic latitude.
-     *
      * @param y [m] Mercator y-coordinate
      * @param max_error maximum error (solve condition)
      * @param max_iterations maximum number of iterations
@@ -66,7 +64,6 @@ public:
 
     /**
      * @brief Computes geodetic longitude.
-     *
      * @param x [m] Mercator x-coordinate
      * @return geodetic longitude [rad]
      */
@@ -74,7 +71,6 @@ public:
 
     /**
      * @brief Computes Mercator x-coordinate.
-     *
      * @param lon [rad] geodetic longitude
      * @return Mercator x-coordinate [m]
      */
@@ -82,7 +78,6 @@ public:
 
     /**
      * @brief Computes Mercator y-coordinate.
-     *
      * @param lat [rad] geodetic latitude
      * @return Mercator y-coordinate [m]
      */
@@ -90,7 +85,6 @@ public:
 
     /**
      * @brief Computes Isometric Latitude kernel.
-     *
      * @param lat [rad] geodetic latitude
      * @return Isometric Latitude kernel
      */
@@ -98,7 +92,6 @@ public:
 
     /**
      * @brief Computes geodetic latitude from the isometric latitude.
-     *
      * @param t isometric latitude
      * @param max_error maximum error (solve condition)
      * @param max_iterations maximum number of iterations

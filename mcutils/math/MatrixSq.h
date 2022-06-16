@@ -35,7 +35,6 @@ namespace mc
 
 /**
  * @brief Square matrix class template.
- *
  * @tparam N number of rows and columns
  */
 template <unsigned int N>
@@ -173,7 +172,6 @@ protected:
 
     /**
      * @brief Multiplies matrix by matrix.
-     *
      * @param matrix
      * @param result
      */

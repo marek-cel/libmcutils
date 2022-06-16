@@ -46,14 +46,12 @@ public:
 
     /**
      * @brief Pure virtual function to get the current output value.
-     *
      * @return current output value
      */
     virtual double getValue() const = 0;
 
     /**
      * @brief Pure virtual function to update element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

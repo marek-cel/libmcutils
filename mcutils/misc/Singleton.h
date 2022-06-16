@@ -41,7 +41,6 @@ public:
 
     /**
      * @brief Returns singleton object instance pointer, creates it if necessary.
-     *
      * @return singleton object instance pointer
      */
     static TYPE* instance()

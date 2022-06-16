@@ -59,7 +59,6 @@ static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] stan
 
 /**
  * @brief Firt order inertia.
- *
  * @param u desired value
  * @param y current value
  * @param dt [s] time step
@@ -73,7 +72,6 @@ inline double inertia( double u, double y, double dt, double tc )
 
 /**
  * @brief Returns Pacejka "Magic Formula" coefficient.
- *
  * @param kappa [-] slip parameter (v_slip/v_roll)
  * @param b b coefficient
  * @param c c coefficient
@@ -96,7 +94,6 @@ inline double pacejkaFormula( double kappa,
 
 /**
  * @brief Gets matrix of inertia about parallel axis.
- *
  * @param m [kg] mass
  * @param i [kg*m^2] inertia tensor
  * @param r [m] position

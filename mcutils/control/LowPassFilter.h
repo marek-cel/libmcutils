@@ -50,7 +50,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param omega [rad/s] cutoff angular frequency
      * @param y initial output value
      */
@@ -64,28 +63,24 @@ public:
 
     /**
      * @brief Sets cutoff angular frequency.
-     *
      * @param omega [rad/s] cutoff angular frequency
      */
     void setOmega( double omega );
 
     /**
      * @brief Sets cutoff frequency.
-     *
      * @param freq [Hz] cutoff frequency
      */
     void setCutoffFreq( double freq );
 
     /**
      * @brief Sets output value
-     *
      * @param youtput value
      */
     void setValue( double y );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

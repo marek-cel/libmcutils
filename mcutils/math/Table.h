@@ -45,7 +45,6 @@ public:
 
     /**
      * @brief Creates table with only one record.
-     *
      * @param val record value
      * @param key record key value
      */
@@ -71,7 +70,6 @@ public:
 
     /**
      * @brief Returns key for the given index.
-     *
      * @param index index
      * @return key value on success or NaN on failure
      */
@@ -82,14 +80,12 @@ public:
 
     /**
      * @brief Returns key of minimum table value.
-     *
      * @return key of minimum table value
      */
     double getKeyOfValueMin() const;
 
     /**
      * @brief Returns key of minimum table value within given range.
-     *
      * @param key_min range minimum
      * @param key_max range maximum
      * @return key of minimum table value
@@ -98,14 +94,12 @@ public:
 
     /**
      * @brief Returns key of maximum table value.
-     *
      * @return key of maximum table value
      */
     double getKeyOfValueMax() const;
 
     /**
      * @brief Returns key of maximum table value within given range.
-     *
      * @param key_min range minimum
      * @param key_max range maximum
      * @return key of maximum table value
@@ -114,10 +108,8 @@ public:
 
     /**
      * @brief Returns table value for the given key.
-     *
      * Returns table value for the given key value using linear interpolation
      * algorithm.
-     *
      * @param key_value key value
      * @return interpolated value on success or NaN on failure
      */
@@ -125,7 +117,6 @@ public:
 
     /**
      * @brief Returns table value for the given key index.
-     *
      * @param key_index key index
      * @return value on success or NaN on failure
      */
@@ -133,49 +124,42 @@ public:
 
     /**
      * @brief Returns table first value.
-     *
      * @return value on success or NaN on failure
      */
     double getFirstValue() const;
 
     /**
      * @brief Returns table last value.
-     *
      * @return value on success or NaN on failure
      */
     double getLastValue() const;
 
     /**
      * @brief Returns minimum table value.
-     *
      * @return minimum table value
      */
     double getValueMin() const;
 
     /**
      * @brief Returns maximum table value.
-     *
      * @return maximum table value
      */
     double getValueMax() const;
 
     /**
      * @brief Checks if table is valid.
-     *
      * @return returns true if size is greater than 0 and all data is valid
      */
     bool isValid() const;
 
     /**
      * @brief Multiplies keys by the given factor.
-     *
      * @param factor given factor
      */
     void multiplyKeys( double factor );
 
     /**
      * @brief Multiplies values by the given factor.
-     *
      * @param factor given factor
      */
     void multiplyValues( double factor );
@@ -201,9 +185,7 @@ private:
     Data _data;     ///< table data
 
     /**
-     * @brief Initializes data with a given data set. Variant for every except
-     * the last entry.
-     *
+     * @brief Initializes data with a given data set. Variant for every except the last entry.
      * @param key_0 current key
      * @param value_0 current value
      * @param key_1 next key
@@ -213,7 +195,6 @@ private:
 
     /**
      * @brief Initializes data with a given data set. Variant for the last entry.
-     *
      * @param key_0 current key
      * @param value_0 current value
      */
@@ -221,7 +202,6 @@ private:
 
     /**
      * @brief Inserts data set into data structure.
-     *
      * @param key key
      * @param value value
      * @param inter interpolation data (gradient)
@@ -230,7 +210,6 @@ private:
 
     /**
      * @brief Inserts data set into data structure.
-     *
      * @param data given data structure
      * @param key key
      * @param value value
@@ -240,7 +219,6 @@ private:
 
     /**
      * @brief Calculates interpolation data (gradient).
-     *
      * @param key_0 current key
      * @param value_0 current value
      * @param key_1 next key

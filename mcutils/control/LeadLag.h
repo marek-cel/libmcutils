@@ -54,7 +54,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param c1 coefficient of the transfer function
      * @param c2 coefficient of the transfer function
      * @param c3 coefficient of the transfer function
@@ -82,7 +81,6 @@ public:
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

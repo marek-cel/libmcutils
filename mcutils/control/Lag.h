@@ -55,7 +55,6 @@ public:
 
     /**
      * @brief Calculates output value due to time constant, time step and input value
-     *
      * @param u input
      * @param y current valuye
      * @param dt [s] time step
@@ -66,7 +65,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param tc time constant
      * @param y initial output value
      */
@@ -80,21 +78,18 @@ public:
 
     /**
      * @brief Sets output value
-     *
      * @param youtput value
      */
     void setValue( double y );
 
     /**
      * @brief Sets time constant.
-     *
      * @param tc time constant
      */
     void setTimeConst( double tc );
 
     /**
      * @brief Updates element due to time step and input value
-     *
      * @param dt [s] time step
      * @param u input value
      */

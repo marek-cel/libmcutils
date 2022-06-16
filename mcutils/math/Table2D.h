@@ -45,7 +45,6 @@ public:
 
     /**
      * @brief Creates table with only one record.
-     *
      * @param val record value
      * @param row_val row key value
      * @param col_val col key value
@@ -81,7 +80,6 @@ public:
 
     /**
      * @brief Returns 1-dimensional table for the given col value.
-     *
      * @param colValue column key value
      * @return 1-dimensional table
      */
@@ -89,10 +87,8 @@ public:
 
     /**
      * @brief Returns table value for the given keys.
-     *
      * Returns table value for the given keys values using bilinear
      * interpolation algorithm.
-     *
      * @param rowValue row key value
      * @param colValue column key value
      * @return interpolated value on success or NaN on failure
@@ -101,7 +97,6 @@ public:
 
     /**
      * @brief Returns table value for the given key index.
-     *
      * @param rowIndex row index
      * @param colIndex col index
      * @return value on success or NaN on failure
@@ -110,14 +105,12 @@ public:
 
     /**
      * @brief Checks if table is valid.
-     *
      * @return returns true if size is greater than 0 and all data is valid
      */
     bool isValid() const;
 
     /**
      * @brief Multiplies columns and rows values by the given factors.
-     *
      * @param f_rows rows factor
      * @param f_cols columns factor
      */
@@ -125,21 +118,18 @@ public:
 
     /**
      * @brief Multiplies rows values by the given factor.
-     *
      * @param factor given factor
      */
     void multiplyRows( double factor );
 
     /**
      * @brief Multiplies columns values by the given factor.
-     *
      * @param factor given factor
      */
     void multiplyCols( double factor );
 
     /**
      * @brief Multiplies values by the given factor.
-     *
      * @param factor given factor
      */
     void multiplyValues( double factor );

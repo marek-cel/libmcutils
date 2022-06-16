@@ -42,12 +42,10 @@ namespace mc
 
 /**
  * @brief Column vector base class template.
- *
  * Column vector base class template which is using integer template parameters
  * to specify vector size. Such an approach does not allow to perform
  * mathematical operation between vectors which sizes do not match each other
  * as they are of different types.
- *
  * @tparam SIZE vector size
  */
 template <unsigned int SIZE>
@@ -130,10 +128,9 @@ public:
 
     /**
      * @brief Gets vector item of given indicies.
-     *
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
-     *
+     * @param index item index
      * @return vector item of given indicies.
      */
     double getItem( unsigned int index ) const
@@ -154,7 +151,6 @@ public:
 
     /**
      * @brief Sets vector item of given indicies.
-     *
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
      */
@@ -246,7 +242,6 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
@@ -258,7 +253,6 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.

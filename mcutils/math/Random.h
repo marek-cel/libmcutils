@@ -46,7 +46,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value
@@ -58,7 +57,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value
@@ -70,7 +68,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value
@@ -82,7 +79,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value
@@ -91,7 +87,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value
@@ -100,7 +95,6 @@ public:
 
     /**
      * @brief Gets random number from the given range.
-     *
      * @param min minimum random number value
      * @param max maximum random number value
      * @return random value

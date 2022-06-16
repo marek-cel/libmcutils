@@ -64,14 +64,12 @@ public:
 
     /**
      * @brief Returns angle expressed in radians.
-     *
      * @return angle expressed in radians
      */
     inline double getAngle() const { return _angle; }
 
     /**
      * @brief Sets angle value.
-     *
      * @param angle [rad] angle
      */
     void setAngle( double angle );

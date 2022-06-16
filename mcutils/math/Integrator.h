@@ -53,9 +53,7 @@ public:
 
     /**
      * @brief Integrates given vector.
-     *
      * This is interface abstract method.
-     *
      * @param step integration time step [s]
      * @param vect integrating vector
      */
@@ -63,10 +61,8 @@ public:
 
     /**
      * @brief Sets a function which calculates vector derivative.
-     *
      * Function should take current vector as first argument and resulting
      * vector derivative pointer as second argument.
-     *
      * @param fun function which calculates vector derivative
      */
     void setDerivFun( Fun fun )
@@ -76,7 +72,6 @@ public:
 
     /**
      * @brief Checks if function which calculates vector derivative is set.
-     *
      * @return true if function which calculates vector derivative is set, false otherwise
      */
     inline bool isDerivFunSet() const

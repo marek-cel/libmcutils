@@ -54,14 +54,12 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param fun function which calculates vector derivative
      */
     explicit RungeKutta4( Fun fun );
 
     /**
      * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.
-     *
      * @param step integration time step [s]
      * @param vect integrating vector
      */

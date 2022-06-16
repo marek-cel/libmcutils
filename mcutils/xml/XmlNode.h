@@ -62,17 +62,14 @@ public:
 
     /**
      * @brief Returns the value of the attribute
-     *
      * Returns the value of the attribute or an empty string if the attribute
      * has not been specified.
-     *
      * @return value of the attribute or an empty string if the attribute has not been specified
      */
     std::string getAttribute( const char *name ) const;
 
     /**
      * @brief Returns element attributes list.
-     *
      * Returns element attributes list or empty list if the node is not
      * an element or element does not has any attributes.
      */
@@ -85,7 +82,6 @@ public:
 
     /**
      * @brief Returns first child element node of the given name.
-     *
      * @param name element name
      */
     XmlNode getFirstChildElement( const char *name = "" ) const;
@@ -136,7 +132,6 @@ public:
 
     /**
      * @brief Returns next sibling element node of the given name.
-     *
      * @param name element name
      */
     XmlNode getNextSiblingElement( const char *name = "" ) const;

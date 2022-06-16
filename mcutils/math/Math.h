@@ -35,7 +35,6 @@ namespace mc { namespace Math
 
 /**
  * @brief Checks if value is within the given range.
- *
  * @param min minimum possible value
  * @param max maximum possible value
  * @param val variable to test
@@ -48,7 +47,6 @@ MCUTILSAPI inline bool isInside( const double &min, const double &max, const dou
 
 /**
  * @brief Checks if value is outside the given range.
- *
  * @param min minimum possible value
  * @param max maximum possible value
  * @param val variable to test
@@ -61,7 +59,6 @@ MCUTILSAPI inline bool isOutside( const double &min, const double &max, const do
 
 /**
  * @brief Power 2 (square) function.
- *
  * @param val argument
  * @return power 2 (square)
  */
@@ -72,7 +69,6 @@ MCUTILSAPI inline double pow2( const double &val )
 
 /**
  * @brief Power 3 (cube) function.
- *
  * @param val argument
  * @return power 3 (cube)
  */
@@ -83,7 +79,6 @@ MCUTILSAPI inline double pow3( const double &val )
 
 /**
  * @brief Power 4 function.
- *
  * @param val argument
  * @return power 4
  */
@@ -94,7 +89,6 @@ MCUTILSAPI inline double pow4( const double &val )
 
 /**
  * @brief Power 5 function.
- *
  * @param val argument
  * @return power 5
  */
@@ -105,7 +99,6 @@ MCUTILSAPI inline double pow5( const double &val )
 
 /**
  * @brief Saturation function. Returns value limited to the given range.
- *
  * @param min minimum possible value
  * @param max maximum possible value
  * @param val variable to test
@@ -121,7 +114,6 @@ MCUTILSAPI inline double satur( const double &min, const double &max, const doub
 
 /**
  * @brief Signum function.
- *
  * @param val input value
  * @return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
@@ -135,9 +127,7 @@ MCUTILSAPI inline double sign( const double &val )
 
 /**
  * @brief Period of 2.0 fast sine wave approximation.
- *
  * Valid range is -1.0 to 1.0.
- *
  * @param x normalized input value <-1.0;1.0>
  * @return approximated sine wave
  */
@@ -149,7 +139,6 @@ MCUTILSAPI inline float sineWave( float x )
 
 /**
  * @brief Smoothstep (sigmoid) 3rd order function.
- *
  * @param xmin minimum argument value
  * @param xmax maximum argument value
  * @param x argument value
@@ -161,7 +150,7 @@ MCUTILSAPI inline float sineWave( float x )
  * </ul>
  */
 MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
-                                       double x )
+                                     double x )
 {
     x = satur( 0.0, 1.0, (x - xmin) / (xmax - xmin) );
     return x * x * (3.0 - 2.0 * x);
@@ -169,7 +158,6 @@ MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
 
 /**
  * @brief Smoothstep (sigmoid) 3rd order function.
- *
  * @param x normalized argument value
  * @return normalized smoothstep function value
  *
@@ -185,7 +173,6 @@ MCUTILSAPI inline double smoothstep( double x )
 
 /**
  * @brief Smoothstep (sigmoid) 3rd order function.
- *
  * @param xmin minimum argument value
  * @param xmax maximum argument value
  * @param ymin minimum output value
@@ -199,15 +186,14 @@ MCUTILSAPI inline double smoothstep( double x )
  * </ul>
  */
 MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
-                                       const double &ymin, const double &ymax,
-                                       double x )
+                                     const double &ymin, const double &ymax,
+                                     double x )
 {
     return smoothstep( xmin, xmax, x ) * ( ymax - ymin ) + ymin;
 }
 
 /**
  * @brief Estimates standard deviation based on a sample.
- *
  * @param sum sum of samples values
  * @param sum_sq sum of samples values squared
  * @param n number of samples
@@ -229,7 +215,6 @@ MCUTILSAPI inline double stdDev( double sum, double sum_sq, int n )
 
 /**
  * @brief Estimates standard deviation based on a sample.
- *
  * @param x array of sample values
  * @param n number of samples
  * @return standard deviation

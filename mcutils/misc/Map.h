@@ -37,7 +37,6 @@ namespace mc
 
 /**
  * @brief Adds item.
- *
  * @param key
  * @param item
  * @return returns sl::Success on success and sl::Failure on failure
@@ -58,7 +57,6 @@ Result addMapItem( std::map<TYPE_KEY, TYPE_ITEM> *map, TYPE_KEY key, TYPE_ITEM i
 
 /**
  * @brief Returns pinter of item by key value.
- *
  * @param key
  * @return pinter of item or NULL
  */

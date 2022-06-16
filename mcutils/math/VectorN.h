@@ -45,7 +45,6 @@ public:
 
     /**
      * @brief Constructor.
-     *
      * @param size vector size
      */
     explicit VectorN( unsigned int size );
@@ -70,10 +69,8 @@ public:
 
     /**
      * @brief Gets vector item of given indicies.
-     *
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
-     *
      * @return vector item of given indicies.
      */
     double getItem( unsigned int index ) const;
@@ -83,7 +80,6 @@ public:
 
     /**
      * @brief Sets vector item of given indicies.
-     *
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
      */
@@ -93,7 +89,6 @@ public:
 
     /**
      * @brief Returns vector size (number of elements)
-     *
      * @return vector size (number of elements)
      */
     unsigned int getSize() const { return _size; }
@@ -124,7 +119,6 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
@@ -136,7 +130,6 @@ public:
 
     /**
      * @brief Items accessor.
-     *
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
