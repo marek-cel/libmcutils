@@ -42,49 +42,49 @@ PID::PID( )
 ////////////////////////////////////////////////////////////////////////////////
 
 PID::PID( double kp, double ki, double kd )
-    : _antiWindup ( AntiWindup::None )
+    : mAntiWindup ( AntiWindup::None )
 
-    , _kp ( kp )
-    , _ki ( ki )
-    , _kd ( kd )
+    , mKp ( kp )
+    , mKi ( ki )
+    , mKd ( kd )
 
-    , _kaw ( 0.0 )
+    , mKaw ( 0.0 )
 
-    , _min ( std::numeric_limits<double>::min() )
-    , _max ( std::numeric_limits<double>::max() )
+    , mMin ( std::numeric_limits<double>::min() )
+    , mMax ( std::numeric_limits<double>::max() )
 
-    , _error   ( 0.0 )
-    , _error_i ( 0.0 )
-    , _error_d ( 0.0 )
+    , mError   ( 0.0 )
+    , mError_i ( 0.0 )
+    , mError_d ( 0.0 )
 
-    , _value ( 0.0 )
-    , _delta ( 0.0 )
+    , mValue ( 0.0 )
+    , mDelta ( 0.0 )
 
-    , _saturation ( false )
+    , mSaturation ( false )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 PID::PID( double kp, double ki, double kd, double min, double max ) :
-    _antiWindup ( AntiWindup::None ),
+    mAntiWindup ( AntiWindup::None ),
 
-    _kp ( kp ),
-    _ki ( ki ),
-    _kd ( kd ),
+    mKp ( kp ),
+    mKi ( ki ),
+    mKd ( kd ),
 
-    _kaw ( 0.0 ),
+    mKaw ( 0.0 ),
 
-    _min ( min ),
-    _max ( max ),
+    mMin ( min ),
+    mMax ( max ),
 
-    _error   ( 0.0 ),
-    _error_i ( 0.0 ),
-    _error_d ( 0.0 ),
+    mError   ( 0.0 ),
+    mError_i ( 0.0 ),
+    mError_d ( 0.0 ),
 
-    _value ( 0.0 ),
-    _delta ( 0.0 ),
+    mValue ( 0.0 ),
+    mDelta ( 0.0 ),
 
-    _saturation ( true )
+    mSaturation ( true )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,41 +97,41 @@ void PID::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double error_i = _error_i;
+        double error_i = mError_i;
 
-        _error_i = _error_i + ( u - _kaw * _delta ) * dt;
-        _error_d = ( dt > 0.0 ) ? ( u - _error ) / dt : 0.0;
+        mError_i = mError_i + ( u - mKaw * mDelta ) * dt;
+        mError_d = ( dt > 0.0 ) ? ( u - mError ) / dt : 0.0;
 
-        _error = u;
+        mError = u;
 
-        double value_pd = _kp * _error + _kd * _error_d;
-        double value = value_pd + _ki * _error_i;
+        double value_pd = mKp * mError + mKd * mError_d;
+        double value = value_pd + mKi * mError_i;
 
-        if ( _saturation )
+        if ( mSaturation )
         {
-            _value = Math::satur( _min, _max, value );
+            mValue = Math::satur( mMin, mMax, value );
 
             // anti-windup
-            if ( _antiWindup == AntiWindup::Calculation )
+            if ( mAntiWindup == AntiWindup::Calculation )
             {
-                if ( fabs( _ki ) > 0.0 )
+                if ( fabs( mKi ) > 0.0 )
                 {
-                    value_pd = Math::satur( _min, _max, value_pd );
-                    _error_i = ( _value - value_pd ) / _ki;
+                    value_pd = Math::satur( mMin, mMax, value_pd );
+                    mError_i = ( mValue - value_pd ) / mKi;
                 }
             }
-            else if ( _antiWindup == AntiWindup::Conditional )
+            else if ( mAntiWindup == AntiWindup::Conditional )
             {
-                if ( _value != value ) _error_i = error_i;
+                if ( mValue != value ) mError_i = error_i;
             }
-            else if ( _antiWindup == AntiWindup::Filtering )
+            else if ( mAntiWindup == AntiWindup::Filtering )
             {
-                _delta = value - _value;
+                mDelta = value - mValue;
             }
         }
         else
         {
-            _value = value;
+            mValue = value;
         }
     }
 }
@@ -140,85 +140,85 @@ void PID::update( double dt, double u )
 
 void PID::reset()
 {
-    _error_i = 0.0;
-    _error_d = 0.0;
+    mError_i = 0.0;
+    mError_d = 0.0;
 
-    _error = 0.0;
+    mError = 0.0;
 
-    _value = 0.0;
-    _delta = 0.0;
+    mValue = 0.0;
+    mDelta = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setParallel( double kp, double ki, double kd )
 {
-    _kp = kp;
-    _ki = ki;
-    _kd = kd;
+    mKp = kp;
+    mKi = ki;
+    mKd = kd;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setSeries( double k, double tau_i, double tau_d )
 {
-    _kp = k * ( 1.0 + tau_d / tau_i );
-    _ki = k / tau_i;
-    _kd = k * tau_d;
+    mKp = k * ( 1.0 + tau_d / tau_i );
+    mKi = k / tau_i;
+    mKd = k * tau_d;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setStandard( double Kp, double Ti, double Td )
 {
-    _kp = Kp;
-    _ki = Kp / Ti;
-    _kd = Kp * Td;
+    mKp = Kp;
+    mKi = Kp / Ti;
+    mKd = Kp * Td;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setError( double error )
 {
-    _error = error;
+    mError = error;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setValue( double value )
 {
-    _error_i = fabs( _ki ) > 0.0 ? value / _ki : 0.0;
-    _error_d = 0.0;
+    mError_i = fabs( mKi ) > 0.0 ? value / mKi : 0.0;
+    mError_d = 0.0;
 
-    _error = 0.0;
+    mError = 0.0;
 
-    _value = value;
-    _delta = 0.0;
+    mValue = value;
+    mDelta = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setValue( double timeStep, double error, double value )
 {
-    _error_d = ( timeStep > 0.0 ) ? ( error - _error ) / timeStep : 0.0;
-    _error_i = fabs( _ki ) > 0.0
-            ? ( ( value  - _kp * error - _kd * _error_d ) / _ki )
-            : 0.0;
+    mError_d = ( timeStep > 0.0 ) ? ( error - mError ) / timeStep : 0.0;
+    mError_i = fabs( mKi ) > 0.0
+          ? ( ( value  - mKp * error - mKd * mError_d ) / mKi )
+          : 0.0;
 
-    _error = error;
+    mError = error;
 
-    _value = value;
-    _delta = 0.0;
+    mValue = value;
+    mDelta = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setAntiWindup( AntiWindup antiWindup )
 {
-    if ( _antiWindup != antiWindup )
+    if ( mAntiWindup != antiWindup )
     {
-        _antiWindup = antiWindup;
-        _delta = 0.0;
+        mAntiWindup = antiWindup;
+        mDelta = 0.0;
     }
 }
 

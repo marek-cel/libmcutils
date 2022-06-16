@@ -120,11 +120,11 @@ public:
 
 private:
 
-    mc::Integrator *_integrator;
+    mc::Integrator *mIntegrator;
 
-    double _m;      ///< [kg]       mass
-    double _k;      ///< [N/m]      stiffness
-    double _c;      ///< [N/(m/s)]  damping
+    double mM;      ///< [kg]       mass
+    double mK;      ///< [N/m]      stiffness
+    double mC;      ///< [N/(m/s)]  damping
 };
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -49,21 +49,21 @@ public:
     /**
      * @brief Constructor.
      * @param omega [rad/s] cutoff angular frequency
-     * @param y initial output value
+     * @param val initial output value
      */
-    explicit HighPassFilter( double omega, double y = 0.0 );
+    explicit HighPassFilter( double omega, double val = 0.0 );
 
     /** @brief Destructor. */
     ~HighPassFilter() = default;
 
-    inline double getValue() const override { return _y; }
-    inline double getOmega() const { return _omega; }
+    inline double getValue() const override { return mVal; }
+    inline double getOmega() const { return mOmega; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param val output value
      */
-    void setValue( double y );
+    void setValue( double val );
 
     /**
      * @brief Sets cutoff angular frequency.
@@ -86,12 +86,12 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] cutoff angular frequency
-    double _tc;             ///< time constant
+    double mOmega;          ///< [rad/s] cutoff angular frequency
+    double mTc;             ///< time constant
 
-    double _u_prev;         ///< previous input value
+    double mInp_prev;       ///< previous input value
 
-    double _y;              ///< current value
+    double mVal;            ///< current value
 };
 
 } // namespace mc

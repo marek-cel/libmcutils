@@ -38,33 +38,33 @@ LowPassFilter::LowPassFilter()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LowPassFilter::LowPassFilter( double omega, double y )
-    : _omega ( omega )
-    , _tc ( 1.0 / omega )
-    , _y ( y )
+LowPassFilter::LowPassFilter( double omega, double val )
+    : mOmega ( omega )
+    , mTc ( 1.0 / mOmega )
+    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LowPassFilter::setOmega( double omega )
 {
-    _omega = std::max( 0.0, omega );
-    _tc = 1.0 / _omega;
+    mOmega = std::max( 0.0, omega );
+    mTc = 1.0 / mOmega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LowPassFilter::setCutoffFreq( double freq )
 {
-    _omega = 2.0 * M_PI * std::max( 0.0, freq );
-    _tc = 1.0 / _omega;
+    mOmega = 2.0 * M_PI * std::max( 0.0, freq );
+    mTc = 1.0 / mOmega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LowPassFilter::setValue( double y )
+void LowPassFilter::setValue( double val )
 {
-    _y = y;
+    mVal = val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ void LowPassFilter::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _y = _y + ( 1.0 - exp( -dt / _tc ) ) * ( u - _y );
+        mVal = mVal + ( 1.0 - exp( -dt / mTc ) ) * ( u - mVal );
     }
 }
 

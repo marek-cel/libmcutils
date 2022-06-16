@@ -118,22 +118,22 @@ public:
     void reset();
 
     /** @brief Returns controller output. */
-    inline double getValue() const override { return _value; }
+    inline double getValue() const override { return mValue; }
 
-    inline double getKp() const { return _kp; }
-    inline double getKi() const { return _ki; }
-    inline double getKd() const { return _kd; }
+    inline double getKp() const { return mKp; }
+    inline double getKi() const { return mKi; }
+    inline double getKd() const { return mKd; }
 
-    inline double getKaw() const { return _kaw; }
+    inline double getKaw() const { return mKaw; }
 
-    inline double getMin() const { return _min; }
-    inline double getMax() const { return _max; }
+    inline double getMin() const { return mMin; }
+    inline double getMax() const { return mMax; }
 
-    inline AntiWindup getAntiWindup() const { return _antiWindup; }
+    inline AntiWindup getAntiWindup() const { return mAntiWindup; }
 
-    inline bool getSaturation() const { return _saturation; }
+    inline bool getSaturation() const { return mSaturation; }
 
-    inline double getError() const { return _error; }
+    inline double getError() const { return mError; }
 
     /**
      * @brief Sets parameters of parallel form.
@@ -173,40 +173,40 @@ public:
 
     void setValue( double timeStep, double error, double value );
 
-    inline void setKp( double kp ) { _kp = kp; }
-    inline void setKi( double ki ) { _ki = ki; }
-    inline void setKd( double kd ) { _kd = kd; }
+    inline void setKp( double kp ) { mKp = kp; }
+    inline void setKi( double ki ) { mKi = ki; }
+    inline void setKd( double kd ) { mKd = kd; }
 
-    inline void setKaw( double kaw ) { _kaw = kaw; }
+    inline void setKaw( double kaw ) { mKaw = kaw; }
 
-    inline void setMin( double min ) { _min = min; }
-    inline void setMax( double max ) { _max = max; }
+    inline void setMin( double min ) { mMin = min; }
+    inline void setMax( double max ) { mMax = max; }
 
     void setAntiWindup( AntiWindup antiWindup );
 
-    inline void setSaturation( bool saturation ) { _saturation  = saturation; }
+    inline void setSaturation( bool saturation ) { mSaturation  = saturation; }
 
 private:
 
-    AntiWindup _antiWindup; ///< anti-windup method
+    AntiWindup mAntiWindup; ///< anti-windup method
 
-    double _kp;             ///< proportional gain
-    double _ki;             ///< integral gain
-    double _kd;             ///< derivative gain
+    double mKp;             ///< proportional gain
+    double mKi;             ///< integral gain
+    double mKd;             ///< derivative gain
 
-    double _kaw;            ///< anti-windup gain
+    double mKaw;            ///< anti-windup gain
 
-    double _min;            ///< minimum output value
-    double _max;            ///< maximum output value
+    double mMin;            ///< minimum output value
+    double mMax;            ///< maximum output value
 
-    double _error;          ///< error
-    double _error_i;        ///< error integral sum
-    double _error_d;        ///< error derivative
+    double mError;          ///< error
+    double mError_i;        ///< error integral sum
+    double mError_d;        ///< error derivative
 
-    double _value;          ///< output value
-    double _delta;          ///< difference between raw and saturated output values
+    double mValue;          ///< output value
+    double mDelta;          ///< difference between raw and saturated output values
 
-    bool _saturation;       ///< specifies if saturation is enabled
+    bool mSaturation;       ///< specifies if saturation is enabled
 };
 
 } // namespace mc

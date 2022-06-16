@@ -54,19 +54,19 @@ public:
     Lead();
 
     /** @brief Constructor. */
-    explicit Lead( double tc, double y = 0.0 );
+    explicit Lead( double tc, double val = 0.0 );
 
     /** @brief Destructor. */
     ~Lead() = default;
 
-    inline double getValue() const override { return _y; }
-    inline double getTimeConst() const { return _tc; }
+    inline double getValue() const override { return mVal; }
+    inline double getTimeConst() const { return mTc; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param val output value
      */
-    void setValue( double y );
+    void setValue( double val );
 
     /**
      * @brief Sets time constant.
@@ -83,10 +83,10 @@ public:
 
 private:
 
-    double _tc;             ///< time constant
+    double mTc;             ///< time constant
 
-    double _u_prev;         ///< previous input
-    double _y;              ///< current value
+    double mInp_prev;       ///< previous input
+    double mVal;            ///< current value
 };
 
 } // namespace mc

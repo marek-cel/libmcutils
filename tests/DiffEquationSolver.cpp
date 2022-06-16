@@ -7,11 +7,11 @@
 DiffEquationSolver::DiffEquationSolver( double m, double k, double c,
                                         mc::Integrator *integrator )
 {
-    _m = m;
-    _k = k;
-    _c = c;
+    mM = m;
+    mK = k;
+    mC = c;
 
-    _integrator = integrator;
+    mIntegrator = integrator;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
     s( 0 ) = x_0;
     s( 1 ) = x_1;
 
-    _integrator->setDerivFun(
+    mIntegrator->setDerivFun(
         [this]( const mc::VectorN &state,
                       mc::VectorN *deriv )
         {
@@ -39,7 +39,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
     double x = 0.0;
 
     // m * r^2  +  c * r  +  k  =  0
-    double delta = calcDelta( _m, _c, _k );
+    double delta = calcDelta( mM, mC, mK );
 
     //std::cout << "Delta= " << delta << std::endl;
 
@@ -49,8 +49,8 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
 
         // a  =  -c / ( 2 * m )
         // b  =  sqrt( 4 * m * k  -  c^2 ) / ( 2 * m )
-        double a = -_c / ( 2.0 * _m );
-        double b = sqrt( 4.0*_m*_k - _c*_c ) / ( 2.0 * _m );
+        double a = -mC / ( 2.0 * mM );
+        double b = sqrt( 4.0*mM*mK - mC*mC ) / ( 2.0 * mM );
 
         // x ( t )  =  e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
         // x'( t )  =  a * e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
@@ -77,7 +77,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
 
             t += T_STEP;
 
-            _integrator->integrate( T_STEP, &s );
+            mIntegrator->integrate( T_STEP, &s );
         }
     }
     else if ( delta > ZERO ) // numerical zero
@@ -87,8 +87,8 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
         //  r_1  =  ( -c - sqrt( Delta ) ) / ( 2 * m )
         //  r_2  =  ( -c + sqrt( Delta ) ) / ( 2 * m )
         double sqrt_delta = sqrt( delta );
-        double r_1 = ( -_c - sqrt_delta ) / ( 2.0 * _m );
-        double r_2 = ( -_c + sqrt_delta ) / ( 2.0 * _m );
+        double r_1 = ( -mC - sqrt_delta ) / ( 2.0 * mM );
+        double r_2 = ( -mC + sqrt_delta ) / ( 2.0 * mM );
 
         // x ( t )  =  C_1 * e^( r_1 * t )  +  C_2 * e^( r_2 * t )
         // x'( t )  =  C_1 * r_1 * e^( r_1 * t )  +  C_2 * r_2 * e^( r_2 * t )
@@ -114,7 +114,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
 
             t += T_STEP;
 
-            _integrator->integrate( T_STEP, &s );
+            mIntegrator->integrate( T_STEP, &s );
         }
     }
     else // delta == numerical zero
@@ -122,7 +122,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
         // x( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
 
         // r_1  =  -c / ( 2 * m )
-        double r_1 = -_c / ( 2.0 * _m );
+        double r_1 = -mC / ( 2.0 * mM );
 
         // x ( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
         // x'( t )  =  C_1  * e^( r_1 * t ) + ( C_1 * t + C_2 ) * r_1 * e^( r_1 * t )
@@ -148,7 +148,7 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
 
             t += T_STEP;
 
-            _integrator->integrate( T_STEP, &s );
+            mIntegrator->integrate( T_STEP, &s );
         }
     }
 
@@ -168,5 +168,5 @@ void DiffEquationSolver::computeStateDeriv( const mc::VectorN &state,
                                             mc::VectorN *deriv )
 {
     (*deriv)( 0 ) = state( 1 );
-    (*deriv)( 1 ) = -_k * state( 0 ) - _c * state( 1 );
+    (*deriv)( 1 ) = -mK * state( 0 ) - mC * state( 1 );
 }

@@ -37,17 +37,17 @@ Lead::Lead()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Lead::Lead( double tc, double y )
-    : _tc ( tc )
-    , _u_prev ( 0.0 )
-    , _y ( y )
+Lead::Lead( double tc, double val )
+    : mTc ( tc )
+    , mInp_prev ( 0.0 )
+    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lead::setValue( double y )
+void Lead::setValue( double val )
 {
-    _y = y;
+    mVal = val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ void Lead::setTimeConst( double tc )
 {
     if ( tc > 0.0 )
     {
-        _tc = tc;
+        mTc = tc;
     }
 }
 
@@ -66,9 +66,9 @@ void Lead::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double du_dt = ( u - _u_prev ) / dt;
-        _y = _tc * du_dt + u;
-        _u_prev = u;
+        double du_dt = ( u - mInp_prev ) / dt;
+        mVal = mTc * du_dt + u;
+        mInp_prev = u;
     }
 }
 

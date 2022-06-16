@@ -38,34 +38,34 @@ HighPassFilter::HighPassFilter()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-HighPassFilter::HighPassFilter( double omega, double y )
-    : _omega ( omega )
-    , _tc ( 1.0 / _omega )
-    , _u_prev ( 0.0 )
-    , _y ( y )
+HighPassFilter::HighPassFilter( double omega, double val )
+    : mOmega ( omega )
+    , mTc ( 1.0 / mOmega )
+    , mInp_prev ( 0.0 )
+    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void HighPassFilter::setValue( double y )
+void HighPassFilter::setValue( double val )
 {
-    _y = y;
+    mVal = val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void HighPassFilter::setOmega( double omega )
 {
-    _omega = std::max( 0.0, omega );
-    _tc = 1.0 / _omega;
+    mOmega = std::max( 0.0, omega );
+    mTc = 1.0 / mOmega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void HighPassFilter::setCutoffFreq( double freq )
 {
-    _omega = 2.0 * M_PI * std::max( 0.0, freq );
-    _tc = 1.0 / _omega;
+    mOmega = 2.0 * M_PI * std::max( 0.0, freq );
+    mTc = 1.0 / mOmega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,9 +74,9 @@ void HighPassFilter::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double u_dif = ( dt > 0.0 ) ? ( u - _u_prev ) / dt : 0.0;
-        _y = _y + ( 1.0 - exp( -dt / _tc ) ) * ( _tc * u_dif - _y );
-        _u_prev = u;
+        double u_dif = ( dt > 0.0 ) ? ( u - mInp_prev ) / dt : 0.0;
+        mVal = mVal + ( 1.0 - exp( -dt / mTc ) ) * ( mTc * u_dif - mVal );
+        mInp_prev = u;
     }
 }
 

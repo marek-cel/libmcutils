@@ -38,16 +38,16 @@ double Lag::calculate( double u, double y, double dt, double tc )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Lag::Lag( double tc, double y )
-    : _tc ( tc )
-    , _y ( y )
+Lag::Lag( double tc, double val )
+    : mTc ( tc )
+    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lag::setValue( double y )
+void Lag::setValue( double val )
 {
-    _y = y;
+    mVal = val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +56,7 @@ void Lag::setTimeConst( double tc )
 {
     if ( tc > 0.0 )
     {
-        _tc = tc;
+        mTc = tc;
     }
 }
 
@@ -66,7 +66,7 @@ void Lag::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _y = calculate( u, _y, dt, _tc );
+        mVal = calculate( u, mVal, dt, mTc );
     }
 }
 

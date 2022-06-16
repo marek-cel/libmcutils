@@ -38,46 +38,46 @@ Lag2::Lag2()
 ////////////////////////////////////////////////////////////////////////////////
 
 Lag2::Lag2( const Lag2 &lag )
-    : _lag1 ( new Lag( lag._lag1->getTimeConst(), lag._lag1->getValue() ) )
-    , _tc2 ( lag._tc2 )
-    , _y ( lag._y )
+    : mLag1 ( new Lag( lag.mLag1->getTimeConst(), lag.mLag1->getValue() ) )
+    , mTc2 ( lag.mTc2 )
+    , mVal ( lag.mVal )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Lag2::Lag2( double tc1, double tc2, double y )
-    : _lag1 ( new Lag( tc1, y ) )
-    , _tc2 ( tc2 )
-    , _y ( y )
+Lag2::Lag2( double tc1, double tc2, double val )
+    : mLag1 ( new Lag( tc1, val ) )
+    , mTc2 ( tc2 )
+    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Lag2::~Lag2()
 {
-    if ( _lag1 ) { delete _lag1; } _lag1 = nullptr;
+    if ( mLag1 ) { delete mLag1; } mLag1 = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lag2::setValue( double y )
+void Lag2::setValue( double val )
 {
-    _lag1->setValue( y );
-    _y = y;
+    mLag1->setValue( val );
+    mVal = val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Lag2::setTimeConst1( double tc1 )
 {
-    _lag1->setTimeConst( tc1 );
+    mLag1->setTimeConst( tc1 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Lag2::setTimeConst2( double tc2 )
 {
-    _tc2 = tc2;
+    mTc2 = tc2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,8 +86,8 @@ void Lag2::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _lag1->update( dt, u );
-        _y = Lag::calculate( _lag1->getValue(), _y, dt, _tc2 );
+        mLag1->update( dt, u );
+        mVal = Lag::calculate( mLag1->getValue(), mVal, dt, mTc2 );
     }
 }
 
@@ -95,11 +95,11 @@ void Lag2::update( double dt, double u )
 
 Lag2& Lag2::operator= ( const Lag2 &lag )
 {
-    _lag1->setTimeConst( lag._lag1->getTimeConst() );
-    _lag1->setValue( lag._lag1->getValue() );
+    mLag1->setTimeConst( lag.mLag1->getTimeConst() );
+    mLag1->setValue( lag.mLag1->getValue() );
 
-    _tc2 = lag._tc2;
-    _y   = lag._y;
+    mTc2 = lag.mTc2;
+    mVal = lag.mVal;
 
     return (*this);
 }

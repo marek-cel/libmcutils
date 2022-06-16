@@ -100,17 +100,18 @@ private:
 
     double mOmega;          ///< [rad/s] undamped angular frequency
     double mZeta;           ///< [-] <0.0;1.0> dampipng coefficient
-    double mVal;            ///< current value
 
     double mC3;             ///< c3 coefficient
     double mC5;             ///< c5 coefficient
     double mC6;             ///< c6 coefficient
 
-    double mInp_prev_1;     ///< input value
-    double mInp_prev_2;     ///<
+    double mInp_prev_1;     ///< input previous value
+    double mInp_prev_2;     ///< input value 2 steps before
 
-    double mVal_prev_1;     ///<
-    double mVal_prev_2;     ///<
+    double mVal_prev_1;     ///< output previous value
+    double mVal_prev_2;     ///< output value 2 steps before
+
+    double mVal;            ///< current value
 };
 
 } // namespace mc
