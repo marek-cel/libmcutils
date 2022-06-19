@@ -18,17 +18,17 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
-    $$PWD/control/TestHighPassFilter.cpp \
-    $$PWD/control/TestLag.cpp \
-    $$PWD/control/TestLag2.cpp \
-    $$PWD/control/TestLead.cpp \
-    $$PWD/control/TestLeadLag.cpp \
-    $$PWD/control/TestLowPassFilter.cpp \
-    $$PWD/control/TestMovingAverageFilter.cpp \
-    $$PWD/control/TestMovingMedianFilter.cpp \
-    $$PWD/control/TestOscillator.cpp \
-    $$PWD/control/TestPID.cpp \
-    $$PWD/control/TestSystem2.cpp
+    $$PWD/ctrl/TestHighPassFilter.cpp \
+    $$PWD/ctrl/TestLag.cpp \
+    $$PWD/ctrl/TestLag2.cpp \
+    $$PWD/ctrl/TestLead.cpp \
+    $$PWD/ctrl/TestLeadLag.cpp \
+    $$PWD/ctrl/TestLowPassFilter.cpp \
+    $$PWD/ctrl/TestMovingAverageFilter.cpp \
+    $$PWD/ctrl/TestMovingMedianFilter.cpp \
+    $$PWD/ctrl/TestOscillator.cpp \
+    $$PWD/ctrl/TestPID.cpp \
+    $$PWD/ctrl/TestSystem2.cpp
 
 ################################################################################
 

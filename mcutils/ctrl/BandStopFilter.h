@@ -19,45 +19,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_DOXYGEN_H_
-#define MCUTILS_DOXYGEN_H_
+#ifndef MCUTILS_CTRL_BANDPASSFILTER_H_
+#define MCUTILS_CTRL_BANDPASSFILTER_H_
 
-/***************************************************************************//**
- * @author Marek M. Cel
- *
- * @mainpage libmcutil
- *
- * @section Introduction
- *
- * <tt>libmcutil</tt> is a various utilities library.
- *
- * @section Modules
- *
- * @subsection ctrl
- * This module contains classes representing common control elements.
- *
- * @subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
- *
- * @subsection math
- * This module contains utilities for various mathematical operations.
- *
- * @subsection misc
- * This module contains miscellaneous utilities.
- *
- * @subsection net
- * This module contains various networking utilities.
- *
- * @subsection physics
- * This module contains utilities for various physical computations.
- *
- * @subsection time
- * This module contains time and date ralted utilities.
- *
- * @subsection xml
- * This module contains XML documents parsing utilities.
- *
- ******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_DOXYGEN_H_
+#include <mcutils/defs.h>
+
+#include <mcutils/ctrl/IControlElement.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+/**
+ * @brief First-order band-stop filter (BPF) or notch filter class.
+ *
+ * Transfer function:
+ * G(s)  =
+ */
+class MCUTILSAPI BandStopFilter final : public IControlElement
+{
+public:
+
+    /** @brief Constructor. */
+    BandStopFilter();
+};
+
+} // namespace mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTILS_CTRL_BANDPASSFILTER_H_

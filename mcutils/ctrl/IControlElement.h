@@ -19,45 +19,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_DOXYGEN_H_
-#define MCUTILS_DOXYGEN_H_
+#ifndef MCUTILS_CTRL_ICONTROLELEMENT_H_
+#define MCUTILS_CTRL_ICONTROLELEMENT_H_
 
-/***************************************************************************//**
- * @author Marek M. Cel
- *
- * @mainpage libmcutil
- *
- * @section Introduction
- *
- * <tt>libmcutil</tt> is a various utilities library.
- *
- * @section Modules
- *
- * @subsection ctrl
- * This module contains classes representing common control elements.
- *
- * @subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
- *
- * @subsection math
- * This module contains utilities for various mathematical operations.
- *
- * @subsection misc
- * This module contains miscellaneous utilities.
- *
- * @subsection net
- * This module contains various networking utilities.
- *
- * @subsection physics
- * This module contains utilities for various physical computations.
- *
- * @subsection time
- * This module contains time and date ralted utilities.
- *
- * @subsection xml
- * This module contains XML documents parsing utilities.
- *
- ******************************************************************************/
+////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_DOXYGEN_H_
+#include <mcutils/defs.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+/**
+ * @brief Interface class for signal processing elements classes.
+ */
+class MCUTILSAPI IControlElement
+{
+public:
+
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
+    /** @brief Destructor. */
+    virtual ~IControlElement() {}
+    // LCOV_EXCL_STOP
+
+    /**
+     * @brief Pure virtual function to get the current output value.
+     * @return current output value
+     */
+    virtual double getValue() const = 0;
+
+    /**
+     * @brief Pure virtual function to update element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
+     */
+    virtual void update( double dt, double u ) = 0;
+};
+
+} // namespace mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTILS_CTRL_ICONTROLELEMENT_H_
