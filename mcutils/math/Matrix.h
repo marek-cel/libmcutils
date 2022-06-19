@@ -51,28 +51,28 @@ public:
 
     /** @brief Constructor. */
     Matrix()
-        : _rows ( ROWS )
-        , _cols ( COLS )
-        , _size ( ROWS * COLS )
-        , _items { 0.0 }
+        : mRows ( ROWS )
+        , mCols ( COLS )
+        , mSize ( ROWS * COLS )
+        , mItems { 0.0 }
     {}
 
     /** @brief Copy constructor. */
     Matrix( const Matrix< ROWS, COLS > &matrix )
-        : _rows ( ROWS )
-        , _cols ( COLS )
-        , _size ( ROWS * COLS )
+        : mRows ( ROWS )
+        , mCols ( COLS )
+        , mSize ( ROWS * COLS )
     {
-        std::memcpy( _items, matrix._items, sizeof(_items) );
+        std::memcpy( mItems, matrix.mItems, sizeof(mItems) );
     }
 
     /** @brief Constructor. */
     explicit Matrix( const double items[] )
-        : _rows ( ROWS )
-        , _cols ( COLS )
-        , _size ( ROWS * COLS )
+        : mRows ( ROWS )
+        , mCols ( COLS )
+        , mSize ( ROWS * COLS )
     {
-        std::memcpy( _items, items, sizeof(_items) );
+        std::memcpy( mItems, items, sizeof(mItems) );
     }
 
     /** @brief Destructor. */
@@ -81,13 +81,13 @@ public:
     /** @return "true" if all items are valid */
     bool isValid() const
     {
-        return mc::isValid( _items, _size );
+        return mc::isValid( mItems, mSize );
     }
 
     /** @brief Puts matrix items into given array. */
     void getArray( double items[] ) const
     {
-        std::memcpy( items, _items, sizeof(_items) );
+        std::memcpy( items, mItems, sizeof(mItems) );
     }
 
     /**
@@ -100,9 +100,9 @@ public:
      */
     double getItem( unsigned int row, unsigned int col ) const
     {
-        if ( ( row < _rows ) && ( col < _cols ) )
+        if ( ( row < mRows ) && ( col < mCols ) )
         {
-            return _items[ row * _cols + col ];
+            return mItems[ row * mCols + col ];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
@@ -111,7 +111,7 @@ public:
     /** @brief Sets matrix items from given array. */
     void setArray( const double *items )
     {
-        std::memcpy( _items, items, sizeof(_items) );
+        std::memcpy( mItems, items, sizeof(mItems) );
     }
 
     /**
@@ -124,20 +124,20 @@ public:
      */
     void setItem( unsigned int row, unsigned int col, double value )
     {
-        if ( ( row < _rows ) && ( col < _cols ) )
+        if ( ( row < mRows ) && ( col < mCols ) )
         {
-            _items[ row * _cols + col ] = value;
+            mItems[ row * mCols + col ] = value;
         }
     }
 
     /** @brief Swaps matrix rows. */
     void swapRows( unsigned int row1, unsigned int row2 )
     {
-        if ( ( row1 < _rows ) && ( row2 < _rows ) )
+        if ( ( row1 < mRows ) && ( row2 < mRows ) )
         {
             for ( unsigned int c = 0; c < COLS; ++c )
             {
-                std::swap( _items[ row1 * _cols + c ], _items[ row2 * _cols + c ] );
+                std::swap( mItems[ row1 * mCols + c ], mItems[ row2 * mCols + c ] );
             }
         }
     }
@@ -147,14 +147,14 @@ public:
     {
         std::stringstream ss;
 
-        for ( unsigned int r = 0; r < _rows; ++r )
+        for ( unsigned int r = 0; r < mRows; ++r )
         {
-            for ( unsigned int c = 0; c < _cols; ++c )
+            for ( unsigned int c = 0; c < mCols; ++c )
             {
                 if ( r > 0 || c >  0 ) ss << ",";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
-                ss << _items[ r * _cols + c ];
+                ss << mItems[ r * mCols + c ];
             }
         }
 
@@ -172,7 +172,7 @@ public:
      */
     inline double operator() ( unsigned int row, unsigned int col ) const
     {
-        return _items[ row * _cols + col ];
+        return mItems[ row * mCols + col ];
     }
 
     /**
@@ -185,13 +185,13 @@ public:
      */
     inline double& operator() ( unsigned int row, unsigned int col )
     {
-        return _items[ row * _cols + col ];
+        return mItems[ row * mCols + col ];
     }
 
     /** @brief Assignment operator. */
     Matrix< ROWS, COLS >& operator= ( const Matrix< ROWS, COLS > &matrix )
     {
-        std::memcpy( _items, matrix._items, sizeof(_items) );
+        std::memcpy( mItems, matrix.mItems, sizeof(mItems) );
         return (*this);
     }
 
@@ -276,9 +276,9 @@ public:
     {
         bool result = true;
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            result = result && ( _items[ i ] == matrix._items[ i ] );
+            result = result && ( mItems[ i ] == matrix.mItems[ i ] );
         }
 
         return result;
@@ -292,58 +292,58 @@ public:
 
 protected:
 
-    const unsigned int _rows;       ///< number of rows
-    const unsigned int _cols;       ///< number of columns
-    const unsigned int _size;       ///< matrix size
+    const unsigned int mRows;       ///< number of rows
+    const unsigned int mCols;       ///< number of columns
+    const unsigned int mSize;       ///< matrix size
 
-    double _items[ ROWS * COLS ];   ///< matrix items
+    double mItems[ ROWS * COLS ];   ///< matrix items
 
     /** @brief Adds matrix. */
     void add( const Matrix< ROWS, COLS > &matrix )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] += matrix._items[ i ];
+            mItems[ i ] += matrix.mItems[ i ];
         }
     }
 
     /** @brief Negates matrix. */
     void negate()
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] = -_items[ i ];
+            mItems[ i ] = -mItems[ i ];
         }
     }
 
     /** @brief Substracts matrix. */
     void substract( const Matrix< ROWS, COLS > &matrix )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] -= matrix._items[ i ];
+            mItems[ i ] -= matrix.mItems[ i ];
         }
     }
 
     /** @brief Multiplies by value. */
     void multiplyByValue( double value )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] *= value;
+            mItems[ i ] *= value;
         }
     }
 
     /** @brief Multiplies by vector. */
     void multiplyByVector( const Vector<COLS> &vect, Vector<ROWS> *result ) const
     {
-        for ( unsigned int r = 0; r < _rows; ++r )
+        for ( unsigned int r = 0; r < mRows; ++r )
         {
             (*result)(r) = 0.0;
 
-            for ( unsigned int c = 0; c < _cols; ++c )
+            for ( unsigned int c = 0; c < mCols; ++c )
             {
-                (*result)(r) += ( _items[ r*_cols + c ] * vect(c) );
+                (*result)(r) += ( mItems[ r*mCols + c ] * vect(c) );
             }
         }
     }
@@ -351,9 +351,9 @@ protected:
     /** @brief Divides by value. */
     void divideByValue( double value )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] /= value;
+            mItems[ i ] /= value;
         }
     }
 };

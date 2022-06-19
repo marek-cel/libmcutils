@@ -76,7 +76,7 @@ public:
     double getKeyByIndex( unsigned int index ) const;
 
     /** */
-    inline unsigned int getSize() const { return static_cast<unsigned int>( _data.size() ); }
+    inline unsigned int getSize() const { return static_cast<unsigned int>( mData.size() ); }
 
     /**
      * @brief Returns key of minimum table value.
@@ -182,7 +182,7 @@ private:
 
     using Data = std::map< double, std::pair< double, double > >;
 
-    Data _data;     ///< table data
+    Data mData;     ///< table data
 
     /**
      * @brief Initializes data with a given data set. Variant for every except the last entry.

@@ -100,17 +100,17 @@ public:
     double t_inv( double t, double max_error = 1.0e-9,
                   unsigned int max_iterations = 10 );
 
-    double getMaxX() const { return _max_x; }
-    double getMaxY() const { return _max_y; }
+    double getMaxX() const { return mMax_x; }
+    double getMaxY() const { return mMax_y; }
 
 private:
 
-    const double _a;        ///< [m] ellipsoid semi major axis
-    const double _e;        ///< [-] ellipsoid first eccentricity
-    const double _e2;       ///< [-] ellipsoid first eccentricity squared
+    const double mA;        ///< [m] ellipsoid semi major axis
+    const double mE;        ///< [-] ellipsoid first eccentricity
+    const double mE2;       ///< [-] ellipsoid first eccentricity squared
 
-    const double _max_x;    ///< [m] maximum Mercator x-coordinate for longitude 180 deg
-    const double _max_y;    ///< [m] maximum Mercator y-coordinate for latitude 85 deg
+    const double mMax_x;    ///< [m] maximum Mercator x-coordinate for longitude 180 deg
+    const double mMax_y;    ///< [m] maximum Mercator y-coordinate for latitude 85 deg
 };
 
 } // namespace mc

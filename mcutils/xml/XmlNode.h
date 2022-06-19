@@ -91,7 +91,7 @@ public:
      */
     inline std::string getFile() const
     {
-        return _file;
+        return mFile;
     }
 
     /**
@@ -106,7 +106,7 @@ public:
     {
         if ( isValid() )
         {
-            return static_cast<int>(_node->line);
+            return static_cast<int>(mNode->line);
         }
 
         return std::numeric_limits<int>::quiet_NaN();
@@ -119,7 +119,7 @@ public:
     {
         if ( isValid() )
         {
-            return std::string( reinterpret_cast<const char*>(_node->name) );
+            return std::string( reinterpret_cast<const char*>(mNode->name) );
         }
 
         return std::string();
@@ -151,7 +151,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->properties != nullptr );
+            return ( mNode->properties != nullptr );
         }
 
         return false;
@@ -164,7 +164,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->children != nullptr );
+            return ( mNode->children != nullptr );
         }
 
         return false;
@@ -177,7 +177,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->type == XML_ATTRIBUTE_NODE );
+            return ( mNode->type == XML_ATTRIBUTE_NODE );
         }
 
         return false;
@@ -190,7 +190,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->type == XML_COMMENT_NODE );
+            return ( mNode->type == XML_COMMENT_NODE );
         }
 
         return false;
@@ -203,7 +203,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->type == XML_ELEMENT_NODE );
+            return ( mNode->type == XML_ELEMENT_NODE );
         }
 
         return false;
@@ -216,7 +216,7 @@ public:
     {
         if ( isValid() )
         {
-            return ( _node->type == XML_TEXT_NODE );
+            return ( mNode->type == XML_TEXT_NODE );
         }
 
         return false;
@@ -227,14 +227,14 @@ public:
      */
     inline bool isValid() const
     {
-        return ( _node ) ? true : false;
+        return ( mNode ) ? true : false;
     }
 
     /** @brief Assignment operator. */
     inline XmlNode& operator= ( const XmlNode &node )
     {
-        _file = node._file;
-        _node = node._node;
+        mFile = node.mFile;
+        mNode = node.mNode;
 
         return (*this);
     }
@@ -242,16 +242,16 @@ public:
     /** @brief Moving assignment operator. */
     inline XmlNode& operator= ( XmlNode &&node )
     {
-        _file = std::move( node._file );
-        _node = std::move( node._node );
+        mFile = std::move( node.mFile );
+        mNode = std::move( node.mNode );
 
         return (*this);
     }
 
 private:
 
-    std::string _file;  ///< XML file name
-    xmlNodePtr  _node;  ///< XML node pointer
+    std::string mFile;  ///< XML file name
+    xmlNodePtr  mNode;  ///< XML node pointer
 };
 
 } // namespace mc

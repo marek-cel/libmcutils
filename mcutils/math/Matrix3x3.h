@@ -83,25 +83,25 @@ public:
     /** @brief Destructor. */
     virtual ~Matrix3x3() = default;
 
-    inline double xx() const { return _xx; }
-    inline double xy() const { return _xy; }
-    inline double xz() const { return _xz; }
-    inline double yx() const { return _yx; }
-    inline double yy() const { return _yy; }
-    inline double yz() const { return _yz; }
-    inline double zx() const { return _zx; }
-    inline double zy() const { return _zy; }
-    inline double zz() const { return _zz; }
+    inline double xx() const { return mA_xx; }
+    inline double xy() const { return mA_xy; }
+    inline double xz() const { return mA_xz; }
+    inline double yx() const { return mA_yx; }
+    inline double yy() const { return mA_yy; }
+    inline double yz() const { return mA_yz; }
+    inline double zx() const { return mA_zx; }
+    inline double zy() const { return mA_zy; }
+    inline double zz() const { return mA_zz; }
 
-    inline double& xx() { return _xx; }
-    inline double& xy() { return _xy; }
-    inline double& xz() { return _xz; }
-    inline double& yx() { return _yx; }
-    inline double& yy() { return _yy; }
-    inline double& yz() { return _yz; }
-    inline double& zx() { return _zx; }
-    inline double& zy() { return _zy; }
-    inline double& zz() { return _zz; }
+    inline double& xx() { return mA_xx; }
+    inline double& xy() { return mA_xy; }
+    inline double& xz() { return mA_xz; }
+    inline double& yx() { return mA_yx; }
+    inline double& yy() { return mA_yy; }
+    inline double& yz() { return mA_yz; }
+    inline double& zx() { return mA_zx; }
+    inline double& zy() { return mA_zy; }
+    inline double& zz() { return mA_zz; }
 
     /**
      * @brief Sets items of the matrix.
@@ -166,17 +166,17 @@ public:
 
 private:
 
-    double &_xx;    ///< xx element
-    double &_xy;    ///< xy element
-    double &_xz;    ///< xz element
+    double &mA_xx;  ///< xx element
+    double &mA_xy;  ///< xy element
+    double &mA_xz;  ///< xz element
 
-    double &_yx;    ///< yx element
-    double &_yy;    ///< yy element
-    double &_yz;    ///< yz element
+    double &mA_yx;  ///< yx element
+    double &mA_yy;  ///< yy element
+    double &mA_yz;  ///< yz element
 
-    double &_zx;    ///< zx element
-    double &_zy;    ///< zy element
-    double &_zz;    ///< zz element
+    double &mA_zx;  ///< zx element
+    double &mA_zy;  ///< zy element
+    double &mA_zz;  ///< zz element
 };
 
 ////////////////////////////////////////////////////////////////////////////////

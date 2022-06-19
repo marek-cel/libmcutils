@@ -58,15 +58,15 @@ public:
     /** @return true if all items are valid */
     bool isValid() const;
 
-    inline int    deg() const { return _deg; }
-    inline int    min() const { return _min; }
-    inline double sec() const { return _sec; }
+    inline int    deg() const { return mDeg; }
+    inline int    min() const { return mMin; }
+    inline double sec() const { return mSec; }
 
     /**
      * @brief Returns angle expressed in radians.
      * @return angle expressed in radians
      */
-    inline double getAngle() const { return _angle; }
+    inline double getAngle() const { return mAngle; }
 
     /**
      * @brief Sets angle value.
@@ -88,11 +88,11 @@ public:
 
 private:
 
-    double _angle;  ///< [rad] angle
+    double mAngle;  ///< [rad] angle
 
-    int    _deg;    ///< degree part
-    int    _min;    ///< minute part (always greater than or equal to 0)
-    double _sec;    ///< second part (always greater than or equal to 0)
+    int    mDeg;    ///< degree part
+    int    mMin;    ///< minute part (always greater than or equal to 0)
+    double mSec;    ///< second part (always greater than or equal to 0)
 };
 
 } // namespace mc

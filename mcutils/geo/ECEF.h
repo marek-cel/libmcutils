@@ -61,8 +61,8 @@ class MCUTILSAPI ECEF
 {
 public:
 
-    static const Matrix3x3 _enu2ned;    ///< matrix of rotation from ENU to NED
-    static const Matrix3x3 _ned2enu;    ///< matrix of rotation from NED to ENU
+    static const Matrix3x3 mT_enu2ned;  ///< matrix of rotation from ENU to NED
+    static const Matrix3x3 mT_ned2enu;  ///< matrix of rotation from NED to ENU
 
     /** @brief Constructor. */
     ECEF();
@@ -168,16 +168,16 @@ public:
      */
     Geo getGeoOffset( double heading, double offset_x, double offset_y ) const;
 
-    inline double getA   () const { return _a;   }
-    inline double getF   () const { return _f;   }
-    inline double getB   () const { return _b;   }
-    inline double getR1  () const { return _r1;  }
-    inline double getA2  () const { return _a2;  }
-    inline double getB2  () const { return _b2;  }
-    inline double getE2  () const { return _e2;  }
-    inline double getE   () const { return _e;   }
-    inline double getEp2 () const { return _ep2; }
-    inline double getEp  () const { return _ep;  }
+    inline double getA   () const { return mA;   }
+    inline double getF   () const { return mF;   }
+    inline double getB   () const { return mB;   }
+    inline double getR1  () const { return mR1;  }
+    inline double getA2  () const { return mA2;  }
+    inline double getB2  () const { return mB2;  }
+    inline double getE2  () const { return mE2;  }
+    inline double getE   () const { return mE;   }
+    inline double getEp2 () const { return mEp2; }
+    inline double getEp  () const { return mEp;  }
 
     Angles getAngles_NED  ( const Angles &angles_ecef ) const;
     Angles getAngles_ECEF ( const Angles &angles_ned  ) const;
@@ -185,16 +185,16 @@ public:
     Quaternion getNED2BAS  ( const Quaternion &att_ecef ) const;
     Quaternion getECEF2BAS ( const Quaternion &att_ned  ) const;
 
-    inline Geo     getPos_Geo  () const { return _pos_geo;  }
-    inline Vector3 getPos_ECEF () const { return _pos_ecef; }
+    inline Geo     getPos_Geo  () const { return mPos_geo;  }
+    inline Vector3 getPos_ECEF () const { return mPos_ecef; }
 
-    inline Matrix3x3 getENU2NED() const { return _enu2ned; }
-    inline Matrix3x3 getNED2ENU() const { return _ned2enu; }
+    inline Matrix3x3 getENU2NED() const { return mT_enu2ned; }
+    inline Matrix3x3 getNED2ENU() const { return mT_ned2enu; }
 
-    inline Matrix3x3 getENU2ECEF() const { return _enu2ecef; }
-    inline Matrix3x3 getNED2ECEF() const { return _ned2ecef; }
-    inline Matrix3x3 getECEF2ENU() const { return _ecef2enu; }
-    inline Matrix3x3 getECEF2NED() const { return _ecef2ned; }
+    inline Matrix3x3 getENU2ECEF() const { return mT_enu2ecef; }
+    inline Matrix3x3 getNED2ECEF() const { return mT_ned2ecef; }
+    inline Matrix3x3 getECEF2ENU() const { return mT_ecef2enu; }
+    inline Matrix3x3 getECEF2NED() const { return mT_ecef2ned; }
 
     /** */
     void setPos_Geo( const Geo &pos_geo );
@@ -210,26 +210,26 @@ public:
 
 protected:
 
-    double _a;                      ///< [m] equatorial radius
-    double _f;                      ///< [-] ellipsoid flattening
+    double mA;                      ///< [m] equatorial radius
+    double mF;                      ///< [-] ellipsoid flattening
 
-    double _b;                      ///< [m] polar radius
-    double _r1;                     ///< [m] mean radius
-    double _a2;                     ///< [m^2] equatorial radius squared
-    double _b2;                     ///< [m^2] polar radius squared
-    double _e2;                     ///< [-] ellipsoid first eccentricity squared
-    double _e;                      ///< [-] ellipsoid first eccentricity
-    double _ep2;                    ///< [-] ellipsoid second eccentricity squared
-    double _ep;                     ///< [-] ellipsoid second eccentricity
+    double mB;                      ///< [m] polar radius
+    double mR1;                     ///< [m] mean radius
+    double mA2;                     ///< [m^2] equatorial radius squared
+    double mB2;                     ///< [m^2] polar radius squared
+    double mE2;                     ///< [-] ellipsoid first eccentricity squared
+    double mE;                      ///< [-] ellipsoid first eccentricity
+    double mEp2;                    ///< [-] ellipsoid second eccentricity squared
+    double mEp;                     ///< [-] ellipsoid second eccentricity
 
-    Geo _pos_geo;                   ///< geodetic coordinates
+    Geo mPos_geo;                   ///< geodetic coordinates
 
-    Vector3 _pos_ecef;              ///< [m] coordinates vector expressed in ECEF
+    Vector3 mPos_ecef;              ///< [m] coordinates vector expressed in ECEF
 
-    Matrix3x3 _enu2ecef;            ///< rotation matrix from ENU to ECEF
-    Matrix3x3 _ned2ecef;            ///< rotation matrix from NED to ECEF
-    Matrix3x3 _ecef2enu;            ///< rotation matrix from ECEF to ENU
-    Matrix3x3 _ecef2ned;            ///< rotation matrix from ECEF to NED
+    Matrix3x3 mT_enu2ecef;          ///< rotation matrix from ENU to ECEF
+    Matrix3x3 mT_ned2ecef;          ///< rotation matrix from NED to ECEF
+    Matrix3x3 mT_ecef2enu;          ///< rotation matrix from ECEF to ENU
+    Matrix3x3 mT_ecef2ned;          ///< rotation matrix from ECEF to NED
 
     virtual void update();
 

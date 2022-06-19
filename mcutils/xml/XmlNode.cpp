@@ -37,28 +37,28 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 XmlNode::XmlNode()
-    : _node ( nullptr )
+    : mNode ( nullptr )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 XmlNode::XmlNode( const XmlNode &node )
-    : XmlNode( node._node, node._file.c_str() )
+    : XmlNode( node.mNode, node.mFile.c_str() )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 XmlNode::XmlNode( XmlNode &&node )
 {
-    _node = std::move( node._node );
-    _file = std::move( node._file );
+    mNode = std::move( node.mNode );
+    mFile = std::move( node.mFile );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 XmlNode::XmlNode( xmlNodePtr node, const char *file )
-    : _file ( file )
-    , _node ( node )
+    : mFile ( file )
+    , mNode ( node )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ std::string XmlNode::getAttribute( const char *name ) const
 {
     if ( hasAttributes() )
     {
-        xmlAttrPtr attr = _node->properties;
+        xmlAttrPtr attr = mNode->properties;
 
         while ( attr != 0 )
         {
@@ -110,7 +110,7 @@ XmlNode::Attributes XmlNode::getAttributes() const
 
     if ( hasAttributes() )
     {
-        xmlAttrPtr attr = _node->properties;
+        xmlAttrPtr attr = mNode->properties;
 
         while ( attr != 0 )
         {
@@ -141,10 +141,10 @@ XmlNode XmlNode::getFirstChild() const
 
     if ( isValid() )
     {
-        if ( _node->children != 0 )
+        if ( mNode->children != 0 )
         {
-            result._node = _node->children;
-            result._file = _file;
+            result.mNode = mNode->children;
+            result.mFile = mFile;
         }
     }
 
@@ -159,7 +159,7 @@ XmlNode XmlNode::getFirstChildElement( const char *name ) const
 
     if ( isValid() )
     {
-        xmlNodePtr child = _node->children;
+        xmlNodePtr child = mNode->children;
 
         while ( child != 0 )
         {
@@ -168,8 +168,8 @@ XmlNode XmlNode::getFirstChildElement( const char *name ) const
                 if ( 0 == xmlStrcmp( child->name, (const xmlChar*)name )
                   || strlen( name ) == 0 )
                 {
-                    result._node = child;
-                    result._file = _file;
+                    result.mNode = child;
+                    result.mFile = mFile;
                     return result;
                 }
             }
@@ -189,9 +189,9 @@ std::string XmlNode::getFileAndLine() const
 
     result.clear();
 
-    result += _file;
+    result += mFile;
     result += "(";
-    result += String::toString( static_cast<int>(_node->line) );
+    result += String::toString( static_cast<int>(mNode->line) );
     result += ")";
 
     return result;
@@ -205,10 +205,10 @@ XmlNode XmlNode::getNextSibling() const
 
     if ( isValid() )
     {
-        if ( _node->next != nullptr )
+        if ( mNode->next != nullptr )
         {
-            result._node = _node->next;
-            result._file = _file;
+            result.mNode = mNode->next;
+            result.mFile = mFile;
         }
     }
 
@@ -223,7 +223,7 @@ XmlNode XmlNode::getNextSiblingElement( const char *name ) const
 
     if ( isValid() )
     {
-        xmlNodePtr next = _node->next;
+        xmlNodePtr next = mNode->next;
 
         while ( next != nullptr )
         {
@@ -232,8 +232,8 @@ XmlNode XmlNode::getNextSiblingElement( const char *name ) const
                 if ( 0 == xmlStrcmp( next->name, (const xmlChar*)name )
                   || strlen( name ) == 0 )
                 {
-                    result._node = next;
-                    result._file = _file;
+                    result.mNode = next;
+                    result.mFile = mFile;
                     return result;
                 }
             }
@@ -249,10 +249,10 @@ XmlNode XmlNode::getNextSiblingElement( const char *name ) const
 
 std::string XmlNode::getText() const
 {
-    switch ( _node->type )
+    switch ( mNode->type )
     {
     case XML_TEXT_NODE:
-        return std::string( (const char*)_node->content );
+        return std::string( (const char*)mNode->content );
         break;
 
     default:
@@ -269,7 +269,7 @@ bool XmlNode::hasAttribute( const char *name ) const
 {
     if ( hasAttributes() )
     {
-        xmlAttrPtr attr = _node->properties;
+        xmlAttrPtr attr = mNode->properties;
 
         while ( attr != 0 )
         {

@@ -105,10 +105,10 @@ public:
 
 private:
 
-    std::ostream *_outputStream;    ///< output stream (default std::cout)
-    VerboseLevel _verboseLevel;     ///< verbose level (default Info)
+    std::ostream *mOutputStream;    ///< output stream (default std::cout)
+    VerboseLevel mVerboseLevel;     ///< verbose level (default Info)
 
-    bool _syslogOutput;             ///< specifies if syslog is enabled (default true)
+    bool mSyslogOutput;             ///< specifies if syslog is enabled (default true)
 
     /**
      * You should use static function instance() due to get refernce

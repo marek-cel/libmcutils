@@ -119,14 +119,14 @@ public:
     /** @brief Returns normalized quaternion. */
     Quaternion getNormalized() const;
 
-    inline double  e0() const { return _e0; }
-    inline double  ex() const { return _ex; }
-    inline double  ey() const { return _ey; }
-    inline double  ez() const { return _ez; }
-    inline double& e0()       { return _e0; }
-    inline double& ex()       { return _ex; }
-    inline double& ey()       { return _ey; }
-    inline double& ez()       { return _ez; }
+    inline double  e0() const { return mE0; }
+    inline double  ex() const { return mEx; }
+    inline double  ey() const { return mEy; }
+    inline double  ez() const { return mEz; }
+    inline double& e0()       { return mE0; }
+    inline double& ex()       { return mEx; }
+    inline double& ey()       { return mEy; }
+    inline double& ez()       { return mEz; }
 
     /** @brief Sets quaternion values. */
     void set( double e0, double ex, double ey, double ez );
@@ -172,10 +172,10 @@ public:
 
 private:
 
-    double _e0;     ///< quaternion e0 (w) component
-    double _ex;     ///< quaternion ex (x) component
-    double _ey;     ///< quaternion ey (y) component
-    double _ez;     ///< quaternion ez (z) component
+    double mE0;     ///< quaternion e0 (w) component
+    double mEx;     ///< quaternion ex (x) component
+    double mEy;     ///< quaternion ey (y) component
+    double mEz;     ///< quaternion ez (z) component
 };
 
 ////////////////////////////////////////////////////////////////////////////////

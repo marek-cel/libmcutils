@@ -67,7 +67,7 @@ public:
      */
     void setDerivFun( Fun fun )
     {
-        _fun = fun;
+        mFun = fun;
     }
 
     /**
@@ -76,12 +76,12 @@ public:
      */
     inline bool isDerivFunSet() const
     {
-        return static_cast<bool>( _fun );
+        return static_cast<bool>( mFun );
     }
 
 protected:
 
-    Fun _fun;   ///< function which calculates vector derivative
+    Fun mFun { nullptr };   ///< function which calculates vector derivative
 };
 
 using IntegratorPtrS = std::shared_ptr < Integrator >;

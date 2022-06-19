@@ -69,6 +69,26 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromArray)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestTable, CanInstantiateAndSetDataFromArrayUnsorted)
+{
+    // y = x^2 - 1
+    double key_values[] {  2.0,  1.0,  0.0, -1.0, -2.0,  3.0 };
+    double table_data[] {  3.0,  0.0, -1.0,  0.0,  1.0,  8.0 };
+
+    mc::Table tab( key_values, table_data, 6 );
+
+    // y = x^2 - 1 sorted
+    double key_values_sorted[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    double table_data_sorted[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+
+    for ( unsigned int i = 0; i < tab.getSize(); ++i )
+    {
+        EXPECT_DOUBLE_EQ( tab.getValue( key_values_sorted[ i ] ), table_data_sorted[ i ] );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestTable, CanInstantiateAndSetDataFromVector)
 {
     // y = x^2 - 1
@@ -76,6 +96,26 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromVector)
     std::vector< double > table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
     mc::Table tab( key_values, table_data );
+
+    for ( unsigned int i = 0; i < key_values.size(); ++i )
+    {
+        EXPECT_DOUBLE_EQ( tab.getValue( key_values[ i ] ), table_data[ i ] );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanInstantiateAndSetDataFromVectorUnsorted)
+{
+    // y = x^2 - 1
+    std::vector< double > key_values {  2.0,  1.0,  0.0, -1.0, -2.0,  3.0 };
+    std::vector< double > table_data {  3.0,  0.0, -1.0,  0.0,  1.0,  8.0 };
+
+    mc::Table tab( key_values, table_data );
+
+    // y = x^2 - 1 sorted
+    std::vector< double > key_values_sorted { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector< double > table_data_sorted {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
     for ( unsigned int i = 0; i < key_values.size(); ++i )
     {

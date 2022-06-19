@@ -32,9 +32,9 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 XmlDoc::XmlDoc( const char *fileName )
-    : _doc  ( nullptr )
-    , _open ( false )
-    , _root ( nullptr )
+    : mDoc  ( nullptr )
+    , mOpen ( false )
+    , mRoot ( nullptr )
 {
     openFile( fileName );
 }
@@ -54,25 +54,25 @@ void XmlDoc::openFile( const char *fileName )
 
     if ( std::strlen( fileName ) > 0 )
     {
-        _doc = xmlParseFile( fileName );
+        mDoc = xmlParseFile( fileName );
 
-        if ( _doc == nullptr )
+        if ( mDoc == nullptr )
         {
-            xmlFreeDoc( _doc );
+            xmlFreeDoc( mDoc );
             return;
         }
 
-        xmlNodePtr root = xmlDocGetRootElement( _doc );
+        xmlNodePtr root = xmlDocGetRootElement( mDoc );
 
         if ( root == nullptr )
         {
-            xmlFreeDoc( _doc );
+            xmlFreeDoc( mDoc );
             return;
         }
 
-        _root = new XmlNode( root, fileName );
+        mRoot = new XmlNode( root, fileName );
 
-        _open = true;
+        mOpen = true;
     }
 }
 
@@ -80,13 +80,13 @@ void XmlDoc::openFile( const char *fileName )
 
 void XmlDoc::closeFile()
 {
-    _open = false;
+    mOpen = false;
 
-    if ( _root ) delete _root;
-    if ( _doc  ) xmlFreeDoc( _doc );
+    if ( mRoot ) delete mRoot;
+    if ( mDoc  ) xmlFreeDoc( mDoc );
 
-    _root = nullptr;
-    _doc  = nullptr;
+    mRoot = nullptr;
+    mDoc  = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

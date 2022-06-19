@@ -55,22 +55,22 @@ public:
 
     /** @brief Constructor. */
     Vector()
-        : _size ( SIZE )
-        , _items { 0 }
+        : mSize ( SIZE )
+        , mItems { 0 }
     {}
 
     /** @brief Copy constructor. */
     Vector( const Vector< SIZE > &vect )
-        : _size ( SIZE )
+        : mSize ( SIZE )
     {
-        std::memcpy( _items, vect._items, sizeof(_items) );
+        std::memcpy( mItems, vect.mItems, sizeof(mItems) );
     }
 
     /** @brief Constructor. */
     explicit Vector( const double items[] )
-        : _size ( SIZE )
+        : mSize ( SIZE )
     {
-        std::memcpy( _items, items, sizeof(_items) );
+        std::memcpy( mItems, items, sizeof(mItems) );
     }
 
     // LCOV_EXCL_START
@@ -82,7 +82,7 @@ public:
     /** @return TRUE if all items are valid */
     bool isValid() const
     {
-        return mc::isValid( _items, _size );
+        return mc::isValid( mItems, mSize );
     }
 
     /** @return vector length squared */
@@ -90,9 +90,9 @@ public:
     {
         double length2 = 0.0;
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            length2 += ( _items[ i ] * _items[ i ] );
+            length2 += ( mItems[ i ] * mItems[ i ] );
         }
 
         return length2;
@@ -113,9 +113,9 @@ public:
         {
             double length_inv = 1.0 / length;
 
-            for ( unsigned int i = 0; i < _size; ++i )
+            for ( unsigned int i = 0; i < mSize; ++i )
             {
-                _items[ i ] *= length_inv;
+                mItems[ i ] *= length_inv;
             }
         }
     }
@@ -123,7 +123,7 @@ public:
     /** @brief Puts vector items into given array. */
     void getArray( double items[] ) const
     {
-        std::memcpy( items, _items, sizeof(_items) );
+        std::memcpy( items, mItems, sizeof(mItems) );
     }
 
     /**
@@ -135,9 +135,9 @@ public:
      */
     double getItem( unsigned int index ) const
     {
-        if ( index < _size )
+        if ( index < mSize )
         {
-            return _items[ index ];
+            return mItems[ index ];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
@@ -146,7 +146,7 @@ public:
     /** @brief Sets vector items from given array. */
     void setArray( const double items[] )
     {
-        std::memcpy( _items, items, sizeof(_items) );
+        std::memcpy( mItems, items, sizeof(mItems) );
     }
 
     /**
@@ -156,18 +156,18 @@ public:
      */
     void setItem( unsigned int index, double val )
     {
-        if ( index < _size )
+        if ( index < mSize )
         {
-            _items[ index ] = val;
+            mItems[ index ] = val;
         }
     }
 
     /** @brief Swaps vector rows. */
     void swapRows( unsigned int row1, unsigned int row2 )
     {
-        if ( row1 < _size && row2 < _size )
+        if ( row1 < mSize && row2 < mSize )
         {
-            std::swap( _items[ row1 ], _items[ row2 ] );
+            std::swap( mItems[ row1 ], mItems[ row2 ] );
         }
     }
 
@@ -176,11 +176,11 @@ public:
     {
         std::stringstream ss;
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
             if ( i != 0 ) ss << ",";
 
-            ss << _items[ i ];
+            ss << mItems[ i ];
         }
 
         return ss.str();
@@ -189,54 +189,54 @@ public:
     /** @brief Sets all vector items to zero. */
     void zeroize()
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] = 0.0;
+            mItems[ i ] = 0.0;
         }
     }
 
     /** @brief Adds vector. */
     void add( const Vector< SIZE > &vect )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] += vect._items[ i ];
+            mItems[ i ] += vect.mItems[ i ];
         }
     }
 
     /** @brief Negates (inverts) vector. */
     void negate()
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] = -_items[ i ];
+            mItems[ i ] = -mItems[ i ];
         }
     }
 
     /** @brief Substracts vector. */
     void substract( const Vector< SIZE > &vect )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] -= vect._items[ i ];
+            mItems[ i ] -= vect.mItems[ i ];
         }
     }
 
     /** @brief Multiplies by value. */
     void multiply( double value )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] *= value;
+            mItems[ i ] *= value;
         }
     }
 
     /** @brief Divides by value. */
     void divide( double value )
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            _items[ i ] /= value;
+            mItems[ i ] /= value;
         }
     }
 
@@ -248,7 +248,7 @@ public:
      */
     inline double operator() ( unsigned int index ) const
     {
-        return _items[ index ];
+        return mItems[ index ];
     }
 
     /**
@@ -259,13 +259,13 @@ public:
      */
     inline double& operator() ( unsigned int index )
     {
-        return _items[ index ];
+        return mItems[ index ];
     }
 
     /** @brief Assignment operator. */
     Vector< SIZE >& operator= ( const Vector< SIZE > &vect )
     {
-        std::memcpy( _items, vect._items, sizeof(_items) );
+        std::memcpy( mItems, vect.mItems, sizeof(mItems) );
         return (*this);
     }
 
@@ -306,9 +306,9 @@ public:
     {
         double result = 0.0;
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            result += _items[ i ] * vect._items[ i ];
+            result += mItems[ i ] * vect.mItems[ i ];
         }
 
         return result;
@@ -355,9 +355,9 @@ public:
     {
         bool result = true;
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < mSize; ++i )
         {
-            result = result && ( _items[i] == vect._items[i] );
+            result = result && ( mItems[i] == vect.mItems[i] );
         }
 
         return result;
@@ -371,9 +371,9 @@ public:
 
 protected:
 
-    const unsigned int _size;   ///< vector size
+    const unsigned int mSize;   ///< vector size
 
-    double _items[ SIZE ];      ///< vector items
+    double mItems[ SIZE ];      ///< vector items
 };
 
 template class MCUTILSAPI mc::Vector<3>;

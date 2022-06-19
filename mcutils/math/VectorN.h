@@ -91,7 +91,7 @@ public:
      * @brief Returns vector size (number of elements)
      * @return vector size (number of elements)
      */
-    unsigned int getSize() const { return _size; }
+    unsigned int getSize() const { return mSize; }
 
     /** @brief Returns string representation of the vector. */
     std::string toString() const;
@@ -125,7 +125,7 @@ public:
      */
     inline double operator() ( unsigned int index ) const
     {
-        return _items[ index ];
+        return mItems[ index ];
     }
 
     /**
@@ -136,7 +136,7 @@ public:
      */
     inline double& operator() ( unsigned int index )
     {
-        return _items[ index ];
+        return mItems[ index ];
     }
 
     /** @brief Assignment operator. */
@@ -171,9 +171,9 @@ public:
 
 protected:
 
-    unsigned int _size;     ///< vector size
+    unsigned int mSize;     ///< vector size
 
-    double *_items;         ///< vector items
+    double *mItems;         ///< vector items
 };
 
 ////////////////////////////////////////////////////////////////////////////////

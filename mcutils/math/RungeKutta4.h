@@ -67,12 +67,12 @@ public:
 
 private:
 
-    VectorN _k1;        ///< auxiliary vector
-    VectorN _k2;        ///< auxiliary vector
-    VectorN _k3;        ///< auxiliary vector
-    VectorN _k4;        ///< auxiliary vector
+    VectorN mK1;        ///< auxiliary vector
+    VectorN mK2;        ///< auxiliary vector
+    VectorN mK3;        ///< auxiliary vector
+    VectorN mK4;        ///< auxiliary vector
 
-    VectorN _xt;        ///< auxiliary vector
+    VectorN mXt;        ///< auxiliary vector
 };
 
 } // namespace mc
