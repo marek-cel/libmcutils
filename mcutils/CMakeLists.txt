@@ -26,7 +26,7 @@ install( TARGETS ${TARGET_NAME}
 
 ################################################################################
 
-add_subdirectory( control )
+add_subdirectory( ctrl )
 add_subdirectory( geo )
 add_subdirectory( math )
 add_subdirectory( misc )
