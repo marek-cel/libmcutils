@@ -54,10 +54,10 @@ Quaternion::Quaternion()
 
 Quaternion::Quaternion( const Quaternion &quat )
 {
-    mE0 = quat.mE0;
-    mEx = quat.mEx;
-    mEy = quat.mEy;
-    mEz = quat.mEz;
+    _e0 = quat._e0;
+    _ex = quat._ex;
+    _ey = quat._ey;
+    _ez = quat._ez;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,10 +89,10 @@ Quaternion::Quaternion( const Angles &angl )
     double sinPhi2SinPsi2 = sinPhi2 * sinPsi2;
     double sinPhi2CosPsi2 = sinPhi2 * cosPsi2;
 
-    mE0 = ( cosPhi2CosPsi2 * cosTht2 ) + ( sinPhi2SinPsi2 * sinTht2 );
-    mEx = ( sinPhi2CosPsi2 * cosTht2 ) - ( cosPhi2SinPsi2 * sinTht2 );
-    mEy = ( cosPhi2CosPsi2 * sinTht2 ) + ( sinPhi2SinPsi2 * cosTht2 );
-    mEz = ( cosPhi2SinPsi2 * cosTht2 ) - ( sinPhi2CosPsi2 * sinTht2 );
+    _e0 = ( cosPhi2CosPsi2 * cosTht2 ) + ( sinPhi2SinPsi2 * sinTht2 );
+    _ex = ( sinPhi2CosPsi2 * cosTht2 ) - ( cosPhi2SinPsi2 * sinTht2 );
+    _ey = ( cosPhi2CosPsi2 * sinTht2 ) + ( sinPhi2SinPsi2 * cosTht2 );
+    _ez = ( cosPhi2SinPsi2 * cosTht2 ) - ( sinPhi2CosPsi2 * sinTht2 );
 
     normalize();
 }
@@ -106,29 +106,29 @@ Quaternion::Quaternion( double angl, const Vector3 &vect )
     double cosAngl2 = cos( 0.5 * angl );
     double sinAngl2 = sin( 0.5 * angl );
 
-    mE0 = cosAngl2;
-    mEx = sinAngl2 * vect.x() * len_inv;
-    mEy = sinAngl2 * vect.y() * len_inv;
-    mEz = sinAngl2 * vect.z() * len_inv;
+    _e0 = cosAngl2;
+    _ex = sinAngl2 * vect.x() * len_inv;
+    _ey = sinAngl2 * vect.y() * len_inv;
+    _ez = sinAngl2 * vect.z() * len_inv;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 bool Quaternion::isValid() const
 {
-    return mc::isValid( mE0 )
-        && mc::isValid( mEx )
-        && mc::isValid( mEy )
-        && mc::isValid( mEz );
+    return mc::isValid( _e0 )
+        && mc::isValid( _ex )
+        && mc::isValid( _ey )
+        && mc::isValid( _ez );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Quaternion::conjugate()
 {
-    mEx = -mEx;
-    mEy = -mEy;
-    mEz = -mEz;
+    _ex = -_ex;
+    _ey = -_ey;
+    _ez = -_ez;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -143,7 +143,7 @@ void Quaternion::invert()
 
 double Quaternion::getLength2() const
 {
-    return mE0*mE0 + mEx*mEx + mEy*mEy + mEz*mEz;
+    return _e0*_e0 + _ex*_ex + _ey*_ey + _ez*_ez;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -161,10 +161,10 @@ void Quaternion::normalize()
 
     if ( length > 0.0 )
     {
-        mE0 = mE0 / length;
-        mEx = mEx / length;
-        mEy = mEy / length;
-        mEz = mEz / length;
+        _e0 = _e0 / length;
+        _ex = _ex / length;
+        _ey = _ey / length;
+        _ez = _ez / length;
     }
 }
 
@@ -174,25 +174,25 @@ Angles Quaternion::getAngles() const
 {
     Angles result;
 
-    double sinTht2 = mE0*mEy - mEx*mEz;
+    double sinTht2 = _e0*_ey - _ex*_ez;
 
     if( sinTht2 >= 0.5 )
     {
-        result.phi() =  2.0 * asin( mEx / cos( M_PI_4 ) );
+        result.phi() =  2.0 * asin( _ex / cos( M_PI_4 ) );
         result.tht() =  M_PI_2;
         result.psi() =  0.0;
     }
     else if ( sinTht2 <= -0.5 )
     {
-        result.phi() =  2.0 * asin( mEx / cos( M_PI_4 ) );
+        result.phi() =  2.0 * asin( _ex / cos( M_PI_4 ) );
         result.tht() = -M_PI_2;
         result.psi() =  0.0;
     }
     else
     {
-        result.phi() = atan2( 2.0*( mE0*mEx + mEy*mEz ), 1.0 - 2.0*( mEx*mEx + mEy*mEy ) );
+        result.phi() = atan2( 2.0*( _e0*_ex + _ey*_ez ), 1.0 - 2.0*( _ex*_ex + _ey*_ey ) );
         result.tht() =  asin( 2.0*sinTht2 );
-        result.psi() = atan2( 2.0*( mE0*mEz + mEx*mEy ), 1.0 - 2.0*( mEy*mEy + mEz*mEz ) );
+        result.psi() = atan2( 2.0*( _e0*_ez + _ex*_ey ), 1.0 - 2.0*( _ey*_ey + _ez*_ez ) );
     }
 
     result.normalize();
@@ -225,21 +225,21 @@ Quaternion Quaternion::getDerivative( const Vector3 &omega, double lambda ) cons
     // | ey_dot | = -0.5 * | -Q  R  0 -P | | ey | = | -0.5 * ( ex*R - e0*Q - ez*P ) |
     // | ez_dot |          | -R -Q  P  0 | | ez |   | -0.5 * ( ey*P - e0*R - ex*Q ) |
 
-    result.mE0 = -0.5 * ( mEz * omega.r()
-                        + mEy * omega.q()
-                        + mEx * omega.p() );
+    result._e0 = -0.5 * ( _ez * omega.r()
+                        + _ey * omega.q()
+                        + _ex * omega.p() );
 
-    result.mEx = -0.5 * ( mEz * omega.q()
-                        - mEy * omega.r()
-                        - mE0 * omega.p() );
+    result._ex = -0.5 * ( _ez * omega.q()
+                        - _ey * omega.r()
+                        - _e0 * omega.p() );
 
-    result.mEy = -0.5 * ( mEx * omega.r()
-                        - mE0 * omega.q()
-                        - mEz * omega.p() );
+    result._ey = -0.5 * ( _ex * omega.r()
+                        - _e0 * omega.q()
+                        - _ez * omega.p() );
 
-    result.mEz = -0.5 * ( mEy * omega.p()
-                        - mE0 * omega.r()
-                        - mEx * omega.q() );
+    result._ez = -0.5 * ( _ey * omega.p()
+                        - _e0 * omega.r()
+                        - _ex * omega.q() );
 
     // Pamadi - Performance Stability Dynamics and Control of Airplanes, 2004, p.348
     // Sibilski - Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34
@@ -249,10 +249,10 @@ Quaternion Quaternion::getDerivative( const Vector3 &omega, double lambda ) cons
         double epsilon = 1.0 - getLength2();
         double lambda_epsilon = lambda * epsilon;
 
-        result.mE0 += lambda_epsilon * mE0;
-        result.mEx += lambda_epsilon * mEx;
-        result.mEy += lambda_epsilon * mEy;
-        result.mEz += lambda_epsilon * mEz;
+        result._e0 += lambda_epsilon * _e0;
+        result._ex += lambda_epsilon * _ex;
+        result._ey += lambda_epsilon * _ey;
+        result._ez += lambda_epsilon * _ez;
     }
 
     return result;
@@ -284,10 +284,10 @@ Quaternion Quaternion::getNormalized() const
 
 void Quaternion::set( double e0, double ex, double ey, double ez )
 {
-    mE0 = e0;
-    mEx = ex;
-    mEy = ey;
-    mEz = ez;
+    _e0 = e0;
+    _ex = ex;
+    _ey = ey;
+    _ez = ez;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -296,7 +296,7 @@ std::string Quaternion::toString() const
 {
     std::stringstream ss;
 
-    ss << mE0 <<  "," << mEx <<  "," << mEy <<  "," << mEz;
+    ss << _e0 <<  "," << _ex <<  "," << _ey <<  "," << _ez;
 
     return ss.str();
 }
@@ -305,10 +305,10 @@ std::string Quaternion::toString() const
 
 Quaternion& Quaternion::operator= ( const Quaternion &quat )
 {
-    mE0 = quat.mE0;
-    mEx = quat.mEx;
-    mEy = quat.mEy;
-    mEz = quat.mEz;
+    _e0 = quat._e0;
+    _ex = quat._ex;
+    _ey = quat._ey;
+    _ez = quat._ez;
 
     return (*this);
 }
@@ -319,10 +319,10 @@ Quaternion Quaternion::operator+ ( const Quaternion &quat ) const
 {
     Quaternion result;
 
-    result.mE0 = mE0 + quat.mE0;
-    result.mEx = mEx + quat.mEx;
-    result.mEy = mEy + quat.mEy;
-    result.mEz = mEz + quat.mEz;
+    result._e0 = _e0 + quat._e0;
+    result._ex = _ex + quat._ex;
+    result._ey = _ey + quat._ey;
+    result._ez = _ez + quat._ez;
 
     return result;
 }
@@ -333,10 +333,10 @@ Quaternion Quaternion::operator- ( const Quaternion &quat ) const
 {
     Quaternion result;
 
-    result.mE0 = mE0 - quat.mE0;
-    result.mEx = mEx - quat.mEx;
-    result.mEy = mEy - quat.mEy;
-    result.mEz = mEz - quat.mEz;
+    result._e0 = _e0 - quat._e0;
+    result._ex = _ex - quat._ex;
+    result._ey = _ey - quat._ey;
+    result._ez = _ez - quat._ez;
 
     return result;
 }
@@ -347,10 +347,10 @@ Quaternion Quaternion::operator* ( double val ) const
 {
     Quaternion result;
 
-    result.mE0 = mE0 * val;
-    result.mEx = mEx * val;
-    result.mEy = mEy * val;
-    result.mEz = mEz * val;
+    result._e0 = _e0 * val;
+    result._ex = _ex * val;
+    result._ey = _ey * val;
+    result._ez = _ez * val;
 
     return result;
 }
@@ -361,25 +361,25 @@ Quaternion Quaternion::operator* ( const Quaternion &quat ) const
 {
     Quaternion result;
 
-    result.mE0 = mE0 * quat.mE0
-               - mEx * quat.mEx
-               - mEy * quat.mEy
-               - mEz * quat.mEz;
+    result._e0 = _e0 * quat._e0
+               - _ex * quat._ex
+               - _ey * quat._ey
+               - _ez * quat._ez;
 
-    result.mEx = mE0 * quat.mEx
-               + mEx * quat.mE0
-               + mEy * quat.mEz
-               - mEz * quat.mEy;
+    result._ex = _e0 * quat._ex
+               + _ex * quat._e0
+               + _ey * quat._ez
+               - _ez * quat._ey;
 
-    result.mEy = mE0 * quat.mEy
-               - mEx * quat.mEz
-               + mEy * quat.mE0
-               + mEz * quat.mEx;
+    result._ey = _e0 * quat._ey
+               - _ex * quat._ez
+               + _ey * quat._e0
+               + _ez * quat._ex;
 
-    result.mEz = mE0 * quat.mEz
-               + mEx * quat.mEy
-               - mEy * quat.mEx
-               + mEz * quat.mE0;
+    result._ez = _e0 * quat._ez
+               + _ex * quat._ey
+               - _ey * quat._ex
+               + _ez * quat._e0;
 
     return result;
 }
@@ -390,10 +390,10 @@ Quaternion Quaternion::operator/ ( double val ) const
 {
     Quaternion result;
 
-    result.mE0 = mE0 / val;
-    result.mEx = mEx / val;
-    result.mEy = mEy / val;
-    result.mEz = mEz / val;
+    result._e0 = _e0 / val;
+    result._ex = _ex / val;
+    result._ey = _ey / val;
+    result._ez = _ez / val;
 
     return result;
 }
@@ -402,10 +402,10 @@ Quaternion Quaternion::operator/ ( double val ) const
 
 Quaternion& Quaternion::operator+= ( const Quaternion &quat )
 {
-    mE0 += quat.mE0;
-    mEx += quat.mEx;
-    mEy += quat.mEy;
-    mEz += quat.mEz;
+    _e0 += quat._e0;
+    _ex += quat._ex;
+    _ey += quat._ey;
+    _ez += quat._ez;
 
     return (*this);
 }
@@ -414,10 +414,10 @@ Quaternion& Quaternion::operator+= ( const Quaternion &quat )
 
 Quaternion& Quaternion::operator-= ( const Quaternion &quat )
 {
-    mE0 -= quat.mE0;
-    mEx -= quat.mEx;
-    mEy -= quat.mEy;
-    mEz -= quat.mEz;
+    _e0 -= quat._e0;
+    _ex -= quat._ex;
+    _ey -= quat._ey;
+    _ez -= quat._ez;
 
     return (*this);
 }
@@ -426,10 +426,10 @@ Quaternion& Quaternion::operator-= ( const Quaternion &quat )
 
 Quaternion& Quaternion::operator*= ( double val )
 {
-    mE0 *= val;
-    mEx *= val;
-    mEy *= val;
-    mEz *= val;
+    _e0 *= val;
+    _ex *= val;
+    _ey *= val;
+    _ez *= val;
 
     return (*this);
 }
@@ -438,10 +438,10 @@ Quaternion& Quaternion::operator*= ( double val )
 
 Quaternion& Quaternion::operator/= ( double val )
 {
-    mE0 /= val;
-    mEx /= val;
-    mEy /= val;
-    mEz /= val;
+    _e0 /= val;
+    _ex /= val;
+    _ey /= val;
+    _ez /= val;
 
     return (*this);
 }
@@ -450,10 +450,10 @@ Quaternion& Quaternion::operator/= ( double val )
 
 bool Quaternion::operator== ( const Quaternion &quat ) const
 {
-    return ( mE0 == quat.mE0 )
-        && ( mEx == quat.mEx )
-        && ( mEy == quat.mEy )
-        && ( mEz == quat.mEz );
+    return ( _e0 == quat._e0 )
+        && ( _ex == quat._ex )
+        && ( _ey == quat._ey )
+        && ( _ez == quat._ez );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -40,17 +40,17 @@ class MCUTILSAPI Vector3 final : public Vector<3>
 {
 public:
 
-    static const Vector3 mEx;   ///< standard basis x-axis unit vector
-    static const Vector3 mEy;   ///< standard basis y-axis unit vector
-    static const Vector3 mEz;   ///< standard basis z-axis unit vector
+    static const Vector3 _ex;   ///< standard basis x-axis unit vector
+    static const Vector3 _ey;   ///< standard basis y-axis unit vector
+    static const Vector3 _ez;   ///< standard basis z-axis unit vector
 
-    inline static const Vector3& ex() { return mEx; }
-    inline static const Vector3& ey() { return mEy; }
-    inline static const Vector3& ez() { return mEz; }
+    inline static const Vector3& ex() { return _ex; }
+    inline static const Vector3& ey() { return _ey; }
+    inline static const Vector3& ez() { return _ez; }
 
-    inline static const Vector3& i() { return mEx; }
-    inline static const Vector3& j() { return mEy; }
-    inline static const Vector3& k() { return mEz; }
+    inline static const Vector3& i() { return _ex; }
+    inline static const Vector3& j() { return _ey; }
+    inline static const Vector3& k() { return _ez; }
 
     /** @brief Constructor. */
     Vector3();
@@ -68,37 +68,37 @@ public:
     virtual ~Vector3() = default;
 
     /** @return length of projection of vector on XY-plane */
-    inline double getLengthXY() const { return sqrt( mX*mX + mY*mY ); }
+    inline double getLengthXY() const { return sqrt( _x*_x + _y*_y ); }
 
     /** @return length of projection of vector on XZ-plane */
-    inline double getLengthXZ() const { return sqrt( mX*mX + mZ*mZ ); }
+    inline double getLengthXZ() const { return sqrt( _x*_x + _z*_z ); }
 
     /** @return length of projection of vector on YZ-plane */
-    inline double getLengthYZ() const { return sqrt( mY*mY + mZ*mZ ); }
+    inline double getLengthYZ() const { return sqrt( _y*_y + _z*_z ); }
 
     /** @return normalized vector */
     Vector3 getNormalized() const;
 
-    inline double  x() const { return mX; }
-    inline double  y() const { return mY; }
-    inline double  z() const { return mZ; }
-    inline double& x()       { return mX; }
-    inline double& y()       { return mY; }
-    inline double& z()       { return mZ; }
+    inline double  x() const { return _x; }
+    inline double  y() const { return _y; }
+    inline double  z() const { return _z; }
+    inline double& x()       { return _x; }
+    inline double& y()       { return _y; }
+    inline double& z()       { return _z; }
 
-    inline double  p() const { return mX; }
-    inline double  q() const { return mY; }
-    inline double  r() const { return mZ; }
-    inline double& p()       { return mX; }
-    inline double& q()       { return mY; }
-    inline double& r()       { return mZ; }
+    inline double  p() const { return _x; }
+    inline double  q() const { return _y; }
+    inline double  r() const { return _z; }
+    inline double& p()       { return _x; }
+    inline double& q()       { return _y; }
+    inline double& r()       { return _z; }
 
-    inline double  u() const { return mX; }
-    inline double  v() const { return mY; }
-    inline double  w() const { return mZ; }
-    inline double& u()       { return mX; }
-    inline double& v()       { return mY; }
-    inline double& w()       { return mZ; }
+    inline double  u() const { return _x; }
+    inline double  v() const { return _y; }
+    inline double  w() const { return _z; }
+    inline double& u()       { return _x; }
+    inline double& v()       { return _y; }
+    inline double& w()       { return _z; }
 
     /** @brief Sets vector values. */
     void set( double x, double y, double z );
@@ -144,9 +144,9 @@ public:
 
 private:
 
-    double &mX;     ///< x element
-    double &mY;     ///< y element
-    double &mZ;     ///< z element
+    double &_x;     ///< x element
+    double &_y;     ///< y element
+    double &_z;     ///< z element
 };
 
 ////////////////////////////////////////////////////////////////////////////////

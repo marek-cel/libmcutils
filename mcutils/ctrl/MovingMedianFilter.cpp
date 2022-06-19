@@ -32,34 +32,34 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MovingMedianFilter::MovingMedianFilter( unsigned int length , double val )
-    : mLength ( length )
-    , mVal ( val )
+MovingMedianFilter::MovingMedianFilter( unsigned int length , double y )
+    : _length ( length )
+    , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingMedianFilter::setLength( unsigned int length )
 {
-    mLength = length;
+    _length = length;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingMedianFilter::update( double, double u )
 {
-    mFifo.push_back( u );
+    _fifo.push_back( u );
 
-    while ( mFifo.size() > mLength )
+    while ( _fifo.size() > _length )
     {
-        mFifo.pop_front();
+        _fifo.pop_front();
     }
 
-    if ( mFifo.size() > 1 )
+    if ( _fifo.size() > 1 )
     {
         std::vector<double> v;
 
-        for ( double &val : mFifo )
+        for ( double &val : _fifo )
         {
             v.push_back( val );
         }
@@ -71,16 +71,16 @@ void MovingMedianFilter::update( double, double u )
             int i1 = static_cast<int>( v.size() ) / 2;
             int i2 = i1 - 1;
 
-            mVal = ( v[ i1 ] + v[ i2 ] ) / 2.0;
+            _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;
         }
         else
         {
-            mVal = v[ v.size() / 2 ];
+            _y = v[ v.size() / 2 ];
         }
     }
     else
     {
-        mVal = u;
+        _y = u;
     }
 }
 

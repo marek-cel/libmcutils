@@ -29,18 +29,18 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const Vector3 Vector3::mEx = Vector3( 1.0, 0.0, 0.0 );
-const Vector3 Vector3::mEy = Vector3( 0.0, 1.0, 0.0 );
-const Vector3 Vector3::mEz = Vector3( 0.0, 0.0, 1.0 );
+const Vector3 Vector3::_ex = Vector3( 1.0, 0.0, 0.0 );
+const Vector3 Vector3::_ey = Vector3( 0.0, 1.0, 0.0 );
+const Vector3 Vector3::_ez = Vector3( 0.0, 0.0, 1.0 );
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector3::Vector3()
     : Vector<3>()
 
-    , mX ( mItems[ 0 ] )
-    , mY ( mItems[ 1 ] )
-    , mZ ( mItems[ 2 ] )
+    , _x ( _items[ 0 ] )
+    , _y ( _items[ 1 ] )
+    , _z ( _items[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +48,9 @@ Vector3::Vector3()
 Vector3::Vector3( const Vector3 &vect )
     : Vector<3>( vect )
 
-    , mX ( mItems[ 0 ] )
-    , mY ( mItems[ 1 ] )
-    , mZ ( mItems[ 2 ] )
+    , _x ( _items[ 0 ] )
+    , _y ( _items[ 1 ] )
+    , _z ( _items[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +58,9 @@ Vector3::Vector3( const Vector3 &vect )
 Vector3::Vector3( const double items[] )
     : Vector<3>( items )
 
-    , mX ( mItems[ 0 ] )
-    , mY ( mItems[ 1 ] )
-    , mZ ( mItems[ 2 ] )
+    , _x ( _items[ 0 ] )
+    , _y ( _items[ 1 ] )
+    , _z ( _items[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,9 +68,9 @@ Vector3::Vector3( const double items[] )
 Vector3::Vector3( double x, double y, double z )
     : Vector3()
 {
-    mX = x;
-    mY = y;
-    mZ = z;
+    _x = x;
+    _y = y;
+    _z = z;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -88,18 +88,18 @@ Vector3 Vector3::getNormalized() const
 
 void Vector3::set( double x, double y, double z )
 {
-    mX = x;
-    mY = y;
-    mZ = z;
+    _x = x;
+    _y = y;
+    _z = z;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector3& Vector3::operator= ( const Vector3 &vect )
 {
-    mX = vect.mX;
-    mY = vect.mY;
-    mZ = vect.mZ;
+    _x = vect._x;
+    _y = vect._y;
+    _z = vect._z;
 
     return (*this);
 }
@@ -110,9 +110,9 @@ Vector3 Vector3::operator+ ( const Vector3 &vect ) const
 {
     Vector3 result( *this );
 
-    result.mX += vect.mX;
-    result.mY += vect.mY;
-    result.mZ += vect.mZ;
+    result._x += vect._x;
+    result._y += vect._y;
+    result._z += vect._z;
 
     return result;
 }
@@ -123,9 +123,9 @@ Vector3 Vector3::operator- () const
 {
     Vector3 result;
 
-    result.mX = -mX;
-    result.mY = -mY;
-    result.mZ = -mZ;
+    result._x = -_x;
+    result._y = -_y;
+    result._z = -_z;
 
     return result;
 }
@@ -136,9 +136,9 @@ Vector3 Vector3::operator- ( const Vector3 &vect ) const
 {
     Vector3 result( *this );
 
-    result.mX -= vect.mX;
-    result.mY -= vect.mY;
-    result.mZ -= vect.mZ;
+    result._x -= vect._x;
+    result._y -= vect._y;
+    result._z -= vect._z;
 
     return result;
 }
@@ -149,9 +149,9 @@ Vector3 Vector3::operator* ( double value ) const
 {
     Vector3 result( *this );
 
-    result.mX *= value;
-    result.mY *= value;
-    result.mZ *= value;
+    result._x *= value;
+    result._y *= value;
+    result._z *= value;
 
     return result;
 }
@@ -162,9 +162,9 @@ Vector3 Vector3::operator/ ( double value ) const
 {
     Vector3 result( *this );
 
-    result.mX /= value;
-    result.mY /= value;
-    result.mZ /= value;
+    result._x /= value;
+    result._y /= value;
+    result._z /= value;
 
     return result;
 }
@@ -173,7 +173,7 @@ Vector3 Vector3::operator/ ( double value ) const
 
 double Vector3::operator* ( const Vector3 &vect ) const
 {
-    return ( mX*vect.mX + mY*vect.mY + mZ*vect.mZ );
+    return ( _x*vect._x + _y*vect._y + _z*vect._z );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -182,9 +182,9 @@ Vector3 Vector3::operator% ( const Vector3 &vect ) const
 {
     Vector3 result;
 
-    result.mX = mY * vect.mZ - mZ * vect.mY;
-    result.mY = mZ * vect.mX - mX * vect.mZ;
-    result.mZ = mX * vect.mY - mY * vect.mX;
+    result._x = _y * vect._z - _z * vect._y;
+    result._y = _z * vect._x - _x * vect._z;
+    result._z = _x * vect._y - _y * vect._x;
 
     return result;
 }
@@ -193,9 +193,9 @@ Vector3 Vector3::operator% ( const Vector3 &vect ) const
 
 Vector3& Vector3::operator+= ( const Vector3 &vect )
 {
-    mX += vect.mX;
-    mY += vect.mY;
-    mZ += vect.mZ;
+    _x += vect._x;
+    _y += vect._y;
+    _z += vect._z;
 
     return (*this);
 }
@@ -204,9 +204,9 @@ Vector3& Vector3::operator+= ( const Vector3 &vect )
 
 Vector3& Vector3::operator-= ( const Vector3 &vect )
 {
-    mX -= vect.mX;
-    mY -= vect.mY;
-    mZ -= vect.mZ;
+    _x -= vect._x;
+    _y -= vect._y;
+    _z -= vect._z;
 
     return (*this);
 }
@@ -215,9 +215,9 @@ Vector3& Vector3::operator-= ( const Vector3 &vect )
 
 Vector3& Vector3::operator*= ( double value )
 {
-    mX *= value;
-    mY *= value;
-    mZ *= value;
+    _x *= value;
+    _y *= value;
+    _z *= value;
 
     return (*this);
 }
@@ -226,9 +226,9 @@ Vector3& Vector3::operator*= ( double value )
 
 Vector3& Vector3::operator/= ( double value )
 {
-    mX /= value;
-    mY /= value;
-    mZ /= value;
+    _x /= value;
+    _y /= value;
+    _z /= value;
 
     return (*this);
 }

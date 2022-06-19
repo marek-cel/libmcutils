@@ -25,8 +25,6 @@
 #include <algorithm>
 #include <cmath>
 
-#include <mcutils/math/Math.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -43,17 +41,16 @@ Oscillator::Oscillator()
 Oscillator::Oscillator( double omega, double zeta, double val )
     : mOmega ( omega )
     , mZeta  ( zeta  )
+    , mVal   ( val   )
 
     , mC3 ( mOmega * mOmega      )
     , mC5 ( 2.0 * mZeta * mOmega )
     , mC6 ( mOmega * mOmega      )
 
-    , mInp_prev_1 ( val )
+    , mInp_prev_1 ( 0.0 )
     , mInp_prev_2 ( 0.0 )
     , mVal_prev_1 ( 0.0 )
     , mVal_prev_2 ( 0.0 )
-
-    , mVal ( val )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +64,7 @@ void Oscillator::setOmega( double omega )
 
 void Oscillator::setDamping( double zeta )
 {
-    mZeta = Math::satur( 0.0, 1.0, zeta );
+    mZeta = std::max( 0.0, std::min( 1.0, zeta ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

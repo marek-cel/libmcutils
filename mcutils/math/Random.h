@@ -103,9 +103,9 @@ public:
 
 private:
 
-    std::mutex mMutex;  ///< mutex
-    int mRand;          ///< random value
-    unsigned int mSeed; ///< seed
+    std::mutex _mutex;  ///< mutex
+    int _rand;          ///< random value
+    unsigned int _seed; ///< seed
 
     /**
      * You should use static function instance() due to get refernce

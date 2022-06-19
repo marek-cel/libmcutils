@@ -85,45 +85,45 @@ void Log::d( const char *format, ... )
 
 std::ostream& Log::out()
 {
-    return instance()->mOutputStream == nullptr ? std::cout : *(instance()->mOutputStream);
+    return instance()->_outputStream == nullptr ? std::cout : *(instance()->_outputStream);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 void Log::setOutputStream( std::ostream *outputStream )
 {
-    instance()->mOutputStream = outputStream;
+    instance()->_outputStream = outputStream;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 void Log::setSyslogOutput( bool syslogOutput )
 {
-    instance()->mSyslogOutput = syslogOutput;
+    instance()->_syslogOutput = syslogOutput;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 void Log::setVerboseLevel( VerboseLevel verboseLevel )
 {
-    instance()->mVerboseLevel = verboseLevel;
+    instance()->_verboseLevel = verboseLevel;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
 Log::Log()
-    : mOutputStream ( &std::cout )
-    , mVerboseLevel ( VerboseLevel::Info )
-    , mSyslogOutput ( true )
+    : _outputStream ( &std::cout )
+    , _verboseLevel ( VerboseLevel::Info )
+    , _syslogOutput ( true )
 {}
 
 //////////////////////////////////////////////////////////////////////////////////
 
 void Log::print( VerboseLevel level, const char *format, ... )
 {
-    if ( level <= mVerboseLevel
+    if ( level <= _verboseLevel
 #   ifdef _LINUX_
-         || mSyslogOutput
+         || _syslogOutput
 #   endif // _LINUX_
        )
     {
@@ -136,7 +136,7 @@ void Log::print( VerboseLevel level, const char *format, ... )
             case VerboseLevel::Debug   : levelTag = "DEBUG";   break;
         }
 
-        if ( level <= mVerboseLevel )
+        if ( level <= _verboseLevel )
         {
             va_list args;
             va_start( args, format );
@@ -152,13 +152,13 @@ void Log::print( VerboseLevel level, const char *format, ... )
 
             if ( buf ) delete [] buf;
 
-            std::ostream *out = mOutputStream == nullptr ? &std::cout : mOutputStream;
+            std::ostream *out = _outputStream == nullptr ? &std::cout : _outputStream;
             (*out) << timestamp();
             (*out) << msg;
         }
 
 #       ifdef _LINUX_
-        if ( mSyslogOutput )
+        if ( _syslogOutput )
         {
             int priority = LOG_DEBUG;
             switch ( level )

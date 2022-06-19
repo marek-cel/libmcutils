@@ -31,43 +31,43 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MovingAverageFilter::MovingAverageFilter( unsigned int length , double val )
-    : mLength ( length )
-    , mVal ( val )
+MovingAverageFilter::MovingAverageFilter( unsigned int length , double y )
+    : _length ( length )
+    , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingAverageFilter::setLength( unsigned int length )
 {
-    mLength = length;
+    _length = length;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingAverageFilter::update( double, double u )
 {
-    mFifo.push_back( u );
+    _fifo.push_back( u );
 
-    while ( mFifo.size() > mLength )
+    while ( _fifo.size() > _length )
     {
-        mFifo.pop_front();
+        _fifo.pop_front();
     }
 
-    if ( mFifo.size() > 1 )
+    if ( _fifo.size() > 1 )
     {
         double sum = 0.0;
 
-        for ( double &val : mFifo )
+        for ( double &val : _fifo )
         {
             sum += val;
         }
 
-        mVal = sum / static_cast<double>( mFifo.size() );
+        _y = sum / static_cast<double>( _fifo.size() );
     }
     else
     {
-        mVal = u;
+        _y = u;
     }
 }
 

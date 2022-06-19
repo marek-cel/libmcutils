@@ -66,21 +66,21 @@ public:
     /**
      * @brief Constructor.
      * @param tc time constant
-     * @param val initial output value
+     * @param y initial output value
      */
-    explicit Lag( double tc = 1.0, double val = 0.0 );
+    explicit Lag( double tc = 1.0, double y = 0.0 );
 
     /** @brief Destructor. */
     ~Lag() = default;
 
-    inline double getValue() const override { return mVal; }
-    inline double getTimeConst() const { return mTc; }
+    inline double getValue() const override { return _y; }
+    inline double getTimeConst() const { return _tc; }
 
     /**
      * @brief Sets output value
-     * @param val output value
+     * @param youtput value
      */
-    void setValue( double val );
+    void setValue( double y );
 
     /**
      * @brief Sets time constant.
@@ -97,8 +97,8 @@ public:
 
 private:
 
-    double mTc;             ///< time constant
-    double mVal;            ///< current value
+    double _tc;             ///< time constant
+    double _y;              ///< current value
 };
 
 } // namespace mc

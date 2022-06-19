@@ -56,7 +56,7 @@ public:
      */
     inline XmlNode getRootNode()
     {
-        return XmlNode( *mRoot );
+        return XmlNode( *_root );
     }
 
     /**
@@ -65,7 +65,7 @@ public:
      */
     inline bool isOpen() const
     {
-        return mOpen;
+        return _open;
     }
 
     /** @brief Open file for reading. */
@@ -76,9 +76,9 @@ public:
 
 private:
 
-    xmlDocPtr mDoc;     ///< XML document pointer
-    bool mOpen;         ///< specifies if document is open
-    XmlNode *mRoot;     ///< XML document root node
+    xmlDocPtr _doc;     ///< XML document pointer
+    bool _open;         ///< specifies if document is open
+    XmlNode *_root;     ///< XML document root node
 };
 
 } // namespace mc

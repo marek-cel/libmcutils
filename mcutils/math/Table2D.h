@@ -75,8 +75,8 @@ public:
     /** @brief Destructor. */
     ~Table2D();
 
-    inline unsigned int getRows() const { return mRows; }
-    inline unsigned int getCols() const { return mCols; }
+    inline unsigned int getRows() const { return _rows; }
+    inline unsigned int getCols() const { return _cols; }
 
     /**
      * @brief Returns 1-dimensional table for the given col value.
@@ -144,15 +144,15 @@ public:
 
 private:
 
-    unsigned int mRows;     ///< number of rows
-    unsigned int mCols;     ///< number of columns
-    unsigned int mSize;     ///< number of table elements
+    unsigned int _rows;     ///< number of rows
+    unsigned int _cols;     ///< number of columns
+    unsigned int _size;     ///< number of table elements
 
-    double *mRowValues;     ///< rows keys values
-    double *mColValues;     ///< columns keys values
-    double *mTableData;     ///< table data
+    double *_row_values;    ///< rows keys values
+    double *_col_values;    ///< columns keys values
+    double *_table_data;    ///< table data
 
-    double *mInterData;     ///< interpolation data matrix
+    double *_inter_data;    ///< interpolation data matrix
 
     /** @brief Updates interpolation data due to table data. */
     void updateInterpolationData();

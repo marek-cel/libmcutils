@@ -53,23 +53,23 @@ public:
      * @brief Constructor.
      * @param tc1 time constant 1
      * @param tc2 time constant 2
-     * @param val initial output value
+     * @param y initial output value
      */
-    Lag2( double tc1, double tc2, double val = 0.0 );
+    Lag2( double tc1, double tc2, double y = 0.0 );
 
     /** @brief Destructor. */
     ~Lag2();
 
-    inline double getValue() const override { return mVal; }
+    inline double getValue() const override { return _y; }
 
-    inline double getTimeConst1() const { return mLag1->getTimeConst(); }
-    inline double getTimeConst2() const { return mTc2; }
+    inline double getTimeConst1() const { return _lag1->getTimeConst(); }
+    inline double getTimeConst2() const { return _tc2; }
 
     /**
      * @brief Sets output value
-     * @param val output value
+     * @param youtput value
      */
-    void setValue( double val );
+    void setValue( double y );
 
     /**
      * @brief Sets time constant tc1.
@@ -95,10 +95,10 @@ public:
 
 private:
 
-    Lag *mLag1;             ///< first-order lag element
+    Lag *_lag1;             ///< first-order lag element
 
-    double mTc2;            ///< time constant
-    double mVal;            ///< current value
+    double _tc2;            ///< time constant
+    double _y;              ///< current value
 };
 
 } // namespace mc

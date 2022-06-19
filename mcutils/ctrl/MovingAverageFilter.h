@@ -50,16 +50,15 @@ public:
     /**
      * @brief Constructor.
      * @param length length of the sliding window
-     * @param val initial output value
      */
-    explicit MovingAverageFilter( unsigned int length = 1, double val = 0.0 );
+    explicit MovingAverageFilter( unsigned int length = 1, double y = 0.0 );
 
     /** @brief Destructor. */
     ~MovingAverageFilter() = default;
 
-    inline double getValue() const override { return mVal; }
+    inline double getValue() const override { return _y; }
 
-    inline unsigned int getLength() const { return mLength; }
+    inline unsigned int getLength() const { return _length; }
 
     /**
      * @brief Sets length of the sliding window
@@ -76,10 +75,10 @@ public:
 
 private:
 
-    std::deque<double> mFifo;   ///< previous value fifo queue
+    std::deque<double> _fifo;   ///< previous value fifo queue
 
-    unsigned int mLength;       ///< length of the sliding window
-    double mVal;                ///< current value
+    unsigned int _length;       ///< length of the sliding window
+    double _y;                  ///< current value
 };
 
 } // namespace mc

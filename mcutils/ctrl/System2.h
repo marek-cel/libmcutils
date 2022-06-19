@@ -49,21 +49,21 @@ public:
     /** @brief Constructor. */
     System2( double c1, double c2, double c3,
              double c4, double c5, double c6,
-             double val = 0.0 );
+             double y = 0.0 );
 
     /** @brief Destructor. */
     ~System2() = default;
 
-    inline double getValue() const override { return mVal; }
+    inline double getValue() const override { return _y; }
 
-    inline double getC1() const { return mC1; }
-    inline double getC2() const { return mC2; }
-    inline double getC3() const { return mC3; }
-    inline double getC4() const { return mC4; }
-    inline double getC5() const { return mC5; }
-    inline double getC6() const { return mC6; }
+    inline double getC1() const { return _c1; }
+    inline double getC2() const { return _c2; }
+    inline double getC3() const { return _c3; }
+    inline double getC4() const { return _c4; }
+    inline double getC5() const { return _c5; }
+    inline double getC6() const { return _c6; }
 
-    void setValue( double val );
+    void setValue( double y );
 
     void setC1( double c1 );
     void setC2( double c2 );
@@ -81,20 +81,20 @@ public:
 
 private:
 
-    double mC1;             ///< c1 coefficient
-    double mC2;             ///< c2 coefficient
-    double mC3;             ///< c3 coefficient
-    double mC4;             ///< c4 coefficient
-    double mC5;             ///< c5 coefficient
-    double mC6;             ///< c6 coefficient
+    double _c1;             ///< c1 coefficient
+    double _c2;             ///< c2 coefficient
+    double _c3;             ///< c3 coefficient
+    double _c4;             ///< c4 coefficient
+    double _c5;             ///< c5 coefficient
+    double _c6;             ///< c6 coefficient
 
-    double mInp_prev_1;     ///<
-    double mInp_prev_2;     ///<
+    double _u_prev_1;       ///<
+    double _u_prev_2;       ///<
 
-    double mVal_prev_1;     ///<
-    double mVal_prev_2;     ///<
+    double _y_prev_1;       ///<
+    double _y_prev_2;       ///<
 
-    double mVal;            ///< current value
+    double _y;              ///< current value
 };
 
 } // namespace mc

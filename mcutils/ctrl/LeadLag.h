@@ -58,21 +58,21 @@ public:
      * @param c2 coefficient of the transfer function
      * @param c3 coefficient of the transfer function
      * @param c4 coefficient of the transfer function
-     * @param val initial output value
+     * @param y initial output value
      */
-    LeadLag( double c1, double c2, double c3, double c4, double val = 0.0 );
+    LeadLag( double c1, double c2, double c3, double c4, double y = 0.0 );
 
     /** @brief Destructor. */
     ~LeadLag() = default;
 
-    inline double getValue() const override { return mVal; }
+    inline double getValue() const override { return _y; }
 
-    inline double getC1() const { return mC1; }
-    inline double getC2() const { return mC2; }
-    inline double getC3() const { return mC3; }
-    inline double getC4() const { return mC4; }
+    inline double getC1() const { return _c1; }
+    inline double getC2() const { return _c2; }
+    inline double getC3() const { return _c3; }
+    inline double getC4() const { return _c4; }
 
-    void setValue( double val );
+    void setValue( double y );
 
     void setC1( double c1 );
     void setC2( double c2 );
@@ -88,15 +88,15 @@ public:
 
 private:
 
-    double mC1;             ///< c1 coefficient of the transfer function
-    double mC2;             ///< c2 coefficient of the transfer function
-    double mC3;             ///< c3 coefficient of the transfer function
-    double mC4;             ///< c4 coefficient of the transfer function
+    double _c1;             ///< c1 coefficient of the transfer function
+    double _c2;             ///< c2 coefficient of the transfer function
+    double _c3;             ///< c3 coefficient of the transfer function
+    double _c4;             ///< c4 coefficient of the transfer function
 
-    double mInp_prev;       ///< previous input value
-    double mVal_prev;       ///< previous output value
+    double _u_prev;         ///< previous input value
+    double _y_prev;         ///< previous output value
 
-    double mVal;            ///< current value
+    double _y;              ///< current value
 };
 
 } // namespace mc

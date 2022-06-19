@@ -58,7 +58,7 @@ Matrix6x6 Matrix6x6::getTransposed() const
 
 Matrix6x6& Matrix6x6::operator= ( const Matrix6x6 &matrix )
 {
-    setArray( matrix.mItems );
+    setArray( matrix._items );
     return (*this);
 }
 

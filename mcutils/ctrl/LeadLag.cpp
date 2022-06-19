@@ -38,50 +38,49 @@ LeadLag::LeadLag()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LeadLag::LeadLag( double c1, double c2, double c3, double c4, double val )
-    : mC1 ( c1 )
-    , mC2 ( c2 )
-    , mC3 ( c3 )
-    , mC4 ( c4 )
-    , mInp_prev ( 0.0 )
-    , mVal_prev ( val )
-    , mVal ( val )
+LeadLag::LeadLag( double c1, double c2, double c3, double c4, double y )
+    : _c1 ( c1 )
+    , _c2 ( c2 )
+    , _c3 ( c3 )
+    , _c4 ( c4 )
+    , _u_prev ( 0.0 )
+    , _y_prev ( y )
+    , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setValue( double val )
+void LeadLag::setValue( double y )
 {
-    mVal = val;
-    mVal_prev = val;
+    _y = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LeadLag::setC1( double c1 )
 {
-    mC1 = c1;
+    _c1 = c1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LeadLag::setC2( double c2 )
 {
-    mC2 = c2;
+    _c2 = c2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LeadLag::setC3( double c3 )
 {
-    mC3 = c3;
+    _c3 = c3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LeadLag::setC4( double c4 )
 {
-    mC4 = c4;
+    _c4 = c4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,17 +89,16 @@ void LeadLag::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double den = 2.0 * mC3 + dt * mC4;
-        double den_inv = 1.0 / den;
+        double den = 2.0 * _c3 + dt * _c4;
 
-        double ca = ( 2.0 * mC1 + dt  * mC2 ) * den_inv;
-        double cb = ( dt  * mC2 - 2.0 * mC1 ) * den_inv;
-        double cc = ( 2.0 * mC3 - dt  * mC4 ) * den_inv;
+        double ca = ( 2.0 * _c1 + dt  * _c2 ) / den;
+        double cb = ( dt  * _c2 - 2.0 * _c1 ) / den;
+        double cc = ( 2.0 * _c3 - dt  * _c4 ) / den;
 
-        mVal = u * ca + mInp_prev * cb + mVal_prev * cc;
+        _y = u * ca + _u_prev * cb + _y_prev * cc;
 
-        mInp_prev = u;
-        mVal_prev = mVal;
+        _u_prev = u;
+        _y_prev = _y;
     }
 }
 

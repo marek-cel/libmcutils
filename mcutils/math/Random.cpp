@@ -33,10 +33,10 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Random::Random()
-    : mRand ( 0 )
-    , mSeed ( static_cast<unsigned int>( time(nullptr) ) )
+    : _rand ( 0 )
+    , _seed ( static_cast<unsigned int>( time(nullptr) ) )
 {
-    srand( mSeed );
+    srand( _seed );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,13 +47,13 @@ int Random::getRandom( int min, int max )
     {
 #       ifdef _MSC_VER
         //rand_s( &_rand );
-        return min + mRand % ( max - min + 1 );
+        return min + _rand % ( max - min + 1 );
         return min + rand() % ( max - min + 1 );
 #       else
-        mMutex.lock();
-        mRand = rand_r( &mSeed );
-        mMutex.unlock();
-        return min + mRand % ( max - min + 1 );
+        _mutex.lock();
+        _rand = rand_r( &_seed );
+        _mutex.unlock();
+        return min + _rand % ( max - min + 1 );
 #       endif
     }
 
