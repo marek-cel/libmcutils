@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils_ctrl )
+set( TARGET_NAME mcutils-ctrl )
 
 ################################################################################
 

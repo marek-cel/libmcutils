@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils_misc )
+set( TARGET_NAME mcutils-misc )
 
 ################################################################################
 

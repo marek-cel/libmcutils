@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils_xml )
+set( TARGET_NAME mcutils-xml )
 
 ################################################################################
 

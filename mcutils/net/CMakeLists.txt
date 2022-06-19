@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils_net )
+set( TARGET_NAME mcutils-net )
 
 ################################################################################
 

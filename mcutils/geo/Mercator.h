@@ -105,12 +105,12 @@ public:
 
 private:
 
-    const double _a;        ///< [m] ellipsoid semi major axis
-    const double _e;        ///< [-] ellipsoid first eccentricity
-    const double _e2;       ///< [-] ellipsoid first eccentricity squared
+    double _a;          ///< [m] ellipsoid semi major axis
+    double _e;          ///< [-] ellipsoid first eccentricity
+    double _e2;         ///< [-] ellipsoid first eccentricity squared
 
-    const double _max_x;    ///< [m] maximum Mercator x-coordinate for longitude 180 deg
-    const double _max_y;    ///< [m] maximum Mercator y-coordinate for latitude 85 deg
+    double _max_x;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
+    double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg
 };
 
 } // namespace mc
