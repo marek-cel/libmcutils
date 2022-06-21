@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_LOWPASSFILTER_H_
-#define MCUTILS_CTRL_LOWPASSFILTER_H_
+#ifndef MCUTILS_CTRL_STATESPACE_H_
+#define MCUTILS_CTRL_STATESPACE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -34,44 +34,18 @@ namespace mc
 {
 
 /**
- * @brief First-order low-pass filter (LPF) class.
- *
- * Transfer function:
- * G(s)  =  1 / ( Tc*s + 1 )  =  omega / ( s + omega )  =  1 / ( s/omega + 1 )
- *
- * First-order low-pass filter is based on a first-order lag element.
+ * @brief State space model class.
  */
-class MCUTILSAPI LowPassFilter final : public IControlElement
+class MCUTILSAPI StateSpace final : public IControlElement
 {
 public:
 
     /**
-     * @brief Constructor.
-     * @param omega [rad/s] cutoff angular frequency
-     * @param y initial output value
+     * @brief Constructor
      */
-    LowPassFilter( double omega = 1.0, double y = 0.0 );
+    StateSpace();
 
     inline double getValue() const override { return _y; }
-    inline double getOmega() const { return _omega; }
-
-    /**
-     * @brief Sets cutoff angular frequency.
-     * @param omega [rad/s] cutoff angular frequency
-     */
-    void setOmega( double omega );
-
-    /**
-     * @brief Sets cutoff frequency.
-     * @param freq [Hz] cutoff frequency
-     */
-    void setCutoffFreq( double freq );
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
 
     /**
      * @brief Updates element due to time step and input value
@@ -82,8 +56,6 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] cutoff angular frequency
-    double _tc;             ///< time constant
     double _y;              ///< current value
 };
 
@@ -91,4 +63,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_LOWPASSFILTER_H_
+#endif // MCUTILS_CTRL_STATESPACE_H_

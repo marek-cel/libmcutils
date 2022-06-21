@@ -49,9 +49,9 @@ TEST_F(TestLeadLag, CanInstantiate)
     mc::LeadLag leadLag;
 
     EXPECT_DOUBLE_EQ( leadLag.getC1(), 0.0 );
-    EXPECT_DOUBLE_EQ( leadLag.getC2(), 0.0 );
+    EXPECT_DOUBLE_EQ( leadLag.getC2(), 1.0 );
     EXPECT_DOUBLE_EQ( leadLag.getC3(), 0.0 );
-    EXPECT_DOUBLE_EQ( leadLag.getC4(), 0.0 );
+    EXPECT_DOUBLE_EQ( leadLag.getC4(), 1.0 );
     EXPECT_DOUBLE_EQ( leadLag.getValue(), 0.0 );
 }
 

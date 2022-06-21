@@ -43,25 +43,19 @@ class MCUTILSAPI HighPassFilter final : public IControlElement
 {
 public:
 
-    /** @brief Constructor. */
-    HighPassFilter();
-
     /**
      * @brief Constructor.
      * @param omega [rad/s] cutoff angular frequency
      * @param y initial output value
      */
-    explicit HighPassFilter( double omega, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~HighPassFilter() = default;
+    HighPassFilter( double omega = 1.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
     inline double getOmega() const { return _omega; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param y output value
      */
     void setValue( double y );
 

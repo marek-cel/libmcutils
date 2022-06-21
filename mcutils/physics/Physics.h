@@ -67,7 +67,12 @@ static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] stan
  */
 inline double inertia( double u, double y, double dt, double tc )
 {
-    return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+    if ( tc > 0.0 )
+    {
+        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+    }
+
+    return u;
 }
 
 /**

@@ -44,15 +44,9 @@ class MCUTILSAPI System2 final : public IControlElement
 public:
 
     /** @brief Constructor. */
-    System2();
-
-    /** @brief Constructor. */
-    System2( double c1, double c2, double c3,
-             double c4, double c5, double c6,
+    System2( double c1 = 0.0, double c2 = 0.0, double c3 = 1.0,
+             double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
              double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~System2() = default;
 
     inline double getValue() const override { return _y; }
 
@@ -88,11 +82,11 @@ private:
     double _c5;             ///< c5 coefficient
     double _c6;             ///< c6 coefficient
 
-    double _u_prev_1;       ///<
-    double _u_prev_2;       ///<
+    double _u_prev_1;       ///< input previous value
+    double _u_prev_2;       ///< input value 2 steps before
 
-    double _y_prev_1;       ///<
-    double _y_prev_2;       ///<
+    double _y_prev_1;       ///< previous value
+    double _y_prev_2;       ///< value 2 steps before
 
     double _y;              ///< current value
 };

@@ -37,7 +37,15 @@ namespace mc
  * @brief First-order band-stop filter (BPF) or notch filter class.
  *
  * Transfer function:
- * G(s)  =
+ * G(s)  =  ( s^2 + omega^2 ) / ( s^2 + beta*s + omega^2 )
+ * where:
+ * beta  [rad/s] bandwidth
+ * omega [rad/s] center frequency
+ *
+ * <h3>Refernces:</h3>
+ * <ul>
+ *   <li><a href="https://en.wikipedia.org/wiki/Band-stop_filter">Band-stop filter - Wikipedia</a></li>
+ * </ul>
  */
 class MCUTILSAPI BandStopFilter final : public IControlElement
 {
@@ -45,6 +53,15 @@ public:
 
     /** @brief Constructor. */
     BandStopFilter();
+
+    inline double getValue() const override { return _y; }
+
+    /**
+     * @brief Updates element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
+     */
+    void update( double dt, double u ) override;
 };
 
 } // namespace mc

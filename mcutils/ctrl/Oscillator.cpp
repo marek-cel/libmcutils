@@ -32,48 +32,38 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Oscillator::Oscillator()
-    : Oscillator( 1.0, 1.0, 0.0 )
-{}
+Oscillator::Oscillator( double omega, double zeta, double y )
+    : _omega ( omega )
+    , _zeta  ( zeta  )
 
-////////////////////////////////////////////////////////////////////////////////
+    , _omega2 ( _omega * _omega )
+    , _2zetomg ( 2.0 * _zeta * _omega )
 
-Oscillator::Oscillator( double omega, double zeta, double val )
-    : mOmega ( omega )
-    , mZeta  ( zeta  )
-    , mVal   ( val   )
-
-    , mC3 ( mOmega * mOmega      )
-    , mC5 ( 2.0 * mZeta * mOmega )
-    , mC6 ( mOmega * mOmega      )
-
-    , mInp_prev_1 ( 0.0 )
-    , mInp_prev_2 ( 0.0 )
-    , mVal_prev_1 ( 0.0 )
-    , mVal_prev_2 ( 0.0 )
+    , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Oscillator::setOmega( double omega )
 {
-    mOmega = std::max( 0.0, omega );
+    _omega = std::max( 0.0, omega );
+    _omega2 = _omega * _omega;
+    _2zetomg = 2.0 * _zeta * _omega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Oscillator::setDamping( double zeta )
 {
-    mZeta = std::max( 0.0, std::min( 1.0, zeta ) );
+    _zeta = std::max( 0.0, std::min( 1.0, zeta ) );
+    _2zetomg = 2.0 * _zeta * _omega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Oscillator::setValue( double val )
+void Oscillator::setValue( double y )
 {
-    mVal = val;
-    mVal_prev_1 = val;
-    mVal_prev_2 = val;
+    _y = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,28 +72,22 @@ void Oscillator::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        if ( dt > 0.0 )
-        {
-            double den = 4.0 + 2.0*mC5*dt + mC6*dt*dt;
-            double den_inv = 1.0 / den;
+        double den = 4.0 + 2.0*_2zetomg*dt + _omega2*dt*dt;
+        double den_inv = 1.0 / den;
 
-            double dt2 = dt * dt;
+        double ca = _omega2 * dt * dt * den_inv;
+        double cb = 2.0 * ca;
+        double cc = cb - 8.0 * den_inv;
+        double cd = ca + ( 4.0 - 2.0 * _2zetomg * dt ) * den_inv;
 
-            double ca = (       mC3 * dt2 ) * den_inv;
-            double cb = ( 2.0 * mC3 * dt2 ) * den_inv;
-            double cc = (       mC3 * dt2 ) * den_inv;
-            double cd = ( 2.0 * mC6 * dt2 - 8.0 ) * den_inv;
-            double ce = ( 4.0 - 2.0 * mC5 * dt + mC6 * dt2 ) * den_inv;
+        _y = u * ca + _u_prev_1 * cb + _u_prev_2 * ca
+                    - _y_prev_1 * cc - _y_prev_2 * cd;
 
-            mVal = u * ca + mInp_prev_1 * cb + mInp_prev_2 * cc
-                          - mVal_prev_1 * cd - mVal_prev_2 * ce;
+        _u_prev_2 = _u_prev_1;
+        _u_prev_1 = u;
 
-            mInp_prev_2 = mInp_prev_1;
-            mInp_prev_1 = u;
-
-            mVal_prev_2 = mVal_prev_1;
-            mVal_prev_1 = mVal;
-        }
+        _y_prev_2 = _y_prev_1;
+        _y_prev_1 = _y;
     }
 }
 

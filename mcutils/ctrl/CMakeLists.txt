@@ -16,6 +16,7 @@ set( HEADERS
     MovingMedianFilter.h
     Oscillator.h
     PID.h
+    StateSpace.h
     System2.h
 )
 

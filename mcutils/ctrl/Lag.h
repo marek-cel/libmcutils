@@ -68,17 +68,14 @@ public:
      * @param tc time constant
      * @param y initial output value
      */
-    explicit Lag( double tc = 1.0, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~Lag() = default;
+    Lag( double tc = 0.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
     inline double getTimeConst() const { return _tc; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param y output value
      */
     void setValue( double y );
 

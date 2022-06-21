@@ -28,6 +28,7 @@ SOURCES += \
     $$PWD/ctrl/TestMovingMedianFilter.cpp \
     $$PWD/ctrl/TestOscillator.cpp \
     $$PWD/ctrl/TestPID.cpp \
+    $$PWD/ctrl/TestStateSpace.cpp \
     $$PWD/ctrl/TestSystem2.cpp
 
 ################################################################################

@@ -78,11 +78,6 @@ public:
         Filtering       ///< feedback filtering
     };
 
-    /**
-     * @brief Constructor.
-     */
-    PID();
-
 
     /**
      * @brief Constructor.
@@ -91,7 +86,7 @@ public:
      * @param ki integral gain
      * @param kd derivative gain
      */
-    PID( double kp, double ki, double kd );
+    PID( double kp = 1.0, double ki = 0.0, double kd = 0.0 );
 
     /**
      * @brief Constructor.
@@ -103,9 +98,6 @@ public:
      * @param max maximal value for saturation
      */
     PID( double kp, double ki, double kd, double min, double max );
-
-    /** @brief Destructor. */
-    ~PID();
 
     /**
      * @brief Updates controller.

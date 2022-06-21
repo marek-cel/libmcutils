@@ -45,10 +45,10 @@ TEST_F(TestSystem2, CanInstantiate)
 
     EXPECT_DOUBLE_EQ( s.getC1(), 0.0 );
     EXPECT_DOUBLE_EQ( s.getC2(), 0.0 );
-    EXPECT_DOUBLE_EQ( s.getC3(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 1.0 );
     EXPECT_DOUBLE_EQ( s.getC4(), 0.0 );
     EXPECT_DOUBLE_EQ( s.getC5(), 0.0 );
-    EXPECT_DOUBLE_EQ( s.getC6(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 1.0 );
 
     EXPECT_DOUBLE_EQ( s.getValue(), 0.0 );
 }

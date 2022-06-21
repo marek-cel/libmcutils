@@ -49,9 +49,6 @@ class MCUTILSAPI LeadLag final : public IControlElement
 {
 public:
 
-    /** @brief Constructor. */
-    LeadLag();
-
     /**
      * @brief Constructor.
      * @param c1 coefficient of the transfer function
@@ -60,10 +57,9 @@ public:
      * @param c4 coefficient of the transfer function
      * @param y initial output value
      */
-    LeadLag( double c1, double c2, double c3, double c4, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~LeadLag() = default;
+    LeadLag( double c1 = 0.0, double c2 = 1.0,
+             double c3 = 0.0, double c4 = 1.0,
+             double y = 0.0 );
 
     inline double getValue() const override { return _y; }
 

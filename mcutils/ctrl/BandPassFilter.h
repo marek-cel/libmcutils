@@ -37,14 +37,42 @@ namespace mc
  * @brief First-order band-pass filter (BPF) class.
  *
  * Transfer function:
- * G(s)  =
+ * G(s)  =  beta*s / ( s^2 + beta*s + omega^2 )
+ * where:
+ * beta  [rad/s] bandwidth
+ * omega [rad/s] center frequency
+ *
+ * <h3>Refernces:</h3>
+ * <ul>
+ *   <li><a href="https://en.wikipedia.org/wiki/Band-pass_filter">Band-pass filter - Wikipedia</a></li>
+ * </ul>
  */
 class MCUTILSAPI BandPassFilter final : public IControlElement
 {
 public:
 
-    /** @brief Constructor. */
-    BandPassFilter();
+    /**
+     * @brief Constructor
+     * @param beta [rad/s] bandwidth
+     * @param omega [rad/s] center frequency
+     */
+    BandPassFilter( double beta = 0.0, double omega = 0.0 );
+
+    inline double getValue() const override { return _y; }
+
+    /**
+     * @brief Updates element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
+     */
+    void update( double dt, double u ) override;
+
+private:
+
+    double _beta;           ///< [rad/s] bandwidth
+    double _omega;          ///< [rad/s] center frequency
+
+    double _y;              ///< current value
 };
 
 } // namespace mc

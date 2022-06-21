@@ -44,7 +44,7 @@ TEST_F(TestLead, CanInstantiate)
 {
     mc::Lead lead;
 
-    EXPECT_DOUBLE_EQ( lead.getTimeConst(), 1.0 );
+    EXPECT_DOUBLE_EQ( lead.getTimeConst(), 0.0 );
     EXPECT_DOUBLE_EQ( lead.getValue(), 0.0 );
 }
 

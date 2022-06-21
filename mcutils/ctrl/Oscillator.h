@@ -53,23 +53,17 @@ class MCUTILSAPI Oscillator final : public IControlElement
 {
 public:
 
-    /** @brief Constructor. */
-    Oscillator();
-
     /**
      * @brief Constructor.
      * @param omega [rad/s] undamped angular frequency
      * @param zeta [-] <0.0;1.0> dampipng ratio
-     * @param val initial output value
+     * @param y initial output value
      */
-    Oscillator( double omega, double zeta, double val = 0.0 );
+    Oscillator( double omega = 1.0, double zeta = 1.0, double y = 0.0 );
 
-    /** @brief Destructor. */
-    ~Oscillator() = default;
-
-    inline double getValue() const override { return mVal; }
-    inline double getOmega() const { return mOmega; }
-    inline double getDamping() const { return mZeta; }
+    inline double getValue() const override { return _y; }
+    inline double getOmega() const { return _omega; }
+    inline double getDamping() const { return _zeta; }
 
     /**
      * @brief Sets undamped angular frequency.
@@ -85,9 +79,9 @@ public:
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param y output value
      */
-    void setValue( double val );
+    void setValue( double y );
 
     /**
      * @brief Updates element due to time step and input value
@@ -98,19 +92,19 @@ public:
 
 private:
 
-    double mOmega;          ///< [rad/s] undamped angular frequency
-    double mZeta;           ///< [-] <0.0;1.0> dampipng coefficient
-    double mVal;            ///< current value
+    double _omega;          ///< [rad/s] undamped angular frequency
+    double _zeta;           ///< [-] <0.0;1.0> dampipng coefficient
 
-    double mC3;             ///< c3 coefficient
-    double mC5;             ///< c5 coefficient
-    double mC6;             ///< c6 coefficient
+    double _omega2;         ///< [rad/s] undamped angular frequency squared
+    double _2zetomg;        ///< [rad/s] 2*zeta*omega
 
-    double mInp_prev_1;     ///< input value
-    double mInp_prev_2;     ///<
+    double _u_prev_1;       ///< input previous value
+    double _u_prev_2;       ///< input value 2 steps before
 
-    double mVal_prev_1;     ///<
-    double mVal_prev_2;     ///<
+    double _y_prev_1;       ///< previous value
+    double _y_prev_2;       ///< value 2 steps before
+
+    double _y;              ///< current value
 };
 
 } // namespace mc

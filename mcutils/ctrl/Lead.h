@@ -51,20 +51,14 @@ class MCUTILSAPI Lead final : public IControlElement
 public:
 
     /** @brief Constructor. */
-    Lead();
-
-    /** @brief Constructor. */
-    explicit Lead( double tc, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~Lead() = default;
+    Lead( double tc = 0.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
     inline double getTimeConst() const { return _tc; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param y output value
      */
     void setValue( double y );
 

@@ -47,8 +47,8 @@ TEST_F(TestLag2, CanInstantiate)
 {
     mc::Lag2 lag;
 
-    EXPECT_DOUBLE_EQ( lag.getTimeConst1(), 1.0 );
-    EXPECT_DOUBLE_EQ( lag.getTimeConst2(), 1.0 );
+    EXPECT_DOUBLE_EQ( lag.getTimeConst1(), 0.0 );
+    EXPECT_DOUBLE_EQ( lag.getTimeConst2(), 0.0 );
     EXPECT_DOUBLE_EQ( lag.getValue(), 0.0 );
 }
 

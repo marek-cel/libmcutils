@@ -32,12 +32,6 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LeadLag::LeadLag()
-    : LeadLag( 0.0, 0.0, 0.0, 0.0, 0.0 )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
 LeadLag::LeadLag( double c1, double c2, double c3, double c4, double y )
     : _c1 ( c1 )
     , _c2 ( c2 )
@@ -90,10 +84,11 @@ void LeadLag::update( double dt, double u )
     if ( dt > 0.0 )
     {
         double den = 2.0 * _c3 + dt * _c4;
+        double den_inv = 1.0 / den;
 
-        double ca = ( 2.0 * _c1 + dt  * _c2 ) / den;
-        double cb = ( dt  * _c2 - 2.0 * _c1 ) / den;
-        double cc = ( 2.0 * _c3 - dt  * _c4 ) / den;
+        double ca = ( 2.0 * _c1 + dt  * _c2 ) * den_inv;
+        double cb = ( dt  * _c2 - 2.0 * _c1 ) * den_inv;
+        double cc = ( 2.0 * _c3 - dt  * _c4 ) * den_inv;
 
         _y = u * ca + _u_prev * cb + _y_prev * cc;
 

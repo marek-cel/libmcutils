@@ -73,7 +73,9 @@
  * x'( 0 )  =  C_1 * a  +  C_2 * b
  *
  * Refernces:
- * Krysicki W., Wlodarski L.: Analiza matematyczna w zadaniach, Tom II. PWN, Ed. XXVII, 2018 [in Polish], p.287
+ * <ul>
+ *   <li>Krysicki W., Wlodarski L.: Analiza matematyczna w zadaniach, Tom II. PWN, Ed. XXVII, 2018 [in Polish], p.287</li>
+ * </ul>
  */
 class DiffEquationSolver
 {

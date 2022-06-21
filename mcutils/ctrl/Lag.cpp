@@ -33,7 +33,12 @@ namespace mc
 
 double Lag::calculate( double u, double y, double dt, double tc )
 {
-    return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+    if ( tc > 0.0 )
+    {
+        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+    }
+
+    return u;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

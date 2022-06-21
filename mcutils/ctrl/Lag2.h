@@ -24,8 +24,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutils/ctrl/Lag.h>
-
 #include <mcutils/ctrl/IControlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,31 +41,22 @@ class MCUTILSAPI Lag2 final : public IControlElement
 {
 public:
 
-    /** @brief Constructor. */
-    Lag2();
-
-    /** @brief Copy constructor. */
-    Lag2( const Lag2 &lag );
-
     /**
      * @brief Constructor.
      * @param tc1 time constant 1
      * @param tc2 time constant 2
      * @param y initial output value
      */
-    Lag2( double tc1, double tc2, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~Lag2();
+    Lag2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
 
-    inline double getTimeConst1() const { return _lag1->getTimeConst(); }
+    inline double getTimeConst1() const { return _tc1; }
     inline double getTimeConst2() const { return _tc2; }
 
     /**
      * @brief Sets output value
-     * @param youtput value
+     * @param y output value
      */
     void setValue( double y );
 
@@ -90,14 +79,11 @@ public:
      */
     void update( double dt, double u ) override;
 
-    /** @brief Assignment operator. */
-    Lag2& operator= ( const Lag2 &lag );
-
 private:
 
-    Lag *_lag1;             ///< first-order lag element
-
-    double _tc2;            ///< time constant
+    double _tc1;            ///< time constant 1
+    double _tc2;            ///< time constant 2
+    double _y1;             ///< intermediate value
     double _y;              ///< current value
 };
 

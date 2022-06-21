@@ -51,10 +51,7 @@ public:
      * @brief Constructor.
      * @param length length of the sliding window
      */
-    explicit MovingAverageFilter( unsigned int length = 1, double y = 0.0 );
-
-    /** @brief Destructor. */
-    ~MovingAverageFilter() = default;
+    MovingAverageFilter( unsigned int length = 1, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
 
