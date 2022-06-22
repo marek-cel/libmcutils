@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +47,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Band-stop_filter">Band-stop filter - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI BandStopFilter final : public IControlElement
+class MCUTILSAPI BandStopFilter final : public ICtrlElement
 {
 public:
 

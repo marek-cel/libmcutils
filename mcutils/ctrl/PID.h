@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -65,7 +65,7 @@ namespace mc
  *   <li><a href="https://www.scilab.org/pid-anti-windup-schemes">PID Anti-Windup Schemes</a></li>
  * </ul>
  */
-class MCUTILSAPI PID final : public IControlElement
+class MCUTILSAPI PID final : public ICtrlElement
 {
 public:
 

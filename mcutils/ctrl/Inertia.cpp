@@ -19,67 +19,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_MOVINGMEDIANFILTER_H_
-#define MCUTILS_CTRL_MOVINGMEDIANFILTER_H_
 
-////////////////////////////////////////////////////////////////////////////////
+#include <mcutils/ctrl/Inertia.h>
 
-#include <deque>
-
-#include <mcutils/defs.h>
-
-#include <mcutils/ctrl/IControlElement.h>
+#include <cmath>
 
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
 {
 
-/**
- * @brief Moving median filter class.
- *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia</a></li>
- * </ul>
- */
-class MCUTILSAPI MovingMedianFilter final : public IControlElement
+////////////////////////////////////////////////////////////////////////////////
+
+double Inertia::calculate( double u, double y, double dt, double tc )
 {
-public:
+    if ( tc > 0.0 )
+    {
+        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+    }
 
-    /**
-     * @brief Constructor.
-     * @param length length of the sliding window
-     */
-    MovingMedianFilter( unsigned int length = 1, double y = 0.0 );
-
-    inline double getValue() const override { return _y; }
-
-    inline unsigned int getLength() const { return _length; }
-
-    /**
-     * @brief Sets length of the sliding window
-     * @param length length of the sliding window
-     */
-    void setLength( unsigned int length );
-
-    /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
-     */
-    void update( double dt, double u ) override;
-
-private:
-
-    std::deque<double> _fifo;   ///< previous value fifo queue
-
-    unsigned int _length;       ///< length of the sliding window
-    double _y;                  ///< current value
-};
-
-} // namespace mc
+    return u;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_MOVINGMEDIANFILTER_H_
+Inertia::Inertia( double tc, double y )
+    : _tc ( tc )
+    , _y ( y )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia::setValue( double y )
+{
+    _y = y;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia::setTimeConst( double tc )
+{
+    if ( tc > 0.0 )
+    {
+        _tc = tc;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia::update( double dt, double u )
+{
+    if ( dt > 0.0 )
+    {
+        _y = calculate( u, _y, dt, _tc );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc

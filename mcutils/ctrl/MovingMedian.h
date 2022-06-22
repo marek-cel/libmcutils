@@ -19,12 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_LAG2_H_
-#define MCUTILS_CTRL_LAG2_H_
+#ifndef MCUTILS_CTRL_MOVINGMEDIAN_H_
+#define MCUTILS_CTRL_MOVINGMEDIAN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <deque>
+
+#include <mcutils/defs.h>
+
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,45 +36,32 @@ namespace mc
 {
 
 /**
- * @brief Second-order lag (inertia) class.
+ * @brief Moving median filter class.
  *
- * Transfer function:
- * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
+ * <h3>Refernces:</h3>
+ * <ul>
+ *   <li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia</a></li>
+ * </ul>
  */
-class MCUTILSAPI Lag2 final : public IControlElement
+class MCUTILSAPI MovingMedian final : public ICtrlElement
 {
 public:
 
     /**
      * @brief Constructor.
-     * @param tc1 time constant 1
-     * @param tc2 time constant 2
-     * @param y initial output value
+     * @param length length of the sliding window
      */
-    Lag2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
+    MovingMedian( unsigned int length = 1, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
 
-    inline double getTimeConst1() const { return _tc1; }
-    inline double getTimeConst2() const { return _tc2; }
+    inline unsigned int getLength() const { return _length; }
 
     /**
-     * @brief Sets output value
-     * @param y output value
+     * @brief Sets length of the sliding window
+     * @param length length of the sliding window
      */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant tc1.
-     * @param tc1 time constant tc1
-     */
-    void setTimeConst1( double tc1 );
-
-    /**
-     * @brief Sets time constant tc2.
-     * @param tc2 time constant tc2
-     */
-    void setTimeConst2( double tc2 );
+    void setLength( unsigned int length );
 
     /**
      * @brief Updates element due to time step and input value
@@ -81,14 +72,14 @@ public:
 
 private:
 
-    double _tc1;            ///< time constant 1
-    double _tc2;            ///< time constant 2
-    double _y1;             ///< intermediate value
-    double _y;              ///< current value
+    std::deque<double> _fifo;   ///< previous value fifo queue
+
+    unsigned int _length;       ///< length of the sliding window
+    double _y;                  ///< current value
 };
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_LAG2_H_
+#endif // MCUTILS_CTRL_MOVINGMEDIAN_H_

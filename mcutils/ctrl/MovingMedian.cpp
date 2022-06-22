@@ -20,9 +20,10 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/Lag.h>
+#include <mcutils/ctrl/MovingMedian.h>
 
-#include <cmath>
+#include <algorithm>
+#include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -31,47 +32,55 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Lag::calculate( double u, double y, double dt, double tc )
-{
-    if ( tc > 0.0 )
-    {
-        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
-    }
-
-    return u;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Lag::Lag( double tc, double y )
-    : _tc ( tc )
+MovingMedian::MovingMedian( unsigned int length , double y )
+    : _length ( length )
     , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lag::setValue( double y )
+void MovingMedian::setLength( unsigned int length )
 {
-    _y = y;
+    _length = length;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lag::setTimeConst( double tc )
+void MovingMedian::update( double, double u )
 {
-    if ( tc > 0.0 )
+    _fifo.push_back( u );
+
+    while ( _fifo.size() > _length )
     {
-        _tc = tc;
+        _fifo.pop_front();
     }
-}
 
-////////////////////////////////////////////////////////////////////////////////
-
-void Lag::update( double dt, double u )
-{
-    if ( dt > 0.0 )
+    if ( _fifo.size() > 1 )
     {
-        _y = calculate( u, _y, dt, _tc );
+        std::vector<double> v;
+
+        for ( double &val : _fifo )
+        {
+            v.push_back( val );
+        }
+
+        std::sort( v.begin(), v.end() );
+
+        if ( v.size() % 2 == 0 )
+        {
+            int i1 = static_cast<int>( v.size() ) / 2;
+            int i2 = i1 - 1;
+
+            _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;
+        }
+        else
+        {
+            _y = v[ v.size() / 2 ];
+        }
+    }
+    else
+    {
+        _y = u;
     }
 }
 

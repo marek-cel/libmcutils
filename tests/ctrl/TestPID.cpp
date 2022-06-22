@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <mcutils/ctrl/PID.h>
-#include <mcutils/ctrl/Lag.h>
+#include <mcutils/ctrl/Inertia.h>
 
 #include <XcosBinFileReader.h>
 
@@ -362,7 +362,7 @@ TEST_F(TestPID, CanUpdate)
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
         pid.update( DT, e );
-        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
+        y = mc::Inertia::calculate( pid.getValue(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
@@ -394,7 +394,7 @@ TEST_F(TestPID, CanUpdateAntiwindupCalculation)
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
         pid.update( DT, e );
-        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
+        y = mc::Inertia::calculate( pid.getValue(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
@@ -426,7 +426,7 @@ TEST_F(TestPID, CanUpdateAntiwindupConditional)
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
         pid.update( DT, e );
-        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
+        y = mc::Inertia::calculate( pid.getValue(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
@@ -459,7 +459,7 @@ TEST_F(TestPID, CanUpdateAntiwindupFilter)
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
         pid.update( DT, e );
-        y = mc::Lag::calculate( pid.getValue(), y, DT, TC );
+        y = mc::Inertia::calculate( pid.getValue(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 

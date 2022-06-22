@@ -20,10 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/MovingMedianFilter.h>
+#include <mcutils/ctrl/MovingAverage.h>
 
 #include <algorithm>
-#include <vector>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,21 +31,21 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MovingMedianFilter::MovingMedianFilter( unsigned int length , double y )
+MovingAverage::MovingAverage( unsigned int length , double y )
     : _length ( length )
     , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void MovingMedianFilter::setLength( unsigned int length )
+void MovingAverage::setLength( unsigned int length )
 {
     _length = length;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void MovingMedianFilter::update( double, double u )
+void MovingAverage::update( double, double u )
 {
     _fifo.push_back( u );
 
@@ -57,26 +56,14 @@ void MovingMedianFilter::update( double, double u )
 
     if ( _fifo.size() > 1 )
     {
-        std::vector<double> v;
+        double sum = 0.0;
 
         for ( double &val : _fifo )
         {
-            v.push_back( val );
+            sum += val;
         }
 
-        std::sort( v.begin(), v.end() );
-
-        if ( v.size() % 2 == 0 )
-        {
-            int i1 = static_cast<int>( v.size() ) / 2;
-            int i2 = i1 - 1;
-
-            _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;
-        }
-        else
-        {
-            _y = v[ v.size() / 2 ];
-        }
+        _y = sum / static_cast<double>( _fifo.size() );
     }
     else
     {

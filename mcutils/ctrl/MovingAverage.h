@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_MOVINGAVERAGEFILTER_H_
-#define MCUTILS_CTRL_MOVINGAVERAGEFILTER_H_
+#ifndef MCUTILS_CTRL_MOVINGAVERAGE_H_
+#define MCUTILS_CTRL_MOVINGAVERAGE_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -28,7 +28,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Moving_average">Moving average - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI MovingAverageFilter final : public IControlElement
+class MCUTILSAPI MovingAverage final : public ICtrlElement
 {
 public:
 
@@ -51,7 +51,7 @@ public:
      * @brief Constructor.
      * @param length length of the sliding window
      */
-    MovingAverageFilter( unsigned int length = 1, double y = 0.0 );
+    MovingAverage( unsigned int length = 1, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
 
@@ -82,4 +82,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_MOVINGAVERAGEFILTER_H_
+#endif // MCUTILS_CTRL_MOVINGAVERAGE_H_

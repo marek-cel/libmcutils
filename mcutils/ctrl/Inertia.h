@@ -19,14 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_LAG_H_
-#define MCUTILS_CTRL_LAG_H_
+#ifndef MCUTILS_CTRL_INERTIA_H_
+#define MCUTILS_CTRL_INERTIA_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ namespace mc
  *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
  * </ul>
  */
-class MCUTILSAPI Lag final : public IControlElement
+class MCUTILSAPI Inertia final : public ICtrlElement
 {
 public:
 
@@ -68,7 +68,7 @@ public:
      * @param tc time constant
      * @param y initial output value
      */
-    Lag( double tc = 0.0, double y = 0.0 );
+    Inertia( double tc = 0.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
     inline double getTimeConst() const { return _tc; }
@@ -102,4 +102,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_LAG_H_
+#endif // MCUTILS_CTRL_INERTIA_H_

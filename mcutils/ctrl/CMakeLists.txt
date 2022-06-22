@@ -3,17 +3,17 @@ set( TARGET_NAME mcutils-ctrl )
 ################################################################################
 
 set( HEADERS
+    ICtrlElement.h
     BandPassFilter.h
     BandStopFilter.h
     HighPassFilter.h
-    IControlElement.h
-    Lag2.h
-    Lag.h
+    Inertia.h
+    Inertia2.h
     Lead.h
     LeadLag.h
     LowPassFilter.h
-    MovingAverageFilter.h
-    MovingMedianFilter.h
+    MovingAverage.h
+    MovingMedian.h
     Oscillator.h
     PID.h
     StateSpace.h
@@ -22,13 +22,13 @@ set( HEADERS
 
 set( SOURCES
     HighPassFilter.cpp
-    Lag2.cpp
-    Lag.cpp
+    Inertia.cpp
+    Inertia2.cpp
     Lead.cpp
     LeadLag.cpp
     LowPassFilter.cpp
-    MovingAverageFilter.cpp
-    MovingMedianFilter.cpp
+    MovingAverage.cpp
+    MovingMedian.cpp
     Oscillator.cpp
     PID.cpp
     System2.cpp

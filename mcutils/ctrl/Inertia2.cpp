@@ -19,47 +19,66 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_ICONTROLELEMENT_H_
-#define MCUTILS_CTRL_ICONTROLELEMENT_H_
 
-////////////////////////////////////////////////////////////////////////////////
+#include <mcutils/ctrl/Inertia2.h>
 
-#include <mcutils/defs.h>
+#include <cmath>
+
+#include <mcutils/ctrl/Inertia.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
 {
 
-/**
- * @brief Interface class for signal processing elements classes.
- */
-class MCUTILSAPI IControlElement
-{
-public:
+////////////////////////////////////////////////////////////////////////////////
 
-    // LCOV_EXCL_START
-    // excluded from coverage report due to deleting destructor calling issues
-    /** @brief Destructor. */
-    virtual ~IControlElement() {}
-    // LCOV_EXCL_STOP
-
-    /**
-     * @brief Pure virtual function to get the current output value.
-     * @return current output value
-     */
-    virtual double getValue() const = 0;
-
-    /**
-     * @brief Pure virtual function to update element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
-     */
-    virtual void update( double dt, double u ) = 0;
-};
-
-} // namespace mc
+Inertia2::Inertia2( double tc1, double tc2, double y )
+    : _tc1 ( tc1 )
+    , _tc2 ( tc2 )
+    , _y1 ( y )
+    , _y  ( y )
+{}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_ICONTROLELEMENT_H_
+void Inertia2::setValue( double y )
+{
+    _y1 = y;
+    _y  = y;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::setTimeConst1( double tc1 )
+{
+    if ( tc1 > 0.0 )
+    {
+        _tc1 = tc1;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::setTimeConst2( double tc2 )
+{
+    if ( tc2 > 0.0 )
+    {
+        _tc2 = tc2;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::update( double dt, double u )
+{
+    if ( dt > 0.0 )
+    {
+        _y1 = Inertia::calculate(   u, _y1, dt, _tc1 );
+        _y  = Inertia::calculate( _y1,  _y, dt, _tc2 );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc

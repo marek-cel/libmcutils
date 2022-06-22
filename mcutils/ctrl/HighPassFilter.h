@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )
  */
-class MCUTILSAPI HighPassFilter final : public IControlElement
+class MCUTILSAPI HighPassFilter final : public ICtrlElement
 {
 public:
 

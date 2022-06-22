@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -49,7 +49,7 @@ namespace mc
  *   <li>Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]</li>
  * </ul>
  */
-class MCUTILSAPI Oscillator final : public IControlElement
+class MCUTILSAPI Oscillator final : public ICtrlElement
 {
 public:
 

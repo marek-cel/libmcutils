@@ -20,4 +20,4 @@ g = 1.0 / ( 2.0*s + 1.0 );
 
 disp( [t y] );
 plot( t, y );
-csvwrite( "../data/test_lag_step.csv", [t y], "delimiter", " " );
+csvwrite( "../data/test_inertia_step.csv", [t y], "delimiter", " " );

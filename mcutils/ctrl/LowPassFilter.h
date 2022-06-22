@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -41,7 +41,7 @@ namespace mc
  *
  * First-order low-pass filter is based on a first-order lag element.
  */
-class MCUTILSAPI LowPassFilter final : public IControlElement
+class MCUTILSAPI LowPassFilter final : public ICtrlElement
 {
 public:
 

@@ -19,13 +19,13 @@ SOURCES += \
 
 SOURCES += \
     $$PWD/ctrl/TestHighPassFilter.cpp \
-    $$PWD/ctrl/TestLag.cpp \
-    $$PWD/ctrl/TestLag2.cpp \
+    $$PWD/ctrl/TestInertia.cpp \
+    $$PWD/ctrl/TestInertia2.cpp \
     $$PWD/ctrl/TestLead.cpp \
     $$PWD/ctrl/TestLeadLag.cpp \
     $$PWD/ctrl/TestLowPassFilter.cpp \
-    $$PWD/ctrl/TestMovingAverageFilter.cpp \
-    $$PWD/ctrl/TestMovingMedianFilter.cpp \
+    $$PWD/ctrl/TestMovingAverage.cpp \
+    $$PWD/ctrl/TestMovingMedian.cpp \
     $$PWD/ctrl/TestOscillator.cpp \
     $$PWD/ctrl/TestPID.cpp \
     $$PWD/ctrl/TestStateSpace.cpp \

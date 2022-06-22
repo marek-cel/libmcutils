@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +39,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
  */
-class MCUTILSAPI System2 final : public IControlElement
+class MCUTILSAPI System2 final : public ICtrlElement
 {
 public:
 

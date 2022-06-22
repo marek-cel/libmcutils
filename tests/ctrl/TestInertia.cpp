@@ -2,35 +2,35 @@
 
 #include <gtest/gtest.h>
 
-#include <mcutils/ctrl/Lag.h>
+#include <mcutils/ctrl/Inertia.h>
 
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class TestLag : public ::testing::Test
+class TestInertia : public ::testing::Test
 {
 protected:
 
     static constexpr double TIME_STEP     { 0.01 };
     static constexpr double TIME_CONSTANT { 2.0 };
 
-    TestLag() {}
-    virtual ~TestLag() {}
+    TestInertia() {}
+    virtual ~TestInertia() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanCalculate)
+TEST_F(TestInertia, CanCalculate)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lag.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lag_step.bin", &vals );
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_inertia_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -40,7 +40,7 @@ TEST_F(TestLag, CanCalculate)
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = ( i < 101 ) ? 0.0 : 1.0;
-        y = mc::Lag::calculate( u, y, TIME_STEP, TIME_CONSTANT );
+        y = mc::Inertia::calculate( u, y, TIME_STEP, TIME_CONSTANT );
 
         double tolerance = std::max( 1.0e-3, 1.0e-3 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
@@ -51,14 +51,14 @@ TEST_F(TestLag, CanCalculate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanCalculate2)
+TEST_F(TestInertia, CanCalculate2)
 {
     std::vector<double> t_ref;
     std::vector<double> y_ref;
 
     // expected values calculated with GNU Octave
     // tests/control/octave/test_lag.m
-    CsvFileReader::readData( "../tests/ctrl/data/test_lag_step.csv", &t_ref, &y_ref );
+    CsvFileReader::readData( "../tests/ctrl/data/test_inertia_step.csv", &t_ref, &y_ref );
 
     EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
     EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
@@ -70,7 +70,7 @@ TEST_F(TestLag, CanCalculate2)
     for ( unsigned int i = 0; i < t_ref.size(); i++ )
     {
         double u = ( i == 0 ) ? 0.0 : 1.0;
-        y = mc::Lag::calculate( u, y, TIME_STEP, TIME_CONSTANT );
+        y = mc::Inertia::calculate( u, y, TIME_STEP, TIME_CONSTANT );
 
         EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
 
@@ -80,92 +80,92 @@ TEST_F(TestLag, CanCalculate2)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanConstruct)
+TEST_F(TestInertia, CanConstruct)
 {
-    mc::Lag *lag = nullptr;
-    EXPECT_NO_THROW( lag = new mc::Lag() );
-    delete lag;
+    mc::Inertia *inertia = nullptr;
+    EXPECT_NO_THROW( inertia = new mc::Inertia() );
+    delete inertia;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanDestruct)
+TEST_F(TestInertia, CanDestruct)
 {
-    mc::Lag *lag = new mc::Lag();
-    EXPECT_NO_THROW( delete lag );
+    mc::Inertia *inertia = new mc::Inertia();
+    EXPECT_NO_THROW( delete inertia );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanInstantiate)
+TEST_F(TestInertia, CanInstantiate)
 {
-    mc::Lag lag;
+    mc::Inertia inertia;
 
-    EXPECT_DOUBLE_EQ( lag.getTimeConst(), 0.0 );
-    EXPECT_DOUBLE_EQ( lag.getValue(), 0.0 );
+    EXPECT_DOUBLE_EQ( inertia.getTimeConst(), 0.0 );
+    EXPECT_DOUBLE_EQ( inertia.getValue(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanInstantiateAndSetData)
+TEST_F(TestInertia, CanInstantiateAndSetData)
 {
-    mc::Lag lag( 2.0, 3.0 );
+    mc::Inertia inertia( 2.0, 3.0 );
 
-    EXPECT_DOUBLE_EQ( lag.getTimeConst(), 2.0 );
-    EXPECT_DOUBLE_EQ( lag.getValue(), 3.0 );
+    EXPECT_DOUBLE_EQ( inertia.getTimeConst(), 2.0 );
+    EXPECT_DOUBLE_EQ( inertia.getValue(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanGetValue)
+TEST_F(TestInertia, CanGetValue)
 {
-    mc::Lag lag( 2.0, 3.0 );
+    mc::Inertia inertia( 2.0, 3.0 );
 
-    EXPECT_DOUBLE_EQ( lag.getValue(), 3.0 );
+    EXPECT_DOUBLE_EQ( inertia.getValue(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanSetValue)
+TEST_F(TestInertia, CanSetValue)
 {
-    mc::Lag lag;
+    mc::Inertia inertia;
 
-    lag.setValue( 1.0 );
-    EXPECT_DOUBLE_EQ( lag.getValue(), 1.0 );
+    inertia.setValue( 1.0 );
+    EXPECT_DOUBLE_EQ( inertia.getValue(), 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanGetTimeConst)
+TEST_F(TestInertia, CanGetTimeConst)
 {
-    mc::Lag lag( 2.0 );
+    mc::Inertia inertia( 2.0 );
 
-    EXPECT_DOUBLE_EQ( lag.getTimeConst(), 2.0 );
+    EXPECT_DOUBLE_EQ( inertia.getTimeConst(), 2.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanSetTimeConst)
+TEST_F(TestInertia, CanSetTimeConst)
 {
-    mc::Lag lag;
+    mc::Inertia inertia;
 
-    lag.setTimeConst( 2.0 );
-    EXPECT_DOUBLE_EQ( lag.getTimeConst(), 2.0 );
+    inertia.setTimeConst( 2.0 );
+    EXPECT_DOUBLE_EQ( inertia.getTimeConst(), 2.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanUpdateStep)
+TEST_F(TestInertia, CanUpdateStep)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lag.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lag_step.bin", &vals );
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_inertia_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::Lag lag( TIME_CONSTANT );
+    mc::Inertia inertia( TIME_CONSTANT );
 
     double t = 0.0;
     double y = 0.0;
@@ -174,8 +174,8 @@ TEST_F(TestLag, CanUpdateStep)
     {
         double u = ( i < 101 ) ? 0.0 : 1.0;
 
-        lag.update( TIME_STEP, u );
-        y = lag.getValue();
+        inertia.update( TIME_STEP, u );
+        y = inertia.getValue();
 
         double tolerance = std::max( 1.0e-3, 1.0e-3 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
@@ -186,20 +186,20 @@ TEST_F(TestLag, CanUpdateStep)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanUpdateStep2)
+TEST_F(TestInertia, CanUpdateStep2)
 {
     std::vector<double> t_ref;
     std::vector<double> y_ref;
 
     // expected values calculated with GNU Octave
     // tests/control/octave/test_lag.m
-    CsvFileReader::readData( "../tests/ctrl/data/test_lag_step.csv", &t_ref, &y_ref );
+    CsvFileReader::readData( "../tests/ctrl/data/test_inertia_step.csv", &t_ref, &y_ref );
 
     EXPECT_GT( t_ref.size(), 0 ) << "No reference data.";
     EXPECT_GT( y_ref.size(), 0 ) << "No reference data.";
     EXPECT_EQ( t_ref.size(), y_ref.size() ) << "Reference data corrupted.";
 
-    mc::Lag lag( TIME_CONSTANT );
+    mc::Inertia inertia( TIME_CONSTANT );
 
     double t = 0.0;
     double y = 0.0;
@@ -208,8 +208,8 @@ TEST_F(TestLag, CanUpdateStep2)
     {
         double u = ( i == 0 ) ? 0.0 : 1.0;
 
-        lag.update( TIME_STEP, u );
-        y = lag.getValue();
+        inertia.update( TIME_STEP, u );
+        y = inertia.getValue();
 
         EXPECT_NEAR( y, y_ref.at( i ), 1.0e-6 ) << "Mismatch at time= " << t;
 
@@ -219,17 +219,17 @@ TEST_F(TestLag, CanUpdateStep2)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLag, CanUpdateSine)
+TEST_F(TestInertia, CanUpdateSine)
 {
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lag.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lag_sine.bin", &vals );
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_inertia_sine.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::Lag lag( TIME_CONSTANT );
+    mc::Inertia inertia( TIME_CONSTANT );
 
     double t = 0.0;
     double y = 0.0;
@@ -238,8 +238,8 @@ TEST_F(TestLag, CanUpdateSine)
     {
         double u = sin( t + TIME_STEP );
 
-        lag.update( TIME_STEP, u );
-        y = lag.getValue();
+        inertia.update( TIME_STEP, u );
+        y = inertia.getValue();
 
         double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;

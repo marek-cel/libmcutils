@@ -19,58 +19,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_CTRL_ICTRLELEMENT_H_
+#define MCUTILS_CTRL_ICTRLELEMENT_H_
 
-#include <mcutils/ctrl/MovingAverageFilter.h>
+////////////////////////////////////////////////////////////////////////////////
 
-#include <algorithm>
+#include <mcutils/defs.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
 {
 
-////////////////////////////////////////////////////////////////////////////////
-
-MovingAverageFilter::MovingAverageFilter( unsigned int length , double y )
-    : _length ( length )
-    , _y ( y )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void MovingAverageFilter::setLength( unsigned int length )
+/**
+ * @brief Interface class for signal processing elements classes.
+ */
+class MCUTILSAPI ICtrlElement
 {
-    _length = length;
-}
+public:
 
-////////////////////////////////////////////////////////////////////////////////
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
+    /** @brief Destructor. */
+    virtual ~ICtrlElement() {}
+    // LCOV_EXCL_STOP
 
-void MovingAverageFilter::update( double, double u )
-{
-    _fifo.push_back( u );
+    /**
+     * @brief Pure virtual function to get the current output value.
+     * @return current output value
+     */
+    virtual double getValue() const = 0;
 
-    while ( _fifo.size() > _length )
-    {
-        _fifo.pop_front();
-    }
-
-    if ( _fifo.size() > 1 )
-    {
-        double sum = 0.0;
-
-        for ( double &val : _fifo )
-        {
-            sum += val;
-        }
-
-        _y = sum / static_cast<double>( _fifo.size() );
-    }
-    else
-    {
-        _y = u;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @brief Pure virtual function to update element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
+     */
+    virtual void update( double dt, double u ) = 0;
+};
 
 } // namespace mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTILS_CTRL_ICTRLELEMENT_H_

@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief State space model class.
  */
-class MCUTILSAPI StateSpace final : public IControlElement
+class MCUTILSAPI StateSpace final : public ICtrlElement
 {
 public:
 

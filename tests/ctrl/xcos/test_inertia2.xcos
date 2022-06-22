@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<XcosDiagram debugLevel="0" finalIntegrationTime="10.0" integratorAbsoluteTolerance="1.0E-6" integratorRelativeTolerance="1.0E-6" toleranceOnTime="1.0E-10" maxIntegrationTimeInterval="100001.0" maximumStepSize="0.0" realTimeScaling="0.0" solver="1.0" background="-1" gridEnabled="1" title="test_lag2"><!--Xcos - 2.0 - Scilab-Branch-master-GIT - 20210909 0830-->
+<XcosDiagram debugLevel="0" finalIntegrationTime="10.0" integratorAbsoluteTolerance="1.0E-6" integratorRelativeTolerance="1.0E-6" toleranceOnTime="1.0E-10" maxIntegrationTimeInterval="100001.0" maximumStepSize="0.0" realTimeScaling="0.0" solver="1.0" background="-1" gridEnabled="1" title="test_inertia2"><!--Xcos - 2.0 - Scilab-Branch-master-GIT - 20210909 0830-->
   <Array as="context" scilabClass="String[]"></Array>
   <mxGraphModel as="model">
     <root>
@@ -104,14 +104,14 @@
       <BasicBlock id="-3970764d:168cc132886:-7ff2" parent="0:2:0" interfaceFunctionName="WRITEC_f" blockType="d" dependsOnU="1" dependsOnT="0" simulationFunctionName="writec" simulationFunctionType="TYPE_2" style="WRITEC_f">
         <ScilabString as="exprs" height="5" width="1">
           <data line="0" column="0" value="1"/>
-          <data line="1" column="0" value="test_lag2_step.bin"/>
+          <data line="1" column="0" value="test_inertia2_step.bin"/>
           <data line="2" column="0" value="f"/>
           <data line="3" column="0" value="2"/>
           <data line="4" column="0" value="0"/>
         </ScilabString>
         <ScilabDouble as="realParameters" height="0" width="0"/>
-        <ScilabInteger as="integerParameters" height="1" width="24" intPrecision="sci_int32">
-          <data line="0" column="0" value="18"/>
+        <ScilabInteger as="integerParameters" height="1" width="28" intPrecision="sci_int32">
+          <data line="0" column="0" value="22"/>
           <data line="0" column="1" value="102"/>
           <data line="0" column="2" value="32"/>
           <data line="0" column="3" value="32"/>
@@ -122,19 +122,23 @@
           <data line="0" column="8" value="115"/>
           <data line="0" column="9" value="116"/>
           <data line="0" column="10" value="95"/>
-          <data line="0" column="11" value="108"/>
-          <data line="0" column="12" value="97"/>
-          <data line="0" column="13" value="103"/>
-          <data line="0" column="14" value="50"/>
-          <data line="0" column="15" value="95"/>
-          <data line="0" column="16" value="115"/>
-          <data line="0" column="17" value="116"/>
-          <data line="0" column="18" value="101"/>
-          <data line="0" column="19" value="112"/>
-          <data line="0" column="20" value="46"/>
-          <data line="0" column="21" value="98"/>
-          <data line="0" column="22" value="105"/>
-          <data line="0" column="23" value="110"/>
+          <data line="0" column="11" value="105"/>
+          <data line="0" column="12" value="110"/>
+          <data line="0" column="13" value="101"/>
+          <data line="0" column="14" value="114"/>
+          <data line="0" column="15" value="116"/>
+          <data line="0" column="16" value="105"/>
+          <data line="0" column="17" value="97"/>
+          <data line="0" column="18" value="50"/>
+          <data line="0" column="19" value="95"/>
+          <data line="0" column="20" value="115"/>
+          <data line="0" column="21" value="116"/>
+          <data line="0" column="22" value="101"/>
+          <data line="0" column="23" value="112"/>
+          <data line="0" column="24" value="46"/>
+          <data line="0" column="25" value="98"/>
+          <data line="0" column="26" value="105"/>
+          <data line="0" column="27" value="110"/>
         </ScilabInteger>
         <Array as="objectsParameters" scilabClass="ScilabList"/>
         <ScilabInteger as="nbZerosCrossing" height="1" width="1" intPrecision="sci_int32">
@@ -409,14 +413,14 @@
       <BasicBlock id="-313c17dd:1816880167f:-7e0d" parent="0:2:0" interfaceFunctionName="WRITEC_f" blockType="d" dependsOnU="1" dependsOnT="0" simulationFunctionName="writec" simulationFunctionType="TYPE_2" style="WRITEC_f">
         <ScilabString as="exprs" height="5" width="1">
           <data line="0" column="0" value="1"/>
-          <data line="1" column="0" value="test_lag2_sine.bin"/>
+          <data line="1" column="0" value="test_inertia2_sine.bin"/>
           <data line="2" column="0" value="f"/>
           <data line="3" column="0" value="2"/>
           <data line="4" column="0" value="0"/>
         </ScilabString>
         <ScilabDouble as="realParameters" height="0" width="0"/>
-        <ScilabInteger as="integerParameters" height="1" width="24" intPrecision="sci_int32">
-          <data line="0" column="0" value="18"/>
+        <ScilabInteger as="integerParameters" height="1" width="28" intPrecision="sci_int32">
+          <data line="0" column="0" value="22"/>
           <data line="0" column="1" value="102"/>
           <data line="0" column="2" value="32"/>
           <data line="0" column="3" value="32"/>
@@ -427,19 +431,23 @@
           <data line="0" column="8" value="115"/>
           <data line="0" column="9" value="116"/>
           <data line="0" column="10" value="95"/>
-          <data line="0" column="11" value="108"/>
-          <data line="0" column="12" value="97"/>
-          <data line="0" column="13" value="103"/>
-          <data line="0" column="14" value="50"/>
-          <data line="0" column="15" value="95"/>
-          <data line="0" column="16" value="115"/>
-          <data line="0" column="17" value="105"/>
-          <data line="0" column="18" value="110"/>
-          <data line="0" column="19" value="101"/>
-          <data line="0" column="20" value="46"/>
-          <data line="0" column="21" value="98"/>
-          <data line="0" column="22" value="105"/>
-          <data line="0" column="23" value="110"/>
+          <data line="0" column="11" value="105"/>
+          <data line="0" column="12" value="110"/>
+          <data line="0" column="13" value="101"/>
+          <data line="0" column="14" value="114"/>
+          <data line="0" column="15" value="116"/>
+          <data line="0" column="16" value="105"/>
+          <data line="0" column="17" value="97"/>
+          <data line="0" column="18" value="50"/>
+          <data line="0" column="19" value="95"/>
+          <data line="0" column="20" value="115"/>
+          <data line="0" column="21" value="105"/>
+          <data line="0" column="22" value="110"/>
+          <data line="0" column="23" value="101"/>
+          <data line="0" column="24" value="46"/>
+          <data line="0" column="25" value="98"/>
+          <data line="0" column="26" value="105"/>
+          <data line="0" column="27" value="110"/>
         </ScilabInteger>
         <Array as="objectsParameters" scilabClass="ScilabList"/>
         <ScilabInteger as="nbZerosCrossing" height="1" width="1" intPrecision="sci_int32">
@@ -796,59 +804,59 @@
       </ExplicitLink>
       <ExplicitLink id="-313c17dd:1816880167f:-7df9" parent="0:2:0" source="-313c17dd:1816880167f:-7e06" target="-313c17dd:1816880167f:-7e01" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="224.0" y="20.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="-4.0" y="0.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <ExplicitLink id="-313c17dd:1816880167f:-7df8" parent="0:2:0" source="-313c17dd:1816880167f:-7dff" target="-313c17dd:1816880167f:-7e04" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="11.0" y="0.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points">
             <mxPoint x="350.0" y="360.0"/>
             <mxPoint x="490.0" y="360.0"/>
             <mxPoint x="490.0" y="400.0"/>
           </Array>
-          <mxPoint as="targetPoint" x="-4.0" y="20.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <CommandControlLink id="-313c17dd:1816880167f:-7df7" parent="0:2:0" source="-313c17dd:1816880167f:-7e09" target="-313c17dd:1816880167f:-7dfc" style="CommandControlLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="20.0" y="44.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="0.0" y="-4.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </CommandControlLink>
       <CommandControlLink id="-313c17dd:1816880167f:-7df6" parent="0:2:0" source="-313c17dd:1816880167f:-7dfb" target="-313c17dd:1816880167f:-7e0b" style="CommandControlLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="0.0" y="11.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="40.0" y="-4.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </CommandControlLink>
       <CommandControlLink id="-313c17dd:1816880167f:-7df5" parent="0:2:0" source="-313c17dd:1816880167f:-7dfa" target="-313c17dd:1816880167f:-7e03" style="CommandControlLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="0.0" y="11.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points">
             <mxPoint x="530.0" y="340.0"/>
           </Array>
-          <mxPoint as="targetPoint" x="20.0" y="-4.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </CommandControlLink>
       <ExplicitLink id="-313c17dd:1816880167f:-7df4" parent="0:2:0" source="-313c17dd:1816880167f:-7e00" target="-313c17dd:1816880167f:-7e0c" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="11.0" y="0.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points">
             <mxPoint x="360.0" y="400.0"/>
           </Array>
-          <mxPoint as="targetPoint" x="-4.0" y="20.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
       <ExplicitLink id="-313c17dd:1816880167f:-7df0" parent="0:2:0" source="-313c17dd:1816880167f:-7df1" target="-313c17dd:1816880167f:-7e07" style="ExplicitLink" value="">
         <mxGeometry as="geometry">
-          <mxPoint as="sourcePoint" x="64.0" y="20.0"/>
+          <mxPoint as="sourcePoint" x="0.0" y="0.0"/>
           <Array as="points"></Array>
-          <mxPoint as="targetPoint" x="-4.0" y="20.0"/>
+          <mxPoint as="targetPoint" x="0.0" y="0.0"/>
         </mxGeometry>
       </ExplicitLink>
     </root>

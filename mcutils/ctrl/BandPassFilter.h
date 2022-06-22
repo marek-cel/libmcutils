@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/IControlElement.h>
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,7 +47,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Band-pass_filter">Band-pass filter - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI BandPassFilter final : public IControlElement
+class MCUTILSAPI BandPassFilter final : public ICtrlElement
 {
 public:
 

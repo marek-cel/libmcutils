@@ -7,17 +7,17 @@ HEADERS += \
 ################################################################################
 
 HEADERS += \
-    $$PWD/ctrl/IControlElement.h \
+    $$PWD/ctrl/ICtrlElement.h \
     $$PWD/ctrl/BandPassFilter.h \
     $$PWD/ctrl/BandStopFilter.h \
     $$PWD/ctrl/HighPassFilter.h \
-    $$PWD/ctrl/LowPassFilter.h \
-    $$PWD/ctrl/Lag.h \
-    $$PWD/ctrl/Lag2.h \
+    $$PWD/ctrl/Inertia.h \
+    $$PWD/ctrl/Inertia2.h \
     $$PWD/ctrl/Lead.h \
     $$PWD/ctrl/LeadLag.h \
-    $$PWD/ctrl/MovingAverageFilter.h \
-    $$PWD/ctrl/MovingMedianFilter.h \
+    $$PWD/ctrl/LowPassFilter.h \
+    $$PWD/ctrl/MovingAverage.h \
+    $$PWD/ctrl/MovingMedian.h \
     $$PWD/ctrl/Oscillator.h \
     $$PWD/ctrl/PID.h \
     $$PWD/ctrl/StateSpace.h \
@@ -25,13 +25,13 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/ctrl/HighPassFilter.cpp \
-    $$PWD/ctrl/LowPassFilter.cpp \
-    $$PWD/ctrl/Lag.cpp \
-    $$PWD/ctrl/Lag2.cpp \
+    $$PWD/ctrl/Inertia.cpp \
+    $$PWD/ctrl/Inertia2.cpp \
     $$PWD/ctrl/Lead.cpp \
     $$PWD/ctrl/LeadLag.cpp \
-    $$PWD/ctrl/MovingAverageFilter.cpp \
-    $$PWD/ctrl/MovingMedianFilter.cpp \
+    $$PWD/ctrl/LowPassFilter.cpp \
+    $$PWD/ctrl/MovingAverage.cpp \
+    $$PWD/ctrl/MovingMedian.cpp \
     $$PWD/ctrl/Oscillator.cpp \
     $$PWD/ctrl/PID.cpp \
     $$PWD/ctrl/System2.cpp
