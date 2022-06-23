@@ -18,7 +18,6 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
-    $$PWD/ctrl/TestBandPassFilter.cpp \
     $$PWD/ctrl/TestHighPassFilter.cpp \
     $$PWD/ctrl/TestInertia.cpp \
     $$PWD/ctrl/TestInertia2.cpp \

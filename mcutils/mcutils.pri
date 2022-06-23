@@ -8,8 +8,6 @@ HEADERS += \
 
 HEADERS += \
     $$PWD/ctrl/ICtrlElement.h \
-    $$PWD/ctrl/BandPassFilter.h \
-    $$PWD/ctrl/BandStopFilter.h \
     $$PWD/ctrl/HighPassFilter.h \
     $$PWD/ctrl/Inertia.h \
     $$PWD/ctrl/Inertia2.h \
@@ -24,8 +22,6 @@ HEADERS += \
     $$PWD/ctrl/System2.h
 
 SOURCES += \
-    $$PWD/ctrl/BandPassFilter.cpp \
-    $$PWD/ctrl/BandStopFilter.cpp \
     $$PWD/ctrl/HighPassFilter.cpp \
     $$PWD/ctrl/Inertia.cpp \
     $$PWD/ctrl/Inertia2.cpp \
