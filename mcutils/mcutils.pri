@@ -8,6 +8,7 @@ HEADERS += \
 
 HEADERS += \
     $$PWD/ctrl/ICtrlElement.h \
+    $$PWD/ctrl/Gain.h \
     $$PWD/ctrl/HighPassFilter.h \
     $$PWD/ctrl/Inertia.h \
     $$PWD/ctrl/Inertia2.h \
@@ -22,6 +23,7 @@ HEADERS += \
     $$PWD/ctrl/System2.h
 
 SOURCES += \
+    $$PWD/ctrl/Gain.cpp \
     $$PWD/ctrl/HighPassFilter.cpp \
     $$PWD/ctrl/Inertia.cpp \
     $$PWD/ctrl/Inertia2.cpp \

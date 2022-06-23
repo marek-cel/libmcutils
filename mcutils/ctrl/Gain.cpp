@@ -20,9 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/Inertia2.h>
+#include <mcutils/ctrl/Gain.h>
 
-#include <mcutils/ctrl/Inertia.h>
+#include <cmath>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -31,49 +31,32 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Inertia2::Inertia2( double tc1, double tc2, double y )
-    : _tc1 ( tc1 )
-    , _tc2 ( tc2 )
-    , _y1 ( y )
-    , _y  ( y )
+Gain::Gain( double k, double y )
+    : _k ( k )
+    , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia2::setValue( double y )
+void Gain::setValue( double y )
 {
-    _y1 = y;
-    _y  = y;
+    _y = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia2::setTimeConst1( double tc1 )
+void Gain::setGain( double k )
 {
-    if ( tc1 > 0.0 )
-    {
-        _tc1 = tc1;
-    }
+    _k = k;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia2::setTimeConst2( double tc2 )
-{
-    if ( tc2 > 0.0 )
-    {
-        _tc2 = tc2;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia2::update( double dt, double u )
+void Gain::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _y1 = Inertia::calculate(   u, _y1, dt, _tc1 );
-        _y  = Inertia::calculate( _y1,  _y, dt, _tc2 );
+        _y = _k * u;
     }
 }
 

@@ -18,6 +18,7 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
+    $$PWD/ctrl/TestGain.cpp \
     $$PWD/ctrl/TestHighPassFilter.cpp \
     $$PWD/ctrl/TestInertia.cpp \
     $$PWD/ctrl/TestInertia2.cpp \

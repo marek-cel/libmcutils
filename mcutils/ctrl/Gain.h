@@ -19,64 +19,67 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_CTRL_GAIN_H_
+#define MCUTILS_CTRL_GAIN_H_
 
-#include <mcutils/ctrl/Inertia2.h>
+////////////////////////////////////////////////////////////////////////////////
 
-#include <mcutils/ctrl/Inertia.h>
+#include <mcutils/defs.h>
+
+#include <mcutils/ctrl/ICtrlElement.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
 {
 
-////////////////////////////////////////////////////////////////////////////////
-
-Inertia2::Inertia2( double tc1, double tc2, double y )
-    : _tc1 ( tc1 )
-    , _tc2 ( tc2 )
-    , _y1 ( y )
-    , _y  ( y )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia2::setValue( double y )
+/**
+ * @brief Constant gain class.
+ *
+ * Transfer function:
+ * G(s)  =  k
+ */
+class MCUTILSAPI Gain final : public ICtrlElement
 {
-    _y1 = y;
-    _y  = y;
-}
+public:
 
-////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @brief Constructor.
+     * @param k gain coefficient
+     * @param y initial output value
+     */
+    Gain( double k = 1.0, double y = 0.0 );
 
-void Inertia2::setTimeConst1( double tc1 )
-{
-    if ( tc1 > 0.0 )
-    {
-        _tc1 = tc1;
-    }
-}
+    inline double getValue() const override { return _y; }
+    inline double getGain() const { return _k; }
 
-////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @brief Sets output value
+     * @param y output value
+     */
+    void setValue( double y );
 
-void Inertia2::setTimeConst2( double tc2 )
-{
-    if ( tc2 > 0.0 )
-    {
-        _tc2 = tc2;
-    }
-}
+    /**
+     * @brief Sets gain coefficient.
+     * @param k gain coefficient
+     */
+    void setGain( double k );
 
-////////////////////////////////////////////////////////////////////////////////
+    /**
+     * @brief Updates element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
+     */
+    void update( double dt, double u ) override;
 
-void Inertia2::update( double dt, double u )
-{
-    if ( dt > 0.0 )
-    {
-        _y1 = Inertia::calculate(   u, _y1, dt, _tc1 );
-        _y  = Inertia::calculate( _y1,  _y, dt, _tc2 );
-    }
-}
+private:
 
-////////////////////////////////////////////////////////////////////////////////
+    double _k;              ///< gain coefficient
+    double _y;              ///< current value
+};
 
 } // namespace mc
+
+////////////////////////////////////////////////////////////////////////////////
+
+#endif // MCUTILS_CTRL_GAIN_H_
