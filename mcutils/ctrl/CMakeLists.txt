@@ -4,6 +4,7 @@ set( TARGET_NAME mcutils-ctrl )
 
 set( HEADERS
     ICtrlElement.h
+    BandPassFilter.h
     HighPassFilter.h
     Inertia.h
     Inertia2.h
@@ -19,6 +20,7 @@ set( HEADERS
 )
 
 set( SOURCES
+    BandPassFilter.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp
