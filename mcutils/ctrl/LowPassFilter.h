@@ -34,12 +34,12 @@ namespace mc
 {
 
 /**
- * @brief First-order low-pass filter (LPF) class.
+ * @brief Low-pass filter (LPF) class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )  =  omega / ( s + omega )  =  1 / ( s/omega + 1 )
  *
- * First-order low-pass filter is based on a first-order lag element.
+ * Low-pass filter is based on a first-order lag element.
  */
 class MCUTILSAPI LowPassFilter final : public ICtrlElement
 {

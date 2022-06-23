@@ -21,6 +21,8 @@ set( HEADERS
 )
 
 set( SOURCES
+    BandPassFilter.cpp
+    BandStopFilter.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp

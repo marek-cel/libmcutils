@@ -108,8 +108,8 @@ TEST_F(TestLowPassFilter, CanUpdateStep)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/control/xcos/test_lpf.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lpf_step.bin", &vals );
+    // tests/control/xcos/test_lowpassfilter.xcos
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_lowpassfilter_step.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -139,8 +139,8 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-    // tests/control/xcos/test_lpf.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lpf_sine.bin", &vals );
+    // tests/control/xcos/test_lowpassfilter.xcos
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_lowpassfilter_sine.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 

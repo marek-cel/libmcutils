@@ -20,10 +20,9 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/LeadLag.h>
+#include <mcutils/ctrl/BandPassFilter.h>
 
 #include <algorithm>
-#include <cmath>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,69 +31,67 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LeadLag::LeadLag( double c1, double c2, double c3, double c4, double y )
-    : _c1 ( c1 )
-    , _c2 ( c2 )
-    , _c3 ( c3 )
-    , _c4 ( c4 )
-    , _u_prev ( 0.0 )
-    , _y_prev ( y )
+BandPassFilter::BandPassFilter( double beta, double omega, double y )
+    : _beta ( beta )
+    , _omega ( omega )
+
+    , _omega2 ( _omega * _omega )
+
+    , _u_prev_1 ( 0.0 )
+    , _u_prev_2 ( 0.0 )
+    , _y_prev_1 ( y )
+    , _y_prev_2 ( y )
+
     , _y ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setValue( double y )
+void BandPassFilter::setValue( double y )
 {
     _y = y;
-    _y_prev = y;
+    _y_prev_1 = y;
+    _y_prev_2 = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setC1( double c1 )
+void BandPassFilter::setOmega( double omega )
 {
-    _c1 = c1;
+    _omega = std::max( 0.0, omega );
+    _omega2 = _omega * _omega;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setC2( double c2 )
+void BandPassFilter::setBeta( double beta )
 {
-    _c2 = c2;
+    _beta = std::max( 0.0, beta );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setC3( double c3 )
-{
-    _c3 = c3;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC4( double c4 )
-{
-    _c4 = c4;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::update( double dt, double u )
+void BandPassFilter::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double den = 2.0 * _c3 + dt * _c4;
+        double dt2 = dt * dt;
+
+        double den = 4.0 + 2.0 * _beta * dt + _omega2 * dt2;
         double den_inv = 1.0 / den;
 
-        double ca = ( 2.0 * _c1 + dt  * _c2 ) * den_inv;
-        double cb = ( dt  * _c2 - 2.0 * _c1 ) * den_inv;
-        double cc = ( 2.0 * _c3 - dt  * _c4 ) * den_inv;
+        double ca = (  2.0 * _beta * dt ) * den_inv;
+        double cb = ( -2.0 * _beta * dt ) * den_inv;
+        double cc = (  2.0 * _omega2 * dt2 - 8.0 ) * den_inv;
+        double cd = (  4.0 - 2.0 * _beta * dt + _omega2 * dt2 ) * den_inv;
 
-        _y = u * ca + _u_prev * cb + _y_prev * cc;
+        _y = u * ca + _u_prev_2 * cb - _y_prev_1 * cc - _y_prev_2 * cd;
 
-        _u_prev = u;
-        _y_prev = _y;
+        _u_prev_2 = _u_prev_1;
+        _u_prev_1 = u;
+
+        _y_prev_2 = _y_prev_1;
+        _y_prev_1 = _y;
     }
 }
 

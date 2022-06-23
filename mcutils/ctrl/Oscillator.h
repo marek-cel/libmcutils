@@ -95,7 +95,7 @@ private:
     double _omega;          ///< [rad/s] undamped angular frequency
     double _zeta;           ///< [-] <0.0;1.0> dampipng coefficient
 
-    double _omega2;         ///< [rad/s] undamped angular frequency squared
+    double _omega2;         ///< [rad^2/s^2] undamped angular frequency squared
     double _2zetomg;        ///< [rad/s] 2*zeta*omega
 
     double _u_prev_1;       ///< input previous value

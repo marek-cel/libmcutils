@@ -34,7 +34,7 @@ namespace mc
 {
 
 /**
- * @brief First-order high-pass filter (HPF) or washout filter class.
+ * @brief High-pass filter (HPF) or washout filter class.
  *
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )

@@ -39,6 +39,11 @@ Oscillator::Oscillator( double omega, double zeta, double y )
     , _omega2 ( _omega * _omega )
     , _2zetomg ( 2.0 * _zeta * _omega )
 
+    , _u_prev_1 ( 0.0 )
+    , _u_prev_2 ( 0.0 )
+    , _y_prev_1 ( y )
+    , _y_prev_2 ( y )
+
     , _y ( y )
 {}
 
@@ -64,6 +69,8 @@ void Oscillator::setDamping( double zeta )
 void Oscillator::setValue( double y )
 {
     _y = y;
+    _y_prev_1 = y;
+    _y_prev_2 = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,10 +79,12 @@ void Oscillator::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double den = 4.0 + 2.0*_2zetomg*dt + _omega2*dt*dt;
+        double dt2 = dt * dt;
+
+        double den = 4.0 + 2.0 * _2zetomg*dt + _omega2 * dt2;
         double den_inv = 1.0 / den;
 
-        double ca = _omega2 * dt * dt * den_inv;
+        double ca = _omega2 * dt2 * den_inv;
         double cb = 2.0 * ca;
         double cc = cb - 8.0 * den_inv;
         double cd = ca + ( 4.0 - 2.0 * _2zetomg * dt ) * den_inv;

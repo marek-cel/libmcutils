@@ -27,6 +27,7 @@
 #include <limits>
 #include <map>
 #include <string>
+#include <utility>
 
 #include <libxml/tree.h>
 

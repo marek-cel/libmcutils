@@ -24,6 +24,8 @@ HEADERS += \
     $$PWD/ctrl/System2.h
 
 SOURCES += \
+    $$PWD/ctrl/BandPassFilter.cpp \
+    $$PWD/ctrl/BandStopFilter.cpp \
     $$PWD/ctrl/HighPassFilter.cpp \
     $$PWD/ctrl/Inertia.cpp \
     $$PWD/ctrl/Inertia2.cpp \

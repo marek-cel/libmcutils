@@ -53,6 +53,8 @@ System2::System2( double c1, double c2, double c3,
 void System2::setValue( double y )
 {
     _y = y;
+    _y_prev_1 = y;
+    _y_prev_2 = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -103,10 +105,10 @@ void System2::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        double den = 4.0*_c4 + 2.0*_c5*dt + _c6*dt*dt;
-        double den_inv = 1.0 / den;
-
         double dt2 = dt * dt;
+
+        double den = 4.0 * _c4 + 2.0 * _c5 * dt + _c6 * dt2;
+        double den_inv = 1.0 / den;
 
         double ca = ( 4.0 * _c1       + 2.0 * _c2 * dt + _c3 * dt2 ) * den_inv;
         double cb = ( 2.0 * _c3 * dt2 - 8.0 * _c1                  ) * den_inv;

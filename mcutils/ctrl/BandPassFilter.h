@@ -34,7 +34,7 @@ namespace mc
 {
 
 /**
- * @brief First-order band-pass filter (BPF) class.
+ * @brief Band-pass filter (BPF) class.
  *
  * Transfer function:
  * G(s)  =  beta*s / ( s^2 + beta*s + omega^2 )
@@ -55,10 +55,31 @@ public:
      * @brief Constructor
      * @param beta [rad/s] bandwidth
      * @param omega [rad/s] center frequency
+     * @param y initial output value
      */
-    BandPassFilter( double beta = 0.0, double omega = 0.0 );
+    BandPassFilter( double beta = 0.0, double omega = 0.0, double y = 0.0 );
 
     inline double getValue() const override { return _y; }
+    inline double getBeta() const { return _beta; }
+    inline double getOmega() const { return _omega; }
+
+    /**
+     * @brief Sets output value
+     * @param y output value
+     */
+    void setValue( double y );
+
+    /**
+     * @brief Sets center frequency.
+     * @param beta [rad/s] bandwidth
+     */
+    void setBeta( double beta );
+
+    /**
+     * @brief Sets center frequency.
+     * @param omega [rad/s] center frequency
+     */
+    void setOmega( double omega );
 
     /**
      * @brief Updates element due to time step and input value
@@ -71,6 +92,14 @@ private:
 
     double _beta;           ///< [rad/s] bandwidth
     double _omega;          ///< [rad/s] center frequency
+
+    double _omega2;         ///< [rad^2/s^2] undamped angular frequency squared
+
+    double _u_prev_1;       ///< input previous value
+    double _u_prev_2;       ///< input value 2 steps before
+
+    double _y_prev_1;       ///< previous value
+    double _y_prev_2;       ///< value 2 steps before
 
     double _y;              ///< current value
 };
