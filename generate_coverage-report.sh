@@ -10,6 +10,8 @@ GCOV_TOOL=gcov
 
 BASE_DIR=./mcutils
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/lib
+
 ################################################################################
 
 if [ ! -z "$BUILD_DIR" ]
@@ -19,7 +21,7 @@ then
     rm -r -f coverage-report
     cd bin; ./tests; cd ..;
     mapfile -t exclude < lcov_exclude.txt
-    $LCOV_TOOL --capture \
+    $LCOV_TOOL --capture  \
         --gcov-tool $GCOV_TOOL \
         --base-directory $BASE_DIR \
         --no-external \
