@@ -152,6 +152,20 @@ TEST_F(TestPhysics, CanComputeInertia)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestPhysics, CanComputeInertiaTimeConst0)
+{
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < 100; i++ )
+    {
+        double u = ( i < 10 ) ? 0.0 : 1.0;
+        y = mc::Physics::inertia( u, y, 0.01, 0.0 );
+        EXPECT_NEAR( y, u, 1.0e-3 );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestPhysics, DISABLED_CanComputePacejkaFormula)
 {
     // TODO
