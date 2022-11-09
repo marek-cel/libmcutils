@@ -1,0 +1,2 @@
+# libmcutils
+Various utilities library.
