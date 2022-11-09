@@ -1,2 +1,2 @@
-# libmcutils
-Various utilities library.
+# libmcutil
+libmcutil is a various utilities library.
