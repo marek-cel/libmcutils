@@ -1,9 +1,14 @@
 pipeline {
     agent any
-    triggers { cron('0 3 * * 1-5') }
+
+    triggers {
+        cron('0 3 * * 1-5')
+    }
+
     options {
         skipStagesAfterUnstable()
     }
+
     stages {
         stage('Build') {
             steps {
