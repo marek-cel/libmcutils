@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/PID.h>
+#include <mcutils/ctrl/AntiWindupPID.h>
 
 #include <algorithm>
 #include <cmath>
@@ -35,35 +35,69 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-PID::PID( double kp, double ki, double kd )
-    : _kp ( kp )
+AntiWindupPID::AntiWindupPID( double kp, double ki, double kd,
+                              double min, double max,
+                              AntiWindup antiWindup )
+    : _antiWindup ( antiWindup )
+
+    , _kp ( kp )
     , _ki ( ki )
     , _kd ( kd )
+
+    , _kaw ( 0.0 )
+
+    , _min ( min )
+    , _max ( max )
 
     , _error   ( 0.0 )
     , _error_i ( 0.0 )
     , _error_d ( 0.0 )
 
     , _value ( 0.0 )
+    , _delta ( 0.0 )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::update( double dt, double u )
+void AntiWindupPID::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _error_i = _error_i + u  * dt;
+        double error_i = _error_i;
+
+        _error_i = _error_i + ( u - _kaw * _delta ) * dt;
         _error_d = ( dt > 0.0 ) ? ( u - _error ) / dt : 0.0;
+
         _error = u;
 
-        _value = _kp * _error + _kd * _error_d + _ki * _error_i;
+        double value_pd = _kp * _error + _kd * _error_d;
+        double value = value_pd + _ki * _error_i;
+
+        _value = Math::satur( _min, _max, value );
+
+        // anti-windup
+        if ( _antiWindup == AntiWindup::Calculation )
+        {
+            if ( fabs( _ki ) > 0.0 )
+            {
+                value_pd = Math::satur( _min, _max, value_pd );
+                _error_i = ( _value - value_pd ) / _ki;
+            }
+        }
+        else if ( _antiWindup == AntiWindup::Conditional )
+        {
+            if ( _value != value ) _error_i = error_i;
+        }
+        else if ( _antiWindup == AntiWindup::Filtering )
+        {
+            _delta = value - _value;
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::reset()
+void AntiWindupPID::reset()
 {
     _error_i = 0.0;
     _error_d = 0.0;
@@ -71,11 +105,12 @@ void PID::reset()
     _error = 0.0;
 
     _value = 0.0;
+    _delta = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setParallel( double kp, double ki, double kd )
+void AntiWindupPID::setParallel( double kp, double ki, double kd )
 {
     _kp = kp;
     _ki = ki;
@@ -84,7 +119,7 @@ void PID::setParallel( double kp, double ki, double kd )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setSeries( double k, double tau_i, double tau_d )
+void AntiWindupPID::setSeries( double k, double tau_i, double tau_d )
 {
     _kp = k * ( 1.0 + tau_d / tau_i );
     _ki = k / tau_i;
@@ -93,7 +128,7 @@ void PID::setSeries( double k, double tau_i, double tau_d )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setStandard( double Kp, double Ti, double Td )
+void AntiWindupPID::setStandard( double Kp, double Ti, double Td )
 {
     _kp = Kp;
     _ki = Kp / Ti;
@@ -102,14 +137,14 @@ void PID::setStandard( double Kp, double Ti, double Td )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setError( double error )
+void AntiWindupPID::setError( double error )
 {
     _error = error;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setValue( double value )
+void AntiWindupPID::setValue( double value )
 {
     _error_i = fabs( _ki ) > 0.0 ? value / _ki : 0.0;
     _error_d = 0.0;
@@ -117,11 +152,12 @@ void PID::setValue( double value )
     _error = 0.0;
 
     _value = value;
+    _delta = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setValue( double timeStep, double error, double value )
+void AntiWindupPID::setValue( double timeStep, double error, double value )
 {
     _error_d = ( timeStep > 0.0 ) ? ( error - _error ) / timeStep : 0.0;
     _error_i = fabs( _ki ) > 0.0
@@ -131,6 +167,18 @@ void PID::setValue( double timeStep, double error, double value )
     _error = error;
 
     _value = value;
+    _delta = 0.0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void AntiWindupPID::setAntiWindup( AntiWindup antiWindup )
+{
+    if ( _antiWindup != antiWindup )
+    {
+        _antiWindup = antiWindup;
+        _delta = 0.0;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

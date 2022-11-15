@@ -51,6 +51,20 @@ TEST_F(TestInertia, CanCalculate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestInertia, CanCalculateWithZeroTimeConst)
+{
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < 200; i++ )
+    {
+        double u = ( i < 101 ) ? 0.0 : 1.0;
+        y = mc::Inertia::calculate( u, y, TIME_STEP, 0.0 );
+        EXPECT_NEAR( y, u, 1.0e-3 ) << "Error at index " << i;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestInertia, CanCalculate2)
 {
     std::vector<double> t_ref;

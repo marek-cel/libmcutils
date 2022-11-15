@@ -7,6 +7,7 @@ HEADERS += \
 ################################################################################
 
 HEADERS += \
+    $$PWD/ctrl/AntiWindupPID.h \
     $$PWD/ctrl/ICtrlElement.h \
     $$PWD/ctrl/Gain.h \
     $$PWD/ctrl/HighPassFilter.h \
@@ -23,6 +24,7 @@ HEADERS += \
     $$PWD/ctrl/System2.h
 
 SOURCES += \
+    $$PWD/ctrl/AntiWindupPID.cpp \
     $$PWD/ctrl/Gain.cpp \
     $$PWD/ctrl/HighPassFilter.cpp \
     $$PWD/ctrl/Inertia.cpp \
@@ -35,20 +37,6 @@ SOURCES += \
     $$PWD/ctrl/Oscillator.cpp \
     $$PWD/ctrl/PID.cpp \
     $$PWD/ctrl/System2.cpp
-
-################################################################################
-
-HEADERS += \
-    $$PWD/datatree/DataRef.h \
-    $$PWD/datatree/DataTree.h \
-    $$PWD/datatree/GroupNode.h \
-    $$PWD/datatree/Node.h \
-    $$PWD/datatree/NodeType.h \
-    $$PWD/datatree/ValueNode.h
-
-SOURCES += \
-    $$PWD/datatree/DataTree.cpp \
-    $$PWD/datatree/GroupNode.cpp
 
 ################################################################################
 

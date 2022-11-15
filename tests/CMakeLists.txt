@@ -20,6 +20,7 @@ set( SOURCES
     XcosBinFileReader.cpp
     main.cpp
 
+    ctrl/TestAntiWindupPID.cpp
     ctrl/TestGain.cpp
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
@@ -33,12 +34,6 @@ set( SOURCES
     ctrl/TestPID.cpp
     ctrl/TestStateSpace.cpp
     ctrl/TestSystem2.cpp
-
-    datatree/TestDataRef.cpp
-    datatree/TestDataTree.cpp
-    datatree/TestGroupNode.cpp
-    datatree/TestNode.cpp
-    datatree/TestValueNode.cpp
 
     geo/TestDataMars.cpp
     geo/TestDataWGS84.cpp
@@ -94,7 +89,6 @@ target_link_libraries( ${TARGET_NAME}
     gcov
 
     mcutils-ctrl
-    mcutils-datatree
     mcutils-geo
     mcutils-math
     mcutils-misc

@@ -3,6 +3,7 @@ set( TARGET_NAME mcutils-ctrl )
 ################################################################################
 
 set( HEADERS
+    AntiWindupPID.h
     ICtrlElement.h
     Gain.h
     HighPassFilter.h
@@ -20,6 +21,7 @@ set( HEADERS
 )
 
 set( SOURCES
+    AntiWindupPID.cpp
     Gain.cpp
     HighPassFilter.cpp
     Inertia.cpp

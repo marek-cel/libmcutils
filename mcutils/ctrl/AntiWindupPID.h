@@ -19,10 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_PID_H_
-#define MCUTILS_CTRL_PID_H_
+#ifndef MCUTILS_CTRL_ANTIWINDUPPID_H_
+#define MCUTILS_CTRL_ANTIWINDUPPID_H_
 
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <cfloat>
 
 #include <mcutils/defs.h>
 
@@ -56,23 +58,40 @@ namespace mc
  *   <li>Skup Z.: Podstawy automatyki i sterowania, 2012, p.118. [in Polish]</li>
  *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.280. [in Polish]</li>
  *   <li>McCormack A., Godfrey K.: Rule-Based Autotuning Based on Frequency Domain Identification, 1998</li>
+ *   <li>Duzinkiewicz K., et al.: Zadania do cwiczen laboratoryjnych T10: Sterowanie predkoscia obrotowa silnika pradu stalego, 2016. [in Polish]</li>
+ *   <li>Brdys M., et al.: Silnik pradu stalego (NI Elvis 2) - Dobieranie nastaw regulatorow P, PI, PI. Filtr przeciwnasyceniowy Anti-windup, 2010. [in Polish]</li>
+ *   <li>Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010</li>
  *   <li><a href="https://en.wikipedia.org/wiki/PID_controller">PID controller - Wikipedia</a></li>
+ *   <li><a href="https://en.wikipedia.org/wiki/Integral_windup">Integral windup - Wikipedia</a></li>
  *   <li><a href="https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method">Ziegler–Nichols method - Wikipedia</a></li>
+ *   <li><a href="https://www.scilab.org/pid-anti-windup-schemes">PID Anti-Windup Schemes</a></li>
  * </ul>
  */
-class MCUTILSAPI PID final : public ICtrlElement
+class MCUTILSAPI AntiWindupPID final : public ICtrlElement
 {
 public:
 
+    /** Anti-Windup methods. */
+    enum class AntiWindup
+    {
+        None = 0,       ///< anti-windup innactive
+        Calculation,    ///< back calculation of integral term
+        Conditional,    ///< conditional integration
+        Filtering       ///< feedback filtering
+    };
 
     /**
      * @brief Constructor.
-     * Disables saturation.
+     * Enables saturation.
      * @param kp proportional gain
      * @param ki integral gain
      * @param kd derivative gain
+     * @param min minimal value for saturation
+     * @param max maximal value for saturation
      */
-    PID( double kp = 1.0, double ki = 0.0, double kd = 0.0 );
+    AntiWindupPID( double kp = 1.0, double ki = 0.0, double kd = 0.0,
+                   double min = DBL_MIN, double max = DBL_MAX,
+                   AntiWindup antiWindup = AntiWindup::None );
 
     /**
      * @brief Updates controller.
@@ -90,6 +109,13 @@ public:
     inline double getKp() const { return _kp; }
     inline double getKi() const { return _ki; }
     inline double getKd() const { return _kd; }
+
+    inline double getKaw() const { return _kaw; }
+
+    inline double getMin() const { return _min; }
+    inline double getMax() const { return _max; }
+
+    inline AntiWindup getAntiWindup() const { return _antiWindup; }
 
     inline double getError() const { return _error; }
 
@@ -135,21 +161,36 @@ public:
     inline void setKi( double ki ) { _ki = ki; }
     inline void setKd( double kd ) { _kd = kd; }
 
+    inline void setKaw( double kaw ) { _kaw = kaw; }
+
+    inline void setMin( double min ) { _min = min; }
+    inline void setMax( double max ) { _max = max; }
+
+    void setAntiWindup( AntiWindup antiWindup );
+
 private:
+
+    AntiWindup _antiWindup; ///< anti-windup method
 
     double _kp;             ///< proportional gain
     double _ki;             ///< integral gain
     double _kd;             ///< derivative gain
+
+    double _kaw;            ///< anti-windup gain
+
+    double _min;            ///< minimum output value
+    double _max;            ///< maximum output value
 
     double _error;          ///< error
     double _error_i;        ///< error integral sum
     double _error_d;        ///< error derivative
 
     double _value;          ///< output value
+    double _delta;          ///< difference between raw and saturated output values
 };
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_CTRL_PID_H_
+#endif // MCUTILS_CTRL_ANTIWINDUPPID_H_

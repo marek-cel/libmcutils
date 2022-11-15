@@ -18,6 +18,7 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
+    $$PWD/ctrl/TestAntiWindupPID.cpp \
     $$PWD/ctrl/TestGain.cpp \
     $$PWD/ctrl/TestHighPassFilter.cpp \
     $$PWD/ctrl/TestInertia.cpp \
@@ -31,15 +32,6 @@ SOURCES += \
     $$PWD/ctrl/TestPID.cpp \
     $$PWD/ctrl/TestStateSpace.cpp \
     $$PWD/ctrl/TestSystem2.cpp
-
-################################################################################
-
-SOURCES += \
-    $$PWD/datatree/TestDataRef.cpp \
-    $$PWD/datatree/TestDataTree.cpp \
-    $$PWD/datatree/TestGroupNode.cpp \
-    $$PWD/datatree/TestNode.cpp \
-    $$PWD/datatree/TestValueNode.cpp
 
 ################################################################################
 
