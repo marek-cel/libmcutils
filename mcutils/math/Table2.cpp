@@ -95,8 +95,8 @@ Table2::Table2( const std::vector<double> &row_values,
 
         if ( _size > 0 )
         {
-            _rows = static_cast< unsigned int >( row_values.size() );
-            _cols = static_cast< unsigned int >( col_values.size() );
+            _rows = static_cast<unsigned int>( row_values.size() );
+            _cols = static_cast<unsigned int>( col_values.size() );
 
             _row_values = new double [ _rows ];
             _col_values = new double [ _cols ];
@@ -213,8 +213,8 @@ Table2::~Table2()
 
 Table Table2::getTable( double col_value ) const
 {
-    std::vector< double > keyValues;
-    std::vector< double > tableData;
+    std::vector<double> keyValues;
+    std::vector<double> tableData;
 
     for ( unsigned int i = 0; i < _rows; ++i )
     {

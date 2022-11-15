@@ -59,8 +59,8 @@ public:
            unsigned int size );
 
     /** @brief Constructor. */
-    Table( const std::vector< double > &key_values,
-           const std::vector< double > &table_data );
+    Table( const std::vector<double> &key_values,
+           const std::vector<double> &table_data );
 
     /** @brief Constructor. */
     Table( const char *str );
@@ -174,7 +174,7 @@ public:
 
 private:
 
-    using Data = std::map< double, std::pair< double, double > >;
+    using Data = std::map< double, std::pair<double,double> >;
 
     Data _data;     ///< table data
 

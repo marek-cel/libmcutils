@@ -65,9 +65,9 @@ public:
             unsigned int cols );
 
     /** @brief Constructor. */
-    Table2( const std::vector< double > &row_values,
-            const std::vector< double > &col_values,
-            const std::vector< double > &table_data );
+    Table2( const std::vector<double> &row_values,
+            const std::vector<double> &col_values,
+            const std::vector<double> &table_data );
 
     /** @brief Copy constructor. */
     Table2( const Table2 &table );

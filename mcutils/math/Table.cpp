@@ -72,8 +72,8 @@ Table::Table( const double key_values[],
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table::Table( const std::vector< double > &key_values,
-              const std::vector< double > &table_data )
+Table::Table( const std::vector<double> &key_values,
+              const std::vector<double> &table_data )
 {
     if ( key_values.size() == table_data.size() )
     {
