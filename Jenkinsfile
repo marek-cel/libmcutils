@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        PROJECT_RECIPIENTS = 'marek.cel@gmail.com,marekcel@marekcel.pl'
+        RECIPIENT_LIST = 'marek.cel@gmail.com,marekcel@marekcel.pl'
     }
 
     triggers {
@@ -37,7 +37,7 @@ pipeline {
     post {
         success {
             emailext (
-                to: '${env.PROJECT_RECIPIENTS}',
+                to: '${ENV, var="RECIPIENT_LIST"}',
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
                 <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
@@ -47,7 +47,7 @@ pipeline {
 
         failure {
             emailext (
-                to: '${env.PROJECT_RECIPIENTS}',
+                to: '${ENV, var="RECIPIENT_LIST"}',
                 subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
                 <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
