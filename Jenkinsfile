@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DEFAULT_RECIPIENTS = ['marek.cel@gmail.com', 'jenkins@marekcel.pl']
+        DEFAULT_RECIPIENTS = 'marek.cel@gmail.com,jenkins@marekcel.pl'
     }
 
     triggers {
