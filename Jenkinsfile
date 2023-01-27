@@ -1,7 +1,3 @@
-properties([
-    [$class: 'StringParameterValue', name: 'DEFAULT_RECIPIENTS', value: 'marek.cel@gmail.com,marekcel@marekcel.pl,marek.cel+jenkins@gmail.com']
-])
-
 pipeline {
     agent any
 
