@@ -7,7 +7,7 @@ TEMPLATE = lib
 DESTDIR = $$PWD/../lib
 TARGET = mcutils
 
-VERSION = 0.1.0
+VERSION = 1.0.0
 
 ################################################################################
 
