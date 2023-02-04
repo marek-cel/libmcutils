@@ -1,0 +1,84 @@
+/****************************************************************************//*
+ * Copyright (C) 2022 Marek M. Cel
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom
+ * the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+ * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+ * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOFTWARE.
+ ******************************************************************************/
+
+#include <mcutils/geo/WGS84.h>
+
+#include <mcutils/geo/DataWGS84.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+namespace mc
+{
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84::WGS84()
+    : ECEF( DataWGS84::a, DataWGS84::f )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84::WGS84( const WGS84 &wgs )
+    : ECEF( wgs )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84::WGS84( WGS84 &&wgs )
+    : ECEF( wgs )
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84::WGS84( const Geo &pos_geo )
+    : WGS84()
+{
+    setPos_Geo( pos_geo );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84::WGS84( const Vector3 &pos_wgs )
+    : WGS84()
+{
+    setPos_WGS( pos_wgs );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84& WGS84::operator= ( const WGS84 &wgs )
+{
+    ECEF::operator =( wgs );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+WGS84& WGS84::operator= ( WGS84 &&wgs )
+{
+    ECEF::operator =( wgs );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace mc

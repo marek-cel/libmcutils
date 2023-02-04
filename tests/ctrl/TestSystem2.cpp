@@ -1,0 +1,257 @@
+#include <cmath>
+
+#include <gtest/gtest.h>
+
+#include <mcutils/ctrl/System2.h>
+
+#include <XcosBinFileReader.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+class TestSystem2 : public ::testing::Test
+{
+protected:
+
+    static constexpr double TIME_STEP { 0.01 };
+
+    TestSystem2() {}
+    virtual ~TestSystem2() {}
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanConstruct)
+{
+    mc::System2 *s = nullptr;
+    EXPECT_NO_THROW( s = new mc::System2() );
+    delete s;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanDestruct)
+{
+    mc::System2 *s = new mc::System2();
+    EXPECT_NO_THROW( delete s );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanInstantiate)
+{
+    mc::System2 s;
+
+    EXPECT_DOUBLE_EQ( s.getC1(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 1.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 0.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 1.0 );
+
+    EXPECT_DOUBLE_EQ( s.getValue(), 0.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanInstantiateAndSetData)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
+
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC1)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC2)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC3)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC4)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC5)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetC6)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanGetValue)
+{
+    mc::System2 s( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC1)
+{
+    mc::System2 s;
+    s.setC1( 1.0 );
+    EXPECT_DOUBLE_EQ( s.getC1(), 1.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC2)
+{
+    mc::System2 s;
+    s.setC2( 2.0 );
+    EXPECT_DOUBLE_EQ( s.getC2(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC3)
+{
+    mc::System2 s;
+    s.setC3( 3.0 );
+    EXPECT_DOUBLE_EQ( s.getC3(), 3.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC4)
+{
+    mc::System2 s;
+    s.setC4( 4.0 );
+    EXPECT_DOUBLE_EQ( s.getC4(), 4.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC5)
+{
+    mc::System2 s;
+    s.setC5( 5.0 );
+    EXPECT_DOUBLE_EQ( s.getC5(), 5.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetC6)
+{
+    mc::System2 s;
+    s.setC6( 6.0 );
+    EXPECT_DOUBLE_EQ( s.getC6(), 6.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanSetValue)
+{
+    mc::System2 s;
+    s.setValue( 99.0 );
+    EXPECT_DOUBLE_EQ( s.getValue(), 99.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanUpdateOscillatorStep)
+{
+    std::vector<double> vals;
+
+    // expected values calculated with Scilab Xcos
+    // tests/control/xcos/test_filter2.xcos
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_oscillator_step.bin", &vals );
+
+    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+
+    // harmonic oscillator
+    // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
+    // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
+    mc::System2 s( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < vals.size(); i++ )
+    {
+        double u = ( i < 100 ) ? 0.0 : 1.0;
+
+        s.update( TIME_STEP, u );
+        y = s.getValue();
+
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+
+        t += TIME_STEP;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestSystem2, CanUpdateOscillatorSine)
+{
+    std::vector<double> vals;
+
+    // expected values calculated with Scilab Xcos
+    // tests/control/xcos/test_filter2.xcos
+    XcosBinFileReader::readData( "../tests/ctrl/data/test_oscillator_sine.bin", &vals );
+
+    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+
+    // harmonic oscillator
+    // G(s) = omega_0^2 / ( s^2 + 2*xi*omega_0*s + omega_0^2 )
+    // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
+    mc::System2 s( 0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0 );
+
+    double t = 0.0;
+    double y = 0.0;
+
+    for ( unsigned int i = 0; i < vals.size(); i++ )
+    {
+        double u = sin( t );
+
+        s.update( TIME_STEP, u );
+        y = s.getValue();
+
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
+        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+
+        t += TIME_STEP;
+    }
+}
