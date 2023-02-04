@@ -18,7 +18,6 @@ HEADERS += \
     $$PWD/ctrl/MovingMedian.h \
     $$PWD/ctrl/Oscillator.h \
     $$PWD/ctrl/PID.h \
-    $$PWD/ctrl/StateSpace.h \
     $$PWD/ctrl/System2.h
 
 SOURCES += \

@@ -30,7 +30,6 @@ set( SOURCES
     ctrl/TestMovingMedian.cpp
     ctrl/TestOscillator.cpp
     ctrl/TestPID.cpp
-    ctrl/TestStateSpace.cpp
     ctrl/TestSystem2.cpp
 
     geo/TestDataMars.cpp

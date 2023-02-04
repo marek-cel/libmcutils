@@ -14,7 +14,6 @@ set( HEADERS
     MovingMedian.h
     Oscillator.h
     PID.h
-    StateSpace.h
     System2.h
 )
 
