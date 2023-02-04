@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -39,7 +37,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
  */
-class MCUTILSAPI System2 final : public ICtrlElement
+class MCUTILSAPI System2
 {
 public:
 
@@ -48,7 +46,7 @@ public:
              double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
              double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
 
     inline double getC1() const { return _c1; }
     inline double getC2() const { return _c2; }
@@ -71,7 +69,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

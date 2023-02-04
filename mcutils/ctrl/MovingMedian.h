@@ -28,8 +28,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -43,7 +41,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI MovingMedian final : public ICtrlElement
+class MCUTILSAPI MovingMedian
 {
 public:
 
@@ -53,7 +51,7 @@ public:
      */
     MovingMedian( unsigned int length = 1, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
 
     inline unsigned int getLength() const { return _length; }
 
@@ -68,7 +66,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

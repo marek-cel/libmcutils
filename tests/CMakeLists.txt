@@ -20,7 +20,6 @@ set( SOURCES
     main.cpp
 
     ctrl/TestAntiWindupPID.cpp
-    ctrl/TestGain.cpp
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
     ctrl/TestInertia2.cpp

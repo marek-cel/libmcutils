@@ -4,8 +4,6 @@ set( TARGET_NAME mcutils-ctrl )
 
 set( HEADERS
     AntiWindupPID.h
-    ICtrlElement.h
-    Gain.h
     HighPassFilter.h
     Inertia.h
     Inertia2.h
@@ -22,7 +20,6 @@ set( HEADERS
 
 set( SOURCES
     AntiWindupPID.cpp
-    Gain.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp

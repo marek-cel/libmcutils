@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -36,7 +34,7 @@ namespace mc
 /**
  * @brief State space model class.
  */
-class MCUTILSAPI StateSpace final : public ICtrlElement
+class MCUTILSAPI StateSpace
 {
 public:
 
@@ -45,14 +43,14 @@ public:
      */
     StateSpace();
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

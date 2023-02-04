@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -39,7 +37,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )
  */
-class MCUTILSAPI HighPassFilter final : public ICtrlElement
+class MCUTILSAPI HighPassFilter
 {
 public:
 
@@ -50,7 +48,7 @@ public:
      */
     HighPassFilter( double omega = 1.0, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
     inline double getOmega() const { return _omega; }
 
     /**
@@ -76,7 +74,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

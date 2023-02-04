@@ -28,8 +28,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -67,7 +65,7 @@ namespace mc
  *   <li><a href="https://www.scilab.org/pid-anti-windup-schemes">PID Anti-Windup Schemes</a></li>
  * </ul>
  */
-class MCUTILSAPI AntiWindupPID final : public ICtrlElement
+class MCUTILSAPI AntiWindupPID
 {
 public:
 
@@ -98,13 +96,13 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
     /** @brief Resets controller. */
     void reset();
 
     /** @brief Returns controller output. */
-    inline double getValue() const override { return _value; }
+    inline double getValue() const { return _value; }
 
     inline double getKp() const { return _kp; }
     inline double getKi() const { return _ki; }

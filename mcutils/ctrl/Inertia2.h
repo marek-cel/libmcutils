@@ -37,7 +37,7 @@ namespace mc
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
  */
-class MCUTILSAPI Inertia2 final : public ICtrlElement
+class MCUTILSAPI Inertia2
 {
 public:
 
@@ -49,7 +49,7 @@ public:
      */
     Inertia2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
 
     inline double getTimeConst1() const { return _tc1; }
     inline double getTimeConst2() const { return _tc2; }
@@ -77,7 +77,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

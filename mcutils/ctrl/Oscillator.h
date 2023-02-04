@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -49,7 +47,7 @@ namespace mc
  *   <li>Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]</li>
  * </ul>
  */
-class MCUTILSAPI Oscillator final : public ICtrlElement
+class MCUTILSAPI Oscillator
 {
 public:
 
@@ -61,7 +59,7 @@ public:
      */
     Oscillator( double omega = 1.0, double zeta = 1.0, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
     inline double getOmega() const { return _omega; }
     inline double getDamping() const { return _zeta; }
 
@@ -88,7 +86,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

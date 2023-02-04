@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -45,7 +43,7 @@ namespace mc
  *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]</li>
  * </ul>
  */
-class MCUTILSAPI LeadLag final : public ICtrlElement
+class MCUTILSAPI LeadLag
 {
 public:
 
@@ -61,7 +59,7 @@ public:
              double c3 = 0.0, double c4 = 1.0,
              double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
 
     inline double getC1() const { return _c1; }
     inline double getC2() const { return _c2; }
@@ -80,7 +78,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

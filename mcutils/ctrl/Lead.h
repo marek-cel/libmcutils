@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -46,14 +44,14 @@ namespace mc
  *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
  * </ul>
  */
-class MCUTILSAPI Lead final : public ICtrlElement
+class MCUTILSAPI Lead
 {
 public:
 
     /** @brief Constructor. */
     Lead( double tc = 0.0, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
     inline double getTimeConst() const { return _tc; }
 
     /**
@@ -73,7 +71,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

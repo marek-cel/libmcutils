@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -41,7 +39,7 @@ namespace mc
  *
  * Low-pass filter is based on a first-order lag element.
  */
-class MCUTILSAPI LowPassFilter final : public ICtrlElement
+class MCUTILSAPI LowPassFilter
 {
 public:
 
@@ -52,7 +50,7 @@ public:
      */
     LowPassFilter( double omega = 1.0, double y = 0.0 );
 
-    inline double getValue() const override { return _y; }
+    inline double getValue() const { return _y; }
     inline double getOmega() const { return _omega; }
 
     /**
@@ -78,7 +76,7 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
 private:
 

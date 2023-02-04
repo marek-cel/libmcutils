@@ -26,8 +26,6 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/ctrl/ICtrlElement.h>
-
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -60,7 +58,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method">Ziegler–Nichols method - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI PID final : public ICtrlElement
+class MCUTILSAPI PID
 {
 public:
 
@@ -79,13 +77,13 @@ public:
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u ) override;
+    void update( double dt, double u );
 
     /** @brief Resets controller. */
     void reset();
 
     /** @brief Returns controller output. */
-    inline double getValue() const override { return _value; }
+    inline double getValue() const { return _value; }
 
     inline double getKp() const { return _kp; }
     inline double getKi() const { return _ki; }
