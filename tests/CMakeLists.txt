@@ -73,9 +73,6 @@ set( SOURCES
 
     time/TestClockTime.cpp
     time/TestISO8601.cpp
-
-    xml/TestXmlDoc.cpp
-    xml/TestXmlNode.cpp
 )
 
 ################################################################################
@@ -94,7 +91,6 @@ target_link_libraries( ${TARGET_NAME}
     mcutils-misc
     mcutils-net
     mcutils-time
-    mcutils-xml
 
     ${LIBXML2_LIBRARIES}
     GTest::gtest

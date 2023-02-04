@@ -89,9 +89,3 @@ SOURCES += \
 SOURCES += \
     $$PWD/time/TestClockTime.cpp \
     $$PWD/time/TestISO8601.cpp
-
-################################################################################
-
-SOURCES += \
-    $$PWD/xml/TestXmlDoc.cpp \
-    $$PWD/xml/TestXmlNode.cpp

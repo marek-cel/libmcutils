@@ -45,17 +45,9 @@ win32-msvc*: DEFINES += MCUTILS_DLL_EXPORTS
 
 INCLUDEPATH += ../
 
-unix: INCLUDEPATH += \
-    /usr/include/libxml2
-
-win32: INCLUDEPATH += \
-    $(LIBXML_DIR)/include
-
 ################################################################################
 
 win32: LIBS += \
-    -L$(LIBXML_DIR)/lib \
-    -llibxml2 \
     -lws2_32
 
 ################################################################################

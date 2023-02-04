@@ -136,13 +136,3 @@ HEADERS += \
 
 SOURCES += \
     $$PWD/time/ISO8601.cpp
-
-################################################################################
-
-HEADERS += \
-    $$PWD/xml/XmlDoc.h \
-    $$PWD/xml/XmlNode.h
-
-SOURCES += \
-    $$PWD/xml/XmlDoc.cpp \
-    $$PWD/xml/XmlNode.cpp
