@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'ubuntu:22.04' }
+    }
 
     environment {
         RECIPIENT_LIST = 'dev@marekcel.pl'
