@@ -82,12 +82,7 @@ target_link_libraries( ${TARGET_NAME}
 
     gcov
 
-    mcutils-ctrl
-    mcutils-geo
-    mcutils-math
-    mcutils-misc
-    mcutils-net
-    mcutils-time
+    mcutils
 
     GTest::gtest
     GTest::gtest_main
