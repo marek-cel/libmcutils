@@ -2,6 +2,14 @@ set( TARGET_NAME mcutils )
 
 ################################################################################
 
+if( WIN32 )
+    if(BUILD_SHARED_LIBS)
+        add_definitions( -DMCUTILS_DLL_EXPORTS )
+    endif()
+endif()
+
+################################################################################
+
 set( HEADERS
     defs.h
     Result.h
