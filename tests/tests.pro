@@ -39,6 +39,8 @@ win32-msvc*: CONFIG(debug, debug|release):   DEFINES += _DEBUG
 unix:  DEFINES += _LINUX_
 win32: DEFINES += WIN32 _WINDOWS
 
+win32-msvc*: DEFINES += MCUTILS_STATIC_LIB
+
 ################################################################################
 
 INCLUDEPATH += ./ $$PWD/../
