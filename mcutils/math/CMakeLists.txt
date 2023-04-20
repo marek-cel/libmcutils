@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils-math )
+set( TARGET_NAME math )
 
 ################################################################################
 
@@ -48,19 +48,16 @@ set( SOURCES
 
 ################################################################################
 
-add_library( ${TARGET_NAME} ${SOURCES} )
+add_library( ${TARGET_NAME} OBJECT ${SOURCES} )
 
 ################################################################################
 
 include( GNUInstallDirs )
 
 set_target_properties( ${TARGET_NAME} PROPERTIES 
-    VERSION ${MCUTILS_VERSION_STRING}
-    SOVERSION ${MCUTILS_VERSION_MAJOR}
     PUBLIC_HEADER "${HEADERS}"
 )
 
 install( TARGETS ${TARGET_NAME}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/math
 )

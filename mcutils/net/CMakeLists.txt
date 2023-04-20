@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils-net )
+set( TARGET_NAME net )
 
 ################################################################################
 
@@ -12,7 +12,7 @@ set( SOURCES
 
 ################################################################################
 
-add_library( ${TARGET_NAME} ${SOURCES} )
+add_library( ${TARGET_NAME} OBJECT ${SOURCES} )
 
 ################################################################################
 
@@ -25,6 +25,5 @@ set_target_properties( ${TARGET_NAME} PROPERTIES
 )
 
 install( TARGETS ${TARGET_NAME}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/net
 )

@@ -41,6 +41,10 @@ elseif( WIN32 )
     add_definitions( -D_CRT_SECURE_NO_DEPRECATE )
     add_definitions( -D_SCL_SECURE_NO_WARNINGS )
     add_definitions( -D_USE_MATH_DEFINES )
+    
+    if(BUILD_SHARED_LIBS)
+        add_definitions( -DMCUTILS_DLL_EXPORTS )
+    endif()
 endif()
 
 if ( TESTING )
