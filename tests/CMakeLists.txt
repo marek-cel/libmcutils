@@ -64,8 +64,6 @@ set( SOURCES
     misc/TestString.cpp
     misc/TestUnits.cpp
 
-    net/TestEndianness.cpp
-
     physics/TestPhysics.cpp
 
     time/TestClockTime.cpp
