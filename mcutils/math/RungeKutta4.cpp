@@ -51,19 +51,19 @@ void RungeKutta4::integrate( double step, VectorN *vect )
     _k4.zeroize();
 
     // k1 - derivatives calculation
-    _fun( _xt, &_k1 );
+    fun_( _xt, &_k1 );
 
     // k2 - derivatives calculation
     _xt = (*vect) + _k1 * ( step / 2.0 );
-    _fun( _xt, &_k2 );
+    fun_( _xt, &_k2 );
 
     // k3 - derivatives calculation
     _xt = (*vect) + _k2 * ( step / 2.0 );
-    _fun( _xt, &_k3 );
+    fun_( _xt, &_k3 );
 
     // k4 - derivatives calculation
     _xt = (*vect) + _k3 * step;
-    _fun( _xt, &_k4 );
+    fun_( _xt, &_k4 );
 
     // integration
     (*vect) = (*vect) + ( _k1 + _k2 * 2.0 + _k3 * 2.0 + _k4 ) * ( step / 6.0 );

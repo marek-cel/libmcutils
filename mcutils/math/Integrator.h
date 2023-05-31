@@ -43,7 +43,7 @@ class MCUTILSAPI Integrator
 {
 public:
 
-    using Fun = std::function<void(const VectorN &, VectorN *)>;
+    using Fun = std::function<void(const VectorN&, VectorN*)>;
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
@@ -57,7 +57,7 @@ public:
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    virtual void integrate( double step, VectorN *vect ) = 0;
+    virtual void integrate( double step, VectorN* vect ) = 0;
 
     /**
      * @brief Sets a function which calculates vector derivative.
@@ -67,7 +67,7 @@ public:
      */
     void setDerivFun( Fun fun )
     {
-        _fun = fun;
+        fun_ = fun;
     }
 
     /**
@@ -76,12 +76,12 @@ public:
      */
     inline bool isDerivFunSet() const
     {
-        return static_cast<bool>( _fun );
+        return static_cast<bool>( fun_ );
     }
 
 protected:
 
-    Fun _fun;   ///< function which calculates vector derivative
+    Fun fun_;   ///< function which calculates vector derivative
 };
 
 using IntegratorSharedPtr = std::shared_ptr < Integrator >;

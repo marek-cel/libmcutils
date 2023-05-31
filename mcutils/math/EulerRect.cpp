@@ -44,7 +44,7 @@ void EulerRect::integrate( double step, VectorN *vect )
     _k0.zeroize();
 
     // derivatives calculation
-    _fun( _xt, &_k0 );
+    fun_( _xt, &_k0 );
 
     // integration
     (*vect) = (*vect) + _k0 * step;
