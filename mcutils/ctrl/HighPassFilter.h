@@ -48,8 +48,8 @@ public:
      */
     HighPassFilter( double omega = 1.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
-    inline double getOmega() const { return _omega; }
+    inline double getValue() const { return y_; }
+    inline double getOmega() const { return omega_; }
 
     /**
      * @brief Sets output value
@@ -78,12 +78,12 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] cutoff angular frequency
-    double _tc;             ///< time constant
+    double omega_;          ///< [rad/s] cutoff angular frequency
+    double tc_;             ///< time constant
 
-    double _u_prev;         ///< previous input value
+    double u_prev_;         ///< previous input value
 
-    double _y;              ///< current value
+    double y_;              ///< current value
 };
 
 } // namespace mc
