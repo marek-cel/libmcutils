@@ -352,7 +352,6 @@ public:
 protected:
 
     const unsigned int size_;   ///< vector size
-
     double items_[ SIZE ];      ///< vector items
 
     /** @brief Adds vector. */
