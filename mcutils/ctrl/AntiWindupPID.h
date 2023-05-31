@@ -89,7 +89,7 @@ public:
      */
     AntiWindupPID( double kp = 1.0, double ki = 0.0, double kd = 0.0,
                    double min = DBL_MIN, double max = DBL_MAX,
-                   AntiWindup antiWindup = AntiWindup::None );
+                   AntiWindup aw = AntiWindup::None );
 
     /**
      * @brief Updates controller.
@@ -102,20 +102,20 @@ public:
     void reset();
 
     /** @brief Returns controller output. */
-    inline double getValue() const { return _value; }
+    inline double getValue() const { return value_; }
 
-    inline double getKp() const { return _kp; }
-    inline double getKi() const { return _ki; }
-    inline double getKd() const { return _kd; }
+    inline double getKp() const { return kp_; }
+    inline double getKi() const { return ki_; }
+    inline double getKd() const { return kd_; }
 
-    inline double getKaw() const { return _kaw; }
+    inline double getKaw() const { return kaw_; }
 
-    inline double getMin() const { return _min; }
-    inline double getMax() const { return _max; }
+    inline double getMin() const { return min_; }
+    inline double getMax() const { return max_; }
 
-    inline AntiWindup getAntiWindup() const { return _antiWindup; }
+    inline AntiWindup getAntiWindup() const { return aw_; }
 
-    inline double getError() const { return _error; }
+    inline double getError() const { return error_; }
 
     /**
      * @brief Sets parameters of parallel form.
@@ -155,36 +155,36 @@ public:
 
     void setValue( double timeStep, double error, double value );
 
-    inline void setKp( double kp ) { _kp = kp; }
-    inline void setKi( double ki ) { _ki = ki; }
-    inline void setKd( double kd ) { _kd = kd; }
+    inline void setKp( double kp ) { kp_ = kp; }
+    inline void setKi( double ki ) { ki_ = ki; }
+    inline void setKd( double kd ) { kd_ = kd; }
 
-    inline void setKaw( double kaw ) { _kaw = kaw; }
+    inline void setKaw( double kaw ) { kaw_ = kaw; }
 
-    inline void setMin( double min ) { _min = min; }
-    inline void setMax( double max ) { _max = max; }
+    inline void setMin( double min ) { min_ = min; }
+    inline void setMax( double max ) { max_ = max; }
 
-    void setAntiWindup( AntiWindup antiWindup );
+    void setAntiWindup( AntiWindup aw );
 
 private:
 
-    AntiWindup _antiWindup; ///< anti-windup method
+    AntiWindup aw_;         ///< anti-windup method
 
-    double _kp;             ///< proportional gain
-    double _ki;             ///< integral gain
-    double _kd;             ///< derivative gain
+    double kp_;             ///< proportional gain
+    double ki_;             ///< integral gain
+    double kd_;             ///< derivative gain
 
-    double _kaw;            ///< anti-windup gain
+    double kaw_;            ///< anti-windup gain
 
-    double _min;            ///< minimum output value
-    double _max;            ///< maximum output value
+    double min_;            ///< minimum output value
+    double max_;            ///< maximum output value
 
-    double _error;          ///< error
-    double _error_i;        ///< error integral sum
-    double _error_d;        ///< error derivative
+    double error_;          ///< error
+    double error_i_;        ///< error integral sum
+    double error_d_;        ///< error derivative
 
-    double _value;          ///< output value
-    double _delta;          ///< difference between raw and saturated output values
+    double value_;          ///< output value
+    double delta_;          ///< difference between raw and saturated output values
 };
 
 } // namespace mc
