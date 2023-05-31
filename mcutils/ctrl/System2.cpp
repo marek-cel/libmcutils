@@ -35,68 +35,68 @@ namespace mc
 System2::System2( double c1, double c2, double c3,
                   double c4, double c5, double c6,
                   double y )
-    : _c1 ( c1 )
-    , _c2 ( c2 )
-    , _c3 ( c3 )
-    , _c4 ( c4 )
-    , _c5 ( c5 )
-    , _c6 ( c6 )
-    , _u_prev_1 ( 0.0 )
-    , _u_prev_2 ( 0.0 )
-    , _y_prev_1 ( y )
-    , _y_prev_2 ( y )
-    , _y ( y )
+    : c1_ ( c1 )
+    , c2_ ( c2 )
+    , c3_ ( c3 )
+    , c4_ ( c4 )
+    , c5_ ( c5 )
+    , c6_ ( c6 )
+    , u_prev_1_ ( 0.0 )
+    , u_prev_2_ ( 0.0 )
+    , y_prev_1_ ( y )
+    , y_prev_2_ ( y )
+    , y_ ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setValue( double y )
 {
-    _y = y;
-    _y_prev_1 = y;
-    _y_prev_2 = y;
+    y_ = y;
+    y_prev_1_ = y;
+    y_prev_2_ = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC1( double c1 )
 {
-    _c1 = c1;
+    c1_ = c1;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC2( double c2 )
 {
-    _c2 = c2;
+    c2_ = c2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC3( double c3 )
 {
-    _c3 = c3;
+    c3_ = c3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC4( double c4 )
 {
-    _c4 = c4;
+    c4_ = c4;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC5( double c5 )
 {
-    _c5 = c5;
+    c5_ = c5;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void System2::setC6( double c6 )
 {
-    _c6 = c6;
+    c6_ = c6;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,23 +107,23 @@ void System2::update( double dt, double u )
     {
         double dt2 = dt * dt;
 
-        double den = 4.0 * _c4 + 2.0 * _c5 * dt + _c6 * dt2;
+        double den = 4.0 * c4_ + 2.0 * c5_ * dt + c6_ * dt2;
         double den_inv = 1.0 / den;
 
-        double ca = ( 4.0 * _c1       + 2.0 * _c2 * dt + _c3 * dt2 ) * den_inv;
-        double cb = ( 2.0 * _c3 * dt2 - 8.0 * _c1                  ) * den_inv;
-        double cc = ( 4.0 * _c1       - 2.0 * _c2 * dt + _c3 * dt2 ) * den_inv;
-        double cd = ( 2.0 * _c6 * dt2 - 8.0 * _c4                  ) * den_inv;
-        double ce = ( 4.0 * _c4       - 2.0 * _c5 * dt + _c6 * dt2 ) * den_inv;
+        double ca = ( 4.0 * c1_       + 2.0 * c2_ * dt + c3_ * dt2 ) * den_inv;
+        double cb = ( 2.0 * c3_ * dt2 - 8.0 * c1_                  ) * den_inv;
+        double cc = ( 4.0 * c1_       - 2.0 * c2_ * dt + c3_ * dt2 ) * den_inv;
+        double cd = ( 2.0 * c6_ * dt2 - 8.0 * c4_                  ) * den_inv;
+        double ce = ( 4.0 * c4_       - 2.0 * c5_ * dt + c6_ * dt2 ) * den_inv;
 
-        _y = u * ca + _u_prev_1 * cb + _u_prev_2 * cc
-                    - _y_prev_1 * cd - _y_prev_2 * ce;
+        y_ = u * ca + u_prev_1_ * cb + u_prev_2_ * cc
+                    - y_prev_1_ * cd - y_prev_2_ * ce;
 
-        _u_prev_2 = _u_prev_1;
-        _u_prev_1 = u;
+        u_prev_2_ = u_prev_1_;
+        u_prev_1_ = u;
 
-        _y_prev_2 = _y_prev_1;
-        _y_prev_1 = _y;
+        y_prev_2_ = y_prev_1_;
+        y_prev_1_ = y_;
     }
 }
 

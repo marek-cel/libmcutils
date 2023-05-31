@@ -46,14 +46,14 @@ public:
              double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
              double y = 0.0 );
 
-    inline double getValue() const { return _y; }
+    inline double getValue() const { return y_; }
 
-    inline double getC1() const { return _c1; }
-    inline double getC2() const { return _c2; }
-    inline double getC3() const { return _c3; }
-    inline double getC4() const { return _c4; }
-    inline double getC5() const { return _c5; }
-    inline double getC6() const { return _c6; }
+    inline double getC1() const { return c1_; }
+    inline double getC2() const { return c2_; }
+    inline double getC3() const { return c3_; }
+    inline double getC4() const { return c4_; }
+    inline double getC5() const { return c5_; }
+    inline double getC6() const { return c6_; }
 
     void setValue( double y );
 
@@ -73,20 +73,20 @@ public:
 
 private:
 
-    double _c1;             ///< c1 coefficient
-    double _c2;             ///< c2 coefficient
-    double _c3;             ///< c3 coefficient
-    double _c4;             ///< c4 coefficient
-    double _c5;             ///< c5 coefficient
-    double _c6;             ///< c6 coefficient
+    double c1_;             ///< c1 coefficient
+    double c2_;             ///< c2 coefficient
+    double c3_;             ///< c3 coefficient
+    double c4_;             ///< c4 coefficient
+    double c5_;             ///< c5 coefficient
+    double c6_;             ///< c6 coefficient
 
-    double _u_prev_1;       ///< input previous value
-    double _u_prev_2;       ///< input value 2 steps before
+    double u_prev_1_;       ///< input previous value
+    double u_prev_2_;       ///< input value 2 steps before
 
-    double _y_prev_1;       ///< previous value
-    double _y_prev_2;       ///< value 2 steps before
+    double y_prev_1_;       ///< previous value
+    double y_prev_2_;       ///< value 2 steps before
 
-    double _y;              ///< current value
+    double y_;              ///< current value
 };
 
 } // namespace mc
