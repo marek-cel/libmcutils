@@ -59,12 +59,12 @@ public:
              double c3 = 0.0, double c4 = 1.0,
              double y = 0.0 );
 
-    inline double getValue() const { return _y; }
+    inline double getValue() const { return y_; }
 
-    inline double getC1() const { return _c1; }
-    inline double getC2() const { return _c2; }
-    inline double getC3() const { return _c3; }
-    inline double getC4() const { return _c4; }
+    inline double getC1() const { return c1_; }
+    inline double getC2() const { return c2_; }
+    inline double getC3() const { return c3_; }
+    inline double getC4() const { return c4_; }
 
     void setValue( double y );
 
@@ -82,15 +82,15 @@ public:
 
 private:
 
-    double _c1;             ///< c1 coefficient of the transfer function
-    double _c2;             ///< c2 coefficient of the transfer function
-    double _c3;             ///< c3 coefficient of the transfer function
-    double _c4;             ///< c4 coefficient of the transfer function
+    double c1_;             ///< c1 coefficient of the transfer function
+    double c2_;             ///< c2 coefficient of the transfer function
+    double c3_;             ///< c3 coefficient of the transfer function
+    double c4_;             ///< c4 coefficient of the transfer function
 
-    double _u_prev;         ///< previous input value
-    double _y_prev;         ///< previous output value
+    double u_prev_;         ///< previous input value
+    double y_prev_;         ///< previous output value
 
-    double _y;              ///< current value
+    double y_;              ///< current value
 };
 
 } // namespace mc
