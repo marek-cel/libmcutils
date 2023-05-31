@@ -40,23 +40,23 @@ class MCUTILSAPI Vector3 final : public Vector<3>
 {
 public:
 
-    static const Vector3 _ex;   ///< standard basis x-axis unit vector
-    static const Vector3 _ey;   ///< standard basis y-axis unit vector
-    static const Vector3 _ez;   ///< standard basis z-axis unit vector
+    static const Vector3 ex_;   ///< standard basis x-axis unit vector
+    static const Vector3 ey_;   ///< standard basis y-axis unit vector
+    static const Vector3 ez_;   ///< standard basis z-axis unit vector
 
-    inline static const Vector3& ex() { return _ex; }
-    inline static const Vector3& ey() { return _ey; }
-    inline static const Vector3& ez() { return _ez; }
+    inline static const Vector3& ex() { return ex_; }
+    inline static const Vector3& ey() { return ey_; }
+    inline static const Vector3& ez() { return ez_; }
 
-    inline static const Vector3& i() { return _ex; }
-    inline static const Vector3& j() { return _ey; }
-    inline static const Vector3& k() { return _ez; }
+    inline static const Vector3& i() { return ex_; }
+    inline static const Vector3& j() { return ey_; }
+    inline static const Vector3& k() { return ez_; }
 
     /** @brief Constructor. */
     Vector3();
 
     /** @brief Copy constructor. */
-    Vector3( const Vector3 &vect );
+    Vector3( const Vector3& vect );
 
     /** @brief Constructor. */
     Vector3( const double items[] );
@@ -71,52 +71,52 @@ public:
     virtual ~Vector3() = default;
 
     /** @return length of projection of vector on XY-plane */
-    inline double getLengthXY() const { return sqrt( _x*_x + _y*_y ); }
+    inline double getLengthXY() const { return sqrt( x_*x_ + y_*y_ ); }
 
     /** @return length of projection of vector on XZ-plane */
-    inline double getLengthXZ() const { return sqrt( _x*_x + _z*_z ); }
+    inline double getLengthXZ() const { return sqrt( x_*x_ + z_*z_ ); }
 
     /** @return length of projection of vector on YZ-plane */
-    inline double getLengthYZ() const { return sqrt( _y*_y + _z*_z ); }
+    inline double getLengthYZ() const { return sqrt( y_*y_ + z_*z_ ); }
 
     /** @return normalized vector */
     Vector3 getNormalized() const;
 
-    inline double  x() const { return _x; }
-    inline double  y() const { return _y; }
-    inline double  z() const { return _z; }
-    inline double& x()       { return _x; }
-    inline double& y()       { return _y; }
-    inline double& z()       { return _z; }
+    inline double  x() const { return x_; }
+    inline double  y() const { return y_; }
+    inline double  z() const { return z_; }
+    inline double& x()       { return x_; }
+    inline double& y()       { return y_; }
+    inline double& z()       { return z_; }
 
-    inline double  p() const { return _x; }
-    inline double  q() const { return _y; }
-    inline double  r() const { return _z; }
-    inline double& p()       { return _x; }
-    inline double& q()       { return _y; }
-    inline double& r()       { return _z; }
+    inline double  p() const { return x_; }
+    inline double  q() const { return y_; }
+    inline double  r() const { return z_; }
+    inline double& p()       { return x_; }
+    inline double& q()       { return y_; }
+    inline double& r()       { return z_; }
 
-    inline double  u() const { return _x; }
-    inline double  v() const { return _y; }
-    inline double  w() const { return _z; }
-    inline double& u()       { return _x; }
-    inline double& v()       { return _y; }
-    inline double& w()       { return _z; }
+    inline double  u() const { return x_; }
+    inline double  v() const { return y_; }
+    inline double  w() const { return z_; }
+    inline double& u()       { return x_; }
+    inline double& v()       { return y_; }
+    inline double& w()       { return z_; }
 
     /** @brief Sets vector values. */
     void set( double x, double y, double z );
 
     /** @brief Assignment operator. */
-    Vector3& operator= ( const Vector3 &vect );
+    Vector3& operator= ( const Vector3& vect );
 
     /** @brief Addition operator. */
-    Vector3 operator+ ( const Vector3 &vect ) const;
+    Vector3 operator+ ( const Vector3& vect ) const;
 
     /** @brief Negation operator. */
     Vector3 operator- () const;
 
     /** @brief Subtraction operator. */
-    Vector3 operator- ( const Vector3 &vect ) const;
+    Vector3 operator- ( const Vector3& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Vector3 operator* ( double value ) const;
@@ -125,16 +125,16 @@ public:
     Vector3 operator/ ( double value ) const;
 
     /** @brief Dot product operator. */
-    double operator* ( const Vector3 &vect ) const;
+    double operator* ( const Vector3& vect ) const;
 
     /** @brief Cross product operator. */
-    Vector3 operator% ( const Vector3 &vect ) const;
+    Vector3 operator% ( const Vector3& vect ) const;
 
     /** @brief Unary addition operator. */
-    Vector3& operator+= ( const Vector3 &vect );
+    Vector3& operator+= ( const Vector3& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector3& operator-= ( const Vector3 &vect );
+    Vector3& operator-= ( const Vector3& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
     Vector3& operator*= ( double value );
@@ -143,19 +143,19 @@ public:
     Vector3& operator/= ( double value );
 
     /** @brief Unary cross product operator. */
-    Vector3& operator%= ( const Vector3 &vect );
+    Vector3& operator%= ( const Vector3& vect );
 
 private:
 
-    double &_x;     ///< x element
-    double &_y;     ///< y element
-    double &_z;     ///< z element
+    double &x_;     ///< x element
+    double &y_;     ///< y element
+    double &z_;     ///< z element
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector3 operator* ( double value, const Vector3 &vect )
+inline Vector3 operator* ( double value, const Vector3& vect )
 {
     return ( vect * value );
 }

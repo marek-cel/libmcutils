@@ -220,51 +220,6 @@ public:
         }
     }
 
-    /** @brief Adds vector. */
-    void add( const Vector< SIZE > &vect )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            items_[ i ] += vect.items_[ i ];
-        }
-    }
-
-    /** @brief Negates (inverts) vector. */
-    void negate()
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            items_[ i ] = -items_[ i ];
-        }
-    }
-
-    /** @brief Substracts vector. */
-    void substract( const Vector< SIZE > &vect )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            items_[ i ] -= vect.items_[ i ];
-        }
-    }
-
-    /** @brief Multiplies by value. */
-    void multiply( double value )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            items_[ i ] *= value;
-        }
-    }
-
-    /** @brief Divides by value. */
-    void divide( double value )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            items_[ i ] /= value;
-        }
-    }
-
     /**
      * @brief Items accessor.
      * Please notice that this operator is NOT bound-checked.
@@ -322,7 +277,7 @@ public:
     Vector< SIZE > operator* ( double value ) const
     {
         Vector< SIZE > result( *this );
-        result.multiply( value );
+        result.multiplyByValue( value );
         return result;
     }
 
@@ -343,7 +298,7 @@ public:
     Vector< SIZE > operator/ ( double val ) const
     {
         Vector< SIZE > result( *this );
-        result.divide( val );
+        result.divideByValue( val );
         return result;
     }
 
@@ -364,14 +319,14 @@ public:
     /** @brief Unary multiplication operator (by scalar). */
     Vector< SIZE >& operator*= ( double value )
     {
-        multiply( value );
+        multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
     Vector< SIZE >& operator/= ( double value )
     {
-        divide( value );
+        divideByValue( value );
         return (*this);
     }
 
@@ -399,6 +354,51 @@ protected:
     const unsigned int size_;   ///< vector size
 
     double items_[ SIZE ];      ///< vector items
+
+    /** @brief Adds vector. */
+    void add( const Vector< SIZE > &vect )
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items_[ i ] += vect.items_[ i ];
+        }
+    }
+
+    /** @brief Negates (inverts) vector. */
+    void negate()
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items_[ i ] = -items_[ i ];
+        }
+    }
+
+    /** @brief Substracts vector. */
+    void substract( const Vector< SIZE > &vect )
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items_[ i ] -= vect.items_[ i ];
+        }
+    }
+
+    /** @brief Multiplies by value. */
+    void multiplyByValue( double value )
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items_[ i ] *= value;
+        }
+    }
+
+    /** @brief Divides by value. */
+    void divideByValue( double value )
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items_[ i ] /= value;
+        }
+    }
 };
 
 template class MCUTILSAPI mc::Vector<3>;
