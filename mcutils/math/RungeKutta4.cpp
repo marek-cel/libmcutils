@@ -38,35 +38,35 @@ RungeKutta4::RungeKutta4( Fun fun )
 
 void RungeKutta4::integrate( double step, VectorN *vect )
 {
-    _xt = (*vect);
+    xt_ = (*vect);
 
-    _k1.resize( vect->getSize() );
-    _k2.resize( vect->getSize() );
-    _k3.resize( vect->getSize() );
-    _k4.resize( vect->getSize() );
+    k1_.resize( vect->getSize() );
+    k2_.resize( vect->getSize() );
+    k3_.resize( vect->getSize() );
+    k4_.resize( vect->getSize() );
 
-    _k1.zeroize();
-    _k2.zeroize();
-    _k3.zeroize();
-    _k4.zeroize();
+    k1_.zeroize();
+    k2_.zeroize();
+    k3_.zeroize();
+    k4_.zeroize();
 
     // k1 - derivatives calculation
-    fun_( _xt, &_k1 );
+    fun_( xt_, &k1_ );
 
     // k2 - derivatives calculation
-    _xt = (*vect) + _k1 * ( step / 2.0 );
-    fun_( _xt, &_k2 );
+    xt_ = (*vect) + k1_ * ( step / 2.0 );
+    fun_( xt_, &k2_ );
 
     // k3 - derivatives calculation
-    _xt = (*vect) + _k2 * ( step / 2.0 );
-    fun_( _xt, &_k3 );
+    xt_ = (*vect) + k2_ * ( step / 2.0 );
+    fun_( xt_, &k3_ );
 
     // k4 - derivatives calculation
-    _xt = (*vect) + _k3 * step;
-    fun_( _xt, &_k4 );
+    xt_ = (*vect) + k3_ * step;
+    fun_( xt_, &k4_ );
 
     // integration
-    (*vect) = (*vect) + ( _k1 + _k2 * 2.0 + _k3 * 2.0 + _k4 ) * ( step / 6.0 );
+    (*vect) = (*vect) + ( k1_ + k2_ * 2.0 + k3_ * 2.0 + k4_ ) * ( step / 6.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
