@@ -89,27 +89,6 @@ public:
 
 private:
 
-    double _a;                      ///< [m] equatorial radius
-    double _f;                      ///< [-] ellipsoid flattening
-
-    double _b;                      ///< [m] polar radius
-    double _r1;                     ///< [m] mean radius
-    double _a2;                     ///< [m^2] equatorial radius squared
-    double _b2;                     ///< [m^2] polar radius squared
-    double _e2;                     ///< [-] ellipsoid first eccentricity squared
-    double _e;                      ///< [-] ellipsoid first eccentricity
-    double _ep2;                    ///< [-] ellipsoid second eccentricity squared
-    double _ep;                     ///< [-] ellipsoid second eccentricity
-
-    Geo _pos_geo;                   ///< geodetic coordinates
-
-    Vector3 _pos_ecef;              ///< [m] coordinates vector expressed in ECEF
-
-    Matrix3x3 _enu2ecef;            ///< rotation matrix from ENU to ECEF
-    Matrix3x3 _ned2ecef;            ///< rotation matrix from NED to ECEF
-    Matrix3x3 _ecef2enu;            ///< rotation matrix from ECEF to ENU
-    Matrix3x3 _ecef2ned;            ///< rotation matrix from ECEF to NED
-
     void copyData( const ECEF &ecef );
     void copyParams( const ECEF &ecef );
 
