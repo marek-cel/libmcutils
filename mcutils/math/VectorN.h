@@ -50,7 +50,7 @@ public:
     VectorN( unsigned int size );
 
     /** @brief Copy constructor. */
-    VectorN( const VectorN &vect );
+    VectorN( const VectorN& vect );
 
     /** @brief Destructor. */
     virtual ~VectorN();
@@ -91,7 +91,7 @@ public:
      * @brief Returns vector size (number of elements)
      * @return vector size (number of elements)
      */
-    unsigned int getSize() const { return _size; }
+    unsigned int getSize() const { return size_; }
 
     /** @brief Returns string representation of the vector. */
     std::string toString() const;
@@ -103,19 +103,19 @@ public:
     void zeroize();
 
     /** @brief Adds vector. */
-    void add( const VectorN &vect );
+    void add( const VectorN& vect );
 
     /** @brief Negates (inverts) vector. */
     void negate();
 
     /** @brief Substracts vector. */
-    void substract( const VectorN &vect );
+    void substract( const VectorN& vect );
 
     /** @brief Multiplies by value. */
-    void multiply( double value );
+    void multiplyByValue( double value );
 
     /** @brief Divides by value. */
-    void divide( double value );
+    void divideByValue( double value );
 
     /**
      * @brief Items accessor.
@@ -125,7 +125,7 @@ public:
      */
     inline double operator() ( unsigned int index ) const
     {
-        return _items[ index ];
+        return items_[ index ];
     }
 
     /**
@@ -136,20 +136,20 @@ public:
      */
     inline double& operator() ( unsigned int index )
     {
-        return _items[ index ];
+        return items_[ index ];
     }
 
     /** @brief Assignment operator. */
-    VectorN& operator= ( const VectorN &vect );
+    VectorN& operator= ( const VectorN& vect );
 
     /** @brief Addition operator. */
-    VectorN operator+ ( const VectorN &vect ) const;
+    VectorN operator+ ( const VectorN& vect ) const;
 
     /** @brief Negation operator. */
     VectorN operator- () const;
 
     /** @brief Subtraction operator. */
-    VectorN operator- ( const VectorN &vect ) const;
+    VectorN operator- ( const VectorN& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
     VectorN operator* ( double value ) const;
@@ -158,10 +158,10 @@ public:
     VectorN operator/ ( double value ) const;
 
     /** @brief Unary addition operator. */
-    VectorN& operator+= ( const VectorN &vect );
+    VectorN& operator+= ( const VectorN& vect );
 
     /** @brief Unary subtraction operator. */
-    VectorN& operator-= ( const VectorN &vect );
+    VectorN& operator-= ( const VectorN& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
     VectorN& operator*= ( double value );
@@ -171,15 +171,14 @@ public:
 
 protected:
 
-    unsigned int _size;     ///< vector size
-
-    double *_items;         ///< vector items
+    unsigned int size_;     ///< vector size
+    double *items_;         ///< vector items
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline VectorN operator* ( double val, const VectorN & vect )
+inline VectorN operator* ( double val, const VectorN& vect )
 {
     return ( vect * val );
 }
