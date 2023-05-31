@@ -36,15 +36,15 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 PID::PID( double kp, double ki, double kd )
-    : _kp ( kp )
-    , _ki ( ki )
-    , _kd ( kd )
+    : kp_ ( kp )
+    , ki_ ( ki )
+    , kd_ ( kd )
 
-    , _error   ( 0.0 )
-    , _error_i ( 0.0 )
-    , _error_d ( 0.0 )
+    , error_   ( 0.0 )
+    , error_i_ ( 0.0 )
+    , error_d_ ( 0.0 )
 
-    , _value ( 0.0 )
+    , value_ ( 0.0 )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,11 +53,11 @@ void PID::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _error_i = _error_i + u  * dt;
-        _error_d = ( dt > 0.0 ) ? ( u - _error ) / dt : 0.0;
-        _error = u;
+        error_i_ = error_i_ + u  * dt;
+        error_d_ = ( dt > 0.0 ) ? ( u - error_ ) / dt : 0.0;
+        error_ = u;
 
-        _value = _kp * _error + _kd * _error_d + _ki * _error_i;
+        value_ = kp_ * error_ + kd_ * error_d_ + ki_ * error_i_;
     }
 }
 
@@ -65,72 +65,72 @@ void PID::update( double dt, double u )
 
 void PID::reset()
 {
-    _error_i = 0.0;
-    _error_d = 0.0;
+    error_i_ = 0.0;
+    error_d_ = 0.0;
 
-    _error = 0.0;
+    error_ = 0.0;
 
-    _value = 0.0;
+    value_ = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setParallel( double kp, double ki, double kd )
 {
-    _kp = kp;
-    _ki = ki;
-    _kd = kd;
+    kp_ = kp;
+    ki_ = ki;
+    kd_ = kd;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setSeries( double k, double tau_i, double tau_d )
 {
-    _kp = k * ( 1.0 + tau_d / tau_i );
-    _ki = k / tau_i;
-    _kd = k * tau_d;
+    kp_ = k * ( 1.0 + tau_d / tau_i );
+    ki_ = k / tau_i;
+    kd_ = k * tau_d;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setStandard( double Kp, double Ti, double Td )
 {
-    _kp = Kp;
-    _ki = Kp / Ti;
-    _kd = Kp * Td;
+    kp_ = Kp;
+    ki_ = Kp / Ti;
+    kd_ = Kp * Td;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setError( double error )
 {
-    _error = error;
+    error_ = error;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setValue( double value )
 {
-    _error_i = fabs( _ki ) > 0.0 ? value / _ki : 0.0;
-    _error_d = 0.0;
+    error_i_ = fabs( ki_ ) > 0.0 ? value / ki_ : 0.0;
+    error_d_ = 0.0;
 
-    _error = 0.0;
+    error_ = 0.0;
 
-    _value = value;
+    value_ = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void PID::setValue( double timeStep, double error, double value )
 {
-    _error_d = ( timeStep > 0.0 ) ? ( error - _error ) / timeStep : 0.0;
-    _error_i = fabs( _ki ) > 0.0
-            ? ( ( value  - _kp * error - _kd * _error_d ) / _ki )
+    error_d_ = ( timeStep > 0.0 ) ? ( error - error_ ) / timeStep : 0.0;
+    error_i_ = fabs( ki_ ) > 0.0
+            ? ( ( value  - kp_ * error - kd_ * error_d_ ) / ki_ )
             : 0.0;
 
-    _error = error;
+    error_ = error;
 
-    _value = value;
+    value_ = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -83,13 +83,13 @@ public:
     void reset();
 
     /** @brief Returns controller output. */
-    inline double getValue() const { return _value; }
+    inline double getValue() const { return value_; }
 
-    inline double getKp() const { return _kp; }
-    inline double getKi() const { return _ki; }
-    inline double getKd() const { return _kd; }
+    inline double getKp() const { return kp_; }
+    inline double getKi() const { return ki_; }
+    inline double getKd() const { return kd_; }
 
-    inline double getError() const { return _error; }
+    inline double getError() const { return error_; }
 
     /**
      * @brief Sets parameters of parallel form.
@@ -129,21 +129,21 @@ public:
 
     void setValue( double timeStep, double error, double value );
 
-    inline void setKp( double kp ) { _kp = kp; }
-    inline void setKi( double ki ) { _ki = ki; }
-    inline void setKd( double kd ) { _kd = kd; }
+    inline void setKp( double kp ) { kp_ = kp; }
+    inline void setKi( double ki ) { ki_ = ki; }
+    inline void setKd( double kd ) { kd_ = kd; }
 
 private:
 
-    double _kp;             ///< proportional gain
-    double _ki;             ///< integral gain
-    double _kd;             ///< derivative gain
+    double kp_;             ///< proportional gain
+    double ki_;             ///< integral gain
+    double kd_;             ///< derivative gain
 
-    double _error;          ///< error
-    double _error_i;        ///< error integral sum
-    double _error_d;        ///< error derivative
+    double error_;          ///< error
+    double error_i_;        ///< error integral sum
+    double error_d_;        ///< error derivative
 
-    double _value;          ///< output value
+    double value_;          ///< output value
 };
 
 } // namespace mc
