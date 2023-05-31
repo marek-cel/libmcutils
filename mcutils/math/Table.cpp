@@ -137,9 +137,9 @@ Table::Table( const char *str )
 
 double Table::getKeyByIndex( unsigned int index ) const
 {
-    if ( _data.size() > 0 && index < _data.size() )
+    if ( data_.size() > 0 && index < data_.size() )
     {
-        Data::const_iterator it = _data.begin();
+        Data::const_iterator it = data_.begin();
         std::advance( it, index );
         return it->first;
     }
@@ -154,7 +154,7 @@ double Table::getKeyOfValueMin() const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::max();
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key = it->first;
         const double &val = it->second.first;
@@ -176,7 +176,7 @@ double Table::getKeyOfValueMin( double key_min, double key_max ) const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::max();
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key = it->first;
         const double &val = it->second.first;
@@ -208,7 +208,7 @@ double Table::getKeyOfValueMax() const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double max_value = std::numeric_limits<double>::min();
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key = it->first;
         const double &val = it->second.first;
@@ -230,7 +230,7 @@ double Table::getKeyOfValueMax( double key_min, double key_max ) const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::min();
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key = it->first;
         const double &val = it->second.first;
@@ -259,10 +259,10 @@ double Table::getKeyOfValueMax( double key_min, double key_max ) const
 
 double Table::getValue( double key_value ) const
 {
-    if ( _data.size() > 0 )
+    if ( data_.size() > 0 )
     {
-        const double &key_b = _data.begin()->first;
-        const double &key_l = _data.rbegin()->first;
+        const double &key_b = data_.begin()->first;
+        const double &key_l = data_.rbegin()->first;
 
         if ( key_value <= key_b )
             return getFirstValue();
@@ -270,13 +270,13 @@ double Table::getValue( double key_value ) const
         if ( key_value >= key_l )
             return getLastValue();
 
-        for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
         {
             Data::const_iterator nx = std::next( it );
 
             const double &key_0 = it->first;
 
-            if ( nx != _data.end() )
+            if ( nx != data_.end() )
             {
                 const double &key_1 = nx->first;
 
@@ -299,9 +299,9 @@ double Table::getValue( double key_value ) const
 
 double Table::getValueByIndex( unsigned int index ) const
 {
-    if ( _data.size() > 0 && index < _data.size() )
+    if ( data_.size() > 0 && index < data_.size() )
     {
-        auto it = _data.begin();
+        auto it = data_.begin();
         std::advance( it, index );
         return it->second.first;
     }
@@ -313,9 +313,9 @@ double Table::getValueByIndex( unsigned int index ) const
 
 double Table::getFirstValue() const
 {
-    if ( _data.size() > 0 )
+    if ( data_.size() > 0 )
     {
-        return _data.begin()->second.first;
+        return data_.begin()->second.first;
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -325,9 +325,9 @@ double Table::getFirstValue() const
 
 double Table::getLastValue() const
 {
-    if ( _data.size() > 0 )
+    if ( data_.size() > 0 )
     {
-        return _data.rbegin()->second.first;
+        return data_.rbegin()->second.first;
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -339,11 +339,11 @@ double Table::getValueMin() const
 {
     double result = std::numeric_limits<double>::quiet_NaN();
 
-    if ( _data.size() > 0 )
+    if ( data_.size() > 0 )
     {
         result = std::numeric_limits<double>::max();
 
-        for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
         {
             const double &val = it->second.first;
 
@@ -363,11 +363,11 @@ double Table::getValueMax() const
 {
     double result = std::numeric_limits<double>::quiet_NaN();
 
-    if ( _data.size() > 0 )
+    if ( data_.size() > 0 )
     {
         result = std::numeric_limits<double>::min();
 
-        for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
         {
             const double &val = it->second.first;
 
@@ -385,9 +385,9 @@ double Table::getValueMax() const
 
 bool Table::isValid() const
 {
-    bool result = ( _data.size() > 0 ) ? true : false;
+    bool result = ( data_.size() > 0 ) ? true : false;
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key   = it->first;
         const double &value = it->second.first;
@@ -407,8 +407,8 @@ bool Table::isValid() const
 
 void Table::multiplyKeys( double factor )
 {
-    Data temp = _data;
-    _data.clear();
+    Data temp = data_;
+    data_.clear();
 
     for ( Data::const_iterator it = temp.begin(); it != temp.end(); ++it )
     {
@@ -435,7 +435,7 @@ void Table::multiplyKeys( double factor )
 
 void Table::multiplyValues( double factor )
 {
-    for ( Data::iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::iterator it = data_.begin(); it != data_.end(); ++it )
     {
         Data::const_iterator nx = std::next( it );
 
@@ -444,7 +444,7 @@ void Table::multiplyValues( double factor )
         double key_0 = it->first;
         double val_0 = it->second.first;
 
-        if ( nx != _data.end() )
+        if ( nx != data_.end() )
         {
             double key_1 = nx->first;
             double val_1 = nx->second.first * factor;
@@ -465,7 +465,7 @@ std::string Table::toString()
 {
     std::stringstream ss;
 
-    for ( Data::iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::iterator it = data_.begin(); it != data_.end(); ++it )
     {
         const double &key = it->first;
         const double &val = it->second.first;
@@ -483,7 +483,7 @@ Table Table::operator+ ( const Table &table ) const
     Table result;
     Data temp;
 
-    for ( Data::const_iterator it = _data.begin(); it != _data.end(); ++it )
+    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
     {
         Data::const_iterator nx = std::next( it );
 
@@ -491,7 +491,7 @@ Table Table::operator+ ( const Table &table ) const
         double value_0 = it->second.first + table.getValue( key_0 );
         double inter_0 = 0.0;
 
-        if ( nx != _data.end() )
+        if ( nx != data_.end() )
         {
             double key_1   = nx->first;
             double value_1 = nx->second.first + table.getValue( key_1 );
@@ -503,7 +503,7 @@ Table Table::operator+ ( const Table &table ) const
         insertDataSet( &temp, key_0, value_0, inter_0 );
     }
 
-    result._data = temp;
+    result.data_ = temp;
 
     return result;
 }
@@ -536,7 +536,7 @@ void Table::initializeData( double key_0, double value_0 )
 
 void Table::insertDataSet( double key, double value, double inter )
 {
-    insertDataSet( &_data, key, value, inter );
+    insertDataSet( &data_, key, value, inter );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
