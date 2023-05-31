@@ -65,7 +65,7 @@ Matrix4x4 Matrix4x4::getTransposed() const
 
 Matrix4x4& Matrix4x4::operator= ( const Matrix4x4 &matrix )
 {
-    setArray( matrix._items );
+    setArray( matrix.items_ );
     return (*this);
 }
 

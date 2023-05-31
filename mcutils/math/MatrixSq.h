@@ -77,7 +77,7 @@ public:
         {
             for ( unsigned int c = 0; c < N; ++c )
             {
-                this->_items[ c*N + r ] = temp._items[ r*N + c ];
+                this->items_[ c*N + r ] = temp.items_[ r*N + c ];
             }
         }
     }
@@ -93,7 +93,7 @@ public:
     /** @brief Assignment operator. */
     MatrixSq<N>& operator= ( const MatrixSq<N> &matrix )
     {
-        std::memcpy( this->_items, matrix._items, sizeof(this->_items) );
+        std::memcpy( this->items_, matrix.items_, sizeof(this->items_) );
         return (*this);
     }
 
@@ -190,7 +190,7 @@ protected:
 
                 for ( unsigned int i = 0; i < N; ++i )
                 {
-                    (*result)(r,c) += ( this->_items[ r*N + i ] * matrix(i,c) );
+                    (*result)(r,c) += ( this->items_[ r*N + i ] * matrix(i,c) );
                 }
             }
         }

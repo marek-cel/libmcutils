@@ -45,15 +45,15 @@ Matrix3x3 Matrix3x3::identityMatrix()
 Matrix3x3::Matrix3x3()
     : MatrixSq<3>()
 
-    , _xx ( _items[ 0 ] )
-    , _xy ( _items[ 1 ] )
-    , _xz ( _items[ 2 ] )
-    , _yx ( _items[ 3 ] )
-    , _yy ( _items[ 4 ] )
-    , _yz ( _items[ 5 ] )
-    , _zx ( _items[ 6 ] )
-    , _zy ( _items[ 7 ] )
-    , _zz ( _items[ 8 ] )
+    , _xx ( items_[ 0 ] )
+    , _xy ( items_[ 1 ] )
+    , _xz ( items_[ 2 ] )
+    , _yx ( items_[ 3 ] )
+    , _yy ( items_[ 4 ] )
+    , _yz ( items_[ 5 ] )
+    , _zx ( items_[ 6 ] )
+    , _zy ( items_[ 7 ] )
+    , _zz ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,15 +61,15 @@ Matrix3x3::Matrix3x3()
 Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
     : MatrixSq<3>( mtrx )
 
-    , _xx ( _items[ 0 ] )
-    , _xy ( _items[ 1 ] )
-    , _xz ( _items[ 2 ] )
-    , _yx ( _items[ 3 ] )
-    , _yy ( _items[ 4 ] )
-    , _yz ( _items[ 5 ] )
-    , _zx ( _items[ 6 ] )
-    , _zy ( _items[ 7 ] )
-    , _zz ( _items[ 8 ] )
+    , _xx ( items_[ 0 ] )
+    , _xy ( items_[ 1 ] )
+    , _xz ( items_[ 2 ] )
+    , _yx ( items_[ 3 ] )
+    , _yy ( items_[ 4 ] )
+    , _yz ( items_[ 5 ] )
+    , _zx ( items_[ 6 ] )
+    , _zy ( items_[ 7 ] )
+    , _zz ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,15 +77,15 @@ Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
 Matrix3x3::Matrix3x3( const double items[] )
     : MatrixSq<3>( items )
 
-    , _xx ( _items[ 0 ] )
-    , _xy ( _items[ 1 ] )
-    , _xz ( _items[ 2 ] )
-    , _yx ( _items[ 3 ] )
-    , _yy ( _items[ 4 ] )
-    , _yz ( _items[ 5 ] )
-    , _zx ( _items[ 6 ] )
-    , _zy ( _items[ 7 ] )
-    , _zz ( _items[ 8 ] )
+    , _xx ( items_[ 0 ] )
+    , _xy ( items_[ 1 ] )
+    , _xz ( items_[ 2 ] )
+    , _yx ( items_[ 3 ] )
+    , _yy ( items_[ 4 ] )
+    , _yz ( items_[ 5 ] )
+    , _zx ( items_[ 6 ] )
+    , _zy ( items_[ 7 ] )
+    , _zz ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -113,15 +113,15 @@ Matrix3x3::Matrix3x3( double xx, double xy, double xz,
 Matrix3x3::Matrix3x3( const char *str )
     : MatrixSq<3>( str )
 
-    , _xx ( _items[ 0 ] )
-    , _xy ( _items[ 1 ] )
-    , _xz ( _items[ 2 ] )
-    , _yx ( _items[ 3 ] )
-    , _yy ( _items[ 4 ] )
-    , _yz ( _items[ 5 ] )
-    , _zx ( _items[ 6 ] )
-    , _zy ( _items[ 7 ] )
-    , _zz ( _items[ 8 ] )
+    , _xx ( items_[ 0 ] )
+    , _xy ( items_[ 1 ] )
+    , _xz ( items_[ 2 ] )
+    , _yx ( items_[ 3 ] )
+    , _yy ( items_[ 4 ] )
+    , _yz ( items_[ 5 ] )
+    , _zx ( items_[ 6 ] )
+    , _zy ( items_[ 7 ] )
+    , _zz ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -294,7 +294,7 @@ Matrix3x3 Matrix3x3::getTransposed() const
 
 Matrix3x3& Matrix3x3::operator= ( const Matrix3x3 &mtrx )
 {
-    std::memcpy( _items, mtrx._items, sizeof(_items) );
+    std::memcpy( items_, mtrx.items_, sizeof(items_) );
     return (*this);
 }
 
