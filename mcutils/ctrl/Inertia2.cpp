@@ -32,18 +32,18 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Inertia2::Inertia2( double tc1, double tc2, double y )
-    : _tc1 ( tc1 )
-    , _tc2 ( tc2 )
-    , _y1 ( y )
-    , _y  ( y )
+    : tc1_ ( tc1 )
+    , tc2_ ( tc2 )
+    , y1_ ( y )
+    , y_  ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Inertia2::setValue( double y )
 {
-    _y1 = y;
-    _y  = y;
+    y1_ = y;
+    y_  = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ void Inertia2::setTimeConst1( double tc1 )
 {
     if ( tc1 > 0.0 )
     {
-        _tc1 = tc1;
+        tc1_ = tc1;
     }
 }
 
@@ -62,7 +62,7 @@ void Inertia2::setTimeConst2( double tc2 )
 {
     if ( tc2 > 0.0 )
     {
-        _tc2 = tc2;
+        tc2_ = tc2;
     }
 }
 
@@ -72,8 +72,8 @@ void Inertia2::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _y1 = Inertia::calculate(   u, _y1, dt, _tc1 );
-        _y  = Inertia::calculate( _y1,  _y, dt, _tc2 );
+        y1_ = Inertia::calculate(   u, y1_, dt, tc1_ );
+        y_  = Inertia::calculate( y1_,  y_, dt, tc2_ );
     }
 }
 

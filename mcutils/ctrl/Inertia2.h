@@ -49,10 +49,10 @@ public:
      */
     Inertia2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
+    inline double getValue() const { return y_; }
 
-    inline double getTimeConst1() const { return _tc1; }
-    inline double getTimeConst2() const { return _tc2; }
+    inline double getTimeConst1() const { return tc1_; }
+    inline double getTimeConst2() const { return tc2_; }
 
     /**
      * @brief Sets output value
@@ -81,10 +81,10 @@ public:
 
 private:
 
-    double _tc1;            ///< time constant 1
-    double _tc2;            ///< time constant 2
-    double _y1;             ///< intermediate value
-    double _y;              ///< current value
+    double tc1_;            ///< time constant 1
+    double tc2_;            ///< time constant 2
+    double y1_;             ///< intermediate value
+    double y_;              ///< current value
 };
 
 } // namespace mc
