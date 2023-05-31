@@ -61,7 +61,7 @@ public:
     {}
 
     /** @brief Copy constructor. */
-    Vector( const Vector< SIZE > &vect )
+    Vector( const Vector<SIZE> &vect )
         : size_ ( SIZE )
     {
         std::memcpy( items_, vect.items_, sizeof(items_) );
@@ -243,46 +243,46 @@ public:
     }
 
     /** @brief Assignment operator. */
-    Vector< SIZE >& operator= ( const Vector< SIZE > &vect )
+    Vector<SIZE>& operator= ( const Vector<SIZE> &vect )
     {
         std::memcpy( items_, vect.items_, sizeof(items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    Vector< SIZE > operator+ ( const Vector< SIZE > &vect ) const
+    Vector<SIZE> operator+ ( const Vector<SIZE> &vect ) const
     {
-        Vector< SIZE > result( *this );
+        Vector<SIZE> result( *this );
         result.add( vect );
         return result;
     }
 
     /** @brief Negation operator. */
-    Vector< SIZE > operator- () const
+    Vector<SIZE> operator- () const
     {
-        Vector< SIZE > result( *this );
+        Vector<SIZE> result( *this );
         result.negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    Vector< SIZE > operator- ( const Vector< SIZE > &vect ) const
+    Vector<SIZE> operator- ( const Vector<SIZE> &vect ) const
     {
-        Vector< SIZE > result( *this );
+        Vector<SIZE> result( *this );
         result.substract( vect );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    Vector< SIZE > operator* ( double value ) const
+    Vector<SIZE> operator* ( double value ) const
     {
-        Vector< SIZE > result( *this );
+        Vector<SIZE> result( *this );
         result.multiplyByValue( value );
         return result;
     }
 
     /** @brief Dot product operator. */
-    double operator* ( const Vector< SIZE > &vect ) const
+    double operator* ( const Vector<SIZE> &vect ) const
     {
         double result = 0.0;
 
@@ -295,43 +295,43 @@ public:
     }
 
     /** @brief Division operator (by scalar). */
-    Vector< SIZE > operator/ ( double val ) const
+    Vector<SIZE> operator/ ( double val ) const
     {
-        Vector< SIZE > result( *this );
+        Vector<SIZE> result( *this );
         result.divideByValue( val );
         return result;
     }
 
     /** @brief Unary addition operator. */
-    Vector< SIZE >& operator+= ( const Vector< SIZE > &vect )
+    Vector<SIZE>& operator+= ( const Vector<SIZE> &vect )
     {
         add( vect );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Vector< SIZE >& operator-= ( const Vector< SIZE > &vect )
+    Vector<SIZE>& operator-= ( const Vector<SIZE> &vect )
     {
         substract( vect );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector< SIZE >& operator*= ( double value )
+    Vector<SIZE>& operator*= ( double value )
     {
         multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    Vector< SIZE >& operator/= ( double value )
+    Vector<SIZE>& operator/= ( double value )
     {
         divideByValue( value );
         return (*this);
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Vector< SIZE > &vect ) const
+    bool operator== ( const Vector<SIZE> &vect ) const
     {
         bool result = true;
 
@@ -344,7 +344,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Vector< SIZE > &vect ) const
+    bool operator!= ( const Vector<SIZE> &vect ) const
     {
         return !( (*this) == vect );
     }
@@ -355,7 +355,7 @@ protected:
     double items_[ SIZE ];      ///< vector items
 
     /** @brief Adds vector. */
-    void add( const Vector< SIZE > &vect )
+    void add( const Vector<SIZE> &vect )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -373,7 +373,7 @@ protected:
     }
 
     /** @brief Substracts vector. */
-    void substract( const Vector< SIZE > &vect )
+    void substract( const Vector<SIZE> &vect )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {

@@ -59,7 +59,7 @@ public:
     {}
 
     /** @brief Copy constructor. */
-    Matrix( const Matrix< ROWS, COLS > &matrix )
+    Matrix( const Matrix<ROWS, COLS> &matrix )
         : rows_ ( ROWS )
         , cols_ ( COLS )
         , size_ ( ROWS * COLS )
@@ -216,40 +216,40 @@ public:
     }
 
     /** @brief Assignment operator. */
-    Matrix< ROWS, COLS >& operator= ( const Matrix< ROWS, COLS > &matrix )
+    Matrix<ROWS, COLS>& operator= ( const Matrix<ROWS, COLS> &matrix )
     {
         std::memcpy( items_, matrix.items_, sizeof(items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    Matrix< ROWS, COLS > operator+ ( const Matrix< ROWS, COLS > &matrix ) const
+    Matrix<ROWS, COLS> operator+ ( const Matrix<ROWS, COLS> &matrix ) const
     {
-        Matrix< ROWS, COLS > result( *this );
+        Matrix<ROWS, COLS> result( *this );
         result.add( matrix );
         return result;
     }
 
     /** @brief Negation operator. */
-    Matrix< ROWS, COLS > operator- () const
+    Matrix<ROWS, COLS> operator- () const
     {
-        Matrix< ROWS, COLS > result( *this );
+        Matrix<ROWS, COLS> result( *this );
         result.negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    Matrix< ROWS, COLS > operator- ( const Matrix< ROWS, COLS > &matrix ) const
+    Matrix<ROWS, COLS> operator- ( const Matrix<ROWS, COLS> &matrix ) const
     {
-        Matrix< ROWS, COLS > result( *this );
+        Matrix<ROWS, COLS> result( *this );
         result.substract( matrix );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix< ROWS, COLS > operator* ( double value ) const
+    Matrix<ROWS, COLS> operator* ( double value ) const
     {
-        Matrix< ROWS, COLS > result( *this );
+        Matrix<ROWS, COLS> result( *this );
         result.multiplyByValue( value );
         return result;
     }
@@ -263,43 +263,43 @@ public:
     }
 
     /** @brief Division operator (by scalar). */
-    Matrix< ROWS, COLS > operator/ ( double value ) const
+    Matrix<ROWS, COLS> operator/ ( double value ) const
     {
-        Matrix< ROWS, COLS > result( *this );
+        Matrix<ROWS, COLS> result( *this );
         result.divideByValue( value );
         return result;
     }
 
     /** @brief Unary addition operator. */
-    Matrix< ROWS, COLS >& operator+= ( const Matrix< ROWS, COLS > &matrix )
+    Matrix<ROWS, COLS>& operator+= ( const Matrix<ROWS, COLS> &matrix )
     {
         add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Matrix< ROWS, COLS >& operator-= ( const Matrix< ROWS, COLS > &matrix )
+    Matrix<ROWS, COLS>& operator-= ( const Matrix<ROWS, COLS> &matrix )
     {
         substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix< ROWS, COLS >& operator*= ( double value )
+    Matrix<ROWS, COLS>& operator*= ( double value )
     {
         multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    Matrix< ROWS, COLS >& operator/= ( double value )
+    Matrix<ROWS, COLS>& operator/= ( double value )
     {
         divideByValue( value );
         return (*this);
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Matrix< ROWS, COLS > &matrix ) const
+    bool operator== ( const Matrix<ROWS, COLS> &matrix ) const
     {
         bool result = true;
 
@@ -312,7 +312,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Matrix< ROWS, COLS > &matrix ) const
+    bool operator!= ( const Matrix<ROWS, COLS> &matrix ) const
     {
         return !( (*this) == matrix );
     }
@@ -326,7 +326,7 @@ protected:
     double items_[ ROWS * COLS ];   ///< matrix items
 
     /** @brief Adds matrix. */
-    void add( const Matrix< ROWS, COLS > &matrix )
+    void add( const Matrix<ROWS, COLS> &matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -344,7 +344,7 @@ protected:
     }
 
     /** @brief Substracts matrix. */
-    void substract( const Matrix< ROWS, COLS > &matrix )
+    void substract( const Matrix<ROWS, COLS> &matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
