@@ -45,15 +45,15 @@ Matrix3x3 Matrix3x3::identityMatrix()
 Matrix3x3::Matrix3x3()
     : MatrixSq<3>()
 
-    , _xx ( items_[ 0 ] )
-    , _xy ( items_[ 1 ] )
-    , _xz ( items_[ 2 ] )
-    , _yx ( items_[ 3 ] )
-    , _yy ( items_[ 4 ] )
-    , _yz ( items_[ 5 ] )
-    , _zx ( items_[ 6 ] )
-    , _zy ( items_[ 7 ] )
-    , _zz ( items_[ 8 ] )
+    , xx_ ( items_[ 0 ] )
+    , xy_ ( items_[ 1 ] )
+    , xz_ ( items_[ 2 ] )
+    , yx_ ( items_[ 3 ] )
+    , yy_ ( items_[ 4 ] )
+    , yz_ ( items_[ 5 ] )
+    , zx_ ( items_[ 6 ] )
+    , zy_ ( items_[ 7 ] )
+    , zz_ ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,15 +61,15 @@ Matrix3x3::Matrix3x3()
 Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
     : MatrixSq<3>( mtrx )
 
-    , _xx ( items_[ 0 ] )
-    , _xy ( items_[ 1 ] )
-    , _xz ( items_[ 2 ] )
-    , _yx ( items_[ 3 ] )
-    , _yy ( items_[ 4 ] )
-    , _yz ( items_[ 5 ] )
-    , _zx ( items_[ 6 ] )
-    , _zy ( items_[ 7 ] )
-    , _zz ( items_[ 8 ] )
+    , xx_ ( items_[ 0 ] )
+    , xy_ ( items_[ 1 ] )
+    , xz_ ( items_[ 2 ] )
+    , yx_ ( items_[ 3 ] )
+    , yy_ ( items_[ 4 ] )
+    , yz_ ( items_[ 5 ] )
+    , zx_ ( items_[ 6 ] )
+    , zy_ ( items_[ 7 ] )
+    , zz_ ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -77,15 +77,15 @@ Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
 Matrix3x3::Matrix3x3( const double items[] )
     : MatrixSq<3>( items )
 
-    , _xx ( items_[ 0 ] )
-    , _xy ( items_[ 1 ] )
-    , _xz ( items_[ 2 ] )
-    , _yx ( items_[ 3 ] )
-    , _yy ( items_[ 4 ] )
-    , _yz ( items_[ 5 ] )
-    , _zx ( items_[ 6 ] )
-    , _zy ( items_[ 7 ] )
-    , _zz ( items_[ 8 ] )
+    , xx_ ( items_[ 0 ] )
+    , xy_ ( items_[ 1 ] )
+    , xz_ ( items_[ 2 ] )
+    , yx_ ( items_[ 3 ] )
+    , yy_ ( items_[ 4 ] )
+    , yz_ ( items_[ 5 ] )
+    , zx_ ( items_[ 6 ] )
+    , zy_ ( items_[ 7 ] )
+    , zz_ ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,17 +95,17 @@ Matrix3x3::Matrix3x3( double xx, double xy, double xz,
                       double zx, double zy, double zz )
     : Matrix3x3()
 {
-    _xx = xx;
-    _xy = xy;
-    _xz = xz;
+    xx_ = xx;
+    xy_ = xy;
+    xz_ = xz;
 
-    _yx = yx;
-    _yy = yy;
-    _yz = yz;
+    yx_ = yx;
+    yy_ = yy;
+    yz_ = yz;
 
-    _zx = zx;
-    _zy = zy;
-    _zz = zz;
+    zx_ = zx;
+    zy_ = zy;
+    zz_ = zz;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -113,15 +113,15 @@ Matrix3x3::Matrix3x3( double xx, double xy, double xz,
 Matrix3x3::Matrix3x3( const char *str )
     : MatrixSq<3>( str )
 
-    , _xx ( items_[ 0 ] )
-    , _xy ( items_[ 1 ] )
-    , _xz ( items_[ 2 ] )
-    , _yx ( items_[ 3 ] )
-    , _yy ( items_[ 4 ] )
-    , _yz ( items_[ 5 ] )
-    , _zx ( items_[ 6 ] )
-    , _zy ( items_[ 7 ] )
-    , _zz ( items_[ 8 ] )
+    , xx_ ( items_[ 0 ] )
+    , xy_ ( items_[ 1 ] )
+    , xz_ ( items_[ 2 ] )
+    , yx_ ( items_[ 3 ] )
+    , yy_ ( items_[ 4 ] )
+    , yz_ ( items_[ 5 ] )
+    , zx_ ( items_[ 6 ] )
+    , zy_ ( items_[ 7 ] )
+    , zz_ ( items_[ 8 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -141,17 +141,17 @@ Matrix3x3::Matrix3x3( const Angles &angl )
     double sinPhiSinTht = sinPhi * sinTht;
     double cosPhiSinTht = cosPhi * sinTht;
 
-    _xx =  cosTht * cosPsi;
-    _xy =  cosTht * sinPsi;
-    _xz = -sinTht;
+    xx_ =  cosTht * cosPsi;
+    xy_ =  cosTht * sinPsi;
+    xz_ = -sinTht;
 
-    _yx = -( cosPhi * sinPsi ) + ( sinPhiSinTht * cosPsi );
-    _yy =  ( cosPhi * cosPsi ) + ( sinPhiSinTht * sinPsi );
-    _yz =  ( sinPhi * cosTht );
+    yx_ = -( cosPhi * sinPsi ) + ( sinPhiSinTht * cosPsi );
+    yy_ =  ( cosPhi * cosPsi ) + ( sinPhiSinTht * sinPsi );
+    yz_ =  ( sinPhi * cosTht );
 
-    _zx =  ( sinPhi * sinPsi ) + ( cosPhiSinTht * cosPsi );
-    _zy = -( sinPhi * cosPsi ) + ( cosPhiSinTht * sinPsi );
-    _zz =  ( cosPhi * cosTht );
+    zx_ =  ( sinPhi * sinPsi ) + ( cosPhiSinTht * cosPsi );
+    zy_ = -( sinPhi * cosPsi ) + ( cosPhiSinTht * sinPsi );
+    zz_ =  ( cosPhi * cosTht );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -169,17 +169,17 @@ Matrix3x3::Matrix3x3( const Quaternion &qtrn )
     double ey2 = ey*ey;
     double ez2 = ez*ez;
 
-    _xx = e02 + ex2 - ey2 - ez2;
-    _xy = 2.0 * ( e0*ez + ex*ey );
-    _xz = 2.0 * ( ex*ez - e0*ey );
+    xx_ = e02 + ex2 - ey2 - ez2;
+    xy_ = 2.0 * ( e0*ez + ex*ey );
+    xz_ = 2.0 * ( ex*ez - e0*ey );
 
-    _yx = 2.0 * ( ex*ey - e0*ez );
-    _yy = e02 - ex2 + ey2 - ez2;
-    _yz = 2.0 * ( e0*ex + ey*ez );
+    yx_ = 2.0 * ( ex*ey - e0*ez );
+    yy_ = e02 - ex2 + ey2 - ez2;
+    yz_ = 2.0 * ( e0*ex + ey*ez );
 
-    _zx = 2.0 * ( e0*ey + ex*ez );
-    _zy = 2.0 * ( ey*ez - e0*ex );
-    _zz = e02 - ex2 - ey2 + ez2;
+    zx_ = 2.0 * ( e0*ey + ex*ez );
+    zy_ = 2.0 * ( ey*ez - e0*ex );
+    zz_ = e02 - ex2 - ey2 + ez2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -188,17 +188,17 @@ void Matrix3x3::set( double xx, double xy, double xz,
                      double yx, double yy, double yz,
                      double zx, double zy, double zz )
 {
-    _xx = xx;
-    _xy = xy;
-    _xz = xz;
+    xx_ = xx;
+    xy_ = xy;
+    xz_ = xz;
 
-    _yx = yx;
-    _yy = yy;
-    _yz = yz;
+    yx_ = yx;
+    yy_ = yy;
+    yz_ = yz;
 
-    _zx = zx;
-    _zy = zy;
-    _zz = zz;
+    zx_ = zx;
+    zy_ = zy;
+    zz_ = zz;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -207,19 +207,19 @@ Angles Matrix3x3::getAngles() const
 {
     Angles result;
 
-    double sinTht = -_xz;
+    double sinTht = -xz_;
     double cosTht = sqrt( 1.0 - std::min( 1.0, sinTht*sinTht ) );
 
     result.tht() = atan2( sinTht, cosTht );
 
     if ( cosTht > 0.0 )
     {
-        result.phi() = atan2( _yz,  _zz );
-        result.psi() = atan2( _xy,  _xx );
+        result.phi() = atan2( yz_, zz_ );
+        result.psi() = atan2( xy_, xx_ );
     }
     else
     {
-        result.phi() = atan2( _yx, _zx );
+        result.phi() = atan2( yx_, zx_ );
         result.psi() = 0.0;
     }
 
@@ -237,10 +237,10 @@ Quaternion Matrix3x3::getQuaternion() const
     // traces
     double tr[ 4 ];
 
-    tr[ 0 ] = 1.0 + _xx + _yy + _zz;
-    tr[ 1 ] = 1.0 + _xx - _yy - _zz;
-    tr[ 2 ] = 1.0 - _xx + _yy - _zz;
-    tr[ 3 ] = 1.0 - _xx - _yy + _zz;
+    tr[ 0 ] = 1.0 + xx_ + yy_ + zz_;
+    tr[ 1 ] = 1.0 + xx_ - yy_ - zz_;
+    tr[ 2 ] = 1.0 - xx_ + yy_ - zz_;
+    tr[ 3 ] = 1.0 - xx_ - yy_ + zz_;
 
     int index = 0;
     for ( int i = 1; i < 4; ++i ) index = ( tr[ i ] > tr[ index ] ) ? i : index;
@@ -248,29 +248,29 @@ Quaternion Matrix3x3::getQuaternion() const
     if ( index == 0 )
     {
         result.e0() = tr[ 0 ];
-        result.ex() = _yz - _zy;
-        result.ey() = _zx - _xz;
-        result.ez() = _xy - _yx;
+        result.ex() = yz_ - zy_;
+        result.ey() = zx_ - xz_;
+        result.ez() = xy_ - yx_;
     }
     else if ( index == 1 )
     {
-        result.e0() = _yz - _zy;
+        result.e0() = yz_ - zy_;
         result.ex() = tr[ 1 ];
-        result.ey() = _xy + _yx;
-        result.ez() = _zx + _xz;
+        result.ey() = xy_ + yx_;
+        result.ez() = zx_ + xz_;
     }
     else if ( index == 2 )
     {
-        result.e0() = _zx - _xz;
-        result.ex() = _xy + _yx;
+        result.e0() = zx_ - xz_;
+        result.ex() = xy_ + yx_;
         result.ey() = tr[ 2 ];
-        result.ez() = _yz + _zy;
+        result.ez() = yz_ + zy_;
     }
     else
     {
-        result.e0() = _xy - _yx;
-        result.ex() = _zx + _xz;
-        result.ey() = _yz + _zy;
+        result.e0() = xy_ - yx_;
+        result.ex() = zx_ + xz_;
+        result.ey() = yz_ + zy_;
         result.ez() = tr[ 3 ];
     }
 
