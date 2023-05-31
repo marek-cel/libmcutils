@@ -58,25 +58,25 @@ Table2::Table2( const double row_values[],
                 const double table_data[],
                 unsigned int rows,
                 unsigned int cols )
-    : _rows ( rows )
-    , _cols ( cols )
-    , _size ( rows*cols )
+    : rows_ ( rows )
+    , cols_ ( cols )
+    , size_ ( rows*cols )
 {
-    if ( _size > 0 )
+    if ( size_ > 0 )
     {
-        _row_values = new double [ _rows ];
-        _col_values = new double [ _cols ];
-        _table_data = new double [ _size ];
+        row_values_ = new double [ rows_ ];
+        col_values_ = new double [ cols_ ];
+        table_data_ = new double [ size_ ];
 
-        _inter_data = new double [ _size ];
+        inter_data_ = new double [ size_ ];
 
-        for ( unsigned int i = 0; i < _rows; ++i ) _row_values[ i ] = row_values[ i ];
-        for ( unsigned int i = 0; i < _cols; ++i ) _col_values[ i ] = col_values[ i ];
+        for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
+        for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            _table_data[ i ] = table_data[ i ];
-            _inter_data[ i ] = 0.0;
+            table_data_[ i ] = table_data[ i ];
+            inter_data_[ i ] = 0.0;
         }
 
         updateInterpolationData();
@@ -91,26 +91,26 @@ Table2::Table2( const std::vector<double> &row_values,
 {
     if ( row_values.size() * col_values.size() == table_data.size() )
     {
-        _size = static_cast< unsigned int >( table_data.size() );
+        size_ = static_cast< unsigned int >( table_data.size() );
 
-        if ( _size > 0 )
+        if ( size_ > 0 )
         {
-            _rows = static_cast<unsigned int>( row_values.size() );
-            _cols = static_cast<unsigned int>( col_values.size() );
+            rows_ = static_cast<unsigned int>( row_values.size() );
+            cols_ = static_cast<unsigned int>( col_values.size() );
 
-            _row_values = new double [ _rows ];
-            _col_values = new double [ _cols ];
-            _table_data = new double [ _size ];
+            row_values_ = new double [ rows_ ];
+            col_values_ = new double [ cols_ ];
+            table_data_ = new double [ size_ ];
 
-            _inter_data = new double [ _size ];
+            inter_data_ = new double [ size_ ];
 
-            for ( unsigned int i = 0; i < _rows; ++i ) _row_values[ i ] = row_values[ i ];
-            for ( unsigned int i = 0; i < _cols; ++i ) _col_values[ i ] = col_values[ i ];
+            for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
+            for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
 
-            for ( unsigned int i = 0; i < _size; ++i )
+            for ( unsigned int i = 0; i < size_; ++i )
             {
-                _table_data[ i ] = table_data[ i ];
-                _inter_data[ i ] = 0.0;
+                table_data_[ i ] = table_data[ i ];
+                inter_data_[ i ] = 0.0;
             }
 
             updateInterpolationData();
@@ -121,25 +121,25 @@ Table2::Table2( const std::vector<double> &row_values,
 ////////////////////////////////////////////////////////////////////////////////
 
 Table2::Table2( const Table2 &table )
-    : _rows ( table._rows )
-    , _cols ( table._cols )
-    , _size ( table._size )
+    : rows_ ( table.rows_ )
+    , cols_ ( table.cols_ )
+    , size_ ( table.size_ )
 {
-    if ( _size > 0 )
+    if ( size_ > 0 )
     {
-        _row_values = new double [ _rows ];
-        _col_values = new double [ _cols ];
-        _table_data = new double [ _size ];
+        row_values_ = new double [ rows_ ];
+        col_values_ = new double [ cols_ ];
+        table_data_ = new double [ size_ ];
 
-        _inter_data = new double [ _size ];
+        inter_data_ = new double [ size_ ];
 
-        for ( unsigned int i = 0; i < _rows; ++i ) _row_values[ i ] = table._row_values[ i ];
-        for ( unsigned int i = 0; i < _cols; ++i ) _col_values[ i ] = table._col_values[ i ];
+        for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = table.row_values_[ i ];
+        for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = table.col_values_[ i ];
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            _table_data[ i ] = table._table_data[ i ];
-            _inter_data[ i ] = table._inter_data[ i ];
+            table_data_[ i ] = table.table_data_[ i ];
+            inter_data_[ i ] = table.inter_data_[ i ];
         }
     }
 }
@@ -203,10 +203,10 @@ Table2::Table2( const char *str )
 
 Table2::~Table2()
 {
-    if ( _row_values ) { delete [] _row_values; } _row_values = nullptr;
-    if ( _col_values ) { delete [] _col_values; } _col_values = nullptr;
-    if ( _table_data ) { delete [] _table_data; } _table_data = nullptr;
-    if ( _inter_data ) { delete [] _inter_data; } _inter_data = nullptr;
+    if ( row_values_ ) { delete [] row_values_; } row_values_ = nullptr;
+    if ( col_values_ ) { delete [] col_values_; } col_values_ = nullptr;
+    if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
+    if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -216,10 +216,10 @@ Table Table2::getTable( double col_value ) const
     std::vector<double> keyValues;
     std::vector<double> tableData;
 
-    for ( unsigned int i = 0; i < _rows; ++i )
+    for ( unsigned int i = 0; i < rows_; ++i )
     {
-        keyValues.push_back( _row_values[ i ] );
-        tableData.push_back( getValue( _row_values[ i ], col_value ) );
+        keyValues.push_back( row_values_[ i ] );
+        tableData.push_back( getValue( row_values_[ i ], col_value ) );
     }
 
     return Table( keyValues, tableData );
@@ -229,56 +229,56 @@ Table Table2::getTable( double col_value ) const
 
 double Table2::getValue( double row_value, double col_value ) const
 {
-    if ( _size > 0 )
+    if ( size_ > 0 )
     {
-        if ( row_value < _row_values[ 0 ] )
-            return getValue( _row_values[ 0 ], col_value );
+        if ( row_value < row_values_[ 0 ] )
+            return getValue( row_values_[ 0 ], col_value );
 
-        if ( col_value < _col_values[ 0 ] )
-            return getValue( row_value, _col_values[ 0 ] );
+        if ( col_value < col_values_[ 0 ] )
+            return getValue( row_value, col_values_[ 0 ] );
 
-        if ( row_value > _row_values[ _rows - 1 ] )
-            return getValue( _row_values[ _rows - 1 ], col_value );
+        if ( row_value > row_values_[ rows_ - 1 ] )
+            return getValue( row_values_[ rows_ - 1 ], col_value );
 
-        if ( col_value > _col_values[ _cols - 1 ] )
-            return getValue( row_value, _col_values[ _cols - 1 ] );
+        if ( col_value > col_values_[ cols_ - 1 ] )
+            return getValue( row_value, col_values_[ cols_ - 1 ] );
 
         unsigned int row_1 = 0;
         unsigned int row_2 = 0;
 
-        for ( unsigned int r = 1; r < _rows; ++r )
+        for ( unsigned int r = 1; r < rows_; ++r )
         {
             row_1 = r - 1;
             row_2 = r;
 
-            if ( row_value >= _row_values[ row_1 ] && row_value < _row_values[ row_2 ] ) break;
+            if ( row_value >= row_values_[ row_1 ] && row_value < row_values_[ row_2 ] ) break;
         }
 
         unsigned int col_1 = 0;
         unsigned int col_2 = 0;
 
-        for ( unsigned int c = 1; c < _cols; ++c )
+        for ( unsigned int c = 1; c < cols_; ++c )
         {
             col_1 = c - 1;
             col_2 = c;
 
-            if ( col_value >= _col_values[ col_1 ] && col_value < _col_values[ col_2 ] ) break;
+            if ( col_value >= col_values_[ col_1 ] && col_value < col_values_[ col_2 ] ) break;
         }
 
-        double result_1 = ( col_value - _col_values[ col_1 ] )
-                        * _inter_data[ row_1 * _cols + col_1 ]
-                        + _table_data[ row_1 * _cols + col_1 ];
+        double result_1 = ( col_value - col_values_[ col_1 ] )
+                        * inter_data_[ row_1 * cols_ + col_1 ]
+                        + table_data_[ row_1 * cols_ + col_1 ];
 
-        double result_2 = ( col_value - _col_values[ col_1 ] )
-                        * _inter_data[ row_2 * _cols + col_1 ]
-                        + _table_data[ row_2 * _cols + col_1 ];
+        double result_2 = ( col_value - col_values_[ col_1 ] )
+                        * inter_data_[ row_2 * cols_ + col_1 ]
+                        + table_data_[ row_2 * cols_ + col_1 ];
 
-        double rowDelta  = _row_values[ row_2 ] - _row_values[ row_1 ];
+        double rowDelta  = row_values_[ row_2 ] - row_values_[ row_1 ];
         double rowFactor = 0.0;
 
         if ( fabs( rowDelta ) > 1.0e-16 )
         {
-            rowFactor = ( row_value - _row_values[ row_1 ] ) / rowDelta;
+            rowFactor = ( row_value - row_values_[ row_1 ] ) / rowDelta;
         }
 
         return rowFactor * ( result_2 - result_1 ) + result_1;
@@ -291,10 +291,10 @@ double Table2::getValue( double row_value, double col_value ) const
 
 double Table2::getValueByIndex( unsigned int row_index, unsigned int col_index ) const
 {
-    if ( _rows > 0 && row_index < _rows
-      && _cols > 0 && col_index < _cols )
+    if ( rows_ > 0 && row_index < rows_
+      && cols_ > 0 && col_index < cols_ )
     {
-        return _table_data[ row_index * _cols + col_index ];
+        return table_data_[ row_index * cols_ + col_index ];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -304,38 +304,38 @@ double Table2::getValueByIndex( unsigned int row_index, unsigned int col_index )
 
 bool Table2::isValid() const
 {
-    bool result = ( _size > 0 ) ? true : false;
+    bool result = ( size_ > 0 ) ? true : false;
 
     if ( result )
     {
-        for ( unsigned int c = 0; c < _cols; ++c )
+        for ( unsigned int c = 0; c < cols_; ++c )
         {
-            if ( result ) result = mc::isValid( _col_values[ c ] );
+            if ( result ) result = mc::isValid( col_values_[ c ] );
 
             if ( c > 0 )
             {
-                if ( result ) result = _col_values[ c - 1 ] < _col_values[ c ];
+                if ( result ) result = col_values_[ c - 1 ] < col_values_[ c ];
             }
 
             if ( !result ) break;
         }
 
-        for ( unsigned int r = 0; r < _rows; ++r )
+        for ( unsigned int r = 0; r < rows_; ++r )
         {
-            if ( result ) result = mc::isValid( _row_values[ r ] );
+            if ( result ) result = mc::isValid( row_values_[ r ] );
 
             if ( r > 0 )
             {
-                if ( result ) result = _row_values[ r - 1 ] < _row_values[ r ];
+                if ( result ) result = row_values_[ r - 1 ] < row_values_[ r ];
             }
 
             if ( !result ) break;
         }
 
-        for ( unsigned int i = 0; i < _size; ++i )
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            if ( result ) result = mc::isValid( _table_data[ i ] );
-            if ( result ) result = mc::isValid( _inter_data[ i ] );
+            if ( result ) result = mc::isValid( table_data_[ i ] );
+            if ( result ) result = mc::isValid( inter_data_[ i ] );
 
             if ( !result ) break;
         }
@@ -348,14 +348,14 @@ bool Table2::isValid() const
 
 void Table2::multiplyRowsAndCols( double f_rows, double f_cols  )
 {
-    for ( unsigned int i = 0; i < _rows; ++i )
+    for ( unsigned int i = 0; i < rows_; ++i )
     {
-        _row_values[ i ] *= f_rows;
+        row_values_[ i ] *= f_rows;
     }
 
-    for ( unsigned int i = 0; i < _cols; ++i )
+    for ( unsigned int i = 0; i < cols_; ++i )
     {
-        _col_values[ i ] *= f_cols;
+        col_values_[ i ] *= f_cols;
     }
 
     updateInterpolationData();
@@ -365,9 +365,9 @@ void Table2::multiplyRowsAndCols( double f_rows, double f_cols  )
 
 void Table2::multiplyRows( double factor )
 {
-    for ( unsigned int i = 0; i < _rows; ++i )
+    for ( unsigned int i = 0; i < rows_; ++i )
     {
-        _row_values[ i ] *= factor;
+        row_values_[ i ] *= factor;
     }
 
     updateInterpolationData();
@@ -377,9 +377,9 @@ void Table2::multiplyRows( double factor )
 
 void Table2::multiplyCols( double factor )
 {
-    for ( unsigned int i = 0; i < _cols; ++i )
+    for ( unsigned int i = 0; i < cols_; ++i )
     {
-        _col_values[ i ] *= factor;
+        col_values_[ i ] *= factor;
     }
 
     updateInterpolationData();
@@ -389,9 +389,9 @@ void Table2::multiplyCols( double factor )
 
 void Table2::multiplyValues( double factor )
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        _table_data[ i ] *= factor;
+        table_data_[ i ] *= factor;
     }
 
     updateInterpolationData();
@@ -405,21 +405,21 @@ std::string Table2::toString()
 
     ss << "\t";
 
-    for ( unsigned int c = 0; c < _cols; ++c )
+    for ( unsigned int c = 0; c < cols_; ++c )
     {
         if ( c > 0 ) ss << "\t";
-        ss << _col_values[ c ];
+        ss << col_values_[ c ];
     }
 
     ss << std::endl;
 
-    for ( unsigned int r = 0; r < _rows; ++r )
+    for ( unsigned int r = 0; r < rows_; ++r )
     {
-        ss << _row_values[ r ];
+        ss << row_values_[ r ];
 
-        for ( unsigned int c = 0; c < _cols; ++c )
+        for ( unsigned int c = 0; c < cols_; ++c )
         {
-            ss << "\t" << _table_data[ r * _cols + c ];
+            ss << "\t" << table_data_[ r * cols_ + c ];
         }
 
         ss << std::endl;
@@ -434,30 +434,30 @@ Table2& Table2::operator= ( const Table2 &table )
 {
     if ( this != &table )
     {
-        if ( _row_values ) { delete [] _row_values; } _row_values = nullptr;
-        if ( _col_values ) { delete [] _col_values; } _col_values = nullptr;
-        if ( _table_data ) { delete [] _table_data; } _table_data = nullptr;
-        if ( _inter_data ) { delete [] _inter_data; } _inter_data = nullptr;
+        if ( row_values_ ) { delete [] row_values_; } row_values_ = nullptr;
+        if ( col_values_ ) { delete [] col_values_; } col_values_ = nullptr;
+        if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
+        if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
 
-        _rows = table._rows;
-        _cols = table._cols;
-        _size = table._size;
+        rows_ = table.rows_;
+        cols_ = table.cols_;
+        size_ = table.size_;
 
-        if ( _size > 0 )
+        if ( size_ > 0 )
         {
-            _row_values = new double [ _rows ];
-            _col_values = new double [ _cols ];
-            _table_data = new double [ _size ];
+            row_values_ = new double [ rows_ ];
+            col_values_ = new double [ cols_ ];
+            table_data_ = new double [ size_ ];
 
-            _inter_data = new double [ _size ];
+            inter_data_ = new double [ size_ ];
 
-            for ( unsigned int i = 0; i < _rows; ++i ) _row_values[ i ] = table._row_values[ i ];
-            for ( unsigned int i = 0; i < _cols; ++i ) _col_values[ i ] = table._col_values[ i ];
+            for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = table.row_values_[ i ];
+            for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = table.col_values_[ i ];
 
-            for ( unsigned int i = 0; i < _size; ++i )
+            for ( unsigned int i = 0; i < size_; ++i )
             {
-                _table_data[ i ] = table._table_data[ i ];
-                _inter_data[ i ] = table._inter_data[ i ];
+                table_data_[ i ] = table.table_data_[ i ];
+                inter_data_[ i ] = table.inter_data_[ i ];
             }
         }
     }
@@ -469,13 +469,13 @@ Table2& Table2::operator= ( const Table2 &table )
 
 void Table2::updateInterpolationData()
 {
-    for ( unsigned int r = 0; r < _rows; ++r )
+    for ( unsigned int r = 0; r < rows_; ++r )
     {
-        for ( unsigned int c = 0; c < _cols - 1; ++c )
+        for ( unsigned int c = 0; c < cols_ - 1; ++c )
         {
-            _inter_data[ r * _cols + c ] =
-                ( _table_data[ r * _cols + c + 1 ] - _table_data[ r * _cols + c ] )
-              / ( _col_values[ c + 1 ] - _col_values[ c ] );
+            inter_data_[ r * cols_ + c ] =
+                ( table_data_[ r * cols_ + c + 1 ] - table_data_[ r * cols_ + c ] )
+              / ( col_values_[ c + 1 ] - col_values_[ c ] );
         }
     }
 }

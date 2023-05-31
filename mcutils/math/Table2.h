@@ -78,8 +78,8 @@ public:
     /** @brief Destructor. */
     ~Table2();
 
-    inline unsigned int getRows() const { return _rows; }
-    inline unsigned int getCols() const { return _cols; }
+    inline unsigned int getRows() const { return rows_; }
+    inline unsigned int getCols() const { return cols_; }
 
     /**
      * @brief Returns 1-dimensional table for the given col value.
@@ -147,15 +147,15 @@ public:
 
 private:
 
-    unsigned int _rows { 0 };           ///< number of rows
-    unsigned int _cols { 0 };           ///< number of columns
-    unsigned int _size { 0 };           ///< number of table elements
+    unsigned int rows_ { 0 };           ///< number of rows
+    unsigned int cols_ { 0 };           ///< number of columns
+    unsigned int size_ { 0 };           ///< number of table elements
 
-    double *_row_values { nullptr };    ///< rows keys values
-    double *_col_values { nullptr };    ///< columns keys values
-    double *_table_data { nullptr };    ///< table data
+    double* row_values_ { nullptr };    ///< rows keys values
+    double* col_values_ { nullptr };    ///< columns keys values
+    double* table_data_ { nullptr };    ///< table data
 
-    double *_inter_data { nullptr };    ///< interpolation data matrix
+    double* inter_data_ { nullptr };    ///< interpolation data matrix
 
     /** @brief Updates interpolation data due to table data. */
     void updateInterpolationData();
