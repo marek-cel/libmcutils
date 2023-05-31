@@ -59,9 +59,9 @@ public:
      */
     Oscillator( double omega = 1.0, double zeta = 1.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
-    inline double getOmega() const { return _omega; }
-    inline double getDamping() const { return _zeta; }
+    inline double getValue() const { return y_; }
+    inline double getOmega() const { return omega_; }
+    inline double getDamping() const { return zeta_; }
 
     /**
      * @brief Sets undamped angular frequency.
@@ -90,19 +90,19 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] undamped angular frequency
-    double _zeta;           ///< [-] <0.0;1.0> dampipng coefficient
+    double omega_;          ///< [rad/s] undamped angular frequency
+    double zeta_;           ///< [-] <0.0;1.0> dampipng coefficient
 
-    double _omega2;         ///< [rad^2/s^2] undamped angular frequency squared
-    double _2zetomg;        ///< [rad/s] 2*zeta*omega
+    double omega2_;         ///< [rad^2/s^2] undamped angular frequency squared
+    double zetomg2_;        ///< [rad/s] zeta*omega*2
 
-    double _u_prev_1;       ///< input previous value
-    double _u_prev_2;       ///< input value 2 steps before
+    double u_prev_1_;       ///< input previous value
+    double u_prev_2_;       ///< input value 2 steps before
 
-    double _y_prev_1;       ///< previous value
-    double _y_prev_2;       ///< value 2 steps before
+    double y_prev_1_;       ///< previous value
+    double y_prev_2_;       ///< value 2 steps before
 
-    double _y;              ///< current value
+    double y_;              ///< current value
 };
 
 } // namespace mc
