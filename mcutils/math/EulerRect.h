@@ -69,8 +69,8 @@ public:
 
 private:
 
-    VectorN _k0;        ///< auxiliary vector
-    VectorN _xt;        ///< auxiliary vector
+    VectorN k0_;        ///< auxiliary vector
+    VectorN xt_;        ///< auxiliary vector
 };
 
 } // namespace mc

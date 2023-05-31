@@ -38,16 +38,16 @@ EulerRect::EulerRect( Fun fun )
 
 void EulerRect::integrate( double step, VectorN *vect )
 {
-    _xt = (*vect);
+    xt_ = (*vect);
 
-    _k0.resize( vect->getSize() );
-    _k0.zeroize();
+    k0_.resize( vect->getSize() );
+    k0_.zeroize();
 
     // derivatives calculation
-    fun_( _xt, &_k0 );
+    fun_( xt_, &k0_ );
 
     // integration
-    (*vect) = (*vect) + _k0 * step;
+    (*vect) = (*vect) + k0_ * step;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
