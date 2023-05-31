@@ -38,9 +38,9 @@ const Vector3 Vector3::ez_ = Vector3( 0.0, 0.0, 1.0 );
 Vector3::Vector3()
     : Vector<3>()
 
-    , x_ ( items_[ 0 ] )
-    , y_ ( items_[ 1 ] )
-    , z_ ( items_[ 2 ] )
+    , x_ ( items_[0] )
+    , y_ ( items_[1] )
+    , z_ ( items_[2] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +48,9 @@ Vector3::Vector3()
 Vector3::Vector3( const Vector3& vect )
     : Vector<3>( vect )
 
-    , x_ ( items_[ 0 ] )
-    , y_ ( items_[ 1 ] )
-    , z_ ( items_[ 2 ] )
+    , x_ ( items_[0] )
+    , y_ ( items_[1] )
+    , z_ ( items_[2] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +58,9 @@ Vector3::Vector3( const Vector3& vect )
 Vector3::Vector3( const double items[] )
     : Vector<3>( items )
 
-    , x_ ( items_[ 0 ] )
-    , y_ ( items_[ 1 ] )
-    , z_ ( items_[ 2 ] )
+    , x_ ( items_[0] )
+    , y_ ( items_[1] )
+    , z_ ( items_[2] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,9 +68,9 @@ Vector3::Vector3( const double items[] )
 Vector3::Vector3( const char *str )
     : Vector<3>( str )
 
-    , x_ ( items_[ 0 ] )
-    , y_ ( items_[ 1 ] )
-    , z_ ( items_[ 2 ] )
+    , x_ ( items_[0] )
+    , y_ ( items_[1] )
+    , z_ ( items_[2] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -122,7 +122,7 @@ Vector3 Vector3::operator+ ( const Vector3& vect ) const
 
 Vector3 Vector3::operator- () const
 {
-    Vector3 result;
+    Vector3 result( *this );
     result.negate();
     return result;
 }

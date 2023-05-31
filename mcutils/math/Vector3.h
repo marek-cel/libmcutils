@@ -147,9 +147,9 @@ public:
 
 private:
 
-    double &x_;     ///< x element
-    double &y_;     ///< y element
-    double &z_;     ///< z element
+    double& x_;     ///< x element
+    double& y_;     ///< y element
+    double& z_;     ///< z element
 };
 
 ////////////////////////////////////////////////////////////////////////////////
