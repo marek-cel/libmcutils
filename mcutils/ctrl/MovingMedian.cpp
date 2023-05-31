@@ -33,33 +33,33 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 MovingMedian::MovingMedian( unsigned int length , double y )
-    : _length ( length )
-    , _y ( y )
+    : length_ ( length )
+    , y_ ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingMedian::setLength( unsigned int length )
 {
-    _length = length;
+    length_ = length;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void MovingMedian::update( double, double u )
 {
-    _fifo.push_back( u );
+    fifo_.push_back( u );
 
-    while ( _fifo.size() > _length )
+    while ( fifo_.size() > length_ )
     {
-        _fifo.pop_front();
+        fifo_.pop_front();
     }
 
-    if ( _fifo.size() > 1 )
+    if ( fifo_.size() > 1 )
     {
         std::vector<double> v;
 
-        for ( double &val : _fifo )
+        for ( double &val : fifo_ )
         {
             v.push_back( val );
         }
@@ -71,16 +71,16 @@ void MovingMedian::update( double, double u )
             int i1 = static_cast<int>( v.size() ) / 2;
             int i2 = i1 - 1;
 
-            _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;
+            y_ = ( v[ i1 ] + v[ i2 ] ) / 2.0;
         }
         else
         {
-            _y = v[ v.size() / 2 ];
+            y_ = v[ v.size() / 2 ];
         }
     }
     else
     {
-        _y = u;
+        y_ = u;
     }
 }
 
