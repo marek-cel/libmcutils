@@ -48,8 +48,8 @@ namespace mc
  * @return ISO-8601 date and time string
  */
 MCUTILSAPI std::string toISO8601( int year, int mon, int day,
-                                     int hour, int min, int sec, int msec,
-                                     bool show_msec = true );
+                                  int hour, int min, int sec, int msec,
+                                  bool show_msec = true );
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -70,7 +70,7 @@ MCUTILSAPI std::string toISO8601( int year, int mon, int day );
  * @return ISO-8601 date and time string
  */
 MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
-                                     bool show_msec = true );
+                                  bool show_msec = true );
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -79,7 +79,7 @@ MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
  * @return ISO-8601 date and time string
  */
 MCUTILSAPI inline std::string toISO8601( const DateTime &dt,
-                                            bool show_msec = true )
+                                         bool show_msec = true )
 {
     return toISO8601( dt.year, dt.month, dt.day,
                       dt.hour, dt.minute, dt.second, dt.msec, show_msec );
