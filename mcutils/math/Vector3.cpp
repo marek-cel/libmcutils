@@ -38,9 +38,9 @@ const Vector3 Vector3::_ez = Vector3( 0.0, 0.0, 1.0 );
 Vector3::Vector3()
     : Vector<3>()
 
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
+    , _x ( items_[ 0 ] )
+    , _y ( items_[ 1 ] )
+    , _z ( items_[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,9 +48,9 @@ Vector3::Vector3()
 Vector3::Vector3( const Vector3 &vect )
     : Vector<3>( vect )
 
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
+    , _x ( items_[ 0 ] )
+    , _y ( items_[ 1 ] )
+    , _z ( items_[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,9 +58,9 @@ Vector3::Vector3( const Vector3 &vect )
 Vector3::Vector3( const double items[] )
     : Vector<3>( items )
 
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
+    , _x ( items_[ 0 ] )
+    , _y ( items_[ 1 ] )
+    , _z ( items_[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,9 +68,9 @@ Vector3::Vector3( const double items[] )
 Vector3::Vector3( const char *str )
     : Vector<3>( str )
 
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
+    , _x ( items_[ 0 ] )
+    , _y ( items_[ 1 ] )
+    , _z ( items_[ 2 ] )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////

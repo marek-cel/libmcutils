@@ -66,7 +66,7 @@ Vector4 Vector4::getNormalized() const
 
 Vector4& Vector4::operator= ( const Vector4 &vect )
 {
-    setArray( vect._items );
+    setArray( vect.items_ );
     return (*this);
 }
 
