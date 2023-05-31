@@ -51,8 +51,8 @@ public:
     /** @brief Constructor. */
     Lead( double tc = 0.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
-    inline double getTimeConst() const { return _tc; }
+    inline double getValue() const { return y_; }
+    inline double getTimeConst() const { return tc_; }
 
     /**
      * @brief Sets output value
@@ -75,10 +75,10 @@ public:
 
 private:
 
-    double _tc;             ///< time constant
+    double tc_;             ///< time constant
 
-    double _u_prev;         ///< previous input
-    double _y;              ///< current value
+    double u_prev_;         ///< previous input
+    double y_;              ///< current value
 };
 
 } // namespace mc
