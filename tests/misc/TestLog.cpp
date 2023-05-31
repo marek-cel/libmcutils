@@ -20,9 +20,9 @@ TEST_F(TestLog, CanPrintNullStream)
 {
     std::string msg = "Lorem ipsum dolor sit amet";
 
-    mc::Log::setOutputStream( nullptr );
+    mc::Log::setOutStream( nullptr );
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Debug );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Debug );
 
     EXPECT_NO_THROW( mc::Log::e( msg.c_str() ) );
     EXPECT_NO_THROW( mc::Log::w( msg.c_str() ) );
@@ -38,12 +38,12 @@ TEST_F(TestLog, CanPrintFormatedStream)
     std::string msg = "lorem";
 
     std::stringstream ss;
-    mc::Log::setOutputStream( &ss );
+    mc::Log::setOutStream( &ss );
 
     std::string result;
     std::string expected;
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Debug );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Debug );
 
     EXPECT_NO_THROW( mc::Log::e( "aaa %s bbb", msg.c_str() ) );
     result   = ss.str().substr(25);
@@ -58,12 +58,12 @@ TEST_F(TestLog, CanPrintErrorMsg)
     std::string msg = "Lorem ipsum dolor sit amet";
 
     std::stringstream ss;
-    mc::Log::setOutputStream( &ss );
+    mc::Log::setOutStream( &ss );
 
     std::string result;
     std::string expected;
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Error );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Error );
     EXPECT_NO_THROW( mc::Log::e( msg.c_str() ) );
     result   = ss.str().substr(25);
     expected = "[ERROR] " + msg + "\n";
@@ -77,18 +77,18 @@ TEST_F(TestLog, CanPrintWarningMsg)
     std::string msg = "Lorem ipsum dolor sit amet";
 
     std::stringstream ss;
-    mc::Log::setOutputStream( &ss );
+    mc::Log::setOutStream( &ss );
 
     std::string result;
     std::string expected;
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Error );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Error );
     EXPECT_NO_THROW( mc::Log::w( msg.c_str() ) );
     result   = ss.str();
     expected = "";
     EXPECT_TRUE( result == expected );
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Warning );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Warning );
     EXPECT_NO_THROW( mc::Log::w( msg.c_str() ) );
     result   = ss.str().substr(25);
     expected = "[WARNING] " + msg + "\n";
@@ -102,18 +102,18 @@ TEST_F(TestLog, CanPrintInfoMsg)
     std::string msg = "Lorem ipsum dolor sit amet";
 
     std::stringstream ss;
-    mc::Log::setOutputStream( &ss );
+    mc::Log::setOutStream( &ss );
 
     std::string result;
     std::string expected;
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Warning );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Warning );
     EXPECT_NO_THROW( mc::Log::i( msg.c_str() ) );
     result   = ss.str();
     expected = "";
     EXPECT_TRUE( result == expected );
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Info );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Info );
     EXPECT_NO_THROW( mc::Log::i( msg.c_str() ) );
     result   = ss.str().substr(25);
     expected = "[INFO] " + msg + "\n";
@@ -127,18 +127,18 @@ TEST_F(TestLog, CanPrintDebugMsg)
     std::string msg = "Lorem ipsum dolor sit amet";
 
     std::stringstream ss;
-    mc::Log::setOutputStream( &ss );
+    mc::Log::setOutStream( &ss );
 
     std::string result;
     std::string expected;
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Info );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Info );
     EXPECT_NO_THROW( mc::Log::d( msg.c_str() ) );
     result   = ss.str();
     expected = "";
     EXPECT_TRUE( result == expected );
 
-    mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Debug );
+    mc::Log::setVerbLevel( mc::Log::VerboseLevel::Debug );
     EXPECT_NO_THROW( mc::Log::d( msg.c_str() ) );
     result   = ss.str().substr(25);
     expected = "[DEBUG] " + msg + "\n";
@@ -147,24 +147,24 @@ TEST_F(TestLog, CanPrintDebugMsg)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLog, CanSetOutputStream)
+TEST_F(TestLog, CanSetOutStream)
 {
     std::stringstream ss;
-    EXPECT_NO_THROW( mc::Log::setOutputStream( &ss ) );
+    EXPECT_NO_THROW( mc::Log::setOutStream( &ss ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLog, CanSetSyslogOutput)
+TEST_F(TestLog, CanSetSyslogOut)
 {
     std::stringstream ss;
-    EXPECT_NO_THROW( mc::Log::setSyslogOutput( false ) );
+    EXPECT_NO_THROW( mc::Log::setSyslogOut( false ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestLog, CanSetVerboseLevel)
+TEST_F(TestLog, CanSetVerbLevel)
 {
     std::stringstream ss;
-    EXPECT_NO_THROW( mc::Log::setVerboseLevel( mc::Log::VerboseLevel::Debug ) );
+    EXPECT_NO_THROW( mc::Log::setVerbLevel( mc::Log::VerboseLevel::Debug ) );
 }

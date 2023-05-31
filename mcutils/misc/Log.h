@@ -90,26 +90,26 @@ public:
      * @brief Sets output stream.
      * @param outputStream output stream
      */
-    static void setOutputStream( std::ostream *outputStream );
+    static void setOutStream( std::ostream *out_stream );
 
     /**
      * @brief Set syslog output status (unix only).
-     * @param syslogOutput syslog output status (true enabled, false disabled)
+     * @param syslog_out syslog output status (true enabled, false disabled)
      */
-    static void setSyslogOutput( bool syslogOutput );
+    static void setSyslogOut( bool syslog_out );
 
     /**
      * @brief Sets verbose level.
      * @param verboseLevel verbose level
      */
-    static void setVerboseLevel( VerboseLevel verboseLevel );
+    static void setVerbLevel( VerboseLevel verb_level );
 
 private:
 
-    std::ostream *_outputStream;    ///< output stream (default std::cout)
-    VerboseLevel _verboseLevel;     ///< verbose level (default Info)
+    std::ostream* out_stream_;      ///< output stream (default std::cout)
+    VerboseLevel  verb_level_;      ///< verbose level (default Info)
 
-    bool _syslogOutput;             ///< specifies if syslog is enabled (default true)
+    bool syslog_out_;               ///< specifies if syslog is enabled (default true)
 
     /**
      * You should use static function instance() due to get refernce
