@@ -68,8 +68,8 @@ public:
      */
     Inertia( double tc = 0.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
-    inline double getTimeConst() const { return _tc; }
+    inline double getValue() const { return y_; }
+    inline double getTimeConst() const { return tc_; }
 
     /**
      * @brief Sets output value
@@ -92,8 +92,8 @@ public:
 
 private:
 
-    double _tc;             ///< time constant
-    double _y;              ///< current value
+    double tc_;             ///< time constant
+    double y_;              ///< current value
 };
 
 } // namespace mc
