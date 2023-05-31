@@ -32,11 +32,11 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Mercator::Mercator( double a, double e )
-    : _a ( a )
-    , _e ( e )
-    , _e2 ( _e*_e )
-    , _max_x ( x( Units::deg2rad( 180.0 ) ) )
-    , _max_y ( y( Units::deg2rad(  85.0 ) ) )
+    : a_ ( a )
+    , e_ ( e )
+    , e2_ ( e_*e_ )
+    , max_x_ ( x( Units::deg2rad( 180.0 ) ) )
+    , max_y_ ( y( Units::deg2rad(  85.0 ) ) )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -44,7 +44,7 @@ Mercator::Mercator( double a, double e )
 double Mercator::lat( double y, double max_error, unsigned int max_iterations )
 {
     // for lat_ts=0 k0=a
-    return t_inv( exp( -y / _a ), max_error, max_iterations );
+    return t_inv( exp( -y / a_ ), max_error, max_iterations );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,7 +52,7 @@ double Mercator::lat( double y, double max_error, unsigned int max_iterations )
 double Mercator::lon( double x )
 {
     // for lat_ts=0 k0=a
-    return x / _a;
+    return x / a_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ double Mercator::lon( double x )
 double Mercator::x( double lon )
 {
     // for lat_ts=0 k0=a
-    return _a * lon;
+    return a_ * lon;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,16 +68,16 @@ double Mercator::x( double lon )
 double Mercator::y( double lat )
 {
     // for lat_ts=0 k0=a
-    return _a * log( t( lat ) );
+    return a_ * log( t( lat ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 double Mercator::t( double lat )
 {
-    double e_sinLat = _e * sin( lat );
+    double e_sinLat = e_ * sin( lat );
     return tan( M_PI_4 + 0.5 * lat ) * pow( ( 1.0 - e_sinLat ) / ( 1.0 + e_sinLat ),
-                                              0.5 * _e );
+                                              0.5 * e_ );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,14 +85,14 @@ double Mercator::t( double lat )
 double Mercator::t_inv( double t, double max_error, unsigned int max_iterations )
 {
     double lat = M_PI_2 - 2.0 * atan( t );
-    double ex = 0.5 * _e;
+    double ex = 0.5 * e_;
     double er = 1.0e16;
 
     unsigned int iteration = 0;
 
     while ( er > max_error && iteration < max_iterations )
     {
-        double e_sinLat = _e * sin( lat );
+        double e_sinLat = e_ * sin( lat );
         double lat_new = M_PI_2 - 2.0
                 * atan( t * pow( ( 1.0 - e_sinLat ) / ( 1.0 + e_sinLat ), ex ) );
 
