@@ -32,7 +32,7 @@ namespace mc
 {
 
 /**
- * @brief First-order lag (inertia) class.
+ * @brief First-order inertia class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )

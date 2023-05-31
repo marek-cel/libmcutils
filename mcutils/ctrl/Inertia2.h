@@ -32,7 +32,7 @@ namespace mc
 {
 
 /**
- * @brief Second-order lag (inertia) class.
+ * @brief Second-order inertia class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
