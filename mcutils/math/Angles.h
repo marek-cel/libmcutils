@@ -82,12 +82,12 @@ public:
      */
     void normalize();
 
-    inline double  phi() const { return _phi; }
-    inline double  tht() const { return _tht; }
-    inline double  psi() const { return _psi; }
-    inline double& phi()       { return _phi; }
-    inline double& tht()       { return _tht; }
-    inline double& psi()       { return _psi; }
+    inline double  phi() const { return phi_; }
+    inline double  tht() const { return tht_; }
+    inline double  psi() const { return psi_; }
+    inline double& phi()       { return phi_; }
+    inline double& tht()       { return tht_; }
+    inline double& psi()       { return psi_; }
 
     /** @brief Sets angles values. */
     void set( double phi, double tht, double psi );
@@ -106,9 +106,9 @@ public:
 
 private:
 
-    double _phi;    ///< [rad] angle of rotation about x-axis
-    double _tht;    ///< [rad] angle of rotation about y-axis
-    double _psi;    ///< [rad] angle of rotation about z-axis
+    double phi_;    ///< [rad] angle of rotation about x-axis
+    double tht_;    ///< [rad] angle of rotation about y-axis
+    double psi_;    ///< [rad] angle of rotation about z-axis
 };
 
 } // namespace mc
