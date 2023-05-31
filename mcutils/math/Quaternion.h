@@ -67,16 +67,16 @@ public:
     Quaternion();
 
     /** @brief Copy constructor. */
-    Quaternion( const Quaternion &quat );
+    Quaternion( const Quaternion& quat );
 
     /** @brief Constructor. */
     Quaternion( double e0, double ex, double ey, double ez );
 
     /** @brief Constructor. */
-    Quaternion( const Angles &angl );
+    Quaternion( const Angles& angl );
 
     /** @brief Constructor. */
-    Quaternion( double angl, const Vector3 &vect );
+    Quaternion( double angl, const Vector3& vect );
 
     /** @brief Destructor. */
     ~Quaternion() = default;
@@ -111,7 +111,7 @@ public:
      * @param lambda free parameter (usually set to a small multiple of the integration time step)
      * @return quaternion derivative
      */
-    Quaternion getDerivative( const Vector3 &omega, double lambda = 0.0 ) const;
+    Quaternion getDerivative( const Vector3& omega, double lambda = 0.0 ) const;
 
     /** @brief Returns inverted quaternion. */
     Quaternion getInverted() const;
@@ -119,14 +119,14 @@ public:
     /** @brief Returns normalized quaternion. */
     Quaternion getNormalized() const;
 
-    inline double  e0() const { return _e0; }
-    inline double  ex() const { return _ex; }
-    inline double  ey() const { return _ey; }
-    inline double  ez() const { return _ez; }
-    inline double& e0()       { return _e0; }
-    inline double& ex()       { return _ex; }
-    inline double& ey()       { return _ey; }
-    inline double& ez()       { return _ez; }
+    inline double  e0() const { return e0_; }
+    inline double  ex() const { return ex_; }
+    inline double  ey() const { return ey_; }
+    inline double  ez() const { return ez_; }
+    inline double& e0()       { return e0_; }
+    inline double& ex()       { return ex_; }
+    inline double& ey()       { return ey_; }
+    inline double& ez()       { return ez_; }
 
     /** @brief Sets quaternion values. */
     void set( double e0, double ex, double ey, double ez );
@@ -135,28 +135,28 @@ public:
     std::string toString() const;
 
     /** @brief Assignment operator. */
-    Quaternion& operator= ( const Quaternion &quat );
+    Quaternion& operator= ( const Quaternion& quat );
 
     /** @brief Addition operator. */
-    Quaternion operator+ ( const Quaternion &quat ) const;
+    Quaternion operator+ ( const Quaternion& quat ) const;
 
     /** @brief Subtraction operator. */
-    Quaternion operator- ( const Quaternion &quat ) const;
+    Quaternion operator- ( const Quaternion& quat ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Quaternion operator* ( double val ) const;
 
     /** @brief Multiplication operator (by quaternion). */
-    Quaternion operator* ( const Quaternion &quat ) const;
+    Quaternion operator* ( const Quaternion& quat ) const;
 
     /** @brief Division operator (by scalar). */
     Quaternion operator/ ( double val ) const;
 
     /** @brief Unary addition operator. */
-    Quaternion& operator+= ( const Quaternion &quat );
+    Quaternion& operator+= ( const Quaternion& quat );
 
     /** @brief Unary subtraction operator. */
-    Quaternion& operator-= ( const Quaternion &quat );
+    Quaternion& operator-= ( const Quaternion& quat );
 
     /** @brief Unary multiplication operator (by scalar). */
     Quaternion& operator*= ( double val );
@@ -165,17 +165,17 @@ public:
     Quaternion& operator/= ( double val );
 
     /** @brief Equality operator. */
-    bool operator== ( const Quaternion &quat ) const;
+    bool operator== ( const Quaternion& quat ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Quaternion &quat ) const;
+    bool operator!= ( const Quaternion& quat ) const;
 
 private:
 
-    double _e0;     ///< quaternion e0 (w) component
-    double _ex;     ///< quaternion ex (x) component
-    double _ey;     ///< quaternion ey (y) component
-    double _ez;     ///< quaternion ez (z) component
+    double e0_;     ///< quaternion e0 (w) component
+    double ex_;     ///< quaternion ex (x) component
+    double ey_;     ///< quaternion ey (y) component
+    double ez_;     ///< quaternion ez (z) component
 };
 
 ////////////////////////////////////////////////////////////////////////////////
