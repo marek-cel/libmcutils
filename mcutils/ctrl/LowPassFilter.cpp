@@ -33,32 +33,32 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 LowPassFilter::LowPassFilter( double omega, double y )
-    : _omega ( omega )
-    , _tc ( 1.0 / omega )
-    , _y ( y )
+    : omega_ ( omega )
+    , tc_ ( 1.0 / omega )
+    , y_ ( y )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LowPassFilter::setOmega( double omega )
 {
-    _omega = std::max( 0.0, omega );
-    _tc = 1.0 / _omega;
+    omega_ = std::max( 0.0, omega );
+    tc_ = 1.0 / omega_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LowPassFilter::setCutoffFreq( double freq )
 {
-    _omega = 2.0 * M_PI * std::max( 0.0, freq );
-    _tc = 1.0 / _omega;
+    omega_ = 2.0 * M_PI * std::max( 0.0, freq );
+    tc_ = 1.0 / omega_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void LowPassFilter::setValue( double y )
 {
-    _y = y;
+    y_ = y;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ void LowPassFilter::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        _y = _y + ( 1.0 - exp( -dt / _tc ) ) * ( u - _y );
+        y_ = y_ + ( 1.0 - exp( -dt / tc_ ) ) * ( u - y_ );
     }
 }
 

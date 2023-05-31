@@ -50,8 +50,8 @@ public:
      */
     LowPassFilter( double omega = 1.0, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
-    inline double getOmega() const { return _omega; }
+    inline double getValue() const { return y_; }
+    inline double getOmega() const { return omega_; }
 
     /**
      * @brief Sets cutoff angular frequency.
@@ -80,9 +80,9 @@ public:
 
 private:
 
-    double _omega;          ///< [rad/s] cutoff angular frequency
-    double _tc;             ///< time constant
-    double _y;              ///< current value
+    double omega_;          ///< [rad/s] cutoff angular frequency
+    double tc_;             ///< time constant
+    double y_;              ///< current value
 };
 
 } // namespace mc
