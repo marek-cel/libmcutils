@@ -51,9 +51,9 @@ public:
      */
     MovingAverage( unsigned int length = 1, double y = 0.0 );
 
-    inline double getValue() const { return _y; }
+    inline double getValue() const { return y_; }
 
-    inline unsigned int getLength() const { return _length; }
+    inline unsigned int getLength() const { return length_; }
 
     /**
      * @brief Sets length of the sliding window
@@ -70,10 +70,10 @@ public:
 
 private:
 
-    std::deque<double> _fifo;   ///< previous value fifo queue
+    std::deque<double> fifo_;   ///< previous value fifo queue
 
-    unsigned int _length;       ///< length of the sliding window
-    double _y;                  ///< current value
+    unsigned int length_;       ///< length of the sliding window
+    double y_;                  ///< current value
 };
 
 } // namespace mc
