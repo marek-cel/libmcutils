@@ -46,7 +46,7 @@ ECEF::ECEF()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF::ECEF( const ECEF &ecef )
+ECEF::ECEF( const ECEF& ecef )
 {
     copyParams ( ecef );
     copyData   ( ecef );
@@ -54,7 +54,7 @@ ECEF::ECEF( const ECEF &ecef )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF::ECEF( ECEF &&ecef )
+ECEF::ECEF( ECEF&& ecef )
 {
     a_ = std::exchange( ecef.a_, 0.0 );
     f_ = std::exchange( ecef.f_, 0.0 );
@@ -109,7 +109,7 @@ ECEF::~ECEF() {}
 ////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::geo2ecef( double lat, double lon, double alt,
-                     double *x, double *y, double *z ) const
+                     double* x, double* y, double* z ) const
 {
     double sinLat = sin( lat );
     double cosLat = cos( lat );
@@ -136,14 +136,14 @@ Vector3 ECEF::geo2ecef( double lat, double lon, double alt ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 ECEF::geo2ecef( const Geo &geo ) const
+Vector3 ECEF::geo2ecef( const Geo& geo ) const
 {
     return geo2ecef( geo.lat, geo.lon, geo.alt );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::geo2ecef( const Geo &geo, Vector3 *pos_ecef ) const
+void ECEF::geo2ecef( const Geo& geo, Vector3* pos_ecef ) const
 {
     *pos_ecef = geo2ecef( geo );
 }
@@ -151,7 +151,7 @@ void ECEF::geo2ecef( const Geo &geo, Vector3 *pos_ecef ) const
 ////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::ecef2geo( double x, double y, double z,
-                     double *lat, double *lon, double *alt ) const
+                     double* lat, double* lon, double* alt ) const
 {
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
@@ -207,14 +207,14 @@ Geo ECEF::ecef2geo( double x, double y, double z ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Geo ECEF::ecef2geo( const Vector3 &pos_ecef ) const
+Geo ECEF::ecef2geo( const Vector3& pos_ecef ) const
 {
     return ecef2geo( pos_ecef.x(), pos_ecef.y(), pos_ecef.z() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::ecef2geo( const Vector3 &pos_ecef, Geo *pos_geo ) const
+void ECEF::ecef2geo( const Vector3& pos_ecef, Geo* pos_geo ) const
 {
     *pos_geo = ecef2geo( pos_ecef );
 }
@@ -236,35 +236,35 @@ Geo ECEF::getGeoOffset( double heading, double offset_x, double offset_y ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles ECEF::getAngles_NED( const Angles &angles_ecf ) const
+Angles ECEF::getAngles_NED( const Angles& angles_ecf ) const
 {
     return getNED2BAS( Quaternion( angles_ecf ) ).getAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles ECEF::getAngles_ECEF( const Angles &angles_ned ) const
+Angles ECEF::getAngles_ECEF( const Angles& angles_ned ) const
 {
     return getECEF2BAS( Quaternion( angles_ned ) ).getAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion ECEF::getNED2BAS( const Quaternion &att_ecf ) const
+Quaternion ECEF::getNED2BAS( const Quaternion& att_ecf ) const
 {
     return ned2ecef_.getQuaternion() * att_ecf;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion ECEF::getECEF2BAS( const Quaternion &att_ned ) const
+Quaternion ECEF::getECEF2BAS( const Quaternion& att_ned ) const
 {
     return ecef2ned_.getQuaternion() * att_ned;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::setPos_Geo( const Geo &pos_geo )
+void ECEF::setPos_Geo( const Geo& pos_geo )
 {
     pos_geo_.lat = pos_geo.lat;
     pos_geo_.lon = pos_geo.lon;
@@ -276,7 +276,7 @@ void ECEF::setPos_Geo( const Geo &pos_geo )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::setPos_ECEF( const Vector3 &pos_ecef )
+void ECEF::setPos_ECEF( const Vector3& pos_ecef )
 {
     pos_ecef_ = pos_ecef;
 
@@ -286,7 +286,7 @@ void ECEF::setPos_ECEF( const Vector3 &pos_ecef )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF& ECEF::operator= ( const ECEF &ecef )
+ECEF& ECEF::operator= ( const ECEF& ecef )
 {
     copyParams ( ecef );
     copyData   ( ecef );
@@ -295,7 +295,7 @@ ECEF& ECEF::operator= ( const ECEF &ecef )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF& ECEF::operator= ( ECEF &&ecef )
+ECEF& ECEF::operator= ( ECEF&& ecef )
 {
     a_ = std::exchange( ecef.a_, 0.0 );
     f_ = std::exchange( ecef.f_, 0.0 );
@@ -329,7 +329,7 @@ void ECEF::update()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::copyData( const ECEF &ecef )
+void ECEF::copyData( const ECEF& ecef )
 {
     pos_geo_  = ecef.pos_geo_;
     pos_ecef_ = ecef.pos_ecef_;
@@ -342,7 +342,7 @@ void ECEF::copyData( const ECEF &ecef )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::copyParams( const ECEF &ecef )
+void ECEF::copyParams( const ECEF& ecef )
 {
     a_ = ecef.a_;
     f_ = ecef.f_;

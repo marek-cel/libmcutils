@@ -71,13 +71,13 @@ public:
      * @brief Copy constructor.
      * @param ecef object to copy
      */
-    ECEF( const ECEF &ecef );
+    ECEF( const ECEF& ecef );
 
     /**
      * @brief Moving constructor.
      * @param ecef object to move
      */
-    ECEF( ECEF &&ecef );
+    ECEF( ECEF&& ecef );
 
     /**
      * @brief Constructor.
@@ -99,7 +99,7 @@ public:
      * @param z [m] resulting ECEF z-coordinate pointer
      */
     void geo2ecef( double lat, double lon, double alt,
-                   double *x, double *y, double *z ) const;
+                   double* x, double* y, double* z ) const;
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
@@ -115,14 +115,14 @@ public:
      * @param pos_geo [m] geodetic coordinates
      * @return [m] resulting ECEF coordinates vector
      */
-    Vector3 geo2ecef( const Geo &pos_geo ) const;
+    Vector3 geo2ecef( const Geo& pos_geo ) const;
 
     /**
      * @brief Converts geodetic coordinates into ECEF coordinates.
      * @param pos_geo [m] geodetic coordinates
      * @param pos_ecef [m] resulting ECEF coordinates vector pointer
      */
-    void geo2ecef( const Geo &pos_geo, Vector3 *pos_ecef ) const;
+    void geo2ecef( const Geo& pos_geo, Vector3* pos_ecef ) const;
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
@@ -134,7 +134,7 @@ public:
      * @param alt [m] resulting altitude above mean sea level pointer
      */
     void ecef2geo( double x, double y, double z,
-                   double *lat, double *lon, double *alt ) const;
+                   double* lat, double* lon, double* alt ) const;
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
@@ -150,14 +150,14 @@ public:
      * @param pos_ecef [m] ECEF coordinates vector
      * @return resulting geodetic coordinates
      */
-    Geo ecef2geo( const Vector3 &pos_ecef ) const;
+    Geo ecef2geo( const Vector3& pos_ecef ) const;
 
     /**
      * @brief Converts ECEF coordinates into geodetic coordinates.
      * @param pos_ecef [m] ECEF coordinates vector
      * @param pos_geo resulting geodetic coordinates pointer
      */
-    void ecef2geo( const Vector3 &pos_ecef, Geo *pos_geo ) const;
+    void ecef2geo( const Vector3& pos_ecef, Geo* pos_geo ) const;
 
     /**
      * @brief Calculates coordinates moved by the given offset.
@@ -179,11 +179,11 @@ public:
     inline double getEp2 () const { return ep2_; }
     inline double getEp  () const { return ep_;  }
 
-    Angles getAngles_NED  ( const Angles &angles_ecef ) const;
-    Angles getAngles_ECEF ( const Angles &angles_ned  ) const;
+    Angles getAngles_NED  ( const Angles& angles_ecef ) const;
+    Angles getAngles_ECEF ( const Angles& angles_ned  ) const;
 
-    Quaternion getNED2BAS  ( const Quaternion &att_ecef ) const;
-    Quaternion getECEF2BAS ( const Quaternion &att_ned  ) const;
+    Quaternion getNED2BAS  ( const Quaternion& att_ecef ) const;
+    Quaternion getECEF2BAS ( const Quaternion& att_ned  ) const;
 
     inline Geo     getPos_Geo  () const { return pos_geo_;  }
     inline Vector3 getPos_ECEF () const { return pos_ecef_; }
@@ -197,16 +197,16 @@ public:
     inline Matrix3x3 getECEF2NED() const { return ecef2ned_; }
 
     /** */
-    void setPos_Geo( const Geo &pos_geo );
+    void setPos_Geo( const Geo& pos_geo );
 
     /** */
-    void setPos_ECEF( const Vector3 &pos_ecef );
+    void setPos_ECEF( const Vector3& pos_ecef );
 
     /** @brief Assignment operator. */
-    ECEF& operator= ( const ECEF &ecef );
+    ECEF& operator= ( const ECEF& ecef );
 
     /** @brief Moving assignment operator. */
-    ECEF& operator= ( ECEF &&ecef );
+    ECEF& operator= ( ECEF&& ecef );
 
 protected:
 
@@ -235,8 +235,8 @@ protected:
 
 private:
 
-    void copyData( const ECEF &ecef );
-    void copyParams( const ECEF &ecef );
+    void copyData( const ECEF& ecef );
+    void copyParams( const ECEF& ecef );
 
     /**
      * @brief Updates rotation matrices due to position.
