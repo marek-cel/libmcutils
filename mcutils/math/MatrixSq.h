@@ -48,7 +48,7 @@ public:
     {}
 
     /** @brief Copy constructor. */
-    MatrixSq( const MatrixSq<N> &matrix ) :
+    MatrixSq( const MatrixSq<N>& matrix ) :
         Matrix<N, N>( matrix )
     {}
 
@@ -58,7 +58,7 @@ public:
     {}
 
     /** @brief Constructor. */
-    MatrixSq( const char *str ) :
+    MatrixSq( const char* str ) :
         Matrix<N, N>( str )
     {}
 
@@ -91,14 +91,14 @@ public:
     }
 
     /** @brief Assignment operator. */
-    MatrixSq<N>& operator= ( const MatrixSq<N> &matrix )
+    MatrixSq<N>& operator= ( const MatrixSq<N>& matrix )
     {
         std::memcpy( this->items_, matrix.items_, sizeof(this->items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    MatrixSq<N> operator+ ( const MatrixSq<N> &matrix ) const
+    MatrixSq<N> operator+ ( const MatrixSq<N>& matrix ) const
     {
         MatrixSq<N> result( *this );
         result.add( matrix );
@@ -114,7 +114,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    MatrixSq<N> operator- ( const MatrixSq<N> &matrix ) const
+    MatrixSq<N> operator- ( const MatrixSq<N>& matrix ) const
     {
         MatrixSq<N> result( *this );
         result.substract( matrix );
@@ -129,8 +129,8 @@ public:
         return result;
     }
 
-    /** @brief Multiplication operator (by scalar). */
-    MatrixSq<N> operator* ( const MatrixSq<N> &matrix ) const
+    /** @brief Multiplication operator (by matrix). */
+    MatrixSq<N> operator* ( const MatrixSq<N>& matrix ) const
     {
         MatrixSq<N> result( *this );
         multiplyByMatrix( matrix, &result );
@@ -146,14 +146,14 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    MatrixSq<N>& operator+= ( const MatrixSq<N> &matrix )
+    MatrixSq<N>& operator+= ( const MatrixSq<N>& matrix )
     {
         this->add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixSq<N>& operator-= ( const MatrixSq<N> &matrix )
+    MatrixSq<N>& operator-= ( const MatrixSq<N>& matrix )
     {
         this->substract( matrix );
         return (*this);
@@ -180,7 +180,7 @@ protected:
      * @param matrix
      * @param result
      */
-    void multiplyByMatrix( const MatrixSq<N> &matrix, MatrixSq<N> *result ) const
+    void multiplyByMatrix( const MatrixSq<N>& matrix, MatrixSq<N>* result ) const
     {
         for ( unsigned int r = 0; r < N; ++r )
         {
