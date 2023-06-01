@@ -64,7 +64,7 @@ public:
     Matrix3x3();
 
     /** @brief Copy constructor. */
-    Matrix3x3( const Matrix3x3 &matrix );
+    Matrix3x3( const Matrix3x3& matrix );
 
     /** @brief Constructor. */
     Matrix3x3( const double items[] );
@@ -75,13 +75,13 @@ public:
                double zx, double zy, double zz );
 
     /** @brief Constructor. */
-    Matrix3x3( const char *str );
+    Matrix3x3( const char* str );
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Angles &angl );
+    Matrix3x3( const Angles& angl );
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Quaternion &qtrn );
+    Matrix3x3( const Quaternion& qtrn );
 
     /** @brief Destructor. */
     virtual ~Matrix3x3() = default;
@@ -132,34 +132,34 @@ public:
     Matrix3x3 getTransposed() const;
 
     /** @brief Assignment operator. */
-    Matrix3x3& operator= ( const Matrix3x3 &matrix );
+    Matrix3x3& operator= ( const Matrix3x3& matrix );
 
     /** @brief Addition operator. */
-    Matrix3x3 operator+ ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator+ ( const Matrix3x3& matrix ) const;
 
     /** @brief Negation operator. */
     Matrix3x3 operator- () const;
 
     /** @brief Subtraction operator. */
-    Matrix3x3 operator- ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator- ( const Matrix3x3& matrix ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Matrix3x3 operator* ( double value ) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix3x3 operator* ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator* ( const Matrix3x3& matrix ) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector3 operator* ( const Vector3 &vect ) const;
+    Vector3 operator* ( const Vector3& vect ) const;
 
     /** @brief Division operator (by scalar). */
     Matrix3x3 operator/ ( double value ) const;
 
     /** @brief Unary addition operator. */
-    Matrix3x3& operator+= ( const Matrix3x3 &matrix );
+    Matrix3x3& operator+= ( const Matrix3x3& matrix );
 
     /** @brief Unary subtraction operator. */
-    Matrix3x3& operator-= ( const Matrix3x3 &matrix );
+    Matrix3x3& operator-= ( const Matrix3x3& matrix );
 
     /** @brief Unary multiplication operator (by scalar). */
     Matrix3x3& operator*= ( double value );
@@ -185,7 +185,7 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix3x3 operator* ( double value, const Matrix3x3 &matrix )
+inline Matrix3x3 operator* ( double value, const Matrix3x3& matrix )
 {
     return ( matrix * value );
 }

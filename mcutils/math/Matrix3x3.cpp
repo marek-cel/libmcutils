@@ -58,7 +58,7 @@ Matrix3x3::Matrix3x3()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const Matrix3x3 &mtrx )
+Matrix3x3::Matrix3x3( const Matrix3x3& mtrx )
     : MatrixSq<3>( mtrx )
 
     , xx_ ( items_[ 0 ] )
@@ -110,7 +110,7 @@ Matrix3x3::Matrix3x3( double xx, double xy, double xz,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const char *str )
+Matrix3x3::Matrix3x3( const char* str )
     : MatrixSq<3>( str )
 
     , xx_ ( items_[ 0 ] )
@@ -126,7 +126,7 @@ Matrix3x3::Matrix3x3( const char *str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const Angles &angl )
+Matrix3x3::Matrix3x3( const Angles& angl )
     : Matrix3x3()
 {
     double sinPhi = sin( angl.phi() );
@@ -156,7 +156,7 @@ Matrix3x3::Matrix3x3( const Angles &angl )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const Quaternion &qtrn )
+Matrix3x3::Matrix3x3( const Quaternion& qtrn )
     : Matrix3x3()
 {
     double e0 = qtrn.e0();
@@ -292,7 +292,7 @@ Matrix3x3 Matrix3x3::getTransposed() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator= ( const Matrix3x3 &mtrx )
+Matrix3x3& Matrix3x3::operator= ( const Matrix3x3& mtrx )
 {
     std::memcpy( items_, mtrx.items_, sizeof(items_) );
     return (*this);
@@ -300,7 +300,7 @@ Matrix3x3& Matrix3x3::operator= ( const Matrix3x3 &mtrx )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator+ ( const Matrix3x3 &mtrx ) const
+Matrix3x3 Matrix3x3::operator+ ( const Matrix3x3& mtrx ) const
 {
     Matrix3x3 result( *this );
     result.add( mtrx );
@@ -318,7 +318,7 @@ Matrix3x3 Matrix3x3::operator- () const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator- ( const Matrix3x3 &mtrx ) const
+Matrix3x3 Matrix3x3::operator- ( const Matrix3x3& mtrx ) const
 {
     Matrix3x3 result( *this );
     result.substract( mtrx );
@@ -336,7 +336,7 @@ Matrix3x3 Matrix3x3::operator* ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator* ( const Matrix3x3 &matrix ) const
+Matrix3x3 Matrix3x3::operator* ( const Matrix3x3& matrix ) const
 {
     Matrix3x3 result;
     multiplyByMatrix( matrix, &result );
@@ -345,7 +345,7 @@ Matrix3x3 Matrix3x3::operator* ( const Matrix3x3 &matrix ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Matrix3x3::operator* ( const Vector3 &vect ) const
+Vector3 Matrix3x3::operator* ( const Vector3& vect ) const
 {
     Vector3 result;
     multiplyByVector( vect, &result );
@@ -363,7 +363,7 @@ Matrix3x3 Matrix3x3::operator/ ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator+= ( const Matrix3x3 &matrix )
+Matrix3x3& Matrix3x3::operator+= ( const Matrix3x3& matrix )
 {
     add( matrix );
     return (*this);
@@ -371,7 +371,7 @@ Matrix3x3& Matrix3x3::operator+= ( const Matrix3x3 &matrix )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator-= ( const Matrix3x3 &matrix )
+Matrix3x3& Matrix3x3::operator-= ( const Matrix3x3& matrix )
 {
     substract( matrix );
     return (*this);
