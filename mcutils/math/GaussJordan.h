@@ -52,8 +52,8 @@ namespace mc { namespace GaussJordan
  * </ul>
  */
 template <unsigned int SIZE>
-Result solve( const Matrix<SIZE, SIZE> &mtr, const Vector<SIZE> &rhs,
-              Vector<SIZE> *x, double eps = 1.0e-14 )
+Result solve( const Matrix<SIZE, SIZE>& mtr, const Vector<SIZE>& rhs,
+              Vector<SIZE>* x, double eps = 1.0e-14 )
 {
     Matrix<SIZE, SIZE> mtr_temp = mtr;
     Vector<SIZE> rhs_temp = rhs;
