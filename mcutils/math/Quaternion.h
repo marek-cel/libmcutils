@@ -181,7 +181,7 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Quaternion operator* ( double val, const Quaternion &quat )
+inline Quaternion operator* ( double val, const Quaternion& quat )
 {
     return quat * val;
 }

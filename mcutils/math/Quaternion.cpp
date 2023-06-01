@@ -303,7 +303,7 @@ std::string Quaternion::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator= ( const Quaternion &quat )
+Quaternion& Quaternion::operator= ( const Quaternion& quat )
 {
     e0_ = quat.e0_;
     ex_ = quat.ex_;
