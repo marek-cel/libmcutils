@@ -59,7 +59,7 @@ public:
     {}
 
     /** @brief Copy constructor. */
-    Matrix( const Matrix<ROWS, COLS> &matrix )
+    Matrix( const Matrix<ROWS, COLS>& matrix )
         : rows_ ( ROWS )
         , cols_ ( COLS )
         , size_ ( ROWS * COLS )
@@ -77,7 +77,7 @@ public:
     }
 
     /** @brief Constructor. */
-    Matrix( const char *str )
+    Matrix( const char* str )
         : rows_ ( ROWS )
         , cols_ ( COLS )
         , size_ ( ROWS * COLS )
@@ -136,7 +136,7 @@ public:
     }
 
     /** @brief Sets matrix items from given array. */
-    void setArray( const double *items )
+    void setArray( const double* items )
     {
         std::memcpy( items_, items, sizeof(items_) );
     }
@@ -216,14 +216,14 @@ public:
     }
 
     /** @brief Assignment operator. */
-    Matrix<ROWS, COLS>& operator= ( const Matrix<ROWS, COLS> &matrix )
+    Matrix<ROWS, COLS>& operator= ( const Matrix<ROWS, COLS>& matrix )
     {
         std::memcpy( items_, matrix.items_, sizeof(items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    Matrix<ROWS, COLS> operator+ ( const Matrix<ROWS, COLS> &matrix ) const
+    Matrix<ROWS, COLS> operator+ ( const Matrix<ROWS, COLS>& matrix ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.add( matrix );
@@ -239,7 +239,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    Matrix<ROWS, COLS> operator- ( const Matrix<ROWS, COLS> &matrix ) const
+    Matrix<ROWS, COLS> operator- ( const Matrix<ROWS, COLS>& matrix ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.substract( matrix );
@@ -255,7 +255,7 @@ public:
     }
 
     /** @brief Multiplication operator (by vector). */
-    Vector<ROWS> operator* ( const Vector<COLS> &vect ) const
+    Vector<ROWS> operator* ( const Vector<COLS>& vect ) const
     {
         Vector<ROWS> result;
         multiplyByVector( vect, &result );
@@ -271,14 +271,14 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    Matrix<ROWS, COLS>& operator+= ( const Matrix<ROWS, COLS> &matrix )
+    Matrix<ROWS, COLS>& operator+= ( const Matrix<ROWS, COLS>& matrix )
     {
         add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Matrix<ROWS, COLS>& operator-= ( const Matrix<ROWS, COLS> &matrix )
+    Matrix<ROWS, COLS>& operator-= ( const Matrix<ROWS, COLS>& matrix )
     {
         substract( matrix );
         return (*this);
@@ -299,7 +299,7 @@ public:
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Matrix<ROWS, COLS> &matrix ) const
+    bool operator== ( const Matrix<ROWS, COLS>& matrix ) const
     {
         bool result = true;
 
@@ -312,7 +312,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Matrix<ROWS, COLS> &matrix ) const
+    bool operator!= ( const Matrix<ROWS, COLS>& matrix ) const
     {
         return !( (*this) == matrix );
     }
@@ -326,7 +326,7 @@ protected:
     double items_[ ROWS * COLS ];   ///< matrix items
 
     /** @brief Adds matrix. */
-    void add( const Matrix<ROWS, COLS> &matrix )
+    void add( const Matrix<ROWS, COLS>& matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -344,7 +344,7 @@ protected:
     }
 
     /** @brief Substracts matrix. */
-    void substract( const Matrix<ROWS, COLS> &matrix )
+    void substract( const Matrix<ROWS, COLS>& matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -362,7 +362,7 @@ protected:
     }
 
     /** @brief Multiplies by vector. */
-    void multiplyByVector( const Vector<COLS> &vect, Vector<ROWS> *result ) const
+    void multiplyByVector( const Vector<COLS>& vect, Vector<ROWS>* result ) const
     {
         for ( unsigned int r = 0; r < rows_; ++r )
         {
