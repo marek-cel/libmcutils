@@ -35,7 +35,7 @@ Vector4::Vector4()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4::Vector4( const Vector4 &vect )
+Vector4::Vector4( const Vector4& vect )
     : Vector<4>( vect )
 {}
 
@@ -47,7 +47,7 @@ Vector4::Vector4( const double items[] )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4::Vector4( const char *str )
+Vector4::Vector4( const char* str )
     : Vector<4>( str )
 {}
 
@@ -64,7 +64,7 @@ Vector4 Vector4::getNormalized() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator= ( const Vector4 &vect )
+Vector4& Vector4::operator= ( const Vector4& vect )
 {
     setArray( vect.items_ );
     return (*this);
@@ -72,7 +72,7 @@ Vector4& Vector4::operator= ( const Vector4 &vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator+ ( const Vector4 &vect ) const
+Vector4 Vector4::operator+ ( const Vector4& vect ) const
 {
     Vector4 result( *this );
     result.add( vect );
@@ -90,7 +90,7 @@ Vector4 Vector4::operator- () const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator- ( const Vector4 &vect ) const
+Vector4 Vector4::operator- ( const Vector4& vect ) const
 {
     Vector4 result( *this );
     result.substract( vect );
@@ -117,7 +117,7 @@ Vector4 Vector4::operator/ ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator+= ( const Vector4 &vect )
+Vector4& Vector4::operator+= ( const Vector4& vect )
 {
     add( vect );
     return (*this);
@@ -125,7 +125,7 @@ Vector4& Vector4::operator+= ( const Vector4 &vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator-= ( const Vector4 &vect )
+Vector4& Vector4::operator-= ( const Vector4& vect )
 {
     substract( vect );
     return (*this);
