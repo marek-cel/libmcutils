@@ -35,7 +35,7 @@ Matrix6x6::Matrix6x6()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6::Matrix6x6( const Matrix6x6 &mtrx )
+Matrix6x6::Matrix6x6( const Matrix6x6& mtrx )
     : MatrixSq<6>( mtrx )
 {}
 
@@ -47,7 +47,7 @@ Matrix6x6::Matrix6x6( const double items[] )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6::Matrix6x6( const char *str )
+Matrix6x6::Matrix6x6( const char* str )
     : MatrixSq<6>( str )
 {}
 
@@ -62,7 +62,7 @@ Matrix6x6 Matrix6x6::getTransposed() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator= ( const Matrix6x6 &matrix )
+Matrix6x6& Matrix6x6::operator= ( const Matrix6x6& matrix )
 {
     setArray( matrix.items_ );
     return (*this);
@@ -70,7 +70,7 @@ Matrix6x6& Matrix6x6::operator= ( const Matrix6x6 &matrix )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator+ ( const Matrix6x6 &matrix ) const
+Matrix6x6 Matrix6x6::operator+ ( const Matrix6x6& matrix ) const
 {
     Matrix6x6 result( *this );
     result.add( matrix );
@@ -88,7 +88,7 @@ Matrix6x6 Matrix6x6::operator- () const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator- ( const Matrix6x6 &matrix ) const
+Matrix6x6 Matrix6x6::operator- ( const Matrix6x6& matrix ) const
 {
     Matrix6x6 result( *this );
     result.substract( matrix );
@@ -106,7 +106,7 @@ Matrix6x6 Matrix6x6::operator* ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator* ( const Matrix6x6 &matrix ) const
+Matrix6x6 Matrix6x6::operator* ( const Matrix6x6& matrix ) const
 {
     Matrix6x6 result;
     multiplyByMatrix( matrix, &result );
@@ -115,7 +115,7 @@ Matrix6x6 Matrix6x6::operator* ( const Matrix6x6 &matrix ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Matrix6x6::operator* ( const Vector6 &vect ) const
+Vector6 Matrix6x6::operator* ( const Vector6& vect ) const
 {
     Vector6 result;
     multiplyByVector( vect, &result );
@@ -133,7 +133,7 @@ Matrix6x6 Matrix6x6::operator/ ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator+= ( const Matrix6x6 &matrix )
+Matrix6x6& Matrix6x6::operator+= ( const Matrix6x6& matrix )
 {
     add( matrix );
     return (*this);
@@ -141,7 +141,7 @@ Matrix6x6& Matrix6x6::operator+= ( const Matrix6x6 &matrix )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator-= ( const Matrix6x6 &matrix )
+Matrix6x6& Matrix6x6::operator-= ( const Matrix6x6& matrix )
 {
     substract( matrix );
     return (*this);

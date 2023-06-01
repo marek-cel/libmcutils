@@ -45,13 +45,13 @@ public:
     Matrix6x6();
 
     /** @brief Copy constructor. */
-    Matrix6x6( const Matrix6x6 &matrix );
+    Matrix6x6( const Matrix6x6& matrix );
 
     /** @brief Constructor. */
     Matrix6x6( const double items[] );
 
     /** @brief Constructor. */
-    Matrix6x6( const char *str );
+    Matrix6x6( const char* str );
 
     /** @brief Destructor. */
     virtual ~Matrix6x6() = default;
@@ -60,34 +60,34 @@ public:
     Matrix6x6 getTransposed() const;
 
     /** @brief Assignment operator. */
-    Matrix6x6& operator= ( const Matrix6x6 &matrix );
+    Matrix6x6& operator= ( const Matrix6x6& matrix );
 
     /** @brief Addition operator. */
-    Matrix6x6 operator+ ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator+ ( const Matrix6x6& matrix ) const;
 
     /** @brief Negation operator. */
     Matrix6x6 operator- () const;
 
     /** @brief Subtraction operator. */
-    Matrix6x6 operator- ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator- ( const Matrix6x6& matrix ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Matrix6x6 operator* ( double value ) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix6x6 operator* ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator* ( const Matrix6x6& matrix ) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector6 operator* ( const Vector6 &vect ) const;
+    Vector6 operator* ( const Vector6& vect ) const;
 
     /** @brief Division operator (by scalar). */
     Matrix6x6 operator/ ( double value ) const;
 
     /** @brief Unary addition operator. */
-    Matrix6x6& operator+= ( const Matrix6x6 &matrix );
+    Matrix6x6& operator+= ( const Matrix6x6& matrix );
 
     /** @brief Unary subtraction operator. */
-    Matrix6x6& operator-= ( const Matrix6x6 &matrix );
+    Matrix6x6& operator-= ( const Matrix6x6& matrix );
 
     /** @brief Unary multiplication operator (by scalar). */
     Matrix6x6& operator*= ( double value );
@@ -99,7 +99,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Binary multiplication by scalar operator. */
-inline Matrix6x6 operator* ( double value, const Matrix6x6 &matrix )
+inline Matrix6x6 operator* ( double value, const Matrix6x6& matrix )
 {
     return ( matrix * value );
 }
