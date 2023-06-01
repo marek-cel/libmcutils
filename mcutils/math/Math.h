@@ -40,7 +40,7 @@ namespace mc { namespace Math
  * @param val variable to test
  * @return true if val greater than min and less than max, false otherwise
  */
-MCUTILSAPI inline bool isInside( const double &min, const double &max, const double &val )
+MCUTILSAPI inline bool isInside( const double& min, const double& max, const double& val )
 {
     return min <= val && val <= max;
 }
@@ -52,7 +52,7 @@ MCUTILSAPI inline bool isInside( const double &min, const double &max, const dou
  * @param val variable to test
  * @return true if val greater than min and less than max, false otherwise
  */
-MCUTILSAPI inline bool isOutside( const double &min, const double &max, const double &val )
+MCUTILSAPI inline bool isOutside( const double& min, const double& max, const double& val )
 {
     return min > val || val > max;
 }
@@ -62,7 +62,7 @@ MCUTILSAPI inline bool isOutside( const double &min, const double &max, const do
  * @param val argument
  * @return power 2 (square)
  */
-MCUTILSAPI inline double pow2( const double &val )
+MCUTILSAPI inline double pow2( const double& val )
 {
     return val * val;
 }
@@ -72,7 +72,7 @@ MCUTILSAPI inline double pow2( const double &val )
  * @param val argument
  * @return power 3 (cube)
  */
-MCUTILSAPI inline double pow3( const double &val )
+MCUTILSAPI inline double pow3( const double& val )
 {
     return val * val * val;
 }
@@ -82,7 +82,7 @@ MCUTILSAPI inline double pow3( const double &val )
  * @param val argument
  * @return power 4
  */
-MCUTILSAPI inline double pow4( const double &val )
+MCUTILSAPI inline double pow4( const double& val )
 {
     return val * val * val * val;
 }
@@ -92,7 +92,7 @@ MCUTILSAPI inline double pow4( const double &val )
  * @param val argument
  * @return power 5
  */
-MCUTILSAPI inline double pow5( const double &val )
+MCUTILSAPI inline double pow5( const double& val )
 {
     return val * val * val * val * val;
 }
@@ -104,7 +104,7 @@ MCUTILSAPI inline double pow5( const double &val )
  * @param val variable to test
  * @return min if val less than min, max if val larger than max, val if val larger than min and less than max
  */
-MCUTILSAPI inline double satur( const double &min, const double &max, const double &val )
+MCUTILSAPI inline double satur( const double& min, const double& max, const double& val )
 {
     if      ( val < min ) return min;
     else if ( val > max ) return max;
@@ -117,7 +117,7 @@ MCUTILSAPI inline double satur( const double &min, const double &max, const doub
  * @param val input value
  * @return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
-MCUTILSAPI inline double sign( const double &val )
+MCUTILSAPI inline double sign( const double& val )
 {
     if      ( val < 0.0 ) return -1.0;
     else if ( val > 0.0 ) return  1.0;
@@ -149,7 +149,7 @@ MCUTILSAPI inline float sineWave( float x )
  *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
+MCUTILSAPI inline double smoothstep( const double& xmin, const double& xmax,
                                      double x )
 {
     x = satur( 0.0, 1.0, (x - xmin) / (xmax - xmin) );
@@ -185,8 +185,8 @@ MCUTILSAPI inline double smoothstep( double x )
  *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
  * </ul>
  */
-MCUTILSAPI inline double smoothstep( const double &xmin, const double &xmax,
-                                     const double &ymin, const double &ymax,
+MCUTILSAPI inline double smoothstep( const double& xmin, const double& xmax,
+                                     const double& ymin, const double& ymax,
                                      double x )
 {
     return smoothstep( xmin, xmax, x ) * ( ymax - ymin ) + ymin;
