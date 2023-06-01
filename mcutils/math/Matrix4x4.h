@@ -45,13 +45,13 @@ public:
     Matrix4x4();
 
     /** @brief Copy constructor. */
-    Matrix4x4( const Matrix4x4 &matrix );
+    Matrix4x4( const Matrix4x4& matrix );
 
     /** @brief Constructor. */
     Matrix4x4( const double items[] );
 
     /** @brief Constructor. */
-    Matrix4x4( const char *str );
+    Matrix4x4( const char* str );
 
     /** @brief Destructor. */
     virtual ~Matrix4x4() = default;
@@ -60,34 +60,34 @@ public:
     Matrix4x4 getTransposed() const;
 
     /** @brief Assignment operator. */
-    Matrix4x4& operator= ( const Matrix4x4 &matrix );
+    Matrix4x4& operator= ( const Matrix4x4& matrix );
 
     /** @brief Addition operator. */
-    Matrix4x4 operator+ ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator+ ( const Matrix4x4& matrix ) const;
 
     /** @brief Negation operator. */
     Matrix4x4 operator- () const;
 
     /** @brief Subtraction operator. */
-    Matrix4x4 operator- ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator- ( const Matrix4x4& matrix ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Matrix4x4 operator* ( double value ) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix4x4 operator* ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator* ( const Matrix4x4& matrix ) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector4 operator* ( const Vector4 &vect ) const;
+    Vector4 operator* ( const Vector4& vect ) const;
 
     /** @brief Division operator (by scalar). */
     Matrix4x4 operator/ ( double value ) const;
 
     /** @brief Unary addition operator. */
-    Matrix4x4& operator+= ( const Matrix4x4 &matrix );
+    Matrix4x4& operator+= ( const Matrix4x4& matrix );
 
     /** @brief Unary subtraction operator. */
-    Matrix4x4& operator-= ( const Matrix4x4 &matrix );
+    Matrix4x4& operator-= ( const Matrix4x4& matrix );
 
     /** @brief Unary multiplication operator (by scalar). */
     Matrix4x4& operator*= ( double value );
@@ -99,7 +99,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix4x4 operator* ( double value, const Matrix4x4 &matrix )
+inline Matrix4x4 operator* ( double value, const Matrix4x4& matrix )
 {
     return ( matrix * value );
 }
