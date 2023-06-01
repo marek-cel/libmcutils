@@ -31,7 +31,7 @@ namespace mc { namespace Units
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Units::Converter getUnitConverter( const char *name )
+Units::Converter getUnitConverter( const char* name )
 {
     // angle
     if ( 0 == String::icompare( name, "rad" ) )

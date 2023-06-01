@@ -84,7 +84,7 @@ using Converter = double (*)(double);
  *   <li>Thrust Specific fuel consumption: g/kNs (grams per kilonewton-socond)</li>
  * </ul>
  */
-MCUTILSAPI Converter getUnitConverter( const char *name );
+MCUTILSAPI Converter getUnitConverter( const char* name );
 
 ////////////////////////////////////////////////////////////////////////////////
 // DUMMY
