@@ -44,13 +44,13 @@ public:
     Vector6();
 
     /** @brief Copy constructor. */
-    Vector6( const Vector6 &vect );
+    Vector6( const Vector6& vect );
 
     /** @brief Constructor. */
     Vector6( const double items[] );
 
     /** @brief Constructor. */
-    Vector6( const char *str );
+    Vector6( const char* str );
 
     /** @brief Destructor. */
     virtual ~Vector6() = default;
@@ -59,16 +59,16 @@ public:
     Vector6 getNormalized() const;
 
     /** @brief Assignment operator. */
-    Vector6& operator= ( const Vector6 &vect );
+    Vector6& operator= ( const Vector6& vect );
 
     /** @brief Addition operator. */
-    Vector6 operator+ ( const Vector6 &vect ) const;
+    Vector6 operator+ ( const Vector6& vect ) const;
 
     /** @brief Negation operator. */
     Vector6 operator- () const;
 
     /** @brief Subtraction operator. */
-    Vector6 operator- ( const Vector6 &vect ) const;
+    Vector6 operator- ( const Vector6& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Vector6 operator* ( double value ) const;
@@ -77,10 +77,10 @@ public:
     Vector6 operator/ ( double value ) const;
 
     /** @brief Unary addition operator. */
-    Vector6& operator+= ( const Vector6 &vect );
+    Vector6& operator+= ( const Vector6& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector6& operator-= ( const Vector6 &vect );
+    Vector6& operator-= ( const Vector6& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
     Vector6& operator*= ( double value );
@@ -93,7 +93,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector6 operator* ( double value, const Vector6 & vect )
+inline Vector6 operator* ( double value, const Vector6& vect )
 {
     return ( vect * value );
 }
