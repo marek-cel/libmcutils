@@ -14,16 +14,26 @@ fi
 
 rm -f coverage_full.info
 rm -f coverage.info
+rm -f coverage_summary.txt
+
 rm -r -f coverage-report
+
 mapfile -t exclude < lcov_exclude.txt
+
 lcov --capture  \
     --base-directory $BASE_DIR \
     --no-external \
     --directory $BUILD_DIR \
     --output-file coverage_full.info
+
 lcov --remove coverage_full.info \
     ${exclude[@]} \
     --output-file coverage.info
+
+rm -f coverage_full.info
+
+lcov --summary coverage.info > coverage_summary.txt
+
 genhtml coverage.info \
     --legend \
     --function-coverage \
