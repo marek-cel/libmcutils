@@ -47,7 +47,7 @@ namespace mc
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::e( const char *format, ... )
+void Log::e( const char* format, ... )
 {
     va_list args;
     va_start( args, format );
@@ -57,7 +57,7 @@ void Log::e( const char *format, ... )
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::w( const char *format, ... )
+void Log::w( const char* format, ... )
 {
     va_list args;
     va_start( args, format );
@@ -67,7 +67,7 @@ void Log::w( const char *format, ... )
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::i( const char *format, ... )
+void Log::i( const char* format, ... )
 {
     va_list args;
     va_start( args, format );
@@ -77,7 +77,7 @@ void Log::i( const char *format, ... )
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::d( const char *format, ... )
+void Log::d( const char* format, ... )
 {
     va_list args;
     va_start( args, format );
@@ -94,7 +94,7 @@ std::ostream& Log::out()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::setOutStream( std::ostream *out_stream )
+void Log::setOutStream( std::ostream* out_stream )
 {
     instance()->out_stream_ = out_stream;
 }
@@ -123,7 +123,7 @@ Log::Log()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::print( VerboseLevel level, const char *format, va_list args )
+void Log::print( VerboseLevel level, const char* format, va_list args )
 {
     if ( level <= verb_level_
 #   ifdef _LINUX_
@@ -154,8 +154,6 @@ void Log::print( VerboseLevel level, const char *format, va_list args )
             case VerboseLevel::Info    : levelTag = "INFO";    break;
             case VerboseLevel::Debug   : levelTag = "DEBUG";   break;
         }
-
-
 
         if ( level <= verb_level_ )
         {

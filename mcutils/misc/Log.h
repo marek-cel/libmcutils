@@ -41,7 +41,7 @@ namespace mc
  */
 class MCUTILSAPI Log : private Singleton<Log>
 {
-    friend class Singleton< Log >;
+    friend class Singleton<Log>;
 
 public:
 
@@ -60,25 +60,25 @@ public:
      * @brief Prints error log message.
      * @param format message format
      */
-    static void e( const char *format, ... );
+    static void e( const char* format, ... );
 
     /**
      * @brief Prints warning log message.
      * @param format message format
      */
-    static void w( const char *format, ... );
+    static void w( const char* format, ... );
 
     /**
      * @brief Prints info log message.
      * @param format message format
      */
-    static void i( const char *format, ... );
+    static void i( const char* format, ... );
 
     /**
      * @brief Prints debug log message.
      * @param format message format
      */
-    static void d( const char *format, ... );
+    static void d( const char* format, ... );
 
     /**
      * @brief Gets output stream.
@@ -90,7 +90,7 @@ public:
      * @brief Sets output stream.
      * @param outputStream output stream
      */
-    static void setOutStream( std::ostream *out_stream );
+    static void setOutStream( std::ostream* out_stream );
 
     /**
      * @brief Set syslog output status (unix only).
@@ -122,7 +122,7 @@ private:
      * @param level verbose level
      * @param format message format
      */
-    void print( VerboseLevel level, const char *format, va_list args );
+    void print( VerboseLevel level, const char* format, va_list args );
 
     std::string timestamp();
 };
