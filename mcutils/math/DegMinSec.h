@@ -44,7 +44,7 @@ public:
     DegMinSec();
 
     /** @brief Copy constructor. */
-    DegMinSec( const DegMinSec &dms );
+    DegMinSec( const DegMinSec& dms );
 
     /**
      * @brief Constructor.
@@ -78,13 +78,13 @@ public:
     std::string toString() const;
 
     /** @brief Assignment operator. */
-    DegMinSec& operator= ( const DegMinSec &dms );
+    DegMinSec& operator= ( const DegMinSec& dms );
 
     /** @brief Equality operator. */
-    bool operator== ( const DegMinSec &dms ) const;
+    bool operator== ( const DegMinSec& dms ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const DegMinSec &dms ) const;
+    bool operator!= ( const DegMinSec& dms ) const;
 
 private:
 

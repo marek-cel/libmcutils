@@ -47,7 +47,7 @@ DegMinSec::DegMinSec()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-DegMinSec::DegMinSec( const DegMinSec &dms )
+DegMinSec::DegMinSec( const DegMinSec& dms )
 {
     angle_ = dms.angle_;
 
@@ -106,7 +106,7 @@ std::string DegMinSec::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-DegMinSec& DegMinSec::operator= ( const DegMinSec &dms )
+DegMinSec& DegMinSec::operator= ( const DegMinSec& dms )
 {
     angle_ = dms.angle_;
 
@@ -119,7 +119,7 @@ DegMinSec& DegMinSec::operator= ( const DegMinSec &dms )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool DegMinSec::operator== ( const DegMinSec &dms ) const
+bool DegMinSec::operator== ( const DegMinSec& dms ) const
 {
     return ( ( deg_ == dms.deg_ )
           && ( min_ == dms.min_ )
@@ -128,7 +128,7 @@ bool DegMinSec::operator== ( const DegMinSec &dms ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool DegMinSec::operator!= ( const DegMinSec &dms ) const
+bool DegMinSec::operator!= ( const DegMinSec& dms ) const
 {
     return !( (*this) == dms );
 }
