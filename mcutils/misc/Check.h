@@ -42,7 +42,7 @@ namespace mc
  * @param val double precision value to test
  * @return function returns TRUE if tested value is Infinite
  */
-MCUTILSAPI inline bool isInf( const double &val )
+MCUTILSAPI inline bool isInf( const double& val )
 {
 #   ifdef _MSC_VER
     return !( _finite( val ) );
@@ -56,7 +56,7 @@ MCUTILSAPI inline bool isInf( const double &val )
  * @param val double precision value to test
  * @return function returns TRUE if tested value is NaN
  */
-MCUTILSAPI inline bool isNaN( const double &val )
+MCUTILSAPI inline bool isNaN( const double& val )
 {
     return ( val != val );
 }
@@ -66,7 +66,7 @@ MCUTILSAPI inline bool isNaN( const double &val )
  * @param val double precision value to test
  * @return function returns FALSE if tested value is Infinite or NaN
  */
-MCUTILSAPI inline bool isValid( const double &val )
+MCUTILSAPI inline bool isValid( const double& val )
 {
     return !( isNaN( val ) || isInf( val ) );
 }
