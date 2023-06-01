@@ -63,7 +63,7 @@ public:
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    void integrate( double step, VectorN *vect ) override;
+    void integrate( double step, VectorN* vect ) override;
 
 private:
 

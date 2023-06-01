@@ -36,7 +36,7 @@ RungeKutta4::RungeKutta4( Fun fun )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void RungeKutta4::integrate( double step, VectorN *vect )
+void RungeKutta4::integrate( double step, VectorN* vect )
 {
     xt_ = (*vect);
 
