@@ -61,7 +61,7 @@ public:
     {}
 
     /** @brief Copy constructor. */
-    Vector( const Vector<SIZE> &vect )
+    Vector( const Vector<SIZE>& vect )
         : size_ ( SIZE )
     {
         std::memcpy( items_, vect.items_, sizeof(items_) );
@@ -75,7 +75,7 @@ public:
     }
 
     /** @brief Constructor. */
-    Vector( const char *str )
+    Vector( const char* str )
         : size_ ( SIZE )
     {
         double items[ SIZE ];
@@ -243,14 +243,14 @@ public:
     }
 
     /** @brief Assignment operator. */
-    Vector<SIZE>& operator= ( const Vector<SIZE> &vect )
+    Vector<SIZE>& operator= ( const Vector<SIZE>& vect )
     {
         std::memcpy( items_, vect.items_, sizeof(items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    Vector<SIZE> operator+ ( const Vector<SIZE> &vect ) const
+    Vector<SIZE> operator+ ( const Vector<SIZE>& vect ) const
     {
         Vector<SIZE> result( *this );
         result.add( vect );
@@ -266,7 +266,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    Vector<SIZE> operator- ( const Vector<SIZE> &vect ) const
+    Vector<SIZE> operator- ( const Vector<SIZE>& vect ) const
     {
         Vector<SIZE> result( *this );
         result.substract( vect );
@@ -282,7 +282,7 @@ public:
     }
 
     /** @brief Dot product operator. */
-    double operator* ( const Vector<SIZE> &vect ) const
+    double operator* ( const Vector<SIZE>& vect ) const
     {
         double result = 0.0;
 
@@ -303,14 +303,14 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    Vector<SIZE>& operator+= ( const Vector<SIZE> &vect )
+    Vector<SIZE>& operator+= ( const Vector<SIZE>& vect )
     {
         add( vect );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Vector<SIZE>& operator-= ( const Vector<SIZE> &vect )
+    Vector<SIZE>& operator-= ( const Vector<SIZE>& vect )
     {
         substract( vect );
         return (*this);
@@ -331,7 +331,7 @@ public:
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Vector<SIZE> &vect ) const
+    bool operator== ( const Vector<SIZE>& vect ) const
     {
         bool result = true;
 
@@ -344,7 +344,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Vector<SIZE> &vect ) const
+    bool operator!= ( const Vector<SIZE>& vect ) const
     {
         return !( (*this) == vect );
     }
@@ -355,7 +355,7 @@ protected:
     double items_[ SIZE ];      ///< vector items
 
     /** @brief Adds vector. */
-    void add( const Vector<SIZE> &vect )
+    void add( const Vector<SIZE>& vect )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -373,7 +373,7 @@ protected:
     }
 
     /** @brief Substracts vector. */
-    void substract( const Vector<SIZE> &vect )
+    void substract( const Vector<SIZE>& vect )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
