@@ -60,7 +60,7 @@ public:
     Angles();
 
     /** @brief Copy constructor. */
-    Angles( const Angles &angl );
+    Angles( const Angles& angl );
 
     /**
      * @brief Constructor.
@@ -96,13 +96,13 @@ public:
     std::string toString() const;
 
     /** @brief Assignment operator. */
-    Angles& operator= ( const Angles &angl );
+    Angles& operator= ( const Angles& angl );
 
     /** @brief Equality operator. */
-    bool operator== ( const Angles &angl ) const;
+    bool operator== ( const Angles& angl ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Angles &angl ) const;
+    bool operator!= ( const Angles& angl ) const;
 
 private:
 

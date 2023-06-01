@@ -58,7 +58,7 @@ Angles::Angles()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles::Angles( const Angles &angl )
+Angles::Angles( const Angles& angl )
 {
     set( angl.phi_, angl.tht_, angl.psi_ );
 }
@@ -133,7 +133,7 @@ std::string Angles::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles& Angles::operator= ( const Angles &angl )
+Angles& Angles::operator= ( const Angles& angl )
 {
     set( angl.phi_, angl.tht_, angl.psi_ );
     return (*this);
@@ -141,7 +141,7 @@ Angles& Angles::operator= ( const Angles &angl )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::operator== ( const Angles &angl ) const
+bool Angles::operator== ( const Angles& angl ) const
 {
     return ( ( phi_ == angl.phi_ )
           && ( tht_ == angl.tht_ )
@@ -150,7 +150,7 @@ bool Angles::operator== ( const Angles &angl ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::operator!= ( const Angles &angl ) const
+bool Angles::operator!= ( const Angles& angl ) const
 {
     return !( (*this) == angl );
 }
