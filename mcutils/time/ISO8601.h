@@ -78,7 +78,7 @@ MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-MCUTILSAPI inline std::string toISO8601( const DateTime &dt,
+MCUTILSAPI inline std::string toISO8601( const DateTime& dt,
                                          bool show_msec = true )
 {
     return toISO8601( dt.year, dt.month, dt.day,
