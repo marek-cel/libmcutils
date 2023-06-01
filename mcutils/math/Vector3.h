@@ -62,7 +62,7 @@ public:
     Vector3( const double items[] );
 
     /** @brief Constructor. */
-    Vector3( const char *str );
+    Vector3( const char* str );
 
     /** @brief Constructor. */
     Vector3( double x, double y, double z );

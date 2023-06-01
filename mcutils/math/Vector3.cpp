@@ -65,7 +65,7 @@ Vector3::Vector3( const double items[] )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3::Vector3( const char *str )
+Vector3::Vector3( const char* str )
     : Vector<3>( str )
 
     , x_ ( items_[0] )
