@@ -36,7 +36,7 @@ EulerRect::EulerRect( Fun fun )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void EulerRect::integrate( double step, VectorN *vect )
+void EulerRect::integrate( double step, VectorN* vect )
 {
     xt_ = (*vect);
 
