@@ -85,9 +85,9 @@ Table2::Table2( const double row_values[],
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2( const std::vector<double> &row_values,
-                const std::vector<double> &col_values,
-                const std::vector<double> &table_data )
+Table2::Table2( const std::vector<double>& row_values,
+                const std::vector<double>& col_values,
+                const std::vector<double>& table_data )
 {
     if ( row_values.size() * col_values.size() == table_data.size() )
     {
@@ -120,7 +120,7 @@ Table2::Table2( const std::vector<double> &row_values,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2( const Table2 &table )
+Table2::Table2( const Table2& table )
     : rows_ ( table.rows_ )
     , cols_ ( table.cols_ )
     , size_ ( table.size_ )
@@ -146,7 +146,7 @@ Table2::Table2( const Table2 &table )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2( const char *str )
+Table2::Table2( const char* str )
 {
     std::vector<double> row_values_tmp;
     std::vector<double> col_values_tmp;
@@ -430,7 +430,7 @@ std::string Table2::toString()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2& Table2::operator= ( const Table2 &table )
+Table2& Table2::operator= ( const Table2& table )
 {
     if ( this != &table )
     {

@@ -65,15 +65,15 @@ public:
             unsigned int cols );
 
     /** @brief Constructor. */
-    Table2( const std::vector<double> &row_values,
-            const std::vector<double> &col_values,
-            const std::vector<double> &table_data );
+    Table2( const std::vector<double>& row_values,
+            const std::vector<double>& col_values,
+            const std::vector<double>& table_data );
 
     /** @brief Copy constructor. */
-    Table2( const Table2 &table );
+    Table2( const Table2& table );
 
     /** @brief Constructor. */
-    Table2( const char *str );
+    Table2( const char* str );
 
     /** @brief Destructor. */
     ~Table2();
@@ -143,7 +143,7 @@ public:
     std::string toString();
 
     /** @brief Assignment operator. */
-    Table2& operator= ( const Table2 &table );
+    Table2& operator= ( const Table2& table );
 
 private:
 
