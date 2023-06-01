@@ -40,6 +40,8 @@
 #   include <Windows.h>
 #endif
 
+#include <mcutils/time/ISO8601.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -227,25 +229,7 @@ std::string Log::timestamp()
     msec = st.wMilliseconds;
 #   endif // WIN32
 
-    std::stringstream ss;
-
-    ss << "[";
-    ss << year;
-    ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << mon;
-    ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << day;
-    ss << "T";
-    ss << std::setfill('0') << std::setw( 2 ) << hour;
-    ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << min;
-    ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << sec;
-    ss << ".";
-    ss << std::setfill('0') << std::setw( 3 ) << msec;
-    ss << "]";
-
-    return ss.str();
+    return "[" + toISO8601( year, mon, day, hour, min, sec, msec ) + "]";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
