@@ -54,43 +54,43 @@ public:
      * @brief Copy constructor.
      * @param ecef object to copy
      */
-    WGS84( const WGS84 &wgs );
+    WGS84( const WGS84& wgs );
 
     /**
      * @brief Moving constructor.
      * @param ecef object to move
      */
-    WGS84( WGS84 &&wgs );
+    WGS84( WGS84&& wgs );
 
     /**
      * @brief Constructor.
      * @param pos_geo geodetic coordinates
      */
-    WGS84( const Geo &pos_geo );
+    WGS84( const Geo& pos_geo );
 
     /**
      * @brief Constructor.
      * @param pos_wgs [m] coordinates vector expressed in ECEF
      */
-    WGS84( const Vector3 &pos_wgs );
+    WGS84( const Vector3& pos_wgs );
 
     /** @brief Destructor. */
     virtual ~WGS84() = default;
 
     inline Vector3 getPos_WGS() const { return getPos_ECEF(); }
 
-    inline void setPos_WGS( const Vector3 &pos_wgs ) { setPos_ECEF( pos_wgs ); }
+    inline void setPos_WGS( const Vector3& pos_wgs ) { setPos_ECEF( pos_wgs ); }
 
     /** @brief Assignment operator. */
-    WGS84& operator= ( const WGS84 &wgs );
+    WGS84& operator= ( const WGS84& wgs );
 
     /** @brief Moving assignment operator. */
-    WGS84& operator= ( WGS84 &&wgs );
+    WGS84& operator= ( WGS84&& wgs );
 
 private:
 
-    void copyData( const ECEF &ecef );
-    void copyParams( const ECEF &ecef );
+    void copyData( const ECEF& ecef );
+    void copyParams( const ECEF& ecef );
 
     /**
      * @brief Updates rotation matrices due to position.

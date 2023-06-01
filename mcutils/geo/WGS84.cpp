@@ -37,19 +37,19 @@ WGS84::WGS84()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84::WGS84( const WGS84 &wgs )
+WGS84::WGS84( const WGS84& wgs )
     : ECEF( wgs )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84::WGS84( WGS84 &&wgs )
+WGS84::WGS84( WGS84&& wgs )
     : ECEF( wgs )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84::WGS84( const Geo &pos_geo )
+WGS84::WGS84( const Geo& pos_geo )
     : WGS84()
 {
     setPos_Geo( pos_geo );
@@ -57,7 +57,7 @@ WGS84::WGS84( const Geo &pos_geo )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84::WGS84( const Vector3 &pos_wgs )
+WGS84::WGS84( const Vector3& pos_wgs )
     : WGS84()
 {
     setPos_WGS( pos_wgs );
@@ -65,7 +65,7 @@ WGS84::WGS84( const Vector3 &pos_wgs )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84& WGS84::operator= ( const WGS84 &wgs )
+WGS84& WGS84::operator= ( const WGS84& wgs )
 {
     ECEF::operator =( wgs );
     return (*this);
@@ -73,7 +73,7 @@ WGS84& WGS84::operator= ( const WGS84 &wgs )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-WGS84& WGS84::operator= ( WGS84 &&wgs )
+WGS84& WGS84::operator= ( WGS84&& wgs )
 {
     ECEF::operator =( wgs );
     return (*this);
