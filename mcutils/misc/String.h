@@ -40,7 +40,7 @@ namespace mc { namespace String
  * @param str string to be processed
  * @return string first line
  */
-MCUTILSAPI std::string getFirstLine( const std::string &str );
+MCUTILSAPI std::string getFirstLine( const std::string& str );
 
 /**
  * @brief Compares strings. This function is case insensitive.
@@ -48,8 +48,8 @@ MCUTILSAPI std::string getFirstLine( const std::string &str );
  * @param str_2 2nd string to compare
  * @return integer result of the comparison (returns 0 if strings are equal)
  */
-MCUTILSAPI int icompare( const std::string &str_1,
-                         const std::string &str_2 );
+MCUTILSAPI int icompare( const std::string& str_1,
+                         const std::string& str_2 );
 
 /**
  * @brief Splits string with the given delimeter.
@@ -57,29 +57,29 @@ MCUTILSAPI int icompare( const std::string &str_1,
  * @param sep string separator
  * @return vector of strings
  */
-MCUTILSAPI std::vector<std::string> splitString( const std::string &str,
-                                                 const std::string &sep );
+MCUTILSAPI std::vector<std::string> splitString( const std::string& str,
+                                                 const std::string& sep );
 
 /**
  * @brief Returns string with leading white spaces removed.
  * @param str string to be processed
  * @return string with leading white spaces removed
  */
-MCUTILSAPI std::string stripLeadingSpaces( const std::string &str );
+MCUTILSAPI std::string stripLeadingSpaces( const std::string& str );
 
 /**
  * @brief Returns string with trailing white spaces removed.
  * @param str string to be processed
  * @return string with trailing white spaces removed
  */
-MCUTILSAPI std::string stripTrailingSpaces( const std::string &str );
+MCUTILSAPI std::string stripTrailingSpaces( const std::string& str );
 
 /**
  * @brief Returns string with both leading and trailing white spaces removed.
  * @param str string to be processed
  * @return string with leading and trailing white spaces removed
  */
-MCUTILSAPI std::string stripSpaces( const std::string &str );
+MCUTILSAPI std::string stripSpaces( const std::string& str );
 
 /**
  * @brief Converts string into variable.
@@ -87,7 +87,7 @@ MCUTILSAPI std::string stripSpaces( const std::string &str );
  * @param def default value
  * @return result value
  */
-MCUTILSAPI bool toBool( const std::string &str,
+MCUTILSAPI bool toBool( const std::string& str,
                         bool def = std::numeric_limits<bool>::quiet_NaN() );
 
 /**
@@ -96,7 +96,7 @@ MCUTILSAPI bool toBool( const std::string &str,
  * @param def default value
  * @return result value
  */
-MCUTILSAPI int toInt( const std::string &str,
+MCUTILSAPI int toInt( const std::string& str,
                       int def = std::numeric_limits<int>::quiet_NaN() );
 
 /**
@@ -105,7 +105,7 @@ MCUTILSAPI int toInt( const std::string &str,
  * @param def default value
  * @return result value
  */
-MCUTILSAPI double toDouble( const std::string &str,
+MCUTILSAPI double toDouble( const std::string& str,
                             double def = std::numeric_limits<double>::quiet_NaN() );
 
 /**
@@ -134,14 +134,14 @@ MCUTILSAPI std::string toString( double val );
  * @param str string to be processed
  * @return result string
  */
-MCUTILSAPI std::string toLower( const std::string &str );
+MCUTILSAPI std::string toLower( const std::string& str );
 
 /**
  * @brief Converts string to upper case.
  * @param str string to be processed
  * @return result string
  */
-MCUTILSAPI std::string toUpper( const std::string &str );
+MCUTILSAPI std::string toUpper( const std::string& str );
 
 } // namespace String
 } // namespace mc

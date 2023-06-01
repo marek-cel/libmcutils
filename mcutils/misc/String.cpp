@@ -38,7 +38,7 @@ namespace mc { namespace String
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string getFirstLine( const std::string &str )
+std::string getFirstLine( const std::string& str )
 {
     std::istringstream iss( str );
     std::string firstLine;
@@ -49,7 +49,7 @@ std::string getFirstLine( const std::string &str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int icompare( const std::string &str_1, const std::string &str_2 )
+int icompare( const std::string& str_1, const std::string& str_2 )
 {
     std::string strTemp_1 = String::toLower( str_1 );
     std::string strTemp_2 = String::toLower( str_2 );
@@ -59,8 +59,8 @@ int icompare( const std::string &str_1, const std::string &str_2 )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::vector<std::string> splitString( const std::string &str,
-                                      const std::string &sep )
+std::vector<std::string> splitString( const std::string& str,
+                                      const std::string& sep )
 {
     std::vector< std::string > result;
 
@@ -83,7 +83,7 @@ std::vector<std::string> splitString( const std::string &str,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripLeadingSpaces( const std::string &str )
+std::string stripLeadingSpaces( const std::string& str )
 {
     unsigned int offset = 0;
 
@@ -102,7 +102,7 @@ std::string stripLeadingSpaces( const std::string &str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripTrailingSpaces( const std::string &str )
+std::string stripTrailingSpaces( const std::string& str )
 {
     std::string::size_type offset = 0;
 
@@ -119,7 +119,7 @@ std::string stripTrailingSpaces( const std::string &str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripSpaces( const std::string &str )
+std::string stripSpaces( const std::string& str )
 {
     std::string::size_type offset_l = 0;
     std::string::size_type offset_t = 0;
@@ -144,7 +144,7 @@ std::string stripSpaces( const std::string &str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool toBool( const std::string &str, bool def )
+bool toBool( const std::string& str, bool def )
 {
     bool result = def;
     int temp = std::numeric_limits<int>::quiet_NaN();
@@ -163,7 +163,7 @@ bool toBool( const std::string &str, bool def )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int toInt( const std::string &str, int def )
+int toInt( const std::string& str, int def )
 {
     int result = def;
     int temp = std::numeric_limits<int>::quiet_NaN();
@@ -182,7 +182,7 @@ int toInt( const std::string &str, int def )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double toDouble( const std::string &str, double def )
+double toDouble( const std::string& str, double def )
 {
     double result = def;
     double temp = std::numeric_limits<double>::quiet_NaN();
@@ -234,7 +234,7 @@ std::string toString( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toLower( const std::string &str )
+std::string toLower( const std::string& str )
 {
     std::string result;
     result.clear();
@@ -251,7 +251,7 @@ std::string toLower( const std::string &str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toUpper( const std::string &str )
+std::string toUpper( const std::string& str )
 {
     std::string result;
     result.clear();
