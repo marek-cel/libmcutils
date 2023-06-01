@@ -52,8 +52,8 @@ namespace mc
  *
  * @return true if there is an intersection, false otherwise
  */
-MCUTILSAPI bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                                 const Vector3 &r, const Vector3 &n );
+MCUTILSAPI bool isSegPlaneIsect( const Vector3& b, const Vector3& e,
+                                 const Vector3& r, const Vector3& n );
 
 /**
  * @brief Returns segment and plane intersection point.
@@ -74,8 +74,8 @@ MCUTILSAPI bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
  *
  * @return intersection point, or end point if there is no intersection, or beginning point if segment lies on the plane
  */
-MCUTILSAPI Vector3 getSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                                     const Vector3 &r, const Vector3 &n );
+MCUTILSAPI Vector3 getSegPlaneIsect( const Vector3& b, const Vector3& e,
+                                     const Vector3& r, const Vector3& n );
 
 } // namespace mc
 

@@ -29,8 +29,8 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                      const Vector3 &r, const Vector3 &n )
+bool isSegPlaneIsect( const Vector3& b, const Vector3& e,
+                      const Vector3& r, const Vector3& n )
 {
     double num = n * ( r - b );
     double den = n * ( e - b );
@@ -49,8 +49,8 @@ bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 getSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                          const Vector3 &r, const Vector3 &n )
+Vector3 getSegPlaneIsect( const Vector3& b, const Vector3& e,
+                          const Vector3& r, const Vector3& n )
 {
     Vector3 r_i = e;
 
