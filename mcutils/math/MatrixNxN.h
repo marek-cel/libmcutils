@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_MATRIXSQ_H_
-#define MCUTILS_MATH_MATRIXSQ_H_
+#ifndef MCUTILS_MATH_MATRIXNXN_H_
+#define MCUTILS_MATH_MATRIXNXN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,40 +38,40 @@ namespace mc
  * @tparam N number of rows and columns
  */
 template <unsigned int N>
-class MatrixSq : public Matrix<N, N>
+class MatrixNxN : public Matrix<N, N>
 {
 public:
 
     /** @brief Constructor. */
-    MatrixSq() :
+    MatrixNxN() :
         Matrix<N, N>()
     {}
 
     /** @brief Copy constructor. */
-    MatrixSq( const MatrixSq<N>& matrix ) :
+    MatrixNxN( const MatrixNxN<N>& matrix ) :
         Matrix<N, N>( matrix )
     {}
 
     /** @brief Constructor. */
-    MatrixSq( const double items[] ) :
+    MatrixNxN( const double items[] ) :
         Matrix<N, N>( items )
     {}
 
     /** @brief Constructor. */
-    MatrixSq( const char* str ) :
+    MatrixNxN( const char* str ) :
         Matrix<N, N>( str )
     {}
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
     /** @brief Destructor. */
-    virtual ~MatrixSq() = default;
+    virtual ~MatrixNxN() = default;
     // LCOV_EXCL_STOP
 
     /** @brief Transposes matrix. */
     void transpose()
     {
-        MatrixSq<N> temp( *this );
+        MatrixNxN<N> temp( *this );
 
         for ( unsigned int r = 0; r < N; ++r )
         {
@@ -83,91 +83,91 @@ public:
     }
 
     /** @brief Returns transposed matrix. */
-    MatrixSq<N> getTransposed() const
+    MatrixNxN<N> getTransposed() const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.transpose();
         return result;
     }
 
     /** @brief Assignment operator. */
-    MatrixSq<N>& operator= ( const MatrixSq<N>& matrix )
+    MatrixNxN<N>& operator= ( const MatrixNxN<N>& matrix )
     {
         std::memcpy( this->items_, matrix.items_, sizeof(this->items_) );
         return (*this);
     }
 
     /** @brief Addition operator. */
-    MatrixSq<N> operator+ ( const MatrixSq<N>& matrix ) const
+    MatrixNxN<N> operator+ ( const MatrixNxN<N>& matrix ) const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.add( matrix );
         return result;
     }
 
     /** @brief Negation operator. */
-    MatrixSq<N> operator- () const
+    MatrixNxN<N> operator- () const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    MatrixSq<N> operator- ( const MatrixSq<N>& matrix ) const
+    MatrixNxN<N> operator- ( const MatrixNxN<N>& matrix ) const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.substract( matrix );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixSq<N> operator* ( double value ) const
+    MatrixNxN<N> operator* ( double value ) const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.multiplyByValue( value );
         return result;
     }
 
     /** @brief Multiplication operator (by matrix). */
-    MatrixSq<N> operator* ( const MatrixSq<N>& matrix ) const
+    MatrixNxN<N> operator* ( const MatrixNxN<N>& matrix ) const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         multiplyByMatrix( matrix, &result );
         return result;
     }
 
     /** @brief Division operator (by scalar). */
-    MatrixSq<N> operator/ ( double value ) const
+    MatrixNxN<N> operator/ ( double value ) const
     {
-        MatrixSq<N> result( *this );
+        MatrixNxN<N> result( *this );
         result.divideByValue( value );
         return result;
     }
 
     /** @brief Unary addition operator. */
-    MatrixSq<N>& operator+= ( const MatrixSq<N>& matrix )
+    MatrixNxN<N>& operator+= ( const MatrixNxN<N>& matrix )
     {
         this->add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixSq<N>& operator-= ( const MatrixSq<N>& matrix )
+    MatrixNxN<N>& operator-= ( const MatrixNxN<N>& matrix )
     {
         this->substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    MatrixSq<N>& operator*= ( double value )
+    MatrixNxN<N>& operator*= ( double value )
     {
         this->multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    MatrixSq<N>& operator/= ( double value )
+    MatrixNxN<N>& operator/= ( double value )
     {
         this->divideByValue( value );
         return (*this);
@@ -180,7 +180,7 @@ protected:
      * @param matrix
      * @param result
      */
-    void multiplyByMatrix( const MatrixSq<N>& matrix, MatrixSq<N>* result ) const
+    void multiplyByMatrix( const MatrixNxN<N>& matrix, MatrixNxN<N>* result ) const
     {
         for ( unsigned int r = 0; r < N; ++r )
         {
@@ -197,12 +197,12 @@ protected:
     }
 };
 
-template class MCUTILSAPI mc::MatrixSq<3>;
-template class MCUTILSAPI mc::MatrixSq<4>;
-template class MCUTILSAPI mc::MatrixSq<6>;
+template class MCUTILSAPI mc::MatrixNxN<3>;
+template class MCUTILSAPI mc::MatrixNxN<4>;
+template class MCUTILSAPI mc::MatrixNxN<6>;
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MATH_MATRIXSQ_H_
+#endif // MCUTILS_MATH_MATRIXNXN_H_

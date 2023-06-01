@@ -46,7 +46,7 @@ set( SOURCES
     math/TestMatrix3x3.cpp
     math/TestMatrix4x4.cpp
     math/TestMatrix6x6.cpp
-    math/TestMatrixSq.cpp
+    math/TestMatrixNxN.cpp
     math/TestQuaternion.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp

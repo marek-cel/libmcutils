@@ -13,7 +13,7 @@ set( HEADERS
     Matrix4x4.h
     Matrix6x6.h
     Matrix.h
-    MatrixSq.h
+    MatrixNxN.h
     Quaternion.h
     Random.h
     RungeKutta4.h

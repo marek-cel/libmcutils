@@ -51,7 +51,7 @@ SOURCES += \
     $$PWD/math/TestMatrix3x3.cpp \
     $$PWD/math/TestMatrix4x4.cpp \
     $$PWD/math/TestMatrix6x6.cpp \
-    $$PWD/math/TestMatrixSq.cpp \
+    $$PWD/math/TestMatrixNxN.cpp \
     $$PWD/math/TestQuaternion.cpp \
     $$PWD/math/TestRandom.cpp \
     $$PWD/math/TestRungeKutta4.cpp \

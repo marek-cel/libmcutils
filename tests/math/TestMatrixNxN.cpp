@@ -1,56 +1,56 @@
 #include <gtest/gtest.h>
 
-#include <mcutils/math/MatrixSq.h>
+#include <mcutils/math/MatrixNxN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
-class TestMatrixSq : public ::testing::Test
+class TestMatrixNxN : public ::testing::Test
 {
 protected:
-    TestMatrixSq() {}
-    virtual ~TestMatrixSq() {}
+    TestMatrixNxN() {}
+    virtual ~TestMatrixNxN() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanConstruct)
+TEST_F(TestMatrixNxN, CanConstruct)
 {
-    mc::MatrixSq<3> *m3 = nullptr;
-    EXPECT_NO_THROW( m3 = new mc::MatrixSq<3>() );
+    mc::MatrixNxN<3> *m3 = nullptr;
+    EXPECT_NO_THROW( m3 = new mc::MatrixNxN<3>() );
     delete m3;
 
-    mc::MatrixSq<4> *m4 = nullptr;
-    EXPECT_NO_THROW( m4 = new mc::MatrixSq<4>() );
+    mc::MatrixNxN<4> *m4 = nullptr;
+    EXPECT_NO_THROW( m4 = new mc::MatrixNxN<4>() );
     delete m4;
 
-    mc::MatrixSq<6> *m6 = nullptr;
-    EXPECT_NO_THROW( m6 = new mc::MatrixSq<6>() );
+    mc::MatrixNxN<6> *m6 = nullptr;
+    EXPECT_NO_THROW( m6 = new mc::MatrixNxN<6>() );
     delete m6;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanDestruct)
+TEST_F(TestMatrixNxN, CanDestruct)
 {
-    mc::MatrixSq<3> *m3 = new mc::MatrixSq<3>();
+    mc::MatrixNxN<3> *m3 = new mc::MatrixNxN<3>();
     EXPECT_NO_THROW( delete m3 );
 
-    mc::MatrixSq<4> *m4 = new mc::MatrixSq<4>();
+    mc::MatrixNxN<4> *m4 = new mc::MatrixNxN<4>();
     EXPECT_NO_THROW( delete m4 );
 
-    mc::MatrixSq<6> *m6 = new mc::MatrixSq<6>();
+    mc::MatrixNxN<6> *m6 = new mc::MatrixNxN<6>();
     EXPECT_NO_THROW( delete m6 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanInstantiate)
+TEST_F(TestMatrixNxN, CanInstantiate)
 {
-    mc::MatrixSq<3> m3;
-    mc::MatrixSq<4> m4;
-    mc::MatrixSq<6> m6;
+    mc::MatrixNxN<3> m3;
+    mc::MatrixNxN<4> m4;
+    mc::MatrixNxN<6> m6;
 
     EXPECT_DOUBLE_EQ( m3(0,0), 0.0 );
     EXPECT_DOUBLE_EQ( m3(0,1), 0.0 );
@@ -119,11 +119,11 @@ TEST_F(TestMatrixSq, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanInstantiateAndCopy)
+TEST_F(TestMatrixNxN, CanInstantiateAndCopy)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -135,7 +135,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndCopy)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32( m31 );
+    mc::MatrixNxN<3> m32( m31 );
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m32(0,1), 2.0 );
@@ -164,7 +164,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndCopy)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42( m41 );
+    mc::MatrixNxN<4> m42( m41 );
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m42(0,1),  2.0 );
@@ -220,7 +220,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndCopy)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62( m61 );
+    mc::MatrixNxN<6> m62( m61 );
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m62(0,1),  2.0 );
@@ -262,13 +262,13 @@ TEST_F(TestMatrixSq, CanInstantiateAndCopy)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromArray)
+TEST_F(TestMatrixNxN, CanInstantiateAndSetDataFromArray)
 {
     double x3[] { 1.0, 2.0,3.0,
                   4.0,5.0,6.0,
                   7.0,8.0,9.0 };
 
-    mc::MatrixSq<3> m3( x3 );
+    mc::MatrixNxN<3> m3( x3 );
 
     EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
@@ -285,7 +285,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromArray)
                  11.0,12.0,13.0,14.0,
                  15.0,16.0,17.0,18.0 };
 
-    mc::MatrixSq<4> m4( x4 );
+    mc::MatrixNxN<4> m4( x4 );
 
     EXPECT_DOUBLE_EQ( m4(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m4(0,1),  2.0 );
@@ -311,7 +311,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromArray)
     41.0,42.0,43.0,44.0,45.0,46.0,
     51.0,52.0,53.0,54.0,55.0,56.0 };
 
-    mc::MatrixSq<6> m6( x6 );
+    mc::MatrixNxN<6> m6( x6 );
 
     EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m6(0,1),  2.0 );
@@ -353,7 +353,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromArray)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromString)
+TEST_F(TestMatrixNxN, CanInstantiateAndSetDataFromString)
 {
     char str3[] =
     { R"##(
@@ -361,7 +361,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromString)
         4.0 5.0 6.0
         7.0 8.0 9.0
     )##" };
-    mc::MatrixSq<3> m3( str3 );
+    mc::MatrixNxN<3> m3( str3 );
 
     EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
@@ -380,7 +380,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromString)
       9.0  10.0  11.0  12.0
      13.0  14.0  15.0  16.0
     )##" };
-    mc::MatrixSq<4> m4( str4 );
+    mc::MatrixNxN<4> m4( str4 );
 
     EXPECT_DOUBLE_EQ( m4(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m4(0,1),  2.0 );
@@ -408,7 +408,7 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromString)
      25.0  26.0  27.0  28.0  29.0  30.0
      31.0  32.0  33.0  34.0  35.0  36.0
     )##" };
-    mc::MatrixSq<6> m6( str6 );
+    mc::MatrixNxN<6> m6( str6 );
 
     EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m6(0,1),  2.0 );
@@ -450,10 +450,10 @@ TEST_F(TestMatrixSq, CanInstantiateAndSetDataFromString)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanTranspose)
+TEST_F(TestMatrixNxN, CanTranspose)
 {
     double items1[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixSq<3> m1( items1 );
+    mc::MatrixNxN<3> m1( items1 );
 
     m1.transpose();
 
@@ -470,12 +470,12 @@ TEST_F(TestMatrixSq, CanTranspose)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanGetTransposed)
+TEST_F(TestMatrixNxN, CanGetTransposed)
 {
     double items3[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixSq<3> m3( items3 );
+    mc::MatrixNxN<3> m3( items3 );
 
-    mc::MatrixSq<3> mt3 = m3.getTransposed();
+    mc::MatrixNxN<3> mt3 = m3.getTransposed();
 
     EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
@@ -504,9 +504,9 @@ TEST_F(TestMatrixSq, CanGetTransposed)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::MatrixSq<4> m4( x4 );
+    mc::MatrixNxN<4> m4( x4 );
 
-    mc::MatrixSq<4> mt4 = m4.getTransposed();
+    mc::MatrixNxN<4> mt4 = m4.getTransposed();
 
     EXPECT_DOUBLE_EQ( m4(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m4(0,1),  2.0 );
@@ -551,8 +551,8 @@ TEST_F(TestMatrixSq, CanGetTransposed)
         31.0, 32.0, 33.0, 34.0, 35.0, 36.0
     };
 
-    mc::MatrixSq<6> m6( x6 );
-    mc::MatrixSq<6> mt6 = m6.getTransposed();
+    mc::MatrixNxN<6> m6( x6 );
+    mc::MatrixNxN<6> mt6 = m6.getTransposed();
 
     EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m6(0,1),  2.0 );
@@ -631,11 +631,11 @@ TEST_F(TestMatrixSq, CanGetTransposed)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanAssign)
+TEST_F(TestMatrixNxN, CanAssign)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -647,7 +647,7 @@ TEST_F(TestMatrixSq, CanAssign)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 );
@@ -677,7 +677,7 @@ TEST_F(TestMatrixSq, CanAssign)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 );
@@ -734,7 +734,7 @@ TEST_F(TestMatrixSq, CanAssign)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 );
@@ -777,11 +777,11 @@ TEST_F(TestMatrixSq, CanAssign)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanAdd)
+TEST_F(TestMatrixNxN, CanAdd)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -793,7 +793,7 @@ TEST_F(TestMatrixSq, CanAdd)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = m32 + m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 );
@@ -823,7 +823,7 @@ TEST_F(TestMatrixSq, CanAdd)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = m42 + m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 );
@@ -880,7 +880,7 @@ TEST_F(TestMatrixSq, CanAdd)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = m62 + m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 );
@@ -923,11 +923,11 @@ TEST_F(TestMatrixSq, CanAdd)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanNegate)
+TEST_F(TestMatrixNxN, CanNegate)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -939,7 +939,7 @@ TEST_F(TestMatrixSq, CanNegate)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = -m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), -1.0 );
@@ -969,7 +969,7 @@ TEST_F(TestMatrixSq, CanNegate)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = -m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  -1.0 );
@@ -1026,7 +1026,7 @@ TEST_F(TestMatrixSq, CanNegate)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = -m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  -1.0 );
@@ -1069,11 +1069,11 @@ TEST_F(TestMatrixSq, CanNegate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanSubstract)
+TEST_F(TestMatrixNxN, CanSubstract)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -1085,7 +1085,7 @@ TEST_F(TestMatrixSq, CanSubstract)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = m32 - m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), -1.0 );
@@ -1115,7 +1115,7 @@ TEST_F(TestMatrixSq, CanSubstract)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = m42 - m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  -1.0 );
@@ -1172,7 +1172,7 @@ TEST_F(TestMatrixSq, CanSubstract)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = m62 - m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  -1.0 );
@@ -1215,11 +1215,11 @@ TEST_F(TestMatrixSq, CanSubstract)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanMultiplyByScalar)
+TEST_F(TestMatrixNxN, CanMultiplyByScalar)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -1231,7 +1231,7 @@ TEST_F(TestMatrixSq, CanMultiplyByScalar)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = m31 * 2.0;
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 * 2.0 );
@@ -1261,7 +1261,7 @@ TEST_F(TestMatrixSq, CanMultiplyByScalar)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = m41 * 2.0;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 * 2.0 );
@@ -1318,7 +1318,7 @@ TEST_F(TestMatrixSq, CanMultiplyByScalar)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = m61 * 2.0;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 * 2.0 );
@@ -1361,15 +1361,15 @@ TEST_F(TestMatrixSq, CanMultiplyByScalar)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanMultiplyByMatrix)
+TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
 {
     double x30[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixSq<3> m30( x30 );
+    mc::MatrixNxN<3> m30( x30 );
 
     double x31[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
-    mc::MatrixSq<3> m31( x31 );
+    mc::MatrixNxN<3> m31( x31 );
 
-    mc::MatrixSq<3> m3 = m30 * m31;
+    mc::MatrixNxN<3> m3 = m30 * m31;
 
     EXPECT_NEAR( m3(0,0),  33.0, 1.0e-9 );
     EXPECT_NEAR( m3(0,1),  39.6, 1.0e-9 );
@@ -1395,10 +1395,10 @@ TEST_F(TestMatrixSq, CanMultiplyByMatrix)
        14.0, 15.0, 16.0, 17.0
     };
 
-    mc::MatrixSq<4> m41( x41 );
-    mc::MatrixSq<4> m42( x42 );
+    mc::MatrixNxN<4> m41( x41 );
+    mc::MatrixNxN<4> m42( x42 );
 
-    mc::MatrixSq<4> m4 = m41 * m42;
+    mc::MatrixNxN<4> m4 = m41 * m42;
 
     EXPECT_DOUBLE_EQ( m4(0,0), 100.0 );
     EXPECT_DOUBLE_EQ( m4(0,1), 110.0 );
@@ -1435,10 +1435,10 @@ TEST_F(TestMatrixSq, CanMultiplyByMatrix)
          1.0,  2.0,  3.0,  4.0,  5.0,  6.0
     };
 
-    mc::MatrixSq<6> m60( x60 );
-    mc::MatrixSq<6> m61( x61 );
+    mc::MatrixNxN<6> m60( x60 );
+    mc::MatrixNxN<6> m61( x61 );
 
-    mc::MatrixSq<6> m6 = m60 * m61;
+    mc::MatrixNxN<6> m6 = m60 * m61;
 
     EXPECT_DOUBLE_EQ( m6(0,0),  231.0 );
     EXPECT_DOUBLE_EQ( m6(0,1),  252.0 );
@@ -1485,11 +1485,11 @@ TEST_F(TestMatrixSq, CanMultiplyByMatrix)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanDivideByScalar)
+TEST_F(TestMatrixNxN, CanDivideByScalar)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -1501,7 +1501,7 @@ TEST_F(TestMatrixSq, CanDivideByScalar)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 = m31 / 2.0;
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 / 2.0 );
@@ -1531,7 +1531,7 @@ TEST_F(TestMatrixSq, CanDivideByScalar)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 = m41 / 2.0;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 / 2.0 );
@@ -1588,7 +1588,7 @@ TEST_F(TestMatrixSq, CanDivideByScalar)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 = m61 / 2.0;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 / 2.0 );
@@ -1631,11 +1631,11 @@ TEST_F(TestMatrixSq, CanDivideByScalar)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanUnaryAdd)
+TEST_F(TestMatrixNxN, CanUnaryAdd)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -1647,7 +1647,7 @@ TEST_F(TestMatrixSq, CanUnaryAdd)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 += m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), 1.0 );
@@ -1677,7 +1677,7 @@ TEST_F(TestMatrixSq, CanUnaryAdd)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 += m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  1.0 );
@@ -1734,7 +1734,7 @@ TEST_F(TestMatrixSq, CanUnaryAdd)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 += m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  1.0 );
@@ -1777,11 +1777,11 @@ TEST_F(TestMatrixSq, CanUnaryAdd)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanUnarySubstract)
+TEST_F(TestMatrixNxN, CanUnarySubstract)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -1793,7 +1793,7 @@ TEST_F(TestMatrixSq, CanUnarySubstract)
     m31(2,1) = 8.0;
     m31(2,2) = 9.0;
 
-    mc::MatrixSq<3> m32;
+    mc::MatrixNxN<3> m32;
     m32 -= m31;
 
     EXPECT_DOUBLE_EQ( m32(0,0), -1.0 );
@@ -1823,7 +1823,7 @@ TEST_F(TestMatrixSq, CanUnarySubstract)
     m41(3,2) = 17.0;
     m41(3,3) = 18.0;
 
-    mc::MatrixSq<4> m42;
+    mc::MatrixNxN<4> m42;
     m42 -= m41;
 
     EXPECT_DOUBLE_EQ( m42(0,0),  -1.0 );
@@ -1880,7 +1880,7 @@ TEST_F(TestMatrixSq, CanUnarySubstract)
     m61(5,4) = 55.0;
     m61(5,5) = 56.0;
 
-    mc::MatrixSq<6> m62;
+    mc::MatrixNxN<6> m62;
     m62 -= m61;
 
     EXPECT_DOUBLE_EQ( m62(0,0),  -1.0 );
@@ -1923,11 +1923,11 @@ TEST_F(TestMatrixSq, CanUnarySubstract)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanUnaryMultiplyByScalar)
+TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
@@ -2066,11 +2066,11 @@ TEST_F(TestMatrixSq, CanUnaryMultiplyByScalar)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixSq, CanUnaryDivideByScalar)
+TEST_F(TestMatrixNxN, CanUnaryDivideByScalar)
 {
-    mc::MatrixSq<3> m31;
-    mc::MatrixSq<4> m41;
-    mc::MatrixSq<6> m61;
+    mc::MatrixNxN<3> m31;
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<6> m61;
 
     m31(0,0) = 1.0;
     m31(0,1) = 2.0;
