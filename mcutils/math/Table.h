@@ -59,11 +59,11 @@ public:
            unsigned int size );
 
     /** @brief Constructor. */
-    Table( const std::vector<double> &key_values,
-           const std::vector<double> &table_data );
+    Table( const std::vector<double>& key_values,
+           const std::vector<double>& table_data );
 
     /** @brief Constructor. */
-    Table( const char *str );
+    Table( const char* str );
 
     /**
      * @brief Returns key for the given index.
@@ -167,7 +167,7 @@ public:
     std::string toString();
 
     /** @brief Addition operator. */
-    Table operator+ ( const Table &table ) const;
+    Table operator+ ( const Table& table ) const;
 
     /** @brief Multiplication operator (by scalar). */
     Table operator* ( double val ) const;
@@ -209,7 +209,7 @@ private:
      * @param value value
      * @param inter interpolation data (gradient)
      */
-    void insertDataSet( Data *data, double key, double value, double inter ) const;
+    void insertDataSet( Data* data, double key, double value, double inter ) const;
 
     /**
      * @brief Calculates interpolation data (gradient).
@@ -226,7 +226,7 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Table operator* ( double val, const Table &table )
+inline Table operator* ( double val, const Table& table )
 {
     return ( table * val );
 }

@@ -72,8 +72,8 @@ Table::Table( const double key_values[],
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table::Table( const std::vector<double> &key_values,
-              const std::vector<double> &table_data )
+Table::Table( const std::vector<double>& key_values,
+              const std::vector<double>& table_data )
 {
     if ( key_values.size() == table_data.size() )
     {
@@ -99,7 +99,7 @@ Table::Table( const std::vector<double> &key_values,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table::Table( const char *str )
+Table::Table( const char* str )
 {
     std::vector<double> key_values_tmp;
     std::vector<double> table_data_tmp;
@@ -478,7 +478,7 @@ std::string Table::toString()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table Table::operator+ ( const Table &table ) const
+Table Table::operator+ ( const Table& table ) const
 {
     Table result;
     Data temp;
@@ -541,7 +541,7 @@ void Table::insertDataSet( double key, double value, double inter )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::insertDataSet( Data *data, double key, double value, double inter ) const
+void Table::insertDataSet( Data* data, double key, double value, double inter ) const
 {
     data->insert( std::pair< double, std::pair<double, double> >(
         key, std::pair<double, double>( value, inter )
