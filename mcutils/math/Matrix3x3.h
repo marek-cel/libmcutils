@@ -155,7 +155,7 @@ public:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix3x3 operator* ( double value, const Matrix3x3& matrix )
+inline Matrix3x3 operator*( double value, const Matrix3x3& matrix )
 {
     return ( matrix * value );
 }
