@@ -88,8 +88,9 @@ public:
     }
 
     /**
-     * @brief setFromString
-     * @param str
+     * @brief Sets matrix items from string.
+     * Values in the given string should be separated with whitespaces.
+     * @param str given string
      */
     void setFromString( const char* str )
     {
@@ -159,7 +160,7 @@ public:
         {
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                if ( r > 0 || c >  0 ) ss << " ";
+                if ( r > 0 || c >  0 ) ss << "\t";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
                 ss << items_[ r * cols_ + c ];

@@ -475,7 +475,7 @@ TEST_F(TestMatrix, CanConvertToString)
     m0(2,1) = 8.0;
     m0(2,2) = 9.0;
 
-    EXPECT_STREQ( m0.toString().c_str(), "1 2 3 \n4 5 6 \n7 8 9" );
+    EXPECT_STREQ( m0.toString().c_str(), "1\t2\t3\t\n4\t5\t6\t\n7\t8\t9" );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
