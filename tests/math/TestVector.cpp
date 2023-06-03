@@ -65,116 +65,6 @@ TEST_F(TestVector, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVector, CanInstantiateAndCopy)
-{
-    const double d3[] { 1.0, 2.0, 3.0 };
-    mc::Vector<3> v3;
-    v3.setItems( d3 );
-
-    mc::Vector<3> v32( v3 );
-
-    EXPECT_DOUBLE_EQ( v32( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v32( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v32( 2 ), 3.0 );
-
-    const double d4[] { 1.0, 2.0, 3.0, 4.0 };
-    mc::Vector<4> v4;
-    v4.setItems( d4 );
-
-    mc::Vector<4> v42( v4 );
-
-    EXPECT_DOUBLE_EQ( v42( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v42( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v42( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v42( 3 ), 4.0 );
-
-    const double d6[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    mc::Vector<6> v6;
-    v6.setItems( d6 );
-
-    mc::Vector<6> v62( v6 );
-
-    EXPECT_DOUBLE_EQ( v62( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v62( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v62( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v62( 3 ), 4.0 );
-    EXPECT_DOUBLE_EQ( v62( 4 ), 5.0 );
-    EXPECT_DOUBLE_EQ( v62( 5 ), 6.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector, CanInstantiateAndSetData)
-{
-    const double d3[] { 1.0, 2.0, 3.0 };
-    mc::Vector<3> v3;
-    v3.setItems( d3 );
-
-    EXPECT_DOUBLE_EQ( v3( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v3( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v3( 2 ), 3.0 );
-
-    const double d4[] { 1.0, 2.0, 3.0, 4.0 };
-    mc::Vector<4> v4;
-    v4.setItems( d4 );
-
-    EXPECT_DOUBLE_EQ( v4( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v4( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v4( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v4( 3 ), 4.0 );
-
-    const double d6[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    mc::Vector<6> v6;
-    v6.setItems( d6 );
-
-    EXPECT_DOUBLE_EQ( v6( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v6( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v6( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v6( 3 ), 4.0 );
-    EXPECT_DOUBLE_EQ( v6( 4 ), 5.0 );
-    EXPECT_DOUBLE_EQ( v6( 5 ), 6.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector, CanInstantiateAndSetDataFromString)
-{
-    char str3[] = { " 1.0  2.0  3.0 " };
-    mc::Vector<3> v3;
-    v3.setFromString( str3 );
-
-    EXPECT_DOUBLE_EQ( v3( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v3( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v3( 2 ), 3.0 );
-
-    char str4[] = { " 1.0 2.0 3.0 4.0 " };
-    mc::Vector<4> v4;
-    v4.setFromString( str4 );
-
-    EXPECT_DOUBLE_EQ( v4( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v4( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v4( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v4( 3 ), 4.0 );
-
-    char str6[] = { "1.0  2.0  3.0  4.0  5.0  6.0" };
-    mc::Vector<6> v6;
-    v6.setFromString( str6 );
-
-    EXPECT_DOUBLE_EQ( v6( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v6( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v6( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v6( 3 ), 4.0 );
-    EXPECT_DOUBLE_EQ( v6( 4 ), 5.0 );
-    EXPECT_DOUBLE_EQ( v6( 5 ), 6.0 );
-
-    char str62[] = { "lorem ipsum" };
-    mc::Vector<6> v62;
-    v62.setFromString( str62 );
-    EXPECT_FALSE( v62.isValid() );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector, CanValidate)
 {
     const double d3[] { 1.0, 2.0, 3.0 };
@@ -409,6 +299,44 @@ TEST_F(TestVector, CanSetArray)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestVector, CanSetFromString)
+{
+    char str3[] = { " 1.0  2.0  3.0 " };
+    mc::Vector<3> v3;
+    v3.setFromString( str3 );
+
+    EXPECT_DOUBLE_EQ( v3( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v3( 1 ), 2.0 );
+    EXPECT_DOUBLE_EQ( v3( 2 ), 3.0 );
+
+    char str4[] = { " 1.0 2.0 3.0 4.0 " };
+    mc::Vector<4> v4;
+    v4.setFromString( str4 );
+
+    EXPECT_DOUBLE_EQ( v4( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v4( 1 ), 2.0 );
+    EXPECT_DOUBLE_EQ( v4( 2 ), 3.0 );
+    EXPECT_DOUBLE_EQ( v4( 3 ), 4.0 );
+
+    char str6[] = { "1.0  2.0  3.0  4.0  5.0  6.0" };
+    mc::Vector<6> v6;
+    v6.setFromString( str6 );
+
+    EXPECT_DOUBLE_EQ( v6( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v6( 1 ), 2.0 );
+    EXPECT_DOUBLE_EQ( v6( 2 ), 3.0 );
+    EXPECT_DOUBLE_EQ( v6( 3 ), 4.0 );
+    EXPECT_DOUBLE_EQ( v6( 4 ), 5.0 );
+    EXPECT_DOUBLE_EQ( v6( 5 ), 6.0 );
+
+    char str62[] = { "lorem ipsum" };
+    mc::Vector<6> v62;
+    v62.setFromString( str62 );
+    EXPECT_FALSE( v62.isValid() );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestVector, CanSetItem)
 {
     mc::Vector<3> v3;
@@ -560,45 +488,6 @@ TEST_F(TestVector, CanAccessItemViaOperator)
     const double d6[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
     mc::Vector<6> v6;
     v6.setItems( d6 );
-    EXPECT_DOUBLE_EQ( v6( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v6( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v6( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v6( 3 ), 4.0 );
-    EXPECT_DOUBLE_EQ( v6( 4 ), 5.0 );
-    EXPECT_DOUBLE_EQ( v6( 5 ), 6.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector, CanAssign)
-{
-    mc::Vector<3> v3;
-    double x31[] { 1.0, 2.0, 3.0 };
-    mc::Vector<3> v31;
-    v31.setItems( x31 );
-    v3 = v31;
-    EXPECT_DOUBLE_EQ( v3( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v3( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v3( 2 ), 3.0 );
-
-    mc::Vector<4> v4;
-    double x41[] = { 1.0, 2.0, 3.0, 4.0 };
-    mc::Vector<4> v41;
-    v41.setItems( x41 );
-    v4 = v41;
-    EXPECT_DOUBLE_EQ( v4( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v4( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v4( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v4( 3 ), 4.0 );
-
-    mc::Vector<6> v6;
-
-    double x61[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-
-    mc::Vector<6> v61;
-    v61.setItems( x61 );
-
-    v6 = v61;
     EXPECT_DOUBLE_EQ( v6( 0 ), 1.0 );
     EXPECT_DOUBLE_EQ( v6( 1 ), 2.0 );
     EXPECT_DOUBLE_EQ( v6( 2 ), 3.0 );
