@@ -36,28 +36,6 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-DegMinSec::DegMinSec()
-{
-    angle_ = 0.0;
-
-    deg_ = 0;
-    min_ = 0;
-    sec_ = 0.0;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-DegMinSec::DegMinSec( const DegMinSec& dms )
-{
-    angle_ = dms.angle_;
-
-    deg_ = dms.deg_;
-    min_ = dms.min_;
-    sec_ = dms.sec_;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 DegMinSec::DegMinSec( double angle )
 {
     setAngle( angle );
@@ -102,19 +80,6 @@ std::string DegMinSec::toString() const
     ss << std::setprecision( 2 ) << sec_ << " sec";
 
     return ss.str();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-DegMinSec& DegMinSec::operator= ( const DegMinSec& dms )
-{
-    angle_ = dms.angle_;
-
-    deg_ = dms.deg_;
-    min_ = dms.min_;
-    sec_ = dms.sec_;
-
-    return (*this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

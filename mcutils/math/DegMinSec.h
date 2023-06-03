@@ -36,15 +36,12 @@ namespace mc
 /**
  * @brief Degree-Minute-Second representation of angle class.
  */
-class MCUTILSAPI DegMinSec final
+class MCUTILSAPI DegMinSec
 {
 public:
 
     /** @brief Constructor. */
-    DegMinSec();
-
-    /** @brief Copy constructor. */
-    DegMinSec( const DegMinSec& dms );
+    DegMinSec() = default;
 
     /**
      * @brief Constructor.
@@ -77,22 +74,19 @@ public:
     /** @brief Returns string represtation of the angles. */
     std::string toString() const;
 
-    /** @brief Assignment operator. */
-    DegMinSec& operator= ( const DegMinSec& dms );
-
     /** @brief Equality operator. */
-    bool operator== ( const DegMinSec& dms ) const;
+    bool operator==( const DegMinSec& dms ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const DegMinSec& dms ) const;
+    bool operator!=( const DegMinSec& dms ) const;
 
 private:
 
-    double angle_;  ///< [rad] angle
+    double angle_ = 0.0;    ///< [rad] angle
 
-    int    deg_;    ///< degree part
-    int    min_;    ///< minute part (always greater than or equal to 0)
-    double sec_;    ///< second part (always greater than or equal to 0)
+    int    deg_ = 0;        ///< degree part
+    int    min_ = 0;        ///< minute part (always greater than or equal to 0)
+    double sec_ = 0.0;      ///< second part (always greater than or equal to 0)
 };
 
 } // namespace mc
