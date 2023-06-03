@@ -51,7 +51,7 @@ public:
         {
             for ( unsigned int c = 0; c < N; ++c )
             {
-                this->items_[ c*N + r ] = temp.items_[ r*N + c ];
+                this->elements_[ c*N + r ] = temp.elements_[ r*N + c ];
             }
         }
     }
@@ -157,7 +157,7 @@ protected:
 
                 for ( unsigned int i = 0; i < N; ++i )
                 {
-                    (*result)(r,c) += ( this->items_[ r*N + i ] * matrix(i,c) );
+                    (*result)(r,c) += ( this->elements_[ r*N + i ] * matrix(i,c) );
                 }
             }
         }

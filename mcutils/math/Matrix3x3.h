@@ -73,25 +73,25 @@ public:
     /** @brief Creates passive (alias) rotation matrix. */
     Matrix3x3( const Quaternion& qtrn );
 
-    inline double xx() const { return items_[0]; }
-    inline double xy() const { return items_[1]; }
-    inline double xz() const { return items_[2]; }
-    inline double yx() const { return items_[3]; }
-    inline double yy() const { return items_[4]; }
-    inline double yz() const { return items_[5]; }
-    inline double zx() const { return items_[6]; }
-    inline double zy() const { return items_[7]; }
-    inline double zz() const { return items_[8]; }
+    inline double xx() const { return elements_[0]; }
+    inline double xy() const { return elements_[1]; }
+    inline double xz() const { return elements_[2]; }
+    inline double yx() const { return elements_[3]; }
+    inline double yy() const { return elements_[4]; }
+    inline double yz() const { return elements_[5]; }
+    inline double zx() const { return elements_[6]; }
+    inline double zy() const { return elements_[7]; }
+    inline double zz() const { return elements_[8]; }
 
-    inline double& xx() { return items_[0]; }
-    inline double& xy() { return items_[1]; }
-    inline double& xz() { return items_[2]; }
-    inline double& yx() { return items_[3]; }
-    inline double& yy() { return items_[4]; }
-    inline double& yz() { return items_[5]; }
-    inline double& zx() { return items_[6]; }
-    inline double& zy() { return items_[7]; }
-    inline double& zz() { return items_[8]; }
+    inline double& xx() { return elements_[0]; }
+    inline double& xy() { return elements_[1]; }
+    inline double& xz() { return elements_[2]; }
+    inline double& yx() { return elements_[3]; }
+    inline double& yy() { return elements_[4]; }
+    inline double& yz() { return elements_[5]; }
+    inline double& zx() { return elements_[6]; }
+    inline double& zy() { return elements_[7]; }
+    inline double& zz() { return elements_[8]; }
 
     /**
      * @brief Sets items of the matrix.

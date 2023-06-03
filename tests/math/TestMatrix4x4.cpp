@@ -61,7 +61,7 @@ TEST_F(TestMatrix4x4, CanTranspose)
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix4x4.m
 
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -69,7 +69,7 @@ TEST_F(TestMatrix4x4, CanTranspose)
     };
 
     mc::Matrix4x4 m;
-    m.setItems( items );
+    m.setElements( elements );
 
     m.transpose();
 
@@ -95,7 +95,7 @@ TEST_F(TestMatrix4x4, CanTranspose)
 
 TEST_F(TestMatrix4x4, CanGetTransposed)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -103,7 +103,7 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
     };
 
     mc::Matrix4x4 m;
-    m.setItems( items );
+    m.setElements( elements );
 
     mc::Matrix4x4 m1 = m.getTransposed();
 
@@ -146,7 +146,7 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
 
 TEST_F(TestMatrix4x4, CanAdd)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -155,7 +155,7 @@ TEST_F(TestMatrix4x4, CanAdd)
 
     mc::Matrix4x4 m0;
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     mc::Matrix4x4 m2 = m0 + m1;
 
@@ -181,7 +181,7 @@ TEST_F(TestMatrix4x4, CanAdd)
 
 TEST_F(TestMatrix4x4, CanNegate)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -189,7 +189,7 @@ TEST_F(TestMatrix4x4, CanNegate)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     mc::Matrix4x4 m2 = -m1;
 
@@ -215,7 +215,7 @@ TEST_F(TestMatrix4x4, CanNegate)
 
 TEST_F(TestMatrix4x4, CanSubstract)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -224,7 +224,7 @@ TEST_F(TestMatrix4x4, CanSubstract)
 
     mc::Matrix4x4 m0;
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     mc::Matrix4x4 m2 = m0 - m1;
 
@@ -250,7 +250,7 @@ TEST_F(TestMatrix4x4, CanSubstract)
 
 TEST_F(TestMatrix4x4, CanMultiplyByScalar)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -258,7 +258,7 @@ TEST_F(TestMatrix4x4, CanMultiplyByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     mc::Matrix4x4 m = m1 * 2.0;
 
@@ -304,8 +304,8 @@ TEST_F(TestMatrix4x4, CanMultiplyByMatrix)
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
 
-    m1.setItems( x1 );
-    m2.setItems( x2 );
+    m1.setElements( x1 );
+    m2.setElements( x2 );
 
     mc::Matrix4x4 m = m1 * m2;
 
@@ -346,7 +346,7 @@ TEST_F(TestMatrix4x4, CanMultiplyByVector)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( x1 );
+    m1.setElements( x1 );
 
     mc::Vector4 v2;
     v2.setItems( x2 );
@@ -371,7 +371,7 @@ TEST_F(TestMatrix4x4, CanDivideByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( x1 );
+    m1.setElements( x1 );
     mc::Matrix4x4 m2 = m1 / 2.0;
 
     EXPECT_DOUBLE_EQ( m2(0,0),  1.0 );
@@ -405,7 +405,7 @@ TEST_F(TestMatrix4x4, CanUnaryAdd)
 
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
-    m2.setItems( x1 );
+    m2.setElements( x1 );
 
     m1 += m2;
 
@@ -440,7 +440,7 @@ TEST_F(TestMatrix4x4, CanUnarySubstract)
 
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
-    m2.setItems( x1 );
+    m2.setElements( x1 );
 
     m1 -= m2;
 
@@ -466,7 +466,7 @@ TEST_F(TestMatrix4x4, CanUnarySubstract)
 
 TEST_F(TestMatrix4x4, CanUnaryMultiplyByScalar)
 {
-    double items[] = {
+    double elements[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
@@ -474,7 +474,7 @@ TEST_F(TestMatrix4x4, CanUnaryMultiplyByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     m1 *= 2.0;
 
@@ -500,7 +500,7 @@ TEST_F(TestMatrix4x4, CanUnaryMultiplyByScalar)
 
 TEST_F(TestMatrix4x4, CanUnaryDivideByScalar)
 {
-    double items[] = {
+    double elements[] = {
         2.0,  4.0,  6.0,  8.0,
        10.0, 12.0, 14.0, 16.0,
        18.0, 20.0, 22.0, 24.0,
@@ -508,7 +508,7 @@ TEST_F(TestMatrix4x4, CanUnaryDivideByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.setItems( items );
+    m1.setElements( elements );
 
     m1 /= 2.0;
 

@@ -57,7 +57,7 @@ public:
     /** @return "true" if all items are valid */
     bool isValid() const
     {
-        return mc::isValid( items_, size_ );
+        return mc::isValid( elements_, size_ );
     }
 
     /**
@@ -68,11 +68,11 @@ public:
      * @param col item column number
      * @return matrix item of given indicies.
      */
-    double getItem( unsigned int row, unsigned int col ) const
+    double getElement( unsigned int row, unsigned int col ) const
     {
         if ( ( row < rows_ ) && ( col < cols_ ) )
         {
-            return items_[row * cols_ + col];
+            return elements_[row * cols_ + col];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
@@ -83,9 +83,9 @@ public:
      * Items index matche following scheme i = i_row * no_of_columns + i_col
      * @param items output array
      */
-    void getItems( double items[] )
+    void getElements( double elements[] )
     {
-        std::memcpy( items, items_, sizeof(items_) );
+        std::memcpy( elements, elements_, sizeof(elements_) );
     }
 
     /**
@@ -95,12 +95,12 @@ public:
      */
     void setFromString( const char* str )
     {
-        double items[size_];
+        double elements[size_];
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items [i] = std::numeric_limits<double>::quiet_NaN();
-            items_[i] = std::numeric_limits<double>::quiet_NaN();
+            elements [i] = std::numeric_limits<double>::quiet_NaN();
+            elements_[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
         std::stringstream ss( String::stripSpaces( str ) );
@@ -108,37 +108,37 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            ss >> items[i];
-            valid &= mc::isValid( items[i] );
+            ss >> elements[i];
+            valid &= mc::isValid( elements[i] );
         }
 
-        if ( valid ) setItems( items );
+        if ( valid ) setElements( elements );
     }
 
     /**
-     * @brief Sets matrix item of given indicies.
+     * @brief Sets matrix element of given indicies.
      * @param row item row number
      * @param col item column number
      * @param value item value
      * This function is bound-checked which may affect performance.
      * Throws an exception when row or column index is out of range.
      */
-    void setItem( unsigned int row, unsigned int col, double value )
+    void setElement( unsigned int row, unsigned int col, double value )
     {
         if ( ( row < rows_ ) && ( col < cols_ ) )
         {
-            items_[row * cols_ + col] = value;
+            elements_[row * cols_ + col] = value;
         }
     }
 
     /**
-     * @brief Sets matrix items from array.
+     * @brief Sets matrix elements from array.
      * Items index should match following scheme i = i_row * no_of_columns + i_col
      * @param items input array
      */
-    void setItems( double items[] )
+    void setElements( double elements[] )
     {
-        std::memcpy( items_, items, sizeof(items_) );
+        std::memcpy( elements_, elements, sizeof(elements_) );
     }
 
     /** @brief Swaps matrix rows. */
@@ -148,7 +148,7 @@ public:
         {
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                std::swap( items_[row1 * cols_ + c], items_[row2 * cols_ + c] );
+                std::swap( elements_[row1 * cols_ + c], elements_[row2 * cols_ + c] );
             }
         }
     }
@@ -165,7 +165,7 @@ public:
                 if ( r > 0 || c >  0 ) ss << "\t";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
-                ss << items_[r * cols_ + c];
+                ss << elements_[r * cols_ + c];
             }
         }
 
@@ -183,7 +183,7 @@ public:
      */
     inline double operator()( unsigned int row, unsigned int col ) const
     {
-        return items_[row * cols_ + col];
+        return elements_[row * cols_ + col];
     }
 
     /**
@@ -196,7 +196,7 @@ public:
      */
     inline double& operator()( unsigned int row, unsigned int col )
     {
-        return items_[row * cols_ + col];
+        return elements_[row * cols_ + col];
     }
 
     /** @brief Addition operator. */
@@ -282,7 +282,7 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            result = result && ( items_[i] == matrix.items_[i] );
+            result = result && ( elements_[i] == matrix.elements_[i] );
         }
 
         return result;
@@ -296,14 +296,14 @@ public:
 
 protected:
 
-    double items_[size_] = { 0.0 }; ///< matrix items
+    double elements_[size_] = { 0.0 }; ///< matrix items
 
     /** @brief Adds matrix. */
     void add( const Matrix<ROWS, COLS>& matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] += matrix.items_[i];
+            elements_[i] += matrix.elements_[i];
         }
     }
 
@@ -312,7 +312,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] = -items_[i];
+            elements_[i] = -elements_[i];
         }
     }
 
@@ -321,7 +321,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] -= matrix.items_[i];
+            elements_[i] -= matrix.elements_[i];
         }
     }
 
@@ -330,7 +330,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] *= value;
+            elements_[i] *= value;
         }
     }
 
@@ -343,7 +343,7 @@ protected:
 
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                (*result)(r) += ( items_[ r*cols_ + c ] * vect(c) );
+                (*result)(r) += ( elements_[ r*cols_ + c ] * vect(c) );
             }
         }
     }
@@ -353,7 +353,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] /= value;
+            elements_[i] /= value;
         }
     }
 };
