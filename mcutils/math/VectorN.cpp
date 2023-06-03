@@ -25,6 +25,7 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <utility>
 
 #include <mcutils/misc/Check.h>
 
@@ -35,10 +36,28 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN::VectorN()
-    : size_ ( 0 )
+VectorN::VectorN( const VectorN& vect )
+    : size_  ( vect.size_ )
     , items_ ( nullptr )
+{
+    items_ = new double[ size_ ];
+
+    setItems( vect.items_ );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN::VectorN( VectorN&& vect )
+    : size_  ( std::exchange( vect.size_, 0 ) )
+    , items_ ( std::exchange( vect.items_, nullptr ) )
 {}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN::~VectorN()
+{
+    if ( items_ ) { delete [] items_; } items_ = nullptr;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -47,26 +66,7 @@ VectorN::VectorN( unsigned int size )
     , items_ ( nullptr )
 {
     items_ = new double[ size_ ];
-
     zeroize();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN::VectorN( const VectorN& vect )
-    : size_ ( vect.size_ )
-    , items_ ( nullptr )
-{
-    items_ = new double[ size_ ];
-
-    setArray( vect.items_ );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN::~VectorN()
-{
-    if ( items_ ) { delete [] items_; } items_ = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +131,7 @@ double VectorN::getItem( unsigned int index ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::setArray( const double items[] )
+void VectorN::setItems( const double items[] )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -267,7 +267,19 @@ void VectorN::divideByValue( double value )
 VectorN& VectorN::operator= ( const VectorN& vect )
 {
     resize( vect.size_ );
-    setArray( vect.items_ );
+    setItems( vect.items_ );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator= ( VectorN&& vect )
+{
+    if ( items_ ) { delete [] items_; } items_ = nullptr;
+
+    size_  = std::exchange( vect.size_, 0 );
+    items_ = std::exchange( vect.items_, nullptr );
+
     return (*this);
 }
 

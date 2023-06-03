@@ -66,6 +66,25 @@ TEST_F(TestVectorN, CanInstantiateAndCopy)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestVectorN, CanInstantiateAndMove)
+{
+    mc::VectorN v1( 3 );
+
+    v1( 0 ) = 1.0;
+    v1( 1 ) = 2.0;
+    v1( 2 ) = 3.0;
+
+    mc::VectorN v2( std::move( v1 ) );
+
+    EXPECT_DOUBLE_EQ( v2( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v2( 1 ), 2.0 );
+    EXPECT_DOUBLE_EQ( v2( 2 ), 3.0 );
+
+    EXPECT_EQ( v2.getSize(), 3 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestVectorN, CanValidate)
 {
     mc::VectorN v1( 3 );
@@ -161,7 +180,7 @@ TEST_F(TestVectorN, CanNormalize)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVectorN, CanGetArray)
+TEST_F(TestVectorN, CanGetItems)
 {
     mc::VectorN v1( 4 );
 
@@ -210,13 +229,13 @@ TEST_F(TestVectorN, CanGetItemOutOfRange)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVectorN, CanSetArray)
+TEST_F(TestVectorN, CanSetItems)
 {
     mc::VectorN v1( 3 );
 
     double x[] = { 1.0, 2.0, 3.0 };
 
-    v1.setArray( x );
+    v1.setItems( x );
 
     EXPECT_DOUBLE_EQ( v1( 0 ), 1.0 );
     EXPECT_DOUBLE_EQ( v1( 1 ), 2.0 );
@@ -255,7 +274,11 @@ TEST_F(TestVectorN, CanSetValue)
 
 TEST_F(TestVectorN, CanGetSize)
 {
-    // TODO
+    mc::VectorN v0;
+    EXPECT_EQ( v0.getSize(), 0 );
+
+    mc::VectorN v3( 3 );
+    EXPECT_EQ( v3.getSize(), 3 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -275,7 +298,14 @@ TEST_F(TestVectorN, CanConvertToString)
 
 TEST_F(TestVectorN, CanResize)
 {
-    // TODO
+    mc::VectorN v;
+    EXPECT_EQ( v.getSize(), 0 );
+
+    v.resize( 3 );
+    EXPECT_EQ( v.getSize(), 3 );
+
+    v.resize( 6 );
+    EXPECT_EQ( v.getSize(), 6 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -328,10 +358,10 @@ TEST_F(TestVectorN, CanAssign)
     mc::VectorN v3( 3 );
     mc::VectorN v4( 3 );
 
-    v1.setArray( x1 );
-    v2.setArray( x2 );
-    v3.setArray( x3 );
-    v4.setArray( x4 );
+    v1.setItems( x1 );
+    v2.setItems( x2 );
+    v3.setItems( x3 );
+    v4.setItems( x4 );
 
     v = v1;
     EXPECT_DOUBLE_EQ( v( 0 ), 1.0 );
@@ -356,6 +386,48 @@ TEST_F(TestVectorN, CanAssign)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestVectorN, CanAssignAndMove)
+{
+    mc::VectorN v( 3 );
+
+    double x1[] = { 1.0, 0.0, 0.0 };
+    double x2[] = { 0.0, 1.0, 0.0 };
+    double x3[] = { 0.0, 0.0, 1.0 };
+    double x4[] = { 1.0, 2.0, 3.0 };
+
+    mc::VectorN v1( 3 );
+    mc::VectorN v2( 3 );
+    mc::VectorN v3( 3 );
+    mc::VectorN v4( 3 );
+
+    v1.setItems( x1 );
+    v2.setItems( x2 );
+    v3.setItems( x3 );
+    v4.setItems( x4 );
+
+    v = std::move( v1 );
+    EXPECT_DOUBLE_EQ( v( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v( 1 ), 0.0 );
+    EXPECT_DOUBLE_EQ( v( 2 ), 0.0 );
+
+    v = std::move( v2 );
+    EXPECT_DOUBLE_EQ( v( 0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( v( 1 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v( 2 ), 0.0 );
+
+    v = std::move( v3 );
+    EXPECT_DOUBLE_EQ( v( 0 ), 0.0 );
+    EXPECT_DOUBLE_EQ( v( 1 ), 0.0 );
+    EXPECT_DOUBLE_EQ( v( 2 ), 1.0 );
+
+    v = std::move( v4 );
+    EXPECT_DOUBLE_EQ( v( 0 ), 1.0 );
+    EXPECT_DOUBLE_EQ( v( 1 ), 2.0 );
+    EXPECT_DOUBLE_EQ( v( 2 ), 3.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestVectorN, CanAdd)
 {
     double x1[] = { 1.0, 2.0, 3.0 };
@@ -368,10 +440,10 @@ TEST_F(TestVectorN, CanAdd)
     mc::VectorN v3( 3 );
     mc::VectorN v4( 3 );
 
-    v1.setArray( x1 );
-    v2.setArray( x2 );
-    v3.setArray( x3 );
-    v4.setArray( x4 );
+    v1.setItems( x1 );
+    v2.setItems( x2 );
+    v3.setItems( x3 );
+    v4.setItems( x4 );
 
     mc::VectorN v12 = v1 + v2;
     mc::VectorN v34 = v3 + v4;
@@ -406,7 +478,7 @@ TEST_F(TestVectorN, CanNegate)
     double x[] = { 1.0, 2.0, 3.0 };
 
     mc::VectorN v1( 3 );
-    v1.setArray( x );
+    v1.setItems( x );
 
     mc::VectorN v2 = -v1;
 
@@ -425,8 +497,8 @@ TEST_F(TestVectorN, CanSubstract)
     mc::VectorN v1( 3 );
     mc::VectorN v2( 3 );
 
-    v1.setArray( x1 );
-    v2.setArray( x2 );
+    v1.setItems( x1 );
+    v2.setItems( x2 );
 
     mc::VectorN v = v1 - v2;
 
@@ -457,7 +529,7 @@ TEST_F(TestVectorN, CanMultiplyByScalar)
 
     mc::VectorN v1( 3 );
 
-    v1.setArray( x );
+    v1.setItems( x );
 
     mc::VectorN v2 = v1 * 2.0;
 
@@ -474,7 +546,7 @@ TEST_F(TestVectorN, CandivideByScalar)
 
     mc::VectorN v1( 3 );
 
-    v1.setArray( x );
+    v1.setItems( x );
 
     mc::VectorN v2 = v1 / 2.0;
 
@@ -493,8 +565,8 @@ TEST_F(TestVectorN, CanUnaryAdd)
     mc::VectorN v0( 3 );
     mc::VectorN v1( 3 );
 
-    v0.setArray( x0 );
-    v1.setArray( x1 );
+    v0.setItems( x0 );
+    v1.setItems( x1 );
 
     v0 += v1;
 
@@ -513,8 +585,8 @@ TEST_F(TestVectorN, CanUnarySubstract)
     mc::VectorN v0( 3 );
     mc::VectorN v1( 3 );
 
-    v0.setArray( x0 );
-    v1.setArray( x1 );
+    v0.setItems( x0 );
+    v1.setItems( x1 );
 
     v0 -= v1;
 
@@ -531,7 +603,7 @@ TEST_F(TestVectorN, CanUnaryMultiplyByScalar)
 
     mc::VectorN v0( 3 );
 
-    v0.setArray( x0 );
+    v0.setItems( x0 );
 
     v0 *= 2.0;
 
@@ -548,7 +620,7 @@ TEST_F(TestVectorN, CanUnaryDivideByScalar)
 
     mc::VectorN v0( 3 );
 
-    v0.setArray( x0 );
+    v0.setItems( x0 );
 
     v0 /= 2.0;
 

@@ -41,19 +41,22 @@ class MCUTILSAPI VectorN
 public:
 
     /** @brief Constructor. */
-    VectorN();
+    VectorN() = default;
+
+    /** @brief Copy constructor. */
+    VectorN( const VectorN& vect );
+
+    /** @brief Move constructor. */
+    VectorN( VectorN&& vect );
+
+    /** @brief Destructor. */
+    virtual ~VectorN();
 
     /**
      * @brief Constructor.
      * @param size vector size
      */
     VectorN( unsigned int size );
-
-    /** @brief Copy constructor. */
-    VectorN( const VectorN& vect );
-
-    /** @brief Destructor. */
-    virtual ~VectorN();
 
     /** @return TRUE if all items are valid */
     bool isValid() const;
@@ -76,7 +79,7 @@ public:
     double getItem( unsigned int index ) const;
 
     /** @brief Sets vector items from given array. */
-    void setArray( const double items[] );
+    void setItems( const double items[] );
 
     /**
      * @brief Sets vector item of given indicies.
@@ -102,6 +105,66 @@ public:
     /** @brief Sets all vector items to zero. */
     void zeroize();
 
+    /**
+     * @brief Items accessor.
+     * Please notice that this operator is NOT bound-checked.
+     * If you want bound-checked item accessor use getItem(int) or
+     * setItem(int,double) functions.
+     */
+    inline double operator()( unsigned int index ) const
+    {
+        return items_[ index ];
+    }
+
+    /**
+     * @brief Items accessor.
+     * Please notice that this operator is NOT bound-checked.
+     * If you want bound-checked item accessor use getItem(int) or
+     * setItem(int,double) functions.
+     */
+    inline double& operator()( unsigned int index )
+    {
+        return items_[ index ];
+    }
+
+    /** @brief Assignment operator. */
+    VectorN& operator=( const VectorN& vect );
+
+    /** @brief Move assignment operator. */
+    VectorN& operator=( VectorN&& vect );
+
+    /** @brief Addition operator. */
+    VectorN operator+( const VectorN& vect ) const;
+
+    /** @brief Negation operator. */
+    VectorN operator-() const;
+
+    /** @brief Subtraction operator. */
+    VectorN operator-( const VectorN& vect ) const;
+
+    /** @brief Multiplication operator (by scalar). */
+    VectorN operator*( double value ) const;
+
+    /** @brief Division operator (by scalar). */
+    VectorN operator/( double value ) const;
+
+    /** @brief Unary addition operator. */
+    VectorN& operator+=( const VectorN& vect );
+
+    /** @brief Unary subtraction operator. */
+    VectorN& operator-=( const VectorN& vect );
+
+    /** @brief Unary multiplication operator (by scalar). */
+    VectorN& operator*=( double value );
+
+    /** @brief Unary division operator (by scalar). */
+    VectorN& operator/=( double value );
+
+protected:
+
+    unsigned int size_ = 0;     ///< vector size
+    double* items_ = nullptr;   ///< vector items
+
     /** @brief Adds vector. */
     void add( const VectorN& vect );
 
@@ -116,69 +179,12 @@ public:
 
     /** @brief Divides by value. */
     void divideByValue( double value );
-
-    /**
-     * @brief Items accessor.
-     * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int) or
-     * setItem(int,double) functions.
-     */
-    inline double operator() ( unsigned int index ) const
-    {
-        return items_[ index ];
-    }
-
-    /**
-     * @brief Items accessor.
-     * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int) or
-     * setItem(int,double) functions.
-     */
-    inline double& operator() ( unsigned int index )
-    {
-        return items_[ index ];
-    }
-
-    /** @brief Assignment operator. */
-    VectorN& operator= ( const VectorN& vect );
-
-    /** @brief Addition operator. */
-    VectorN operator+ ( const VectorN& vect ) const;
-
-    /** @brief Negation operator. */
-    VectorN operator- () const;
-
-    /** @brief Subtraction operator. */
-    VectorN operator- ( const VectorN& vect ) const;
-
-    /** @brief Multiplication operator (by scalar). */
-    VectorN operator* ( double value ) const;
-
-    /** @brief Division operator (by scalar). */
-    VectorN operator/ ( double value ) const;
-
-    /** @brief Unary addition operator. */
-    VectorN& operator+= ( const VectorN& vect );
-
-    /** @brief Unary subtraction operator. */
-    VectorN& operator-= ( const VectorN& vect );
-
-    /** @brief Unary multiplication operator (by scalar). */
-    VectorN& operator*= ( double value );
-
-    /** @brief Unary division operator (by scalar). */
-    VectorN& operator/= ( double value );
-
-protected:
-
-    unsigned int size_;     ///< vector size
-    double *items_;         ///< vector items
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline VectorN operator* ( double val, const VectorN& vect )
+inline VectorN operator*( double val, const VectorN& vect )
 {
     return ( vect * val );
 }
