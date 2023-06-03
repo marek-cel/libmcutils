@@ -39,7 +39,7 @@ namespace mc
 /**
  * @brief 2D table and bilinear interpolation class.
  */
-class MCUTILSAPI Table2 final
+class MCUTILSAPI Table2
 {
 public:
 
@@ -55,28 +55,44 @@ public:
                                   double col_val = 0.0 );
 
     /** @brief Constructor. */
-    Table2();
+    Table2() = default;
 
-    /** @brief Constructor. */
+    /** @brief Copy constructor. */
+    Table2( const Table2& table );
+
+    /** @brief Move constructor. */
+    Table2( Table2&& table ) noexcept;
+
+    /** @brief Destructor. */
+    ~Table2();
+
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * Table data index should match following scheme i = i_row * no_of_columns + i_col
+     * @param row_values rows key values ordered array
+     * @param col_values columns key values ordered array
+     * @param table_data table values ordered array
+     * @param rows number of rows
+     * @param cols number of columns
+     */
     Table2( const double row_values[],
             const double col_values[],
             const double table_data[],
             unsigned int rows,
             unsigned int cols );
 
-    /** @brief Constructor. */
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * Table data index should match following scheme i = i_row * no_of_columns + i_col
+     * @param row_values rows key values ordered vector
+     * @param col_values columns key values ordered vector
+     * @param table_data table values ordered vector
+     */
     Table2( const std::vector<double>& row_values,
             const std::vector<double>& col_values,
             const std::vector<double>& table_data );
-
-    /** @brief Copy constructor. */
-    Table2( const Table2& table );
-
-    /** @brief Constructor. */
-    Table2( const char* str );
-
-    /** @brief Destructor. */
-    ~Table2();
 
     inline unsigned int getRows() const { return rows_; }
     inline unsigned int getCols() const { return cols_; }
@@ -138,12 +154,49 @@ public:
     void multiplyValues( double factor );
 
     /**
+     * @brief Sets table data.
+     * Table data index should match following scheme i = i_row * no_of_columns + i_col
+     * @param row_values rows key values ordered array
+     * @param col_values columns key values ordered array
+     * @param table_data table values ordered array
+     * @param rows number of rows
+     * @param cols number of columns
+     */
+    void setData( const double row_values[],
+                  const double col_values[],
+                  const double table_data[],
+                  unsigned int rows,
+                  unsigned int cols );
+
+    /**
+     * @brief Sets table data.
+     * This constructor is used to initialize table with data.
+     * Table data index should match following scheme i = i_row * no_of_columns + i_col
+     * @param row_values rows key values ordered vector
+     * @param col_values columns key values ordered vector
+     * @param table_data table values ordered vector
+     */
+    void setData( const std::vector<double>& row_values,
+                  const std::vector<double>& col_values,
+                  const std::vector<double>& table_data );
+
+    /**
+     * @brief Sets table data from string.
+     * Values in the given string should be separated with whitespaces.
+     * @param str given string
+     */
+    void setFromString( const char* str );
+
+    /**
      * @brief Returns string representation of the table.
      */
     std::string toString();
 
     /** @brief Assignment operator. */
-    Table2& operator= ( const Table2& table );
+    Table2& operator=( const Table2& table );
+
+    /** @brief Move assignment operator. */
+    Table2& operator=( Table2&& table );
 
 private:
 

@@ -49,38 +49,13 @@ Table2 Table2::oneRecordTable( double val, double row_val, double col_val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2() {}
-
-////////////////////////////////////////////////////////////////////////////////
-
 Table2::Table2( const double row_values[],
                 const double col_values[],
                 const double table_data[],
                 unsigned int rows,
                 unsigned int cols )
-    : rows_ ( rows )
-    , cols_ ( cols )
-    , size_ ( rows*cols )
 {
-    if ( size_ > 0 )
-    {
-        row_values_ = new double [ rows_ ];
-        col_values_ = new double [ cols_ ];
-        table_data_ = new double [ size_ ];
-
-        inter_data_ = new double [ size_ ];
-
-        for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
-        for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            table_data_[ i ] = table_data[ i ];
-            inter_data_[ i ] = 0.0;
-        }
-
-        updateInterpolationData();
-    }
+    setData( row_values, col_values, table_data, rows, cols );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,33 +64,7 @@ Table2::Table2( const std::vector<double>& row_values,
                 const std::vector<double>& col_values,
                 const std::vector<double>& table_data )
 {
-    if ( row_values.size() * col_values.size() == table_data.size() )
-    {
-        size_ = static_cast< unsigned int >( table_data.size() );
-
-        if ( size_ > 0 )
-        {
-            rows_ = static_cast<unsigned int>( row_values.size() );
-            cols_ = static_cast<unsigned int>( col_values.size() );
-
-            row_values_ = new double [ rows_ ];
-            col_values_ = new double [ cols_ ];
-            table_data_ = new double [ size_ ];
-
-            inter_data_ = new double [ size_ ];
-
-            for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
-            for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
-
-            for ( unsigned int i = 0; i < size_; ++i )
-            {
-                table_data_[ i ] = table_data[ i ];
-                inter_data_[ i ] = 0.0;
-            }
-
-            updateInterpolationData();
-        }
-    }
+    setData( row_values, col_values, table_data );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,58 +95,17 @@ Table2::Table2( const Table2& table )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2( const char* str )
-{
-    std::vector<double> row_values_tmp;
-    std::vector<double> col_values_tmp;
-    std::vector<double> table_data_tmp;
+Table2::Table2( Table2&& table ) noexcept
+    : rows_( std::exchange( table.rows_, 0 ) )
+    , cols_( std::exchange( table.cols_, 0 ) )
+    , size_( std::exchange( table.size_, 0 ) )
 
-    std::stringstream ss( String::stripSpaces( str ) );
-    std::stringstream sl( String::getFirstLine( ss.str() ) );
+    , row_values_( std::exchange( table.row_values_, nullptr ) )
+    , col_values_( std::exchange( table.col_values_, nullptr ) )
+    , table_data_( std::exchange( table.table_data_, nullptr ) )
 
-    bool valid = true;
-
-    // cols keys
-    while ( !sl.eof() && valid )
-    {
-        double key = std::numeric_limits<double>::quiet_NaN();
-        sl >> key; // sic!
-        ss >> key; // sic!
-        valid &= mc::isValid( key );
-        col_values_tmp.push_back( key );
-    }
-
-    // table rows
-    while ( !ss.eof() && valid )
-    {
-        double key = std::numeric_limits<double>::quiet_NaN();
-        ss >> key;
-        valid &= mc::isValid( key );
-        row_values_tmp.push_back( key );
-
-        // table data
-        for ( unsigned int i = 0; i < col_values_tmp.size(); i++ )
-        {
-            double val = std::numeric_limits<double>::quiet_NaN();
-            ss >> val;
-            valid &= mc::isValid( val );
-            table_data_tmp.push_back( val );
-        }
-    }
-
-    std::vector<double> row_values { std::numeric_limits<double>::quiet_NaN() };
-    std::vector<double> col_values { std::numeric_limits<double>::quiet_NaN() };
-    std::vector<double> table_data { std::numeric_limits<double>::quiet_NaN() };
-
-    if ( valid )
-    {
-        row_values = row_values_tmp;
-        col_values = col_values_tmp;
-        table_data = table_data_tmp;
-    }
-
-    *this = Table2( row_values, col_values, table_data );
-}
+    , inter_data_( std::exchange( table.inter_data_, nullptr ) )
+{}
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -399,6 +307,129 @@ void Table2::multiplyValues( double factor )
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void Table2::setData( const double row_values[],
+                      const double col_values[],
+                      const double table_data[],
+                      unsigned int rows,
+                      unsigned int cols)
+{
+    rows_ = rows;
+    cols_ = cols;
+    size_ = rows*cols;
+
+    if ( size_ > 0 )
+    {
+        row_values_ = new double [ rows_ ];
+        col_values_ = new double [ cols_ ];
+        table_data_ = new double [ size_ ];
+
+        inter_data_ = new double [ size_ ];
+
+        for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
+        for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            table_data_[ i ] = table_data[ i ];
+            inter_data_[ i ] = 0.0;
+        }
+
+        updateInterpolationData();
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table2::setData( const std::vector<double>& row_values,
+                      const std::vector<double>& col_values,
+                      const std::vector<double>& table_data )
+{
+    if ( row_values.size() * col_values.size() == table_data.size() )
+    {
+        size_ = static_cast< unsigned int >( table_data.size() );
+
+        if ( size_ > 0 )
+        {
+            rows_ = static_cast<unsigned int>( row_values.size() );
+            cols_ = static_cast<unsigned int>( col_values.size() );
+
+            row_values_ = new double [ rows_ ];
+            col_values_ = new double [ cols_ ];
+            table_data_ = new double [ size_ ];
+
+            inter_data_ = new double [ size_ ];
+
+            for ( unsigned int i = 0; i < rows_; ++i ) row_values_[ i ] = row_values[ i ];
+            for ( unsigned int i = 0; i < cols_; ++i ) col_values_[ i ] = col_values[ i ];
+
+            for ( unsigned int i = 0; i < size_; ++i )
+            {
+                table_data_[ i ] = table_data[ i ];
+                inter_data_[ i ] = 0.0;
+            }
+
+            updateInterpolationData();
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table2::setFromString( const char* str )
+{
+    std::vector<double> row_values_tmp;
+    std::vector<double> col_values_tmp;
+    std::vector<double> table_data_tmp;
+
+    std::stringstream ss( String::stripSpaces( str ) );
+    std::stringstream sl( String::getFirstLine( ss.str() ) );
+
+    bool valid = true;
+
+    // cols keys
+    while ( !sl.eof() && valid )
+    {
+        double key = std::numeric_limits<double>::quiet_NaN();
+        sl >> key; // sic!
+        ss >> key; // sic!
+        valid &= mc::isValid( key );
+        col_values_tmp.push_back( key );
+    }
+
+    // table rows
+    while ( !ss.eof() && valid )
+    {
+        double key = std::numeric_limits<double>::quiet_NaN();
+        ss >> key;
+        valid &= mc::isValid( key );
+        row_values_tmp.push_back( key );
+
+        // table data
+        for ( unsigned int i = 0; i < col_values_tmp.size(); i++ )
+        {
+            double val = std::numeric_limits<double>::quiet_NaN();
+            ss >> val;
+            valid &= mc::isValid( val );
+            table_data_tmp.push_back( val );
+        }
+    }
+
+    std::vector<double> row_values { std::numeric_limits<double>::quiet_NaN() };
+    std::vector<double> col_values { std::numeric_limits<double>::quiet_NaN() };
+    std::vector<double> table_data { std::numeric_limits<double>::quiet_NaN() };
+
+    if ( valid )
+    {
+        row_values = row_values_tmp;
+        col_values = col_values_tmp;
+        table_data = table_data_tmp;
+    }
+
+    setData( row_values, col_values, table_data );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 std::string Table2::toString()
 {
     std::stringstream ss;
@@ -430,7 +461,7 @@ std::string Table2::toString()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2& Table2::operator= ( const Table2& table )
+Table2& Table2::operator=( const Table2& table )
 {
     if ( this != &table )
     {
@@ -461,6 +492,28 @@ Table2& Table2::operator= ( const Table2& table )
             }
         }
     }
+
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Table2& Table2::operator=( Table2&& table )
+{
+    if ( row_values_ ) { delete [] row_values_; } row_values_ = nullptr;
+    if ( col_values_ ) { delete [] col_values_; } col_values_ = nullptr;
+    if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
+    if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
+
+    rows_ = std::exchange( table.rows_, 0 );
+    cols_ = std::exchange( table.cols_, 0 );
+    size_ = std::exchange( table.size_, 0 );
+
+    row_values_ = std::exchange( table.row_values_, nullptr );
+    col_values_ = std::exchange( table.col_values_, nullptr );
+    table_data_ = std::exchange( table.table_data_, nullptr );
+
+    inter_data_ = std::exchange( table.inter_data_, nullptr );
 
     return (*this);
 }

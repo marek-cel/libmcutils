@@ -52,6 +52,64 @@ TEST_F(TestTable2, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestTable2, CanInstantiateAndCopy)
+{
+    // z = x^2 + y - 1
+    std::vector< double > r { -1.0,  0.0,  1.0,  2.0 };
+    std::vector< double > c {  0.0,  1.0 };
+    std::vector< double > v {  0.0,  1.0,
+                              -1.0,  0.0,
+                               0.0,  1.0,
+                               3.0,  4.0 };
+
+    mc::Table2 tab1( r, c, v );
+
+    mc::Table2 tab( tab1 );
+
+    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
+
+    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
+    {
+        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
+        {
+             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+        }
+    }
+
+    EXPECT_EQ( tab.getRows(), 4 );
+    EXPECT_EQ( tab.getCols(), 2 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable2, CanInstantiateAndMove)
+{
+    // z = x^2 + y - 1
+    std::vector< double > r { -1.0,  0.0,  1.0,  2.0 };
+    std::vector< double > c {  0.0,  1.0 };
+    std::vector< double > v {  0.0,  1.0,
+                              -1.0,  0.0,
+                               0.0,  1.0,
+                               3.0,  4.0 };
+
+    mc::Table2 tab( std::move(mc::Table2( r, c, v )) );
+
+    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
+
+    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
+    {
+        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
+        {
+             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+        }
+    }
+
+    EXPECT_EQ( tab.getRows(), 4 );
+    EXPECT_EQ( tab.getCols(), 2 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestTable2, CanInstantiateAndSetDataFromArray)
 {
     // z = x^2 + y - 1
@@ -104,70 +162,6 @@ TEST_F(TestTable2, CanInstantiateAndSetDataFromVector)
 
     EXPECT_EQ( tab.getRows(), 4 );
     EXPECT_EQ( tab.getCols(), 2 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestTable2, CanInstantiateAndCopy)
-{
-    // z = x^2 + y - 1
-    std::vector< double > r { -1.0,  0.0,  1.0,  2.0 };
-    std::vector< double > c {  0.0,  1.0 };
-    std::vector< double > v {  0.0,  1.0,
-                              -1.0,  0.0,
-                               0.0,  1.0,
-                               3.0,  4.0 };
-
-    mc::Table2 tab1( r, c, v );
-
-    mc::Table2 tab( tab1 );
-
-    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
-
-    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
-    {
-        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
-        {
-             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
-        }
-    }
-
-    EXPECT_EQ( tab.getRows(), 4 );
-    EXPECT_EQ( tab.getCols(), 2 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestTable2, CanInstantiateAndSetDataFromString)
-{
-    char str[] =
-    { R"##(
-             1.0  2.0  3.0
-        1.0  2.0  3.0  4.0
-        2.0  3.0  4.0  5.0
-    )##" };
-
-    mc::Table2 tab( str );
-
-    EXPECT_TRUE( tab.isValid() );
-
-    EXPECT_EQ( tab.getCols(), 3 );
-    EXPECT_EQ( tab.getRows(), 2 );
-
-    for ( unsigned int ir = 0; ir < 2; ++ir )
-    {
-        for ( unsigned int ic = 0; ic < 3; ++ic )
-        {
-            double xr = ir + 1;
-            double xc = ic + 1;
-            double y = xr + xc;
-            EXPECT_DOUBLE_EQ( tab.getValue( xr, xc ), y );
-        }
-    }
-
-    char str2[] = { "lorem ipsum" };
-    mc::Table2 tab2( str2 );
-    EXPECT_FALSE( tab2.isValid() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -504,6 +498,100 @@ TEST_F(TestTable2, CanMultiplyValues)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+TEST_F(TestTable2, CanSetDataFromArray)
+{
+    // z = x^2 + y - 1
+    double r[] { -1.0,  0.0,  1.0,  2.0 };
+    double c[] {  0.0,  1.0 };
+    double v[] {  0.0,  1.0,
+                 -1.0,  0.0,
+                  0.0,  1.0,
+                  3.0,  4.0 };
+
+    mc::Table2 tab;
+    tab.setData( r, c, v, 4, 2 );
+
+    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
+
+    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
+    {
+        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
+        {
+             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+        }
+    }
+
+    EXPECT_EQ( tab.getRows(), 4 );
+    EXPECT_EQ( tab.getCols(), 2 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable2, CanSetDataFromVector)
+{
+    // z = x^2 + y - 1
+    std::vector< double > r { -1.0,  0.0,  1.0,  2.0 };
+    std::vector< double > c {  0.0,  1.0 };
+    std::vector< double > v {  0.0,  1.0,
+                              -1.0,  0.0,
+                               0.0,  1.0,
+                               3.0,  4.0 };
+
+    mc::Table2 tab;
+    tab.setData( r, c, v );
+
+    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
+
+    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
+    {
+        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
+        {
+             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+        }
+    }
+
+    EXPECT_EQ( tab.getRows(), 4 );
+    EXPECT_EQ( tab.getCols(), 2 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable2, CanSetDataFromString)
+{
+    char str[] =
+    { R"##(
+             1.0  2.0  3.0
+        1.0  2.0  3.0  4.0
+        2.0  3.0  4.0  5.0
+    )##" };
+
+    mc::Table2 tab;
+    tab.setFromString( str );
+
+    EXPECT_TRUE( tab.isValid() );
+
+    EXPECT_EQ( tab.getCols(), 3 );
+    EXPECT_EQ( tab.getRows(), 2 );
+
+    for ( unsigned int ir = 0; ir < 2; ++ir )
+    {
+        for ( unsigned int ic = 0; ic < 3; ++ic )
+        {
+            double xr = ir + 1;
+            double xc = ic + 1;
+            double y = xr + xc;
+            EXPECT_DOUBLE_EQ( tab.getValue( xr, xc ), y );
+        }
+    }
+
+    char str2[] = { "lorem ipsum" };
+    mc::Table2 tab2;
+    tab2.setFromString( str2 );
+    EXPECT_FALSE( tab2.isValid() );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 TEST_F(TestTable2, CanConvertToString)
 {
     // z = x^2 + y - 1
@@ -535,6 +623,35 @@ TEST_F(TestTable2, CanAssign)
     mc::Table2 tab1( r, c, v );
 
     tab = tab1;
+
+    auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
+
+    for ( unsigned int ir = 0; ir < tab.getRows(); ++ir )
+    {
+        for ( unsigned int ic = 0; ic < tab.getCols(); ++ic )
+        {
+             EXPECT_DOUBLE_EQ( tab.getValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+        }
+    }
+
+    EXPECT_EQ( tab.getRows(), 4 );
+    EXPECT_EQ( tab.getCols(), 2 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable2, CanAssignAndMove)
+{
+    // z = x^2 + y - 1
+    std::vector< double > r { -1.0,  0.0,  1.0,  2.0 };
+    std::vector< double > c {  0.0,  1.0 };
+    std::vector< double > v {  0.0,  1.0,
+                              -1.0,  0.0,
+                               0.0,  1.0,
+                               3.0,  4.0 };
+
+    mc::Table2 tab;
+    tab = std::move(mc::Table2( r, c, v ));
 
     auto fun = [&](int ir, int ic){ return r[ir]*r[ir] + c[ic] - 1.0; };
 
