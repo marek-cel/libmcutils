@@ -58,10 +58,10 @@ HEADERS += \
     $$PWD/math/GaussJordan.h \
     $$PWD/math/Integrator.h \
     $$PWD/math/Math.h \
-    $$PWD/math/Matrix.h \
     $$PWD/math/Matrix3x3.h \
     $$PWD/math/Matrix4x4.h \
     $$PWD/math/Matrix6x6.h \
+    $$PWD/math/MatrixMxN.h \
     $$PWD/math/MatrixNxN.h \
     $$PWD/math/Quaternion.h \
     $$PWD/math/Random.h \
@@ -88,10 +88,10 @@ SOURCES += \
     $$PWD/math/SegPlaneIsect.cpp \
     $$PWD/math/Table.cpp \
     $$PWD/math/Table2.cpp \
+    $$PWD/math/Vector.cpp \
     $$PWD/math/Vector3.cpp \
     $$PWD/math/Vector4.cpp \
-    $$PWD/math/Vector6.cpp \
-    $$PWD/math/VectorN.cpp
+    $$PWD/math/Vector6.cpp
 
 ################################################################################
 

@@ -24,17 +24,9 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <cmath>
-#include <cstring>
-#include <limits>
-#include <sstream>
-#include <string>
-#include <utility>
-
 #include <mcutils/defs.h>
 
-#include <mcutils/misc/Check.h>
-#include <mcutils/misc/String.h>
+#include <string>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -42,162 +34,76 @@ namespace mc
 {
 
 /**
- * @brief Column vector base class template.
- * Column vector base class template which is using integer template parameters
- * to specify vector size. Such an approach does not allow to perform
- * mathematical operation between vectors which sizes do not match each other
- * as they are of different types.
- * @tparam SIZE vector size
+ * @brief Variable length dynamic allocated vector class.
  */
-template <unsigned int SIZE>
-class Vector
+class MCUTILSAPI Vector
 {
 public:
 
-    static constexpr unsigned int size_ = SIZE; ///< vector size
+    /** @brief Constructor. */
+    Vector() = default;
+
+    /** @brief Copy constructor. */
+    Vector( const Vector& vect );
+
+    /** @brief Move constructor. */
+    Vector( Vector&& vect );
+
+    /** @brief Destructor. */
+    virtual ~Vector();
+
+    /**
+     * @brief Constructor.
+     * @param size vector size
+     */
+    Vector( unsigned int size );
 
     /** @return TRUE if all items are valid */
-    bool isValid() const
-    {
-        return mc::isValid( elements_, size_ );
-    }
-
-    /** @return vector length squared */
-    double getLength2() const
-    {
-        double length2 = 0.0;
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            length2 += ( elements_[i] * elements_[i] );
-        }
-
-        return length2;
-    }
+    bool isValid() const;
 
     /** @return vector length */
-    double getLength() const
-    {
-        return sqrt( getLength2() );
-    }
+    double getLength() const;
 
-    /** @brief Normalizes vector. */
-    void normalize()
-    {
-        double length = getLength();
+    /** @brief This function normalizes vector. */
+    void normalize();
 
-        if ( length > 0.0 )
-        {
-            double length_inv = 1.0 / length;
-
-            for ( unsigned int i = 0; i < size_; ++i )
-            {
-                elements_[i] *= length_inv;
-            }
-        }
-    }
+    /** @brief uts vector items into given array. */
+    void getArray( double items[] ) const;
 
     /**
      * @brief Gets vector item of given indicies.
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
-     * @param index item index
      * @return vector item of given indicies.
      */
-    double getElement( unsigned int index ) const
-    {
-        if ( index < size_ )
-        {
-            return elements_[ index ];
-        }
+    double getItem( unsigned int index ) const;
 
-        return std::numeric_limits<double>::quiet_NaN();
-    }
-
-    /** @brief Puts vector items into given array. */
-    void getElements( double elements[] ) const
-    {
-        std::memcpy( elements, elements_, sizeof(elements_) );
-    }
+    /** @brief Sets vector items from given array. */
+    void setItems( const double items[] );
 
     /**
-     * @brief Sets vector element of given indicies.
+     * @brief Sets vector item of given indicies.
      * This function is bound-checked which may affect performance.
      * Throws an exception when index is out of range.
      */
-    void setElement( unsigned int index, double val )
-    {
-        if ( index < size_ )
-        {
-            elements_[ index ] = val;
-        }
-    }
+    void setItem( unsigned int index, double val );
 
-    /** @brief Sets vector elements from given array. */
-    void setElements( const double elements[] )
-    {
-        std::memcpy( elements_, elements, sizeof(elements_) );
-    }
+    void setValue( double val );
 
     /**
-     * @brief Sets vector items from string.
-     * Values in the given string should be separated with whitespaces.
-     * @param str given string
+     * @brief Returns vector size (number of elements)
+     * @return vector size (number of elements)
      */
-    void setFromString( const char* str )
-    {
-        double elements[size_];
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements [i] = std::numeric_limits<double>::quiet_NaN();
-            elements_[i] = std::numeric_limits<double>::quiet_NaN();
-        }
-
-        std::stringstream ss( String::stripSpaces( str ) );
-        bool valid = true;
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            ss >> elements[i];
-            valid &= mc::isValid( elements[i] );
-        }
-
-        if ( valid ) setElements( elements );
-    }
-
-    /** @brief Swaps vector rows. */
-    void swapRows( unsigned int row1, unsigned int row2 )
-    {
-        if ( row1 < size_ && row2 < size_ )
-        {
-            std::swap( elements_[ row1 ], elements_[ row2 ] );
-        }
-    }
+    unsigned int getSize() const { return size_; }
 
     /** @brief Returns string representation of the vector. */
-    std::string toString() const
-    {
-        std::stringstream ss;
+    std::string toString() const;
 
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            if ( i != 0 ) ss << ",";
-
-            ss << elements_[i];
-        }
-
-        return ss.str();
-    }
+    /** @brief Resizes vector if needed. */
+    void resize( unsigned int size );
 
     /** @brief Sets all vector items to zero. */
-    void zeroize()
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] = 0.0;
-        }
-    }
+    void zeroize();
 
     /**
      * @brief Items accessor.
@@ -207,7 +113,7 @@ public:
      */
     inline double operator()( unsigned int index ) const
     {
-        return elements_[index];
+        return items_[ index ];
     }
 
     /**
@@ -218,162 +124,72 @@ public:
      */
     inline double& operator()( unsigned int index )
     {
-        return elements_[index];
+        return items_[ index ];
     }
+
+    /** @brief Assignment operator. */
+    Vector& operator=( const Vector& vect );
+
+    /** @brief Move assignment operator. */
+    Vector& operator=( Vector&& vect );
 
     /** @brief Addition operator. */
-    Vector<SIZE> operator+( const Vector<SIZE>& vect ) const
-    {
-        Vector<SIZE> result( *this );
-        result.add( vect );
-        return result;
-    }
+    Vector operator+( const Vector& vect ) const;
 
     /** @brief Negation operator. */
-    Vector<SIZE> operator-() const
-    {
-        Vector<SIZE> result( *this );
-        result.negate();
-        return result;
-    }
+    Vector operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector<SIZE> operator-( const Vector<SIZE>& vect ) const
-    {
-        Vector<SIZE> result( *this );
-        result.substract( vect );
-        return result;
-    }
+    Vector operator-( const Vector& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector<SIZE> operator*( double value ) const
-    {
-        Vector<SIZE> result( *this );
-        result.multiplyByValue( value );
-        return result;
-    }
-
-    /** @brief Dot product operator. */
-    double operator*( const Vector<SIZE>& vect ) const
-    {
-        double result = 0.0;
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            result += elements_[i] * vect.elements_[i];
-        }
-
-        return result;
-    }
+    Vector operator*( double value ) const;
 
     /** @brief Division operator (by scalar). */
-    Vector<SIZE> operator/( double val ) const
-    {
-        Vector<SIZE> result( *this );
-        result.divideByValue( val );
-        return result;
-    }
+    Vector operator/( double value ) const;
 
     /** @brief Unary addition operator. */
-    Vector<SIZE>& operator+=( const Vector<SIZE>& vect )
-    {
-        add( vect );
-        return (*this);
-    }
+    Vector& operator+=( const Vector& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector<SIZE>& operator-=( const Vector<SIZE>& vect )
-    {
-        substract( vect );
-        return (*this);
-    }
+    Vector& operator-=( const Vector& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector<SIZE>& operator*=( double value )
-    {
-        multiplyByValue( value );
-        return (*this);
-    }
+    Vector& operator*=( double value );
 
     /** @brief Unary division operator (by scalar). */
-    Vector<SIZE>& operator/=( double value )
-    {
-        divideByValue( value );
-        return (*this);
-    }
-
-    /** @brief Equality operator. */
-    bool operator==( const Vector<SIZE>& vect ) const
-    {
-        bool result = true;
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            result = result && ( elements_[i] == vect.elements_[i] );
-        }
-
-        return result;
-    }
-
-    /** @brief Inequality operator. */
-    bool operator!=( const Vector<SIZE>& vect ) const
-    {
-        return !( (*this) == vect );
-    }
+    Vector& operator/=( double value );
 
 protected:
 
-    double elements_[size_] = { 0.0 };  ///< vector items
+    unsigned int size_ = 0;     ///< vector size
+    double* items_ = nullptr;   ///< vector items
 
     /** @brief Adds vector. */
-    void add( const Vector<SIZE>& vect )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] += vect.elements_[i];
-        }
-    }
+    void add( const Vector& vect );
 
     /** @brief Negates (inverts) vector. */
-    void negate()
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] = -elements_[i];
-        }
-    }
+    void negate();
 
     /** @brief Substracts vector. */
-    void substract( const Vector<SIZE>& vect )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] -= vect.elements_[i];
-        }
-    }
+    void substract( const Vector& vect );
 
     /** @brief Multiplies by value. */
-    void multiplyByValue( double value )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] *= value;
-        }
-    }
+    void multiplyByValue( double value );
 
     /** @brief Divides by value. */
-    void divideByValue( double value )
-    {
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            elements_[i] /= value;
-        }
-    }
+    void divideByValue( double value );
 };
 
-template class MCUTILSAPI mc::Vector<3>;
-template class MCUTILSAPI mc::Vector<4>;
-template class MCUTILSAPI mc::Vector<6>;
+////////////////////////////////////////////////////////////////////////////////
+
+/** @brief Multiplication operator (by scalar). */
+inline Vector operator*( double val, const Vector& vect )
+{
+    return ( vect * val );
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc
 

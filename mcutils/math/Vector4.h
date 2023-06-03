@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/VectorN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief 4 elements column vector class.
  */
-class MCUTILSAPI Vector4 : public Vector<4>
+class MCUTILSAPI Vector4 : public VectorN<4>
 {
 public:
 

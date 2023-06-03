@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/VectorN.h>
+#include <mcutils/math/Vector.h>
 
 #include <limits>
 #include <sstream>
@@ -36,7 +36,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN::VectorN( const VectorN& vect )
+Vector::Vector( const Vector& vect )
     : size_  ( vect.size_ )
     , items_ ( nullptr )
 {
@@ -47,21 +47,21 @@ VectorN::VectorN( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN::VectorN( VectorN&& vect )
+Vector::Vector( Vector&& vect )
     : size_  ( std::exchange( vect.size_, 0 ) )
     , items_ ( std::exchange( vect.items_, nullptr ) )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN::~VectorN()
+Vector::~Vector()
 {
     if ( items_ ) { delete [] items_; } items_ = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN::VectorN( unsigned int size )
+Vector::Vector( unsigned int size )
     : size_ ( size )
     , items_ ( nullptr )
 {
@@ -71,14 +71,14 @@ VectorN::VectorN( unsigned int size )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool VectorN::isValid() const
+bool Vector::isValid() const
 {
     return mc::isValid( items_, size_ );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double VectorN::getLength() const
+double Vector::getLength() const
 {
     double length2 = 0.0;
 
@@ -92,7 +92,7 @@ double VectorN::getLength() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::normalize()
+void Vector::normalize()
 {
     double length = getLength();
 
@@ -109,7 +109,7 @@ void VectorN::normalize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::getArray( double items[] ) const
+void Vector::getArray( double items[] ) const
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -119,7 +119,7 @@ void VectorN::getArray( double items[] ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double VectorN::getItem( unsigned int index ) const
+double Vector::getItem( unsigned int index ) const
 {
     if ( index < size_ )
     {
@@ -131,7 +131,7 @@ double VectorN::getItem( unsigned int index ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::setItems( const double items[] )
+void Vector::setItems( const double items[] )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -141,7 +141,7 @@ void VectorN::setItems( const double items[] )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::setItem( unsigned int index, double val )
+void Vector::setItem( unsigned int index, double val )
 {
     if ( index < size_ )
     {
@@ -151,7 +151,7 @@ void VectorN::setItem( unsigned int index, double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::setValue( double val )
+void Vector::setValue( double val )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -161,7 +161,7 @@ void VectorN::setValue( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string VectorN::toString() const
+std::string Vector::toString() const
 {
     std::stringstream ss;
 
@@ -177,7 +177,7 @@ std::string VectorN::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::resize( unsigned int size )
+void Vector::resize( unsigned int size )
 {
     if ( size_ != size )
     {
@@ -190,7 +190,7 @@ void VectorN::resize( unsigned int size )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::zeroize()
+void Vector::zeroize()
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -200,7 +200,7 @@ void VectorN::zeroize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator=( const VectorN& vect )
+Vector& Vector::operator=( const Vector& vect )
 {
     resize( vect.size_ );
     setItems( vect.items_ );
@@ -209,7 +209,7 @@ VectorN& VectorN::operator=( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator=( VectorN&& vect )
+Vector& Vector::operator=( Vector&& vect )
 {
     if ( items_ ) { delete [] items_; } items_ = nullptr;
 
@@ -221,52 +221,52 @@ VectorN& VectorN::operator=( VectorN&& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN VectorN::operator+( const VectorN& vect ) const
+Vector Vector::operator+( const Vector& vect ) const
 {
-    VectorN result( *this );
+    Vector result( *this );
     result.add( vect );
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN VectorN::operator-() const
+Vector Vector::operator-() const
 {
-    VectorN result( *this );
+    Vector result( *this );
     result.negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN VectorN::operator-( const VectorN& vect ) const
+Vector Vector::operator-( const Vector& vect ) const
 {
-    VectorN result( *this );
+    Vector result( *this );
     result.substract( vect );
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN VectorN::operator*( double value ) const
+Vector Vector::operator*( double value ) const
 {
-    VectorN result( *this );
+    Vector result( *this );
     result.multiplyByValue( value );
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN VectorN::operator/( double value ) const
+Vector Vector::operator/( double value ) const
 {
-    VectorN result( *this );
+    Vector result( *this );
     result.divideByValue( value );
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator+=( const VectorN& vect )
+Vector& Vector::operator+=( const Vector& vect )
 {
     add( vect );
     return (*this);
@@ -274,7 +274,7 @@ VectorN& VectorN::operator+=( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator-=( const VectorN& vect )
+Vector& Vector::operator-=( const Vector& vect )
 {
     substract( vect );
     return (*this);
@@ -282,7 +282,7 @@ VectorN& VectorN::operator-=( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator*=( double value )
+Vector& Vector::operator*=( double value )
 {
     multiplyByValue( value );
     return (*this);
@@ -290,7 +290,7 @@ VectorN& VectorN::operator*=( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-VectorN& VectorN::operator/=( double value )
+Vector& Vector::operator/=( double value )
 {
     divideByValue( value );
     return (*this);
@@ -298,7 +298,7 @@ VectorN& VectorN::operator/=( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::add( const VectorN& vect )
+void Vector::add( const Vector& vect )
 {
     if ( size_ == vect.size_ )
     {
@@ -315,7 +315,7 @@ void VectorN::add( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::negate()
+void Vector::negate()
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -325,7 +325,7 @@ void VectorN::negate()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::substract( const VectorN& vect )
+void Vector::substract( const Vector& vect )
 {
     if ( size_ == vect.size_ )
     {
@@ -342,7 +342,7 @@ void VectorN::substract( const VectorN& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::multiplyByValue( double value )
+void Vector::multiplyByValue( double value )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
@@ -352,7 +352,7 @@ void VectorN::multiplyByValue( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void VectorN::divideByValue( double value )
+void Vector::divideByValue( double value )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {

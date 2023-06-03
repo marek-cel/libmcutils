@@ -26,7 +26,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Matrix.h>
+#include <mcutils/math/MatrixMxN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -38,7 +38,7 @@ namespace mc
  * @tparam N number of rows and columns
  */
 template <unsigned int N>
-class MatrixNxN : public Matrix<N, N>
+class MatrixNxN : public MatrixMxN<N, N>
 {
 public:
 

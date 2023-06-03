@@ -42,10 +42,10 @@ set( SOURCES
     math/TestDegMinSec.cpp
     math/TestEulerRect.cpp
     math/TestMath.cpp
-    math/TestMatrix.cpp
     math/TestMatrix3x3.cpp
     math/TestMatrix4x4.cpp
     math/TestMatrix6x6.cpp
+    math/TestMatrixMxN.cpp
     math/TestMatrixNxN.cpp
     math/TestQuaternion.cpp
     math/TestRandom.cpp

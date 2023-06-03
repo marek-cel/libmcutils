@@ -29,7 +29,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/VectorN.h>
+#include <mcutils/math/Vector.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ class MCUTILSAPI Integrator
 {
 public:
 
-    using Fun = std::function<void(const VectorN&, VectorN*)>;
+    using Fun = std::function<void(const Vector&, Vector*)>;
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
@@ -57,7 +57,7 @@ public:
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    virtual void integrate( double step, VectorN* vect ) = 0;
+    virtual void integrate( double step, Vector* vect ) = 0;
 
     /**
      * @brief Sets a function which calculates vector derivative.

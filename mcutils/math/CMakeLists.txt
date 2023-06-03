@@ -12,7 +12,7 @@ set( HEADERS
     Matrix3x3.h
     Matrix4x4.h
     Matrix6x6.h
-    Matrix.h
+    MatrixMxN.h
     MatrixNxN.h
     Quaternion.h
     Random.h
@@ -20,10 +20,10 @@ set( HEADERS
     SegPlaneIsect.h
     Table2.h
     Table.h
+    Vector.h
     Vector3.h
     Vector4.h
     Vector6.h
-    Vector.h
     VectorN.h
 )
 
@@ -40,10 +40,10 @@ set( SOURCES
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp
+    Vector.cpp
     Vector3.cpp
     Vector4.cpp
     Vector6.cpp
-    VectorN.cpp
 )
 
 ################################################################################

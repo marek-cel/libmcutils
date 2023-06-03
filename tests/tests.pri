@@ -47,10 +47,10 @@ SOURCES += \
     $$PWD/math/TestDegMinSec.cpp \
     $$PWD/math/TestEulerRect.cpp \
     $$PWD/math/TestMath.cpp \
-    $$PWD/math/TestMatrix.cpp \
     $$PWD/math/TestMatrix3x3.cpp \
     $$PWD/math/TestMatrix4x4.cpp \
     $$PWD/math/TestMatrix6x6.cpp \
+    $$PWD/math/TestMatrixMxN.cpp \
     $$PWD/math/TestMatrixNxN.cpp \
     $$PWD/math/TestQuaternion.cpp \
     $$PWD/math/TestRandom.cpp \

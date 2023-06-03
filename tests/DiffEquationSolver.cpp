@@ -21,15 +21,15 @@ bool DiffEquationSolver::solve( double x_0, double x_1 )
     // state vector
     // index 0: x
     // index 1: dx/dt
-    mc::VectorN s( 2 );
+    mc::Vector s( 2 );
 
     // initial conditions
     s( 0 ) = x_0;
     s( 1 ) = x_1;
 
     _integrator->setDerivFun(
-        [this]( const mc::VectorN &state,
-                      mc::VectorN *deriv )
+        [this]( const mc::Vector &state,
+                      mc::Vector *deriv )
         {
             computeStateDeriv( state, deriv );
         }
@@ -164,8 +164,8 @@ double DiffEquationSolver::calcDelta( double a, double b, double c )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void DiffEquationSolver::computeStateDeriv( const mc::VectorN &state,
-                                            mc::VectorN *deriv )
+void DiffEquationSolver::computeStateDeriv( const mc::Vector &state,
+                                            mc::Vector *deriv )
 {
     (*deriv)( 0 ) = state( 1 );
     (*deriv)( 1 ) = -_k * state( 0 ) - _c * state( 1 );

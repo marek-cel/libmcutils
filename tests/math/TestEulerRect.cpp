@@ -46,8 +46,8 @@ TEST_F(TestEulerRect, CanInstantiate)
 
 TEST_F(TestEulerRect, CanInstantiateAndSetFun)
 {
-    std::function<void(const mc::VectorN &, mc::VectorN *)> fun =
-            [](const mc::VectorN &, mc::VectorN *){};
+    std::function<void(const mc::Vector &, mc::Vector *)> fun =
+            [](const mc::Vector &, mc::Vector *){};
     mc::EulerRect er( fun );
     EXPECT_TRUE( er.isDerivFunSet() );
 }
@@ -86,7 +86,7 @@ TEST_F(TestEulerRect, CanSolve)
 TEST_F(TestEulerRect, CanSetDerivFun)
 {
     mc::EulerRect er;
-    EXPECT_NO_THROW( er.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
+    EXPECT_NO_THROW( er.setDerivFun( [](const mc::Vector &, mc::Vector *ds)
     {
         for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {
@@ -102,7 +102,7 @@ TEST_F(TestEulerRect, CanCheckIfDerivFunIsSet)
 {
     mc::EulerRect er;
     EXPECT_FALSE( er.isDerivFunSet() );
-    er.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
+    er.setDerivFun( [](const mc::Vector &, mc::Vector *ds)
     {
         for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {

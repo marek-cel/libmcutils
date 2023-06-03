@@ -44,8 +44,8 @@ TEST_F(TestRungeKutta4, CanInstantiate)
 
 TEST_F(TestRungeKutta4, CanInstantiateAndSetFun)
 {
-    std::function<void(const mc::VectorN &, mc::VectorN *)> fun =
-            [](const mc::VectorN &, mc::VectorN *){};
+    std::function<void(const mc::Vector &, mc::Vector *)> fun =
+            [](const mc::Vector &, mc::Vector *){};
     mc::RungeKutta4 rk( fun );
     EXPECT_TRUE( rk.isDerivFunSet() );
 }
@@ -84,7 +84,7 @@ TEST_F(TestRungeKutta4, CanSolve)
 TEST_F(TestRungeKutta4, CanSetDerivFun)
 {
     mc::RungeKutta4 rk;
-    EXPECT_NO_THROW( rk.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
+    EXPECT_NO_THROW( rk.setDerivFun( [](const mc::Vector &, mc::Vector *ds)
     {
         for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {
@@ -100,7 +100,7 @@ TEST_F(TestRungeKutta4, CanCheckIfDerivFunIsSet)
 {
     mc::RungeKutta4 rk;
     EXPECT_FALSE( rk.isDerivFunSet() );
-    rk.setDerivFun( [](const mc::VectorN &, mc::VectorN *ds)
+    rk.setDerivFun( [](const mc::Vector &, mc::Vector *ds)
     {
         for ( unsigned int i = 0; i < ds->getSize(); ++i )
         {

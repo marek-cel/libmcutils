@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_MATRIX_H_
-#define MCUTILS_MATH_MATRIX_H_
+#ifndef MCUTILS_MATH_MATRIXMXN_H_
+#define MCUTILS_MATH_MATRIXMXN_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +32,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/VectorN.h>
 #include <mcutils/misc/String.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -41,12 +41,12 @@ namespace mc
 {
 
 /**
- * @brief Matrix base class template.
+ * @brief Rectangular matrix class template.
  * @tparam ROWS matrix rows count
  * @tparam COLS matrix columns count
  */
 template <unsigned int ROWS, unsigned int COLS>
-class Matrix
+class MatrixMxN
 {
 public:
 
@@ -200,83 +200,83 @@ public:
     }
 
     /** @brief Addition operator. */
-    Matrix<ROWS, COLS> operator+( const Matrix<ROWS, COLS>& matrix ) const
+    MatrixMxN<ROWS, COLS> operator+( const MatrixMxN<ROWS, COLS>& matrix ) const
     {
-        Matrix<ROWS, COLS> result( *this );
+        MatrixMxN<ROWS, COLS> result( *this );
         result.add( matrix );
         return result;
     }
 
     /** @brief Negation operator. */
-    Matrix<ROWS, COLS> operator-() const
+    MatrixMxN<ROWS, COLS> operator-() const
     {
-        Matrix<ROWS, COLS> result( *this );
+        MatrixMxN<ROWS, COLS> result( *this );
         result.negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    Matrix<ROWS, COLS> operator-( const Matrix<ROWS, COLS>& matrix ) const
+    MatrixMxN<ROWS, COLS> operator-( const MatrixMxN<ROWS, COLS>& matrix ) const
     {
-        Matrix<ROWS, COLS> result( *this );
+        MatrixMxN<ROWS, COLS> result( *this );
         result.substract( matrix );
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix<ROWS, COLS> operator*( double value ) const
+    MatrixMxN<ROWS, COLS> operator*( double value ) const
     {
-        Matrix<ROWS, COLS> result( *this );
+        MatrixMxN<ROWS, COLS> result( *this );
         result.multiplyByValue( value );
         return result;
     }
 
     /** @brief Multiplication operator (by vector). */
-    Vector<ROWS> operator*( const Vector<COLS>& vect ) const
+    VectorN<ROWS> operator*( const VectorN<COLS>& vect ) const
     {
-        Vector<ROWS> result;
+        VectorN<ROWS> result;
         multiplyByVector( vect, &result );
         return result;
     }
 
     /** @brief Division operator (by scalar). */
-    Matrix<ROWS, COLS> operator/( double value ) const
+    MatrixMxN<ROWS, COLS> operator/( double value ) const
     {
-        Matrix<ROWS, COLS> result( *this );
+        MatrixMxN<ROWS, COLS> result( *this );
         result.divideByValue( value );
         return result;
     }
 
     /** @brief Unary addition operator. */
-    Matrix<ROWS, COLS>& operator+=( const Matrix<ROWS, COLS>& matrix )
+    MatrixMxN<ROWS, COLS>& operator+=( const MatrixMxN<ROWS, COLS>& matrix )
     {
         add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Matrix<ROWS, COLS>& operator-=( const Matrix<ROWS, COLS>& matrix )
+    MatrixMxN<ROWS, COLS>& operator-=( const MatrixMxN<ROWS, COLS>& matrix )
     {
         substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix<ROWS, COLS>& operator*=( double value )
+    MatrixMxN<ROWS, COLS>& operator*=( double value )
     {
         multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    Matrix<ROWS, COLS>& operator/=( double value )
+    MatrixMxN<ROWS, COLS>& operator/=( double value )
     {
         divideByValue( value );
         return (*this);
     }
 
     /** @brief Equality operator. */
-    bool operator==( const Matrix<ROWS, COLS>& matrix ) const
+    bool operator==( const MatrixMxN<ROWS, COLS>& matrix ) const
     {
         bool result = true;
 
@@ -289,7 +289,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!=( const Matrix<ROWS, COLS>& matrix ) const
+    bool operator!=( const MatrixMxN<ROWS, COLS>& matrix ) const
     {
         return !( (*this) == matrix );
     }
@@ -299,7 +299,7 @@ protected:
     double elements_[size_] = { 0.0 }; ///< matrix items
 
     /** @brief Adds matrix. */
-    void add( const Matrix<ROWS, COLS>& matrix )
+    void add( const MatrixMxN<ROWS, COLS>& matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -317,7 +317,7 @@ protected:
     }
 
     /** @brief Substracts matrix. */
-    void substract( const Matrix<ROWS, COLS>& matrix )
+    void substract( const MatrixMxN<ROWS, COLS>& matrix )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -335,7 +335,7 @@ protected:
     }
 
     /** @brief Multiplies by vector. */
-    void multiplyByVector( const Vector<COLS>& vect, Vector<ROWS>* result ) const
+    void multiplyByVector( const VectorN<COLS>& vect, VectorN<ROWS>* result ) const
     {
         for ( unsigned int r = 0; r < rows_; ++r )
         {
@@ -362,4 +362,4 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MATH_MATRIX_H_
+#endif // MCUTILS_MATH_MATRIXMXN_H_

@@ -4,7 +4,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <mcutils/math/Integrator.h>
-#include <mcutils/math/VectorN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -117,8 +116,8 @@ public:
      * @param state
      * @param deriv
      */
-    void computeStateDeriv( const mc::VectorN &state,
-                            mc::VectorN *deriv );
+    void computeStateDeriv( const mc::Vector &state,
+                            mc::Vector *deriv );
 
 private:
 

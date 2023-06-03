@@ -65,12 +65,12 @@ public:
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    void integrate( double step, VectorN* vect ) override;
+    void integrate( double step, Vector* vect ) override;
 
 private:
 
-    VectorN k0_;        ///< auxiliary vector
-    VectorN xt_;        ///< auxiliary vector
+    Vector k0_;         ///< auxiliary vector
+    Vector xt_;         ///< auxiliary vector
 };
 
 } // namespace mc
