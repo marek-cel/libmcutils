@@ -249,6 +249,49 @@ TEST_F(TestVector3, CanSetData)
     EXPECT_DOUBLE_EQ( v.z(), 3.0 );
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestVector3, CanAccessElementsViaFunctions)
+{
+    mc::Vector3 v1;
+
+    v1.x() = 1.0;
+    v1.y() = 2.0;
+    v1.z() = 3.0;
+
+    EXPECT_DOUBLE_EQ( v1.x(), 1.0 );
+    EXPECT_DOUBLE_EQ( v1.y(), 2.0 );
+    EXPECT_DOUBLE_EQ( v1.z(), 3.0 );
+    EXPECT_DOUBLE_EQ( v1(0), 1.0 );
+    EXPECT_DOUBLE_EQ( v1(1), 2.0 );
+    EXPECT_DOUBLE_EQ( v1(2), 3.0 );
+
+    mc::Vector3 v2;
+
+    v2.p() = 1.0;
+    v2.q() = 2.0;
+    v2.r() = 3.0;
+
+    EXPECT_DOUBLE_EQ( v2.p(), 1.0 );
+    EXPECT_DOUBLE_EQ( v2.q(), 2.0 );
+    EXPECT_DOUBLE_EQ( v2.r(), 3.0 );
+    EXPECT_DOUBLE_EQ( v2(0), 1.0 );
+    EXPECT_DOUBLE_EQ( v2(1), 2.0 );
+    EXPECT_DOUBLE_EQ( v2(2), 3.0 );
+
+    mc::Vector3 v3;
+
+    v3.u() = 1.0;
+    v3.v() = 2.0;
+    v3.w() = 3.0;
+
+    EXPECT_DOUBLE_EQ( v3.u(), 1.0 );
+    EXPECT_DOUBLE_EQ( v3.v(), 2.0 );
+    EXPECT_DOUBLE_EQ( v3.w(), 3.0 );
+    EXPECT_DOUBLE_EQ( v2(0), 1.0 );
+    EXPECT_DOUBLE_EQ( v2(1), 2.0 );
+    EXPECT_DOUBLE_EQ( v2(2), 3.0 );
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
