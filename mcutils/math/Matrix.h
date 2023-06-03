@@ -89,6 +89,32 @@ public:
     }
 
     /**
+     * @brief Sets matrix element of given indicies.
+     * @param row item row number
+     * @param col item column number
+     * @param value item value
+     * This function is bound-checked which may affect performance.
+     * Throws an exception when row or column index is out of range.
+     */
+    void setElement( unsigned int row, unsigned int col, double value )
+    {
+        if ( ( row < rows_ ) && ( col < cols_ ) )
+        {
+            elements_[row * cols_ + col] = value;
+        }
+    }
+
+    /**
+     * @brief Sets matrix elements from array.
+     * Items index should match following scheme i = i_row * no_of_columns + i_col
+     * @param items input array
+     */
+    void setElements( double elements[] )
+    {
+        std::memcpy( elements_, elements, sizeof(elements_) );
+    }
+
+    /**
      * @brief Sets matrix items from string.
      * Values in the given string should be separated with whitespaces.
      * @param str given string
@@ -113,32 +139,6 @@ public:
         }
 
         if ( valid ) setElements( elements );
-    }
-
-    /**
-     * @brief Sets matrix element of given indicies.
-     * @param row item row number
-     * @param col item column number
-     * @param value item value
-     * This function is bound-checked which may affect performance.
-     * Throws an exception when row or column index is out of range.
-     */
-    void setElement( unsigned int row, unsigned int col, double value )
-    {
-        if ( ( row < rows_ ) && ( col < cols_ ) )
-        {
-            elements_[row * cols_ + col] = value;
-        }
-    }
-
-    /**
-     * @brief Sets matrix elements from array.
-     * Items index should match following scheme i = i_row * no_of_columns + i_col
-     * @param items input array
-     */
-    void setElements( double elements[] )
-    {
-        std::memcpy( elements_, elements, sizeof(elements_) );
     }
 
     /** @brief Swaps matrix rows. */
