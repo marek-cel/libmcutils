@@ -49,22 +49,6 @@ double Angles::normalize( double val, double min )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles::Angles()
-{
-    phi_ = 0.0;
-    tht_ = 0.0;
-    psi_ = 0.0;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Angles::Angles( const Angles& angl )
-{
-    set( angl.phi_, angl.tht_, angl.psi_ );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 Angles::Angles( double phi, double tht, double psi )
 {
     set( phi, tht, psi );
@@ -133,15 +117,7 @@ std::string Angles::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles& Angles::operator= ( const Angles& angl )
-{
-    set( angl.phi_, angl.tht_, angl.psi_ );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-bool Angles::operator== ( const Angles& angl ) const
+bool Angles::operator==( const Angles& angl ) const
 {
     return ( ( phi_ == angl.phi_ )
           && ( tht_ == angl.tht_ )
@@ -150,7 +126,7 @@ bool Angles::operator== ( const Angles& angl ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::operator!= ( const Angles& angl ) const
+bool Angles::operator!=( const Angles& angl ) const
 {
     return !( (*this) == angl );
 }

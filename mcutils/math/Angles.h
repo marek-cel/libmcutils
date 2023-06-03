@@ -44,7 +44,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI Angles final
+class MCUTILSAPI Angles
 {
 public:
 
@@ -56,11 +56,8 @@ public:
      */
     static double normalize( double val, double min = 0.0 );
 
-    /** @brief Constructor. */
-    Angles();
-
-    /** @brief Copy constructor. */
-    Angles( const Angles& angl );
+    /** Constructor. */
+    Angles() = default;
 
     /**
      * @brief Constructor.
@@ -95,20 +92,17 @@ public:
     /** @brief Returns string represtation of the angles. */
     std::string toString() const;
 
-    /** @brief Assignment operator. */
-    Angles& operator= ( const Angles& angl );
-
     /** @brief Equality operator. */
-    bool operator== ( const Angles& angl ) const;
+    bool operator==( const Angles& angl ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Angles& angl ) const;
+    bool operator!=( const Angles& angl ) const;
 
 private:
 
-    double phi_;    ///< [rad] angle of rotation about x-axis
-    double tht_;    ///< [rad] angle of rotation about y-axis
-    double psi_;    ///< [rad] angle of rotation about z-axis
+    double phi_ = 0.0;  ///< [rad] angle of rotation about x-axis
+    double tht_ = 0.0;  ///< [rad] angle of rotation about y-axis
+    double psi_ = 0.0;  ///< [rad] angle of rotation about z-axis
 };
 
 } // namespace mc
