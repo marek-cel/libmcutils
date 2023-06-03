@@ -415,7 +415,8 @@ void Table::setData( const double key_values[],
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::setData(const std::vector<double> &key_values, const std::vector<double> &table_data)
+void Table::setData( const std::vector<double>& key_values,
+                     const std::vector<double>& table_data )
 {
     if ( key_values.size() == table_data.size() )
     {
@@ -441,7 +442,7 @@ void Table::setData(const std::vector<double> &key_values, const std::vector<dou
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::setFromString( const char *str )
+void Table::setFromString( const char* str )
 {
     std::vector<double> key_values_temp;
     std::vector<double> table_data_temp;
