@@ -42,24 +42,6 @@ Quaternion Quaternion::zeroRotationQuaternion()
     return Quaternion( 1.0, 0.0, 0.0, 0.0 );
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-
-Quaternion::Quaternion()
-{
-    set( 0.0, 0.0, 0.0, 0.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Quaternion::Quaternion( const Quaternion& quat )
-{
-    e0_ = quat.e0_;
-    ex_ = quat.ex_;
-    ey_ = quat.ey_;
-    ez_ = quat.ez_;
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 
 Quaternion::Quaternion( double e0, double ex, double ey, double ez )
@@ -303,19 +285,7 @@ std::string Quaternion::toString() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator= ( const Quaternion& quat )
-{
-    e0_ = quat.e0_;
-    ex_ = quat.ex_;
-    ey_ = quat.ey_;
-    ez_ = quat.ez_;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Quaternion Quaternion::operator+ ( const Quaternion& quat ) const
+Quaternion Quaternion::operator+( const Quaternion& quat ) const
 {
     Quaternion result;
 
@@ -329,7 +299,7 @@ Quaternion Quaternion::operator+ ( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator- ( const Quaternion& quat ) const
+Quaternion Quaternion::operator-( const Quaternion& quat ) const
 {
     Quaternion result;
 
@@ -343,7 +313,7 @@ Quaternion Quaternion::operator- ( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator* ( double val ) const
+Quaternion Quaternion::operator*( double val ) const
 {
     Quaternion result;
 
@@ -357,7 +327,7 @@ Quaternion Quaternion::operator* ( double val ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator* ( const Quaternion& quat ) const
+Quaternion Quaternion::operator*( const Quaternion& quat ) const
 {
     Quaternion result;
 
@@ -386,7 +356,7 @@ Quaternion Quaternion::operator* ( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator/ ( double val ) const
+Quaternion Quaternion::operator/( double val ) const
 {
     Quaternion result;
 
@@ -400,7 +370,7 @@ Quaternion Quaternion::operator/ ( double val ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator+= ( const Quaternion& quat )
+Quaternion& Quaternion::operator+=( const Quaternion& quat )
 {
     e0_ += quat.e0_;
     ex_ += quat.ex_;
@@ -412,7 +382,7 @@ Quaternion& Quaternion::operator+= ( const Quaternion& quat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator-= ( const Quaternion& quat )
+Quaternion& Quaternion::operator-=( const Quaternion& quat )
 {
     e0_ -= quat.e0_;
     ex_ -= quat.ex_;
@@ -424,7 +394,7 @@ Quaternion& Quaternion::operator-= ( const Quaternion& quat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator*= ( double val )
+Quaternion& Quaternion::operator*=( double val )
 {
     e0_ *= val;
     ex_ *= val;
@@ -436,7 +406,7 @@ Quaternion& Quaternion::operator*= ( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator/= ( double val )
+Quaternion& Quaternion::operator/=( double val )
 {
     e0_ /= val;
     ex_ /= val;
@@ -448,7 +418,7 @@ Quaternion& Quaternion::operator/= ( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Quaternion::operator== ( const Quaternion& quat ) const
+bool Quaternion::operator==( const Quaternion& quat ) const
 {
     return ( e0_ == quat.e0_ )
         && ( ex_ == quat.ex_ )
@@ -458,7 +428,7 @@ bool Quaternion::operator== ( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Quaternion::operator!= ( const Quaternion& quat ) const
+bool Quaternion::operator!=( const Quaternion& quat ) const
 {
     return !( (*this) == quat );
 }

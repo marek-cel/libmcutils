@@ -59,25 +59,6 @@ TEST_F(TestQuaternion, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestQuaternion, CanInstantiateAndCopy)
-{
-    mc::Quaternion q0;
-
-    q0.e0() = 0.1;
-    q0.ex() = 0.2;
-    q0.ey() = 0.3;
-    q0.ez() = 0.4;
-
-    mc::Quaternion q1( q0 );
-
-    EXPECT_DOUBLE_EQ( q1.e0(), 0.1 );
-    EXPECT_DOUBLE_EQ( q1.ex(), 0.2 );
-    EXPECT_DOUBLE_EQ( q1.ey(), 0.3 );
-    EXPECT_DOUBLE_EQ( q1.ez(), 0.4 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanInstantiateAndSetData)
 {
     mc::Quaternion q0( 0.1, 0.2, 0.3, 0.4 );
@@ -461,21 +442,6 @@ TEST_F(TestQuaternion, CanSetValues)
     EXPECT_DOUBLE_EQ( q0.ex(),  2.0 );
     EXPECT_DOUBLE_EQ( q0.ey(),  3.0 );
     EXPECT_DOUBLE_EQ( q0.ez(),  4.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestQuaternion, CanAssign)
-{
-    mc::Quaternion q0( 1.0, 2.0, 3.0, 4.0 );
-    mc::Quaternion q1;
-
-    q1 = q0;
-
-    EXPECT_DOUBLE_EQ( q1.e0(),  1.0 );
-    EXPECT_DOUBLE_EQ( q1.ex(),  2.0 );
-    EXPECT_DOUBLE_EQ( q1.ey(),  3.0 );
-    EXPECT_DOUBLE_EQ( q1.ez(),  4.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

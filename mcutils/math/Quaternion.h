@@ -56,7 +56,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI Quaternion final
+class MCUTILSAPI Quaternion
 {
 public:
 
@@ -64,10 +64,7 @@ public:
     static Quaternion zeroRotationQuaternion();
 
     /** @brief Constructor. */
-    Quaternion();
-
-    /** @brief Copy constructor. */
-    Quaternion( const Quaternion& quat );
+    Quaternion() = default;
 
     /** @brief Constructor. */
     Quaternion( double e0, double ex, double ey, double ez );
@@ -77,9 +74,6 @@ public:
 
     /** @brief Constructor. */
     Quaternion( double angl, const Vector3& vect );
-
-    /** @brief Destructor. */
-    ~Quaternion() = default;
 
     /** @return TRUE if all items are valid */
     bool isValid() const;
@@ -134,54 +128,51 @@ public:
     /** @brief Returns string representation of the quaternion. */
     std::string toString() const;
 
-    /** @brief Assignment operator. */
-    Quaternion& operator= ( const Quaternion& quat );
-
     /** @brief Addition operator. */
-    Quaternion operator+ ( const Quaternion& quat ) const;
+    Quaternion operator+( const Quaternion& quat ) const;
 
     /** @brief Subtraction operator. */
-    Quaternion operator- ( const Quaternion& quat ) const;
+    Quaternion operator-( const Quaternion& quat ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Quaternion operator* ( double val ) const;
+    Quaternion operator*( double val ) const;
 
     /** @brief Multiplication operator (by quaternion). */
-    Quaternion operator* ( const Quaternion& quat ) const;
+    Quaternion operator*( const Quaternion& quat ) const;
 
     /** @brief Division operator (by scalar). */
-    Quaternion operator/ ( double val ) const;
+    Quaternion operator/( double val ) const;
 
     /** @brief Unary addition operator. */
-    Quaternion& operator+= ( const Quaternion& quat );
+    Quaternion& operator+=( const Quaternion& quat );
 
     /** @brief Unary subtraction operator. */
-    Quaternion& operator-= ( const Quaternion& quat );
+    Quaternion& operator-=( const Quaternion& quat );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Quaternion& operator*= ( double val );
+    Quaternion& operator*=( double val );
 
     /** @brief Unary division operator (by scalar). */
-    Quaternion& operator/= ( double val );
+    Quaternion& operator/=( double val );
 
     /** @brief Equality operator. */
-    bool operator== ( const Quaternion& quat ) const;
+    bool operator==( const Quaternion& quat ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Quaternion& quat ) const;
+    bool operator!=( const Quaternion& quat ) const;
 
 private:
 
-    double e0_;     ///< quaternion e0 (w) component
-    double ex_;     ///< quaternion ex (x) component
-    double ey_;     ///< quaternion ey (y) component
-    double ez_;     ///< quaternion ez (z) component
+    double e0_ = 0.0;   ///< quaternion e0 (w) component
+    double ex_ = 0.0;   ///< quaternion ex (x) component
+    double ey_ = 0.0;   ///< quaternion ey (y) component
+    double ez_ = 0.0;   ///< quaternion ez (z) component
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Quaternion operator* ( double val, const Quaternion& quat )
+inline Quaternion operator*( double val, const Quaternion& quat )
 {
     return quat * val;
 }
