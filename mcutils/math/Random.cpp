@@ -33,8 +33,7 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Random::Random()
-    : rand_ ( 0 )
-    , seed_ ( static_cast<unsigned int>( time(nullptr) ) )
+    : seed_ ( static_cast<unsigned int>( time(nullptr) ) )
 {
     srand( seed_ );
 }

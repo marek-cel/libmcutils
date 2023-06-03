@@ -104,7 +104,7 @@ public:
 private:
 
     std::mutex mutex_;  ///< mutex
-    int rand_;          ///< random value
+    int rand_ = 0;      ///< random value
     unsigned int seed_; ///< seed
 
     /**
