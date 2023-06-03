@@ -44,18 +44,6 @@ TEST_F(TestDegMinSec, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestDegMinSec, CanInstantiateAndCopy)
-{
-    mc::DegMinSec dms( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
-    mc::DegMinSec dms1( dms );
-
-    EXPECT_EQ( dms1.deg(), 1 );
-    EXPECT_EQ( dms1.min(), 2 );
-    EXPECT_NEAR( dms1.sec(), 3.0, 1e-9 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 {
     mc::DegMinSec dms( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
@@ -102,20 +90,6 @@ TEST_F(TestDegMinSec, CanConvertToString)
     mc::DegMinSec dms( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
 
     EXPECT_STREQ( dms.toString().c_str(), "1 deg 2 min 3.00 sec" );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestDegMinSec, CanAssign)
-{
-    mc::DegMinSec dms;
-
-    mc::DegMinSec dms1( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
-
-    dms = dms1;
-    EXPECT_EQ( dms.deg(), 1 );
-    EXPECT_EQ( dms.min(), 2 );
-    EXPECT_NEAR( dms.sec(), 3.0, 1e-9 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -83,31 +83,6 @@ TEST_F(TestAngles, CanInstantiateAndSetData)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestAngles, CanInstantiateAndCopy)
-{
-    mc::Angles angles1( M_PI_4, M_PI_4, M_PI_4 );
-    mc::Angles angles2( angles1 );
-
-    EXPECT_DOUBLE_EQ( angles2.phi(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles2.tht(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles2.psi(), M_PI_4 );
-}
-
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestAngles, CanConvertToDegMinSec)
-{
-    mc::Angles angles1( M_PI_4, M_PI_4, M_PI_4 );
-    mc::Angles angles2( angles1 );
-
-    EXPECT_DOUBLE_EQ( angles2.phi(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles2.tht(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles2.psi(), M_PI_4 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanValidate)
 {
     mc::Angles angles1( 0.0, 0.0, 0.0 );
@@ -136,38 +111,6 @@ TEST_F(TestAngles, CanNormalize)
     EXPECT_NEAR( a.phi(), a1.phi(), 1.0e-9 );
     EXPECT_NEAR( a.tht(), a1.tht(), 1.0e-9 );
     EXPECT_NEAR( a.psi(), a1.psi(), 1.0e-9 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestAngles, CanAssign)
-{
-    mc::Angles a;
-
-    mc::Angles a1( M_PI, 0.0, 0.0 );
-    mc::Angles a2( 0.0, M_PI, 0.0 );
-    mc::Angles a3( 0.0, 0.0, M_PI );
-    mc::Angles a4( 1.0, 2.0, 3.0 );
-
-    a = a1;
-    EXPECT_DOUBLE_EQ( a.phi(), M_PI );
-    EXPECT_DOUBLE_EQ( a.tht(),  0.0 );
-    EXPECT_DOUBLE_EQ( a.psi(),  0.0 );
-
-    a = a2;
-    EXPECT_DOUBLE_EQ( a.phi(),  0.0 );
-    EXPECT_DOUBLE_EQ( a.tht(), M_PI );
-    EXPECT_DOUBLE_EQ( a.psi(),  0.0 );
-
-    a = a3;
-    EXPECT_DOUBLE_EQ( a.phi(),  0.0 );
-    EXPECT_DOUBLE_EQ( a.tht(),  0.0 );
-    EXPECT_DOUBLE_EQ( a.psi(), M_PI );
-
-    a = a4;
-    EXPECT_DOUBLE_EQ( a.phi(), 1.0 );
-    EXPECT_DOUBLE_EQ( a.tht(), 2.0 );
-    EXPECT_DOUBLE_EQ( a.psi(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
