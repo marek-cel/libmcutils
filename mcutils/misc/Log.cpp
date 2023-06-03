@@ -28,7 +28,6 @@
 #include <ctime>
 
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 
 #ifdef _LINUX_
@@ -114,14 +113,6 @@ void Log::setVerbLevel( VerboseLevel verb_level )
 {
     instance()->verb_level_ = verb_level;
 }
-
-//////////////////////////////////////////////////////////////////////////////////
-
-Log::Log()
-    : out_stream_ ( &std::cout )
-    , verb_level_ ( VerboseLevel::Info )
-    , syslog_out_ ( true )
-{}
 
 //////////////////////////////////////////////////////////////////////////////////
 

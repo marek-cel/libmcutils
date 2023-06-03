@@ -24,7 +24,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <ostream>
+#include <iostream>
 #include <string>
 
 #include <mcutils/defs.h>
@@ -106,16 +106,18 @@ public:
 
 private:
 
-    std::ostream* out_stream_;      ///< output stream (default std::cout)
-    VerboseLevel  verb_level_;      ///< verbose level (default Info)
+    std::ostream* out_stream_ = &std::cout;         ///< output stream (default std::cout)
+    VerboseLevel  verb_level_ = VerboseLevel::Info; ///< verbose level (default Info)
 
-    bool syslog_out_;               ///< specifies if syslog is enabled (default true)
+    bool syslog_out_ = true;                        ///< specifies if syslog is enabled (default true)
 
     /**
      * You should use static function instance() due to get refernce
      * to Random class instance.
      */
-    Log();
+    Log() = default;
+    Log( const Log& ) = default;
+    Log( Log&& ) = default;
 
     /**
      * @brief Prints log message.
