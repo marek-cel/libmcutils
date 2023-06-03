@@ -53,21 +53,7 @@ Table::Table( const double key_values[],
               const double table_data[],
               unsigned int size )
 {
-    if ( size > 0 )
-    {
-        for ( unsigned int i = 0; i < size; ++i )
-        {
-            if ( i < size - 1 )
-            {
-                initializeData( key_values[ i     ], table_data[ i     ],
-                                key_values[ i + 1 ], table_data[ i + 1 ] );
-            }
-            else
-            {
-                initializeData( key_values[ i ], table_data[ i ] );
-            }
-        }
-    }
+    setData( key_values, table_data, size );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,62 +61,7 @@ Table::Table( const double key_values[],
 Table::Table( const std::vector<double>& key_values,
               const std::vector<double>& table_data )
 {
-    if ( key_values.size() == table_data.size() )
-    {
-        unsigned int size = static_cast<unsigned int>( key_values.size() );
-
-        if ( size > 0 )
-        {
-            for ( unsigned int i = 0; i < size; ++i )
-            {
-                if ( i < size - 1 )
-                {
-                    initializeData( key_values[ i     ], table_data[ i     ],
-                                    key_values[ i + 1 ], table_data[ i + 1 ] );
-                }
-                else
-                {
-                    initializeData( key_values[ i ], table_data[ i ] );
-                }
-            }
-        }
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Table::Table( const char* str )
-{
-    std::vector<double> key_values_tmp;
-    std::vector<double> table_data_tmp;
-
-    std::stringstream ss( String::stripSpaces( str ) );
-    bool valid = true;
-
-    while ( !ss.eof() && valid )
-    {
-        double key = std::numeric_limits<double>::quiet_NaN();
-        double val = std::numeric_limits<double>::quiet_NaN();
-
-        ss >> key;
-        ss >> val;
-
-        valid &= mc::isValid( key ) && mc::isValid( val );
-
-        key_values_tmp.push_back( key );
-        table_data_tmp.push_back( val );
-    }
-
-    std::vector<double> key_values { std::numeric_limits<double>::quiet_NaN() };
-    std::vector<double> table_data { std::numeric_limits<double>::quiet_NaN() };
-
-    if ( valid )
-    {
-        key_values = key_values_tmp;
-        table_data = table_data_tmp;
-    }
-
-    *this = Table( key_values, table_data );
+    setData( key_values, table_data );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -457,6 +388,91 @@ void Table::multiplyValues( double factor )
             it->second.second = 0.0;
         }
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::setData( const double key_values[],
+                     const double table_data[],
+                     unsigned int size )
+{
+    if ( size > 0 )
+    {
+        for ( unsigned int i = 0; i < size; ++i )
+        {
+            if ( i < size - 1 )
+            {
+                initializeData( key_values[ i     ], table_data[ i     ],
+                                key_values[ i + 1 ], table_data[ i + 1 ] );
+            }
+            else
+            {
+                initializeData( key_values[ i ], table_data[ i ] );
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::setData(const std::vector<double> &key_values, const std::vector<double> &table_data)
+{
+    if ( key_values.size() == table_data.size() )
+    {
+        unsigned int size = static_cast<unsigned int>( key_values.size() );
+
+        if ( size > 0 )
+        {
+            for ( unsigned int i = 0; i < size; ++i )
+            {
+                if ( i < size - 1 )
+                {
+                    initializeData( key_values[ i     ], table_data[ i     ],
+                                    key_values[ i + 1 ], table_data[ i + 1 ] );
+                }
+                else
+                {
+                    initializeData( key_values[ i ], table_data[ i ] );
+                }
+            }
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::setFromString( const char *str )
+{
+    std::vector<double> key_values_temp;
+    std::vector<double> table_data_temp;
+
+    std::stringstream ss( String::stripSpaces( str ) );
+    bool valid = true;
+
+    while ( !ss.eof() && valid )
+    {
+        double key = std::numeric_limits<double>::quiet_NaN();
+        double val = std::numeric_limits<double>::quiet_NaN();
+
+        ss >> key;
+        ss >> val;
+
+        valid &= mc::isValid( key ) && mc::isValid( val );
+
+        key_values_temp.push_back( key );
+        table_data_temp.push_back( val );
+    }
+
+    std::vector<double> key_values { std::numeric_limits<double>::quiet_NaN() };
+    std::vector<double> table_data { std::numeric_limits<double>::quiet_NaN() };
+
+    if ( valid )
+    {
+        key_values = key_values_temp;
+        table_data = table_data_temp;
+    }
+
+    setData( key_values, table_data );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -103,37 +103,6 @@ TEST_F(TestTable, CanInstantiateAndCopy)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestTable, CanInstantiateAndSetDataFromString)
-{
-    char str[] =
-    { R"##(
-      -2.0  4.0
-      -1.0  1.0
-       0.0  0.0
-       1.0  1.0
-       2.0  4.0
-       3.0  9.0
-    )##" };
-    mc::Table tab( str );
-
-    EXPECT_TRUE( tab.isValid() );
-
-    EXPECT_EQ( tab.getSize(), 6 );
-
-    for ( int i = 0; i < 6; ++i )
-    {
-        double x = i - 2;
-        double y = x*x;
-        EXPECT_DOUBLE_EQ( tab.getValue( x ), y );
-    }
-
-    char str2[] = { "lorem ipsum" };
-    mc::Table tab2( str2 );
-    EXPECT_FALSE( tab2.isValid() );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetKeyByIndex)
 {
     // y = x^2 - 1
@@ -461,23 +430,69 @@ TEST_F(TestTable, CanConvertToString)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestTable, CanAssign)
+TEST_F(TestTable, CanSetDataFromArray)
 {
-    mc::Table tab;
-
     // y = x^2 - 1
     double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table t1( key_values, table_data, 6 );
-
-    tab = t1;
+    mc::Table tab;
+    tab.setData( key_values, table_data, 6 );
 
     for ( unsigned int i = 0; i < tab.getSize(); ++i )
     {
-        EXPECT_DOUBLE_EQ( tab.getKeyByIndex( i ), key_values[ i ] );
         EXPECT_DOUBLE_EQ( tab.getValue( key_values[ i ] ), table_data[ i ] );
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanSetDataFromVector)
+{
+    // y = x^2 - 1
+    std::vector< double > key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector< double > table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+
+    mc::Table tab;
+    tab.setData( key_values, table_data );
+
+    for ( unsigned int i = 0; i < key_values.size(); ++i )
+    {
+        EXPECT_DOUBLE_EQ( tab.getValue( key_values[ i ] ), table_data[ i ] );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanSetFromString)
+{
+    char str[] =
+    { R"##(
+      -2.0  4.0
+      -1.0  1.0
+       0.0  0.0
+       1.0  1.0
+       2.0  4.0
+       3.0  9.0
+    )##" };
+    mc::Table tab;
+    tab.setFromString( str );
+
+    EXPECT_TRUE( tab.isValid() );
+
+    EXPECT_EQ( tab.getSize(), 6 );
+
+    for ( int i = 0; i < 6; ++i )
+    {
+        double x = i - 2;
+        double y = x*x;
+        EXPECT_DOUBLE_EQ( tab.getValue( x ), y );
+    }
+
+    char str2[] = { "lorem ipsum" };
+    mc::Table tab2;
+    tab2.setFromString( str2 );
+    EXPECT_FALSE( tab2.isValid() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

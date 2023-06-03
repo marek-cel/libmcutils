@@ -53,12 +53,23 @@ public:
     /** @brief Constructor. */
     Table() = default;
 
-    /** @brief Constructor. */
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * @param key_values key values ordered array
+     * @param table_data table values ordered array
+     * @param size array size
+     */
     Table( const double key_values[],
            const double table_data[],
            unsigned int size );
 
-    /** @brief Constructor. */
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * @param key_values key values ordered vector
+     * @param table_data table values ordered vector
+     */
     Table( const std::vector<double>& key_values,
            const std::vector<double>& table_data );
 
@@ -160,6 +171,31 @@ public:
      * @param factor given factor
      */
     void multiplyValues( double factor );
+
+    /**
+     * @brief Sets table data.
+     * @param key_values key values ordered array
+     * @param table_data table values ordered array
+     * @param size array size
+     */
+    void setData( const double key_values[],
+                  const double table_data[],
+                  unsigned int size );
+
+    /**
+     * @brief Sets table data.
+     * @param key_values key values ordered vector
+     * @param table_data table values ordered vector
+     */
+    void setData( const std::vector<double>& key_values,
+                  const std::vector<double>& table_data );
+
+    /**
+     * @brief Sets table data from string.
+     * Values in the given string should be separated with whitespaces.
+     * @param str given string
+     */
+    void setFromString( const char* str );
 
     /**
      * @brief Returns string representation of the table.
