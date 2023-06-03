@@ -164,10 +164,6 @@ protected:
     }
 };
 
-template class MCUTILSAPI mc::MatrixNxN<3>;
-template class MCUTILSAPI mc::MatrixNxN<4>;
-template class MCUTILSAPI mc::MatrixNxN<6>;
-
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////

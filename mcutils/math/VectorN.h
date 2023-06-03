@@ -371,10 +371,6 @@ protected:
     }
 };
 
-template class MCUTILSAPI mc::VectorN<3>;
-template class MCUTILSAPI mc::VectorN<4>;
-template class MCUTILSAPI mc::VectorN<6>;
-
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
