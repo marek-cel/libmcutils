@@ -72,7 +72,7 @@ public:
     {
         if ( ( row < rows_ ) && ( col < cols_ ) )
         {
-            return items_[ row * cols_ + col ];
+            return items_[row * cols_ + col];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
@@ -95,7 +95,7 @@ public:
      */
     void setFromString( const char* str )
     {
-        double items[ size_ ];
+        double items[size_];
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -127,7 +127,7 @@ public:
     {
         if ( ( row < rows_ ) && ( col < cols_ ) )
         {
-            items_[ row * cols_ + col ] = value;
+            items_[row * cols_ + col] = value;
         }
     }
 
@@ -148,7 +148,7 @@ public:
         {
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                std::swap( items_[ row1 * cols_ + c ], items_[ row2 * cols_ + c ] );
+                std::swap( items_[row1 * cols_ + c], items_[row2 * cols_ + c] );
             }
         }
     }
@@ -165,7 +165,7 @@ public:
                 if ( r > 0 || c >  0 ) ss << "\t";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
-                ss << items_[ r * cols_ + c ];
+                ss << items_[r * cols_ + c];
             }
         }
 
@@ -183,7 +183,7 @@ public:
      */
     inline double operator()( unsigned int row, unsigned int col ) const
     {
-        return items_[ row * cols_ + col ];
+        return items_[row * cols_ + col];
     }
 
     /**
@@ -196,7 +196,7 @@ public:
      */
     inline double& operator()( unsigned int row, unsigned int col )
     {
-        return items_[ row * cols_ + col ];
+        return items_[row * cols_ + col];
     }
 
     /** @brief Addition operator. */
@@ -282,7 +282,7 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            result = result && ( items_[ i ] == matrix.items_[ i ] );
+            result = result && ( items_[i] == matrix.items_[i] );
         }
 
         return result;
@@ -303,7 +303,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] += matrix.items_[ i ];
+            items_[i] += matrix.items_[i];
         }
     }
 
@@ -312,7 +312,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] = -items_[ i ];
+            items_[i] = -items_[i];
         }
     }
 
@@ -321,7 +321,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] -= matrix.items_[ i ];
+            items_[i] -= matrix.items_[i];
         }
     }
 
@@ -330,7 +330,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] *= value;
+            items_[i] *= value;
         }
     }
 
@@ -353,7 +353,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] /= value;
+            items_[i] /= value;
         }
     }
 };
