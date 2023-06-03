@@ -62,7 +62,7 @@ void Vector3::set( double x, double y, double z )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator+ ( const Vector3& vect ) const
+Vector3 Vector3::operator+( const Vector3& vect ) const
 {
     Vector3 result( *this );
     result.add( vect );
@@ -71,7 +71,7 @@ Vector3 Vector3::operator+ ( const Vector3& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator- () const
+Vector3 Vector3::operator-() const
 {
     Vector3 result( *this );
     result.negate();
@@ -80,7 +80,7 @@ Vector3 Vector3::operator- () const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator- ( const Vector3& vect ) const
+Vector3 Vector3::operator-( const Vector3& vect ) const
 {
     Vector3 result( *this );
     result.substract( vect );
@@ -89,7 +89,7 @@ Vector3 Vector3::operator- ( const Vector3& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator* ( double value ) const
+Vector3 Vector3::operator*( double value ) const
 {
     Vector3 result( *this );
     result.multiplyByValue( value );
@@ -98,7 +98,7 @@ Vector3 Vector3::operator* ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator/ ( double value ) const
+Vector3 Vector3::operator/( double value ) const
 {
     Vector3 result( *this );
     result.divideByValue( value );
@@ -107,14 +107,14 @@ Vector3 Vector3::operator/ ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Vector3::operator* ( const Vector3& vect ) const
+double Vector3::operator*( const Vector3& vect ) const
 {
     return ( x()*vect.x() + y()*vect.y() + z()*vect.z() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator% ( const Vector3& vect ) const
+Vector3 Vector3::operator%( const Vector3& vect ) const
 {
     Vector3 result;
 
@@ -127,7 +127,7 @@ Vector3 Vector3::operator% ( const Vector3& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator+= ( const Vector3& vect )
+Vector3& Vector3::operator+=( const Vector3& vect )
 {
     add( vect );
     return (*this);
@@ -135,7 +135,7 @@ Vector3& Vector3::operator+= ( const Vector3& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator-= ( const Vector3& vect )
+Vector3& Vector3::operator-=( const Vector3& vect )
 {
     substract( vect );
     return (*this);
@@ -143,7 +143,7 @@ Vector3& Vector3::operator-= ( const Vector3& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator*= ( double value )
+Vector3& Vector3::operator*=( double value )
 {
     multiplyByValue( value );
     return (*this);
@@ -151,7 +151,7 @@ Vector3& Vector3::operator*= ( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator/= ( double value )
+Vector3& Vector3::operator/=( double value )
 {
     divideByValue( value );
     return (*this);
@@ -159,7 +159,7 @@ Vector3& Vector3::operator/= ( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator%= ( const Vector3& vect )
+Vector3& Vector3::operator%=( const Vector3& vect )
 {
     (*this) = (*this) % vect;
     return (*this);

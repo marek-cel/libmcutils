@@ -44,38 +44,37 @@ public:
     Vector4 getNormalized() const;
 
     /** @brief Addition operator. */
-    Vector4 operator+ ( const Vector4& vect ) const;
+    Vector4 operator+( const Vector4& vect ) const;
 
     /** @brief Negation operator. */
-    Vector4 operator- () const;
+    Vector4 operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector4 operator- ( const Vector4& vect ) const;
+    Vector4 operator-( const Vector4& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector4 operator* ( double value ) const;
+    Vector4 operator*( double value ) const;
 
     /** @brief Division operator (by scalar). */
-    Vector4 operator/ ( double value ) const;
+    Vector4 operator/( double value ) const;
 
     /** @brief Unary addition operator. */
-    Vector4& operator+= ( const Vector4& vect );
+    Vector4& operator+=( const Vector4& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector4& operator-= ( const Vector4& vect );
+    Vector4& operator-=( const Vector4& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector4& operator*= ( double value );
+    Vector4& operator*=( double value );
 
     /** Unary division operator (by scalar). */
-    Vector4& operator/= ( double value );
-
+    Vector4& operator/=( double value );
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector4 operator* ( double value, const Vector4& vect )
+inline Vector4 operator*( double value, const Vector4& vect )
 {
     return ( vect * value );
 }

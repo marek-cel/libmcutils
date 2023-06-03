@@ -40,7 +40,7 @@ Vector4 Vector4::getNormalized() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator+ ( const Vector4& vect ) const
+Vector4 Vector4::operator+( const Vector4& vect ) const
 {
     Vector4 result( *this );
     result.add( vect );
@@ -49,7 +49,7 @@ Vector4 Vector4::operator+ ( const Vector4& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator- () const
+Vector4 Vector4::operator-() const
 {
     Vector4 result( *this );
     result.negate();
@@ -58,7 +58,7 @@ Vector4 Vector4::operator- () const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator- ( const Vector4& vect ) const
+Vector4 Vector4::operator-( const Vector4& vect ) const
 {
     Vector4 result( *this );
     result.substract( vect );
@@ -67,7 +67,7 @@ Vector4 Vector4::operator- ( const Vector4& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator* ( double value ) const
+Vector4 Vector4::operator*( double value ) const
 {
     Vector4 result( *this );
     result.multiplyByValue( value );
@@ -76,7 +76,7 @@ Vector4 Vector4::operator* ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator/ ( double value ) const
+Vector4 Vector4::operator/( double value ) const
 {
     Vector4 result( *this );
     result.divideByValue( value );
@@ -85,7 +85,7 @@ Vector4 Vector4::operator/ ( double value ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator+= ( const Vector4& vect )
+Vector4& Vector4::operator+=( const Vector4& vect )
 {
     add( vect );
     return (*this);
@@ -93,7 +93,7 @@ Vector4& Vector4::operator+= ( const Vector4& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator-= ( const Vector4& vect )
+Vector4& Vector4::operator-=( const Vector4& vect )
 {
     substract( vect );
     return (*this);
@@ -101,7 +101,7 @@ Vector4& Vector4::operator-= ( const Vector4& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator*= ( double value )
+Vector4& Vector4::operator*=( double value )
 {
     multiplyByValue( value );
     return (*this);
@@ -109,7 +109,7 @@ Vector4& Vector4::operator*= ( double value )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator/= ( double value )
+Vector4& Vector4::operator/=( double value )
 {
     divideByValue( value );
     return (*this);

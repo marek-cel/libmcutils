@@ -205,7 +205,7 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double operator() ( unsigned int index ) const
+    inline double operator()( unsigned int index ) const
     {
         return items_[index];
     }
@@ -216,13 +216,13 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double& operator() ( unsigned int index )
+    inline double& operator()( unsigned int index )
     {
         return items_[index];
     }
 
     /** @brief Addition operator. */
-    Vector<SIZE> operator+ ( const Vector<SIZE>& vect ) const
+    Vector<SIZE> operator+( const Vector<SIZE>& vect ) const
     {
         Vector<SIZE> result( *this );
         result.add( vect );
@@ -230,7 +230,7 @@ public:
     }
 
     /** @brief Negation operator. */
-    Vector<SIZE> operator- () const
+    Vector<SIZE> operator-() const
     {
         Vector<SIZE> result( *this );
         result.negate();
@@ -238,7 +238,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    Vector<SIZE> operator- ( const Vector<SIZE>& vect ) const
+    Vector<SIZE> operator-( const Vector<SIZE>& vect ) const
     {
         Vector<SIZE> result( *this );
         result.substract( vect );
@@ -246,7 +246,7 @@ public:
     }
 
     /** @brief Multiplication operator (by scalar). */
-    Vector<SIZE> operator* ( double value ) const
+    Vector<SIZE> operator*( double value ) const
     {
         Vector<SIZE> result( *this );
         result.multiplyByValue( value );
@@ -254,7 +254,7 @@ public:
     }
 
     /** @brief Dot product operator. */
-    double operator* ( const Vector<SIZE>& vect ) const
+    double operator*( const Vector<SIZE>& vect ) const
     {
         double result = 0.0;
 
@@ -267,7 +267,7 @@ public:
     }
 
     /** @brief Division operator (by scalar). */
-    Vector<SIZE> operator/ ( double val ) const
+    Vector<SIZE> operator/( double val ) const
     {
         Vector<SIZE> result( *this );
         result.divideByValue( val );
@@ -275,35 +275,35 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    Vector<SIZE>& operator+= ( const Vector<SIZE>& vect )
+    Vector<SIZE>& operator+=( const Vector<SIZE>& vect )
     {
         add( vect );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Vector<SIZE>& operator-= ( const Vector<SIZE>& vect )
+    Vector<SIZE>& operator-=( const Vector<SIZE>& vect )
     {
         substract( vect );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector<SIZE>& operator*= ( double value )
+    Vector<SIZE>& operator*=( double value )
     {
         multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    Vector<SIZE>& operator/= ( double value )
+    Vector<SIZE>& operator/=( double value )
     {
         divideByValue( value );
         return (*this);
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Vector<SIZE>& vect ) const
+    bool operator==( const Vector<SIZE>& vect ) const
     {
         bool result = true;
 
@@ -316,7 +316,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Vector<SIZE>& vect ) const
+    bool operator!=( const Vector<SIZE>& vect ) const
     {
         return !( (*this) == vect );
     }

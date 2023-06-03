@@ -44,38 +44,37 @@ public:
     Vector6 getNormalized() const;
 
     /** @brief Addition operator. */
-    Vector6 operator+ ( const Vector6& vect ) const;
+    Vector6 operator+( const Vector6& vect ) const;
 
     /** @brief Negation operator. */
-    Vector6 operator- () const;
+    Vector6 operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector6 operator- ( const Vector6& vect ) const;
+    Vector6 operator-( const Vector6& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector6 operator* ( double value ) const;
+    Vector6 operator*( double value ) const;
 
     /** @brief Division operator (by scalar). */
-    Vector6 operator/ ( double value ) const;
+    Vector6 operator/( double value ) const;
 
     /** @brief Unary addition operator. */
-    Vector6& operator+= ( const Vector6& vect );
+    Vector6& operator+=( const Vector6& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector6& operator-= ( const Vector6& vect );
+    Vector6& operator-=( const Vector6& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector6& operator*= ( double value );
+    Vector6& operator*=( double value );
 
     /** @brief Unary division operator (by scalar). */
-    Vector6& operator/= ( double value );
-
+    Vector6& operator/=( double value );
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector6 operator* ( double value, const Vector6& vect )
+inline Vector6 operator*( double value, const Vector6& vect )
 {
     return ( vect * value );
 }

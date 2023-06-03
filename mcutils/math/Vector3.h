@@ -98,46 +98,46 @@ public:
     void set( double x, double y, double z );
 
     /** @brief Addition operator. */
-    Vector3 operator+ ( const Vector3& vect ) const;
+    Vector3 operator+( const Vector3& vect ) const;
 
     /** @brief Negation operator. */
-    Vector3 operator- () const;
+    Vector3 operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector3 operator- ( const Vector3& vect ) const;
+    Vector3 operator-( const Vector3& vect ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector3 operator* ( double value ) const;
+    Vector3 operator*( double value ) const;
 
     /** @brief Division operator (by scalar). */
-    Vector3 operator/ ( double value ) const;
+    Vector3 operator/( double value ) const;
 
     /** @brief Dot product operator. */
-    double operator* ( const Vector3& vect ) const;
+    double operator*( const Vector3& vect ) const;
 
     /** @brief Cross product operator. */
-    Vector3 operator% ( const Vector3& vect ) const;
+    Vector3 operator%( const Vector3& vect ) const;
 
     /** @brief Unary addition operator. */
-    Vector3& operator+= ( const Vector3& vect );
+    Vector3& operator+=( const Vector3& vect );
 
     /** @brief Unary subtraction operator. */
-    Vector3& operator-= ( const Vector3& vect );
+    Vector3& operator-=( const Vector3& vect );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector3& operator*= ( double value );
+    Vector3& operator*=( double value );
 
     /** @brief Unary division operator (by scalar). */
-    Vector3& operator/= ( double value );
+    Vector3& operator/=( double value );
 
     /** @brief Unary cross product operator. */
-    Vector3& operator%= ( const Vector3& vect );
+    Vector3& operator%=( const Vector3& vect );
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector3 operator* ( double value, const Vector3& vect )
+inline Vector3 operator*( double value, const Vector3& vect )
 {
     return ( vect * value );
 }
