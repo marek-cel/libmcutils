@@ -99,68 +99,6 @@ TEST_F(TestMatrix4x4, CanInstantiateAndCopy)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix4x4, CanInstantiateAndSetData)
-{
-    double items[] = {
-         1.0,  2.0,  3.0,  4.0,
-         5.0,  6.0,  7.0,  8.0,
-         9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0
-    };
-
-    mc::Matrix4x4 m1( items );
-
-    EXPECT_DOUBLE_EQ( m1(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m1(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m1(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m1(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m1(1,0),  5.0 );
-    EXPECT_DOUBLE_EQ( m1(1,1),  6.0 );
-    EXPECT_DOUBLE_EQ( m1(1,2),  7.0 );
-    EXPECT_DOUBLE_EQ( m1(1,3),  8.0 );
-    EXPECT_DOUBLE_EQ( m1(2,0),  9.0 );
-    EXPECT_DOUBLE_EQ( m1(2,1), 10.0 );
-    EXPECT_DOUBLE_EQ( m1(2,2), 11.0 );
-    EXPECT_DOUBLE_EQ( m1(2,3), 12.0 );
-    EXPECT_DOUBLE_EQ( m1(3,0), 13.0 );
-    EXPECT_DOUBLE_EQ( m1(3,1), 14.0 );
-    EXPECT_DOUBLE_EQ( m1(3,2), 15.0 );
-    EXPECT_DOUBLE_EQ( m1(3,3), 16.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestMatrix4x4, CanInstantiateAndSetDataFromString)
-{
-    char str[] =
-    { R"##(
-      1.0   2.0   3.0   4.0
-      5.0   6.0   7.0   8.0
-      9.0  10.0  11.0  12.0
-     13.0  14.0  15.0  16.0
-    )##" };
-    mc::Matrix4x4 m1( str );
-
-    EXPECT_DOUBLE_EQ( m1(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m1(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m1(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m1(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m1(1,0),  5.0 );
-    EXPECT_DOUBLE_EQ( m1(1,1),  6.0 );
-    EXPECT_DOUBLE_EQ( m1(1,2),  7.0 );
-    EXPECT_DOUBLE_EQ( m1(1,3),  8.0 );
-    EXPECT_DOUBLE_EQ( m1(2,0),  9.0 );
-    EXPECT_DOUBLE_EQ( m1(2,1), 10.0 );
-    EXPECT_DOUBLE_EQ( m1(2,2), 11.0 );
-    EXPECT_DOUBLE_EQ( m1(2,3), 12.0 );
-    EXPECT_DOUBLE_EQ( m1(3,0), 13.0 );
-    EXPECT_DOUBLE_EQ( m1(3,1), 14.0 );
-    EXPECT_DOUBLE_EQ( m1(3,2), 15.0 );
-    EXPECT_DOUBLE_EQ( m1(3,3), 16.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix4x4, CanTranspose)
 {
     // expected values calculated with GNU Octave
@@ -173,7 +111,8 @@ TEST_F(TestMatrix4x4, CanTranspose)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m( items );
+    mc::Matrix4x4 m;
+    m.setItems( items );
 
     m.transpose();
 
@@ -206,7 +145,8 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m( items );
+    mc::Matrix4x4 m;
+    m.setItems( items );
 
     mc::Matrix4x4 m1 = m.getTransposed();
 
@@ -247,40 +187,6 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix4x4, CanAssign)
-{
-    double items[] = {
-         1.0,  2.0,  3.0,  4.0,
-         5.0,  6.0,  7.0,  8.0,
-         9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0
-    };
-
-    mc::Matrix4x4 m( items );
-    mc::Matrix4x4 m1;
-
-    m1 = m;
-
-    EXPECT_DOUBLE_EQ( m1(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m1(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m1(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m1(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m1(1,0),  5.0 );
-    EXPECT_DOUBLE_EQ( m1(1,1),  6.0 );
-    EXPECT_DOUBLE_EQ( m1(1,2),  7.0 );
-    EXPECT_DOUBLE_EQ( m1(1,3),  8.0 );
-    EXPECT_DOUBLE_EQ( m1(2,0),  9.0 );
-    EXPECT_DOUBLE_EQ( m1(2,1), 10.0 );
-    EXPECT_DOUBLE_EQ( m1(2,2), 11.0 );
-    EXPECT_DOUBLE_EQ( m1(2,3), 12.0 );
-    EXPECT_DOUBLE_EQ( m1(3,0), 13.0 );
-    EXPECT_DOUBLE_EQ( m1(3,1), 14.0 );
-    EXPECT_DOUBLE_EQ( m1(3,2), 15.0 );
-    EXPECT_DOUBLE_EQ( m1(3,3), 16.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix4x4, CanAdd)
 {
     double items[] = {
@@ -291,7 +197,9 @@ TEST_F(TestMatrix4x4, CanAdd)
     };
 
     mc::Matrix4x4 m0;
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
+
     mc::Matrix4x4 m2 = m0 + m1;
 
     EXPECT_DOUBLE_EQ( m2(0,0),  1.0 );
@@ -323,7 +231,9 @@ TEST_F(TestMatrix4x4, CanNegate)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
+
     mc::Matrix4x4 m2 = -m1;
 
     EXPECT_DOUBLE_EQ( m2(0,0),  -1.0 );
@@ -356,7 +266,9 @@ TEST_F(TestMatrix4x4, CanSubstract)
     };
 
     mc::Matrix4x4 m0;
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
+
     mc::Matrix4x4 m2 = m0 - m1;
 
     EXPECT_DOUBLE_EQ( m2(0,0), -  1.0 );
@@ -388,7 +300,9 @@ TEST_F(TestMatrix4x4, CanMultiplyByScalar)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
+
     mc::Matrix4x4 m = m1 * 2.0;
 
     EXPECT_DOUBLE_EQ( m(0,0),  2.0 );
@@ -430,8 +344,11 @@ TEST_F(TestMatrix4x4, CanMultiplyByMatrix)
        14.0, 15.0, 16.0, 17.0
     };
 
-    mc::Matrix4x4 m1( x1 );
-    mc::Matrix4x4 m2( x2 );
+    mc::Matrix4x4 m1;
+    mc::Matrix4x4 m2;
+
+    m1.setItems( x1 );
+    m2.setItems( x2 );
 
     mc::Matrix4x4 m = m1 * m2;
 
@@ -471,7 +388,9 @@ TEST_F(TestMatrix4x4, CanMultiplyByVector)
          1.0,  2.0,  3.0,  4.0
     };
 
-    mc::Matrix4x4 m1( x1 );
+    mc::Matrix4x4 m1;
+    m1.setItems( x1 );
+
     mc::Vector4 v2( x2 );
 
     mc::Vector4 v = m1 * v2;
@@ -493,7 +412,8 @@ TEST_F(TestMatrix4x4, CanDivideByScalar)
        26.0, 28.0, 30.0, 32.0
     };
 
-    mc::Matrix4x4 m1( x1 );
+    mc::Matrix4x4 m1;
+    m1.setItems( x1 );
     mc::Matrix4x4 m2 = m1 / 2.0;
 
     EXPECT_DOUBLE_EQ( m2(0,0),  1.0 );
@@ -526,7 +446,8 @@ TEST_F(TestMatrix4x4, CanUnaryAdd)
     };
 
     mc::Matrix4x4 m1;
-    mc::Matrix4x4 m2( x1 );
+    mc::Matrix4x4 m2;
+    m2.setItems( x1 );
 
     m1 += m2;
 
@@ -560,7 +481,8 @@ TEST_F(TestMatrix4x4, CanUnarySubstract)
     };
 
     mc::Matrix4x4 m1;
-    mc::Matrix4x4 m2( x1 );
+    mc::Matrix4x4 m2;
+    m2.setItems( x1 );
 
     m1 -= m2;
 
@@ -593,7 +515,8 @@ TEST_F(TestMatrix4x4, CanUnaryMultiplyByScalar)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
 
     m1 *= 2.0;
 
@@ -626,7 +549,8 @@ TEST_F(TestMatrix4x4, CanUnaryDivideByScalar)
        26.0, 28.0, 30.0, 32.0
     };
 
-    mc::Matrix4x4 m1( items );
+    mc::Matrix4x4 m1;
+    m1.setItems( items );
 
     m1 /= 2.0;
 

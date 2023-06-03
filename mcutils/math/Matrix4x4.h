@@ -41,26 +41,8 @@ class MCUTILSAPI Matrix4x4 final : public MatrixNxN<4>
 {
 public:
 
-    /** @brief Constructor. */
-    Matrix4x4();
-
-    /** @brief Copy constructor. */
-    Matrix4x4( const Matrix4x4& matrix );
-
-    /** @brief Constructor. */
-    Matrix4x4( const double items[] );
-
-    /** @brief Constructor. */
-    Matrix4x4( const char* str );
-
-    /** @brief Destructor. */
-    virtual ~Matrix4x4() = default;
-
     /** @brief Returns transposed matrix. */
     Matrix4x4 getTransposed() const;
-
-    /** @brief Assignment operator. */
-    Matrix4x4& operator= ( const Matrix4x4& matrix );
 
     /** @brief Addition operator. */
     Matrix4x4 operator+ ( const Matrix4x4& matrix ) const;

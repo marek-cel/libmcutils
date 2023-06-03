@@ -60,22 +60,12 @@ public:
     /** @brief Creates identity matrix. */
     static Matrix3x3 identityMatrix();
 
-    /** @brief Constructor. */
-    Matrix3x3();
-
-    /** @brief Copy constructor. */
-    Matrix3x3( const Matrix3x3& matrix );
-
-    /** @brief Constructor. */
-    Matrix3x3( const double items[] );
+    Matrix3x3() = default;
 
     /** @brief Constructor. */
     Matrix3x3( double xx, double xy, double xz,
                double yx, double yy, double yz,
                double zx, double zy, double zz );
-
-    /** @brief Constructor. */
-    Matrix3x3( const char* str );
 
     /** @brief Creates passive (alias) rotation matrix. */
     Matrix3x3( const Angles& angl );
@@ -83,28 +73,25 @@ public:
     /** @brief Creates passive (alias) rotation matrix. */
     Matrix3x3( const Quaternion& qtrn );
 
-    /** @brief Destructor. */
-    virtual ~Matrix3x3() = default;
+    inline double xx() const { return items_[0]; }
+    inline double xy() const { return items_[1]; }
+    inline double xz() const { return items_[2]; }
+    inline double yx() const { return items_[3]; }
+    inline double yy() const { return items_[4]; }
+    inline double yz() const { return items_[5]; }
+    inline double zx() const { return items_[6]; }
+    inline double zy() const { return items_[7]; }
+    inline double zz() const { return items_[8]; }
 
-    inline double xx() const { return xx_; }
-    inline double xy() const { return xy_; }
-    inline double xz() const { return xz_; }
-    inline double yx() const { return yx_; }
-    inline double yy() const { return yy_; }
-    inline double yz() const { return yz_; }
-    inline double zx() const { return zx_; }
-    inline double zy() const { return zy_; }
-    inline double zz() const { return zz_; }
-
-    inline double& xx() { return xx_; }
-    inline double& xy() { return xy_; }
-    inline double& xz() { return xz_; }
-    inline double& yx() { return yx_; }
-    inline double& yy() { return yy_; }
-    inline double& yz() { return yz_; }
-    inline double& zx() { return zx_; }
-    inline double& zy() { return zy_; }
-    inline double& zz() { return zz_; }
+    inline double& xx() { return items_[0]; }
+    inline double& xy() { return items_[1]; }
+    inline double& xz() { return items_[2]; }
+    inline double& yx() { return items_[3]; }
+    inline double& yy() { return items_[4]; }
+    inline double& yz() { return items_[5]; }
+    inline double& zx() { return items_[6]; }
+    inline double& zy() { return items_[7]; }
+    inline double& zz() { return items_[8]; }
 
     /**
      * @brief Sets items of the matrix.
@@ -131,55 +118,38 @@ public:
     /** @brief Returns transposed matrix. */
     Matrix3x3 getTransposed() const;
 
-    /** @brief Assignment operator. */
-    Matrix3x3& operator= ( const Matrix3x3& matrix );
-
     /** @brief Addition operator. */
-    Matrix3x3 operator+ ( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator+( const Matrix3x3& matrix ) const;
 
     /** @brief Negation operator. */
-    Matrix3x3 operator- () const;
+    Matrix3x3 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix3x3 operator- ( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator-( const Matrix3x3& matrix ) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix3x3 operator* ( double value ) const;
+    Matrix3x3 operator*( double value ) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix3x3 operator* ( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator*( const Matrix3x3& matrix ) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector3 operator* ( const Vector3& vect ) const;
+    Vector3 operator*( const Vector3& vect ) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix3x3 operator/ ( double value ) const;
+    Matrix3x3 operator/( double value ) const;
 
     /** @brief Unary addition operator. */
-    Matrix3x3& operator+= ( const Matrix3x3& matrix );
+    Matrix3x3& operator+=( const Matrix3x3& matrix );
 
     /** @brief Unary subtraction operator. */
-    Matrix3x3& operator-= ( const Matrix3x3& matrix );
+    Matrix3x3& operator-=( const Matrix3x3& matrix );
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix3x3& operator*= ( double value );
+    Matrix3x3& operator*=( double value );
 
     /** @brief Unary division operator (by scalar). */
-    Matrix3x3& operator/= ( double value );
-
-private:
-
-    double& xx_;    ///< xx element
-    double& xy_;    ///< xy element
-    double& xz_;    ///< xz element
-
-    double& yx_;    ///< yx element
-    double& yy_;    ///< yy element
-    double& yz_;    ///< yz element
-
-    double& zx_;    ///< zx element
-    double& zy_;    ///< zy element
-    double& zz_;    ///< zz element
+    Matrix3x3& operator/=( double value );
 };
 
 ////////////////////////////////////////////////////////////////////////////////

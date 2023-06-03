@@ -42,32 +42,6 @@ class MatrixNxN : public Matrix<N, N>
 {
 public:
 
-    /** @brief Constructor. */
-    MatrixNxN() :
-        Matrix<N, N>()
-    {}
-
-    /** @brief Copy constructor. */
-    MatrixNxN( const MatrixNxN<N>& matrix ) :
-        Matrix<N, N>( matrix )
-    {}
-
-    /** @brief Constructor. */
-    MatrixNxN( const double items[] ) :
-        Matrix<N, N>( items )
-    {}
-
-    /** @brief Constructor. */
-    MatrixNxN( const char* str ) :
-        Matrix<N, N>( str )
-    {}
-
-    // LCOV_EXCL_START
-    // excluded from coverage report due to deleting destructor calling issues
-    /** @brief Destructor. */
-    virtual ~MatrixNxN() = default;
-    // LCOV_EXCL_STOP
-
     /** @brief Transposes matrix. */
     void transpose()
     {
@@ -90,15 +64,8 @@ public:
         return result;
     }
 
-    /** @brief Assignment operator. */
-    MatrixNxN<N>& operator= ( const MatrixNxN<N>& matrix )
-    {
-        std::memcpy( this->items_, matrix.items_, sizeof(this->items_) );
-        return (*this);
-    }
-
     /** @brief Addition operator. */
-    MatrixNxN<N> operator+ ( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator+( const MatrixNxN<N>& matrix ) const
     {
         MatrixNxN<N> result( *this );
         result.add( matrix );
@@ -106,7 +73,7 @@ public:
     }
 
     /** @brief Negation operator. */
-    MatrixNxN<N> operator- () const
+    MatrixNxN<N> operator-() const
     {
         MatrixNxN<N> result( *this );
         result.negate();
@@ -114,7 +81,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    MatrixNxN<N> operator- ( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator-( const MatrixNxN<N>& matrix ) const
     {
         MatrixNxN<N> result( *this );
         result.substract( matrix );
@@ -122,7 +89,7 @@ public:
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixNxN<N> operator* ( double value ) const
+    MatrixNxN<N> operator*( double value ) const
     {
         MatrixNxN<N> result( *this );
         result.multiplyByValue( value );
@@ -130,7 +97,7 @@ public:
     }
 
     /** @brief Multiplication operator (by matrix). */
-    MatrixNxN<N> operator* ( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator*( const MatrixNxN<N>& matrix ) const
     {
         MatrixNxN<N> result( *this );
         multiplyByMatrix( matrix, &result );
@@ -138,7 +105,7 @@ public:
     }
 
     /** @brief Division operator (by scalar). */
-    MatrixNxN<N> operator/ ( double value ) const
+    MatrixNxN<N> operator/( double value ) const
     {
         MatrixNxN<N> result( *this );
         result.divideByValue( value );
@@ -146,28 +113,28 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    MatrixNxN<N>& operator+= ( const MatrixNxN<N>& matrix )
+    MatrixNxN<N>& operator+=( const MatrixNxN<N>& matrix )
     {
         this->add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixNxN<N>& operator-= ( const MatrixNxN<N>& matrix )
+    MatrixNxN<N>& operator-=( const MatrixNxN<N>& matrix )
     {
         this->substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    MatrixNxN<N>& operator*= ( double value )
+    MatrixNxN<N>& operator*=( double value )
     {
         this->multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    MatrixNxN<N>& operator/= ( double value )
+    MatrixNxN<N>& operator/=( double value )
     {
         this->divideByValue( value );
         return (*this);

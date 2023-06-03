@@ -41,26 +41,8 @@ class MCUTILSAPI Matrix6x6 final : public MatrixNxN<6>
 {
 public:
 
-    /** @brief Constructor. */
-    Matrix6x6();
-
-    /** @brief Copy constructor. */
-    Matrix6x6( const Matrix6x6& matrix );
-
-    /** @brief Constructor. */
-    Matrix6x6( const double items[] );
-
-    /** @brief Constructor. */
-    Matrix6x6( const char* str );
-
-    /** @brief Destructor. */
-    virtual ~Matrix6x6() = default;
-
     /** @brief Returns transposed matrix. */
     Matrix6x6 getTransposed() const;
-
-    /** @brief Assignment operator. */
-    Matrix6x6& operator= ( const Matrix6x6& matrix );
 
     /** @brief Addition operator. */
     Matrix6x6 operator+ ( const Matrix6x6& matrix ) const;

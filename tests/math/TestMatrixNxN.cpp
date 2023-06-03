@@ -262,198 +262,11 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixNxN, CanInstantiateAndSetDataFromArray)
-{
-    double x3[] { 1.0, 2.0,3.0,
-                  4.0,5.0,6.0,
-                  7.0,8.0,9.0 };
-
-    mc::MatrixNxN<3> m3( x3 );
-
-    EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
-    EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
-    EXPECT_DOUBLE_EQ( m3(0,2), 3.0 );
-    EXPECT_DOUBLE_EQ( m3(1,0), 4.0 );
-    EXPECT_DOUBLE_EQ( m3(1,1), 5.0 );
-    EXPECT_DOUBLE_EQ( m3(1,2), 6.0 );
-    EXPECT_DOUBLE_EQ( m3(2,0), 7.0 );
-    EXPECT_DOUBLE_EQ( m3(2,1), 8.0 );
-    EXPECT_DOUBLE_EQ( m3(2,2), 9.0 );
-
-    double x4[] { 1.0,2.0,3.0,4.0,
-                  5.0,6.0,7.0,8.0,
-                 11.0,12.0,13.0,14.0,
-                 15.0,16.0,17.0,18.0 };
-
-    mc::MatrixNxN<4> m4( x4 );
-
-    EXPECT_DOUBLE_EQ( m4(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m4(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m4(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m4(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m4(1,0),  5.0 );
-    EXPECT_DOUBLE_EQ( m4(1,1),  6.0 );
-    EXPECT_DOUBLE_EQ( m4(1,2),  7.0 );
-    EXPECT_DOUBLE_EQ( m4(1,3),  8.0 );
-    EXPECT_DOUBLE_EQ( m4(2,0), 11.0 );
-    EXPECT_DOUBLE_EQ( m4(2,1), 12.0 );
-    EXPECT_DOUBLE_EQ( m4(2,2), 13.0 );
-    EXPECT_DOUBLE_EQ( m4(2,3), 14.0 );
-    EXPECT_DOUBLE_EQ( m4(3,0), 15.0 );
-    EXPECT_DOUBLE_EQ( m4(3,1), 16.0 );
-    EXPECT_DOUBLE_EQ( m4(3,2), 17.0 );
-    EXPECT_DOUBLE_EQ( m4(3,3), 18.0 );
-
-    double x6[] { 1.0,2.0,3.0,4.0,5.0,6.0,
-    11.0,12.0,13.0,14.0,15.0,16.0,
-    21.0,22.0,23.0,24.0,25.0,26.0,
-    31.0,32.0,33.0,34.0,35.0,36.0,
-    41.0,42.0,43.0,44.0,45.0,46.0,
-    51.0,52.0,53.0,54.0,55.0,56.0 };
-
-    mc::MatrixNxN<6> m6( x6 );
-
-    EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m6(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m6(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m6(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m6(0,4),  5.0 );
-    EXPECT_DOUBLE_EQ( m6(0,5),  6.0 );
-    EXPECT_DOUBLE_EQ( m6(1,0), 11.0 );
-    EXPECT_DOUBLE_EQ( m6(1,1), 12.0 );
-    EXPECT_DOUBLE_EQ( m6(1,2), 13.0 );
-    EXPECT_DOUBLE_EQ( m6(1,3), 14.0 );
-    EXPECT_DOUBLE_EQ( m6(1,4), 15.0 );
-    EXPECT_DOUBLE_EQ( m6(1,5), 16.0 );
-    EXPECT_DOUBLE_EQ( m6(2,0), 21.0 );
-    EXPECT_DOUBLE_EQ( m6(2,1), 22.0 );
-    EXPECT_DOUBLE_EQ( m6(2,2), 23.0 );
-    EXPECT_DOUBLE_EQ( m6(2,3), 24.0 );
-    EXPECT_DOUBLE_EQ( m6(2,4), 25.0 );
-    EXPECT_DOUBLE_EQ( m6(2,5), 26.0 );
-    EXPECT_DOUBLE_EQ( m6(3,0), 31.0 );
-    EXPECT_DOUBLE_EQ( m6(3,1), 32.0 );
-    EXPECT_DOUBLE_EQ( m6(3,2), 33.0 );
-    EXPECT_DOUBLE_EQ( m6(3,3), 34.0 );
-    EXPECT_DOUBLE_EQ( m6(3,4), 35.0 );
-    EXPECT_DOUBLE_EQ( m6(3,5), 36.0 );
-    EXPECT_DOUBLE_EQ( m6(4,0), 41.0 );
-    EXPECT_DOUBLE_EQ( m6(4,1), 42.0 );
-    EXPECT_DOUBLE_EQ( m6(4,2), 43.0 );
-    EXPECT_DOUBLE_EQ( m6(4,3), 44.0 );
-    EXPECT_DOUBLE_EQ( m6(4,4), 45.0 );
-    EXPECT_DOUBLE_EQ( m6(4,5), 46.0 );
-    EXPECT_DOUBLE_EQ( m6(5,0), 51.0 );
-    EXPECT_DOUBLE_EQ( m6(5,1), 52.0 );
-    EXPECT_DOUBLE_EQ( m6(5,2), 53.0 );
-    EXPECT_DOUBLE_EQ( m6(5,3), 54.0 );
-    EXPECT_DOUBLE_EQ( m6(5,4), 55.0 );
-    EXPECT_DOUBLE_EQ( m6(5,5), 56.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestMatrixNxN, CanInstantiateAndSetDataFromString)
-{
-    char str3[] =
-    { R"##(
-        1.0 2.0 3.0
-        4.0 5.0 6.0
-        7.0 8.0 9.0
-    )##" };
-    mc::MatrixNxN<3> m3( str3 );
-
-    EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
-    EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
-    EXPECT_DOUBLE_EQ( m3(0,2), 3.0 );
-    EXPECT_DOUBLE_EQ( m3(1,0), 4.0 );
-    EXPECT_DOUBLE_EQ( m3(1,1), 5.0 );
-    EXPECT_DOUBLE_EQ( m3(1,2), 6.0 );
-    EXPECT_DOUBLE_EQ( m3(2,0), 7.0 );
-    EXPECT_DOUBLE_EQ( m3(2,1), 8.0 );
-    EXPECT_DOUBLE_EQ( m3(2,2), 9.0 );
-
-    char str4[] =
-    { R"##(
-      1.0   2.0   3.0   4.0
-      5.0   6.0   7.0   8.0
-      9.0  10.0  11.0  12.0
-     13.0  14.0  15.0  16.0
-    )##" };
-    mc::MatrixNxN<4> m4( str4 );
-
-    EXPECT_DOUBLE_EQ( m4(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m4(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m4(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m4(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m4(1,0),  5.0 );
-    EXPECT_DOUBLE_EQ( m4(1,1),  6.0 );
-    EXPECT_DOUBLE_EQ( m4(1,2),  7.0 );
-    EXPECT_DOUBLE_EQ( m4(1,3),  8.0 );
-    EXPECT_DOUBLE_EQ( m4(2,0),  9.0 );
-    EXPECT_DOUBLE_EQ( m4(2,1), 10.0 );
-    EXPECT_DOUBLE_EQ( m4(2,2), 11.0 );
-    EXPECT_DOUBLE_EQ( m4(2,3), 12.0 );
-    EXPECT_DOUBLE_EQ( m4(3,0), 13.0 );
-    EXPECT_DOUBLE_EQ( m4(3,1), 14.0 );
-    EXPECT_DOUBLE_EQ( m4(3,2), 15.0 );
-    EXPECT_DOUBLE_EQ( m4(3,3), 16.0 );
-
-    char str6[] =
-    { R"##(
-      1.0   2.0   3.0   4.0   5.0   6.0
-      7.0   8.0   9.0  10.0  11.0  12.0
-     13.0  14.0  15.0  16.0  17.0  18.0
-     19.0  20.0  21.0  22.0  23.0  24.0
-     25.0  26.0  27.0  28.0  29.0  30.0
-     31.0  32.0  33.0  34.0  35.0  36.0
-    )##" };
-    mc::MatrixNxN<6> m6( str6 );
-
-    EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
-    EXPECT_DOUBLE_EQ( m6(0,1),  2.0 );
-    EXPECT_DOUBLE_EQ( m6(0,2),  3.0 );
-    EXPECT_DOUBLE_EQ( m6(0,3),  4.0 );
-    EXPECT_DOUBLE_EQ( m6(0,4),  5.0 );
-    EXPECT_DOUBLE_EQ( m6(0,5),  6.0 );
-    EXPECT_DOUBLE_EQ( m6(1,0),  7.0 );
-    EXPECT_DOUBLE_EQ( m6(1,1),  8.0 );
-    EXPECT_DOUBLE_EQ( m6(1,2),  9.0 );
-    EXPECT_DOUBLE_EQ( m6(1,3), 10.0 );
-    EXPECT_DOUBLE_EQ( m6(1,4), 11.0 );
-    EXPECT_DOUBLE_EQ( m6(1,5), 12.0 );
-    EXPECT_DOUBLE_EQ( m6(2,0), 13.0 );
-    EXPECT_DOUBLE_EQ( m6(2,1), 14.0 );
-    EXPECT_DOUBLE_EQ( m6(2,2), 15.0 );
-    EXPECT_DOUBLE_EQ( m6(2,3), 16.0 );
-    EXPECT_DOUBLE_EQ( m6(2,4), 17.0 );
-    EXPECT_DOUBLE_EQ( m6(2,5), 18.0 );
-    EXPECT_DOUBLE_EQ( m6(3,0), 19.0 );
-    EXPECT_DOUBLE_EQ( m6(3,1), 20.0 );
-    EXPECT_DOUBLE_EQ( m6(3,2), 21.0 );
-    EXPECT_DOUBLE_EQ( m6(3,3), 22.0 );
-    EXPECT_DOUBLE_EQ( m6(3,4), 23.0 );
-    EXPECT_DOUBLE_EQ( m6(3,5), 24.0 );
-    EXPECT_DOUBLE_EQ( m6(4,0), 25.0 );
-    EXPECT_DOUBLE_EQ( m6(4,1), 26.0 );
-    EXPECT_DOUBLE_EQ( m6(4,2), 27.0 );
-    EXPECT_DOUBLE_EQ( m6(4,3), 28.0 );
-    EXPECT_DOUBLE_EQ( m6(4,4), 29.0 );
-    EXPECT_DOUBLE_EQ( m6(4,5), 30.0 );
-    EXPECT_DOUBLE_EQ( m6(5,0), 31.0 );
-    EXPECT_DOUBLE_EQ( m6(5,1), 32.0 );
-    EXPECT_DOUBLE_EQ( m6(5,2), 33.0 );
-    EXPECT_DOUBLE_EQ( m6(5,3), 34.0 );
-    EXPECT_DOUBLE_EQ( m6(5,4), 35.0 );
-    EXPECT_DOUBLE_EQ( m6(5,5), 36.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanTranspose)
 {
     double items1[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixNxN<3> m1( items1 );
+    mc::MatrixNxN<3> m1;
+    m1.setItems( items1 );
 
     m1.transpose();
 
@@ -473,7 +286,8 @@ TEST_F(TestMatrixNxN, CanTranspose)
 TEST_F(TestMatrixNxN, CanGetTransposed)
 {
     double items3[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixNxN<3> m3( items3 );
+    mc::MatrixNxN<3> m3;
+    m3.setItems( items3 );
 
     mc::MatrixNxN<3> mt3 = m3.getTransposed();
 
@@ -504,7 +318,8 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::MatrixNxN<4> m4( x4 );
+    mc::MatrixNxN<4> m4;
+    m4.setItems( x4 );
 
     mc::MatrixNxN<4> mt4 = m4.getTransposed();
 
@@ -551,7 +366,9 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
         31.0, 32.0, 33.0, 34.0, 35.0, 36.0
     };
 
-    mc::MatrixNxN<6> m6( x6 );
+    mc::MatrixNxN<6> m6;
+    m6.setItems( x6 );
+
     mc::MatrixNxN<6> mt6 = m6.getTransposed();
 
     EXPECT_DOUBLE_EQ( m6(0,0),  1.0 );
@@ -1364,10 +1181,12 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar)
 TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
 {
     double x30[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixNxN<3> m30( x30 );
+    mc::MatrixNxN<3> m30;
+    m30.setItems( x30 );
 
     double x31[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
-    mc::MatrixNxN<3> m31( x31 );
+    mc::MatrixNxN<3> m31;
+    m31.setItems( x31 );
 
     mc::MatrixNxN<3> m3 = m30 * m31;
 
@@ -1395,8 +1214,11 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
        14.0, 15.0, 16.0, 17.0
     };
 
-    mc::MatrixNxN<4> m41( x41 );
-    mc::MatrixNxN<4> m42( x42 );
+    mc::MatrixNxN<4> m41;
+    mc::MatrixNxN<4> m42;
+
+    m41.setItems( x41 );
+    m42.setItems( x42 );
 
     mc::MatrixNxN<4> m4 = m41 * m42;
 
@@ -1435,8 +1257,11 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
          1.0,  2.0,  3.0,  4.0,  5.0,  6.0
     };
 
-    mc::MatrixNxN<6> m60( x60 );
-    mc::MatrixNxN<6> m61( x61 );
+    mc::MatrixNxN<6> m60;
+    mc::MatrixNxN<6> m61;
+
+    m60.setItems( x60 );
+    m61.setItems( x61 );
 
     mc::MatrixNxN<6> m6 = m60 * m61;
 

@@ -114,24 +114,6 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromArray)
-{
-    double items[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::Matrix3x3 m1( items );
-
-    EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
-    EXPECT_DOUBLE_EQ( m1(0,1), 2.0 );
-    EXPECT_DOUBLE_EQ( m1(0,2), 3.0 );
-    EXPECT_DOUBLE_EQ( m1(1,0), 4.0 );
-    EXPECT_DOUBLE_EQ( m1(1,1), 5.0 );
-    EXPECT_DOUBLE_EQ( m1(1,2), 6.0 );
-    EXPECT_DOUBLE_EQ( m1(2,0), 7.0 );
-    EXPECT_DOUBLE_EQ( m1(2,1), 8.0 );
-    EXPECT_DOUBLE_EQ( m1(2,2), 9.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 {
     mc::Angles a0( 0.0, 0.0, 0.0 );
@@ -382,29 +364,6 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq8.zx(), -0.1464, 1.0e-3 );
     EXPECT_NEAR( mq8.zy(), -0.8536, 1.0e-3 );
     EXPECT_NEAR( mq8.zz(),  0.5000, 1.0e-3 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromString)
-{
-    char str[] =
-    { R"##(
-        1.0 2.0 3.0
-        4.0 5.0 6.0
-        7.0 8.0 9.0
-    )##" };
-    mc::Matrix3x3 m1( str );
-
-    EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
-    EXPECT_DOUBLE_EQ( m1(0,1), 2.0 );
-    EXPECT_DOUBLE_EQ( m1(0,2), 3.0 );
-    EXPECT_DOUBLE_EQ( m1(1,0), 4.0 );
-    EXPECT_DOUBLE_EQ( m1(1,1), 5.0 );
-    EXPECT_DOUBLE_EQ( m1(1,2), 6.0 );
-    EXPECT_DOUBLE_EQ( m1(2,0), 7.0 );
-    EXPECT_DOUBLE_EQ( m1(2,1), 8.0 );
-    EXPECT_DOUBLE_EQ( m1(2,2), 9.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -776,28 +735,6 @@ TEST_F(TestMatrix3x3, CanGetTransposed)
     EXPECT_DOUBLE_EQ( mt.zx(), 3.0 );
     EXPECT_DOUBLE_EQ( mt.zy(), 6.0 );
     EXPECT_DOUBLE_EQ( mt.zz(), 9.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestMatrix3x3, CanAssign)
-{
-    mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
-                      4.0, 5.0, 6.0,
-                      7.0, 8.0, 9.0 );
-
-    mc::Matrix3x3 m0;
-    m0 = m1;
-
-    EXPECT_DOUBLE_EQ( m0.xx(), 1.0 );
-    EXPECT_DOUBLE_EQ( m0.xy(), 2.0 );
-    EXPECT_DOUBLE_EQ( m0.xz(), 3.0 );
-    EXPECT_DOUBLE_EQ( m0.yx(), 4.0 );
-    EXPECT_DOUBLE_EQ( m0.yy(), 5.0 );
-    EXPECT_DOUBLE_EQ( m0.yz(), 6.0 );
-    EXPECT_DOUBLE_EQ( m0.zx(), 7.0 );
-    EXPECT_DOUBLE_EQ( m0.zy(), 8.0 );
-    EXPECT_DOUBLE_EQ( m0.zz(), 9.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

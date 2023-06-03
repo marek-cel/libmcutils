@@ -50,71 +50,14 @@ class Matrix
 {
 public:
 
-    /** @brief Constructor. */
-    Matrix()
-        : rows_ ( ROWS )
-        , cols_ ( COLS )
-        , size_ ( ROWS * COLS )
-        , items_ { 0.0 }
-    {}
-
-    /** @brief Copy constructor. */
-    Matrix( const Matrix<ROWS, COLS>& matrix )
-        : rows_ ( ROWS )
-        , cols_ ( COLS )
-        , size_ ( ROWS * COLS )
-    {
-        std::memcpy( items_, matrix.items_, sizeof(items_) );
-    }
-
-    /** @brief Constructor. */
-    Matrix( const double items[] )
-        : rows_ ( ROWS )
-        , cols_ ( COLS )
-        , size_ ( ROWS * COLS )
-    {
-        std::memcpy( items_, items, sizeof(items_) );
-    }
-
-    /** @brief Constructor. */
-    Matrix( const char* str )
-        : rows_ ( ROWS )
-        , cols_ ( COLS )
-        , size_ ( ROWS * COLS )
-    {
-        double items[ ROWS * COLS ];
-
-        for ( unsigned int i = 0; i < ROWS * COLS; ++i )
-        {
-            items [i] = std::numeric_limits<double>::quiet_NaN();
-            items_[i] = std::numeric_limits<double>::quiet_NaN();
-        }
-
-        std::stringstream ss( String::stripSpaces( str ) );
-        bool valid = true;
-
-        for ( unsigned int i = 0; i < ROWS * COLS; ++i )
-        {
-            ss >> items[i];
-            valid &= mc::isValid( items[i] );
-        }
-
-        if ( valid ) std::memcpy( items_, items, sizeof(items_) );
-    }
-
-    /** @brief Destructor. */
-    virtual ~Matrix() = default;
+    static constexpr unsigned int rows_ = ROWS;        ///< number of rows
+    static constexpr unsigned int cols_ = COLS;        ///< number of columns
+    static constexpr unsigned int size_ = ROWS * COLS; ///< matrix size
 
     /** @return "true" if all items are valid */
     bool isValid() const
     {
         return mc::isValid( items_, size_ );
-    }
-
-    /** @brief Puts matrix items into given array. */
-    void getArray( double items[] ) const
-    {
-        std::memcpy( items, items_, sizeof(items_) );
     }
 
     /**
@@ -135,10 +78,39 @@ public:
         return std::numeric_limits<double>::quiet_NaN();
     }
 
-    /** @brief Sets matrix items from given array. */
-    void setArray( const double* items )
+    /**
+     * @brief getItems
+     * @param items
+     */
+    void getItems( double items[] )
     {
-        std::memcpy( items_, items, sizeof(items_) );
+        std::memcpy( items, items_, sizeof(items_) );
+    }
+
+    /**
+     * @brief setFromString
+     * @param str
+     */
+    void setFromString( const char* str )
+    {
+        double items[ size_ ];
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            items [i] = std::numeric_limits<double>::quiet_NaN();
+            items_[i] = std::numeric_limits<double>::quiet_NaN();
+        }
+
+        std::stringstream ss( String::stripSpaces( str ) );
+        bool valid = true;
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            ss >> items[i];
+            valid &= mc::isValid( items[i] );
+        }
+
+        if ( valid ) setItems( items );
     }
 
     /**
@@ -157,12 +129,21 @@ public:
         }
     }
 
+    /**
+     * @brief setItems
+     * @param items
+     */
+    void setItems( double items[] )
+    {
+        std::memcpy( items_, items, sizeof(items_) );
+    }
+
     /** @brief Swaps matrix rows. */
     void swapRows( unsigned int row1, unsigned int row2 )
     {
         if ( ( row1 < rows_ ) && ( row2 < rows_ ) )
         {
-            for ( unsigned int c = 0; c < COLS; ++c )
+            for ( unsigned int c = 0; c < cols_; ++c )
             {
                 std::swap( items_[ row1 * cols_ + c ], items_[ row2 * cols_ + c ] );
             }
@@ -178,7 +159,7 @@ public:
         {
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                if ( r > 0 || c >  0 ) ss << ",";
+                if ( r > 0 || c >  0 ) ss << " ";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
                 ss << items_[ r * cols_ + c ];
@@ -197,7 +178,7 @@ public:
      * @param col item column number
      * @return item value
      */
-    inline double operator() ( unsigned int row, unsigned int col ) const
+    inline double operator()( unsigned int row, unsigned int col ) const
     {
         return items_[ row * cols_ + col ];
     }
@@ -210,20 +191,13 @@ public:
      * @param row item row number
      * @param col item column number
      */
-    inline double& operator() ( unsigned int row, unsigned int col )
+    inline double& operator()( unsigned int row, unsigned int col )
     {
         return items_[ row * cols_ + col ];
     }
 
-    /** @brief Assignment operator. */
-    Matrix<ROWS, COLS>& operator= ( const Matrix<ROWS, COLS>& matrix )
-    {
-        std::memcpy( items_, matrix.items_, sizeof(items_) );
-        return (*this);
-    }
-
     /** @brief Addition operator. */
-    Matrix<ROWS, COLS> operator+ ( const Matrix<ROWS, COLS>& matrix ) const
+    Matrix<ROWS, COLS> operator+( const Matrix<ROWS, COLS>& matrix ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.add( matrix );
@@ -231,7 +205,7 @@ public:
     }
 
     /** @brief Negation operator. */
-    Matrix<ROWS, COLS> operator- () const
+    Matrix<ROWS, COLS> operator-() const
     {
         Matrix<ROWS, COLS> result( *this );
         result.negate();
@@ -239,7 +213,7 @@ public:
     }
 
     /** @brief Subtraction operator. */
-    Matrix<ROWS, COLS> operator- ( const Matrix<ROWS, COLS>& matrix ) const
+    Matrix<ROWS, COLS> operator-( const Matrix<ROWS, COLS>& matrix ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.substract( matrix );
@@ -247,7 +221,7 @@ public:
     }
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix<ROWS, COLS> operator* ( double value ) const
+    Matrix<ROWS, COLS> operator*( double value ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.multiplyByValue( value );
@@ -255,7 +229,7 @@ public:
     }
 
     /** @brief Multiplication operator (by vector). */
-    Vector<ROWS> operator* ( const Vector<COLS>& vect ) const
+    Vector<ROWS> operator*( const Vector<COLS>& vect ) const
     {
         Vector<ROWS> result;
         multiplyByVector( vect, &result );
@@ -263,7 +237,7 @@ public:
     }
 
     /** @brief Division operator (by scalar). */
-    Matrix<ROWS, COLS> operator/ ( double value ) const
+    Matrix<ROWS, COLS> operator/( double value ) const
     {
         Matrix<ROWS, COLS> result( *this );
         result.divideByValue( value );
@@ -271,35 +245,35 @@ public:
     }
 
     /** @brief Unary addition operator. */
-    Matrix<ROWS, COLS>& operator+= ( const Matrix<ROWS, COLS>& matrix )
+    Matrix<ROWS, COLS>& operator+=( const Matrix<ROWS, COLS>& matrix )
     {
         add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
-    Matrix<ROWS, COLS>& operator-= ( const Matrix<ROWS, COLS>& matrix )
+    Matrix<ROWS, COLS>& operator-=( const Matrix<ROWS, COLS>& matrix )
     {
         substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix<ROWS, COLS>& operator*= ( double value )
+    Matrix<ROWS, COLS>& operator*=( double value )
     {
         multiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
-    Matrix<ROWS, COLS>& operator/= ( double value )
+    Matrix<ROWS, COLS>& operator/=( double value )
     {
         divideByValue( value );
         return (*this);
     }
 
     /** @brief Equality operator. */
-    bool operator== ( const Matrix<ROWS, COLS>& matrix ) const
+    bool operator==( const Matrix<ROWS, COLS>& matrix ) const
     {
         bool result = true;
 
@@ -312,18 +286,14 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Matrix<ROWS, COLS>& matrix ) const
+    bool operator!=( const Matrix<ROWS, COLS>& matrix ) const
     {
         return !( (*this) == matrix );
     }
 
 protected:
 
-    const unsigned int rows_;       ///< number of rows
-    const unsigned int cols_;       ///< number of columns
-    const unsigned int size_;       ///< matrix size
-
-    double items_[ ROWS * COLS ];   ///< matrix items
+    double items_[size_] = { 0.0 }; ///< matrix items
 
     /** @brief Adds matrix. */
     void add( const Matrix<ROWS, COLS>& matrix )
