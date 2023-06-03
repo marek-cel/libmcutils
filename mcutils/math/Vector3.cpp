@@ -35,48 +35,7 @@ const Vector3 Vector3::ez_ = Vector3( 0.0, 0.0, 1.0 );
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3::Vector3()
-    : Vector<3>()
-
-    , x_ ( items_[0] )
-    , y_ ( items_[1] )
-    , z_ ( items_[2] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const Vector3& vect )
-    : Vector<3>( vect )
-
-    , x_ ( items_[0] )
-    , y_ ( items_[1] )
-    , z_ ( items_[2] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const double items[] )
-    : Vector<3>( items )
-
-    , x_ ( items_[0] )
-    , y_ ( items_[1] )
-    , z_ ( items_[2] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const char* str )
-    : Vector<3>( str )
-
-    , x_ ( items_[0] )
-    , y_ ( items_[1] )
-    , z_ ( items_[2] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3::Vector3( double x, double y, double z )
-    : Vector3()
 {
     set( x, y, z );
 }
@@ -96,17 +55,9 @@ Vector3 Vector3::getNormalized() const
 
 void Vector3::set( double x, double y, double z )
 {
-    x_ = x;
-    y_ = y;
-    z_ = z;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator= ( const Vector3& vect )
-{
-    std::memcpy( items_, vect.items_, sizeof(items_) );
-    return (*this);
+    items_[0] = x;
+    items_[1] = y;
+    items_[2] = z;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -158,7 +109,7 @@ Vector3 Vector3::operator/ ( double value ) const
 
 double Vector3::operator* ( const Vector3& vect ) const
 {
-    return ( x_*vect.x_ + y_*vect.y_ + z_*vect.z_ );
+    return ( x()*vect.x() + y()*vect.y() + z()*vect.z() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -167,9 +118,9 @@ Vector3 Vector3::operator% ( const Vector3& vect ) const
 {
     Vector3 result;
 
-    result.x_ = y_ * vect.z_ - z_ * vect.y_;
-    result.y_ = z_ * vect.x_ - x_ * vect.z_;
-    result.z_ = x_ * vect.y_ - y_ * vect.x_;
+    result.x() = y() * vect.z() - z() * vect.y();
+    result.y() = z() * vect.x() - x() * vect.z();
+    result.z() = x() * vect.y() - y() * vect.x();
 
     return result;
 }

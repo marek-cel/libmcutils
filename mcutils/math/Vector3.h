@@ -53,16 +53,7 @@ public:
     inline static const Vector3& k() { return ez_; }
 
     /** @brief Constructor. */
-    Vector3();
-
-    /** @brief Copy constructor. */
-    Vector3( const Vector3& vect );
-
-    /** @brief Constructor. */
-    Vector3( const double items[] );
-
-    /** @brief Constructor. */
-    Vector3( const char* str );
+    Vector3() = default;
 
     /** @brief Constructor. */
     Vector3( double x, double y, double z );
@@ -71,43 +62,40 @@ public:
     virtual ~Vector3() = default;
 
     /** @return length of projection of vector on XY-plane */
-    inline double getLengthXY() const { return sqrt( x_*x_ + y_*y_ ); }
+    inline double getLengthXY() const { return sqrt( x()*x() + y()*y() ); }
 
     /** @return length of projection of vector on XZ-plane */
-    inline double getLengthXZ() const { return sqrt( x_*x_ + z_*z_ ); }
+    inline double getLengthXZ() const { return sqrt( x()*x() + z()*z() ); }
 
     /** @return length of projection of vector on YZ-plane */
-    inline double getLengthYZ() const { return sqrt( y_*y_ + z_*z_ ); }
+    inline double getLengthYZ() const { return sqrt( y()*y() + z()*z() ); }
 
     /** @return normalized vector */
     Vector3 getNormalized() const;
 
-    inline double  x() const { return x_; }
-    inline double  y() const { return y_; }
-    inline double  z() const { return z_; }
-    inline double& x()       { return x_; }
-    inline double& y()       { return y_; }
-    inline double& z()       { return z_; }
+    inline double  x() const { return items_[0]; }
+    inline double  y() const { return items_[1]; }
+    inline double  z() const { return items_[2]; }
+    inline double& x()       { return items_[0]; }
+    inline double& y()       { return items_[1]; }
+    inline double& z()       { return items_[2]; }
 
-    inline double  p() const { return x_; }
-    inline double  q() const { return y_; }
-    inline double  r() const { return z_; }
-    inline double& p()       { return x_; }
-    inline double& q()       { return y_; }
-    inline double& r()       { return z_; }
+    inline double  p() const { return items_[0]; }
+    inline double  q() const { return items_[1]; }
+    inline double  r() const { return items_[2]; }
+    inline double& p()       { return items_[0]; }
+    inline double& q()       { return items_[1]; }
+    inline double& r()       { return items_[2]; }
 
-    inline double  u() const { return x_; }
-    inline double  v() const { return y_; }
-    inline double  w() const { return z_; }
-    inline double& u()       { return x_; }
-    inline double& v()       { return y_; }
-    inline double& w()       { return z_; }
+    inline double  u() const { return items_[0]; }
+    inline double  v() const { return items_[1]; }
+    inline double  w() const { return items_[2]; }
+    inline double& u()       { return items_[0]; }
+    inline double& v()       { return items_[1]; }
+    inline double& w()       { return items_[2]; }
 
     /** @brief Sets vector values. */
     void set( double x, double y, double z );
-
-    /** @brief Assignment operator. */
-    Vector3& operator= ( const Vector3& vect );
 
     /** @brief Addition operator. */
     Vector3 operator+ ( const Vector3& vect ) const;
@@ -144,12 +132,6 @@ public:
 
     /** @brief Unary cross product operator. */
     Vector3& operator%= ( const Vector3& vect );
-
-private:
-
-    double& x_;     ///< x element
-    double& y_;     ///< y element
-    double& z_;     ///< z element
 };
 
 ////////////////////////////////////////////////////////////////////////////////

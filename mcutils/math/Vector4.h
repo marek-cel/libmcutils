@@ -40,26 +40,8 @@ class MCUTILSAPI Vector4 : public Vector<4>
 {
 public:
 
-    /** @brief Constructor. */
-    Vector4();
-
-    /** @brief Copy constructor. */
-    Vector4( const Vector4& vect );
-
-    /** @brief Constructor. */
-    Vector4( const double items[] );
-
-    /** @brief Constructor. */
-    Vector4( const char* str );
-
-    /** @brief Destructor. */
-    virtual ~Vector4() = default;
-
     /** @return normalized vector */
     Vector4 getNormalized() const;
-
-    /** @brief Assignment operator. */
-    Vector4& operator= ( const Vector4& vect );
 
     /** @brief Addition operator. */
     Vector4 operator+ ( const Vector4& vect ) const;

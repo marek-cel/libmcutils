@@ -632,7 +632,8 @@ TEST_F(TestMatrix6x6, CanMultiplyByVector)
     mc::Matrix6x6 m0;
     m0.setItems( x0 );
 
-    mc::Vector6 v1( x1 );
+    mc::Vector6 v1;
+    v1.setItems( x1 );
 
     mc::Vector6 v = m0 * v1;
 

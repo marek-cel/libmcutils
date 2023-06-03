@@ -40,26 +40,8 @@ class MCUTILSAPI Vector6 : public Vector<6>
 {
 public:
 
-    /** @brief Constructor. */
-    Vector6();
-
-    /** @brief Copy constructor. */
-    Vector6( const Vector6& vect );
-
-    /** @brief Constructor. */
-    Vector6( const double items[] );
-
-    /** @brief Constructor. */
-    Vector6( const char* str );
-
-    /** @brief Destructor. */
-    virtual ~Vector6() = default;
-
     /** @return normalized vector */
     Vector6 getNormalized() const;
-
-    /** @brief Assignment operator. */
-    Vector6& operator= ( const Vector6& vect );
 
     /** @brief Addition operator. */
     Vector6 operator+ ( const Vector6& vect ) const;
