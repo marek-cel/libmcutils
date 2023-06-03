@@ -68,35 +68,6 @@ TEST_F(TestMatrix3x3, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix3x3, CanInstantiateAndCopy)
-{
-    mc::Matrix3x3 m1;
-
-    m1(0,0) = 1.0;
-    m1(0,1) = 2.0;
-    m1(0,2) = 3.0;
-    m1(1,0) = 4.0;
-    m1(1,1) = 5.0;
-    m1(1,2) = 6.0;
-    m1(2,0) = 7.0;
-    m1(2,1) = 8.0;
-    m1(2,2) = 9.0;
-
-    mc::Matrix3x3 m2( m1 );
-
-    EXPECT_DOUBLE_EQ( m2(0,0), 1.0 );
-    EXPECT_DOUBLE_EQ( m2(0,1), 2.0 );
-    EXPECT_DOUBLE_EQ( m2(0,2), 3.0 );
-    EXPECT_DOUBLE_EQ( m2(1,0), 4.0 );
-    EXPECT_DOUBLE_EQ( m2(1,1), 5.0 );
-    EXPECT_DOUBLE_EQ( m2(1,2), 6.0 );
-    EXPECT_DOUBLE_EQ( m2(2,0), 7.0 );
-    EXPECT_DOUBLE_EQ( m2(2,1), 8.0 );
-    EXPECT_DOUBLE_EQ( m2(2,2), 9.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 );

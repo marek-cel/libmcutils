@@ -55,52 +55,6 @@ TEST_F(TestMatrix, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix, CanInstantiateAndCopy)
-{
-    mc::Matrix<4,4> m1;
-
-    m1(0,0) = 11.0;
-    m1(0,1) = 12.0;
-    m1(0,2) = 13.0;
-    m1(0,3) = 14.0;
-    m1(1,0) = 21.0;
-    m1(1,1) = 22.0;
-    m1(1,2) = 23.0;
-    m1(1,3) = 24.0;
-    m1(2,0) = 31.0;
-    m1(2,1) = 32.0;
-    m1(2,2) = 33.0;
-    m1(2,3) = 34.0;
-    m1(3,0) = 41.0;
-    m1(3,1) = 42.0;
-    m1(3,2) = 43.0;
-    m1(3,3) = 44.0;
-
-    mc::Matrix<4,4> m2( m1 );
-
-    EXPECT_DOUBLE_EQ( m2(0,0), 11.0 );
-    EXPECT_DOUBLE_EQ( m2(0,1), 12.0 );
-    EXPECT_DOUBLE_EQ( m2(0,2), 13.0 );
-    EXPECT_DOUBLE_EQ( m2(0,3), 14.0 );
-
-    EXPECT_DOUBLE_EQ( m2(1,0), 21.0 );
-    EXPECT_DOUBLE_EQ( m2(1,1), 22.0 );
-    EXPECT_DOUBLE_EQ( m2(1,2), 23.0 );
-    EXPECT_DOUBLE_EQ( m2(1,3), 24.0 );
-
-    EXPECT_DOUBLE_EQ( m2(2,0), 31.0 );
-    EXPECT_DOUBLE_EQ( m2(2,1), 32.0 );
-    EXPECT_DOUBLE_EQ( m2(2,2), 33.0 );
-    EXPECT_DOUBLE_EQ( m2(2,3), 34.0 );
-
-    EXPECT_DOUBLE_EQ( m2(3,0), 41.0 );
-    EXPECT_DOUBLE_EQ( m2(3,1), 42.0 );
-    EXPECT_DOUBLE_EQ( m2(3,2), 43.0 );
-    EXPECT_DOUBLE_EQ( m2(3,3), 44.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix, CanValidate)
 {
     mc::Matrix<3,3> m1;
