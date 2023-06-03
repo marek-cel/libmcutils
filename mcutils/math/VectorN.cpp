@@ -200,6 +200,104 @@ void VectorN::zeroize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
+VectorN& VectorN::operator=( const VectorN& vect )
+{
+    resize( vect.size_ );
+    setItems( vect.items_ );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator=( VectorN&& vect )
+{
+    if ( items_ ) { delete [] items_; } items_ = nullptr;
+
+    size_  = std::exchange( vect.size_, 0 );
+    items_ = std::exchange( vect.items_, nullptr );
+
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN VectorN::operator+( const VectorN& vect ) const
+{
+    VectorN result( *this );
+    result.add( vect );
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN VectorN::operator-() const
+{
+    VectorN result( *this );
+    result.negate();
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN VectorN::operator-( const VectorN& vect ) const
+{
+    VectorN result( *this );
+    result.substract( vect );
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN VectorN::operator*( double value ) const
+{
+    VectorN result( *this );
+    result.multiplyByValue( value );
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN VectorN::operator/( double value ) const
+{
+    VectorN result( *this );
+    result.divideByValue( value );
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator+=( const VectorN& vect )
+{
+    add( vect );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator-=( const VectorN& vect )
+{
+    substract( vect );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator*=( double value )
+{
+    multiplyByValue( value );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+VectorN& VectorN::operator/=( double value )
+{
+    divideByValue( value );
+    return (*this);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void VectorN::add( const VectorN& vect )
 {
     if ( size_ == vect.size_ )
@@ -260,104 +358,6 @@ void VectorN::divideByValue( double value )
     {
         items_[ i ] /= value;
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator= ( const VectorN& vect )
-{
-    resize( vect.size_ );
-    setItems( vect.items_ );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator= ( VectorN&& vect )
-{
-    if ( items_ ) { delete [] items_; } items_ = nullptr;
-
-    size_  = std::exchange( vect.size_, 0 );
-    items_ = std::exchange( vect.items_, nullptr );
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN VectorN::operator+ ( const VectorN& vect ) const
-{
-    VectorN result( *this );
-    result.add( vect );
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN VectorN::operator- () const
-{
-    VectorN result( *this );
-    result.negate();
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN VectorN::operator- ( const VectorN& vect ) const
-{
-    VectorN result( *this );
-    result.substract( vect );
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN VectorN::operator* ( double value ) const
-{
-    VectorN result( *this );
-    result.multiplyByValue( value );
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN VectorN::operator/ ( double value ) const
-{
-    VectorN result( *this );
-    result.divideByValue( value );
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator+= ( const VectorN& vect )
-{
-    add( vect );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator-= ( const VectorN& vect )
-{
-    substract( vect );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator*= ( double value )
-{
-    multiplyByValue( value );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-VectorN& VectorN::operator/= ( double value )
-{
-    divideByValue( value );
-    return (*this);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
