@@ -79,8 +79,9 @@ public:
     }
 
     /**
-     * @brief getItems
-     * @param items
+     * @brief Gets matrix items as array.
+     * Items index matche following scheme i = i_row * no_of_columns + i_col
+     * @param items output array
      */
     void getItems( double items[] )
     {
@@ -131,8 +132,9 @@ public:
     }
 
     /**
-     * @brief setItems
-     * @param items
+     * @brief Sets matrix items from array.
+     * Items index should match following scheme i = i_row * no_of_columns + i_col
+     * @param items input array
      */
     void setItems( double items[] )
     {
