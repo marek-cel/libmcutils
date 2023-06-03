@@ -46,7 +46,7 @@ namespace mc
  *   <li><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge–Kutta methods - Wikipedia</a></li>
  * </ul>
  */
-class MCUTILSAPI RungeKutta4 final : public Integrator
+class MCUTILSAPI RungeKutta4 : public Integrator
 {
 public:
 
