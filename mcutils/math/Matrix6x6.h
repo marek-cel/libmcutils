@@ -37,7 +37,7 @@ namespace mc
 /**
  * @brief 6 by 6 matrix class.
  */
-class MCUTILSAPI Matrix6x6 final : public MatrixNxN<6>
+class MCUTILSAPI Matrix6x6 : public MatrixNxN<6>
 {
 public:
 

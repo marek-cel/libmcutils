@@ -36,7 +36,7 @@ namespace mc
 /**
  * @brief 4 elements column vector class.
  */
-class MCUTILSAPI Vector4 final : public Vector<4>
+class MCUTILSAPI Vector4 : public Vector<4>
 {
 public:
 
