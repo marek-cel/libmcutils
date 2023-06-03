@@ -349,7 +349,7 @@ TEST_F(TestMatrix4x4, CanMultiplyByVector)
     m1.setElements( x1 );
 
     mc::Vector4 v2;
-    v2.setItems( x2 );
+    v2.setElements( x2 );
 
     mc::Vector4 v = m1 * v2;
 

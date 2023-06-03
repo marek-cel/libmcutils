@@ -59,7 +59,7 @@ public:
     /** @return TRUE if all items are valid */
     bool isValid() const
     {
-        return mc::isValid( items_, size_ );
+        return mc::isValid( elements_, size_ );
     }
 
     /** @return vector length squared */
@@ -69,7 +69,7 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            length2 += ( items_[i] * items_[i] );
+            length2 += ( elements_[i] * elements_[i] );
         }
 
         return length2;
@@ -92,7 +92,7 @@ public:
 
             for ( unsigned int i = 0; i < size_; ++i )
             {
-                items_[i] *= length_inv;
+                elements_[i] *= length_inv;
             }
         }
     }
@@ -104,20 +104,39 @@ public:
      * @param index item index
      * @return vector item of given indicies.
      */
-    double getItem( unsigned int index ) const
+    double getElement( unsigned int index ) const
     {
         if ( index < size_ )
         {
-            return items_[ index ];
+            return elements_[ index ];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
     }
 
     /** @brief Puts vector items into given array. */
-    void getItems( double items[] ) const
+    void getElements( double elements[] ) const
     {
-        std::memcpy( items, items_, sizeof(items_) );
+        std::memcpy( elements, elements_, sizeof(elements_) );
+    }
+
+    /**
+     * @brief Sets vector element of given indicies.
+     * This function is bound-checked which may affect performance.
+     * Throws an exception when index is out of range.
+     */
+    void setElement( unsigned int index, double val )
+    {
+        if ( index < size_ )
+        {
+            elements_[ index ] = val;
+        }
+    }
+
+    /** @brief Sets vector elements from given array. */
+    void setElements( const double elements[] )
+    {
+        std::memcpy( elements_, elements, sizeof(elements_) );
     }
 
     /**
@@ -127,12 +146,12 @@ public:
      */
     void setFromString( const char* str )
     {
-        double items[size_];
+        double elements[size_];
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items [i] = std::numeric_limits<double>::quiet_NaN();
-            items_[i] = std::numeric_limits<double>::quiet_NaN();
+            elements [i] = std::numeric_limits<double>::quiet_NaN();
+            elements_[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
         std::stringstream ss( String::stripSpaces( str ) );
@@ -140,30 +159,11 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            ss >> items[i];
-            valid &= mc::isValid( items[i] );
+            ss >> elements[i];
+            valid &= mc::isValid( elements[i] );
         }
 
-        if ( valid ) setItems( items );
-    }
-
-    /**
-     * @brief Sets vector item of given indicies.
-     * This function is bound-checked which may affect performance.
-     * Throws an exception when index is out of range.
-     */
-    void setItem( unsigned int index, double val )
-    {
-        if ( index < size_ )
-        {
-            items_[ index ] = val;
-        }
-    }
-
-    /** @brief Sets vector items from given array. */
-    void setItems( const double items[] )
-    {
-        std::memcpy( items_, items, sizeof(items_) );
+        if ( valid ) setElements( elements );
     }
 
     /** @brief Swaps vector rows. */
@@ -171,7 +171,7 @@ public:
     {
         if ( row1 < size_ && row2 < size_ )
         {
-            std::swap( items_[ row1 ], items_[ row2 ] );
+            std::swap( elements_[ row1 ], elements_[ row2 ] );
         }
     }
 
@@ -184,7 +184,7 @@ public:
         {
             if ( i != 0 ) ss << ",";
 
-            ss << items_[i];
+            ss << elements_[i];
         }
 
         return ss.str();
@@ -195,7 +195,7 @@ public:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] = 0.0;
+            elements_[i] = 0.0;
         }
     }
 
@@ -207,7 +207,7 @@ public:
      */
     inline double operator()( unsigned int index ) const
     {
-        return items_[index];
+        return elements_[index];
     }
 
     /**
@@ -218,7 +218,7 @@ public:
      */
     inline double& operator()( unsigned int index )
     {
-        return items_[index];
+        return elements_[index];
     }
 
     /** @brief Addition operator. */
@@ -260,7 +260,7 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            result += items_[i] * vect.items_[i];
+            result += elements_[i] * vect.elements_[i];
         }
 
         return result;
@@ -309,7 +309,7 @@ public:
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            result = result && ( items_[i] == vect.items_[i] );
+            result = result && ( elements_[i] == vect.elements_[i] );
         }
 
         return result;
@@ -323,14 +323,14 @@ public:
 
 protected:
 
-    double items_[size_] = { 0.0 }; ///< vector items
+    double elements_[size_] = { 0.0 };  ///< vector items
 
     /** @brief Adds vector. */
     void add( const Vector<SIZE>& vect )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] += vect.items_[i];
+            elements_[i] += vect.elements_[i];
         }
     }
 
@@ -339,7 +339,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] = -items_[i];
+            elements_[i] = -elements_[i];
         }
     }
 
@@ -348,7 +348,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] -= vect.items_[i];
+            elements_[i] -= vect.elements_[i];
         }
     }
 
@@ -357,7 +357,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] *= value;
+            elements_[i] *= value;
         }
     }
 
@@ -366,7 +366,7 @@ protected:
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[i] /= value;
+            elements_[i] /= value;
         }
     }
 };

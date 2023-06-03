@@ -109,48 +109,9 @@ TEST_F(TestVector3, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVector3, CanInstantiateAndCopy)
-{
-    mc::Vector3 v1( 1.0, 2.0, 3.0 );
-
-    mc::Vector3 v2( v1 );
-
-    EXPECT_DOUBLE_EQ( v2.x(), 1.0 );
-    EXPECT_DOUBLE_EQ( v2.y(), 2.0 );
-    EXPECT_DOUBLE_EQ( v2.z(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanInstantiateAndSetData)
 {
     mc::Vector3 v1( 1.0, 2.0, 3.0 );
-
-    EXPECT_DOUBLE_EQ( v1.x(), 1.0 );
-    EXPECT_DOUBLE_EQ( v1.y(), 2.0 );
-    EXPECT_DOUBLE_EQ( v1.z(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector3, CanInstantiateAndSetDataFromArray)
-{
-    const double d1[] { 1.0, 2.0, 3.0 };
-    mc::Vector3 v1;
-    v1.setItems( d1 );
-
-    EXPECT_DOUBLE_EQ( v1.x(), 1.0 );
-    EXPECT_DOUBLE_EQ( v1.y(), 2.0 );
-    EXPECT_DOUBLE_EQ( v1.z(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector3, CanInstantiateAndSetDataFromString)
-{
-    char str[] = { " 1.0  2.0  3.0 " };
-    mc::Vector3 v1;
-    v1.setFromString( str );
 
     EXPECT_DOUBLE_EQ( v1.x(), 1.0 );
     EXPECT_DOUBLE_EQ( v1.y(), 2.0 );

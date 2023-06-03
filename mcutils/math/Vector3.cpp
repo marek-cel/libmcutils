@@ -55,9 +55,9 @@ Vector3 Vector3::getNormalized() const
 
 void Vector3::set( double x, double y, double z )
 {
-    items_[0] = x;
-    items_[1] = y;
-    items_[2] = z;
+    elements_[0] = x;
+    elements_[1] = y;
+    elements_[2] = z;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -73,26 +73,26 @@ public:
     /** @return normalized vector */
     Vector3 getNormalized() const;
 
-    inline double  x() const { return items_[0]; }
-    inline double  y() const { return items_[1]; }
-    inline double  z() const { return items_[2]; }
-    inline double& x()       { return items_[0]; }
-    inline double& y()       { return items_[1]; }
-    inline double& z()       { return items_[2]; }
+    inline double  x() const { return elements_[0]; }
+    inline double  y() const { return elements_[1]; }
+    inline double  z() const { return elements_[2]; }
+    inline double& x()       { return elements_[0]; }
+    inline double& y()       { return elements_[1]; }
+    inline double& z()       { return elements_[2]; }
 
-    inline double  p() const { return items_[0]; }
-    inline double  q() const { return items_[1]; }
-    inline double  r() const { return items_[2]; }
-    inline double& p()       { return items_[0]; }
-    inline double& q()       { return items_[1]; }
-    inline double& r()       { return items_[2]; }
+    inline double  p() const { return elements_[0]; }
+    inline double  q() const { return elements_[1]; }
+    inline double  r() const { return elements_[2]; }
+    inline double& p()       { return elements_[0]; }
+    inline double& q()       { return elements_[1]; }
+    inline double& r()       { return elements_[2]; }
 
-    inline double  u() const { return items_[0]; }
-    inline double  v() const { return items_[1]; }
-    inline double  w() const { return items_[2]; }
-    inline double& u()       { return items_[0]; }
-    inline double& v()       { return items_[1]; }
-    inline double& w()       { return items_[2]; }
+    inline double  u() const { return elements_[0]; }
+    inline double  v() const { return elements_[1]; }
+    inline double  w() const { return elements_[2]; }
+    inline double& u()       { return elements_[0]; }
+    inline double& v()       { return elements_[1]; }
+    inline double& w()       { return elements_[2]; }
 
     /** @brief Sets vector values. */
     void set( double x, double y, double z );

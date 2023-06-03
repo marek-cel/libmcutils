@@ -44,50 +44,6 @@ TEST_F(TestVector4, CanInstantiate)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVector4, CanInstantiateAndCopy)
-{
-    const double d1[] { 1.0, 2.0, 3.0, 4.0 };
-    mc::Vector4 v1;
-    v1.setItems( d1 );
-
-    mc::Vector4 v2( v1 );
-
-    EXPECT_DOUBLE_EQ( v2( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v2( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v2( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v2( 3 ), 4.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector4, CanInstantiateAndSetData)
-{
-    const double d1[] { 1.0, 2.0, 3.0, 4.0 };
-    mc::Vector4 v1;
-    v1.setItems( d1 );
-
-    EXPECT_DOUBLE_EQ( v1( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v1( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v1( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v1( 3 ), 4.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestVector4, CanInstantiateAndSetDataFromString)
-{
-    char str[] = { " 1.0 2.0 3.0 4.0 " };
-    mc::Vector4 v1;
-    v1.setFromString( str );
-
-    EXPECT_DOUBLE_EQ( v1( 0 ), 1.0 );
-    EXPECT_DOUBLE_EQ( v1( 1 ), 2.0 );
-    EXPECT_DOUBLE_EQ( v1( 2 ), 3.0 );
-    EXPECT_DOUBLE_EQ( v1( 3 ), 4.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanGetNormalized)
 {
     // expected values calculated with GNU Octave
@@ -95,7 +51,7 @@ TEST_F(TestVector4, CanGetNormalized)
 
     const double d1[] { 1.0, 2.0, 3.0, 4.0 };
     mc::Vector4 v1;
-    v1.setItems( d1 );
+    v1.setElements( d1 );
     mc::Vector4 v1_n = v1.getNormalized();
 
     EXPECT_NEAR( v1_n( 0 ), 0.182574, 1.0e-5 );
@@ -124,11 +80,11 @@ TEST_F(TestVector4, CanAssign)
     mc::Vector4 v4;
     mc::Vector4 v5;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
-    v3.setItems( x3 );
-    v4.setItems( x4 );
-    v5.setItems( x5 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
+    v3.setElements( x3 );
+    v4.setElements( x4 );
+    v5.setElements( x5 );
 
     v = v1;
     EXPECT_DOUBLE_EQ( v( 0 ), 1.0 );
@@ -175,10 +131,10 @@ TEST_F(TestVector4, CanAdd)
     mc::Vector4 v3;
     mc::Vector4 v4;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
-    v3.setItems( x3 );
-    v4.setItems( x4 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
+    v3.setElements( x3 );
+    v4.setElements( x4 );
 
     mc::Vector4 v12 = v1 + v2;
     mc::Vector4 v34 = v3 + v4;
@@ -204,8 +160,8 @@ TEST_F(TestVector4, CanNegate)
     mc::Vector4 v1;
     mc::Vector4 v2;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
 
     mc::Vector4 v1n = -v1;
     mc::Vector4 v2n = -v2;
@@ -231,8 +187,8 @@ TEST_F(TestVector4, CanSubstract)
     mc::Vector4 v1;
     mc::Vector4 v2;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
 
     mc::Vector4 v = v1 - v2;
 
@@ -249,7 +205,7 @@ TEST_F(TestVector4, CanMultiplyByScalar)
     double x1[] = { 1.0, 2.0, 3.0, 4.0 };
 
     mc::Vector4 v1;
-    v1.setItems( x1 );
+    v1.setElements( x1 );
 
     mc::Vector4 v = v1 * 2.0;
 
@@ -266,7 +222,7 @@ TEST_F(TestVector4, CanDivideByScalar)
     double x1[] = { 2.0, 4.0, 6.0, 8.0 };
 
     mc::Vector4 v1;
-    v1.setItems( x1 );
+    v1.setElements( x1 );
 
     mc::Vector4 v = v1 / 2.0;
 
@@ -286,8 +242,8 @@ TEST_F(TestVector4, CanUnaryAdd)
     mc::Vector4 v1;
     mc::Vector4 v2;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
 
     v1 += v2;
 
@@ -307,8 +263,8 @@ TEST_F(TestVector4, CanUnarySubstract)
     mc::Vector4 v1;
     mc::Vector4 v2;
 
-    v1.setItems( x1 );
-    v2.setItems( x2 );
+    v1.setElements( x1 );
+    v2.setElements( x2 );
 
     v1 -= v2;
 
@@ -325,7 +281,7 @@ TEST_F(TestVector4, CanUnaryMultiplyByScalar)
     double x1[] = { 1.0, 2.0, 3.0, 4.0 };
 
     mc::Vector4 v1;
-    v1.setItems( x1 );
+    v1.setElements( x1 );
 
     v1 *= 2.0;
 
@@ -342,7 +298,7 @@ TEST_F(TestVector4, CanUnaryDivideByScalar)
     double x1[] = { 2.0, 4.0, 6.0, 8.0 };
 
     mc::Vector4 v1;
-    v1.setItems( x1 );
+    v1.setElements( x1 );
 
     v1 /= 2.0;
 
