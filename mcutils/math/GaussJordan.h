@@ -27,8 +27,8 @@
 #include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
-#include <mcutils/math/Matrix.h>
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/MatrixNxN.h>
+#include <mcutils/math/VectorN.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -52,11 +52,11 @@ namespace mc { namespace GaussJordan
  * </ul>
  */
 template <unsigned int SIZE>
-Result solve( const Matrix<SIZE, SIZE>& mtr, const Vector<SIZE>& rhs,
-              Vector<SIZE>* x, double eps = 1.0e-14 )
+Result solve( const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
+              VectorN<SIZE>* x, double eps = 1.0e-9 )
 {
-    Matrix<SIZE, SIZE> mtr_temp = mtr;
-    Vector<SIZE> rhs_temp = rhs;
+    MatrixNxN<SIZE> mtr_temp = mtr;
+    VectorN<SIZE> rhs_temp = rhs;
 
     for ( unsigned int r = 0; r < SIZE; ++r )
     {

@@ -41,6 +41,7 @@ set( SOURCES
     math/TestAngles.cpp
     math/TestDegMinSec.cpp
     math/TestEulerRect.cpp
+    math/TestGaussJordan.cpp
     math/TestMath.cpp
     math/TestMatrix3x3.cpp
     math/TestMatrix4x4.cpp

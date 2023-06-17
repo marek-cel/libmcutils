@@ -46,6 +46,7 @@ SOURCES += \
     $$PWD/math/TestAngles.cpp \
     $$PWD/math/TestDegMinSec.cpp \
     $$PWD/math/TestEulerRect.cpp \
+    $$PWD/math/TestGaussJordan.cpp \
     $$PWD/math/TestMath.cpp \
     $$PWD/math/TestMatrix3x3.cpp \
     $$PWD/math/TestMatrix4x4.cpp \
