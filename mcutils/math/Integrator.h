@@ -43,7 +43,7 @@ class MCUTILSAPI Integrator
 {
 public:
 
-    using Fun = std::function<void(const Vector&, Vector*)>;
+    using DerivFun = std::function<void(const Vector&, Vector*)>;
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
@@ -65,7 +65,7 @@ public:
      * vector derivative pointer as second argument.
      * @param fun function which calculates vector derivative
      */
-    void setDerivFun( Fun fun )
+    void setDerivFun( DerivFun fun )
     {
         fun_ = fun;
     }
@@ -81,7 +81,7 @@ public:
 
 protected:
 
-    Fun fun_;   ///< function which calculates vector derivative
+    DerivFun fun_;  ///< function which calculates vector derivative
 };
 
 using IntegratorSharedPtr = std::shared_ptr < Integrator >;

@@ -29,7 +29,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-RungeKutta4::RungeKutta4( Fun fun )
+RungeKutta4::RungeKutta4( DerivFun fun )
 {
     setDerivFun( fun );
 }

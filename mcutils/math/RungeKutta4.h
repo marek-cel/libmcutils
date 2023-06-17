@@ -56,7 +56,7 @@ public:
      * @brief Constructor.
      * @param fun function which calculates vector derivative
      */
-    RungeKutta4( Fun fun );
+    RungeKutta4( DerivFun fun );
 
     /**
      * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.

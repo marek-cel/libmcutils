@@ -58,7 +58,7 @@ public:
      * @brief Constructor.
      * @param fun function which calculates vector derivative
      */
-    EulerRect( Fun fun );
+    EulerRect( DerivFun fun );
 
     /**
      * @brief Integrates given vector using Euler's rectangular integration algorithm.

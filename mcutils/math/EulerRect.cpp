@@ -29,7 +29,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-EulerRect::EulerRect( Fun fun )
+EulerRect::EulerRect( DerivFun fun )
 {
     setDerivFun( fun );
 }
