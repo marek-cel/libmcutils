@@ -3,8 +3,11 @@ set( TARGET_NAME ctrl )
 ################################################################################
 
 set( HEADERS
-    AntiWindupPID.h
+    AWBackCalc.h
+    AWCondCalc.h
+    AWFilter.h
     HighPassFilter.h
+    IAntiWindup.h
     Inertia.h
     Inertia2.h
     Lead.h
@@ -18,7 +21,9 @@ set( HEADERS
 )
 
 set( SOURCES
-    AntiWindupPID.cpp
+    AWBackCalc.cpp
+    AWCondCalc.cpp
+    AWFilter.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp

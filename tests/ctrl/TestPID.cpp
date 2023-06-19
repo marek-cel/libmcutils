@@ -46,9 +46,9 @@ TEST_F(TestPID, CanInstantiate)
 {
     mc::PID pid;
 
-    EXPECT_DOUBLE_EQ( pid.getKp(), 1.0 );
-    EXPECT_DOUBLE_EQ( pid.getKi(), 0.0 );
-    EXPECT_DOUBLE_EQ( pid.getKd(), 0.0 );
+    EXPECT_DOUBLE_EQ( pid.kp(), 1.0 );
+    EXPECT_DOUBLE_EQ( pid.ki(), 0.0 );
+    EXPECT_DOUBLE_EQ( pid.kd(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -57,9 +57,9 @@ TEST_F(TestPID, CanInstantiateAndSetData)
 {
     mc::PID pid( 2.0, 3.0, 4.0 );
 
-    EXPECT_DOUBLE_EQ( pid.getKp(), 2.0 );
-    EXPECT_DOUBLE_EQ( pid.getKi(), 3.0 );
-    EXPECT_DOUBLE_EQ( pid.getKd(), 4.0 );
+    EXPECT_DOUBLE_EQ( pid.kp(), 2.0 );
+    EXPECT_DOUBLE_EQ( pid.ki(), 3.0 );
+    EXPECT_DOUBLE_EQ( pid.kd(), 4.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,116 +68,58 @@ TEST_F(TestPID, CanReset)
 {
     mc::PID pid( KP, KI, KD );
 
-    pid.update( DT, 1.0 );
-    pid.update( DT, 2.0 );
-    pid.update( DT, 3.0 );
+    pid.Update( DT, 1.0 );
+    pid.Update( DT, 2.0 );
+    pid.Update( DT, 3.0 );
 
-    EXPECT_NO_THROW( pid.reset() );
-    EXPECT_DOUBLE_EQ( pid.getValue(), 0.0 );
-    EXPECT_DOUBLE_EQ( pid.getError(), 0.0 );
+    EXPECT_NO_THROW( pid.Reset() );
+    EXPECT_DOUBLE_EQ( pid.value(), 0.0 );
+    EXPECT_DOUBLE_EQ( pid.error(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestPID, CanGetValue)
-{
-    mc::PID pid( KP, KI, KD );
-
-    pid.setValue( 7.0 );
-
-    EXPECT_DOUBLE_EQ( pid.getValue(), 7.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanGetKp)
-{
-    mc::PID pid( KP, KI, KD );
-
-    EXPECT_DOUBLE_EQ( pid.getKp(), KP );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanGetKi)
-{
-    mc::PID pid( KP, KI, KD );
-
-    EXPECT_DOUBLE_EQ( pid.getKi(), KI );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanGetKd)
-{
-    mc::PID pid( KP, KI, KD );
-
-    EXPECT_DOUBLE_EQ( pid.getKd(), KD );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanSetParallel)
+TEST_F(TestPID, CanSetAsParallel)
 {
     mc::PID pid;
 
-    pid.setParallel( KP, KI, KD );
+    pid.SetAsParallel( KP, KI, KD );
 
-    EXPECT_DOUBLE_EQ( pid.getKp(), KP );
-    EXPECT_DOUBLE_EQ( pid.getKi(), KI );
-    EXPECT_DOUBLE_EQ( pid.getKd(), KD );
+    EXPECT_DOUBLE_EQ( pid.kp(), KP );
+    EXPECT_DOUBLE_EQ( pid.ki(), KI );
+    EXPECT_DOUBLE_EQ( pid.kd(), KD );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestPID, CanSetSeries)
+TEST_F(TestPID, CanSetAsSeries)
 {
     mc::PID pid;
 
-    pid.setSeries( 1.0, 2.0, 3.0 );
+    pid.SetAsSeries( 1.0, 2.0, 3.0 );
 
     // expected values calculated with GNU Octave
     // tests/control/octave/test_pid.m
 
-    EXPECT_DOUBLE_EQ( pid.getKp(), 2.5 );
-    EXPECT_DOUBLE_EQ( pid.getKi(), 0.5 );
-    EXPECT_DOUBLE_EQ( pid.getKd(), 3.0 );
+    EXPECT_DOUBLE_EQ( pid.kp(), 2.5 );
+    EXPECT_DOUBLE_EQ( pid.ki(), 0.5 );
+    EXPECT_DOUBLE_EQ( pid.kd(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestPID, CanSetStandard)
+TEST_F(TestPID, CanSetAsStandard)
 {
     mc::PID pid;
 
-    pid.setStandard( 1.0, 2.0, 3.0 );
+    pid.SetAsStandard( 1.0, 2.0, 3.0 );
 
     // expected values calculated with GNU Octave
     // tests/control/octave/test_pid.m
 
-    EXPECT_DOUBLE_EQ( pid.getKp(), 1.0 );
-    EXPECT_DOUBLE_EQ( pid.getKi(), 0.5 );
-    EXPECT_DOUBLE_EQ( pid.getKd(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanSetError)
-{
-    mc::PID pid( KP, KI, KD );
-
-    EXPECT_NO_THROW( pid.setError( 6.0 ) );
-    EXPECT_DOUBLE_EQ( pid.getError(), 6.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestPID, CanSetValue)
-{
-    mc::PID pid( KP, KI, KD );
-
-    EXPECT_NO_THROW( pid.setValue( 7.0 ) );
-    EXPECT_DOUBLE_EQ( pid.getValue(), 7.0 );
+    EXPECT_DOUBLE_EQ( pid.kp(), 1.0 );
+    EXPECT_DOUBLE_EQ( pid.ki(), 0.5 );
+    EXPECT_DOUBLE_EQ( pid.kd(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -186,9 +128,67 @@ TEST_F(TestPID, CanSetValueAndError)
 {
     mc::PID pid( KP, KI, KD );
 
-    EXPECT_NO_THROW( pid.setValue( 0.1, 6.0, 7.0 ) );
-    EXPECT_DOUBLE_EQ( pid.getValue(), 7.0 );
-    EXPECT_DOUBLE_EQ( pid.getError(), 6.0 );
+    EXPECT_NO_THROW( pid.SetValueAndError( 6.0, 7.0, 0.1 ) );
+    EXPECT_DOUBLE_EQ( pid.value(), 6.0 );
+    EXPECT_DOUBLE_EQ( pid.error(), 7.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanGetValue)
+{
+    mc::PID pid( KP, KI, KD );
+
+    pid.set_value( 7.0 );
+
+    EXPECT_DOUBLE_EQ( pid.value(), 7.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanGetKp)
+{
+    mc::PID pid( KP, KI, KD );
+
+    EXPECT_DOUBLE_EQ( pid.kp(), KP );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanGetKi)
+{
+    mc::PID pid( KP, KI, KD );
+
+    EXPECT_DOUBLE_EQ( pid.ki(), KI );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanGetKd)
+{
+    mc::PID pid( KP, KI, KD );
+
+    EXPECT_DOUBLE_EQ( pid.kd(), KD );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanSetError)
+{
+    mc::PID pid( KP, KI, KD );
+
+    EXPECT_NO_THROW( pid.set_error( 6.0 ) );
+    EXPECT_DOUBLE_EQ( pid.error(), 6.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestPID, CanSetValue)
+{
+    mc::PID pid( KP, KI, KD );
+
+    EXPECT_NO_THROW( pid.set_value( 7.0 ) );
+    EXPECT_DOUBLE_EQ( pid.value(), 7.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -197,8 +197,8 @@ TEST_F(TestPID, CanSetKp)
 {
     mc::PID pid;
 
-    EXPECT_NO_THROW( pid.setKp( KP ) );
-    EXPECT_DOUBLE_EQ( pid.getKp(), KP );
+    EXPECT_NO_THROW( pid.set_kp( KP ) );
+    EXPECT_DOUBLE_EQ( pid.kp(), KP );
 }
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -206,8 +206,8 @@ TEST_F(TestPID, CanSetKi)
 {
     mc::PID pid;
 
-    EXPECT_NO_THROW( pid.setKi( KI ) );
-    EXPECT_DOUBLE_EQ( pid.getKi(), KI );
+    EXPECT_NO_THROW( pid.set_ki( KI ) );
+    EXPECT_DOUBLE_EQ( pid.ki(), KI );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -216,8 +216,8 @@ TEST_F(TestPID, CanSetKd)
 {
     mc::PID pid;
 
-    EXPECT_NO_THROW( pid.setKd( KD ) );
-    EXPECT_DOUBLE_EQ( pid.getKd(), KD );
+    EXPECT_NO_THROW( pid.set_kd( KD ) );
+    EXPECT_DOUBLE_EQ( pid.kd(), KD );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -241,8 +241,8 @@ TEST_F(TestPID, CanUpdate)
     {
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
-        pid.update( DT, e );
-        y = mc::Inertia::calculate( pid.getValue(), y, DT, TC );
+        pid.Update( DT, e );
+        y = mc::Inertia::calculate( pid.value(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 

@@ -35,21 +35,18 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-PID::PID( double kp, double ki, double kd )
-    : kp_ ( kp )
-    , ki_ ( ki )
-    , kd_ ( kd )
+PID::PID(double kp, double ki, double kd,
+         std::unique_ptr<IAntiWindup> anti_windup)
+    : anti_windup_(std::move(anti_windup))
 
-    , error_   ( 0.0 )
-    , error_i_ ( 0.0 )
-    , error_d_ ( 0.0 )
-
-    , value_ ( 0.0 )
+    , kp_(kp)
+    , ki_(ki)
+    , kd_(kd)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::update( double dt, double u )
+void PID::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
@@ -57,13 +54,24 @@ void PID::update( double dt, double u )
         error_d_ = ( dt > 0.0 ) ? ( u - error_ ) / dt : 0.0;
         error_ = u;
 
-        value_ = kp_ * error_ + kd_ * error_d_ + ki_ * error_i_;
+        double y_p = kp_ * error_;
+        double y_i = ki_ * error_i_;
+        double y_d = kd_ * error_d_;
+
+        if ( anti_windup_ != nullptr )
+        {
+            anti_windup_->Update(dt, y_p, y_i, y_d, &value_, &error_i_, this);
+        }
+        else
+        {
+            value_ = y_p + y_d + y_i;
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::reset()
+void PID::Reset()
 {
     error_i_ = 0.0;
     error_d_ = 0.0;
@@ -75,7 +83,7 @@ void PID::reset()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setParallel( double kp, double ki, double kd )
+void PID::SetAsParallel(double kp, double ki, double kd)
 {
     kp_ = kp;
     ki_ = ki;
@@ -84,7 +92,7 @@ void PID::setParallel( double kp, double ki, double kd )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setSeries( double k, double tau_i, double tau_d )
+void PID::SetAsSeries( double k, double tau_i, double tau_d )
 {
     kp_ = k * ( 1.0 + tau_d / tau_i );
     ki_ = k / tau_i;
@@ -93,42 +101,35 @@ void PID::setSeries( double k, double tau_i, double tau_d )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setStandard( double Kp, double Ti, double Td )
+void PID::SetAsStandard(double kp, double ti, double td )
 {
-    kp_ = Kp;
-    ki_ = Kp / Ti;
-    kd_ = Kp * Td;
+    kp_ = kp;
+    ki_ = kp / ti;
+    kd_ = kp * td;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setError( double error )
+void PID::SetValueAndError( double value, double error, double dt )
 {
+    error_d_ = ( dt > 0.0 ) ? ( error - error_ ) / dt : 0.0;
+    error_i_ = fabs(ki_) > 0.0
+            ? ( ( value  - kp_ * error - kd_ * error_d_ ) / ki_ )
+            : 0.0;
+
     error_ = error;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setValue( double value )
-{
-    error_i_ = fabs( ki_ ) > 0.0 ? value / ki_ : 0.0;
-    error_d_ = 0.0;
-
-    error_ = 0.0;
 
     value_ = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void PID::setValue( double timeStep, double error, double value )
+void PID::set_value(double value)
 {
-    error_d_ = ( timeStep > 0.0 ) ? ( error - error_ ) / timeStep : 0.0;
-    error_i_ = fabs( ki_ ) > 0.0
-            ? ( ( value  - kp_ * error - kd_ * error_d_ ) / ki_ )
-            : 0.0;
+    error_i_ = fabs(ki_) > 0.0 ? value / ki_ : 0.0;
+    error_d_ = 0.0;
 
-    error_ = error;
+    error_ = 0.0;
 
     value_ = value;
 }

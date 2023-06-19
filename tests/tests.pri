@@ -18,7 +18,9 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
-    $$PWD/ctrl/TestAntiWindupPID.cpp \
+    $$PWD/ctrl/TestAWBackCalc.cpp \
+    $$PWD/ctrl/TestAWCondCalc.cpp \
+    $$PWD/ctrl/TestAWFilter.cpp \
     $$PWD/ctrl/TestHighPassFilter.cpp \
     $$PWD/ctrl/TestInertia.cpp \
     $$PWD/ctrl/TestInertia2.cpp \

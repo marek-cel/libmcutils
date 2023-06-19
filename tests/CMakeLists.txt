@@ -19,7 +19,9 @@ set( SOURCES
     XcosBinFileReader.cpp
     main.cpp
 
-    ctrl/TestAntiWindupPID.cpp
+    ctrl/TestAWBackCalc.cpp
+    ctrl/TestAWCondCalc.cpp
+    ctrl/TestAWFilter.cpp
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
     ctrl/TestInertia2.cpp

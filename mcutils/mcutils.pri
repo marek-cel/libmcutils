@@ -7,8 +7,11 @@ HEADERS += \
 ################################################################################
 
 HEADERS += \
-    $$PWD/ctrl/AntiWindupPID.h \
+    $$PWD/ctrl/AWBackCalc.h \
+    $$PWD/ctrl/AWCondCalc.h \
+    $$PWD/ctrl/AWFilter.h \
     $$PWD/ctrl/HighPassFilter.h \
+    $$PWD/ctrl/IAntiWindup.h \
     $$PWD/ctrl/Inertia.h \
     $$PWD/ctrl/Inertia2.h \
     $$PWD/ctrl/Lead.h \
@@ -21,7 +24,9 @@ HEADERS += \
     $$PWD/ctrl/System2.h
 
 SOURCES += \
-    $$PWD/ctrl/AntiWindupPID.cpp \
+    $$PWD/ctrl/AWBackCalc.cpp \
+    $$PWD/ctrl/AWCondCalc.cpp \
+    $$PWD/ctrl/AWFilter.cpp \
     $$PWD/ctrl/HighPassFilter.cpp \
     $$PWD/ctrl/Inertia.cpp \
     $$PWD/ctrl/Inertia2.cpp \

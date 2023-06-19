@@ -24,7 +24,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+#include <memory>
+
 #include <mcutils/defs.h>
+
+#include <mcutils/ctrl/IAntiWindup.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -62,34 +66,24 @@ class MCUTILSAPI PID
 {
 public:
 
-
     /**
      * @brief Constructor.
-     * Disables saturation.
      * @param kp proportional gain
      * @param ki integral gain
      * @param kd derivative gain
      */
-    PID( double kp = 1.0, double ki = 0.0, double kd = 0.0 );
+    PID(double kp = 1.0, double ki = 0.0, double kd = 0.0,
+        std::unique_ptr<IAntiWindup> anti_windup = nullptr);
 
     /**
      * @brief Updates controller.
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
 
     /** @brief Resets controller. */
-    void reset();
-
-    /** @brief Returns controller output. */
-    inline double getValue() const { return value_; }
-
-    inline double getKp() const { return kp_; }
-    inline double getKi() const { return ki_; }
-    inline double getKd() const { return kd_; }
-
-    inline double getError() const { return error_; }
+    void Reset();
 
     /**
      * @brief Sets parameters of parallel form.
@@ -97,7 +91,7 @@ public:
      * @param ki integral coefficient expressed in parallel form
      * @param kd derivative coefficient expressed in parallel form
      */
-    void setParallel( double kp, double ki, double kd );
+    void SetAsParallel(double kp, double ki, double kd);
 
     /**
      * @brief Sets parameters of series form.
@@ -105,45 +99,60 @@ public:
      * @param tau_i integral time expressed in series form
      * @param tau_d derivative time expressed in series form
      */
-    void setSeries( double k, double tau_i, double tau_d );
+    void SetAsSeries(double k, double tau_i, double tau_d);
 
     /**
      * @brief Sets parameters of standard (ideal) form.
-     * @param Kp proportional gain expressed in standard (ideal) form
-     * @param Ti integral time expressed in standard (ideal) form
-     * @param Td derivative time expressed in standard (ideal) form
+     * @param kp proportional gain expressed in standard (ideal) form
+     * @param ti integral time expressed in standard (ideal) form
+     * @param td derivative time expressed in standard (ideal) form
      */
-    void setStandard( double Kp, double Ti, double Td );
+    void SetAsStandard(double kp, double ti, double td);
 
     /**
-     * @brief Sets controller current error.
-     * @param error current error value
+     * @brief Sets value and error according to value and time step.
+     * @param value new value
+     * @param error new error
+     * @param dt [s] time step
      */
-    void setError( double error );
+    void SetValueAndError(double value, double error, double dt);
+
+    inline double value() const { return value_; }
+
+    inline double kp() const { return kp_; }
+    inline double ki() const { return ki_; }
+    inline double kd() const { return kd_; }
+
+    inline double error() const { return error_; }
+
+    inline double error_i() const { return error_i_; }
+    inline double error_d() const { return error_d_; }
+
+    inline void set_error(double error) { error_ = error; }
 
     /**
      * @brief Sets controller output (resets error integral sum).
      * @param value output value
      */
-    void setValue( double value );
+    void set_value(double value);
 
-    void setValue( double timeStep, double error, double value );
-
-    inline void setKp( double kp ) { kp_ = kp; }
-    inline void setKi( double ki ) { ki_ = ki; }
-    inline void setKd( double kd ) { kd_ = kd; }
+    inline void set_kp(double kp) { kp_ = kp; }
+    inline void set_ki(double ki) { ki_ = ki; }
+    inline void set_kd(double kd) { kd_ = kd; }
 
 private:
 
-    double kp_;             ///< proportional gain
-    double ki_;             ///< integral gain
-    double kd_;             ///< derivative gain
+    std::unique_ptr<IAntiWindup> anti_windup_;  ///< anti windup object
 
-    double error_;          ///< error
-    double error_i_;        ///< error integral sum
-    double error_d_;        ///< error derivative
+    double kp_ = 0.0;       ///< proportional gain
+    double ki_ = 0.0;       ///< integral gain
+    double kd_ = 0.0;       ///< derivative gain
 
-    double value_;          ///< output value
+    double error_   = 0.0;  ///< error
+    double error_i_ = 0.0;  ///< error integral sum
+    double error_d_ = 0.0;  ///< error derivative
+
+    double value_ = 0.0;    ///< output value
 };
 
 } // namespace mc
