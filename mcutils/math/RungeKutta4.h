@@ -50,20 +50,12 @@ class MCUTILSAPI RungeKutta4 : public Integrator
 {
 public:
 
-    RungeKutta4() = default;
-
-    /**
-     * @brief Constructor.
-     * @param fun function which calculates vector derivative
-     */
-    RungeKutta4( DerivFun fun );
-
     /**
      * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    void integrate( double step, Vector* vect ) override;
+    void Integrate(double step, Vector* vect) override;
 
 private:
 

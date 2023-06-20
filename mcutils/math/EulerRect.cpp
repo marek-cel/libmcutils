@@ -29,22 +29,15 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-EulerRect::EulerRect( DerivFun fun )
-{
-    setDerivFun( fun );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void EulerRect::integrate( double step, Vector* vect )
+void EulerRect::Integrate(double step, Vector* vect)
 {
     xt_ = (*vect);
 
-    k0_.resize( vect->getSize() );
+    k0_.resize(vect->getSize());
     k0_.zeroize();
 
     // derivatives calculation
-    fun_( xt_, &k0_ );
+    deriv_fun_(xt_, &k0_);
 
     // integration
     (*vect) = (*vect) + k0_ * step;

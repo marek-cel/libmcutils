@@ -29,21 +29,14 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-RungeKutta4::RungeKutta4( DerivFun fun )
-{
-    setDerivFun( fun );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void RungeKutta4::integrate( double step, Vector* vect )
+void RungeKutta4::Integrate(double step, Vector* vect)
 {
     xt_ = (*vect);
 
-    k1_.resize( vect->getSize() );
-    k2_.resize( vect->getSize() );
-    k3_.resize( vect->getSize() );
-    k4_.resize( vect->getSize() );
+    k1_.resize(vect->getSize());
+    k2_.resize(vect->getSize());
+    k3_.resize(vect->getSize());
+    k4_.resize(vect->getSize());
 
     k1_.zeroize();
     k2_.zeroize();
@@ -51,19 +44,19 @@ void RungeKutta4::integrate( double step, Vector* vect )
     k4_.zeroize();
 
     // k1 - derivatives calculation
-    fun_( xt_, &k1_ );
+    deriv_fun_(xt_, &k1_);
 
     // k2 - derivatives calculation
     xt_ = (*vect) + k1_ * ( step / 2.0 );
-    fun_( xt_, &k2_ );
+    deriv_fun_(xt_, &k2_);
 
     // k3 - derivatives calculation
     xt_ = (*vect) + k2_ * ( step / 2.0 );
-    fun_( xt_, &k3_ );
+    deriv_fun_(xt_, &k3_);
 
     // k4 - derivatives calculation
     xt_ = (*vect) + k3_ * step;
-    fun_( xt_, &k4_ );
+    deriv_fun_(xt_, &k4_);
 
     // integration
     (*vect) = (*vect) + ( k1_ + k2_ * 2.0 + k3_ * 2.0 + k4_ ) * ( step / 6.0 );

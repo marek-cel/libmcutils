@@ -52,20 +52,12 @@ class MCUTILSAPI EulerRect : public Integrator
 {
 public:
 
-    EulerRect() = default;
-
-    /**
-     * @brief Constructor.
-     * @param fun function which calculates vector derivative
-     */
-    EulerRect( DerivFun fun );
-
     /**
      * @brief Integrates given vector using Euler's rectangular integration algorithm.
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    void integrate( double step, Vector* vect ) override;
+    void Integrate(double step, Vector* vect) override;
 
 private:
 

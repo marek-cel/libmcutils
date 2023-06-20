@@ -91,8 +91,8 @@ public:
      * @param k stiffness
      * @param c damping
      */
-    DiffEquationSolver( double m, double k, double c,
-                        mc::Integrator *integrator );
+    DiffEquationSolver(double m, double k, double c,
+                       mc::Integrator* integrator);
 
     /**
      * @brief solve
@@ -100,7 +100,7 @@ public:
      * @param x_1 initial value first derivative
      * @return
      */
-    bool solve( double x_0, double x_1 );
+    bool Solve(double x_0, double x_1);
 
     /**
      * @brief calcDelta
@@ -109,23 +109,23 @@ public:
      * @param c
      * @return
      */
-    double calcDelta( double a, double b, double c );
+    double CalcDelta(double a, double b, double c);
 
     /**
      * @brief computeStateDeriv
      * @param state
      * @param deriv
      */
-    void computeStateDeriv( const mc::Vector &state,
-                            mc::Vector *deriv );
+    void ComputeStateDeriv(const mc::Vector& state,
+                           mc::Vector* deriv);
 
 private:
 
-    mc::Integrator *_integrator;
+    mc::Integrator* integrator_;
 
-    double _m;      ///< [kg]       mass
-    double _k;      ///< [N/m]      stiffness
-    double _c;      ///< [N/(m/s)]  damping
+    double m_;      ///< [kg]       mass
+    double k_;      ///< [N/m]      stiffness
+    double c_;      ///< [N/(m/s)]  damping
 };
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -38,6 +38,9 @@ namespace mc
 
 /**
  * @brief Abstract numerical integration base class.
+ *
+ * Function should take current vector as first argument and resulting
+ * vector derivative pointer as second argument.
  */
 class MCUTILSAPI Integrator
 {
@@ -47,7 +50,11 @@ public:
 
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
-    /** @brief Destructor. */
+    Integrator() = default;
+    Integrator(const Integrator&) = default;
+    Integrator(Integrator&&) = default;
+    Integrator& operator=(const Integrator&) = default;
+    Integrator& operator=(Integrator&&) = default;
     virtual ~Integrator() = default;
     // LCOV_EXCL_STOP
 
@@ -57,35 +64,16 @@ public:
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    virtual void integrate( double step, Vector* vect ) = 0;
+    virtual void Integrate(double step, Vector* vect) = 0;
 
-    /**
-     * @brief Sets a function which calculates vector derivative.
-     * Function should take current vector as first argument and resulting
-     * vector derivative pointer as second argument.
-     * @param fun function which calculates vector derivative
-     */
-    void setDerivFun( DerivFun fun )
-    {
-        fun_ = fun;
-    }
+    inline DerivFun deriv_fun() const { return deriv_fun_; }
 
-    /**
-     * @brief Checks if function which calculates vector derivative is set.
-     * @return true if function which calculates vector derivative is set, false otherwise
-     */
-    inline bool isDerivFunSet() const
-    {
-        return static_cast<bool>( fun_ );
-    }
+    void set_deriv_fun(DerivFun deriv_fun) { deriv_fun_ = deriv_fun; }
 
 protected:
 
-    DerivFun fun_;  ///< function which calculates vector derivative
+    DerivFun deriv_fun_;    ///< function which calculates vector derivative
 };
-
-using IntegratorSharedPtr = std::shared_ptr < Integrator >;
-using IntegratorWeakPtr   = std::weak_ptr   < Integrator >;
 
 } // namespace mc
 
