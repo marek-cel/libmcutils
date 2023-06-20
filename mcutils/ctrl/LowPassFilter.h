@@ -46,43 +46,43 @@ public:
     /**
      * @brief Constructor.
      * @param omega [rad/s] cutoff angular frequency
-     * @param y initial output value
+     * @param value initial output value
      */
-    LowPassFilter( double omega = 1.0, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-    inline double getOmega() const { return omega_; }
-
-    /**
-     * @brief Sets cutoff angular frequency.
-     * @param omega [rad/s] cutoff angular frequency
-     */
-    void setOmega( double omega );
+    LowPassFilter(double omega = 1.0, double value = 0.0);
 
     /**
      * @brief Sets cutoff frequency.
      * @param freq [Hz] cutoff frequency
      */
-    void setCutoffFreq( double freq );
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
+    void SetCutoffFreq(double freq);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double omega() const { return omega_; }
+
+    /**
+     * @brief Sets cutoff angular frequency.
+     * @param omega [rad/s] cutoff angular frequency
+     */
+    void set_omega(double omega);
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    inline void set_value(double value) { value_ = value; }
 
 private:
 
-    double omega_;          ///< [rad/s] cutoff angular frequency
-    double tc_;             ///< time constant
-    double y_;              ///< current value
+    double omega_ = 0.0;        ///< [rad/s] cutoff angular frequency
+    double time_const_ = 0.0;   ///< time constant
+    double value_ = 0.0;        ///< current value
 };
 
 } // namespace mc

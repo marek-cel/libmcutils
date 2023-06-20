@@ -32,43 +32,36 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LowPassFilter::LowPassFilter( double omega, double y )
-    : omega_ ( omega )
-    , tc_ ( 1.0 / omega )
-    , y_ ( y )
+LowPassFilter::LowPassFilter(double omega, double value)
+    : omega_( omega )
+    , time_const_( 1.0 / omega )
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LowPassFilter::setOmega( double omega )
+void LowPassFilter::SetCutoffFreq(double freq)
 {
-    omega_ = std::max( 0.0, omega );
-    tc_ = 1.0 / omega_;
+    omega_ = 2.0 * M_PI * std::max(0.0, freq);
+    time_const_ = 1.0 / omega_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LowPassFilter::setCutoffFreq( double freq )
-{
-    omega_ = 2.0 * M_PI * std::max( 0.0, freq );
-    tc_ = 1.0 / omega_;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LowPassFilter::setValue( double y )
-{
-    y_ = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LowPassFilter::update( double dt, double u )
+void LowPassFilter::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        y_ = y_ + ( 1.0 - exp( -dt / tc_ ) ) * ( u - y_ );
+        value_ += + ( 1.0 - exp(-dt / time_const_) ) * ( u - value_ );
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void LowPassFilter::set_omega(double omega)
+{
+    omega_ = std::max(0.0, omega);
+    time_const_ = 1.0 / omega_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

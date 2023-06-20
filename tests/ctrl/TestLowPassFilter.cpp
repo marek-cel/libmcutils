@@ -44,8 +44,8 @@ TEST_F(TestLowPassFilter, CanInstantiate)
 {
     mc::LowPassFilter lpf;
 
-    EXPECT_DOUBLE_EQ( lpf.getOmega(), 1.0 );
-    EXPECT_DOUBLE_EQ( lpf.getValue(), 0.0 );
+    EXPECT_DOUBLE_EQ( lpf.omega(), 1.0 );
+    EXPECT_DOUBLE_EQ( lpf.value(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,42 +54,8 @@ TEST_F(TestLowPassFilter, CanInstantiateAndSetData)
 {
     mc::LowPassFilter lpf( 2.0, 3.0 );
 
-    EXPECT_DOUBLE_EQ( lpf.getOmega(), 2.0 );
-    EXPECT_DOUBLE_EQ( lpf.getValue(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestLowPassFilter, CanGetOmega)
-{
-    mc::LowPassFilter lpf( 2.0, 3.0 );
-    EXPECT_DOUBLE_EQ( lpf.getOmega(), 2.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestLowPassFilter, CanGetValue)
-{
-    mc::LowPassFilter lpf( 2.0, 3.0 );
-    EXPECT_DOUBLE_EQ( lpf.getValue(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestLowPassFilter, CanSetOmega)
-{
-    mc::LowPassFilter lpf;
-    lpf.setOmega( 2.0 );
-    EXPECT_DOUBLE_EQ( lpf.getOmega(), 2.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestLowPassFilter, CanSetValue)
-{
-    mc::LowPassFilter lpf;
-    lpf.setValue( 3.0 );
-    EXPECT_DOUBLE_EQ( lpf.getValue(), 3.0 );
+    EXPECT_DOUBLE_EQ( lpf.omega(), 2.0 );
+    EXPECT_DOUBLE_EQ( lpf.value(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -97,8 +63,8 @@ TEST_F(TestLowPassFilter, CanSetValue)
 TEST_F(TestLowPassFilter, CanSetCutoffFreq)
 {
     mc::LowPassFilter lpf;
-    lpf.setCutoffFreq( 1.0 );
-    EXPECT_DOUBLE_EQ( lpf.getOmega(), 2.0 * M_PI );
+    lpf.SetCutoffFreq( 1.0 );
+    EXPECT_DOUBLE_EQ( lpf.omega(), 2.0 * M_PI );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -109,11 +75,11 @@ TEST_F(TestLowPassFilter, CanUpdateStep)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lowpassfilter.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_lowpassfilter_step.bin", &vals );
+    XcosBinFileReader::readData("../tests/ctrl/data/test_lowpassfilter_step.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::LowPassFilter lpf( OMEGA );
+    mc::LowPassFilter lpf(OMEGA);
 
     double t = 0.0;
     double y = 0.0;
@@ -122,11 +88,11 @@ TEST_F(TestLowPassFilter, CanUpdateStep)
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        lpf.update( TIME_STEP, u );
-        y = lpf.getValue();
+        lpf.Update(TIME_STEP, u);
+        y = lpf.value();
 
-        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
-        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at(i) );
+        EXPECT_NEAR( y, vals.at(i), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }
@@ -144,7 +110,7 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
-    mc::LowPassFilter lpf( OMEGA );
+    mc::LowPassFilter lpf(OMEGA);
 
     double t = 0.0;
     double y = 0.0;
@@ -153,12 +119,46 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
     {
         double u = sin( t );
 
-        lpf.update( TIME_STEP, u );
-        y = lpf.getValue();
+        lpf.Update(TIME_STEP, u);
+        y = lpf.value();
 
-        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
-        EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
+        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at(i) );
+        EXPECT_NEAR( y, vals.at(i), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLowPassFilter, CanGetOmega)
+{
+    mc::LowPassFilter lpf( 2.0, 3.0 );
+    EXPECT_DOUBLE_EQ( lpf.omega(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLowPassFilter, CanGetValue)
+{
+    mc::LowPassFilter lpf( 2.0, 3.0 );
+    EXPECT_DOUBLE_EQ( lpf.value(), 3.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLowPassFilter, CanSetOmega)
+{
+    mc::LowPassFilter lpf;
+    lpf.set_omega( 2.0 );
+    EXPECT_DOUBLE_EQ( lpf.omega(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestLowPassFilter, CanSetValue)
+{
+    mc::LowPassFilter lpf;
+    lpf.set_value( 3.0 );
+    EXPECT_DOUBLE_EQ( lpf.value(), 3.0 );
 }
