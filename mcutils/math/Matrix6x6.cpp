@@ -29,7 +29,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::getTransposed() const
+Matrix6x6 Matrix6x6::GetTransposed() const
 {
     Matrix6x6 result(*this);
     result.Transpose();

@@ -149,7 +149,7 @@ TEST_F(TestMatrix6x6, CanGetTransposed)
     mc::Matrix6x6 m;
     m.SetElements(x);
 
-    mc::Matrix6x6 m1 = m.getTransposed();
+    mc::Matrix6x6 m1 = m.GetTransposed();
 
     EXPECT_DOUBLE_EQ( m(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m(0,1),  2.0 );
