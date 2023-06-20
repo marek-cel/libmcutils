@@ -204,7 +204,7 @@ Vector& Vector::operator=( const Vector& vect )
 {
     resize( vect.size_ );
     setItems( vect.items_ );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -216,7 +216,7 @@ Vector& Vector::operator=( Vector&& vect )
     size_  = std::exchange( vect.size_, 0 );
     items_ = std::exchange( vect.items_, nullptr );
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -269,7 +269,7 @@ Vector Vector::operator/( double value ) const
 Vector& Vector::operator+=( const Vector& vect )
 {
     add( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -277,7 +277,7 @@ Vector& Vector::operator+=( const Vector& vect )
 Vector& Vector::operator-=( const Vector& vect )
 {
     substract( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -285,7 +285,7 @@ Vector& Vector::operator-=( const Vector& vect )
 Vector& Vector::operator*=( double value )
 {
     multiplyByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -293,7 +293,7 @@ Vector& Vector::operator*=( double value )
 Vector& Vector::operator/=( double value )
 {
     divideByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -95,7 +95,7 @@ bool DegMinSec::operator==(const DegMinSec& dms) const
 
 bool DegMinSec::operator!=(const DegMinSec& dms) const
 {
-    return !( (*this) == dms );
+    return !( *this == dms );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

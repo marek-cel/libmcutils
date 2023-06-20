@@ -88,7 +88,7 @@ Vector6 Vector6::operator/( double value ) const
 Vector6& Vector6::operator+=( const Vector6& vect )
 {
     add( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ Vector6& Vector6::operator+=( const Vector6& vect )
 Vector6& Vector6::operator-=( const Vector6& vect )
 {
     substract( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +104,7 @@ Vector6& Vector6::operator-=( const Vector6& vect )
 Vector6& Vector6::operator*=( double value )
 {
     multiplyByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,7 +112,7 @@ Vector6& Vector6::operator*=( double value )
 Vector6& Vector6::operator/=( double value )
 {
     divideByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -156,9 +156,9 @@ void Log::print( VerboseLevel level, const char* format, va_list args )
             std::string msg = ss.str();
 
             std::ostream *out = out_stream_ == nullptr ? &std::cout : out_stream_;
-            (*out) << timestamp();
-            (*out) << msg;
-            (*out).flush();
+            *out << timestamp();
+            *out << msg;
+            out->flush();
         }
 
 #       ifdef _LINUX_

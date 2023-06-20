@@ -343,7 +343,7 @@ protected:
 
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                (*result)(r) += ( elements_[ r*cols_ + c ] * vect(c) );
+                (*result)(r) += ( elements_[r*cols_ + c] * vect(c) );
             }
         }
     }

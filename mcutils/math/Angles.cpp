@@ -128,7 +128,7 @@ bool Angles::operator==(const Angles& angl) const
 
 bool Angles::operator!=(const Angles& angl) const
 {
-    return !( (*this) == angl );
+    return !( *this == angl );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

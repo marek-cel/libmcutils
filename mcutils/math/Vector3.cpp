@@ -130,7 +130,7 @@ Vector3 Vector3::operator%( const Vector3& vect ) const
 Vector3& Vector3::operator+=( const Vector3& vect )
 {
     add( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -138,7 +138,7 @@ Vector3& Vector3::operator+=( const Vector3& vect )
 Vector3& Vector3::operator-=( const Vector3& vect )
 {
     substract( vect );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -146,7 +146,7 @@ Vector3& Vector3::operator-=( const Vector3& vect )
 Vector3& Vector3::operator*=( double value )
 {
     multiplyByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -154,15 +154,15 @@ Vector3& Vector3::operator*=( double value )
 Vector3& Vector3::operator/=( double value )
 {
     divideByValue( value );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector3& Vector3::operator%=( const Vector3& vect )
 {
-    (*this) = (*this) % vect;
-    return (*this);
+    *this = *this % vect;
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

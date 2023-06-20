@@ -107,7 +107,7 @@ Result solve( const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
     }
 
     // rewritting results
-    (*x) = rhs_temp;
+    *x = rhs_temp;
 
     return Result::Success;
 }

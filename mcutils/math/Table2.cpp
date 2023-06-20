@@ -493,7 +493,7 @@ Table2& Table2::operator=( const Table2& table )
         }
     }
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -515,7 +515,7 @@ Table2& Table2::operator=( Table2&& table )
 
     inter_data_ = std::exchange( table.inter_data_, nullptr );
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

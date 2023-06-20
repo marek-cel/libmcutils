@@ -289,7 +289,7 @@ ECEF& ECEF::operator=(const ECEF& ecef)
 {
     CopyParams( ecef );
     CopyData( ecef );
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -316,7 +316,7 @@ ECEF& ECEF::operator=(ECEF&& ecef)
     ecef2enu_ = std::move(ecef.ecef2enu_);
     ecef2ned_ = std::move(ecef.ecef2ned_);
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

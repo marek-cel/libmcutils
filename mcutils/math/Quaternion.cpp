@@ -377,7 +377,7 @@ Quaternion& Quaternion::operator+=( const Quaternion& quat )
     ey_ += quat.ey_;
     ez_ += quat.ez_;
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -389,7 +389,7 @@ Quaternion& Quaternion::operator-=( const Quaternion& quat )
     ey_ -= quat.ey_;
     ez_ -= quat.ez_;
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -401,7 +401,7 @@ Quaternion& Quaternion::operator*=( double val )
     ey_ *= val;
     ez_ *= val;
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -413,7 +413,7 @@ Quaternion& Quaternion::operator/=( double val )
     ey_ /= val;
     ez_ /= val;
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -430,7 +430,7 @@ bool Quaternion::operator==( const Quaternion& quat ) const
 
 bool Quaternion::operator!=( const Quaternion& quat ) const
 {
-    return !( (*this) == quat );
+    return !( *this == quat );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

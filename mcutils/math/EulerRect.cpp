@@ -31,7 +31,7 @@ namespace mc
 
 void EulerRect::Integrate(double step, Vector* vect)
 {
-    xt_ = (*vect);
+    xt_ = *vect;
 
     k0_.resize(vect->getSize());
     k0_.zeroize();
@@ -40,7 +40,7 @@ void EulerRect::Integrate(double step, Vector* vect)
     deriv_fun_(xt_, &k0_);
 
     // integration
-    (*vect) = (*vect) + k0_ * step;
+    *vect += k0_ * step;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -63,7 +63,7 @@ WGS84::WGS84(const Vector3& pos_wgs) : WGS84()
 WGS84& WGS84::operator=(const WGS84& wgs)
 {
     ECEF::operator=(wgs);
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ WGS84& WGS84::operator=(const WGS84& wgs)
 WGS84& WGS84::operator=(WGS84&& wgs)
 {
     ECEF::operator=(wgs);
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

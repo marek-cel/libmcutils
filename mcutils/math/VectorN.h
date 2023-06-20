@@ -278,28 +278,28 @@ public:
     VectorN<SIZE>& operator+=( const VectorN<SIZE>& vect )
     {
         add( vect );
-        return (*this);
+        return *this;
     }
 
     /** @brief Unary subtraction operator. */
     VectorN<SIZE>& operator-=( const VectorN<SIZE>& vect )
     {
         substract( vect );
-        return (*this);
+        return *this;
     }
 
     /** @brief Unary multiplication operator (by scalar). */
     VectorN<SIZE>& operator*=( double value )
     {
         multiplyByValue( value );
-        return (*this);
+        return *this;
     }
 
     /** @brief Unary division operator (by scalar). */
     VectorN<SIZE>& operator/=( double value )
     {
         divideByValue( value );
-        return (*this);
+        return *this;
     }
 
     /** @brief Equality operator. */
@@ -318,7 +318,7 @@ public:
     /** @brief Inequality operator. */
     bool operator!=( const VectorN<SIZE>& vect ) const
     {
-        return !( (*this) == vect );
+        return !( *this == vect );
     }
 
 protected:
