@@ -66,7 +66,7 @@ public:
 
     /**
      * @brief Sets output value
-     * @param y output value
+     * @param value output value
      */
     inline void set_value(double value) { value_ = value; }
 
