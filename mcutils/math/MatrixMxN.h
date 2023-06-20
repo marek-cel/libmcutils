@@ -55,9 +55,9 @@ public:
     static constexpr unsigned int size_ = ROWS * COLS; ///< matrix size
 
     /** @return "true" if all items are valid */
-    bool isValid() const
+    bool IsValid() const
     {
-        return mc::isValid( elements_, size_ );
+        return mc::isValid(elements_, size_);
     }
 
     /**
@@ -68,9 +68,9 @@ public:
      * @param col item column number
      * @return matrix item of given indicies.
      */
-    double getElement( unsigned int row, unsigned int col ) const
+    double GetElement(unsigned int row, unsigned int col) const
     {
-        if ( ( row < rows_ ) && ( col < cols_ ) )
+        if ( row < rows_ && col < cols_ )
         {
             return elements_[row * cols_ + col];
         }
@@ -83,9 +83,9 @@ public:
      * Items index matche following scheme i = i_row * no_of_columns + i_col
      * @param items output array
      */
-    void getElements( double elements[] )
+    void GetElements( double elements[] )
     {
-        std::memcpy( elements, elements_, sizeof(elements_) );
+        std::memcpy(elements, elements_, sizeof(elements_));
     }
 
     /**
@@ -96,9 +96,9 @@ public:
      * This function is bound-checked which may affect performance.
      * Throws an exception when row or column index is out of range.
      */
-    void setElement( unsigned int row, unsigned int col, double value )
+    void SetElement(unsigned int row, unsigned int col, double value)
     {
-        if ( ( row < rows_ ) && ( col < cols_ ) )
+        if ( row < rows_ && col < cols_ )
         {
             elements_[row * cols_ + col] = value;
         }
@@ -109,9 +109,9 @@ public:
      * Items index should match following scheme i = i_row * no_of_columns + i_col
      * @param items input array
      */
-    void setElements( double elements[] )
+    void SetElements( double elements[] )
     {
-        std::memcpy( elements_, elements, sizeof(elements_) );
+        std::memcpy(elements_, elements, sizeof(elements_));
     }
 
     /**
@@ -119,7 +119,7 @@ public:
      * Values in the given string should be separated with whitespaces.
      * @param str given string
      */
-    void setFromString( const char* str )
+    void SetFromString(const char* str)
     {
         double elements[size_];
 
@@ -129,32 +129,32 @@ public:
             elements_[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
-        std::stringstream ss( String::stripSpaces( str ) );
+        std::stringstream ss( String::stripSpaces(str) );
         bool valid = true;
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
             ss >> elements[i];
-            valid &= mc::isValid( elements[i] );
+            valid &= mc::isValid(elements[i]);
         }
 
-        if ( valid ) setElements( elements );
+        if ( valid ) SetElements(elements);
     }
 
     /** @brief Swaps matrix rows. */
-    void swapRows( unsigned int row1, unsigned int row2 )
+    void SwapRows(unsigned int row1, unsigned int row2)
     {
-        if ( ( row1 < rows_ ) && ( row2 < rows_ ) )
+        if ( row1 < rows_ && row2 < rows_ )
         {
             for ( unsigned int c = 0; c < cols_; ++c )
             {
-                std::swap( elements_[row1 * cols_ + c], elements_[row2 * cols_ + c] );
+                std::swap(elements_[row1 * cols_ + c], elements_[row2 * cols_ + c]);
             }
         }
     }
 
     /** @brief Returns string representation of the matrix. */
-    std::string toString() const
+    std::string ToString() const
     {
         std::stringstream ss;
 
@@ -181,7 +181,7 @@ public:
      * @param col item column number
      * @return item value
      */
-    inline double operator()( unsigned int row, unsigned int col ) const
+    inline double operator()(unsigned int row, unsigned int col) const
     {
         return elements_[row * cols_ + col];
     }
@@ -194,89 +194,89 @@ public:
      * @param row item row number
      * @param col item column number
      */
-    inline double& operator()( unsigned int row, unsigned int col )
+    inline double& operator()(unsigned int row, unsigned int col)
     {
         return elements_[row * cols_ + col];
     }
 
     /** @brief Addition operator. */
-    MatrixMxN<ROWS, COLS> operator+( const MatrixMxN<ROWS, COLS>& matrix ) const
+    MatrixMxN<ROWS, COLS> operator+(const MatrixMxN<ROWS, COLS>& matrix) const
     {
-        MatrixMxN<ROWS, COLS> result( *this );
-        result.add( matrix );
+        MatrixMxN<ROWS, COLS> result(*this);
+        result.Add(matrix);
         return result;
     }
 
     /** @brief Negation operator. */
     MatrixMxN<ROWS, COLS> operator-() const
     {
-        MatrixMxN<ROWS, COLS> result( *this );
-        result.negate();
+        MatrixMxN<ROWS, COLS> result(*this);
+        result.Negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    MatrixMxN<ROWS, COLS> operator-( const MatrixMxN<ROWS, COLS>& matrix ) const
+    MatrixMxN<ROWS, COLS> operator-(const MatrixMxN<ROWS, COLS>& matrix) const
     {
-        MatrixMxN<ROWS, COLS> result( *this );
-        result.substract( matrix );
+        MatrixMxN<ROWS, COLS> result(*this);
+        result.Substract(matrix);
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixMxN<ROWS, COLS> operator*( double value ) const
+    MatrixMxN<ROWS, COLS> operator*(double value) const
     {
-        MatrixMxN<ROWS, COLS> result( *this );
-        result.multiplyByValue( value );
+        MatrixMxN<ROWS, COLS> result(*this);
+        result.MultiplyByValue(value);
         return result;
     }
 
     /** @brief Multiplication operator (by vector). */
-    VectorN<ROWS> operator*( const VectorN<COLS>& vect ) const
+    VectorN<ROWS> operator*(const VectorN<COLS>& vect) const
     {
         VectorN<ROWS> result;
-        multiplyByVector( vect, &result );
+        MultiplyByVector(vect, &result);
         return result;
     }
 
     /** @brief Division operator (by scalar). */
-    MatrixMxN<ROWS, COLS> operator/( double value ) const
+    MatrixMxN<ROWS, COLS> operator/(double value) const
     {
-        MatrixMxN<ROWS, COLS> result( *this );
-        result.divideByValue( value );
+        MatrixMxN<ROWS, COLS> result(*this);
+        result.DivideByValue(value);
         return result;
     }
 
     /** @brief Unary addition operator. */
-    MatrixMxN<ROWS, COLS>& operator+=( const MatrixMxN<ROWS, COLS>& matrix )
+    MatrixMxN<ROWS, COLS>& operator+=(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        add( matrix );
-        return (*this);
+        Add(matrix);
+        return *this;
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixMxN<ROWS, COLS>& operator-=( const MatrixMxN<ROWS, COLS>& matrix )
+    MatrixMxN<ROWS, COLS>& operator-=(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        substract( matrix );
-        return (*this);
+        Substract(matrix);
+        return *this;
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    MatrixMxN<ROWS, COLS>& operator*=( double value )
+    MatrixMxN<ROWS, COLS>& operator*=(double value)
     {
-        multiplyByValue( value );
-        return (*this);
+        MultiplyByValue(value);
+        return *this;
     }
 
     /** @brief Unary division operator (by scalar). */
-    MatrixMxN<ROWS, COLS>& operator/=( double value )
+    MatrixMxN<ROWS, COLS>& operator/=(double value)
     {
-        divideByValue( value );
-        return (*this);
+        DivideByValue(value);
+        return *this;
     }
 
     /** @brief Equality operator. */
-    bool operator==( const MatrixMxN<ROWS, COLS>& matrix ) const
+    bool operator==(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         bool result = true;
 
@@ -289,7 +289,7 @@ public:
     }
 
     /** @brief Inequality operator. */
-    bool operator!=( const MatrixMxN<ROWS, COLS>& matrix ) const
+    bool operator!=(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         return !( (*this) == matrix );
     }
@@ -299,7 +299,7 @@ protected:
     double elements_[size_] = { 0.0 }; ///< matrix items
 
     /** @brief Adds matrix. */
-    void add( const MatrixMxN<ROWS, COLS>& matrix )
+    void Add(const MatrixMxN<ROWS, COLS>& matrix)
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -308,7 +308,7 @@ protected:
     }
 
     /** @brief Negates matrix. */
-    void negate()
+    void Negate()
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -317,7 +317,7 @@ protected:
     }
 
     /** @brief Substracts matrix. */
-    void substract( const MatrixMxN<ROWS, COLS>& matrix )
+    void Substract(const MatrixMxN<ROWS, COLS>& matrix)
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -326,7 +326,7 @@ protected:
     }
 
     /** @brief Multiplies by value. */
-    void multiplyByValue( double value )
+    void MultiplyByValue(double value)
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
@@ -335,7 +335,7 @@ protected:
     }
 
     /** @brief Multiplies by vector. */
-    void multiplyByVector( const VectorN<COLS>& vect, VectorN<ROWS>* result ) const
+    void MultiplyByVector(const VectorN<COLS>& vect, VectorN<ROWS>* result) const
     {
         for ( unsigned int r = 0; r < rows_; ++r )
         {
@@ -349,7 +349,7 @@ protected:
     }
 
     /** @brief Divides by value. */
-    void divideByValue( double value )
+    void DivideByValue(double value)
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {

@@ -61,12 +61,12 @@ Result solve( const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
     for ( unsigned int r = 0; r < SIZE; ++r )
     {
         // run along diagonal, swapping rows to move zeros (outside the diagonal) downwards
-        if ( fabs( mtr_temp(r,r) ) < fabs( eps ) )
+        if ( fabs(mtr_temp(r,r)) < fabs(eps) )
         {
             if ( r < SIZE - 1 )
             {
-                mtr_temp.swapRows( r, r+1 );
-                rhs_temp.swapRows( r, r+1 );
+                mtr_temp.SwapRows(r, r+1);
+                rhs_temp.swapRows(r, r+1);
             }
             else
             {

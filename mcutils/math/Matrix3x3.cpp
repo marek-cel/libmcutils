@@ -218,7 +218,7 @@ Matrix3x3 Matrix3x3::getTransposed() const
 Matrix3x3 Matrix3x3::operator+( const Matrix3x3& mtrx ) const
 {
     Matrix3x3 result( *this );
-    result.add( mtrx );
+    result.Add( mtrx );
     return result;
 }
 
@@ -227,7 +227,7 @@ Matrix3x3 Matrix3x3::operator+( const Matrix3x3& mtrx ) const
 Matrix3x3 Matrix3x3::operator-() const
 {
     Matrix3x3 result( *this );
-    result.negate();
+    result.Negate();
     return result;
 }
 
@@ -236,7 +236,7 @@ Matrix3x3 Matrix3x3::operator-() const
 Matrix3x3 Matrix3x3::operator-( const Matrix3x3& mtrx ) const
 {
     Matrix3x3 result( *this );
-    result.substract( mtrx );
+    result.Substract( mtrx );
     return result;
 }
 
@@ -245,7 +245,7 @@ Matrix3x3 Matrix3x3::operator-( const Matrix3x3& mtrx ) const
 Matrix3x3 Matrix3x3::operator*( double value ) const
 {
     Matrix3x3 result( *this );
-    result.multiplyByValue( value );
+    result.MultiplyByValue( value );
     return result;
 }
 
@@ -263,7 +263,7 @@ Matrix3x3 Matrix3x3::operator*( const Matrix3x3& matrix ) const
 Vector3 Matrix3x3::operator*( const Vector3& vect ) const
 {
     Vector3 result;
-    multiplyByVector( vect, &result );
+    MultiplyByVector( vect, &result );
     return result;
 }
 
@@ -272,7 +272,7 @@ Vector3 Matrix3x3::operator*( const Vector3& vect ) const
 Matrix3x3 Matrix3x3::operator/( double value ) const
 {
     Matrix3x3 result( *this );
-    result.divideByValue( value );
+    result.DivideByValue( value );
     return result;
 }
 
@@ -280,7 +280,7 @@ Matrix3x3 Matrix3x3::operator/( double value ) const
 
 Matrix3x3& Matrix3x3::operator+=( const Matrix3x3& matrix )
 {
-    add( matrix );
+    Add( matrix );
     return (*this);
 }
 
@@ -288,7 +288,7 @@ Matrix3x3& Matrix3x3::operator+=( const Matrix3x3& matrix )
 
 Matrix3x3& Matrix3x3::operator-=( const Matrix3x3& matrix )
 {
-    substract( matrix );
+    Substract( matrix );
     return (*this);
 }
 
@@ -296,7 +296,7 @@ Matrix3x3& Matrix3x3::operator-=( const Matrix3x3& matrix )
 
 Matrix3x3& Matrix3x3::operator*=( double value )
 {
-    multiplyByValue( value );
+    MultiplyByValue( value );
     return (*this);
 }
 
@@ -304,7 +304,7 @@ Matrix3x3& Matrix3x3::operator*=( double value )
 
 Matrix3x3& Matrix3x3::operator/=( double value )
 {
-    divideByValue( value );
+    DivideByValue( value );
     return (*this);
 }
 

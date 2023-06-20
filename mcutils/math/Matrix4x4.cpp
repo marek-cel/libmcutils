@@ -43,7 +43,7 @@ Matrix4x4 Matrix4x4::getTransposed() const
 Matrix4x4 Matrix4x4::operator+( const Matrix4x4& matrix ) const
 {
     Matrix4x4 result( *this );
-    result.add( matrix );
+    result.Add( matrix );
     return result;
 }
 
@@ -52,7 +52,7 @@ Matrix4x4 Matrix4x4::operator+( const Matrix4x4& matrix ) const
 Matrix4x4 Matrix4x4::operator-() const
 {
     Matrix4x4 result( *this );
-    result.negate();
+    result.Negate();
     return result;
 }
 
@@ -61,7 +61,7 @@ Matrix4x4 Matrix4x4::operator-() const
 Matrix4x4 Matrix4x4::operator-( const Matrix4x4& matrix ) const
 {
     Matrix4x4 result( *this );
-    result.substract( matrix );
+    result.Substract( matrix );
     return result;
 }
 
@@ -70,7 +70,7 @@ Matrix4x4 Matrix4x4::operator-( const Matrix4x4& matrix ) const
 Matrix4x4 Matrix4x4::operator*( double value ) const
 {
     Matrix4x4 result( *this );
-    result.multiplyByValue( value );
+    result.MultiplyByValue( value );
     return result;
 }
 
@@ -88,7 +88,7 @@ Matrix4x4 Matrix4x4::operator*( const Matrix4x4& matrix ) const
 Vector4 Matrix4x4::operator*( const Vector4& vect ) const
 {
     Vector4 result;
-    multiplyByVector( vect, &result );
+    MultiplyByVector( vect, &result );
     return result;
 }
 
@@ -97,7 +97,7 @@ Vector4 Matrix4x4::operator*( const Vector4& vect ) const
 Matrix4x4 Matrix4x4::operator/( double value ) const
 {
     Matrix4x4 result( *this );
-    result.divideByValue( value );
+    result.DivideByValue( value );
     return result;
 }
 
@@ -105,7 +105,7 @@ Matrix4x4 Matrix4x4::operator/( double value ) const
 
 Matrix4x4& Matrix4x4::operator+=( const Matrix4x4& matrix )
 {
-    add( matrix );
+    Add( matrix );
     return (*this);
 }
 
@@ -113,7 +113,7 @@ Matrix4x4& Matrix4x4::operator+=( const Matrix4x4& matrix )
 
 Matrix4x4& Matrix4x4::operator-=( const Matrix4x4& matrix )
 {
-    substract( matrix );
+    Substract( matrix );
     return (*this);
 }
 
@@ -121,7 +121,7 @@ Matrix4x4& Matrix4x4::operator-=( const Matrix4x4& matrix )
 
 Matrix4x4& Matrix4x4::operator*=( double value )
 {
-    multiplyByValue( value );
+    MultiplyByValue( value );
     return (*this);
 }
 
@@ -129,7 +129,7 @@ Matrix4x4& Matrix4x4::operator*=( double value )
 
 Matrix4x4& Matrix4x4::operator/=( double value )
 {
-    divideByValue( value );
+    DivideByValue( value );
     return (*this);
 }
 

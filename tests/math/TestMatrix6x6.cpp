@@ -91,7 +91,7 @@ TEST_F(TestMatrix6x6, CanTranspose)
     };
 
     mc::Matrix6x6 m;
-    m.setElements( x );
+    m.SetElements(x);
 
     m.transpose();
 
@@ -147,7 +147,7 @@ TEST_F(TestMatrix6x6, CanGetTransposed)
     };
 
     mc::Matrix6x6 m;
-    m.setElements( x );
+    m.SetElements(x);
 
     mc::Matrix6x6 m1 = m.getTransposed();
 
@@ -241,7 +241,7 @@ TEST_F(TestMatrix6x6, CanAdd)
 
     mc::Matrix6x6 m0;
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     mc::Matrix6x6 m = m0 + m1;
 
@@ -297,7 +297,7 @@ TEST_F(TestMatrix6x6, CanNegate)
     };
 
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     mc::Matrix6x6 m = -m1;
 
@@ -354,7 +354,7 @@ TEST_F(TestMatrix6x6, CanSubstract)
 
     mc::Matrix6x6 m0;
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     mc::Matrix6x6 m = m0 - m1;
 
@@ -410,7 +410,7 @@ TEST_F(TestMatrix6x6, CanMultiplyByScalar)
     };
 
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     mc::Matrix6x6 m = m1 * 0.5;
 
@@ -480,8 +480,8 @@ TEST_F(TestMatrix6x6, CanMultiplyByMatrix)
     mc::Matrix6x6 m0;
     mc::Matrix6x6 m1;
 
-    m0.setElements( x0 );
-    m1.setElements( x1 );
+    m0.SetElements(x0);
+    m1.SetElements(x1);
 
     mc::Matrix6x6 m = m0 * m1;
 
@@ -547,10 +547,10 @@ TEST_F(TestMatrix6x6, CanMultiplyByVector)
     double x1[] = { 1.0,  2.0,  3.0,  4.0,  5.0,  6.0 };
 
     mc::Matrix6x6 m0;
-    m0.setElements( x0 );
+    m0.SetElements(x0);
 
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.setElements(x1);
 
     mc::Vector6 v = m0 * v1;
 
@@ -576,7 +576,7 @@ TEST_F(TestMatrix6x6, CanDivideByScalar)
     };
 
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     mc::Matrix6x6 m = m1 / 2.0;
 
@@ -633,7 +633,7 @@ TEST_F(TestMatrix6x6, CanUnaryAdd)
 
     mc::Matrix6x6 m;
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     m += m1;
 
@@ -690,7 +690,7 @@ TEST_F(TestMatrix6x6, CanUnarySubstract)
 
     mc::Matrix6x6 m;
     mc::Matrix6x6 m1;
-    m1.setElements( x );
+    m1.SetElements(x);
 
     m -= m1;
 
@@ -746,7 +746,7 @@ TEST_F(TestMatrix6x6, CanUnaryMultiplyByScalar)
     };
 
     mc::Matrix6x6 m;
-    m.setElements( x );
+    m.SetElements(x);
 
     m *= 0.5;
 
@@ -802,7 +802,7 @@ TEST_F(TestMatrix6x6, CanUnaryDivideByScalar)
     };
 
     mc::Matrix6x6 m;
-    m.setElements( x );
+    m.SetElements(x);
 
     m /= 2.0;
 

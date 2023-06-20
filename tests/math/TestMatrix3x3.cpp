@@ -70,7 +70,7 @@ TEST_F(TestMatrix3x3, CanInstantiate)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
 {
-    mc::Matrix3x3 m1( 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 );
+    mc::Matrix3x3 m1(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0);
 
     EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m1(0,1), 2.0 );
@@ -97,7 +97,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     mc::Angles a7(  M_PI_4, -M_PI_4,  M_PI_4 );
     mc::Angles a8(  M_PI_4,  M_PI_4, -M_PI_4 );
 
-    mc::Matrix3x3 ma0( a0 );
+    mc::Matrix3x3 ma0(a0);
     EXPECT_NEAR( ma0.xx(), 1.0, 1.0e-9 );
     EXPECT_NEAR( ma0.xy(), 0.0, 1.0e-9 );
     EXPECT_NEAR( ma0.xz(), 0.0, 1.0e-9 );
@@ -108,7 +108,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR( ma0.zy(), 0.0, 1.0e-9 );
     EXPECT_NEAR( ma0.zz(), 1.0, 1.0e-9 );
 
-    mc::Matrix3x3 ma1( a1 );
+    mc::Matrix3x3 ma1(a1);
     EXPECT_NEAR( ma1.xx(),  1.0, 1.0e-9 );
     EXPECT_NEAR( ma1.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma1.xz(),  0.0, 1.0e-9 );
@@ -119,7 +119,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR( ma1.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma1.zz(), -1.0, 1.0e-9 );
 
-    mc::Matrix3x3 ma2( a2 );
+    mc::Matrix3x3 ma2(a2);
     EXPECT_NEAR( ma2.xx(), -1.0, 1.0e-9 );
     EXPECT_NEAR( ma2.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma2.xz(),  0.0, 1.0e-9 );
@@ -130,7 +130,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR( ma2.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma2.zz(), -1.0, 1.0e-9 );
 
-    mc::Matrix3x3 ma3( a3 );
+    mc::Matrix3x3 ma3(a3);
     EXPECT_NEAR( ma3.xx(), -1.0, 1.0e-9 );
     EXPECT_NEAR( ma3.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma3.xz(),  0.0, 1.0e-9 );
@@ -141,7 +141,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR( ma3.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma3.zz(),  1.0, 1.0e-9 );
 
-    mc::Matrix3x3 ma4( a4 );
+    mc::Matrix3x3 ma4(a4);
     EXPECT_NEAR( ma4.xx(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma4.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( ma4.xz(), -1.0, 1.0e-9 );
@@ -154,7 +154,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma5( a5 );
+    mc::Matrix3x3 ma5(a5);
     EXPECT_NEAR( ma5.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma5.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma5.xz(), -0.7071, 1.0e-3 );
@@ -167,7 +167,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma6( a6 );
+    mc::Matrix3x3 ma6(a6);
     EXPECT_NEAR( ma6.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma6.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma6.xz(), -0.7071, 1.0e-3 );
@@ -180,7 +180,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma7( a7 );
+    mc::Matrix3x3 ma7(a7);
     EXPECT_NEAR( ma7.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma7.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma7.xz(),  0.7071, 1.0e-3 );
@@ -193,7 +193,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma8( a8 );
+    mc::Matrix3x3 ma8(a8);
     EXPECT_NEAR( ma8.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( ma8.xy(), -0.5000, 1.0e-3 );
     EXPECT_NEAR( ma8.xz(), -0.7071, 1.0e-3 );
@@ -219,17 +219,17 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     mc::Angles a7(  M_PI_4, -M_PI_4,  M_PI_4 );
     mc::Angles a8(  M_PI_4,  M_PI_4, -M_PI_4 );
 
-    mc::Quaternion q0( a0 );
-    mc::Quaternion q1( a1 );
-    mc::Quaternion q2( a2 );
-    mc::Quaternion q3( a3 );
-    mc::Quaternion q4( a4 );
-    mc::Quaternion q5( a5 );
-    mc::Quaternion q6( a6 );
-    mc::Quaternion q7( a7 );
-    mc::Quaternion q8( a8 );
+    mc::Quaternion q0(a0);
+    mc::Quaternion q1(a1);
+    mc::Quaternion q2(a2);
+    mc::Quaternion q3(a3);
+    mc::Quaternion q4(a4);
+    mc::Quaternion q5(a5);
+    mc::Quaternion q6(a6);
+    mc::Quaternion q7(a7);
+    mc::Quaternion q8(a8);
 
-    mc::Matrix3x3 mq0( q0 );
+    mc::Matrix3x3 mq0(q0);
     EXPECT_NEAR( mq0.xx(), 1.0, 1.0e-9 );
     EXPECT_NEAR( mq0.xy(), 0.0, 1.0e-9 );
     EXPECT_NEAR( mq0.xz(), 0.0, 1.0e-9 );
@@ -240,7 +240,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq0.zy(), 0.0, 1.0e-9 );
     EXPECT_NEAR( mq0.zz(), 1.0, 1.0e-9 );
 
-    mc::Matrix3x3 mq1( q1 );
+    mc::Matrix3x3 mq1(q1);
     EXPECT_NEAR( mq1.xx(),  1.0, 1.0e-9 );
     EXPECT_NEAR( mq1.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq1.xz(),  0.0, 1.0e-9 );
@@ -251,7 +251,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq1.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq1.zz(), -1.0, 1.0e-9 );
 
-    mc::Matrix3x3 mq2( q2 );
+    mc::Matrix3x3 mq2(q2);
     EXPECT_NEAR( mq2.xx(), -1.0, 1.0e-9 );
     EXPECT_NEAR( mq2.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq2.xz(),  0.0, 1.0e-9 );
@@ -262,7 +262,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq2.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq2.zz(), -1.0, 1.0e-9 );
 
-    mc::Matrix3x3 mq3( q3 );
+    mc::Matrix3x3 mq3(q3);
     EXPECT_NEAR( mq3.xx(), -1.0, 1.0e-9 );
     EXPECT_NEAR( mq3.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq3.xz(),  0.0, 1.0e-9 );
@@ -273,7 +273,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR( mq3.zy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq3.zz(),  1.0, 1.0e-9 );
 
-    mc::Matrix3x3 mq4( q4 );
+    mc::Matrix3x3 mq4(q4);
     EXPECT_NEAR( mq4.xx(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq4.xy(),  0.0, 1.0e-9 );
     EXPECT_NEAR( mq4.xz(), -1.0, 1.0e-9 );
@@ -286,7 +286,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq5( q5 );
+    mc::Matrix3x3 mq5(q5);
     EXPECT_NEAR( mq5.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq5.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq5.xz(), -0.7071, 1.0e-3 );
@@ -299,7 +299,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq6( q6 );
+    mc::Matrix3x3 mq6(q6);
     EXPECT_NEAR( mq6.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq6.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq6.xz(), -0.7071, 1.0e-3 );
@@ -312,7 +312,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq7( q7 );
+    mc::Matrix3x3 mq7(q7);
     EXPECT_NEAR( mq7.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq7.xy(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq7.xz(),  0.7071, 1.0e-3 );
@@ -325,7 +325,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq8( q8 );
+    mc::Matrix3x3 mq8(q8);
     EXPECT_NEAR( mq8.xx(),  0.5000, 1.0e-3 );
     EXPECT_NEAR( mq8.xy(), -0.5000, 1.0e-3 );
     EXPECT_NEAR( mq8.xz(), -0.7071, 1.0e-3 );
@@ -613,7 +613,7 @@ TEST_F(TestMatrix3x3, CanGetAngles)
 TEST_F(TestMatrix3x3, CanGetQuaternion)
 {
     mc::Matrix3x3 mq0( mc::Quaternion::zeroRotationQuaternion() );
-    mc::Matrix3x3 mq1( mc::Quaternion( 0.6, 0.0, 0.0, 0.8 ) );
+    mc::Matrix3x3 mq1( mc::Quaternion(0.6, 0.0, 0.0, 0.8) );
 
     mc::Quaternion q0 = mq0.getQuaternion();
     mc::Quaternion q1 = mq1.getQuaternion();

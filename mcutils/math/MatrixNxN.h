@@ -68,7 +68,7 @@ public:
     MatrixNxN<N> operator+( const MatrixNxN<N>& matrix ) const
     {
         MatrixNxN<N> result( *this );
-        result.add( matrix );
+        result.Add( matrix );
         return result;
     }
 
@@ -76,7 +76,7 @@ public:
     MatrixNxN<N> operator-() const
     {
         MatrixNxN<N> result( *this );
-        result.negate();
+        result.Negate();
         return result;
     }
 
@@ -84,7 +84,7 @@ public:
     MatrixNxN<N> operator-( const MatrixNxN<N>& matrix ) const
     {
         MatrixNxN<N> result( *this );
-        result.substract( matrix );
+        result.Substract( matrix );
         return result;
     }
 
@@ -92,7 +92,7 @@ public:
     MatrixNxN<N> operator*( double value ) const
     {
         MatrixNxN<N> result( *this );
-        result.multiplyByValue( value );
+        result.MultiplyByValue( value );
         return result;
     }
 
@@ -108,35 +108,35 @@ public:
     MatrixNxN<N> operator/( double value ) const
     {
         MatrixNxN<N> result( *this );
-        result.divideByValue( value );
+        result.DivideByValue( value );
         return result;
     }
 
     /** @brief Unary addition operator. */
     MatrixNxN<N>& operator+=( const MatrixNxN<N>& matrix )
     {
-        this->add( matrix );
+        this->Add( matrix );
         return (*this);
     }
 
     /** @brief Unary subtraction operator. */
     MatrixNxN<N>& operator-=( const MatrixNxN<N>& matrix )
     {
-        this->substract( matrix );
+        this->Substract( matrix );
         return (*this);
     }
 
     /** @brief Unary multiplication operator (by scalar). */
     MatrixNxN<N>& operator*=( double value )
     {
-        this->multiplyByValue( value );
+        this->MultiplyByValue( value );
         return (*this);
     }
 
     /** @brief Unary division operator (by scalar). */
     MatrixNxN<N>& operator/=( double value )
     {
-        this->divideByValue( value );
+        this->DivideByValue( value );
         return (*this);
     }
 
