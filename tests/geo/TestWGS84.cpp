@@ -37,16 +37,16 @@ TEST_F(TestWGS84, CanInstantiate)
 {
     mc::WGS84 wgs;
 
-    EXPECT_NEAR( wgs.getA   (), mc::DataWGS84::a   , 1.0e-9 );
-    EXPECT_NEAR( wgs.getF   (), mc::DataWGS84::f   , 1.0e-9 );
-    EXPECT_NEAR( wgs.getB   (), mc::DataWGS84::b   , 1.0e-4 );
-    EXPECT_NEAR( wgs.getR1  (), mc::DataWGS84::r1  , 1.0e-4 );
-    EXPECT_NEAR( wgs.getA2  (), mc::DataWGS84::a2  , 1.0e3  ); // sic!
-    EXPECT_NEAR( wgs.getB2  (), mc::DataWGS84::b2  , 1.0e3  ); // sic!
-    EXPECT_NEAR( wgs.getE2  (), mc::DataWGS84::e2  , 1.0e-4 );
-    EXPECT_NEAR( wgs.getE   (), mc::DataWGS84::e   , 1.0e-4 );
-    EXPECT_NEAR( wgs.getEp2 (), mc::DataWGS84::ep2 , 1.0e-4 );
-    EXPECT_NEAR( wgs.getEp  (), mc::DataWGS84::ep  , 1.0e-4 );
+    EXPECT_NEAR( wgs.a()   , mc::DataWGS84::a   , 1.0e-9 );
+    EXPECT_NEAR( wgs.f()   , mc::DataWGS84::f   , 1.0e-9 );
+    EXPECT_NEAR( wgs.b()   , mc::DataWGS84::b   , 1.0e-4 );
+    EXPECT_NEAR( wgs.r1()  , mc::DataWGS84::r1  , 1.0e-4 );
+    EXPECT_NEAR( wgs.a2()  , mc::DataWGS84::a2  , 1.0e3  ); // sic!
+    EXPECT_NEAR( wgs.b2()  , mc::DataWGS84::b2  , 1.0e3  ); // sic!
+    EXPECT_NEAR( wgs.e2()  , mc::DataWGS84::e2  , 1.0e-4 );
+    EXPECT_NEAR( wgs.e()   , mc::DataWGS84::e   , 1.0e-4 );
+    EXPECT_NEAR( wgs.ep2() , mc::DataWGS84::ep2 , 1.0e-4 );
+    EXPECT_NEAR( wgs.ep()  , mc::DataWGS84::ep  , 1.0e-4 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -60,11 +60,11 @@ TEST_F(TestWGS84, CanInstantiateAndCopy)
     pos_geo.lon = M_PI_4;
     pos_geo.alt = 100.0;
 
-    mc::WGS84 wgs0( pos_geo );
+    mc::WGS84 wgs0(pos_geo);
 
-    mc::WGS84 wgs( wgs0 );
+    mc::WGS84 wgs(wgs0);
 
-    pos_geo_out = wgs.getPos_Geo();
+    pos_geo_out = wgs.pos_geo();
 
     EXPECT_DOUBLE_EQ( pos_geo_out.lat, M_PI_4 );
     EXPECT_DOUBLE_EQ( pos_geo_out.lon, M_PI_4 );
@@ -82,9 +82,9 @@ TEST_F(TestWGS84, CanInstantiateAndMove)
     pos_geo.lon = M_PI_4;
     pos_geo.alt = 100.0;
 
-    mc::WGS84 wgs( std::move( mc::WGS84( pos_geo ) ) );
+    mc::WGS84 wgs(std::move(mc::WGS84(pos_geo)));
 
-    pos_geo_out = wgs.getPos_Geo();
+    pos_geo_out = wgs.pos_geo();
 
     EXPECT_DOUBLE_EQ( pos_geo_out.lat, M_PI_4 );
     EXPECT_DOUBLE_EQ( pos_geo_out.lon, M_PI_4 );
@@ -101,10 +101,10 @@ TEST_F(TestWGS84, CanInstantiateAndSetPosGeo)
     pos_geo.lon = M_PI_4;
     pos_geo.alt = 100.0;
 
-    mc::WGS84 wgs( pos_geo );
+    mc::WGS84 wgs(pos_geo);
 
-    mc::Geo     pos_geo_out = wgs.getPos_Geo();
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
+    mc::Geo     pos_geo_out = wgs.pos_geo();
+    mc::Vector3 pos_wgs_out = wgs.pos_cart();
 
     EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , 1.0e-5 );
     EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , 1.0e-5 );
@@ -125,61 +125,14 @@ TEST_F(TestWGS84, CanInstantiateAndSetPosWGS)
     pos_wgs.y() = 3194469.145060574;
     pos_wgs.z() = 4487419.119544039;
 
-    mc::WGS84 wgs( pos_wgs );
+    mc::WGS84 wgs(pos_wgs);
 
-    mc::Geo     pos_geo_out = wgs.getPos_Geo();
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
-
-    EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , 1.0e-5 );
-    EXPECT_NEAR( pos_geo_out.alt, 100.0  , 1.0e-4 );
-
-    EXPECT_NEAR( pos_wgs_out.x(), 3194469.1450605746 , 1.0e-4 );
-    EXPECT_NEAR( pos_wgs_out.y(), 3194469.145060574  , 1.0e-4 );
-    EXPECT_NEAR( pos_wgs_out.z(), 4487419.119544039  , 1.0e-4 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestWGS84, CanSetPosWGS)
-{
-    mc::Vector3 pos_wgs;
-
-    pos_wgs.x() = 3194469.1450605746;
-    pos_wgs.y() = 3194469.145060574;
-    pos_wgs.z() = 4487419.119544039;
-
-    mc::WGS84 wgs;
-
-    EXPECT_NO_THROW( wgs.setPos_WGS( pos_wgs ) );
-
-    mc::Geo     pos_geo_out = wgs.getPos_Geo();
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
+    mc::Geo     pos_geo_out = wgs.pos_geo();
+    mc::Vector3 pos_wgs_out = wgs.pos_cart();
 
     EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , 1.0e-5 );
     EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , 1.0e-5 );
     EXPECT_NEAR( pos_geo_out.alt, 100.0  , 1.0e-4 );
-
-    EXPECT_NEAR( pos_wgs_out.x(), 3194469.1450605746 , 1.0e-4 );
-    EXPECT_NEAR( pos_wgs_out.y(), 3194469.145060574  , 1.0e-4 );
-    EXPECT_NEAR( pos_wgs_out.z(), 4487419.119544039  , 1.0e-4 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestWGS84, CanGetPosWGS)
-{
-    mc::Vector3 pos_wgs;
-
-    pos_wgs.x() = 3194469.1450605746;
-    pos_wgs.y() = 3194469.145060574;
-    pos_wgs.z() = 4487419.119544039;
-
-    mc::WGS84 wgs;
-
-    wgs.setPos_WGS( pos_wgs );
-
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
 
     EXPECT_NEAR( pos_wgs_out.x(), 3194469.1450605746 , 1.0e-4 );
     EXPECT_NEAR( pos_wgs_out.y(), 3194469.145060574  , 1.0e-4 );
@@ -198,12 +151,12 @@ TEST_F(TestWGS84, CanAssign)
     pos_geo.lon = M_PI_4;
     pos_geo.alt = 100.0;
 
-    mc::WGS84 wgs0( pos_geo );
+    mc::WGS84 wgs0(pos_geo);
 
     wgs = wgs0;
 
-    mc::Geo     pos_geo_out = wgs.getPos_Geo();
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
+    mc::Geo     pos_geo_out = wgs.pos_geo();
+    mc::Vector3 pos_wgs_out = wgs.pos_cart();
 
     EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , 1.0e-5 );
     EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , 1.0e-5 );
@@ -226,10 +179,10 @@ TEST_F(TestWGS84, CanAssignMove)
     pos_geo.lon = M_PI_4;
     pos_geo.alt = 100.0;
 
-    wgs = std::move( mc::WGS84( pos_geo ) );
+    wgs = std::move(mc::WGS84(pos_geo));
 
-    mc::Geo     pos_geo_out = wgs.getPos_Geo();
-    mc::Vector3 pos_wgs_out = wgs.getPos_WGS();
+    mc::Geo     pos_geo_out = wgs.pos_geo();
+    mc::Vector3 pos_wgs_out = wgs.pos_cart();
 
     EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , 1.0e-5 );
     EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , 1.0e-5 );
