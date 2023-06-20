@@ -49,36 +49,36 @@ class MCUTILSAPI Lead
 public:
 
     /** @brief Constructor. */
-    Lead( double tc = 0.0, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-    inline double getTimeConst() const { return tc_; }
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant.
-     * @param tc time constant
-     */
-    void setTimeConst( double tc );
+    Lead(double tc = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double time_const() const { return time_const_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    inline void set_value(double value) { value_ = value; }
+
+    /**
+     * @brief Sets time constant.
+     * @param tc time constant
+     */
+    void set_time_const(double tc);
 
 private:
 
-    double tc_;             ///< time constant
+    double time_const_ = 0.0;   ///< time constant
 
-    double u_prev_;         ///< previous input
-    double y_;              ///< current value
+    double u_prev_ = 0.0;       ///< previous input
+    double value_  = 0.0;       ///< current value
 };
 
 } // namespace mc
