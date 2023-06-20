@@ -146,7 +146,7 @@ Angles Matrix3x3::getAngles() const
         result.psi() = 0.0;
     }
 
-    result.normalize();
+    result.Normalize();
 
     return result;
 }

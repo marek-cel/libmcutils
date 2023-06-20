@@ -177,7 +177,7 @@ Angles Quaternion::getAngles() const
         result.psi() = atan2( 2.0*( e0_*ez_ + ex_*ey_ ), 1.0 - 2.0*( ey_*ey_ + ez_*ez_ ) );
     }
 
-    result.normalize();
+    result.Normalize();
 
     return result;
 }

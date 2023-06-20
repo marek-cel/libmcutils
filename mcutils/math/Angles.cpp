@@ -36,7 +36,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Angles::normalize( double val, double min )
+double Angles::Normalize(double val, double min)
 {
     double tmp = val;
     double max = min + 2.0 * M_PI;
@@ -49,23 +49,23 @@ double Angles::normalize( double val, double min )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles::Angles( double phi, double tht, double psi )
+Angles::Angles(double phi, double tht, double psi)
 {
-    set( phi, tht, psi );
+    Set(phi, tht, psi);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::isValid() const
+bool Angles::IsValid() const
 {
-    return ( mc::isValid( phi_ )
-          && mc::isValid( tht_ )
-          && mc::isValid( psi_ ) );
+    return mc::isValid(phi_)
+        && mc::isValid(tht_)
+        && mc::isValid(psi_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Angles::normalize()
+void Angles::Normalize()
 {
     while ( tht_ >  M_PI_2 )
     {
@@ -90,7 +90,7 @@ void Angles::normalize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Angles::set( double phi, double tht, double psi )
+void Angles::Set(double phi, double tht, double psi)
 {
     phi_ = phi;
     tht_ = tht;
@@ -99,34 +99,34 @@ void Angles::set( double phi, double tht, double psi )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string Angles::toString() const
+std::string Angles::ToString() const
 {
     std::stringstream ss;
 
-    ss.setf( std::ios_base::showpoint );
-    ss.setf( std::ios_base::fixed );
+    ss.setf(std::ios_base::showpoint);
+    ss.setf(std::ios_base::fixed);
 
-    ss << std::setprecision( 2 ) << Units::rad2deg( phi_ );
+    ss << std::setprecision(2) << Units::rad2deg(phi_);
     ss << ",";
-    ss << std::setprecision( 2 ) << Units::rad2deg( tht_ );
+    ss << std::setprecision(2) << Units::rad2deg(tht_);
     ss << ",";
-    ss << std::setprecision( 2 ) << Units::rad2deg( psi_ );
+    ss << std::setprecision(2) << Units::rad2deg(psi_);
 
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::operator==( const Angles& angl ) const
+bool Angles::operator==(const Angles& angl) const
 {
-    return ( ( phi_ == angl.phi_ )
-          && ( tht_ == angl.tht_ )
-          && ( psi_ == angl.psi_ ) );
+    return ( phi_ == angl.phi_ )
+        && ( tht_ == angl.tht_ )
+        && ( psi_ == angl.psi_ );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Angles::operator!=( const Angles& angl ) const
+bool Angles::operator!=(const Angles& angl) const
 {
     return !( (*this) == angl );
 }

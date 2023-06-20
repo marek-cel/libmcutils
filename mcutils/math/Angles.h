@@ -54,7 +54,7 @@ public:
      * @param min minimum value
      * @return normalized angle
      */
-    static double normalize( double val, double min = 0.0 );
+    static double Normalize(double val, double min = 0.0);
 
     /** Constructor. */
     Angles() = default;
@@ -65,19 +65,30 @@ public:
      * @param tht [rad] angle of rotation about y-axis
      * @param psi [rad] angle of rotation about z-axis
      */
-    Angles( double phi, double tht, double psi );
+    Angles(double phi, double tht, double psi);
 
     /** @brief Destructor. */
     ~Angles() = default;
 
     /** @return true if all items are valid */
-    bool isValid() const;
+    bool IsValid() const;
 
     /**
      * @brief Normalizes angles.
      * Limits phi to [-pi,pi] theta to [-pi/2,pi/2] and psi to [0,2*pi].
      */
-    void normalize();
+    void Normalize();
+
+    /**
+     * @brief Sets angles values.
+     * @param phi [rad] angle of rotation about x-axis
+     * @param tht [rad] angle of rotation about y-axis
+     * @param psi [rad] angle of rotation about z-axis
+     */
+    void Set(double phi, double tht, double psi);
+
+    /** @brief Returns string represtation of the angles. */
+    std::string ToString() const;
 
     inline double  phi() const { return phi_; }
     inline double  tht() const { return tht_; }
@@ -85,12 +96,6 @@ public:
     inline double& phi()       { return phi_; }
     inline double& tht()       { return tht_; }
     inline double& psi()       { return psi_; }
-
-    /** @brief Sets angles values. */
-    void set( double phi, double tht, double psi );
-
-    /** @brief Returns string represtation of the angles. */
-    std::string toString() const;
 
     /** @brief Equality operator. */
     bool operator==( const Angles& angl ) const;
