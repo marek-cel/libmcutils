@@ -31,7 +31,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::getTransposed() const
+Matrix4x4 Matrix4x4::GetTransposed() const
 {
     Matrix4x4 result(*this);
     result.Transpose();

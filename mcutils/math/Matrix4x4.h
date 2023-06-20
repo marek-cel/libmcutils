@@ -47,48 +47,48 @@ class MCUTILSAPI Matrix4x4 : public MatrixNxN<4>
 public:
 
     /** @brief Returns transposed matrix. */
-    Matrix4x4 getTransposed() const;
+    Matrix4x4 GetTransposed() const;
 
     /** @brief Addition operator. */
-    Matrix4x4 operator+( const Matrix4x4& matrix ) const;
+    Matrix4x4 operator+(const Matrix4x4& matrix) const;
 
     /** @brief Negation operator. */
     Matrix4x4 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix4x4 operator-( const Matrix4x4& matrix ) const;
+    Matrix4x4 operator-(const Matrix4x4& matrix) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix4x4 operator*( double value ) const;
+    Matrix4x4 operator*(double value) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix4x4 operator*( const Matrix4x4& matrix ) const;
+    Matrix4x4 operator*(const Matrix4x4& matrix) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector4 operator*( const Vector4& vect ) const;
+    Vector4 operator*(const Vector4& vect) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix4x4 operator/( double value ) const;
+    Matrix4x4 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Matrix4x4& operator+=( const Matrix4x4& matrix );
+    Matrix4x4& operator+=(const Matrix4x4& matrix);
 
     /** @brief Unary subtraction operator. */
-    Matrix4x4& operator-=( const Matrix4x4& matrix );
+    Matrix4x4& operator-=(const Matrix4x4& matrix);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix4x4& operator*=( double value );
+    Matrix4x4& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Matrix4x4& operator/=( double value );
+    Matrix4x4& operator/=(double value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix4x4 operator*( double value, const Matrix4x4& matrix )
+inline Matrix4x4 operator*(double value, const Matrix4x4& matrix)
 {
-    return ( matrix * value );
+    return matrix * value;
 }
 
 } // namespace mc

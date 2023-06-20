@@ -105,7 +105,7 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
     mc::Matrix4x4 m;
     m.SetElements( elements );
 
-    mc::Matrix4x4 m1 = m.getTransposed();
+    mc::Matrix4x4 m1 = m.GetTransposed();
 
     EXPECT_DOUBLE_EQ( m(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m(0,1),  2.0 );
