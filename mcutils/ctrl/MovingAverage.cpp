@@ -31,23 +31,16 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MovingAverage::MovingAverage( unsigned int length , double y )
-    : length_ ( length )
-    , y_ ( y )
+MovingAverage::MovingAverage(unsigned int length , double value)
+    : length_(length)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void MovingAverage::setLength( unsigned int length )
+void MovingAverage::Update(double, double u)
 {
-    length_ = length;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void MovingAverage::update( double, double u )
-{
-    fifo_.push_back( u );
+    fifo_.push_back(u);
 
     while ( fifo_.size() > length_ )
     {
@@ -63,11 +56,11 @@ void MovingAverage::update( double, double u )
             sum += val;
         }
 
-        y_ = sum / static_cast<double>( fifo_.size() );
+        value_ = sum / static_cast<double>(fifo_.size());
     }
     else
     {
-        y_ = u;
+        value_ = u;
     }
 }
 

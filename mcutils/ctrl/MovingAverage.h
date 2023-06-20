@@ -48,32 +48,33 @@ public:
     /**
      * @brief Constructor.
      * @param length length of the sliding window
+     * @param value initial output value
      */
-    MovingAverage( unsigned int length = 1, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-
-    inline unsigned int getLength() const { return length_; }
-
-    /**
-     * @brief Sets length of the sliding window
-     * @param length length of the sliding window
-     */
-    void setLength( unsigned int length );
+    MovingAverage(unsigned int length = 1, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+
+    inline unsigned int length() const { return length_; }
+
+    /**
+     * @brief Sets length of the sliding window
+     * @param length length of the sliding window
+     */
+    inline void set_length(unsigned int length) { length_ = length; }
 
 private:
 
     std::deque<double> fifo_;   ///< previous value fifo queue
 
-    unsigned int length_;       ///< length of the sliding window
-    double y_;                  ///< current value
+    unsigned int length_ = 0;   ///< length of the sliding window
+    double value_ = 0.0;        ///< current value
 };
 
 } // namespace mc
