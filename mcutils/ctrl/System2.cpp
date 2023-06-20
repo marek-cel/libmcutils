@@ -32,76 +32,23 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-System2::System2( double c1, double c2, double c3,
-                  double c4, double c5, double c6,
-                  double y )
-    : c1_ ( c1 )
-    , c2_ ( c2 )
-    , c3_ ( c3 )
-    , c4_ ( c4 )
-    , c5_ ( c5 )
-    , c6_ ( c6 )
-    , u_prev_1_ ( 0.0 )
-    , u_prev_2_ ( 0.0 )
-    , y_prev_1_ ( y )
-    , y_prev_2_ ( y )
-    , y_ ( y )
+System2::System2(double c1, double c2, double c3,
+                 double c4, double c5, double c6,
+                 double value)
+    : c1_(c1)
+    , c2_(c2)
+    , c3_(c3)
+    , c4_(c4)
+    , c5_(c5)
+    , c6_(c6)
+    , y_prev_1_(value)
+    , y_prev_2_(value)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void System2::setValue( double y )
-{
-    y_ = y;
-    y_prev_1_ = y;
-    y_prev_2_ = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC1( double c1 )
-{
-    c1_ = c1;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC2( double c2 )
-{
-    c2_ = c2;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC3( double c3 )
-{
-    c3_ = c3;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC4( double c4 )
-{
-    c4_ = c4;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC5( double c5 )
-{
-    c5_ = c5;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::setC6( double c6 )
-{
-    c6_ = c6;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void System2::update( double dt, double u )
+void System2::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
@@ -116,15 +63,24 @@ void System2::update( double dt, double u )
         double cd = ( 2.0 * c6_ * dt2 - 8.0 * c4_                  ) * den_inv;
         double ce = ( 4.0 * c4_       - 2.0 * c5_ * dt + c6_ * dt2 ) * den_inv;
 
-        y_ = u * ca + u_prev_1_ * cb + u_prev_2_ * cc
-                    - y_prev_1_ * cd - y_prev_2_ * ce;
+        value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * cc
+                        - y_prev_1_ * cd - y_prev_2_ * ce;
 
         u_prev_2_ = u_prev_1_;
         u_prev_1_ = u;
 
         y_prev_2_ = y_prev_1_;
-        y_prev_1_ = y_;
+        y_prev_1_ = value_;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void System2::set_value(double value)
+{
+    value_ = value;
+    y_prev_1_ = value;
+    y_prev_2_ = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
