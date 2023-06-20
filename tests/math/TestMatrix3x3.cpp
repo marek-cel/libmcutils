@@ -15,9 +15,9 @@ protected:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrix3x3, CanCreateIdentityMatrix)
+TEST_F(TestMatrix3x3, CanGetIdentityMatrix)
 {
-    mc::Matrix3x3 m = mc::Matrix3x3::identityMatrix();
+    mc::Matrix3x3 m = mc::Matrix3x3::GetIdentityMatrix();
 
     EXPECT_DOUBLE_EQ( m(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m(0,1), 0.0 );
@@ -514,7 +514,7 @@ TEST_F(TestMatrix3x3, CanSetDat)
 {
     mc::Matrix3x3 m0;
 
-    m0.set( 11.0, 12.0, 13.0,
+    m0.Set( 11.0, 12.0, 13.0,
             21.0, 22.0, 23.0,
             31.0, 32.0, 33.0 );
 
@@ -558,9 +558,9 @@ TEST_F(TestMatrix3x3, CanGetAngles)
     mc::Matrix3x3 ma1( mc::Angles( M_PI, 0.0, 0.0 ) );
     mc::Matrix3x3 ma3( mc::Angles( 0.0, 0.0, M_PI ) );
 
-    mc::Angles a0 =  ma0.getAngles();
-    mc::Angles a1 =  ma1.getAngles();
-    mc::Angles a3 =  ma3.getAngles();
+    mc::Angles a0 =  ma0.GetAngles();
+    mc::Angles a1 =  ma1.GetAngles();
+    mc::Angles a3 =  ma3.GetAngles();
 
     EXPECT_NEAR( a0.phi(), 0.0  , 1.0e-9 );
     EXPECT_NEAR( a0.tht(), 0.0  , 1.0e-9 );
@@ -581,11 +581,11 @@ TEST_F(TestMatrix3x3, CanGetAngles)
     mc::Matrix3x3 mas4( mc::Angles(   M_PI, M_PI_2,    0.0 ) );
     mc::Matrix3x3 mas5( mc::Angles(    0.0, M_PI_2, M_PI_2 ) );
 
-    mc::Angles as1 = mas1.getAngles();
-    mc::Angles as2 = mas2.getAngles();
-    mc::Angles as3 = mas3.getAngles();
-    mc::Angles as4 = mas4.getAngles();
-    mc::Angles as5 = mas5.getAngles();
+    mc::Angles as1 = mas1.GetAngles();
+    mc::Angles as2 = mas2.GetAngles();
+    mc::Angles as3 = mas3.GetAngles();
+    mc::Angles as4 = mas4.GetAngles();
+    mc::Angles as5 = mas5.GetAngles();
 
     EXPECT_NEAR( as1.phi(),     0.0, 1.0e-9 );
     EXPECT_NEAR( as1.tht(),  M_PI_2, 1.0e-9 );
@@ -615,8 +615,8 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
     mc::Matrix3x3 mq0( mc::Quaternion::zeroRotationQuaternion() );
     mc::Matrix3x3 mq1( mc::Quaternion(0.6, 0.0, 0.0, 0.8) );
 
-    mc::Quaternion q0 = mq0.getQuaternion();
-    mc::Quaternion q1 = mq1.getQuaternion();
+    mc::Quaternion q0 = mq0.GetQuaternion();
+    mc::Quaternion q1 = mq1.GetQuaternion();
 
     EXPECT_NEAR( q0.e0(), 1.0, 1.0e-9 );
     EXPECT_NEAR( q0.ex(), 0.0, 1.0e-9 );
@@ -641,20 +641,20 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
                        0.0, -1.0,  0.0,
                        0.0,  0.0, -1.0 );
 
-    mc::Angles a1 = m1.getAngles();
-    mc::Angles a2 = m2.getAngles();
-    mc::Angles a3 = m3.getAngles();
-    mc::Angles a4 = m4.getAngles();
+    mc::Angles a1 = m1.GetAngles();
+    mc::Angles a2 = m2.GetAngles();
+    mc::Angles a3 = m3.GetAngles();
+    mc::Angles a4 = m4.GetAngles();
 
     mc::Quaternion qa1( a1 );
     mc::Quaternion qa2( a2 );
     mc::Quaternion qa3( a3 );
     mc::Quaternion qa4( a4 );
 
-    mc::Quaternion qm1 = m1.getQuaternion();
-    mc::Quaternion qm2 = m2.getQuaternion();
-    mc::Quaternion qm3 = m3.getQuaternion();
-    mc::Quaternion qm4 = m4.getQuaternion();
+    mc::Quaternion qm1 = m1.GetQuaternion();
+    mc::Quaternion qm2 = m2.GetQuaternion();
+    mc::Quaternion qm3 = m3.GetQuaternion();
+    mc::Quaternion qm4 = m4.GetQuaternion();
 
     EXPECT_NEAR( qa1.e0(), qm1.e0(), 1.0e-9 );
     EXPECT_NEAR( qa1.ex(), qm1.ex(), 1.0e-9 );
@@ -685,7 +685,7 @@ TEST_F(TestMatrix3x3, CanGetTransposed)
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::Matrix3x3 mt = m1.getTransposed();
+    mc::Matrix3x3 mt = m1.GetTransposed();
 
     EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m1(0,1), 2.0 );

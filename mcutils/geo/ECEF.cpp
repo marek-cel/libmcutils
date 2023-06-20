@@ -223,7 +223,7 @@ void ECEF::ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const
 Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
 {
     Matrix3x3 ned2bas(Angles(0.0, 0.0, heading));
-    Matrix3x3 bas2ned = ned2bas.getTransposed();
+    Matrix3x3 bas2ned = ned2bas.GetTransposed();
 
     Vector3 r_bas( offset_x, offset_y, 0.0 );
     Vector3 r_ned = bas2ned * r_bas;
@@ -251,14 +251,14 @@ Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
 
 Quaternion ECEF::ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const
 {
-    return ned2ecef_.getQuaternion() * att_ecef;
+    return ned2ecef_.GetQuaternion() * att_ecef;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Quaternion ECEF::ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const
 {
-    return ecef2ned_.getQuaternion() * att_ned;
+    return ecef2ned_.GetQuaternion() * att_ned;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

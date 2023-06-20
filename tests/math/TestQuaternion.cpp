@@ -305,8 +305,8 @@ TEST_F(TestQuaternion, CanGetAngles)
     mc::Angles aq1 = q1.getAngles();
     mc::Angles aq2 = q2.getAngles();
 
-    mc::Angles am1 = mq1.getAngles();
-    mc::Angles am2 = mq2.getAngles();
+    mc::Angles am1 = mq1.GetAngles();
+    mc::Angles am2 = mq2.GetAngles();
 
     EXPECT_DOUBLE_EQ( aq1.phi(), am1.phi() );
     EXPECT_DOUBLE_EQ( aq1.tht(), am1.tht() );

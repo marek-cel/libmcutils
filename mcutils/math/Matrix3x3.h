@@ -63,20 +63,20 @@ class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
 public:
 
     /** @brief Creates identity matrix. */
-    static Matrix3x3 identityMatrix();
+    static Matrix3x3 GetIdentityMatrix();
 
     Matrix3x3() = default;
 
     /** @brief Constructor. */
-    Matrix3x3( double xx, double xy, double xz,
-               double yx, double yy, double yz,
-               double zx, double zy, double zz );
+    Matrix3x3(double xx, double xy, double xz,
+              double yx, double yy, double yz,
+              double zx, double zy, double zz);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Angles& angl );
+    Matrix3x3(const Angles& angl);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Quaternion& qtrn );
+    Matrix3x3(const Quaternion& qtrn);
 
     inline double xx() const { return elements_[0]; }
     inline double xy() const { return elements_[1]; }
@@ -110,59 +110,59 @@ public:
      * @param zy item at position zy
      * @param zz item at position zz
      */
-    void set( double xx, double xy, double xz,
-              double yx, double yy, double yz,
-              double zx, double zy, double zz );
+    void Set(double xx, double xy, double xz,
+             double yx, double yy, double yz,
+             double zx, double zy, double zz);
 
     /** @brief Returns Bryant angles of rotation matrix. */
-    Angles getAngles() const;
+    Angles GetAngles() const;
 
     /** @brief Returns quaternion of rotation matrix. */
-    Quaternion getQuaternion() const;
+    Quaternion GetQuaternion() const;
 
     /** @brief Returns transposed matrix. */
-    Matrix3x3 getTransposed() const;
+    Matrix3x3 GetTransposed() const;
 
     /** @brief Addition operator. */
-    Matrix3x3 operator+( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator+(const Matrix3x3& matrix) const;
 
     /** @brief Negation operator. */
     Matrix3x3 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix3x3 operator-( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator-(const Matrix3x3& matrix) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix3x3 operator*( double value ) const;
+    Matrix3x3 operator*(double value) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix3x3 operator*( const Matrix3x3& matrix ) const;
+    Matrix3x3 operator*(const Matrix3x3& matrix) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector3 operator*( const Vector3& vect ) const;
+    Vector3 operator*(const Vector3& vect) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix3x3 operator/( double value ) const;
+    Matrix3x3 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Matrix3x3& operator+=( const Matrix3x3& matrix );
+    Matrix3x3& operator+=(const Matrix3x3& matrix);
 
     /** @brief Unary subtraction operator. */
-    Matrix3x3& operator-=( const Matrix3x3& matrix );
+    Matrix3x3& operator-=(const Matrix3x3& matrix);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix3x3& operator*=( double value );
+    Matrix3x3& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Matrix3x3& operator/=( double value );
+    Matrix3x3& operator/=(double value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix3x3 operator*( double value, const Matrix3x3& matrix )
+inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
 {
-    return ( matrix * value );
+    return matrix * value;
 }
 
 } // namespace mc

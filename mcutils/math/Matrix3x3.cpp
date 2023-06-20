@@ -33,34 +33,34 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::identityMatrix()
+Matrix3x3 Matrix3x3::GetIdentityMatrix()
 {
-    return Matrix3x3( 1.0, 0.0, 0.0,
-                      0.0, 1.0, 0.0,
-                      0.0, 0.0, 1.0 );
+    return Matrix3x3(1.0, 0.0, 0.0,
+                     0.0, 1.0, 0.0,
+                     0.0, 0.0, 1.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( double xx, double xy, double xz,
-                      double yx, double yy, double yz,
-                      double zx, double zy, double zz )
+Matrix3x3::Matrix3x3(double xx, double xy, double xz,
+                     double yx, double yy, double yz,
+                     double zx, double zy, double zz)
 {
-    set( xx, xy, xz, yx, yy, yz, zx, zy, zz );
+    Set(xx, xy, xz, yx, yy, yz, zx, zy, zz);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const Angles& angl )
+Matrix3x3::Matrix3x3(const Angles& angl)
 {
-    double sinPhi = sin( angl.phi() );
-    double cosPhi = cos( angl.phi() );
+    double sinPhi = sin(angl.phi());
+    double cosPhi = cos(angl.phi());
 
-    double sinTht = sin( angl.tht() );
-    double cosTht = cos( angl.tht() );
+    double sinTht = sin(angl.tht());
+    double cosTht = cos(angl.tht());
 
-    double sinPsi = sin( angl.psi() );
-    double cosPsi = cos( angl.psi() );
+    double sinPsi = sin(angl.psi());
+    double cosPsi = cos(angl.psi());
 
     double sinPhiSinTht = sinPhi * sinTht;
     double cosPhiSinTht = cosPhi * sinTht;
@@ -80,7 +80,7 @@ Matrix3x3::Matrix3x3( const Angles& angl )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3::Matrix3x3( const Quaternion& qtrn )
+Matrix3x3::Matrix3x3(const Quaternion& qtrn)
 {
     double e0 = qtrn.e0();
     double ex = qtrn.ex();
@@ -107,9 +107,9 @@ Matrix3x3::Matrix3x3( const Quaternion& qtrn )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Matrix3x3::set( double xx, double xy, double xz,
-                     double yx, double yy, double yz,
-                     double zx, double zy, double zz )
+void Matrix3x3::Set(double xx, double xy, double xz,
+                    double yx, double yy, double yz,
+                    double zx, double zy, double zz)
 {
     this->xx() = xx;
     this->xy() = xy;
@@ -126,23 +126,23 @@ void Matrix3x3::set( double xx, double xy, double xz,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles Matrix3x3::getAngles() const
+Angles Matrix3x3::GetAngles() const
 {
     Angles result;
 
     double sinTht = -xz();
-    double cosTht = sqrt( 1.0 - std::min( 1.0, sinTht*sinTht ) );
+    double cosTht = sqrt( 1.0 - std::min(1.0, sinTht*sinTht) );
 
-    result.tht() = atan2( sinTht, cosTht );
+    result.tht() = atan2(sinTht, cosTht);
 
     if ( cosTht > 0.0 )
     {
-        result.phi() = atan2( yz(), zz() );
-        result.psi() = atan2( xy(), xx() );
+        result.phi() = atan2(yz(), zz());
+        result.psi() = atan2(xy(), xx());
     }
     else
     {
-        result.phi() = atan2( yx(), zx() );
+        result.phi() = atan2(yx(), zx());
         result.psi() = 0.0;
     }
 
@@ -153,24 +153,24 @@ Angles Matrix3x3::getAngles() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Matrix3x3::getQuaternion() const
+Quaternion Matrix3x3::GetQuaternion() const
 {
     Quaternion result;
 
     // traces
-    double tr[ 4 ];
+    double tr[4];
 
-    tr[ 0 ] = 1.0 + xx() + yy() + zz();
-    tr[ 1 ] = 1.0 + xx() - yy() - zz();
-    tr[ 2 ] = 1.0 - xx() + yy() - zz();
-    tr[ 3 ] = 1.0 - xx() - yy() + zz();
+    tr[0] = 1.0 + xx() + yy() + zz();
+    tr[1] = 1.0 + xx() - yy() - zz();
+    tr[2] = 1.0 - xx() + yy() - zz();
+    tr[3] = 1.0 - xx() - yy() + zz();
 
     int index = 0;
-    for ( int i = 1; i < 4; ++i ) index = ( tr[ i ] > tr[ index ] ) ? i : index;
+    for ( int i = 1; i < 4; ++i ) index = ( tr[i] > tr[index] ) ? i : index;
 
     if ( index == 0 )
     {
-        result.e0() = tr[ 0 ];
+        result.e0() = tr[0];
         result.ex() = yz() - zy();
         result.ey() = zx() - xz();
         result.ez() = xy() - yx();
@@ -178,7 +178,7 @@ Quaternion Matrix3x3::getQuaternion() const
     else if ( index == 1 )
     {
         result.e0() = yz() - zy();
-        result.ex() = tr[ 1 ];
+        result.ex() = tr[1];
         result.ey() = xy() + yx();
         result.ez() = zx() + xz();
     }
@@ -186,7 +186,7 @@ Quaternion Matrix3x3::getQuaternion() const
     {
         result.e0() = zx() - xz();
         result.ex() = xy() + yx();
-        result.ey() = tr[ 2 ];
+        result.ey() = tr[2];
         result.ez() = yz() + zy();
     }
     else
@@ -194,10 +194,10 @@ Quaternion Matrix3x3::getQuaternion() const
         result.e0() = xy() - yx();
         result.ex() = zx() + xz();
         result.ey() = yz() + zy();
-        result.ez() = tr[ 3 ];
+        result.ez() = tr[3];
     }
 
-    result *= sqrt( 0.25 / tr[ index ] );
+    result *= sqrt(0.25 / tr[index]);
 
     result.normalize();
 
@@ -206,7 +206,7 @@ Quaternion Matrix3x3::getQuaternion() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::getTransposed() const
+Matrix3x3 Matrix3x3::GetTransposed() const
 {
     Matrix3x3 result(*this);
     result.Transpose();
