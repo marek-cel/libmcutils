@@ -48,7 +48,11 @@ class MCUTILSAPI Lead
 {
 public:
 
-    /** @brief Constructor. */
+    /**
+     * @brief Constructor.
+     * @param tc time constant
+     * @param value initial output value
+     */
     Lead(double tc = 0.0, double value = 0.0);
 
     /**
