@@ -43,8 +43,8 @@ double Inertia::Calculate(double u, double y, double dt, double tc)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Inertia::Inertia(double time_const, double value)
-    : time_const_( time_const )
+Inertia::Inertia(double tc, double value)
+    : time_const_( tc )
     , value_( value )
 {}
 

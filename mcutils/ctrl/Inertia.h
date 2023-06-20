@@ -63,10 +63,10 @@ public:
 
     /**
      * @brief Constructor.
-     * @param time_const time constant
+     * @param tc time constant
      * @param value initial output value
      */
-    Inertia(double time_const = 0.0, double value = 0.0);
+    Inertia(double tc = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
@@ -82,7 +82,7 @@ public:
      * @brief Sets output value
      * @param value output value
      */
-    void set_value(double value) { value_ = value; }
+    inline void set_value(double value) { value_ = value; }
 
     /**
      * @brief Sets time constant.
