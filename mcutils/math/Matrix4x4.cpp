@@ -33,17 +33,17 @@ namespace mc
 
 Matrix4x4 Matrix4x4::getTransposed() const
 {
-    Matrix4x4 result( *this );
-    result.transpose();
+    Matrix4x4 result(*this);
+    result.Transpose();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator+( const Matrix4x4& matrix ) const
+Matrix4x4 Matrix4x4::operator+(const Matrix4x4& matrix) const
 {
-    Matrix4x4 result( *this );
-    result.Add( matrix );
+    Matrix4x4 result(*this);
+    result.Add(matrix);
     return result;
 }
 
@@ -51,86 +51,86 @@ Matrix4x4 Matrix4x4::operator+( const Matrix4x4& matrix ) const
 
 Matrix4x4 Matrix4x4::operator-() const
 {
-    Matrix4x4 result( *this );
+    Matrix4x4 result(*this);
     result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator-( const Matrix4x4& matrix ) const
+Matrix4x4 Matrix4x4::operator-(const Matrix4x4& matrix) const
 {
-    Matrix4x4 result( *this );
-    result.Substract( matrix );
+    Matrix4x4 result(*this);
+    result.Substract(matrix);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator*( double value ) const
+Matrix4x4 Matrix4x4::operator*(double value) const
 {
-    Matrix4x4 result( *this );
-    result.MultiplyByValue( value );
+    Matrix4x4 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator*( const Matrix4x4& matrix ) const
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4& matrix) const
 {
     Matrix4x4 result;
-    multiplyByMatrix( matrix, &result );
+    MultiplyByMatrix(matrix, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Matrix4x4::operator*( const Vector4& vect ) const
+Vector4 Matrix4x4::operator*(const Vector4& vect) const
 {
     Vector4 result;
-    MultiplyByVector( vect, &result );
+    MultiplyByVector(vect, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator/( double value ) const
+Matrix4x4 Matrix4x4::operator/(double value) const
 {
-    Matrix4x4 result( *this );
-    result.DivideByValue( value );
+    Matrix4x4 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator+=( const Matrix4x4& matrix )
+Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& matrix)
 {
-    Add( matrix );
-    return (*this);
+    Add(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator-=( const Matrix4x4& matrix )
+Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& matrix)
 {
-    Substract( matrix );
-    return (*this);
+    Substract(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator*=( double value )
+Matrix4x4& Matrix4x4::operator*=(double value)
 {
-    MultiplyByValue( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator/=( double value )
+Matrix4x4& Matrix4x4::operator/=(double value)
 {
-    DivideByValue( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

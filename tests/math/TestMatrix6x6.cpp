@@ -93,7 +93,7 @@ TEST_F(TestMatrix6x6, CanTranspose)
     mc::Matrix6x6 m;
     m.SetElements(x);
 
-    m.transpose();
+    m.Transpose();
 
     EXPECT_DOUBLE_EQ( m(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m(0,1),  7.0 );

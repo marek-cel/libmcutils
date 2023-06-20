@@ -268,7 +268,7 @@ TEST_F(TestMatrixNxN, CanTranspose)
     mc::MatrixNxN<3> m1;
     m1.SetElements(items1);
 
-    m1.transpose();
+    m1.Transpose();
 
     EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m1(0,1), 4.0 );

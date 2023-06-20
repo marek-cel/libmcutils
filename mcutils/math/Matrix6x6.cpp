@@ -31,17 +31,17 @@ namespace mc
 
 Matrix6x6 Matrix6x6::getTransposed() const
 {
-    Matrix6x6 result( *this );
-    result.transpose();
+    Matrix6x6 result(*this);
+    result.Transpose();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator+( const Matrix6x6& matrix ) const
+Matrix6x6 Matrix6x6::operator+(const Matrix6x6& matrix) const
 {
-    Matrix6x6 result( *this );
-    result.Add( matrix );
+    Matrix6x6 result(*this);
+    result.Add(matrix);
     return result;
 }
 
@@ -49,86 +49,86 @@ Matrix6x6 Matrix6x6::operator+( const Matrix6x6& matrix ) const
 
 Matrix6x6 Matrix6x6::operator-() const
 {
-    Matrix6x6 result( *this );
+    Matrix6x6 result(*this);
     result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator-( const Matrix6x6& matrix ) const
+Matrix6x6 Matrix6x6::operator-(const Matrix6x6& matrix) const
 {
-    Matrix6x6 result( *this );
-    result.Substract( matrix );
+    Matrix6x6 result(*this);
+    result.Substract(matrix);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator*( double value ) const
+Matrix6x6 Matrix6x6::operator*(double value) const
 {
-    Matrix6x6 result( *this );
-    result.MultiplyByValue( value );
+    Matrix6x6 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator*( const Matrix6x6& matrix ) const
+Matrix6x6 Matrix6x6::operator*(const Matrix6x6& matrix) const
 {
     Matrix6x6 result;
-    multiplyByMatrix( matrix, &result );
+    MultiplyByMatrix(matrix, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Matrix6x6::operator*( const Vector6& vect ) const
+Vector6 Matrix6x6::operator*(const Vector6& vect) const
 {
     Vector6 result;
-    MultiplyByVector( vect, &result );
+    MultiplyByVector(vect, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6 Matrix6x6::operator/( double value ) const
+Matrix6x6 Matrix6x6::operator/(double value) const
 {
-    Matrix6x6 result( *this );
-    result.DivideByValue( value );
+    Matrix6x6 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator+=( const Matrix6x6& matrix )
+Matrix6x6& Matrix6x6::operator+=(const Matrix6x6& matrix)
 {
-    Add( matrix );
-    return (*this);
+    Add(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator-=( const Matrix6x6& matrix )
+Matrix6x6& Matrix6x6::operator-=(const Matrix6x6& matrix)
 {
-    Substract( matrix );
-    return (*this);
+    Substract(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator*=( double value )
+Matrix6x6& Matrix6x6::operator*=(double value)
 {
-    MultiplyByValue( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix6x6& Matrix6x6::operator/=( double value )
+Matrix6x6& Matrix6x6::operator/=(double value)
 {
-    DivideByValue( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

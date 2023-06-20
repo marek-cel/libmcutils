@@ -71,7 +71,7 @@ TEST_F(TestMatrix4x4, CanTranspose)
     mc::Matrix4x4 m;
     m.SetElements( elements );
 
-    m.transpose();
+    m.Transpose();
 
     EXPECT_DOUBLE_EQ( m(0,0),  1.0 );
     EXPECT_DOUBLE_EQ( m(0,1),  5.0 );

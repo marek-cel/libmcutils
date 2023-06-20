@@ -291,7 +291,7 @@ public:
     /** @brief Inequality operator. */
     bool operator!=(const MatrixMxN<ROWS, COLS>& matrix) const
     {
-        return !( (*this) == matrix );
+        return !( *this == matrix );
     }
 
 protected:

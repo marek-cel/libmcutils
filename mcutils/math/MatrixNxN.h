@@ -38,20 +38,20 @@ namespace mc
  * @tparam N number of rows and columns
  */
 template <unsigned int N>
-class MatrixNxN : public MatrixMxN<N, N>
+class MatrixNxN : public MatrixMxN<N,N>
 {
 public:
 
     /** @brief Transposes matrix. */
-    void transpose()
+    void Transpose()
     {
-        MatrixNxN<N> temp( *this );
+        MatrixNxN<N> temp(*this);
 
         for ( unsigned int r = 0; r < N; ++r )
         {
             for ( unsigned int c = 0; c < N; ++c )
             {
-                this->elements_[ c*N + r ] = temp.elements_[ r*N + c ];
+                this->elements_[c*N + r] = temp.elements_[r*N + c];
             }
         }
     }
@@ -59,85 +59,85 @@ public:
     /** @brief Returns transposed matrix. */
     MatrixNxN<N> getTransposed() const
     {
-        MatrixNxN<N> result( *this );
-        result.transpose();
+        MatrixNxN<N> result(*this);
+        result.Transpose();
         return result;
     }
 
     /** @brief Addition operator. */
-    MatrixNxN<N> operator+( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator+(const MatrixNxN<N>& matrix) const
     {
-        MatrixNxN<N> result( *this );
-        result.Add( matrix );
+        MatrixNxN<N> result(*this);
+        result.Add(matrix);
         return result;
     }
 
     /** @brief Negation operator. */
     MatrixNxN<N> operator-() const
     {
-        MatrixNxN<N> result( *this );
+        MatrixNxN<N> result(*this);
         result.Negate();
         return result;
     }
 
     /** @brief Subtraction operator. */
-    MatrixNxN<N> operator-( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator-(const MatrixNxN<N>& matrix) const
     {
-        MatrixNxN<N> result( *this );
-        result.Substract( matrix );
+        MatrixNxN<N> result(*this);
+        result.Substract(matrix);
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
-    MatrixNxN<N> operator*( double value ) const
+    MatrixNxN<N> operator*(double value) const
     {
-        MatrixNxN<N> result( *this );
-        result.MultiplyByValue( value );
+        MatrixNxN<N> result(*this);
+        result.MultiplyByValue(value);
         return result;
     }
 
     /** @brief Multiplication operator (by matrix). */
-    MatrixNxN<N> operator*( const MatrixNxN<N>& matrix ) const
+    MatrixNxN<N> operator*(const MatrixNxN<N>& matrix) const
     {
         MatrixNxN<N> result( *this );
-        multiplyByMatrix( matrix, &result );
+        MultiplyByMatrix(matrix, &result);
         return result;
     }
 
     /** @brief Division operator (by scalar). */
-    MatrixNxN<N> operator/( double value ) const
+    MatrixNxN<N> operator/(double value) const
     {
-        MatrixNxN<N> result( *this );
-        result.DivideByValue( value );
+        MatrixNxN<N> result(*this);
+        result.DivideByValue(value);
         return result;
     }
 
     /** @brief Unary addition operator. */
-    MatrixNxN<N>& operator+=( const MatrixNxN<N>& matrix )
+    MatrixNxN<N>& operator+=(const MatrixNxN<N>& matrix)
     {
-        this->Add( matrix );
-        return (*this);
+        this->Add(matrix);
+        return *this;
     }
 
     /** @brief Unary subtraction operator. */
-    MatrixNxN<N>& operator-=( const MatrixNxN<N>& matrix )
+    MatrixNxN<N>& operator-=(const MatrixNxN<N>& matrix)
     {
-        this->Substract( matrix );
-        return (*this);
+        this->Substract(matrix);
+        return *this;
     }
 
     /** @brief Unary multiplication operator (by scalar). */
-    MatrixNxN<N>& operator*=( double value )
+    MatrixNxN<N>& operator*=(double value)
     {
-        this->MultiplyByValue( value );
-        return (*this);
+        this->MultiplyByValue(value);
+        return *this;
     }
 
     /** @brief Unary division operator (by scalar). */
-    MatrixNxN<N>& operator/=( double value )
+    MatrixNxN<N>& operator/=(double value)
     {
-        this->DivideByValue( value );
-        return (*this);
+        this->DivideByValue(value);
+        return *this;
     }
 
 protected:
@@ -147,7 +147,7 @@ protected:
      * @param matrix
      * @param result
      */
-    void multiplyByMatrix( const MatrixNxN<N>& matrix, MatrixNxN<N>* result ) const
+    void MultiplyByMatrix(const MatrixNxN<N>& matrix, MatrixNxN<N>* result) const
     {
         for ( unsigned int r = 0; r < N; ++r )
         {
@@ -157,7 +157,7 @@ protected:
 
                 for ( unsigned int i = 0; i < N; ++i )
                 {
-                    (*result)(r,c) += ( this->elements_[ r*N + i ] * matrix(i,c) );
+                    (*result)(r,c) += ( this->elements_[r*N + i] * matrix(i,c) );
                 }
             }
         }

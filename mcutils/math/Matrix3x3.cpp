@@ -208,17 +208,17 @@ Quaternion Matrix3x3::getQuaternion() const
 
 Matrix3x3 Matrix3x3::getTransposed() const
 {
-    Matrix3x3 result( *this );
-    result.transpose();
+    Matrix3x3 result(*this);
+    result.Transpose();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator+( const Matrix3x3& mtrx ) const
+Matrix3x3 Matrix3x3::operator+(const Matrix3x3& mtrx) const
 {
-    Matrix3x3 result( *this );
-    result.Add( mtrx );
+    Matrix3x3 result(*this);
+    result.Add(mtrx);
     return result;
 }
 
@@ -226,86 +226,86 @@ Matrix3x3 Matrix3x3::operator+( const Matrix3x3& mtrx ) const
 
 Matrix3x3 Matrix3x3::operator-() const
 {
-    Matrix3x3 result( *this );
+    Matrix3x3 result(*this);
     result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator-( const Matrix3x3& mtrx ) const
+Matrix3x3 Matrix3x3::operator-(const Matrix3x3& mtrx) const
 {
-    Matrix3x3 result( *this );
-    result.Substract( mtrx );
+    Matrix3x3 result(*this);
+    result.Substract(mtrx);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator*( double value ) const
+Matrix3x3 Matrix3x3::operator*(double value) const
 {
-    Matrix3x3 result( *this );
-    result.MultiplyByValue( value );
+    Matrix3x3 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator*( const Matrix3x3& matrix ) const
+Matrix3x3 Matrix3x3::operator*(const Matrix3x3& matrix) const
 {
     Matrix3x3 result;
-    multiplyByMatrix( matrix, &result );
+    MultiplyByMatrix(matrix, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Matrix3x3::operator*( const Vector3& vect ) const
+Vector3 Matrix3x3::operator*(const Vector3& vect) const
 {
     Vector3 result;
-    MultiplyByVector( vect, &result );
+    MultiplyByVector(vect, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3 Matrix3x3::operator/( double value ) const
+Matrix3x3 Matrix3x3::operator/(double value) const
 {
-    Matrix3x3 result( *this );
-    result.DivideByValue( value );
+    Matrix3x3 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator+=( const Matrix3x3& matrix )
+Matrix3x3& Matrix3x3::operator+=(const Matrix3x3& matrix)
 {
-    Add( matrix );
-    return (*this);
+    Add(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator-=( const Matrix3x3& matrix )
+Matrix3x3& Matrix3x3::operator-=(const Matrix3x3& matrix)
 {
-    Substract( matrix );
-    return (*this);
+    Substract(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator*=( double value )
+Matrix3x3& Matrix3x3::operator*=(double value)
 {
-    MultiplyByValue( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix3x3& Matrix3x3::operator/=( double value )
+Matrix3x3& Matrix3x3::operator/=(double value)
 {
-    DivideByValue( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

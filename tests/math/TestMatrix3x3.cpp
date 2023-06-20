@@ -537,7 +537,7 @@ TEST_F(TestMatrix3x3, CanTranspose)
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    m1.transpose();
+    m1.Transpose();
 
     EXPECT_DOUBLE_EQ( m1.xx(), 1.0 );
     EXPECT_DOUBLE_EQ( m1.xy(), 4.0 );
