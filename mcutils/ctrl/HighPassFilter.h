@@ -44,7 +44,7 @@ public:
     /**
      * @brief Constructor.
      * @param omega [rad/s] cutoff angular frequency
-     * @param y initial output value
+     * @param value initial output value
      */
     HighPassFilter(double omega = 1.0, double value = 0.0 );
 
