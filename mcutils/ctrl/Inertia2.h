@@ -63,7 +63,7 @@ public:
 
     /**
      * @brief Sets output value
-     * @param y output value
+     * @param value output value
      */
     void set_value( double y );
 
