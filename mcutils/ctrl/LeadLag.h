@@ -73,6 +73,10 @@ public:
     inline double c3() const { return c3_; }
     inline double c4() const { return c4_; }
 
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
     inline void set_value(double value) { value_ = value; }
 
     inline void set_c1(double c1) { c1_ = c1; }
