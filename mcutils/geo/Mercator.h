@@ -50,58 +50,58 @@ public:
      * @param a [m] ellipsoid semi major axis
      * @param e [-] ellipsoid first eccentricity
      */
-    Mercator( double a = 0.0, double e = 0.0 );
+    Mercator(double a = 0.0, double e = 0.0);
 
     /**
-     * @brief Computes geodetic latitude.
+     * @brief Calculates geodetic latitude.
      * @param y [m] Mercator y-coordinate
      * @param max_error maximum error (solve condition)
      * @param max_iterations maximum number of iterations
      * @return geodetic latitude [rad]
      */
-    double lat( double y, double max_error = 1.0e-9,
-                unsigned int max_iterations = 10 );
+    double CalculateLat(double y, double max_error = 1.0e-9,
+                        unsigned int max_iterations = 10);
 
     /**
-     * @brief Computes geodetic longitude.
+     * @brief Calculates geodetic longitude.
      * @param x [m] Mercator x-coordinate
      * @return geodetic longitude [rad]
      */
-    double lon( double x );
+    double CalculateLon(double x);
 
     /**
-     * @brief Computes Mercator x-coordinate.
+     * @brief Calculates Mercator x-coordinate.
      * @param lon [rad] geodetic longitude
      * @return Mercator x-coordinate [m]
      */
-    double x( double lon );
+    double CalculateX(double lon);
 
     /**
-     * @brief Computes Mercator y-coordinate.
+     * @brief Calculates Mercator y-coordinate.
      * @param lat [rad] geodetic latitude
      * @return Mercator y-coordinate [m]
      */
-    double y( double lat );
+    double CalculateY(double lat);
 
     /**
-     * @brief Computes Isometric Latitude kernel.
+     * @brief Calculates Isometric Latitude kernel.
      * @param lat [rad] geodetic latitude
      * @return Isometric Latitude kernel
      */
-    double t( double lat );
+    double CalculateT(double lat);
 
     /**
-     * @brief Computes geodetic latitude from the isometric latitude.
+     * @brief Calculates geodetic latitude from the isometric latitude.
      * @param t isometric latitude
      * @param max_error maximum error (solve condition)
      * @param max_iterations maximum number of iterations
      * @return geodetic latitude [rad]
      */
-    double t_inv( double t, double max_error = 1.0e-9,
-                  unsigned int max_iterations = 10 );
+    double CalculateT_inv(double t, double max_error = 1.0e-9,
+                          unsigned int max_iterations = 10);
 
-    double getMaxX() const { return max_x_; }
-    double getMaxY() const { return max_y_; }
+    double max_x() const { return max_x_; }
+    double max_y() const { return max_y_; }
 
 private:
 
