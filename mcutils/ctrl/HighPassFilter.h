@@ -68,22 +68,22 @@ public:
      * @brief Sets output value
      * @param y output value
      */
-    inline void set_value( double value ) { value_ = value; }
+    inline void set_value(double value) { value_ = value; }
 
     /**
      * @brief Sets cutoff angular frequency.
      * @param omega [rad/s] cutoff angular frequency
      */
-    void set_omega( double omega );
+    void set_omega(double omega);
 
 private:
 
-    double omega_;          ///< [rad/s] cutoff angular frequency
-    double tc_;             ///< time constant
+    double omega_ = 1.0;        ///< [rad/s] cutoff angular frequency
+    double time_const_ = 1.0;   ///< time constant
 
-    double u_prev_ = 0.0;   ///< previous input value
+    double u_prev_ = 0.0;       ///< previous input value
 
-    double value_ = 0.0;    ///< current value
+    double value_ = 0.0;        ///< current value
 };
 
 } // namespace mc
