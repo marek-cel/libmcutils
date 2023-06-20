@@ -53,44 +53,43 @@ public:
      * @param c2 coefficient of the transfer function
      * @param c3 coefficient of the transfer function
      * @param c4 coefficient of the transfer function
-     * @param y initial output value
+     * @param value initial output value
      */
-    LeadLag( double c1 = 0.0, double c2 = 1.0,
-             double c3 = 0.0, double c4 = 1.0,
-             double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-
-    inline double getC1() const { return c1_; }
-    inline double getC2() const { return c2_; }
-    inline double getC3() const { return c3_; }
-    inline double getC4() const { return c4_; }
-
-    void setValue( double y );
-
-    void setC1( double c1 );
-    void setC2( double c2 );
-    void setC3( double c3 );
-    void setC4( double c4 );
+    LeadLag(double c1 = 0.0, double c2 = 1.0,
+            double c3 = 0.0, double c4 = 1.0,
+            double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+
+    inline double c1() const { return c1_; }
+    inline double c2() const { return c2_; }
+    inline double c3() const { return c3_; }
+    inline double c4() const { return c4_; }
+
+    inline void set_value(double value) { value_ = value; }
+
+    inline void set_c1(double c1) { c1_ = c1; }
+    inline void set_c2(double c2) { c2_ = c2; }
+    inline void set_c3(double c3) { c3_ = c3; }
+    inline void set_c4(double c4) { c4_ = c4; }
 
 private:
 
-    double c1_;             ///< c1 coefficient of the transfer function
-    double c2_;             ///< c2 coefficient of the transfer function
-    double c3_;             ///< c3 coefficient of the transfer function
-    double c4_;             ///< c4 coefficient of the transfer function
+    double c1_ = 0.0;       ///< c1 coefficient of the transfer function
+    double c2_ = 0.0;       ///< c2 coefficient of the transfer function
+    double c3_ = 0.0;       ///< c3 coefficient of the transfer function
+    double c4_ = 0.0;       ///< c4 coefficient of the transfer function
 
-    double u_prev_;         ///< previous input value
-    double y_prev_;         ///< previous output value
+    double u_prev_ = 0.0;   ///< previous input value
 
-    double y_;              ///< current value
+    double value_ = 0.0;    ///< current value
 };
 
 } // namespace mc

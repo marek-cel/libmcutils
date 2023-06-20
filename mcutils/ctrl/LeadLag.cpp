@@ -32,55 +32,17 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LeadLag::LeadLag( double c1, double c2, double c3, double c4, double y )
-    : c1_ ( c1 )
-    , c2_ ( c2 )
-    , c3_ ( c3 )
-    , c4_ ( c4 )
-    , u_prev_ ( 0.0 )
-    , y_prev_ ( y )
-    , y_ ( y )
+LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
+    : c1_( c1 )
+    , c2_( c2 )
+    , c3_( c3 )
+    , c4_( c4 )
+    , value_( value )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setValue( double y )
-{
-    y_ = y;
-    y_prev_ = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC1( double c1 )
-{
-    c1_ = c1;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC2( double c2 )
-{
-    c2_ = c2;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC3( double c3 )
-{
-    c3_ = c3;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC4( double c4 )
-{
-    c4_ = c4;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::update( double dt, double u )
+void LeadLag::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
@@ -91,10 +53,10 @@ void LeadLag::update( double dt, double u )
         double cb = ( dt  * c2_ - 2.0 * c1_ ) * den_inv;
         double cc = ( 2.0 * c3_ - dt  * c4_ ) * den_inv;
 
-        y_ = u * ca + u_prev_ * cb + y_prev_ * cc;
+        double y_prev = value_;
+        value_ = u * ca + u_prev_ * cb + y_prev * cc;
 
         u_prev_ = u;
-        y_prev_ = y_;
     }
 }
 
