@@ -46,7 +46,7 @@ TEST_F(TestDegMinSec, CanInstantiate)
 
 TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 {
-    mc::DegMinSec dms( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
+    mc::DegMinSec dms(mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ));
 
     EXPECT_EQ( dms.deg(), 1 );
     EXPECT_EQ( dms.min(), 2 );
@@ -57,20 +57,20 @@ TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 
 TEST_F(TestDegMinSec, CanValidate)
 {
-    mc::DegMinSec dms1( M_PI_4 );
-    EXPECT_TRUE( dms1.isValid() );
+    mc::DegMinSec dms1(M_PI_4);
+    EXPECT_TRUE( dms1.IsValid() );
 
     mc::DegMinSec dms2( std::numeric_limits<double>::quiet_NaN() );
-    EXPECT_FALSE( dms2.isValid() );
+    EXPECT_FALSE( dms2.IsValid() );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestDegMinSec, CanGetAngle)
 {
-    mc::DegMinSec dms( M_PI_4 );
+    mc::DegMinSec dms(M_PI_4);
 
-    EXPECT_DOUBLE_EQ( dms.getAngle(), M_PI_4 );
+    EXPECT_DOUBLE_EQ( dms.GetAngle(), M_PI_4 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,8 +79,8 @@ TEST_F(TestDegMinSec, CanSetAngle)
 {
     mc::DegMinSec dms;
 
-    dms.setAngle( M_PI_4 );
-    EXPECT_DOUBLE_EQ( dms.getAngle(), M_PI_4 );
+    dms.SetAngle(M_PI_4);
+    EXPECT_DOUBLE_EQ( dms.GetAngle(), M_PI_4 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ TEST_F(TestDegMinSec, CanConvertToString)
 {
     mc::DegMinSec dms( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
 
-    EXPECT_STREQ( dms.toString().c_str(), "1 deg 2 min 3.00 sec" );
+    EXPECT_STREQ( dms.ToString().c_str(), "1 deg 2 min 3.00 sec" );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ TEST_F(TestDegMinSec, CanCompare)
 {
     mc::DegMinSec dms;
 
-    mc::DegMinSec dms1( mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ) );
+    mc::DegMinSec dms1(mc::Units::deg2rad( 1.0 + 2.0 / 60.0 + 3.0 / 3600.0 ));
 
     EXPECT_FALSE( dms == dms1 );
     EXPECT_TRUE(  dms != dms1 );

@@ -47,13 +47,13 @@ public:
      * @brief Constructor.
      * @param angle [rad] angle
      */
-    DegMinSec( double angle );
+    DegMinSec(double angle);
 
     /** @brief Destructor. */
     ~DegMinSec() = default;
 
     /** @return true if all items are valid */
-    bool isValid() const;
+    bool IsValid() const;
 
     inline int    deg() const { return deg_; }
     inline int    min() const { return min_; }
@@ -63,22 +63,22 @@ public:
      * @brief Returns angle expressed in radians.
      * @return angle expressed in radians
      */
-    inline double getAngle() const { return angle_; }
+    inline double GetAngle() const { return angle_; }
 
     /**
      * @brief Sets angle value.
      * @param angle [rad] angle
      */
-    void setAngle( double angle );
+    void SetAngle(double angle);
 
     /** @brief Returns string represtation of the angles. */
-    std::string toString() const;
+    std::string ToString() const;
 
     /** @brief Equality operator. */
-    bool operator==( const DegMinSec& dms ) const;
+    bool operator==(const DegMinSec& dms) const;
 
     /** @brief Inequality operator. */
-    bool operator!=( const DegMinSec& dms ) const;
+    bool operator!=(const DegMinSec& dms) const;
 
 private:
 
