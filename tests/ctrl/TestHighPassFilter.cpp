@@ -44,51 +44,17 @@ TEST_F(TestHighPassFilter, CanDestruct)
 TEST_F(TestHighPassFilter, CanInstantiate)
 {
     mc::HighPassFilter hpf;
-    EXPECT_DOUBLE_EQ( hpf.getOmega(), 1.0 );
-    EXPECT_DOUBLE_EQ( hpf.getValue(), 0.0 );
+    EXPECT_DOUBLE_EQ( hpf.omega(), 1.0 );
+    EXPECT_DOUBLE_EQ( hpf.value(), 0.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestHighPassFilter, CanInstantiateAndSetData)
 {
-    mc::HighPassFilter hpf( 2.0, 3.0 );
-    EXPECT_DOUBLE_EQ( hpf.getOmega(), 2.0 );
-    EXPECT_DOUBLE_EQ( hpf.getValue(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestHighPassFilter, CanGetOmega)
-{
-    mc::HighPassFilter hpf( 2.0, 3.0 );
-    EXPECT_DOUBLE_EQ( hpf.getOmega(), 2.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestHighPassFilter, CanGetValue)
-{
-    mc::HighPassFilter hpf( 2.0, 3.0 );
-    EXPECT_DOUBLE_EQ( hpf.getValue(), 3.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestHighPassFilter, CanSetOmega)
-{
-    mc::HighPassFilter hpf;
-    hpf.setOmega( 2.0 );
-    EXPECT_DOUBLE_EQ( hpf.getOmega(), 2.0 );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-TEST_F(TestHighPassFilter, CanSetValue)
-{
-    mc::HighPassFilter hpf;
-    hpf.setValue( 3.0 );
-    EXPECT_DOUBLE_EQ( hpf.getValue(), 3.0 );
+    mc::HighPassFilter hpf(2.0, 3.0);
+    EXPECT_DOUBLE_EQ( hpf.omega(), 2.0 );
+    EXPECT_DOUBLE_EQ( hpf.value(), 3.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +62,8 @@ TEST_F(TestHighPassFilter, CanSetValue)
 TEST_F(TestHighPassFilter, CanSetCutoffFreq)
 {
     mc::HighPassFilter hpf;
-    hpf.setCutoffFreq( 1.0 );
-    EXPECT_DOUBLE_EQ( hpf.getOmega(), 2.0 * M_PI );
+    hpf.SetCutoffFreq( 1.0 );
+    EXPECT_DOUBLE_EQ( hpf.omega(), 2.0 * M_PI );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -121,8 +87,8 @@ TEST_F(TestHighPassFilter, CanUpdateStep)
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 
-        hpf.update( TIME_STEP, u );
-        y = hpf.getValue();
+        hpf.Update( TIME_STEP, u );
+        y = hpf.value();
 
         double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
@@ -152,12 +118,46 @@ TEST_F(TestHighPassFilter, CanUpdateSine)
     {
         double u = sin( t );
 
-        hpf.update( TIME_STEP, u );
-        y = hpf.getValue();
+        hpf.Update( TIME_STEP, u );
+        y = hpf.value();
 
         double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at( i ) );
         EXPECT_NEAR( y, vals.at( i ), tolerance ) << "Error at index " << i;
 
         t += TIME_STEP;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestHighPassFilter, CanGetOmega)
+{
+    mc::HighPassFilter hpf(2.0, 3.0);
+    EXPECT_DOUBLE_EQ( hpf.omega(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestHighPassFilter, CanGetValue)
+{
+    mc::HighPassFilter hpf(2.0, 3.0);
+    EXPECT_DOUBLE_EQ( hpf.value(), 3.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestHighPassFilter, CanSetOmega)
+{
+    mc::HighPassFilter hpf;
+    hpf.set_omega(2.0);
+    EXPECT_DOUBLE_EQ( hpf.omega(), 2.0 );
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestHighPassFilter, CanSetValue)
+{
+    mc::HighPassFilter hpf;
+    hpf.set_value(3.0);
+    EXPECT_DOUBLE_EQ( hpf.value(), 3.0 );
 }
