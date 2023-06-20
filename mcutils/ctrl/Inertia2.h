@@ -45,7 +45,7 @@ public:
      * @brief Constructor.
      * @param tc1 time constant 1
      * @param tc2 time constant 2
-     * @param y initial output value
+     * @param value initial output value
      */
     Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
 
@@ -65,19 +65,19 @@ public:
      * @brief Sets output value
      * @param value output value
      */
-    void set_value( double y );
+    void set_value(double y);
 
     /**
      * @brief Sets time constant tc1.
      * @param tc1 time constant tc1
      */
-    void set_time_const_1( double tc1 );
+    void set_time_const_1(double tc1);
 
     /**
      * @brief Sets time constant tc2.
      * @param tc2 time constant tc2
      */
-    void set_time_const_2( double tc2 );
+    void set_time_const_2(double tc2);
 
 private:
 
