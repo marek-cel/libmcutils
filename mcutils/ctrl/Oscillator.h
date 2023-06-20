@@ -55,54 +55,54 @@ public:
      * @brief Constructor.
      * @param omega [rad/s] undamped angular frequency
      * @param zeta [-] <0.0;1.0> dampipng ratio
-     * @param y initial output value
+     * @param value initial output value
      */
-    Oscillator( double omega = 1.0, double zeta = 1.0, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-    inline double getOmega() const { return omega_; }
-    inline double getDamping() const { return zeta_; }
-
-    /**
-     * @brief Sets undamped angular frequency.
-     * @param omega [rad/s] undamped angular frequency
-     */
-    void setOmega( double omega );
-
-    /**
-     * @brief Sets damping ratio.
-     * @param zeta [-] <0.0;1.0> damping ratio
-     */
-    void setDamping( double zeta );
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
+    Oscillator(double omega = 1.0, double zeta = 1.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double omega() const { return omega_; }
+    inline double zeta()  const { return zeta_;  }
+
+    /**
+     * @brief Sets undamped angular frequency.
+     * @param omega [rad/s] undamped angular frequency
+     */
+    void set_omega(double omega);
+
+    /**
+     * @brief Sets damping ratio.
+     * @param zeta [-] <0.0;1.0> damping ratio
+     */
+    void set_zeta(double zeta);
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    void set_value(double value);
 
 private:
 
-    double omega_;          ///< [rad/s] undamped angular frequency
-    double zeta_;           ///< [-] <0.0;1.0> dampipng coefficient
+    double omega_ = 0.0;    ///< [rad/s] undamped angular frequency
+    double zeta_  = 0.0;    ///< [-] <0.0;1.0> dampipng coefficient
 
-    double omega2_;         ///< [rad^2/s^2] undamped angular frequency squared
-    double zetomg2_;        ///< [rad/s] zeta*omega*2
+    double omega2_  = 0.0;  ///< [rad^2/s^2] undamped angular frequency squared
+    double zetomg2_ = 0.0;  ///< [rad/s] zeta*omega*2
 
-    double u_prev_1_;       ///< input previous value
-    double u_prev_2_;       ///< input value 2 steps before
+    double u_prev_1_ = 0.0; ///< input previous value
+    double u_prev_2_ = 0.0; ///< input value 2 steps before
 
-    double y_prev_1_;       ///< previous value
-    double y_prev_2_;       ///< value 2 steps before
+    double y_prev_1_ = 0.0; ///< previous value
+    double y_prev_2_ = 0.0; ///< value 2 steps before
 
-    double y_;              ///< current value
+    double value_ = 0.0;    ///< current value
 };
 
 } // namespace mc

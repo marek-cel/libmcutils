@@ -32,50 +32,22 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Oscillator::Oscillator( double omega, double zeta, double y )
+Oscillator::Oscillator( double omega, double zeta, double value)
     : omega_ ( omega )
     , zeta_  ( zeta  )
 
-    , omega2_ ( omega_ * omega_ )
+    , omega2_  ( omega_ * omega_ )
     , zetomg2_ ( 2.0 * zeta_ * omega_ )
 
-    , u_prev_1_ ( 0.0 )
-    , u_prev_2_ ( 0.0 )
-    , y_prev_1_ ( y )
-    , y_prev_2_ ( y )
+    , y_prev_1_(value)
+    , y_prev_2_(value)
 
-    , y_ ( y )
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Oscillator::setOmega( double omega )
-{
-    omega_ = std::max( 0.0, omega );
-    omega2_ = omega_ * omega_;
-    zetomg2_ = 2.0 * zeta_ * omega_;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::setDamping( double zeta )
-{
-    zeta_ = std::max( 0.0, std::min( 1.0, zeta ) );
-    zetomg2_ = 2.0 * zeta_ * omega_;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::setValue( double y )
-{
-    y_ = y;
-    y_prev_1_ = y;
-    y_prev_2_ = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::update( double dt, double u )
+void Oscillator::Update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
@@ -89,15 +61,43 @@ void Oscillator::update( double dt, double u )
         double cc = cb - 8.0 * den_inv;
         double cd = ca + ( 4.0 - 2.0 * zetomg2_ * dt ) * den_inv;
 
-        y_ = u * ca + u_prev_1_ * cb + u_prev_2_ * ca
-                    - y_prev_1_ * cc - y_prev_2_ * cd;
+        value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * ca
+                        - y_prev_1_ * cc - y_prev_2_ * cd;
 
         u_prev_2_ = u_prev_1_;
         u_prev_1_ = u;
 
         y_prev_2_ = y_prev_1_;
-        y_prev_1_ = y_;
+        y_prev_1_ = value_;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Oscillator::set_omega(double omega)
+{
+    omega_ = std::max(0.0, omega);
+
+    omega2_ = omega_ * omega_;
+    zetomg2_ = 2.0 * zeta_ * omega_;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Oscillator::set_zeta(double zeta)
+{
+    zeta_ = std::max(0.0, std::min(1.0, zeta));
+
+    zetomg2_ = 2.0 * zeta_ * omega_;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Oscillator::set_value(double value)
+{
+    value_ = value;
+    y_prev_1_ = value;
+    y_prev_2_ = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
