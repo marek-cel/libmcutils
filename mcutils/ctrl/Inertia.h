@@ -59,41 +59,41 @@ public:
      * @param tc [s] time constant
      * @return
      */
-    static double calculate( double u, double y, double dt, double tc );
+    static double Calculate(double u, double y, double dt, double tc);
 
     /**
      * @brief Constructor.
-     * @param tc time constant
-     * @param y initial output value
+     * @param time_const time constant
+     * @param value initial output value
      */
-    Inertia( double tc = 0.0, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-    inline double getTimeConst() const { return tc_; }
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant.
-     * @param tc time constant
-     */
-    void setTimeConst( double tc );
+    Inertia(double time_const = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double time_const() const { return time_const_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    void set_value(double value) { value_ = value; }
+
+    /**
+     * @brief Sets time constant.
+     * @param tc time constant
+     */
+    void set_time_const(double time_const);
 
 private:
 
-    double tc_;             ///< time constant
-    double y_;              ///< current value
+    double time_const_ = 0.0;   ///< time constant
+    double value_ = 0.0;        ///< current value
 };
 
 } // namespace mc

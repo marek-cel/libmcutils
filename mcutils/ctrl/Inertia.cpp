@@ -31,11 +31,11 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Inertia::calculate( double u, double y, double dt, double tc )
+double Inertia::Calculate(double u, double y, double dt, double tc)
 {
     if ( tc > 0.0 )
     {
-        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+        return y + ( 1.0 - exp(-dt / tc) ) * ( u - y );
     }
 
     return u;
@@ -43,35 +43,28 @@ double Inertia::calculate( double u, double y, double dt, double tc )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Inertia::Inertia( double tc, double y )
-    : tc_ ( tc )
-    , y_ ( y )
+Inertia::Inertia(double time_const, double value)
+    : time_const_( time_const )
+    , value_( value )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia::setValue( double y )
+void Inertia::Update(double dt, double u)
 {
-    y_ = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia::setTimeConst( double tc )
-{
-    if ( tc > 0.0 )
+    if ( dt > 0.0 )
     {
-        tc_ = tc;
+        value_ = Calculate(u, value_, dt, time_const_);
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia::update( double dt, double u )
+void Inertia::set_time_const(double time_const)
 {
-    if ( dt > 0.0 )
+    if ( time_const > 0.0 )
     {
-        y_ = calculate( u, y_, dt, tc_ );
+        time_const_ = time_const;
     }
 }
 

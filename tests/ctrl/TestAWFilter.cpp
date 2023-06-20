@@ -128,7 +128,7 @@ TEST_F(TestAWFilter, CanUpdate)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_pid.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_pid_antiwindup_filter.bin", &vals );
+    XcosBinFileReader::readData("../tests/ctrl/data/test_pid_antiwindup_filter.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -141,10 +141,10 @@ TEST_F(TestAWFilter, CanUpdate)
     {
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
-        pid.Update( DT, e );
-        y = mc::Inertia::calculate( pid.value(), y, DT, TC );
+        pid.Update(DT, e);
+        y = mc::Inertia::Calculate(pid.value(), y, DT, TC);
 
-        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
+        EXPECT_NEAR( y, vals.at(i), 1.0e-1 );
 
         t += DT;
     }

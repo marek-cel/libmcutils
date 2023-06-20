@@ -72,8 +72,8 @@ void Inertia2::update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
-        y1_ = Inertia::calculate(   u, y1_, dt, tc1_ );
-        y_  = Inertia::calculate( y1_,  y_, dt, tc2_ );
+        y1_ = Inertia::Calculate(   u, y1_, dt, tc1_ );
+        y_  = Inertia::Calculate( y1_,  y_, dt, tc2_ );
     }
 }
 

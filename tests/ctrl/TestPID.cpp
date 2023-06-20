@@ -242,7 +242,7 @@ TEST_F(TestPID, CanUpdate)
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
         pid.Update( DT, e );
-        y = mc::Inertia::calculate( pid.value(), y, DT, TC );
+        y = mc::Inertia::Calculate( pid.value(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
 
