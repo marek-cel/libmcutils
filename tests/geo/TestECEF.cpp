@@ -716,7 +716,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     angles_ecef.psi() =  0.0;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
-    angles_ned = ned2bas.getAngles();
+    angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
     EXPECT_NEAR( angles_ned.phi(), 0.0, 1.0e-6 );
@@ -734,7 +734,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     angles_ecef.psi() =  M_PI_2;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
-    angles_ned = ned2bas.getAngles();
+    angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
     EXPECT_NEAR( angles_ned.phi(), 0.0, 1.0e-6 );
@@ -752,7 +752,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     angles_ecef.psi() = -M_PI_2;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
-    angles_ned = ned2bas.getAngles();
+    angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
     EXPECT_NEAR( angles_ned.phi(), 0.0, 1.0e-6 );
@@ -770,7 +770,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     angles_ecef.psi() =  M_PI;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
-    angles_ned = ned2bas.getAngles();
+    angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
     EXPECT_NEAR( angles_ned.phi(), 0.0, 1.0e-6 );
@@ -794,8 +794,8 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo( pos_geo );
 
-    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion::zeroRotationQuaternion());
-    angles_ecef = ecef2bas.getAngles();
+    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
+    angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
     EXPECT_NEAR( angles_ecef.phi(),  0.0    , 1.0e-6 );
@@ -808,8 +808,8 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo( pos_geo );
 
-    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion::zeroRotationQuaternion());
-    angles_ecef = ecef2bas.getAngles();
+    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
+    angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
     EXPECT_NEAR( angles_ecef.phi(),  M_PI_2 , 1.0e-6 );
@@ -822,8 +822,8 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo( pos_geo );
 
-    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion::zeroRotationQuaternion());
-    angles_ecef = ecef2bas.getAngles();
+    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
+    angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
     EXPECT_NEAR( angles_ecef.phi(), -M_PI_2 , 1.0e-6 );
@@ -836,8 +836,8 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo( pos_geo );
 
-    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion::zeroRotationQuaternion());
-    angles_ecef = ecef2bas.getAngles();
+    ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
+    angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
     EXPECT_NEAR( angles_ecef.phi(),  M_PI   , 1.0e-6 );

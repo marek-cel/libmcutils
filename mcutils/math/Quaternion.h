@@ -60,44 +60,38 @@ class MCUTILSAPI Quaternion
 {
 public:
 
-    /** @brief Creates zero rotation quaternion. */
-    static Quaternion zeroRotationQuaternion();
+    /** @brief Constructor. */
+    Quaternion(double e0 = 1.0, double ex = 0.0, double ey = 0.0, double ez = 0.0);
 
     /** @brief Constructor. */
-    Quaternion() = default;
+    Quaternion(const Angles& angl);
 
     /** @brief Constructor. */
-    Quaternion( double e0, double ex, double ey, double ez );
-
-    /** @brief Constructor. */
-    Quaternion( const Angles& angl );
-
-    /** @brief Constructor. */
-    Quaternion( double angl, const Vector3& vect );
+    Quaternion(double angl, const Vector3& vect);
 
     /** @return TRUE if all items are valid */
-    bool isValid() const;
+    bool IsValid() const;
 
     /** @brief Conjugates quaternion. */
-    void conjugate();
+    void Conjugate();
 
     /** @brief Inverts quaternion. */
-    void invert();
+    void Invert();
 
     /** @brief Normalizes quaternion. */
-    void normalize();
+    void Normalize();
 
     /** @return vector length squared */
-    double getLength2() const;
+    double GetLength2() const;
 
     /** @return vector length */
-    double getLength() const;
+    double GetLength() const;
 
     /** @brief Returns Bryant angles. */
-    Angles getAngles() const;
+    Angles GetAngles() const;
 
     /** @brief Returns conjugated quaternion. */
-    Quaternion getConjugated() const;
+    Quaternion GetConjugated() const;
 
     /**
      * @brief Returns quaternion derivative due to given angular velocity.
@@ -105,13 +99,19 @@ public:
      * @param lambda free parameter (usually set to a small multiple of the integration time step)
      * @return quaternion derivative
      */
-    Quaternion getDerivative( const Vector3& omega, double lambda = 0.0 ) const;
+    Quaternion GetDerivative(const Vector3& omega, double lambda = 0.0) const;
 
     /** @brief Returns inverted quaternion. */
-    Quaternion getInverted() const;
+    Quaternion GetInverted() const;
 
     /** @brief Returns normalized quaternion. */
-    Quaternion getNormalized() const;
+    Quaternion GetNormalized() const;
+
+    /** @brief Sets quaternion values. */
+    void Set(double e0, double ex, double ey, double ez);
+
+    /** @brief Returns string representation of the quaternion. */
+    std::string ToString() const;
 
     inline double  e0() const { return e0_; }
     inline double  ex() const { return ex_; }
@@ -122,48 +122,42 @@ public:
     inline double& ey()       { return ey_; }
     inline double& ez()       { return ez_; }
 
-    /** @brief Sets quaternion values. */
-    void set( double e0, double ex, double ey, double ez );
-
-    /** @brief Returns string representation of the quaternion. */
-    std::string toString() const;
-
     /** @brief Addition operator. */
-    Quaternion operator+( const Quaternion& quat ) const;
+    Quaternion operator+(const Quaternion& quat) const;
 
     /** @brief Subtraction operator. */
-    Quaternion operator-( const Quaternion& quat ) const;
+    Quaternion operator-(const Quaternion& quat) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Quaternion operator*( double val ) const;
+    Quaternion operator*(double val) const;
 
     /** @brief Multiplication operator (by quaternion). */
-    Quaternion operator*( const Quaternion& quat ) const;
+    Quaternion operator*(const Quaternion& quat) const;
 
     /** @brief Division operator (by scalar). */
-    Quaternion operator/( double val ) const;
+    Quaternion operator/(double val) const;
 
     /** @brief Unary addition operator. */
-    Quaternion& operator+=( const Quaternion& quat );
+    Quaternion& operator+=(const Quaternion& quat);
 
     /** @brief Unary subtraction operator. */
-    Quaternion& operator-=( const Quaternion& quat );
+    Quaternion& operator-=(const Quaternion& quat);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Quaternion& operator*=( double val );
+    Quaternion& operator*=(double val);
 
     /** @brief Unary division operator (by scalar). */
-    Quaternion& operator/=( double val );
+    Quaternion& operator/=(double val);
 
     /** @brief Equality operator. */
-    bool operator==( const Quaternion& quat ) const;
+    bool operator==(const Quaternion& quat) const;
 
     /** @brief Inequality operator. */
-    bool operator!=( const Quaternion& quat ) const;
+    bool operator!=(const Quaternion& quat) const;
 
 private:
 
-    double e0_ = 0.0;   ///< quaternion e0 (w) component
+    double e0_ = 1.0;   ///< quaternion e0 (w) component
     double ex_ = 0.0;   ///< quaternion ex (x) component
     double ey_ = 0.0;   ///< quaternion ey (y) component
     double ez_ = 0.0;   ///< quaternion ez (z) component
@@ -172,7 +166,7 @@ private:
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Quaternion operator*( double val, const Quaternion& quat )
+inline Quaternion operator*(double val, const Quaternion& quat)
 {
     return quat * val;
 }

@@ -104,7 +104,7 @@ TEST_F(TestAngles, CanNormalize)
 {
     mc::Angles a(2.2 * M_PI, 2.3 * M_PI, 2.4 * M_PI);
     mc::Quaternion q(a);
-    mc::Angles a1 = q.getAngles();
+    mc::Angles a1 = q.GetAngles();
 
     a.Normalize();
 

@@ -37,34 +37,27 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::zeroRotationQuaternion()
+Quaternion::Quaternion(double e0, double ex, double ey, double ez)
 {
-    return Quaternion( 1.0, 0.0, 0.0, 0.0 );
+    Set(e0, ex, ey, ez);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion::Quaternion( double e0, double ex, double ey, double ez )
-{
-    set( e0, ex, ey, ez );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Quaternion::Quaternion( const Angles& angl )
+Quaternion::Quaternion(const Angles& angl)
 {
     double phi2 = angl.phi() / 2.0;
     double tht2 = angl.tht() / 2.0;
     double psi2 = angl.psi() / 2.0;
 
-    double sinPhi2 = sin( phi2 );
-    double cosPhi2 = cos( phi2 );
+    double sinPhi2 = sin(phi2);
+    double cosPhi2 = cos(phi2);
 
-    double sinTht2 = sin( tht2 );
-    double cosTht2 = cos( tht2 );
+    double sinTht2 = sin(tht2);
+    double cosTht2 = cos(tht2);
 
-    double sinPsi2 = sin( psi2 );
-    double cosPsi2 = cos( psi2 );
+    double sinPsi2 = sin(psi2);
+    double cosPsi2 = cos(psi2);
 
     double cosPhi2CosPsi2 = cosPhi2 * cosPsi2;
     double cosPhi2SinPsi2 = cosPhi2 * sinPsi2;
@@ -76,17 +69,17 @@ Quaternion::Quaternion( const Angles& angl )
     ey_ = ( cosPhi2CosPsi2 * sinTht2 ) + ( sinPhi2SinPsi2 * cosTht2 );
     ez_ = ( cosPhi2SinPsi2 * cosTht2 ) - ( sinPhi2CosPsi2 * sinTht2 );
 
-    normalize();
+    Normalize();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion::Quaternion( double angl, const Vector3& vect )
+Quaternion::Quaternion(double angl, const Vector3& vect)
 {
     double len_inv = 1.0 / vect.getLength();
 
-    double cosAngl2 = cos( 0.5 * angl );
-    double sinAngl2 = sin( 0.5 * angl );
+    double cosAngl2 = cos(0.5 * angl);
+    double sinAngl2 = sin(0.5 * angl);
 
     e0_ = cosAngl2;
     ex_ = sinAngl2 * vect.x() * len_inv;
@@ -96,17 +89,17 @@ Quaternion::Quaternion( double angl, const Vector3& vect )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Quaternion::isValid() const
+bool Quaternion::IsValid() const
 {
-    return mc::isValid( e0_ )
-        && mc::isValid( ex_ )
-        && mc::isValid( ey_ )
-        && mc::isValid( ez_ );
+    return mc::isValid(e0_)
+        && mc::isValid(ex_)
+        && mc::isValid(ey_)
+        && mc::isValid(ez_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Quaternion::conjugate()
+void Quaternion::Conjugate()
 {
     ex_ = -ex_;
     ey_ = -ey_;
@@ -115,31 +108,31 @@ void Quaternion::conjugate()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Quaternion::invert()
+void Quaternion::Invert()
 {
-    conjugate();
-    normalize();
+    Conjugate();
+    Normalize();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Quaternion::getLength2() const
+double Quaternion::GetLength2() const
 {
     return e0_*e0_ + ex_*ex_ + ey_*ey_ + ez_*ez_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Quaternion::getLength() const
+double Quaternion::GetLength() const
 {
-    return sqrt( getLength2() );
+    return sqrt(GetLength2());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Quaternion::normalize()
+void Quaternion::Normalize()
 {
-    double length = getLength();
+    double length = GetLength();
 
     if ( length > 0.0 )
     {
@@ -152,7 +145,7 @@ void Quaternion::normalize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles Quaternion::getAngles() const
+Angles Quaternion::GetAngles() const
 {
     Angles result;
 
@@ -160,13 +153,13 @@ Angles Quaternion::getAngles() const
 
     if( sinTht2 >= 0.5 )
     {
-        result.phi() =  2.0 * asin( ex_ / cos( M_PI_4 ) );
+        result.phi() =  2.0 * asin(ex_ / cos(M_PI_4));
         result.tht() =  M_PI_2;
         result.psi() =  0.0;
     }
     else if ( sinTht2 <= -0.5 )
     {
-        result.phi() =  2.0 * asin( ex_ / cos( M_PI_4 ) );
+        result.phi() =  2.0 * asin(ex_ / cos(M_PI_4));
         result.tht() = -M_PI_2;
         result.psi() =  0.0;
     }
@@ -184,18 +177,16 @@ Angles Quaternion::getAngles() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::getConjugated() const
+Quaternion Quaternion::GetConjugated() const
 {
-    Quaternion result( *this );
-
-    result.conjugate();
-
+    Quaternion result(*this);
+    result.Conjugate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::getDerivative( const Vector3& omega, double lambda ) const
+Quaternion Quaternion::GetDerivative(const Vector3& omega, double lambda) const
 {
     Quaternion result;
 
@@ -228,7 +219,7 @@ Quaternion Quaternion::getDerivative( const Vector3& omega, double lambda ) cons
     // Roziecki - Bifurkacyjna Analiza Dynamiki Lotu Samolotu z Wektorowaniem Ciagu, 2006, p.24
     if ( lambda > 0.0 )
     {
-        double epsilon = 1.0 - getLength2();
+        double epsilon = 1.0 - GetLength2();
         double lambda_epsilon = lambda * epsilon;
 
         result.e0_ += lambda_epsilon * e0_;
@@ -242,29 +233,25 @@ Quaternion Quaternion::getDerivative( const Vector3& omega, double lambda ) cons
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::getInverted() const
+Quaternion Quaternion::GetInverted() const
 {
-    Quaternion result( *this );
-
-    result.invert();
-
+    Quaternion result(*this);
+    result.Invert();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::getNormalized() const
+Quaternion Quaternion::GetNormalized() const
 {
-    Quaternion result( *this );
-
-    result.normalize();
-
+    Quaternion result(*this);
+    result.Normalize();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Quaternion::set( double e0, double ex, double ey, double ez )
+void Quaternion::Set(double e0, double ex, double ey, double ez)
 {
     e0_ = e0;
     ex_ = ex;
@@ -274,18 +261,16 @@ void Quaternion::set( double e0, double ex, double ey, double ez )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string Quaternion::toString() const
+std::string Quaternion::ToString() const
 {
     std::stringstream ss;
-
     ss << e0_ <<  "," << ex_ <<  "," << ey_ <<  "," << ez_;
-
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator+( const Quaternion& quat ) const
+Quaternion Quaternion::operator+(const Quaternion& quat) const
 {
     Quaternion result;
 
@@ -299,7 +284,7 @@ Quaternion Quaternion::operator+( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator-( const Quaternion& quat ) const
+Quaternion Quaternion::operator-(const Quaternion& quat) const
 {
     Quaternion result;
 
@@ -313,7 +298,7 @@ Quaternion Quaternion::operator-( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator*( double val ) const
+Quaternion Quaternion::operator*(double val) const
 {
     Quaternion result;
 
@@ -327,7 +312,7 @@ Quaternion Quaternion::operator*( double val ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator*( const Quaternion& quat ) const
+Quaternion Quaternion::operator*(const Quaternion& quat) const
 {
     Quaternion result;
 
@@ -356,7 +341,7 @@ Quaternion Quaternion::operator*( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion Quaternion::operator/( double val ) const
+Quaternion Quaternion::operator/(double val) const
 {
     Quaternion result;
 
@@ -370,7 +355,7 @@ Quaternion Quaternion::operator/( double val ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator+=( const Quaternion& quat )
+Quaternion& Quaternion::operator+=(const Quaternion& quat)
 {
     e0_ += quat.e0_;
     ex_ += quat.ex_;
@@ -382,7 +367,7 @@ Quaternion& Quaternion::operator+=( const Quaternion& quat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator-=( const Quaternion& quat )
+Quaternion& Quaternion::operator-=(const Quaternion& quat)
 {
     e0_ -= quat.e0_;
     ex_ -= quat.ex_;
@@ -394,7 +379,7 @@ Quaternion& Quaternion::operator-=( const Quaternion& quat )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator*=( double val )
+Quaternion& Quaternion::operator*=(double val)
 {
     e0_ *= val;
     ex_ *= val;
@@ -406,7 +391,7 @@ Quaternion& Quaternion::operator*=( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion& Quaternion::operator/=( double val )
+Quaternion& Quaternion::operator/=(double val)
 {
     e0_ /= val;
     ex_ /= val;
@@ -418,7 +403,7 @@ Quaternion& Quaternion::operator/=( double val )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Quaternion::operator==( const Quaternion& quat ) const
+bool Quaternion::operator==(const Quaternion& quat) const
 {
     return ( e0_ == quat.e0_ )
         && ( ex_ == quat.ex_ )
@@ -428,7 +413,7 @@ bool Quaternion::operator==( const Quaternion& quat ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Quaternion::operator!=( const Quaternion& quat ) const
+bool Quaternion::operator!=(const Quaternion& quat) const
 {
     return !( *this == quat );
 }

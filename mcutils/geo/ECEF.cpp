@@ -237,14 +237,14 @@ Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
 
 Angles ECEF::ConvertAttitudeECEF2NED(const Angles& angles_ecef) const
 {
-    return ConvertAttitudeECEF2NED(Quaternion(angles_ecef)).getAngles();
+    return ConvertAttitudeECEF2NED(Quaternion(angles_ecef)).GetAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
 {
-    return ConvertAttitudeNED2ECEF(Quaternion(angles_ned)).getAngles();
+    return ConvertAttitudeNED2ECEF(Quaternion(angles_ned)).GetAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

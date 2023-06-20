@@ -199,7 +199,7 @@ Quaternion Matrix3x3::GetQuaternion() const
 
     result *= sqrt(0.25 / tr[index]);
 
-    result.normalize();
+    result.Normalize();
 
     return result;
 }
