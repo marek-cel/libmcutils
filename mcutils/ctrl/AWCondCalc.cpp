@@ -43,7 +43,7 @@ void AWCondCalc::Update(double, double y_p, double y_i, double y_d,
 {
     double y = y_p + y_i + y_d;
 
-    *value = Math::satur( min_, max_, y );
+    *value = Math::Satur(min_, max_, y);
 
     if ( y != *value ) *error_i = error_i_prev_;
 

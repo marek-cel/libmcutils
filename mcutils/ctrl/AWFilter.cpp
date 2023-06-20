@@ -43,7 +43,7 @@ void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
                       double* value, double* error_i, const PID*)
 {
     double y = y_p + y_i + y_d;
-    value_ = Math::satur( min_, max_, y );
+    value_ = Math::Satur(min_, max_, y);
     delta_ = y - value_;
 
     *value = value_;

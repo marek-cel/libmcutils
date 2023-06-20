@@ -44,12 +44,12 @@ void AWBackCalc::Update(double, double y_p, double y_i, double y_d,
 {
     double y = y_p + y_i + y_d;
 
-    *value = Math::satur( min_, max_, y );
+    *value = Math::Satur(min_, max_, y);
 
     if ( fabs(pid->ki()) > 0.0 )
     {
-        double y_pd = Math::satur( min_, max_, y_p + y_d );
-        *error_i = ( *value - y_pd ) / pid->ki();
+        double y_pd = Math::Satur(min_, max_, y_p + y_d);
+        *error_i = (*value - y_pd) / pid->ki();
     }
 }
 
