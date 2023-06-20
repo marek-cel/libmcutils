@@ -31,49 +31,49 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Inertia2::Inertia2( double tc1, double tc2, double y )
-    : tc1_ ( tc1 )
-    , tc2_ ( tc2 )
-    , y1_ ( y )
-    , y_  ( y )
+Inertia2::Inertia2(double tc1, double tc2, double value)
+    : time_const_1_( tc1 )
+    , time_const_2_( tc2 )
+    , value_int_ ( value )
+    , value_     ( value )
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Inertia2::setValue( double y )
-{
-    y1_ = y;
-    y_  = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia2::setTimeConst1( double tc1 )
-{
-    if ( tc1 > 0.0 )
-    {
-        tc1_ = tc1;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia2::setTimeConst2( double tc2 )
-{
-    if ( tc2 > 0.0 )
-    {
-        tc2_ = tc2;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia2::update( double dt, double u )
+void Inertia2::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        y1_ = Inertia::Calculate(   u, y1_, dt, tc1_ );
-        y_  = Inertia::Calculate( y1_,  y_, dt, tc2_ );
+        value_int_ = Inertia::Calculate(          u, value_int_, dt, time_const_1_ );
+        value_     = Inertia::Calculate( value_int_,     value_, dt, time_const_2_ );
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::set_value(double value)
+{
+    value_int_ = value;
+    value_     = value;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::set_time_const_1(double tc1)
+{
+    if ( tc1 > 0.0 )
+    {
+        time_const_1_ = tc1;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Inertia2::set_time_const_2(double tc2)
+{
+    if ( tc2 > 0.0 )
+    {
+        time_const_2_ = tc2;
     }
 }
 

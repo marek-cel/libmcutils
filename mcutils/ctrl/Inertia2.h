@@ -47,44 +47,44 @@ public:
      * @param tc2 time constant 2
      * @param y initial output value
      */
-    Inertia2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
-
-    inline double getValue() const { return y_; }
-
-    inline double getTimeConst1() const { return tc1_; }
-    inline double getTimeConst2() const { return tc2_; }
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant tc1.
-     * @param tc1 time constant tc1
-     */
-    void setTimeConst1( double tc1 );
-
-    /**
-     * @brief Sets time constant tc2.
-     * @param tc2 time constant tc2
-     */
-    void setTimeConst2( double tc2 );
+    Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+
+    inline double time_const_1() const { return time_const_1_; }
+    inline double time_const_2() const { return time_const_2_; }
+
+    /**
+     * @brief Sets output value
+     * @param y output value
+     */
+    void set_value( double y );
+
+    /**
+     * @brief Sets time constant tc1.
+     * @param tc1 time constant tc1
+     */
+    void set_time_const_1( double tc1 );
+
+    /**
+     * @brief Sets time constant tc2.
+     * @param tc2 time constant tc2
+     */
+    void set_time_const_2( double tc2 );
 
 private:
 
-    double tc1_;            ///< time constant 1
-    double tc2_;            ///< time constant 2
-    double y1_;             ///< intermediate value
-    double y_;              ///< current value
+    double time_const_1_ = 0.0; ///< time constant 1
+    double time_const_2_ = 0.0; ///< time constant 2
+    double value_int_ = 0.0;    ///< intermediate value
+    double value_     = 0.0;    ///< current value
 };
 
 } // namespace mc
