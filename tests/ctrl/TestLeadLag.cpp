@@ -76,7 +76,7 @@ TEST_F(TestLeadLag, CanUpdateStep)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lead_lag.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_lead_lag_step.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_lead_lag_step.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -107,7 +107,7 @@ TEST_F(TestLeadLag, CanUpdateSine)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lead_lag.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_lead_lag_sine.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_lead_lag_sine.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 

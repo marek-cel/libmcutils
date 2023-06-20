@@ -107,8 +107,8 @@ TEST_F(TestAWCondCalc, CanUpdate)
     std::vector<double> vals;
 
     // expected values calculated with Scilab Xcos
-        // tests/control/xcos/test_pid.xcos
-        XcosBinFileReader::readData( "../tests/ctrl/data/test_pid_antiwindup_conditional.bin", &vals );
+    // tests/control/xcos/test_pid.xcos
+    XcosBinFileReader::ReadData( "../tests/ctrl/data/test_pid_antiwindup_conditional.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 

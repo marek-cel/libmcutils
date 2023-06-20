@@ -108,7 +108,7 @@ TEST_F(TestAWBackCalc, CanUpdate)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_pid.xcos
-    XcosBinFileReader::readData( "../tests/ctrl/data/test_pid_antiwindup_calculation.bin", &vals );
+    XcosBinFileReader::ReadData( "../tests/ctrl/data/test_pid_antiwindup_calculation.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -121,7 +121,7 @@ TEST_F(TestAWBackCalc, CanUpdate)
     {
         double u = ( i < 500 ) ? 0.0 : 1.0;
         double e = u - y;
-        pid.Update( DT, e );
+        pid.Update(DT, e);
         y = mc::Inertia::Calculate( pid.value(), y, DT, TC );
 
         EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );

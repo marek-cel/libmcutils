@@ -110,7 +110,7 @@ TEST_F(TestPhysics, CanComputeInertia)
 
     // expected values calculated with Scilab Xcos
     // tests/math/xcos/test_inertia.xcos
-    XcosBinFileReader::readData( "../tests/physics/data/test_inertia.bin", &vals );
+    XcosBinFileReader::ReadData( "../tests/physics/data/test_inertia.bin", &vals );
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -128,7 +128,7 @@ TEST_F(TestPhysics, CanComputeInertia)
         for ( int j = 0; j < steps; j++ )
         {
             double dt = TIME_STEP / (double)steps;
-            y = mc::Physics::inertia( u, y, dt, TIME_CONSTANT );
+            y = mc::Physics::inertia(u, y, dt, TIME_CONSTANT);
 
             if ( 0 )
             {

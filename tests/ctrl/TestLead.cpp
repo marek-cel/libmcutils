@@ -66,7 +66,7 @@ TEST_F(TestLead, CanUpdateSine)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lead.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_lead_sine.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_lead_sine.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 

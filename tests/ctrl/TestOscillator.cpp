@@ -69,7 +69,7 @@ TEST_F(TestOscillator, CanUpdateStep)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_oscillator.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_oscillator_step.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_oscillator_step.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
@@ -100,7 +100,7 @@ TEST_F(TestOscillator, CanUpdateSine)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_oscillator.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_oscillator_sine.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_oscillator_sine.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 

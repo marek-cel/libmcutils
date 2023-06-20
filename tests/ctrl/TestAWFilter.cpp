@@ -128,7 +128,7 @@ TEST_F(TestAWFilter, CanUpdate)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_pid.xcos
-    XcosBinFileReader::readData("../tests/ctrl/data/test_pid_antiwindup_filter.bin", &vals);
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_pid_antiwindup_filter.bin", &vals);
 
     EXPECT_GT( vals.size(), 0 ) << "No input data.";
 
