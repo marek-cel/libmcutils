@@ -210,30 +210,30 @@ TEST_F(TestTable2, CanGetTable)
                   0.0,  1.0,
                   3.0,  4.0 };
 
-    mc::Table2 tab( r, c, v, 4, 2 );
+    mc::Table2 tab(r, c, v, 4, 2);
 
-    mc::Table tab0 = tab.getTable( 0 );
-    mc::Table tab1 = tab.getTable( 1 );
+    mc::Table tab0 = tab.getTable(0);
+    mc::Table tab1 = tab.getTable(1);
 
-    EXPECT_DOUBLE_EQ( tab0.getKeyByIndex( 0 ), -1.0 );
-    EXPECT_DOUBLE_EQ( tab0.getKeyByIndex( 1 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.getKeyByIndex( 2 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab0.getKeyByIndex( 3 ),  2.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(0), -1.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(1),  0.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(2),  1.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(3),  2.0 );
 
-    EXPECT_DOUBLE_EQ( tab0.getValue( -1.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.getValue(  0.0 ), -1.0 );
-    EXPECT_DOUBLE_EQ( tab0.getValue(  1.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.getValue(  2.0 ),  3.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetValue( -1.0 ),  0.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetValue(  0.0 ), -1.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetValue(  1.0 ),  0.0 );
+    EXPECT_DOUBLE_EQ( tab0.GetValue(  2.0 ),  3.0 );
 
-    EXPECT_DOUBLE_EQ( tab1.getKeyByIndex( 0 ), -1.0 );
-    EXPECT_DOUBLE_EQ( tab1.getKeyByIndex( 1 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab1.getKeyByIndex( 2 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.getKeyByIndex( 3 ),  2.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(0), -1.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(1),  0.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(2),  1.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(3),  2.0 );
 
-    EXPECT_DOUBLE_EQ( tab1.getValue( -1.0 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.getValue(  0.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab1.getValue(  1.0 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.getValue(  2.0 ),  4.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetValue( -1.0 ),  1.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetValue(  0.0 ),  0.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetValue(  1.0 ),  1.0 );
+    EXPECT_DOUBLE_EQ( tab1.GetValue(  2.0 ),  4.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

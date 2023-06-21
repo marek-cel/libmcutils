@@ -110,11 +110,11 @@ private:
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
     Random();
-    ~Random() = default;
     Random(const Random&) = delete;
     Random(Random&&) = delete;
     Random& operator=(const Random&) = delete;
     Random& operator=(Random&&) = delete;
+    ~Random() = default;
     // LCOV_EXCL_STOP
 };
 
