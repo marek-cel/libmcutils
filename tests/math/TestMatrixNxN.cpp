@@ -266,7 +266,7 @@ TEST_F(TestMatrixNxN, CanTranspose)
 {
     double items1[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     mc::MatrixNxN<3> m1;
-    m1.SetElements(items1);
+    m1.SetFromArray(items1);
 
     m1.Transpose();
 
@@ -287,7 +287,7 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
 {
     double items3[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     mc::MatrixNxN<3> m3;
-    m3.SetElements(items3);
+    m3.SetFromArray(items3);
 
     mc::MatrixNxN<3> mt3 = m3.getTransposed();
 
@@ -319,7 +319,7 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
     };
 
     mc::MatrixNxN<4> m4;
-    m4.SetElements(x4);
+    m4.SetFromArray(x4);
 
     mc::MatrixNxN<4> mt4 = m4.getTransposed();
 
@@ -367,7 +367,7 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
     };
 
     mc::MatrixNxN<6> m6;
-    m6.SetElements(x6);
+    m6.SetFromArray(x6);
 
     mc::MatrixNxN<6> mt6 = m6.getTransposed();
 
@@ -1182,11 +1182,11 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
 {
     double x30[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     mc::MatrixNxN<3> m30;
-    m30.SetElements(x30);
+    m30.SetFromArray(x30);
 
     double x31[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
     mc::MatrixNxN<3> m31;
-    m31.SetElements(x31);
+    m31.SetFromArray(x31);
 
     mc::MatrixNxN<3> m3 = m30 * m31;
 
@@ -1217,8 +1217,8 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
     mc::MatrixNxN<4> m41;
     mc::MatrixNxN<4> m42;
 
-    m41.SetElements(x41);
-    m42.SetElements(x42);
+    m41.SetFromArray(x41);
+    m42.SetFromArray(x42);
 
     mc::MatrixNxN<4> m4 = m41 * m42;
 
@@ -1260,8 +1260,8 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
     mc::MatrixNxN<6> m60;
     mc::MatrixNxN<6> m61;
 
-    m60.SetElements(x60);
-    m61.SetElements(x61);
+    m60.SetFromArray(x60);
+    m61.SetFromArray(x61);
 
     mc::MatrixNxN<6> m6 = m60 * m61;
 

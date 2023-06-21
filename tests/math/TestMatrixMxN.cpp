@@ -130,9 +130,9 @@ TEST_F(TestMatrixMxN, CanGetElement)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     EXPECT_DOUBLE_EQ( m3.GetElement(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m3.GetElement(0,1), 2.0 );
@@ -156,7 +156,7 @@ TEST_F(TestMatrixMxN, CanGetElement)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixMxN, CanGetElements)
+TEST_F(TestMatrixMxN, CanGetIntoArray)
 {
     double x3[] { 1.0, 2.0, 3.0,
                   4.0, 5.0, 6.0,
@@ -178,17 +178,17 @@ TEST_F(TestMatrixMxN, CanGetElements)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     double xx3[9]  = { 0.0 };
     double xx4[16] = { 0.0 };
     double xx6[36] = { 0.0 };
 
-    m3.GetElements(xx3);
-    m4.GetElements(xx4);
-    m6.GetElements(xx6);
+    m3.GetIntoArray(xx3);
+    m4.GetIntoArray(xx4);
+    m6.GetIntoArray(xx6);
 
     EXPECT_DOUBLE_EQ( xx3[0], x3[0] );
     EXPECT_DOUBLE_EQ( xx3[1], x3[1] );
@@ -293,7 +293,7 @@ TEST_F(TestMatrixMxN, CanSetElement)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixMxN, CanSetElements)
+TEST_F(TestMatrixMxN, CanSetFromArray)
 {
     mc::MatrixMxN<3,3> m1;
 
@@ -301,7 +301,7 @@ TEST_F(TestMatrixMxN, CanSetElements)
                           4.0, 5.0, 6.0,
                           7.0, 8.0, 9.0 };
 
-    m1.SetElements(elements);
+    m1.SetFromArray(elements);
 
     EXPECT_DOUBLE_EQ( m1(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m1(0,1), 2.0 );
@@ -451,9 +451,9 @@ TEST_F(TestMatrixMxN, CanSwapRows)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     EXPECT_DOUBLE_EQ( m3(0,0), 1.0 );
     EXPECT_DOUBLE_EQ( m3(0,1), 2.0 );
@@ -582,9 +582,9 @@ TEST_F(TestMatrixMxN, CanConvertToString)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     EXPECT_STREQ( m3.ToString().c_str(), "1\t2\t3\t\n4\t5\t6\t\n7\t8\t9" );
     EXPECT_STREQ( m4.ToString().c_str(), "1\t2\t3\t4\t\n5\t6\t7\t8\t\n9\t10\t11\t12\t\n13\t14\t15\t16" );
@@ -752,9 +752,9 @@ TEST_F(TestMatrixMxN, CanAdd)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> m03;
     mc::MatrixMxN<4,4> m04;
@@ -853,9 +853,9 @@ TEST_F(TestMatrixMxN, CanNegate)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> mr3 = -m3;
     mc::MatrixMxN<4,4> mr4 = -m4;
@@ -950,9 +950,9 @@ TEST_F(TestMatrixMxN, CanSubstract)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> m03;
     mc::MatrixMxN<4,4> m04;
@@ -1051,9 +1051,9 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> mr3 = m3 * 2.0;
     mc::MatrixMxN<4,4> mr4 = m4 * 2.0;
@@ -1204,7 +1204,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector)
                   4.0, 5.0, 6.0,
                   7.0, 8.0, 9.0 };
     mc::MatrixMxN<3,3> m35;
-    m35.SetElements(x3);
+    m35.SetFromArray(x3);
 
     mc::VectorN<3> v35 = m35 * v3;
     EXPECT_DOUBLE_EQ( v35(0), 14.0 );
@@ -1216,7 +1216,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector)
                    9.0, 10.0, 11.0, 12.0,
                   13.0, 14.0, 15.0, 16.0 };
     mc::MatrixMxN<4,4> m41;
-    m41.SetElements(x4);
+    m41.SetFromArray(x4);
 
     mc::VectorN<4> v4;
     v4(0) = 1.0;
@@ -1237,7 +1237,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector)
                   25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0 };
     mc::MatrixMxN<6,6> m61;
-    m61.SetElements(x6);
+    m61.SetFromArray(x6);
 
     mc::VectorN<6> v6;
     v6(0) = 1.0;
@@ -1280,9 +1280,9 @@ TEST_F(TestMatrixMxN, CanDivideByScalar)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> mr3 = m3 / 2.0;
     mc::MatrixMxN<4,4> mr4 = m4 / 2.0;
@@ -1377,9 +1377,9 @@ TEST_F(TestMatrixMxN, CanUnaryAdd)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> mr3;
     mc::MatrixMxN<4,4> mr4;
@@ -1478,9 +1478,9 @@ TEST_F(TestMatrixMxN, CanUnarySubstract)
     mc::MatrixMxN<4,4> m4;
     mc::MatrixMxN<6,6> m6;
 
-    m3.SetElements(x3);
-    m4.SetElements(x4);
-    m6.SetElements(x6);
+    m3.SetFromArray(x3);
+    m4.SetFromArray(x4);
+    m6.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> mr3;
     mc::MatrixMxN<4,4> mr4;
@@ -1580,9 +1580,9 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar)
     mc::MatrixMxN<4,4> mr4;
     mc::MatrixMxN<6,6> mr6;
 
-    mr3.SetElements(x3);
-    mr4.SetElements(x4);
-    mr6.SetElements(x6);
+    mr3.SetFromArray(x3);
+    mr4.SetFromArray(x4);
+    mr6.SetFromArray(x6);
 
     mr3 *= 2.0;
     mr4 *= 2.0;
@@ -1677,9 +1677,9 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar)
     mc::MatrixMxN<4,4> mr4;
     mc::MatrixMxN<6,6> mr6;
 
-    mr3.SetElements(x3);
-    mr4.SetElements(x4);
-    mr6.SetElements(x6);
+    mr3.SetFromArray(x3);
+    mr4.SetFromArray(x4);
+    mr6.SetFromArray(x6);
 
     mr3 /= 2.0;
     mr4 /= 2.0;
@@ -1778,13 +1778,13 @@ TEST_F(TestMatrixMxN, CanCompare)
     mc::MatrixMxN<4,4> m42;
     mc::MatrixMxN<6,6> m62;
 
-    m61.SetElements(x6);
-    m41.SetElements(x4);
-    m31.SetElements(x3);
+    m61.SetFromArray(x6);
+    m41.SetFromArray(x4);
+    m31.SetFromArray(x3);
 
-    m32.SetElements(x3);
-    m42.SetElements(x4);
-    m62.SetElements(x6);
+    m32.SetFromArray(x3);
+    m42.SetFromArray(x4);
+    m62.SetFromArray(x6);
 
     mc::MatrixMxN<3,3> m30;
     mc::MatrixMxN<4,4> m40;

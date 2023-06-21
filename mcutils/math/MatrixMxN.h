@@ -54,19 +54,19 @@ public:
     static constexpr unsigned int cols_ = COLS;        ///< number of columns
     static constexpr unsigned int size_ = ROWS * COLS; ///< matrix size
 
-    /** @return "true" if all items are valid */
+    /** @return "true" if all elements are valid */
     bool IsValid() const
     {
         return mc::isValid(elements_, size_);
     }
 
     /**
-     * @brief  Gets matrix item of given indicies.
+     * @brief  Gets matrix element of given indicies.
      * This function is bound-checked which may affect performance.
-     * Throws an exception when row or column index is out of range.
-     * @param row item row number
-     * @param col item column number
-     * @return matrix item of given indicies.
+     * Returns NaN if row or column index is out of range.
+     * @param row element row number
+     * @param col element column number
+     * @return matrix element of given indicies, NaN if row or column index is out of range
      */
     double GetElement(unsigned int row, unsigned int col) const
     {
@@ -79,22 +79,27 @@ public:
     }
 
     /**
-     * @brief Gets matrix items as array.
-     * Items index matche following scheme i = i_row * no_of_columns + i_col
-     * @param items output array
+     * @brief Gets matrix elements as array.
+     * Elements index should match following scheme:
+     * i = i_row * n_col + i_col
+     * where:
+     * i - array index
+     * i_row - row index
+     * i_col - column index
+     * n_col - number of columns
+     * @param elements output array
      */
-    void GetElements( double elements[] )
+    void GetIntoArray(double elements[])
     {
         std::memcpy(elements, elements_, sizeof(elements_));
     }
 
     /**
      * @brief Sets matrix element of given indicies.
-     * @param row item row number
-     * @param col item column number
-     * @param value item value
+     * @param row element row number
+     * @param col element column number
+     * @param value element value
      * This function is bound-checked which may affect performance.
-     * Throws an exception when row or column index is out of range.
      */
     void SetElement(unsigned int row, unsigned int col, double value)
     {
@@ -106,16 +111,22 @@ public:
 
     /**
      * @brief Sets matrix elements from array.
-     * Items index should match following scheme i = i_row * no_of_columns + i_col
-     * @param items input array
+     * Elements index should match following scheme:
+     * i = i_row * n_col + i_col
+     * where:
+     * i - array index
+     * i_row - row index
+     * i_col - column index
+     * n_col - number of columns
+     * @param elements input array
      */
-    void SetElements( double elements[] )
+    void SetFromArray(double elements[])
     {
         std::memcpy(elements_, elements, sizeof(elements_));
     }
 
     /**
-     * @brief Sets matrix items from string.
+     * @brief Sets matrix elements from string.
      * Values in the given string should be separated with whitespaces.
      * @param str given string
      */
@@ -138,7 +149,7 @@ public:
             valid &= mc::isValid(elements[i]);
         }
 
-        if ( valid ) SetElements(elements);
+        if ( valid ) SetFromArray(elements);
     }
 
     /** @brief Swaps matrix rows. */
@@ -173,13 +184,13 @@ public:
     }
 
     /**
-     * @brief Items accessor.
+     * @brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int,int) or
-     * setItem(int,int,double) functions.
-     * @param row item row number
-     * @param col item column number
-     * @return item value
+     * If you want bound-checked elements accessor use GetElement(int,int) or
+     * SetElement(int,int,double) functions.
+     * @param row element row number
+     * @param col element column number
+     * @return element value
      */
     inline double operator()(unsigned int row, unsigned int col) const
     {
@@ -187,12 +198,12 @@ public:
     }
 
     /**
-     * @brief Items accessor.
+     * @brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int,int) or
-     * setItem(int,int,double) functions.
-     * @param row item row number
-     * @param col item column number
+     * If you want bound-checked elements accessor use GetElement(int,int) or
+     * SetElement(int,int,double) functions.
+     * @param row element row number
+     * @param col element column number
      */
     inline double& operator()(unsigned int row, unsigned int col)
     {
@@ -296,7 +307,7 @@ public:
 
 protected:
 
-    double elements_[size_] = { 0.0 }; ///< matrix items
+    double elements_[size_] = { 0.0 }; ///< matrix elements
 
     /** @brief Adds matrix. */
     void Add(const MatrixMxN<ROWS, COLS>& matrix)

@@ -69,7 +69,7 @@ TEST_F(TestMatrix4x4, CanTranspose)
     };
 
     mc::Matrix4x4 m;
-    m.SetElements( elements );
+    m.SetFromArray(elements);
 
     m.Transpose();
 
@@ -103,7 +103,7 @@ TEST_F(TestMatrix4x4, CanGetTransposed)
     };
 
     mc::Matrix4x4 m;
-    m.SetElements( elements );
+    m.SetFromArray(elements);
 
     mc::Matrix4x4 m1 = m.GetTransposed();
 
@@ -155,7 +155,7 @@ TEST_F(TestMatrix4x4, CanAdd)
 
     mc::Matrix4x4 m0;
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements);
 
     mc::Matrix4x4 m2 = m0 + m1;
 
@@ -189,7 +189,7 @@ TEST_F(TestMatrix4x4, CanNegate)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements );
 
     mc::Matrix4x4 m2 = -m1;
 
@@ -224,7 +224,7 @@ TEST_F(TestMatrix4x4, CanSubstract)
 
     mc::Matrix4x4 m0;
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements );
 
     mc::Matrix4x4 m2 = m0 - m1;
 
@@ -258,7 +258,7 @@ TEST_F(TestMatrix4x4, CanMultiplyByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements );
 
     mc::Matrix4x4 m = m1 * 2.0;
 
@@ -304,8 +304,8 @@ TEST_F(TestMatrix4x4, CanMultiplyByMatrix)
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
 
-    m1.SetElements( x1 );
-    m2.SetElements( x2 );
+    m1.SetFromArray(x1 );
+    m2.SetFromArray(x2 );
 
     mc::Matrix4x4 m = m1 * m2;
 
@@ -346,10 +346,10 @@ TEST_F(TestMatrix4x4, CanMultiplyByVector)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( x1 );
+    m1.SetFromArray(x1 );
 
     mc::Vector4 v2;
-    v2.setElements( x2 );
+    v2.setElements(x2);
 
     mc::Vector4 v = m1 * v2;
 
@@ -371,7 +371,7 @@ TEST_F(TestMatrix4x4, CanDivideByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( x1 );
+    m1.SetFromArray(x1 );
     mc::Matrix4x4 m2 = m1 / 2.0;
 
     EXPECT_DOUBLE_EQ( m2(0,0),  1.0 );
@@ -405,7 +405,7 @@ TEST_F(TestMatrix4x4, CanUnaryAdd)
 
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
-    m2.SetElements( x1 );
+    m2.SetFromArray(x1 );
 
     m1 += m2;
 
@@ -440,7 +440,7 @@ TEST_F(TestMatrix4x4, CanUnarySubstract)
 
     mc::Matrix4x4 m1;
     mc::Matrix4x4 m2;
-    m2.SetElements( x1 );
+    m2.SetFromArray(x1 );
 
     m1 -= m2;
 
@@ -474,7 +474,7 @@ TEST_F(TestMatrix4x4, CanUnaryMultiplyByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements );
 
     m1 *= 2.0;
 
@@ -508,7 +508,7 @@ TEST_F(TestMatrix4x4, CanUnaryDivideByScalar)
     };
 
     mc::Matrix4x4 m1;
-    m1.SetElements( elements );
+    m1.SetFromArray(elements );
 
     m1 /= 2.0;
 
