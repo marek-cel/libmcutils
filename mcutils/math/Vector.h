@@ -44,10 +44,10 @@ public:
     Vector() = default;
 
     /** @brief Copy constructor. */
-    Vector( const Vector& vect );
+    Vector(const Vector& vect);
 
     /** @brief Move constructor. */
-    Vector( Vector&& vect );
+    Vector(Vector&& vect);
 
     /** @brief Destructor. */
     virtual ~Vector();
@@ -56,137 +56,139 @@ public:
      * @brief Constructor.
      * @param size vector size
      */
-    Vector( unsigned int size );
+    Vector(unsigned int size);
 
-    /** @return TRUE if all items are valid */
-    bool isValid() const;
+    /** @return TRUE if all elements are valid */
+    bool IsValid() const;
 
     /** @return vector length */
-    double getLength() const;
+    double GetLength() const;
 
     /** @brief This function normalizes vector. */
-    void normalize();
-
-    /** @brief uts vector items into given array. */
-    void getArray( double items[] ) const;
+    void Normalize();
 
     /**
-     * @brief Gets vector item of given indicies.
+     * @brief Gets vector element of given indicies.
      * This function is bound-checked which may affect performance.
-     * Throws an exception when index is out of range.
-     * @return vector item of given indicies.
+     * Returns NaN if index is out of range.
+     * @return vector element of given indicies, NaN if index is out of range
      */
-    double getItem( unsigned int index ) const;
-
-    /** @brief Sets vector items from given array. */
-    void setItems( const double items[] );
+    double GetElement(unsigned int index) const;
 
     /**
-     * @brief Sets vector item of given indicies.
+     * @brief Gets vector elements as array.
+     * @param elements output array
+     */
+    void GetIntoArray(double elements[]) const;
+
+    /**
+     * @brief Sets vector element of given indicies.
      * This function is bound-checked which may affect performance.
-     * Throws an exception when index is out of range.
      */
-    void setItem( unsigned int index, double val );
-
-    void setValue( double val );
+    void SetElement(unsigned int index, double val);
 
     /**
-     * @brief Returns vector size (number of elements)
-     * @return vector size (number of elements)
+     * @brief Sets vector elements from array.
+     * @param elements input array
      */
-    unsigned int getSize() const { return size_; }
+    void SetFromArray(const double elements[]);
 
     /** @brief Returns string representation of the vector. */
-    std::string toString() const;
+    std::string ToString() const;
 
     /** @brief Resizes vector if needed. */
-    void resize( unsigned int size );
+    void Resize(unsigned int size);
 
-    /** @brief Sets all vector items to zero. */
-    void zeroize();
+    /** @brief Sets all vector elements to zero. */
+    void Zeroize();
+
+    unsigned int size() const { return size_; }
 
     /**
-     * @brief Items accessor.
+     * @brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int) or
-     * setItem(int,double) functions.
+     * If you want bound-checked elements accessor use GetElement(int) or
+     * SetElement(int,double) functions.
      */
-    inline double operator()( unsigned int index ) const
+    inline double operator()(unsigned int index) const
     {
-        return items_[ index ];
+        return elements_[ index ];
     }
 
     /**
-     * @brief Items accessor.
+     * @brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int) or
-     * setItem(int,double) functions.
+     * If you want bound-checked elements accessor use GetElement(int) or
+     * SetElement(int,double) functions.
      */
-    inline double& operator()( unsigned int index )
+    inline double& operator()(unsigned int index)
     {
-        return items_[ index ];
+        return elements_[index];
     }
 
     /** @brief Assignment operator. */
-    Vector& operator=( const Vector& vect );
+    Vector& operator=(const Vector& vect);
 
     /** @brief Move assignment operator. */
-    Vector& operator=( Vector&& vect );
+    Vector& operator=(Vector&& vect);
 
     /** @brief Addition operator. */
-    Vector operator+( const Vector& vect ) const;
+    Vector operator+(const Vector& vect) const;
 
     /** @brief Negation operator. */
     Vector operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector operator-( const Vector& vect ) const;
+    Vector operator-(const Vector& vect) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector operator*( double value ) const;
+    Vector operator*(double value) const;
 
     /** @brief Division operator (by scalar). */
-    Vector operator/( double value ) const;
+    Vector operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Vector& operator+=( const Vector& vect );
+    Vector& operator+=(const Vector& vect);
 
     /** @brief Unary subtraction operator. */
-    Vector& operator-=( const Vector& vect );
+    Vector& operator-=(const Vector& vect);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector& operator*=( double value );
+    Vector& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Vector& operator/=( double value );
+    Vector& operator/=(double value);
 
 protected:
 
-    unsigned int size_ = 0;     ///< vector size
-    double* items_ = nullptr;   ///< vector items
+    unsigned int size_ = 0;         ///< vector size
+    double* elements_ = nullptr;    ///< vector elements
 
     /** @brief Adds vector. */
-    void add( const Vector& vect );
+    void Add(const Vector& vect);
 
     /** @brief Negates (inverts) vector. */
-    void negate();
+    void Negate();
 
     /** @brief Substracts vector. */
-    void substract( const Vector& vect );
+    void Substract(const Vector& vect);
 
     /** @brief Multiplies by value. */
-    void multiplyByValue( double value );
+    void MultiplyByValue(double value);
 
     /** @brief Divides by value. */
-    void divideByValue( double value );
+    void DivideByValue(double value);
+
+    /** @brief Deletes elements array. */
+    void DeleteElementsArray();
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector operator*( double val, const Vector& vect )
+inline Vector operator*(double val, const Vector& vect)
 {
-    return ( vect * val );
+    return vect * val;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

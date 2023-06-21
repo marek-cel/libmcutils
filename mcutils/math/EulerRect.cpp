@@ -33,8 +33,8 @@ void EulerRect::Integrate(double step, Vector* vect)
 {
     xt_ = *vect;
 
-    k0_.resize(vect->getSize());
-    k0_.zeroize();
+    k0_.Resize(vect->size());
+    k0_.Zeroize();
 
     // derivatives calculation
     deriv_fun_(xt_, &k0_);

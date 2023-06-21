@@ -33,15 +33,15 @@ void RungeKutta4::Integrate(double step, Vector* vect)
 {
     xt_ = *vect;
 
-    k1_.resize(vect->getSize());
-    k2_.resize(vect->getSize());
-    k3_.resize(vect->getSize());
-    k4_.resize(vect->getSize());
+    k1_.Resize(vect->size());
+    k2_.Resize(vect->size());
+    k3_.Resize(vect->size());
+    k4_.Resize(vect->size());
 
-    k1_.zeroize();
-    k2_.zeroize();
-    k3_.zeroize();
-    k4_.zeroize();
+    k1_.Zeroize();
+    k2_.Zeroize();
+    k3_.Zeroize();
+    k4_.Zeroize();
 
     // k1 - derivatives calculation
     deriv_fun_(xt_, &k1_);

@@ -78,7 +78,7 @@ TEST_F(TestEulerRect, CanSetDerivFun)
     mc::EulerRect er;
     EXPECT_NO_THROW( er.set_deriv_fun( [](const mc::Vector &, mc::Vector *ds)
     {
-        for ( unsigned int i = 0; i < ds->getSize(); ++i )
+        for ( unsigned int i = 0; i < ds->size(); ++i )
         {
             (*ds)(i) = 1.0;
         }

@@ -36,65 +36,61 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector::Vector( const Vector& vect )
-    : size_  ( vect.size_ )
-    , items_ ( nullptr )
+Vector::Vector(const Vector& vect)
+    : size_ (vect.size_)
 {
-    items_ = new double[ size_ ];
+    elements_ = new double [size_];
 
-    setItems( vect.items_ );
+    SetFromArray(vect.elements_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector::Vector( Vector&& vect )
-    : size_  ( std::exchange( vect.size_, 0 ) )
-    , items_ ( std::exchange( vect.items_, nullptr ) )
+Vector::Vector(Vector&& vect)
+    : size_ (std::exchange(vect.size_, 0))
+    , elements_(std::exchange(vect.elements_, nullptr))
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector::~Vector()
 {
-    if ( items_ ) { delete [] items_; } items_ = nullptr;
+    DeleteElementsArray();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector::Vector( unsigned int size )
-    : size_ ( size )
-    , items_ ( nullptr )
+    : size_( size )
 {
-    items_ = new double[ size_ ];
-    zeroize();
+    elements_ = new double [size_];
+    Zeroize();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool Vector::isValid() const
+bool Vector::IsValid() const
 {
-    return mc::isValid( items_, size_ );
+    return mc::isValid(elements_, size_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Vector::getLength() const
+double Vector::GetLength() const
 {
     double length2 = 0.0;
-
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        length2 += ( items_[ i ] * items_[ i ] );
+        length2 += ( elements_[i] * elements_[i] );
     }
-
-    return sqrt( length2 );
+    return sqrt(length2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::normalize()
+void Vector::Normalize()
 {
-    double length = getLength();
+    double length = GetLength();
 
     if ( length > 0.0 )
     {
@@ -102,28 +98,18 @@ void Vector::normalize()
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] *= length_inv;
+            elements_[i] *= length_inv;
         }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::getArray( double items[] ) const
-{
-    for ( unsigned int i = 0; i < size_; ++i )
-    {
-        items[i] = items_[i];
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-double Vector::getItem( unsigned int index ) const
+double Vector::GetElement(unsigned int index) const
 {
     if ( index < size_ )
     {
-        return items_[ index ];
+        return elements_[index];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -131,100 +117,98 @@ double Vector::getItem( unsigned int index ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::setItems( const double items[] )
+void Vector::GetIntoArray(double elements[]) const
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[i] = items[i];
+        elements[i] = elements_[i];
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::setItem( unsigned int index, double val )
+void Vector::SetElement(unsigned int index, double val)
 {
     if ( index < size_ )
     {
-        items_[ index ] = val;
+        elements_[index] = val;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::setValue( double val )
+void Vector::SetFromArray(const double elements[])
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[i] = val;
+        elements_[i] = elements[i];
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string Vector::toString() const
+std::string Vector::ToString() const
 {
     std::stringstream ss;
-
     for ( unsigned int i = 0; i < size_; ++i )
     {
         if ( i != 0 ) ss << ",";
 
-        ss << items_[ i ];
+        ss << elements_[i];
     }
-
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::resize( unsigned int size )
+void Vector::Resize(unsigned int size)
 {
     if ( size_ != size )
     {
-        if ( items_ ) { delete [] items_; } items_ = nullptr;
+        DeleteElementsArray();
 
         size_ = size;
-        items_ = new double[ size_ ];
+        elements_ = new double [size_];
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::zeroize()
+void Vector::Zeroize()
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[ i ] = 0.0;
+        elements_[i] = 0.0;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator=( const Vector& vect )
+Vector& Vector::operator=(const Vector& vect)
 {
-    resize( vect.size_ );
-    setItems( vect.items_ );
+    Resize(vect.size_);
+    SetFromArray(vect.elements_);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator=( Vector&& vect )
+Vector& Vector::operator=(Vector&& vect)
 {
-    if ( items_ ) { delete [] items_; } items_ = nullptr;
+    DeleteElementsArray();
 
-    size_  = std::exchange( vect.size_, 0 );
-    items_ = std::exchange( vect.items_, nullptr );
+    size_     = std::exchange(vect.size_, 0);
+    elements_ = std::exchange(vect.elements_, nullptr);
 
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector Vector::operator+( const Vector& vect ) const
+Vector Vector::operator+(const Vector& vect) const
 {
-    Vector result( *this );
-    result.add( vect );
+    Vector result(*this);
+    result.Add(vect);
     return result;
 }
 
@@ -232,132 +216,145 @@ Vector Vector::operator+( const Vector& vect ) const
 
 Vector Vector::operator-() const
 {
-    Vector result( *this );
-    result.negate();
+    Vector result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector Vector::operator-( const Vector& vect ) const
+Vector Vector::operator-(const Vector& vect) const
 {
-    Vector result( *this );
-    result.substract( vect );
+    Vector result(*this);
+    result.Substract(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector Vector::operator*( double value ) const
+Vector Vector::operator*(double value) const
 {
-    Vector result( *this );
-    result.multiplyByValue( value );
+    Vector result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector Vector::operator/( double value ) const
+Vector Vector::operator/(double value) const
 {
-    Vector result( *this );
-    result.divideByValue( value );
+    Vector result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator+=( const Vector& vect )
+Vector& Vector::operator+=(const Vector& vect)
 {
-    add( vect );
+    Add(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator-=( const Vector& vect )
+Vector& Vector::operator-=(const Vector& vect)
 {
-    substract( vect );
+    Substract(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator*=( double value )
+Vector& Vector::operator*=(double value)
 {
-    multiplyByValue( value );
+    MultiplyByValue(value);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector& Vector::operator/=( double value )
+Vector& Vector::operator/=(double value)
 {
-    divideByValue( value );
+    DivideByValue(value);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::add( const Vector& vect )
+void Vector::Add(const Vector& vect)
 {
     if ( size_ == vect.size_ )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] = items_[ i ] + vect.items_[ i ];
+            elements_[i] = elements_[i] + vect.elements_[i];
         }
     }
     else
     {
-        setValue( std::numeric_limits<double>::quiet_NaN() );
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::negate()
+void Vector::Negate()
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[ i ] = -items_[ i ];
+        elements_[i] = -elements_[i];
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::substract( const Vector& vect )
+void Vector::Substract(const Vector& vect)
 {
     if ( size_ == vect.size_ )
     {
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            items_[ i ] = items_[ i ] - vect.items_[ i ];
+            elements_[i] = elements_[i] - vect.elements_[i];
         }
     }
     else
     {
-        setValue( std::numeric_limits<double>::quiet_NaN() );
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+        }
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::multiplyByValue( double value )
+void Vector::MultiplyByValue(double value)
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[ i ] *= value;
+        elements_[i] *= value;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::divideByValue( double value )
+void Vector::DivideByValue( double value )
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
-        items_[ i ] /= value;
+        elements_[i] /= value;
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Vector::DeleteElementsArray()
+{
+    if ( elements_ ) { delete [] elements_; } elements_ = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
