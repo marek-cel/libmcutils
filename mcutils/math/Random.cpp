@@ -33,24 +33,24 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Random::Random()
-    : seed_ ( static_cast<unsigned int>( time(nullptr) ) )
+    : seed_(static_cast<unsigned int>(time(nullptr)))
 {
-    srand( seed_ );
+    srand(seed_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int Random::getRandom( int min, int max )
+int Random::GetRandom(int min, int max)
 {
     if ( max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
-        //rand_s( &_rand );
+        //rand_s(&_rand);
         return min + rand_ % ( max - min + 1 );
         return min + rand() % ( max - min + 1 );
 #       else
         mutex_.lock();
-        rand_ = rand_r( &seed_ );
+        rand_ = rand_r(&seed_);
         mutex_.unlock();
         return min + rand_ % ( max - min + 1 );
 #       endif
@@ -61,17 +61,17 @@ int Random::getRandom( int min, int max )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-float Random::getRandom( float min, float max )
+float Random::GetRandom(float min, float max)
 {
-    int random = getRandom( 0, RAND_MAX );
+    int random = GetRandom(0, RAND_MAX);
     return min + ( max - min ) * ( static_cast<float>(random) / static_cast<float>(RAND_MAX) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Random::getRandom( double min, double max )
+double Random::GetRandom(double min, double max)
 {
-    int random = getRandom( 0, RAND_MAX );
+    int random = GetRandom(0, RAND_MAX);
     return min + ( max - min ) * ( static_cast<double>(random) / static_cast<double>(RAND_MAX) );
 }
 

@@ -50,9 +50,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static int get( int min, int max )
+    inline static int Get(int min, int max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -61,9 +61,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static float get( float min, float max )
+    inline static float Get(float min, float max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -72,9 +72,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static double get( double min, double max )
+    inline static double Get(double min, double max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -83,7 +83,7 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    int getRandom( int min, int max );
+    int GetRandom(int min, int max);
 
     /**
      * @brief Gets random number from the given range.
@@ -91,7 +91,7 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    float getRandom( float min, float max );
+    float GetRandom(float min, float max);
 
     /**
      * @brief Gets random number from the given range.
@@ -99,7 +99,7 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    double getRandom( double min, double max );
+    double GetRandom(double min, double max);
 
 private:
 
@@ -107,11 +107,15 @@ private:
     int rand_ = 0;      ///< random value
     unsigned int seed_; ///< seed
 
-    /**
-     * You should use static function instance() due to get refernce
-     * to Random class instance.
-     */
+    // LCOV_EXCL_START
+    // excluded from coverage report due to deleting destructor calling issues
     Random();
+    ~Random() = default;
+    Random(const Random&) = delete;
+    Random(Random&&) = delete;
+    Random& operator=(const Random&) = delete;
+    Random& operator=(Random&&) = delete;
+    // LCOV_EXCL_STOP
 };
 
 } // namespace mc
