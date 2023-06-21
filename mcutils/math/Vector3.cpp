@@ -37,23 +37,21 @@ const Vector3 Vector3::ez_ = Vector3(0.0, 0.0, 1.0);
 
 Vector3::Vector3(double x, double y, double z)
 {
-    set(x, y, z);
+    Set(x, y, z);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::getNormalized() const
+Vector3 Vector3::GetNormalized() const
 {
     Vector3 result(*this);
-
     result.Normalize();
-
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector3::set(double x, double y, double z)
+void Vector3::Set(double x, double y, double z)
 {
     elements_[0] = x;
     elements_[1] = y;

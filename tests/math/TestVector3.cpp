@@ -124,11 +124,11 @@ TEST_F(TestVector3, CanGetLengthXY)
 {
     mc::Vector3 v1( 1.0, 2.0, 3.0 );
     // 1^2 + 2^2 = 1 + 4 = 5
-    EXPECT_DOUBLE_EQ( v1.getLengthXY(), sqrt( 5.0 ) );
+    EXPECT_DOUBLE_EQ( v1.GetLengthXY(), sqrt( 5.0 ) );
 
     mc::Vector3 v2( 2.0, 3.0, 4.0 );
     // 2^2 + 3^2 = 4 + 9 = 13
-    EXPECT_DOUBLE_EQ( v2.getLengthXY(), sqrt( 13.0 ) );
+    EXPECT_DOUBLE_EQ( v2.GetLengthXY(), sqrt( 13.0 ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,11 +137,11 @@ TEST_F(TestVector3, CanGetLengthXZ)
 {
     mc::Vector3 v1( 1.0, 2.0, 3.0 );
     // 1^2 + 3^2 = 1 + 9 = 10
-    EXPECT_DOUBLE_EQ( v1.getLengthXZ(), sqrt( 10.0 ) );
+    EXPECT_DOUBLE_EQ( v1.GetLengthXZ(), sqrt( 10.0 ) );
 
     mc::Vector3 v2( 2.0, 3.0, 4.0 );
     // 2^2 + 4^2 = 4 + 16 = 20
-    EXPECT_DOUBLE_EQ( v2.getLengthXZ(), sqrt( 20.0 ) );
+    EXPECT_DOUBLE_EQ( v2.GetLengthXZ(), sqrt( 20.0 ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -150,11 +150,11 @@ TEST_F(TestVector3, CanGetLengthYZ)
 {
     mc::Vector3 v1( 1.0, 2.0, 3.0 );
     // 2^2 + 3^2 = 4 + 9 = 13
-    EXPECT_DOUBLE_EQ( v1.getLengthYZ(), sqrt( 13.0 ) );
+    EXPECT_DOUBLE_EQ( v1.GetLengthYZ(), sqrt( 13.0 ) );
 
     mc::Vector3 v2( 2.0, 3.0, 4.0 );
     // 3^2 + 4^2 = 9 + 16 = 25
-    EXPECT_DOUBLE_EQ( v2.getLengthYZ(), sqrt( 25.0 ) );
+    EXPECT_DOUBLE_EQ( v2.GetLengthYZ(), sqrt( 25.0 ) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +165,7 @@ TEST_F(TestVector3, CanGetNormalized)
     // tests/math/octave/test_vector3.m
 
     mc::Vector3 v1( 1.0, 2.0, 3.0 );
-    mc::Vector3 v1_n = v1.getNormalized();
+    mc::Vector3 v1_n = v1.GetNormalized();
 
     EXPECT_NEAR( v1_n.x(), 0.267261, 1.0e-5 );
     EXPECT_NEAR( v1_n.y(), 0.534522, 1.0e-5 );
@@ -174,7 +174,7 @@ TEST_F(TestVector3, CanGetNormalized)
     EXPECT_DOUBLE_EQ( v1_n.GetLength(), 1.0 );
 
     mc::Vector3 v2( 2.0, 3.0, 4.0 );
-    mc::Vector3 v2_n = v2.getNormalized();
+    mc::Vector3 v2_n = v2.GetNormalized();
 
     EXPECT_NEAR( v2_n.x(), 0.371391, 1.0e-5 );
     EXPECT_NEAR( v2_n.y(), 0.557086, 1.0e-5 );
@@ -189,22 +189,22 @@ TEST_F(TestVector3, CanSetData)
 {
     mc::Vector3 v;
 
-    v.set( 1.0, 0.0, 0.0 );
+    v.Set( 1.0, 0.0, 0.0 );
     EXPECT_DOUBLE_EQ( v.x(), 1.0 );
     EXPECT_DOUBLE_EQ( v.y(), 0.0 );
     EXPECT_DOUBLE_EQ( v.z(), 0.0 );
 
-    v.set( 0.0, 1.0, 0.0 );
+    v.Set( 0.0, 1.0, 0.0 );
     EXPECT_DOUBLE_EQ( v.x(), 0.0 );
     EXPECT_DOUBLE_EQ( v.y(), 1.0 );
     EXPECT_DOUBLE_EQ( v.z(), 0.0 );
 
-    v.set( 0.0, 0.0, 1.0 );
+    v.Set( 0.0, 0.0, 1.0 );
     EXPECT_DOUBLE_EQ( v.x(), 0.0 );
     EXPECT_DOUBLE_EQ( v.y(), 0.0 );
     EXPECT_DOUBLE_EQ( v.z(), 1.0 );
 
-    v.set( 1.0, 2.0, 3.0 );
+    v.Set( 1.0, 2.0, 3.0 );
     EXPECT_DOUBLE_EQ( v.x(), 1.0 );
     EXPECT_DOUBLE_EQ( v.y(), 2.0 );
     EXPECT_DOUBLE_EQ( v.z(), 3.0 );

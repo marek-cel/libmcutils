@@ -52,7 +52,7 @@ TEST_F(TestVector4, CanGetNormalized)
     const double d1[] { 1.0, 2.0, 3.0, 4.0 };
     mc::Vector4 v1;
     v1.SetFromArray(d1);
-    mc::Vector4 v1_n = v1.getNormalized();
+    mc::Vector4 v1_n = v1.GetNormalized();
 
     EXPECT_NEAR( v1_n(0), 0.182574, 1.0e-5 );
     EXPECT_NEAR( v1_n(1), 0.365148, 1.0e-5 );

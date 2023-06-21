@@ -54,7 +54,7 @@ TEST_F(TestVector6, CanGetNormalized)
     double x1[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
     mc::Vector6 v1;
     v1.SetFromArray(x1);
-    mc::Vector6 v1_n = v1.getNormalized();
+    mc::Vector6 v1_n = v1.GetNormalized();
 
     EXPECT_NEAR( v1_n(0), 0.104828, 1.0e-5 );
     EXPECT_NEAR( v1_n(1), 0.209657, 1.0e-5 );
@@ -68,7 +68,7 @@ TEST_F(TestVector6, CanGetNormalized)
     double x2[] = { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0 };
     mc::Vector6 v2;
     v2.SetFromArray(x2);
-    mc::Vector6 v2_n = v2.getNormalized();
+    mc::Vector6 v2_n = v2.GetNormalized();
 
     EXPECT_NEAR( v2_n(0), 0.169638, 1.0e-5 );
     EXPECT_NEAR( v2_n(1), 0.254457, 1.0e-5 );

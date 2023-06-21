@@ -29,7 +29,7 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Vector6::getNormalized() const
+Vector6 Vector6::GetNormalized() const
 {
     Vector6 result(*this);
     result.Normalize();
