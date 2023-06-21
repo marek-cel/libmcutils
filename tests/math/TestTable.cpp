@@ -37,12 +37,12 @@ TEST_F(TestTable, CanDestruct)
 TEST_F(TestTable, CanInstantiate)
 {
     mc::Table tab1;
-    EXPECT_EQ( tab1.GetSize(), 1 );
+    EXPECT_EQ( tab1.size(), 1 );
     EXPECT_DOUBLE_EQ( tab1.GetValue(0.0), 0.0 );
     EXPECT_DOUBLE_EQ( tab1.GetValue(1.7), 0.0 );
 
     mc::Table tab2(2.2, 1.7);
-    EXPECT_EQ( tab2.GetSize(), 1 );
+    EXPECT_EQ( tab2.size(), 1 );
     EXPECT_DOUBLE_EQ( tab2.GetValue(0.0), 2.2 );
     EXPECT_DOUBLE_EQ( tab2.GetValue(1.7), 2.2 );
 }
@@ -57,7 +57,7 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromArray)
 
     mc::Table tab(key_values, table_data, 6);
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetValue(key_values[i]), table_data[i] );
     }
@@ -136,7 +136,7 @@ TEST_F(TestTable, CanGetSize)
 
     mc::Table tab(key_values, table_data);
 
-    EXPECT_EQ( tab.GetSize(), 6 );
+    EXPECT_EQ( tab.size(), 6 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +355,7 @@ TEST_F(TestTable, CanMultiplyKeys)
 
     tab.MultiplyKeys(coef);
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetKeyByIndex(i), key_values[i] * coef );
         EXPECT_DOUBLE_EQ( tab.GetValue(key_values[i] * coef), table_data[i] );
@@ -378,7 +378,7 @@ TEST_F(TestTable, CanMultiplyValues)
 
     tab.MultiplyValues(coef);
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetKeyByIndex(i), key_values[i] );
         EXPECT_DOUBLE_EQ( tab.GetValue(key_values[i]), table_data[i] * coef );
@@ -410,7 +410,7 @@ TEST_F(TestTable, CanSetDataFromArray)
     mc::Table tab;
     tab.SetData(key_values, table_data, 6);
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetValue(key_values[i]), table_data[i] );
     }
@@ -451,7 +451,7 @@ TEST_F(TestTable, CanSetFromString)
 
     EXPECT_TRUE( tab.IsValid() );
 
-    EXPECT_EQ( tab.GetSize(), 6 );
+    EXPECT_EQ( tab.size(), 6 );
 
     for ( int i = 0; i < 6; ++i )
     {
@@ -481,7 +481,7 @@ TEST_F(TestTable, CanAdd)
 
     tab = tab1 + tab2;
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetKeyByIndex(i), k0[i] );
         EXPECT_DOUBLE_EQ( tab.GetValue(k0[i]), t1[i] + t2[i] );
@@ -504,7 +504,7 @@ TEST_F(TestTable, CanMultiply)
 
     tab = t1 * coef;
 
-    for ( unsigned int i = 0; i < tab.GetSize(); ++i )
+    for ( unsigned int i = 0; i < tab.size(); ++i )
     {
         EXPECT_DOUBLE_EQ( tab.GetKeyByIndex(i), key_values[i] );
         EXPECT_DOUBLE_EQ( tab.GetValue(key_values[i]), table_data[i] * coef );

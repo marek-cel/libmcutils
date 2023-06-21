@@ -43,28 +43,22 @@ class MCUTILSAPI Table2
 {
 public:
 
+    /** @brief Copy constructor. */
+    Table2(const Table2& table);
+
+    /** @brief Move constructor. */
+    Table2(Table2&& table) noexcept;
+
     /**
-     * @brief Creates table with only one record.
+     * @brief Constructor.
+     * Creates table with only one record.
      * @param val record value
      * @param row_val row key value
      * @param col_val col key value
-     * @return
      */
-    static Table2 oneRecordTable( double val = 0.0,
-                                  double row_val = 0.0,
-                                  double col_val = 0.0 );
-
-    /** @brief Constructor. */
-    Table2() = default;
-
-    /** @brief Copy constructor. */
-    Table2( const Table2& table );
-
-    /** @brief Move constructor. */
-    Table2( Table2&& table ) noexcept;
-
-    /** @brief Destructor. */
-    ~Table2();
+    Table2(double val = 0.0,
+           double row_val = 0.0,
+           double col_val = 0.0);
 
     /**
      * @brief Constructor.
@@ -76,11 +70,11 @@ public:
      * @param rows number of rows
      * @param cols number of columns
      */
-    Table2( const double row_values[],
-            const double col_values[],
-            const double table_data[],
-            unsigned int rows,
-            unsigned int cols );
+    Table2(const double row_values[],
+           const double col_values[],
+           const double table_data[],
+           unsigned int rows,
+           unsigned int cols);
 
     /**
      * @brief Constructor.
@@ -90,19 +84,19 @@ public:
      * @param col_values columns key values ordered vector
      * @param table_data table values ordered vector
      */
-    Table2( const std::vector<double>& row_values,
-            const std::vector<double>& col_values,
-            const std::vector<double>& table_data );
+    Table2(const std::vector<double>& row_values,
+           const std::vector<double>& col_values,
+           const std::vector<double>& table_data);
 
-    inline unsigned int getRows() const { return rows_; }
-    inline unsigned int getCols() const { return cols_; }
+    /** @brief Destructor. */
+    ~Table2();
 
     /**
      * @brief Returns 1-dimensional table for the given col value.
      * @param colValue column key value
      * @return 1-dimensional table
      */
-    Table getTable( double col_value ) const;
+    Table GetTable(double col_value) const;
 
     /**
      * @brief Returns table value for the given keys.
@@ -112,7 +106,7 @@ public:
      * @param colValue column key value
      * @return interpolated value on success or NaN on failure
      */
-    double getValue( double row_value, double col_value ) const;
+    double GetValue(double row_value, double col_value) const;
 
     /**
      * @brief Returns table value for the given key index.
@@ -120,38 +114,38 @@ public:
      * @param colIndex col index
      * @return value on success or NaN on failure
      */
-    double getValueByIndex( unsigned int row_index, unsigned int col_index ) const;
+    double GetValueByIndex(unsigned int row_index, unsigned int col_index) const;
 
     /**
      * @brief Checks if table is valid.
      * @return returns true if size is greater than 0 and all data is valid
      */
-    bool isValid() const;
+    bool IsValid() const;
 
     /**
      * @brief Multiplies columns and rows values by the given factors.
      * @param f_rows rows factor
      * @param f_cols columns factor
      */
-    void multiplyRowsAndCols( double f_rows, double f_cols );
+    void MultiplyRowsAndCols(double f_rows, double f_cols);
 
     /**
      * @brief Multiplies rows values by the given factor.
      * @param factor given factor
      */
-    void multiplyRows( double factor );
+    void MultiplyRows(double factor);
 
     /**
      * @brief Multiplies columns values by the given factor.
      * @param factor given factor
      */
-    void multiplyCols( double factor );
+    void MultiplyCols(double factor);
 
     /**
      * @brief Multiplies values by the given factor.
      * @param factor given factor
      */
-    void multiplyValues( double factor );
+    void MultiplyValues(double factor);
 
     /**
      * @brief Sets table data.
@@ -162,11 +156,11 @@ public:
      * @param rows number of rows
      * @param cols number of columns
      */
-    void setData( const double row_values[],
-                  const double col_values[],
-                  const double table_data[],
-                  unsigned int rows,
-                  unsigned int cols );
+    void SetData(const double row_values[],
+                 const double col_values[],
+                 const double table_data[],
+                 unsigned int rows,
+                 unsigned int cols);
 
     /**
      * @brief Sets table data.
@@ -176,42 +170,51 @@ public:
      * @param col_values columns key values ordered vector
      * @param table_data table values ordered vector
      */
-    void setData( const std::vector<double>& row_values,
-                  const std::vector<double>& col_values,
-                  const std::vector<double>& table_data );
+    void SetData(const std::vector<double>& row_values,
+                 const std::vector<double>& col_values,
+                 const std::vector<double>& table_data);
 
     /**
      * @brief Sets table data from string.
      * Values in the given string should be separated with whitespaces.
      * @param str given string
      */
-    void setFromString( const char* str );
+    void SetFromString(const char* str);
 
     /**
      * @brief Returns string representation of the table.
      */
-    std::string toString();
+    std::string ToString();
+
+    inline unsigned int rows() const { return rows_; }
+    inline unsigned int cols() const { return cols_; }
 
     /** @brief Assignment operator. */
-    Table2& operator=( const Table2& table );
+    Table2& operator=(const Table2& table);
 
     /** @brief Move assignment operator. */
-    Table2& operator=( Table2&& table );
+    Table2& operator=(Table2&& table);
 
 private:
 
-    unsigned int rows_ { 0 };           ///< number of rows
-    unsigned int cols_ { 0 };           ///< number of columns
-    unsigned int size_ { 0 };           ///< number of table elements
+    unsigned int rows_ = 0;         ///< number of rows
+    unsigned int cols_ = 0;         ///< number of columns
+    unsigned int size_ = 0;         ///< number of table elements
 
-    double* row_values_ { nullptr };    ///< rows keys values
-    double* col_values_ { nullptr };    ///< columns keys values
-    double* table_data_ { nullptr };    ///< table data
+    double* row_values_ = nullptr;  ///< rows keys values
+    double* col_values_ = nullptr;  ///< columns keys values
+    double* table_data_ = nullptr;  ///< table data
 
-    double* inter_data_ { nullptr };    ///< interpolation data matrix
+    double* inter_data_ = nullptr;  ///< interpolation data matrix
+
+    /** Creates data tables. */
+    void CreateTables();
+
+    /** Deletes data tables. */
+    void DeleteTables();
 
     /** @brief Updates interpolation data due to table data. */
-    void updateInterpolationData();
+    void UpdateInterpolationData();
 };
 
 } // namespace mc

@@ -41,6 +41,7 @@ namespace mc
 
 Table::Table(double val, double key)
 {
+    size_ = 1;
     InitializeData(key, val);
 }
 
@@ -393,13 +394,16 @@ void Table::SetData(const double key_values[],
                     const double table_data[],
                     unsigned int size)
 {
+    size_ = 0;
     data_.clear();
 
     if ( size > 0 )
     {
-        for ( unsigned int i = 0; i < size; ++i )
+        size_ = size;
+
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            if ( i < size - 1 )
+            if ( i < size_ - 1 )
             {
                 InitializeData(key_values[i]   , table_data[i],
                                key_values[i+1] , table_data[i+1]);
@@ -417,17 +421,18 @@ void Table::SetData(const double key_values[],
 void Table::SetData(const std::vector<double>& key_values,
                     const std::vector<double>& table_data)
 {
+    size_ = 0;
     data_.clear();
 
     if ( key_values.size() == table_data.size() )
     {
-        unsigned int size = static_cast<unsigned int>( key_values.size() );
+        size_ = static_cast<unsigned int>( key_values.size() );
 
-        if ( size > 0 )
+        if ( size_ > 0 )
         {
-            for ( unsigned int i = 0; i < size; ++i )
+            for ( unsigned int i = 0; i < size_; ++i )
             {
-                if ( i < size - 1 )
+                if ( i < size_ - 1 )
                 {
                     InitializeData(key_values[i]   , table_data[i],
                                    key_values[i+1] , table_data[i+1]);
@@ -448,7 +453,7 @@ void Table::SetFromString(const char* str)
     std::vector<double> key_values_temp;
     std::vector<double> table_data_temp;
 
-    std::stringstream ss( String::stripSpaces( str ) );
+    std::stringstream ss(String::stripSpaces(str));
     bool valid = true;
 
     while ( !ss.eof() && valid )

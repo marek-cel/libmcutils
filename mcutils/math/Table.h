@@ -82,9 +82,6 @@ public:
      */
     double GetKeyByIndex(unsigned int index) const;
 
-    /** */
-    inline unsigned int GetSize() const { return static_cast<unsigned int>(data_.size()); }
-
     /**
      * @brief Returns key of minimum table value.
      * @return key of minimum table value
@@ -201,6 +198,8 @@ public:
      */
     std::string ToString();
 
+    inline unsigned int size() const { return size_; }
+
     /** @brief Addition operator. */
     Table operator+(const Table& table) const;
 
@@ -211,7 +210,8 @@ private:
 
     using Data = std::map<double,std::pair<double,double>>;
 
-    Data data_;     ///< table data
+    unsigned int size_ = 0;     ///< number of table elements
+    Data data_;                 ///< table data
 
     /**
      * @brief Initializes data with a given data set. Variant for every except the last entry.
