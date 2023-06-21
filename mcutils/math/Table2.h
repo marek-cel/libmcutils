@@ -208,10 +208,10 @@ private:
     double* inter_data_ = nullptr;  ///< interpolation data matrix
 
     /** Creates data tables. */
-    void CreateTables();
+    void CreateArrays();
 
     /** Deletes data tables. */
-    void DeleteTables();
+    void DeleteArrays();
 
     /** @brief Updates interpolation data due to table data. */
     void UpdateInterpolationData();

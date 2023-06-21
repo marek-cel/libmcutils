@@ -45,7 +45,7 @@ Table2::Table2(const Table2& table)
 {
     if ( size_ > 0 )
     {
-        CreateTables();
+        CreateArrays();
 
         for ( unsigned int i = 0; i < rows_; ++i ) row_values_[i] = table.row_values_[i];
         for ( unsigned int i = 0; i < cols_; ++i ) col_values_[i] = table.col_values_[i];
@@ -80,7 +80,7 @@ Table2::Table2(double val, double row_val, double col_val)
     cols_ = 1;
     size_ = 1;
 
-    CreateTables();
+    CreateArrays();
 
     row_values_[0] = row_val;
     col_values_[0] = col_val;
@@ -114,7 +114,7 @@ Table2::Table2(const std::vector<double>& row_values,
 
 Table2::~Table2()
 {
-    DeleteTables();
+    DeleteArrays();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -313,7 +313,7 @@ void Table2::SetData(const double row_values[],
                      unsigned int rows,
                      unsigned int cols)
 {
-    DeleteTables();
+    DeleteArrays();
 
     rows_ = rows;
     cols_ = cols;
@@ -321,7 +321,7 @@ void Table2::SetData(const double row_values[],
 
     if ( size_ > 0 )
     {
-        CreateTables();
+        CreateArrays();
 
         for ( unsigned int i = 0; i < rows_; ++i ) row_values_[i] = row_values[i];
         for ( unsigned int i = 0; i < cols_; ++i ) col_values_[i] = col_values[i];
@@ -342,7 +342,7 @@ void Table2::SetData(const std::vector<double>& row_values,
                      const std::vector<double>& col_values,
                      const std::vector<double>& table_data)
 {
-    DeleteTables();
+    DeleteArrays();
 
     if ( row_values.size() * col_values.size() == table_data.size() )
     {
@@ -353,7 +353,7 @@ void Table2::SetData(const std::vector<double>& row_values,
             rows_ = static_cast<unsigned int>(row_values.size());
             cols_ = static_cast<unsigned int>(col_values.size());
 
-            CreateTables();
+            CreateArrays();
 
             for ( unsigned int i = 0; i < rows_; ++i ) row_values_[i] = row_values[i];
             for ( unsigned int i = 0; i < cols_; ++i ) col_values_[i] = col_values[i];
@@ -461,7 +461,7 @@ Table2& Table2::operator=(const Table2& table)
 {
     if ( this != &table )
     {
-        DeleteTables();
+        DeleteArrays();
 
         rows_ = table.rows_;
         cols_ = table.cols_;
@@ -469,7 +469,7 @@ Table2& Table2::operator=(const Table2& table)
 
         if ( size_ > 0 )
         {
-            CreateTables();
+            CreateArrays();
 
             for ( unsigned int i = 0; i < rows_; ++i ) row_values_[i] = table.row_values_[i];
             for ( unsigned int i = 0; i < cols_; ++i ) col_values_[i] = table.col_values_[i];
@@ -489,7 +489,7 @@ Table2& Table2::operator=(const Table2& table)
 
 Table2& Table2::operator=(Table2&& table)
 {
-    DeleteTables();
+    DeleteArrays();
 
     rows_ = std::exchange(table.rows_, 0);
     cols_ = std::exchange(table.cols_, 0);
@@ -506,7 +506,7 @@ Table2& Table2::operator=(Table2&& table)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table2::CreateTables()
+void Table2::CreateArrays()
 {
     row_values_ = new double [rows_];
     col_values_ = new double [cols_];
@@ -516,7 +516,7 @@ void Table2::CreateTables()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table2::DeleteTables()
+void Table2::DeleteArrays()
 {
     if ( row_values_ ) { delete [] row_values_; } row_values_ = nullptr;
     if ( col_values_ ) { delete [] col_values_; } col_values_ = nullptr;
