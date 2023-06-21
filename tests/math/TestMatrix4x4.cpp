@@ -349,7 +349,7 @@ TEST_F(TestMatrix4x4, CanMultiplyByVector)
     m1.SetFromArray(x1 );
 
     mc::Vector4 v2;
-    v2.setElements(x2);
+    v2.SetFromArray(x2);
 
     mc::Vector4 v = m1 * v2;
 

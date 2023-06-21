@@ -76,7 +76,7 @@ Quaternion::Quaternion(const Angles& angl)
 
 Quaternion::Quaternion(double angl, const Vector3& vect)
 {
-    double len_inv = 1.0 / vect.getLength();
+    double len_inv = 1.0 / vect.GetLength();
 
     double cosAngl2 = cos(0.5 * angl);
     double sinAngl2 = sin(0.5 * angl);

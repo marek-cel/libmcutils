@@ -53,31 +53,31 @@ TEST_F(TestVector6, CanGetNormalized)
 
     double x1[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.SetFromArray(x1);
     mc::Vector6 v1_n = v1.getNormalized();
 
-    EXPECT_NEAR( v1_n( 0 ), 0.104828, 1.0e-5 );
-    EXPECT_NEAR( v1_n( 1 ), 0.209657, 1.0e-5 );
-    EXPECT_NEAR( v1_n( 2 ), 0.314485, 1.0e-5 );
-    EXPECT_NEAR( v1_n( 3 ), 0.419314, 1.0e-5 );
-    EXPECT_NEAR( v1_n( 4 ), 0.524142, 1.0e-5 );
-    EXPECT_NEAR( v1_n( 5 ), 0.628971, 1.0e-5 );
+    EXPECT_NEAR( v1_n(0), 0.104828, 1.0e-5 );
+    EXPECT_NEAR( v1_n(1), 0.209657, 1.0e-5 );
+    EXPECT_NEAR( v1_n(2), 0.314485, 1.0e-5 );
+    EXPECT_NEAR( v1_n(3), 0.419314, 1.0e-5 );
+    EXPECT_NEAR( v1_n(4), 0.524142, 1.0e-5 );
+    EXPECT_NEAR( v1_n(5), 0.628971, 1.0e-5 );
 
-    EXPECT_DOUBLE_EQ( v1_n.getLength(), 1.0 );
+    EXPECT_DOUBLE_EQ( v1_n.GetLength(), 1.0 );
 
     double x2[] = { 2.0, 3.0, 4.0, 5.0, 6.0, 7.0 };
     mc::Vector6 v2;
-    v2.setElements( x2 );
+    v2.SetFromArray(x2);
     mc::Vector6 v2_n = v2.getNormalized();
 
-    EXPECT_NEAR( v2_n( 0 ), 0.169638, 1.0e-5 );
-    EXPECT_NEAR( v2_n( 1 ), 0.254457, 1.0e-5 );
-    EXPECT_NEAR( v2_n( 2 ), 0.339276, 1.0e-5 );
-    EXPECT_NEAR( v2_n( 3 ), 0.424094, 1.0e-5 );
-    EXPECT_NEAR( v2_n( 4 ), 0.508913, 1.0e-5 );
-    EXPECT_NEAR( v2_n( 5 ), 0.593732, 1.0e-5 );
+    EXPECT_NEAR( v2_n(0), 0.169638, 1.0e-5 );
+    EXPECT_NEAR( v2_n(1), 0.254457, 1.0e-5 );
+    EXPECT_NEAR( v2_n(2), 0.339276, 1.0e-5 );
+    EXPECT_NEAR( v2_n(3), 0.424094, 1.0e-5 );
+    EXPECT_NEAR( v2_n(4), 0.508913, 1.0e-5 );
+    EXPECT_NEAR( v2_n(5), 0.593732, 1.0e-5 );
 
-    EXPECT_DOUBLE_EQ( v2_n.getLength(), 1.0 );
+    EXPECT_DOUBLE_EQ( v2_n.GetLength(), 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -102,13 +102,13 @@ TEST_F(TestVector6, CanAssign)
     mc::Vector6 v6;
     mc::Vector6 v7;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
-    v3.setElements( x3 );
-    v4.setElements( x4 );
-    v5.setElements( x5 );
-    v6.setElements( x6 );
-    v7.setElements( x7 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
+    v3.SetFromArray(x3 );
+    v4.SetFromArray(x4 );
+    v5.SetFromArray(x5 );
+    v6.SetFromArray(x6 );
+    v7.SetFromArray(x7 );
 
     v = v1;
     EXPECT_DOUBLE_EQ( v( 0 ), 1.0 );
@@ -181,10 +181,10 @@ TEST_F(TestVector6, CanAdd)
     mc::Vector6 v3;
     mc::Vector6 v4;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
-    v3.setElements( x3 );
-    v4.setElements( x4 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
+    v3.SetFromArray(x3 );
+    v4.SetFromArray(x4 );
 
     mc::Vector6 v12 = v1 + v2;
     mc::Vector6 v34 = v3 + v4;
@@ -214,8 +214,8 @@ TEST_F(TestVector6, CanNegate)
     mc::Vector6 v1;
     mc::Vector6 v2;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
 
     mc::Vector6 v1n = -v1;
     mc::Vector6 v2n = -v2;
@@ -245,8 +245,8 @@ TEST_F(TestVector6, CanSubstract)
     mc::Vector6 v1;
     mc::Vector6 v2;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
 
     mc::Vector6 v = v1 - v2;
 
@@ -265,7 +265,7 @@ TEST_F(TestVector6, CanMultiplyByScalar)
     double x1[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
 
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.SetFromArray(x1 );
 
     mc::Vector6 v = v1 * 2.0;
 
@@ -284,7 +284,7 @@ TEST_F(TestVector6, CanDivideByScalar)
     double x1[] = { 2.0, 4.0, 6.0, 8.0, 10.0, 12.0 };
 
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.SetFromArray(x1 );
 
     mc::Vector6 v = v1 / 2.0;
 
@@ -306,8 +306,8 @@ TEST_F(TestVector6, CanUnaryAdd)
     mc::Vector6 v1;
     mc::Vector6 v2;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
 
     v1 += v2;
 
@@ -329,8 +329,8 @@ TEST_F(TestVector6, CanUnarySubstract)
     mc::Vector6 v1;
     mc::Vector6 v2;
 
-    v1.setElements( x1 );
-    v2.setElements( x2 );
+    v1.SetFromArray(x1 );
+    v2.SetFromArray(x2 );
 
     v1 -= v2;
 
@@ -349,7 +349,7 @@ TEST_F(TestVector6, CanUnaryMultiplyByScalar)
     double x1[] = { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
 
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.SetFromArray(x1 );
 
     v1 *= 2.0;
 
@@ -368,7 +368,7 @@ TEST_F(TestVector6, CanUnaryDivideByScalar)
     double x1[] = { 2.0, 4.0, 6.0, 8.0, 10.0, 12.0 };
 
     mc::Vector6 v1;
-    v1.setElements( x1 );
+    v1.SetFromArray(x1 );
 
     v1 /= 2.0;
 

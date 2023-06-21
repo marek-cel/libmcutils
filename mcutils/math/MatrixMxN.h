@@ -79,7 +79,7 @@ public:
     }
 
     /**
-     * @brief Gets matrix elements as array.
+     * @brief Puts matrix elements into given array.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -89,7 +89,7 @@ public:
      * n_col - number of columns
      * @param elements output array
      */
-    void GetIntoArray(double elements[])
+    void PutIntoArray(double elements[])
     {
         std::memcpy(elements, elements_, sizeof(elements_));
     }
@@ -140,7 +140,7 @@ public:
             elements_[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
-        std::stringstream ss( String::stripSpaces(str) );
+        std::stringstream ss(String::stripSpaces(str));
         bool valid = true;
 
         for ( unsigned int i = 0; i < size_; ++i )

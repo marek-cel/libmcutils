@@ -29,31 +29,31 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const Vector3 Vector3::ex_ = Vector3( 1.0, 0.0, 0.0 );
-const Vector3 Vector3::ey_ = Vector3( 0.0, 1.0, 0.0 );
-const Vector3 Vector3::ez_ = Vector3( 0.0, 0.0, 1.0 );
+const Vector3 Vector3::ex_ = Vector3(1.0, 0.0, 0.0);
+const Vector3 Vector3::ey_ = Vector3(0.0, 1.0, 0.0);
+const Vector3 Vector3::ez_ = Vector3(0.0, 0.0, 1.0);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3::Vector3( double x, double y, double z )
+Vector3::Vector3(double x, double y, double z)
 {
-    set( x, y, z );
+    set(x, y, z);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::getNormalized() const
 {
-    Vector3 result( *this );
+    Vector3 result(*this);
 
-    result.normalize();
+    result.Normalize();
 
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector3::set( double x, double y, double z )
+void Vector3::set(double x, double y, double z)
 {
     elements_[0] = x;
     elements_[1] = y;
@@ -62,10 +62,10 @@ void Vector3::set( double x, double y, double z )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator+( const Vector3& vect ) const
+Vector3 Vector3::operator+(const Vector3& vect) const
 {
-    Vector3 result( *this );
-    result.add( vect );
+    Vector3 result(*this);
+    result.Add(vect);
     return result;
 }
 
@@ -73,48 +73,48 @@ Vector3 Vector3::operator+( const Vector3& vect ) const
 
 Vector3 Vector3::operator-() const
 {
-    Vector3 result( *this );
-    result.negate();
+    Vector3 result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator-( const Vector3& vect ) const
+Vector3 Vector3::operator-(const Vector3& vect) const
 {
-    Vector3 result( *this );
-    result.substract( vect );
+    Vector3 result(*this);
+    result.Substract(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator*( double value ) const
+Vector3 Vector3::operator*(double value) const
 {
-    Vector3 result( *this );
-    result.multiplyByValue( value );
+    Vector3 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator/( double value ) const
+Vector3 Vector3::operator/(double value) const
 {
-    Vector3 result( *this );
-    result.divideByValue( value );
+    Vector3 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Vector3::operator*( const Vector3& vect ) const
+double Vector3::operator*(const Vector3& vect) const
 {
-    return ( x()*vect.x() + y()*vect.y() + z()*vect.z() );
+    return x()*vect.x() + y()*vect.y() + z()*vect.z();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator%( const Vector3& vect ) const
+Vector3 Vector3::operator%(const Vector3& vect) const
 {
     Vector3 result;
 
@@ -127,39 +127,39 @@ Vector3 Vector3::operator%( const Vector3& vect ) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator+=( const Vector3& vect )
+Vector3& Vector3::operator+=(const Vector3& vect)
 {
-    add( vect );
+    Add(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator-=( const Vector3& vect )
+Vector3& Vector3::operator-=(const Vector3& vect)
 {
-    substract( vect );
+    Substract(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator*=( double value )
+Vector3& Vector3::operator*=(double value)
 {
-    multiplyByValue( value );
+    MultiplyByValue(value);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator/=( double value )
+Vector3& Vector3::operator/=(double value)
 {
-    divideByValue( value );
+    DivideByValue(value);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator%=( const Vector3& vect )
+Vector3& Vector3::operator%=(const Vector3& vect)
 {
     *this = *this % vect;
     return *this;

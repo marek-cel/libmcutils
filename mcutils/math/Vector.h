@@ -76,10 +76,10 @@ public:
     double GetElement(unsigned int index) const;
 
     /**
-     * @brief Gets vector elements as array.
+     * @brief Puts vector elements into given array.
      * @param elements output array
      */
-    void GetIntoArray(double elements[]) const;
+    void PutIntoArray(double elements[]) const;
 
     /**
      * @brief Sets vector element of given indicies.

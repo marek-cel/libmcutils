@@ -66,7 +66,7 @@ Result solve( const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
             if ( r < SIZE - 1 )
             {
                 mtr_temp.SwapRows(r, r+1);
-                rhs_temp.swapRows(r, r+1);
+                rhs_temp.SwapRows(r, r+1);
             }
             else
             {

@@ -117,7 +117,7 @@ double Vector::GetElement(unsigned int index) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector::GetIntoArray(double elements[]) const
+void Vector::PutIntoArray(double elements[]) const
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {

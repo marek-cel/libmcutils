@@ -101,7 +101,7 @@ TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngleAndVector)
     EXPECT_NEAR( q3.ez(), 0.38268, 1.0e-5 );
 
     mc::Vector3 v111(1.0, 1.0, 1.0);
-    v111.normalize();
+    v111.Normalize();
     mc::Quaternion q4(M_PI_4, v111);
 
     EXPECT_NEAR( q4.e0(), 0.92388, 1.0e-5 );
@@ -183,7 +183,7 @@ TEST_F(TestQuaternion, CanInverse)
     // tests/math/octave/test_quaternion.m
 
     mc::Vector3 v111(1.0, 1.0, 1.0);
-    v111.normalize();
+    v111.Normalize();
 
     mc::Quaternion q0(M_PI_4, v111);
     const mc::Quaternion qr(-M_PI_4, v111);
@@ -331,7 +331,7 @@ TEST_F(TestQuaternion, CanGetInverted)
     // tests/math/octave/test_quaternion.m
 
     mc::Vector3 v111(1.0, 1.0, 1.0);
-    v111.normalize();
+    v111.Normalize();
 
     mc::Quaternion q0(M_PI_4, v111);
     const mc::Quaternion qc(q0);
@@ -363,7 +363,7 @@ TEST_F(TestQuaternion, CanGetDerivative)
     // tests/math/octave/test_quaternion.m
 
     mc::Vector3 v111(1.0, 1.0, 1.0);
-    v111.normalize();
+    v111.Normalize();
 
     mc::Quaternion q(M_PI_4, v111);
     mc::Vector3 omega(1.0, 2.0, 3.0);
@@ -384,7 +384,7 @@ TEST_F(TestQuaternion, CanGetDerivativeLambdaGreaterThanZero)
     // tests/math/octave/test_quaternion.m
 
     mc::Vector3 v111(1.0, 1.0, 1.0);
-    v111.normalize();
+    v111.Normalize();
 
     mc::Quaternion q(M_PI_4, v111);
     mc::Vector3 omega(1.0, 2.0, 3.0);

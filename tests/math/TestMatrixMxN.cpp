@@ -156,7 +156,7 @@ TEST_F(TestMatrixMxN, CanGetElement)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestMatrixMxN, CanGetIntoArray)
+TEST_F(TestMatrixMxN, CanPutIntoArray)
 {
     double x3[] { 1.0, 2.0, 3.0,
                   4.0, 5.0, 6.0,
@@ -186,9 +186,9 @@ TEST_F(TestMatrixMxN, CanGetIntoArray)
     double xx4[16] = { 0.0 };
     double xx6[36] = { 0.0 };
 
-    m3.GetIntoArray(xx3);
-    m4.GetIntoArray(xx4);
-    m6.GetIntoArray(xx6);
+    m3.PutIntoArray(xx3);
+    m4.PutIntoArray(xx4);
+    m6.PutIntoArray(xx6);
 
     EXPECT_DOUBLE_EQ( xx3[0], x3[0] );
     EXPECT_DOUBLE_EQ( xx3[1], x3[1] );

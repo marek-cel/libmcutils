@@ -550,7 +550,7 @@ TEST_F(TestMatrix6x6, CanMultiplyByVector)
     m0.SetFromArray(x0);
 
     mc::Vector6 v1;
-    v1.setElements(x1);
+    v1.SetFromArray(x1);
 
     mc::Vector6 v = m0 * v1;
 

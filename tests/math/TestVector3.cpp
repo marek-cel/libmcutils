@@ -171,7 +171,7 @@ TEST_F(TestVector3, CanGetNormalized)
     EXPECT_NEAR( v1_n.y(), 0.534522, 1.0e-5 );
     EXPECT_NEAR( v1_n.z(), 0.801784, 1.0e-5 );
 
-    EXPECT_DOUBLE_EQ( v1_n.getLength(), 1.0 );
+    EXPECT_DOUBLE_EQ( v1_n.GetLength(), 1.0 );
 
     mc::Vector3 v2( 2.0, 3.0, 4.0 );
     mc::Vector3 v2_n = v2.getNormalized();
@@ -180,7 +180,7 @@ TEST_F(TestVector3, CanGetNormalized)
     EXPECT_NEAR( v2_n.y(), 0.557086, 1.0e-5 );
     EXPECT_NEAR( v2_n.z(), 0.742781, 1.0e-5 );
 
-    EXPECT_DOUBLE_EQ( v2_n.getLength(), 1.0 );
+    EXPECT_DOUBLE_EQ( v2_n.GetLength(), 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

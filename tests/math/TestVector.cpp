@@ -195,7 +195,7 @@ TEST_F(TestVector, CanGetElement)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-TEST_F(TestVector, CanGetIntoArray)
+TEST_F(TestVector, CanPutIntoArray)
 {
     mc::Vector v1(4);
 
@@ -206,7 +206,7 @@ TEST_F(TestVector, CanGetIntoArray)
 
     double x[4];
 
-    v1.GetIntoArray(x);
+    v1.PutIntoArray(x);
 
     EXPECT_DOUBLE_EQ( x[0], 1.0 );
     EXPECT_DOUBLE_EQ( x[1], 2.0 );

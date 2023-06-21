@@ -31,19 +31,17 @@ namespace mc
 
 Vector4 Vector4::getNormalized() const
 {
-    Vector4 result( *this );
-
-    result.normalize();
-
+    Vector4 result(*this);
+    result.Normalize();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator+( const Vector4& vect ) const
+Vector4 Vector4::operator+(const Vector4& vect) const
 {
-    Vector4 result( *this );
-    result.add( vect );
+    Vector4 result(*this);
+    result.Add(vect);
     return result;
 }
 
@@ -51,67 +49,67 @@ Vector4 Vector4::operator+( const Vector4& vect ) const
 
 Vector4 Vector4::operator-() const
 {
-    Vector4 result( *this );
-    result.negate();
+    Vector4 result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator-( const Vector4& vect ) const
+Vector4 Vector4::operator-(const Vector4& vect) const
 {
-    Vector4 result( *this );
-    result.substract( vect );
+    Vector4 result(*this);
+    result.Substract(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator*( double value ) const
+Vector4 Vector4::operator*(double value) const
 {
-    Vector4 result( *this );
-    result.multiplyByValue( value );
+    Vector4 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator/( double value ) const
+Vector4 Vector4::operator/(double value) const
 {
-    Vector4 result( *this );
-    result.divideByValue( value );
+    Vector4 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator+=( const Vector4& vect )
+Vector4& Vector4::operator+=(const Vector4& vect)
 {
-    add( vect );
+    Add(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator-=( const Vector4& vect )
+Vector4& Vector4::operator-=(const Vector4& vect)
 {
-    substract( vect );
+    Substract(vect);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator*=( double value )
+Vector4& Vector4::operator*=(double value)
 {
-    multiplyByValue( value );
+    MultiplyByValue(value);
     return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator/=( double value )
+Vector4& Vector4::operator/=(double value)
 {
-    divideByValue( value );
+    DivideByValue(value);
     return *this;
 }
 
