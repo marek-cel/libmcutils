@@ -64,6 +64,7 @@ set( SOURCES
 
     misc/TestCheck.cpp
     misc/TestLog.cpp
+    misc/TestMapUtils.cpp
     misc/TestString.cpp
     misc/TestUnits.cpp
 
