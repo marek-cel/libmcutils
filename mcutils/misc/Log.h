@@ -117,8 +117,8 @@ private:
      * to Random class instance.
      */
     Log() = default;
-    Log(const Log&) = default;
-    Log(Log&&) = default;
+    Log(const Log&) = delete;
+    Log(Log&&) = delete;
 
     /**
      * @brief Prints log message.

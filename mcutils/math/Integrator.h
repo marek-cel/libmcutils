@@ -51,9 +51,9 @@ public:
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
     Integrator() = default;
-    Integrator(const Integrator&) = default;
+    Integrator(const Integrator&) = delete;
     Integrator(Integrator&&) = default;
-    Integrator& operator=(const Integrator&) = default;
+    Integrator& operator=(const Integrator&) = delete;
     Integrator& operator=(Integrator&&) = default;
     virtual ~Integrator() = default;
     // LCOV_EXCL_STOP

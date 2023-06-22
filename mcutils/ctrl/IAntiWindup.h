@@ -38,9 +38,9 @@ public:
     // LCOV_EXCL_START
     // excluded from coverage report due to deleting destructor calling issues
     IAntiWindup() = default;
-    IAntiWindup(const IAntiWindup&) = default;
+    IAntiWindup(const IAntiWindup&) = delete;
     IAntiWindup(IAntiWindup&&) = default;
-    IAntiWindup& operator=(const IAntiWindup&) = default;
+    IAntiWindup& operator=(const IAntiWindup&) = delete;
     IAntiWindup& operator=(IAntiWindup&&) = default;
     virtual ~IAntiWindup() = default;
     // LCOV_EXCL_STOP
