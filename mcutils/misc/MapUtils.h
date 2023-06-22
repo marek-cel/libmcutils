@@ -39,7 +39,7 @@ namespace mc
  * @brief Adds item.
  * @param key
  * @param item
- * @return returns sl::Success on success and sl::Failure on failure
+ * @return returns mc::Result::Success on success and mc::Result::Failure on failure
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
 Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)

@@ -42,7 +42,7 @@ namespace mc { namespace GaussJordan
  * @param rhs right hand size vector
  * @param x result vector
  * @param eps minimum value treated as not-zero
- * @return sl::Success on success and sl::Failure on failure
+ * @return mc::Result::Success on success and mc::Result::Failure on failure
  *
  * <h3>Refernces:</h3>
  * <ul>
