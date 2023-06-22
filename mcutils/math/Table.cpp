@@ -453,7 +453,7 @@ void Table::SetFromString(const char* str)
     std::vector<double> key_values_temp;
     std::vector<double> table_data_temp;
 
-    std::stringstream ss(String::stripSpaces(str));
+    std::stringstream ss(String::StripSpaces(str));
     bool valid = true;
 
     while ( !ss.eof() && valid )

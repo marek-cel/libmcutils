@@ -155,7 +155,7 @@ public:
             elements_[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
-        std::stringstream ss(String::stripSpaces(str));
+        std::stringstream ss(String::StripSpaces(str));
         bool valid = true;
 
         for ( unsigned int i = 0; i < size_; ++i )

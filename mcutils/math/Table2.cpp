@@ -377,8 +377,8 @@ void Table2::SetFromString(const char* str)
     std::vector<double> col_values_tmp;
     std::vector<double> table_data_tmp;
 
-    std::stringstream ss(String::stripSpaces(str));
-    std::stringstream sl(String::getFirstLine(ss.str()));
+    std::stringstream ss(String::StripSpaces(str));
+    std::stringstream sl(String::GetFirstLine(ss.str()));
 
     bool valid = true;
 

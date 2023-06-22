@@ -38,88 +38,90 @@ namespace mc { namespace String
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string getFirstLine( const std::string& str )
+std::string GetFirstLine(const std::string& str)
 {
-    std::istringstream iss( str );
+    std::istringstream iss(str);
     std::string firstLine;
-    std::getline( iss, firstLine );
+    std::getline(iss, firstLine);
 
     return firstLine;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int icompare( const std::string& str_1, const std::string& str_2 )
+int Compare(const std::string& str_1, const std::string& str_2,
+            bool case_sensitive)
 {
-    std::string strTemp_1 = String::toLower( str_1 );
-    std::string strTemp_2 = String::toLower( str_2 );
+    std::string strTemp_1 = str_1;
+    std::string strTemp_2 = str_2;
 
-    return strTemp_1.compare( strTemp_2 );
+    if ( !case_sensitive )
+    {
+        strTemp_1 = String::ToLower(str_1);
+        strTemp_2 = String::ToLower(str_2);
+    }
+
+    return strTemp_1.compare(strTemp_2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::vector<std::string> splitString( const std::string& str,
-                                      const std::string& sep )
+std::vector<std::string> SplitString(const std::string& str,
+                                     const std::string& sep)
 {
-    std::vector< std::string > result;
+    std::vector<std::string> result;
 
     std::string temp = str;
-
     size_t pos = 0;
     std::string token;
-
     while ( ( pos = temp.find( sep ) ) != std::string::npos )
     {
-        token = temp.substr( 0, pos );
-        result.push_back( token );
-        temp.erase( 0, pos + 1 );
+        token = temp.substr(0, pos);
+        result.push_back(token);
+        temp.erase(0, pos + 1);
     }
 
-    result.push_back( temp );
+    result.push_back(temp);
 
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripLeadingSpaces( const std::string& str )
+std::string StripLeadingSpaces(const std::string& str)
 {
-    unsigned int offset = 0;
-
+    std::string::size_type offset = 0;
     for ( unsigned int i = 0; i < str.size(); ++i )
     {
-        if ( !isspace( str.c_str()[ i ] ) )
+        if ( !isspace(str.c_str()[i]) )
         {
             break;
         }
-
         offset++;
     }
 
-    return str.substr( offset );
+    return str.substr(offset);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripTrailingSpaces( const std::string& str )
+std::string StripTrailingSpaces(const std::string& str)
 {
     std::string::size_type offset = 0;
-
     for ( unsigned int i = 0; i < str.size(); ++i )
     {
-        if ( !isspace( str.c_str()[ i ] ) )
+        if ( !isspace(str.c_str()[i]) )
         {
-            offset = i;
+            offset = static_cast<std::string::size_type>(i);
         }
     }
 
-    return str.substr( 0, offset + 1 );
+    return str.substr(0, offset + 1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string stripSpaces( const std::string& str )
+std::string StripSpaces(const std::string& str)
 {
     std::string::size_type offset_l = 0;
     std::string::size_type offset_t = 0;
@@ -128,7 +130,7 @@ std::string stripSpaces( const std::string& str )
 
     for ( unsigned int i = 0; i < str.size(); ++i )
     {
-        if ( !isspace( str.c_str()[ i ] ) )
+        if ( !isspace( str.c_str()[i] ) )
         {
             offset_t = i;
             l_passed = true;
@@ -139,18 +141,17 @@ std::string stripSpaces( const std::string& str )
         }
     }
 
-    return str.substr( offset_l, offset_t - offset_l + 1 );
+    return str.substr(offset_l, offset_t - offset_l + 1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool toBool( const std::string& str, bool def )
+bool ToBool(const std::string& str, bool def)
 {
     bool result = def;
     int temp = std::numeric_limits<int>::quiet_NaN();
 
-    std::stringstream ss( str );
-
+    std::stringstream ss(str);
     ss >> temp;
 
     if ( IsValid(temp) )
@@ -163,13 +164,12 @@ bool toBool( const std::string& str, bool def )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-int toInt( const std::string& str, int def )
+int ToInt(const std::string& str, int def)
 {
     int result = def;
     int temp = std::numeric_limits<int>::quiet_NaN();
 
-    std::stringstream ss( str );
-
+    std::stringstream ss(str);
     ss >> temp;
 
     if ( IsValid(temp) )
@@ -182,13 +182,12 @@ int toInt( const std::string& str, int def )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double toDouble( const std::string& str, double def )
+double ToDouble(const std::string& str, double def)
 {
     double result = def;
     double temp = std::numeric_limits<double>::quiet_NaN();
 
-    std::stringstream ss( str );
-
+    std::stringstream ss(str);
     ss >> temp;
 
     if ( IsValid(temp) )
@@ -201,49 +200,42 @@ double toDouble( const std::string& str, double def )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toString( int val )
+std::string ToString(int val)
 {
     std::stringstream ss;
-
     ss << val;
-
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toString( float val )
+std::string ToString(float val)
 {
     std::stringstream ss;
-
     ss << val;
-
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toString( double val )
+std::string ToString(double val)
 {
     std::stringstream ss;
-
     ss << val;
-
     return ss.str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toLower( const std::string& str )
+std::string ToLower(const std::string& str)
 {
     std::string result;
     result.clear();
 
-    unsigned int length = static_cast< unsigned int >( str.length() );
-
+    unsigned int length = static_cast<unsigned int>(str.length());
     for ( unsigned int i = 0; i < length; ++i )
     {
-        result += static_cast<char>( tolower( str.c_str()[ i ] ) );
+        result += static_cast<char>( tolower(str.c_str()[i]) );
     }
 
     return result;
@@ -251,16 +243,15 @@ std::string toLower( const std::string& str )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::string toUpper( const std::string& str )
+std::string ToUpper(const std::string& str)
 {
     std::string result;
     result.clear();
 
-    unsigned int length = static_cast< unsigned int >( str.length() );
-
+    unsigned int length = static_cast<unsigned int>(str.length());
     for ( unsigned int i = 0; i < length; ++i )
     {
-        result += static_cast<char>( toupper( str.c_str()[ i ] ) );
+        result += static_cast<char>( toupper(str.c_str()[i]) );
     }
 
     return result;

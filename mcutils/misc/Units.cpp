@@ -34,111 +34,111 @@ namespace mc { namespace Units
 Units::Converter getUnitConverter( const char* name )
 {
     // angle
-    if ( 0 == String::icompare( name, "rad" ) )
+    if ( 0 == String::Compare(name, "rad") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "deg" ) )
+    else if ( 0 == String::Compare(name, "deg") )
         return &deg2rad;
 
     // length
-    else if ( 0 == String::icompare( name, "m" ) )
+    else if ( 0 == String::Compare(name, "m") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "ft" ) )
+    else if ( 0 == String::Compare(name, "ft") )
         return &ft2m;
-    else if ( 0 == String::icompare( name, "in" ) )
+    else if ( 0 == String::Compare(name, "in") )
         return &in2m;
-    else if ( 0 == String::icompare( name, "km" ) )
+    else if ( 0 == String::Compare(name, "km") )
         return &km2m;
-    else if ( 0 == String::icompare( name, "nmi" ) )
+    else if ( 0 == String::Compare(name, "nmi") )
         return &nmi2m;
 
     // area
-    else if ( 0 == String::icompare( name, "sqm" ) )
+    else if ( 0 == String::Compare(name, "sqm") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "sqft" ) )
+    else if ( 0 == String::Compare(name, "sqft") )
         return &sqft2sqm;
 
     // volume
-    else if ( 0 == String::icompare( name, "cum" ) )
+    else if ( 0 == String::Compare(name, "cum") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "cuft" ) )
+    else if ( 0 == String::Compare(name, "cuft") )
         return &cuft2cum;
-    else if ( 0 == String::icompare( name, "cuin" ) )
+    else if ( 0 == String::Compare(name, "cuin") )
         return &cuin2cum;
-    else if ( 0 == String::icompare( name, "l" ) )
+    else if ( 0 == String::Compare(name, "l") )
         return &l2cum;
 
     // velocity
-    else if ( 0 == String::icompare( name, "mps" ) )
+    else if ( 0 == String::Compare(name, "mps") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "fpm" ) )
+    else if ( 0 == String::Compare(name, "fpm") )
         return &fpm2mps;
-    else if ( 0 == String::icompare( name, "fps" ) )
+    else if ( 0 == String::Compare(name, "fps") )
         return &fps2mps;
-    else if ( 0 == String::icompare( name, "kmh" ) )
+    else if ( 0 == String::Compare(name, "kmh") )
         return &kmh2mps;
-    else if ( 0 == String::icompare( name, "kts" ) )
+    else if ( 0 == String::Compare(name, "kts") )
         return &kts2mps;
 
     // angular velocity
-    else if ( 0 == String::icompare( name, "rad/s" ) )
+    else if ( 0 == String::Compare(name, "rad/s") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "deg/s" ) )
+    else if ( 0 == String::Compare(name, "deg/s") )
         return &deg2rad;
-    else if ( 0 == String::icompare( name, "rpm" ) )
+    else if ( 0 == String::Compare(name, "rpm") )
         return &rpm2rad_s;
 
     // mass
-    else if ( 0 == String::icompare( name, "kg" ) )
+    else if ( 0 == String::Compare(name, "kg") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "lb" ) )
+    else if ( 0 == String::Compare(name, "lb") )
         return &lb2kg;
 
     // force
-    else if ( 0 == String::icompare( name, "N" ) )
+    else if ( 0 == String::Compare(name, "N") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "lbf" ) )
+    else if ( 0 == String::Compare(name, "lbf") )
         return &lbf2n;
 
     // pressure
-    else if ( 0 == String::icompare( name, "Pa" ) )
+    else if ( 0 == String::Compare(name, "Pa") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "psf" ) )
+    else if ( 0 == String::Compare(name, "psf") )
         return &psf2pa;
-    else if ( 0 == String::icompare( name, "psi" ) )
+    else if ( 0 == String::Compare(name, "psi") )
         return &psi2pa;
-    else if ( 0 == String::icompare( name, "inHg" ) )
+    else if ( 0 == String::Compare(name, "inHg") )
         return &inhg2pa;
-    else if ( 0 == String::icompare( name, "mb" ) )
+    else if ( 0 == String::Compare(name, "mb") )
         return &mb2pa;
 
     // power
-    else if ( 0 == String::icompare( name, "W" ) )
+    else if ( 0 == String::Compare(name, "W") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "PS" ) )
+    else if ( 0 == String::Compare(name, "PS") )
         return &ps2w;
-    else if ( 0 == String::icompare( name, "hp" ) )
+    else if ( 0 == String::Compare(name, "hp") )
         return &hp2w;
-    else if ( 0 == String::icompare( name, "kW" ) )
+    else if ( 0 == String::Compare(name, "kW") )
         return &kw2w;
 
     // temperature
-    else if ( 0 == String::icompare( name, "K" ) )
+    else if ( 0 == String::Compare(name, "K") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "degC" ) )
+    else if ( 0 == String::Compare(name, "degC") )
         return &c2k;
-    else if ( 0 == String::icompare( name, "degF" ) )
+    else if ( 0 == String::Compare(name, "degF") )
         return &f2k;
 
     // specific fuel consumption
-    else if ( 0 == String::icompare( name, "kg/Ws" ) )
+    else if ( 0 == String::Compare(name, "kg/Ws") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "g/kWh" ) )
+    else if ( 0 == String::Compare(name, "g/kWh") )
         return &g_kWh_2_kg_Ws;
 
     // thrust specific fuel consumption
-    else if ( 0 == String::icompare( name, "kg/Ns" ) )
+    else if ( 0 == String::Compare(name, "kg/Ns") )
         return &dummy;
-    else if ( 0 == String::icompare( name, "g/kNs" ) )
+    else if ( 0 == String::Compare(name, "g/kNs") )
         return &g_kNs_2_kg_Ns;
 
     return nullptr;
