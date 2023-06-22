@@ -103,7 +103,7 @@ SOURCES += \
 HEADERS += \
     $$PWD/misc/Check.h \
     $$PWD/misc/Log.h \
-    $$PWD/misc/Map.h \
+    $$PWD/misc/MapUtils.h \
     $$PWD/misc/Singleton.h \
     $$PWD/misc/String.h \
     $$PWD/misc/Units.h

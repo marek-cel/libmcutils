@@ -5,7 +5,7 @@ set( TARGET_NAME misc )
 set( HEADERS
     Check.h
     Log.h
-    Map.h
+    MapUtils.h
     Singleton.h
     String.h
     Units.h

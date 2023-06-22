@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_MAP_H_
-#define MCUTILS_MISC_MAP_H_
+#ifndef MCUTILS_MISC_MAPUTILS_H_
+#define MCUTILS_MISC_MAPUTILS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -42,17 +42,17 @@ namespace mc
  * @return returns sl::Success on success and sl::Failure on failure
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
-Result addMapItem( std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item )
+Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
 {
-    std::pair< typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool > temp =
-            map->insert( std::pair<TYPE_KEY, TYPE_ITEM>( key, item ) );
+    std::pair< typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
+            map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
 
     if ( temp.second == true )
     {
-        return Success;
+        return Result::Success;
     }
 
-    return Failure;
+    return Result::Failure;
 }
 
 /**
@@ -61,9 +61,9 @@ Result addMapItem( std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM i
  * @return pinter of item or NULL
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
-TYPE_ITEM getMapItemByKey( std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key )
+TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
 {
-    typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find( key );
+    typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find(key);
 
     if ( it != map->end() )
     {
@@ -77,4 +77,4 @@ TYPE_ITEM getMapItemByKey( std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MISC_MAP_H_
+#endif // MCUTILS_MISC_MAPUTILS_H_
