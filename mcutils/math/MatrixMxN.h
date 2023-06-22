@@ -57,7 +57,7 @@ public:
     /** @return "true" if all elements are valid */
     bool IsValid() const
     {
-        return mc::isValid(elements_, size_);
+        return mc::IsValid(elements_, size_);
     }
 
     /**
@@ -146,7 +146,7 @@ public:
         for ( unsigned int i = 0; i < size_; ++i )
         {
             ss >> elements[i];
-            valid &= mc::isValid(elements[i]);
+            valid &= mc::IsValid(elements[i]);
         }
 
         if ( valid ) SetFromArray(elements);

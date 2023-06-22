@@ -58,9 +58,9 @@ Angles::Angles(double phi, double tht, double psi)
 
 bool Angles::IsValid() const
 {
-    return mc::isValid(phi_)
-        && mc::isValid(tht_)
-        && mc::isValid(psi_);
+    return mc::IsValid(phi_)
+        && mc::IsValid(tht_)
+        && mc::IsValid(psi_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

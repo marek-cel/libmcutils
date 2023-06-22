@@ -218,7 +218,7 @@ bool Table2::IsValid() const
     {
         for ( unsigned int c = 0; c < cols_; ++c )
         {
-            if ( result ) result = mc::isValid(col_values_[c]);
+            if ( result ) result = mc::IsValid(col_values_[c]);
 
             if ( c > 0 )
             {
@@ -230,7 +230,7 @@ bool Table2::IsValid() const
 
         for ( unsigned int r = 0; r < rows_; ++r )
         {
-            if ( result ) result = mc::isValid(row_values_[r]);
+            if ( result ) result = mc::IsValid(row_values_[r]);
 
             if ( r > 0 )
             {
@@ -242,8 +242,8 @@ bool Table2::IsValid() const
 
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            if ( result ) result = mc::isValid(table_data_[i]);
-            if ( result ) result = mc::isValid(inter_data_[i]);
+            if ( result ) result = mc::IsValid(table_data_[i]);
+            if ( result ) result = mc::IsValid(inter_data_[i]);
 
             if ( !result ) break;
         }
@@ -388,7 +388,7 @@ void Table2::SetFromString(const char* str)
         double key = std::numeric_limits<double>::quiet_NaN();
         sl >> key; // sic!
         ss >> key; // sic!
-        valid &= mc::isValid(key);
+        valid &= mc::IsValid(key);
         col_values_tmp.push_back(key);
     }
 
@@ -397,7 +397,7 @@ void Table2::SetFromString(const char* str)
     {
         double key = std::numeric_limits<double>::quiet_NaN();
         ss >> key;
-        valid &= mc::isValid(key);
+        valid &= mc::IsValid(key);
         row_values_tmp.push_back(key);
 
         // table data
@@ -405,7 +405,7 @@ void Table2::SetFromString(const char* str)
         {
             double val = std::numeric_limits<double>::quiet_NaN();
             ss >> val;
-            valid &= mc::isValid(val);
+            valid &= mc::IsValid(val);
             table_data_tmp.push_back(val);
         }
     }

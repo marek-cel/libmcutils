@@ -153,7 +153,7 @@ bool toBool( const std::string& str, bool def )
 
     ss >> temp;
 
-    if ( isValid( temp ) )
+    if ( IsValid(temp) )
     {
         result = temp != 0;
     }
@@ -172,7 +172,7 @@ int toInt( const std::string& str, int def )
 
     ss >> temp;
 
-    if ( isValid( temp ) )
+    if ( IsValid(temp) )
     {
         result = temp;
     }
@@ -191,7 +191,7 @@ double toDouble( const std::string& str, double def )
 
     ss >> temp;
 
-    if ( isValid( temp ) )
+    if ( IsValid(temp) )
     {
         result = temp;
     }

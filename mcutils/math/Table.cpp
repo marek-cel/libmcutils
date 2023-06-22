@@ -322,9 +322,9 @@ bool Table::IsValid() const
         const double &value = it->second.first;
         const double &inter = it->second.second;
 
-        if ( result ) result = mc::isValid(key);
-        if ( result ) result = mc::isValid(value);
-        if ( result ) result = mc::isValid(inter);
+        if ( result ) result = mc::IsValid(key);
+        if ( result ) result = mc::IsValid(value);
+        if ( result ) result = mc::IsValid(inter);
 
         if ( !result ) break;
     }
@@ -464,7 +464,7 @@ void Table::SetFromString(const char* str)
         ss >> key;
         ss >> val;
 
-        valid &= mc::isValid(key) && mc::isValid(val);
+        valid &= mc::IsValid(key) && mc::IsValid(val);
 
         key_values_temp.push_back(key);
         table_data_temp.push_back(val);

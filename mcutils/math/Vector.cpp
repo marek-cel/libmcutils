@@ -71,7 +71,7 @@ Vector::Vector( unsigned int size )
 
 bool Vector::IsValid() const
 {
-    return mc::isValid(elements_, size_);
+    return mc::IsValid(elements_, size_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

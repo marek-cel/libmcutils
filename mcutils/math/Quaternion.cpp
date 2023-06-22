@@ -91,10 +91,10 @@ Quaternion::Quaternion(double angl, const Vector3& vect)
 
 bool Quaternion::IsValid() const
 {
-    return mc::isValid(e0_)
-        && mc::isValid(ex_)
-        && mc::isValid(ey_)
-        && mc::isValid(ez_);
+    return mc::IsValid(e0_)
+        && mc::IsValid(ex_)
+        && mc::IsValid(ey_)
+        && mc::IsValid(ez_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

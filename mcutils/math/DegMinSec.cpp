@@ -45,10 +45,10 @@ DegMinSec::DegMinSec(double angle)
 
 bool DegMinSec::IsValid() const
 {
-    return mc::isValid(angle_)
-        && mc::isValid(deg_)
-        && mc::isValid(min_)
-        && mc::isValid(sec_);
+    return mc::IsValid(angle_)
+        && mc::IsValid(deg_)
+        && mc::IsValid(min_)
+        && mc::IsValid(sec_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
