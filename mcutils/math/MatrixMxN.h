@@ -83,9 +83,9 @@ public:
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
-     * i - array index
-     * i_row - row index
-     * i_col - column index
+     * i - array index,
+     * i_row - row index,
+     * i_col - column index,
      * n_col - number of columns
      * @param elements output array
      */
@@ -114,9 +114,9 @@ public:
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
-     * i - array index
-     * i_row - row index
-     * i_col - column index
+     * i - array index,
+     * i_row - row index,
+     * i_col - column index,
      * n_col - number of columns
      * @param elements input array
      */
