@@ -107,15 +107,9 @@ private:
     int rand_ = 0;      ///< random value
     unsigned int seed_; ///< seed
 
-    // LCOV_EXCL_START
-    // excluded from coverage report due to deleting destructor calling issues
     Random();
     Random(const Random&) = delete;
     Random(Random&&) = delete;
-    Random& operator=(const Random&) = delete;
-    Random& operator=(Random&&) = delete;
-    ~Random() = default;
-    // LCOV_EXCL_STOP
 };
 
 } // namespace mc
