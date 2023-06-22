@@ -46,28 +46,28 @@ Quaternion::Quaternion(double e0, double ex, double ey, double ez)
 
 Quaternion::Quaternion(const Angles& angl)
 {
-    double phi2 = angl.phi() / 2.0;
-    double tht2 = angl.tht() / 2.0;
-    double psi2 = angl.psi() / 2.0;
+    double phi_2 = angl.phi() / 2.0;
+    double tht_2 = angl.tht() / 2.0;
+    double psi_2 = angl.psi() / 2.0;
 
-    double sinPhi2 = sin(phi2);
-    double cosPhi2 = cos(phi2);
+    double sin_phi_2 = sin(phi_2);
+    double cos_phi_2 = cos(phi_2);
 
-    double sinTht2 = sin(tht2);
-    double cosTht2 = cos(tht2);
+    double sin_tht_2 = sin(tht_2);
+    double cos_tht_2 = cos(tht_2);
 
-    double sinPsi2 = sin(psi2);
-    double cosPsi2 = cos(psi2);
+    double sin_psi_2 = sin(psi_2);
+    double cos_psi_2 = cos(psi_2);
 
-    double cosPhi2CosPsi2 = cosPhi2 * cosPsi2;
-    double cosPhi2SinPsi2 = cosPhi2 * sinPsi2;
-    double sinPhi2SinPsi2 = sinPhi2 * sinPsi2;
-    double sinPhi2CosPsi2 = sinPhi2 * cosPsi2;
+    double cos_phi_2_cos_psi_2 = cos_phi_2 * cos_psi_2;
+    double cos_phi_2_sin_psi_2 = cos_phi_2 * sin_psi_2;
+    double sin_phi_2_sin_psi_2 = sin_phi_2 * sin_psi_2;
+    double sin_phi_2_cos_psi_2 = sin_phi_2 * cos_psi_2;
 
-    e0_ = ( cosPhi2CosPsi2 * cosTht2 ) + ( sinPhi2SinPsi2 * sinTht2 );
-    ex_ = ( sinPhi2CosPsi2 * cosTht2 ) - ( cosPhi2SinPsi2 * sinTht2 );
-    ey_ = ( cosPhi2CosPsi2 * sinTht2 ) + ( sinPhi2SinPsi2 * cosTht2 );
-    ez_ = ( cosPhi2SinPsi2 * cosTht2 ) - ( sinPhi2CosPsi2 * sinTht2 );
+    e0_ = ( cos_phi_2_cos_psi_2 * cos_tht_2 ) + ( sin_phi_2_sin_psi_2 * sin_tht_2 );
+    ex_ = ( sin_phi_2_cos_psi_2 * cos_tht_2 ) - ( cos_phi_2_sin_psi_2 * sin_tht_2 );
+    ey_ = ( cos_phi_2_cos_psi_2 * sin_tht_2 ) + ( sin_phi_2_sin_psi_2 * cos_tht_2 );
+    ez_ = ( cos_phi_2_sin_psi_2 * cos_tht_2 ) - ( sin_phi_2_cos_psi_2 * sin_tht_2 );
 
     Normalize();
 }
@@ -78,13 +78,13 @@ Quaternion::Quaternion(double angl, const Vector3& vect)
 {
     double len_inv = 1.0 / vect.GetLength();
 
-    double cosAngl2 = cos(0.5 * angl);
-    double sinAngl2 = sin(0.5 * angl);
+    double cos_angl_2 = cos(0.5 * angl);
+    double sin_angl_2 = sin(0.5 * angl);
 
-    e0_ = cosAngl2;
-    ex_ = sinAngl2 * vect.x() * len_inv;
-    ey_ = sinAngl2 * vect.y() * len_inv;
-    ez_ = sinAngl2 * vect.z() * len_inv;
+    e0_ = cos_angl_2;
+    ex_ = sin_angl_2 * vect.x() * len_inv;
+    ey_ = sin_angl_2 * vect.y() * len_inv;
+    ez_ = sin_angl_2 * vect.z() * len_inv;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,15 +149,15 @@ Angles Quaternion::GetAngles() const
 {
     Angles result;
 
-    double sinTht2 = e0_*ey_ - ex_*ez_;
+    double sin_tht_2 = e0_*ey_ - ex_*ez_;
 
-    if( sinTht2 >= 0.5 )
+    if( sin_tht_2 >= 0.5 )
     {
         result.phi() =  2.0 * asin(ex_ / cos(M_PI_4));
         result.tht() =  M_PI_2;
         result.psi() =  0.0;
     }
-    else if ( sinTht2 <= -0.5 )
+    else if ( sin_tht_2 <= -0.5 )
     {
         result.phi() =  2.0 * asin(ex_ / cos(M_PI_4));
         result.tht() = -M_PI_2;
@@ -166,7 +166,7 @@ Angles Quaternion::GetAngles() const
     else
     {
         result.phi() = atan2( 2.0*( e0_*ex_ + ey_*ez_ ), 1.0 - 2.0*( ex_*ex_ + ey_*ey_ ) );
-        result.tht() =  asin( 2.0*sinTht2 );
+        result.tht() =  asin( 2.0*sin_tht_2 );
         result.psi() = atan2( 2.0*( e0_*ez_ + ex_*ey_ ), 1.0 - 2.0*( ey_*ey_ + ez_*ez_ ) );
     }
 

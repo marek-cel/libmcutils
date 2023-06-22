@@ -53,29 +53,29 @@ Matrix3x3::Matrix3x3(double xx, double xy, double xz,
 
 Matrix3x3::Matrix3x3(const Angles& angl)
 {
-    double sinPhi = sin(angl.phi());
-    double cosPhi = cos(angl.phi());
+    double sin_phi = sin(angl.phi());
+    double cos_phi = cos(angl.phi());
 
-    double sinTht = sin(angl.tht());
-    double cosTht = cos(angl.tht());
+    double sin_tht = sin(angl.tht());
+    double cos_tht = cos(angl.tht());
 
-    double sinPsi = sin(angl.psi());
-    double cosPsi = cos(angl.psi());
+    double sin_psi = sin(angl.psi());
+    double cos_psi = cos(angl.psi());
 
-    double sinPhiSinTht = sinPhi * sinTht;
-    double cosPhiSinTht = cosPhi * sinTht;
+    double sin_phi_sin_tht = sin_phi * sin_tht;
+    double cos_phi_sin_tht = cos_phi * sin_tht;
 
-    xx() =  cosTht * cosPsi;
-    xy() =  cosTht * sinPsi;
-    xz() = -sinTht;
+    xx() =  cos_tht * cos_psi;
+    xy() =  cos_tht * sin_psi;
+    xz() = -sin_tht;
 
-    yx() = -( cosPhi * sinPsi ) + ( sinPhiSinTht * cosPsi );
-    yy() =  ( cosPhi * cosPsi ) + ( sinPhiSinTht * sinPsi );
-    yz() =  ( sinPhi * cosTht );
+    yx() = -( cos_phi * sin_psi ) + ( sin_phi_sin_tht * cos_psi );
+    yy() =  ( cos_phi * cos_psi ) + ( sin_phi_sin_tht * sin_psi );
+    yz() =  ( sin_phi * cos_tht );
 
-    zx() =  ( sinPhi * sinPsi ) + ( cosPhiSinTht * cosPsi );
-    zy() = -( sinPhi * cosPsi ) + ( cosPhiSinTht * sinPsi );
-    zz() =  ( cosPhi * cosTht );
+    zx() =  ( sin_phi * sin_psi ) + ( cos_phi_sin_tht * cos_psi );
+    zy() = -( sin_phi * cos_psi ) + ( cos_phi_sin_tht * sin_psi );
+    zz() =  ( cos_phi * cos_tht );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -130,12 +130,12 @@ Angles Matrix3x3::GetAngles() const
 {
     Angles result;
 
-    double sinTht = -xz();
-    double cosTht = sqrt( 1.0 - std::min(1.0, sinTht*sinTht) );
+    double sin_tht = -xz();
+    double cos_tht = sqrt( 1.0 - std::min(1.0, sin_tht*sin_tht) );
 
-    result.tht() = atan2(sinTht, cosTht);
+    result.tht() = atan2(sin_tht, cos_tht);
 
-    if ( cosTht > 0.0 )
+    if ( cos_tht > 0.0 )
     {
         result.phi() = atan2(yz(), zz());
         result.psi() = atan2(xy(), xx());
