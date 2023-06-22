@@ -220,7 +220,7 @@ std::string Log::Timestamp()
     msec = st.wMilliseconds;
 #   endif // WIN32
 
-    return "[" + toISO8601(year, mon, day, hour, min, sec, msec) + "]";
+    return "[" + ToISO8601(year, mon, day, hour, min, sec, msec) + "]";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
