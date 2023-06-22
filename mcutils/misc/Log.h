@@ -60,73 +60,74 @@ public:
      * @brief Prints error log message.
      * @param format message format
      */
-    static void e( const char* format, ... );
+    static void Error(const char* format, ...);
 
     /**
      * @brief Prints warning log message.
      * @param format message format
      */
-    static void w( const char* format, ... );
+    static void Warning(const char* format, ...);
 
     /**
      * @brief Prints info log message.
      * @param format message format
      */
-    static void i( const char* format, ... );
+    static void Info(const char* format, ...);
 
     /**
      * @brief Prints debug log message.
      * @param format message format
      */
-    static void d( const char* format, ... );
+    static void Debug(const char* format, ...);
 
     /**
      * @brief Gets output stream.
+     * If output stream is not set std::cout is returned.
      * @return output stream
      */
-    static std::ostream& out();
+    static std::ostream& out_stream();
 
     /**
      * @brief Sets output stream.
      * @param outputStream output stream
      */
-    static void setOutStream( std::ostream* out_stream );
+    static void set_out_stream(std::ostream* out_stream);
 
     /**
      * @brief Set syslog output status (unix only).
      * @param syslog_out syslog output status (true enabled, false disabled)
      */
-    static void setSyslogOut( bool syslog_out );
+    static void set_syslog_out(bool syslog_out);
 
     /**
      * @brief Sets verbose level.
      * @param verboseLevel verbose level
      */
-    static void setVerbLevel( VerboseLevel verb_level );
+    static void set_verb_level(VerboseLevel verb_level);
 
 private:
 
     std::ostream* out_stream_ = &std::cout;         ///< output stream (default std::cout)
     VerboseLevel  verb_level_ = VerboseLevel::Info; ///< verbose level (default Info)
 
-    bool syslog_out_ = true;                        ///< specifies if syslog is enabled (default true)
+    bool syslog_out_ = true;    ///< specifies if syslog is enabled (default true)
 
     /**
      * You should use static function instance() due to get refernce
      * to Random class instance.
      */
     Log() = default;
-    Log( const Log& ) = default;
-    Log( Log&& ) = default;
+    Log(const Log&) = default;
+    Log(Log&&) = default;
 
     /**
      * @brief Prints log message.
      * @param level verbose level
      * @param format message format
      */
-    void print( VerboseLevel level, const char* format, va_list args );
+    void Print(VerboseLevel level, const char* format, va_list arg);
 
-    std::string timestamp();
+    std::string Timestamp();
 };
 
 } // namespace mc
