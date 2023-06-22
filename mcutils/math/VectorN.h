@@ -68,7 +68,7 @@ public:
         double length2 = 0.0;
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            length2 += ( elements_[i] * elements_[i] );
+            length2 += elements_[i] * elements_[i];
         }
         return length2;
     }
@@ -225,15 +225,15 @@ public:
     /** @brief Addition operator. */
     VectorN<SIZE> operator+(const VectorN<SIZE>& vect) const
     {
-        VectorN<SIZE> result( *this );
-        result.Add( vect );
+        VectorN<SIZE> result(*this);
+        result.Add(vect);
         return result;
     }
 
     /** @brief Negation operator. */
     VectorN<SIZE> operator-() const
     {
-        VectorN<SIZE> result( *this );
+        VectorN<SIZE> result(*this);
         result.Negate();
         return result;
     }
@@ -241,16 +241,16 @@ public:
     /** @brief Subtraction operator. */
     VectorN<SIZE> operator-(const VectorN<SIZE>& vect) const
     {
-        VectorN<SIZE> result( *this );
-        result.Substract( vect );
+        VectorN<SIZE> result(*this);
+        result.Substract(vect);
         return result;
     }
 
     /** @brief Multiplication operator (by scalar). */
     VectorN<SIZE> operator*(double value) const
     {
-        VectorN<SIZE> result( *this );
-        result.MultiplyByValue( value );
+        VectorN<SIZE> result(*this);
+        result.MultiplyByValue(value);
         return result;
     }
 
@@ -258,48 +258,46 @@ public:
     double operator*(const VectorN<SIZE>& vect) const
     {
         double result = 0.0;
-
         for ( unsigned int i = 0; i < size_; ++i )
         {
             result += elements_[i] * vect.elements_[i];
         }
-
         return result;
     }
 
     /** @brief Division operator (by scalar). */
     VectorN<SIZE> operator/(double val) const
     {
-        VectorN<SIZE> result( *this );
-        result.DivideByValue( val );
+        VectorN<SIZE> result(*this);
+        result.DivideByValue(val);
         return result;
     }
 
     /** @brief Unary addition operator. */
     VectorN<SIZE>& operator+=(const VectorN<SIZE>& vect)
     {
-        Add( vect );
+        Add(vect);
         return *this;
     }
 
     /** @brief Unary subtraction operator. */
     VectorN<SIZE>& operator-=(const VectorN<SIZE>& vect)
     {
-        Substract( vect );
+        Substract(vect);
         return *this;
     }
 
     /** @brief Unary multiplication operator (by scalar). */
     VectorN<SIZE>& operator*=(double value)
     {
-        MultiplyByValue( value );
+        MultiplyByValue(value);
         return *this;
     }
 
     /** @brief Unary division operator (by scalar). */
     VectorN<SIZE>& operator/=(double value)
     {
-        DivideByValue( value );
+        DivideByValue(value);
         return *this;
     }
 
@@ -307,12 +305,10 @@ public:
     bool operator==(const VectorN<SIZE>& vect) const
     {
         bool result = true;
-
         for ( unsigned int i = 0; i < size_; ++i )
         {
             result = result && ( elements_[i] == vect.elements_[i] );
         }
-
         return result;
     }
 
