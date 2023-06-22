@@ -29,4 +29,5 @@ TEST_F(TestMapUtils, CanGetMapItem)
     std::map<int,double> map;
     mc::AddMapItem(&map, 0, 3.14);
     EXPECT_DOUBLE_EQ( mc::GetMapItemByKey(&map, 0), 3.14 );
+    EXPECT_NO_THROW( mc::GetMapItemByKey(&map, 1) );
 }

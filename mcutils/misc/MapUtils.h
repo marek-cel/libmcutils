@@ -44,7 +44,7 @@ namespace mc
 template <typename TYPE_KEY, typename TYPE_ITEM>
 Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
 {
-    std::pair< typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
+    std::pair<typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
             map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
 
     if ( temp.second == true )
