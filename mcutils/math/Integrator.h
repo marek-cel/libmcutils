@@ -49,7 +49,6 @@ public:
     using DerivFun = std::function<void(const Vector&, Vector*)>;
 
     // LCOV_EXCL_START
-    // excluded from coverage report due to deleting destructor calling issues
     Integrator() = default;
     Integrator(const Integrator&) = delete;
     Integrator(Integrator&&) = default;
