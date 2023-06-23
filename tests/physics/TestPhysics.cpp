@@ -27,7 +27,7 @@ protected:
 TEST_F(TestPhysics, IsSpeedOfLightCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::speedOfLight, 299'792'458.0, 1.0 );
+    EXPECT_NEAR( mc::Physics::kSpeedOfLight, 299'792'458.0, 1.0 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@ TEST_F(TestPhysics, IsSpeedOfLightCorrect)
 TEST_F(TestPhysics, IsGravitationalConstCorrect)
 {
     // The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012, p.9
-    EXPECT_NEAR( mc::Physics::gravitationalConst, 6.6732e-11, 1.0e-14 );
+    EXPECT_NEAR( mc::Physics::kGravitationalConst, 6.6732e-11, 1.0e-14 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -43,7 +43,7 @@ TEST_F(TestPhysics, IsGravitationalConstCorrect)
 TEST_F(TestPhysics, IsAvogadroConstCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::avogadroConst, 6.02214076e23, 1.0e16 );
+    EXPECT_NEAR( mc::Physics::kAvogadroConst, 6.02214076e23, 1.0e16 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@ TEST_F(TestPhysics, IsAvogadroConstCorrect)
 TEST_F(TestPhysics, IsBoltzmannConstCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::boltzmannConst, 1.380649e-23, 1.0e-28 );
+    EXPECT_NEAR( mc::Physics::kBoltzmannConst, 1.380649e-23, 1.0e-28 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ TEST_F(TestPhysics, IsBoltzmannConstCorrect)
 TEST_F(TestPhysics, IsUniversalGasConstCorrect)
 {
     // The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012, p.9
-    EXPECT_NEAR( mc::Physics::universalGasConst, 8.31434e3, 1.0e-2 );
+    EXPECT_NEAR( mc::Physics::kUniversalGasConst, 8.31434e3, 1.0e-2 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,7 +67,7 @@ TEST_F(TestPhysics, IsUniversalGasConstCorrect)
 TEST_F(TestPhysics, IsFaradayConstCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::faradayConst, 9.64867e7, 1.0e-2 );
+    EXPECT_NEAR( mc::Physics::kFaradayConst, 9.64867e7, 1.0e-2 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +75,7 @@ TEST_F(TestPhysics, IsFaradayConstCorrect)
 TEST_F(TestPhysics, IsPlanckConstCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::planckConst, 6.62607015e-34, 1.0e-41 );
+    EXPECT_NEAR( mc::Physics::kPlanckConst, 6.62607015e-34, 1.0e-41 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@ TEST_F(TestPhysics, IsPlanckConstCorrect)
 TEST_F(TestPhysics, IsElementaryChargeCorrect)
 {
     // The International System of Units (SI) 9th edition, p.127
-    EXPECT_NEAR( mc::Physics::elementaryCharge, 1.602176634e-19, 1.0e-27 );
+    EXPECT_NEAR( mc::Physics::kElementaryCharge, 1.602176634e-19, 1.0e-27 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +91,7 @@ TEST_F(TestPhysics, IsElementaryChargeCorrect)
 TEST_F(TestPhysics, IsStefanBoltzmanConstCorrect)
 {
     // The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012, p.9
-    EXPECT_NEAR( mc::Physics::stefanBoltzmanConst, 5.66961e-8, 1.0e-12 );
+    EXPECT_NEAR( mc::Physics::kStefanBoltzmanConst, 5.66961e-8, 1.0e-12 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -99,7 +99,7 @@ TEST_F(TestPhysics, IsStefanBoltzmanConstCorrect)
 TEST_F(TestPhysics, IsStandardGravityCorrect)
 {
     // The International System of Units (SI) 9th edition, p.159
-    EXPECT_NEAR( mc::Physics::standardGravity, 9.80665, 1.0e-4 );
+    EXPECT_NEAR( mc::Physics::kStandardGravity, 9.80665, 1.0e-4 );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,7 +128,7 @@ TEST_F(TestPhysics, CanComputeInertia)
         for ( int j = 0; j < steps; j++ )
         {
             double dt = TIME_STEP / (double)steps;
-            y = mc::Physics::inertia(u, y, dt, TIME_CONSTANT);
+            y = mc::Physics::Inertia(u, y, dt, TIME_CONSTANT);
 
             if ( 0 )
             {
@@ -159,7 +159,7 @@ TEST_F(TestPhysics, CanComputeInertiaTimeConst0)
     for ( unsigned int i = 0; i < 100; i++ )
     {
         double u = ( i < 10 ) ? 0.0 : 1.0;
-        y = mc::Physics::inertia( u, y, 0.01, 0.0 );
+        y = mc::Physics::Inertia(u, y, 0.01, 0.0);
         EXPECT_NEAR( y, u, 1.0e-3 );
     }
 }
@@ -181,18 +181,18 @@ TEST_F(TestPhysics, CanComputeParallelAxisInertia)
     constexpr double m = 1.0;
 
     // Slender rod along y-axis of length l and mass m about center
-    mc::Matrix3x3 m1( m*l*l / 12.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0,
-                      0.0, 0.0, m*l*l / 12.0);
+    mc::Matrix3x3 m1(m*l*l / 12.0, 0.0, 0.0,
+                     0.0, 0.0, 0.0,
+                     0.0, 0.0, m*l*l / 12.0);
 
     // Slender rod along y-axis of length l and mass m about end
-    mc::Matrix3x3 m2( m*l*l / 3.0, 0.0, 0.0,
-                      0.0, 0.0, 0.0,
-                      0.0, 0.0, m*l*l / 3.0);
+    mc::Matrix3x3 m2(m*l*l / 3.0, 0.0, 0.0,
+                     0.0, 0.0, 0.0,
+                     0.0, 0.0, m*l*l / 3.0);
 
-    mc::Vector3 r( 0.0, l / 2.0, 0.0 );
+    mc::Vector3 r(0.0, l / 2.0, 0.0);
 
-    mc::Matrix3x3 m3 = mc::Physics::parallelAxisInertia( m, m1, r );
+    mc::Matrix3x3 m3 = mc::Physics::ParallelAxisInertia(m, m1, r);
 
     EXPECT_NEAR( m3(0,0), m2(0,0), 1.0e-12 );
     EXPECT_NEAR( m3(0,1), m2(0,1), 1.0e-12 );
