@@ -85,7 +85,7 @@ public:
      * If output stream is not set std::cout is returned.
      * @return output stream
      */
-    static std::ostream& out_stream();
+    static std::ostream& Out();
 
     /**
      * @brief Sets output stream.

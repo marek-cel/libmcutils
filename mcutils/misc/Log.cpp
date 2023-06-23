@@ -88,7 +88,7 @@ void Log::Debug( const char* format, ... )
 
 //////////////////////////////////////////////////////////////////////////////////
 
-std::ostream& Log::out_stream()
+std::ostream& Log::Out()
 {
     return instance()->out_stream_ == nullptr ? std::cout : *(instance()->out_stream_);
 }

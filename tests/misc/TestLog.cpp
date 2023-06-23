@@ -28,7 +28,7 @@ TEST_F(TestLog, CanPrintNullStream)
     EXPECT_NO_THROW( mc::Log::Warning(msg.c_str()) );
     EXPECT_NO_THROW( mc::Log::Info(msg.c_str()) );
     EXPECT_NO_THROW( mc::Log::Debug(msg.c_str()) );
-    EXPECT_NO_THROW( mc::Log::out_stream() << msg );
+    EXPECT_NO_THROW( mc::Log::Out() << msg );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
