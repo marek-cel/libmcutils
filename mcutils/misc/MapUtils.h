@@ -32,7 +32,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace mc
+namespace mc { namespace MapUtils
 {
 
 /**
@@ -42,7 +42,7 @@ namespace mc
  * @return returns mc::Result::Success on success and mc::Result::Failure on failure
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
-Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
+Result AddItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
 {
     std::pair<typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
             map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
@@ -61,7 +61,7 @@ Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM it
  * @return pinter of item or NULL
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
-TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
+TYPE_ITEM GetItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
 {
     typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find(key);
 
@@ -73,6 +73,7 @@ TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
     return TYPE_ITEM {};
 }
 
+} // MapUtils
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
