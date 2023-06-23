@@ -57,7 +57,7 @@ public:
     inline static const Vector3& k() { return ez_; }
 
     /** @brief Constructor. */
-    Vector3(double x = 0.0, double y = 0.0, double z = 0.0);
+    explicit Vector3(double x = 0.0, double y = 0.0, double z = 0.0);
 
     /** @return length of projection of vector on XY-plane */
     inline double GetLengthXY() const { return sqrt( x()*x() + y()*y() ); }

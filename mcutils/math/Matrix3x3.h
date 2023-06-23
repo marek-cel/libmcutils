@@ -73,10 +73,10 @@ public:
               double zx, double zy, double zz);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3(const Angles& angl);
+    explicit Matrix3x3(const Angles& angl);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3(const Quaternion& qtrn);
+    explicit Matrix3x3(const Quaternion& qtrn);
 
     inline double xx() const { return elements_[0]; }
     inline double xy() const { return elements_[1]; }

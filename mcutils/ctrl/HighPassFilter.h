@@ -46,7 +46,7 @@ public:
      * @param omega [rad/s] cutoff angular frequency
      * @param value initial output value
      */
-    HighPassFilter(double omega = 1.0, double value = 0.0 );
+    explicit HighPassFilter(double omega = 1.0, double value = 0.0 );
 
     /**
      * @brief Sets cutoff frequency.

@@ -52,7 +52,7 @@ public:
      * @param min minimal value for saturation
      * @param max maximal value for saturation
      */
-    AWCondCalc(double min = DBL_MIN, double max = DBL_MAX);
+    explicit AWCondCalc(double min = DBL_MIN, double max = DBL_MAX);
 
     void Update(double dt, double y_p, double y_i, double y_d,
                 double *value, double *error_i, const class PID* pid) override;

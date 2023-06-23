@@ -47,7 +47,7 @@ public:
      * @brief Constructor.
      * @param angle [rad] angle
      */
-    DegMinSec(double angle);
+    explicit DegMinSec(double angle);
 
     /** @brief Destructor. */
     ~DegMinSec() = default;

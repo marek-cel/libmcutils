@@ -20,7 +20,7 @@ protected:
 TEST_F(TestVector, CanConstruct)
 {
     mc::Vector *v = nullptr;
-    EXPECT_NO_THROW( v = new mc::Vector() );
+    EXPECT_NO_THROW( v = new mc::Vector(0) );
     delete v;
 }
 
@@ -28,7 +28,7 @@ TEST_F(TestVector, CanConstruct)
 
 TEST_F(TestVector, CanDestruct)
 {
-    mc::Vector *v = new mc::Vector();
+    mc::Vector *v = new mc::Vector(0);
     EXPECT_NO_THROW( delete v );
 }
 
@@ -261,7 +261,7 @@ TEST_F(TestVector, CanSetFromArray)
 
 TEST_F(TestVector, CanGetSize)
 {
-    mc::Vector v0;
+    mc::Vector v0(0);
     EXPECT_EQ( v0.size(), 0 );
 
     mc::Vector v3(3);
@@ -285,7 +285,7 @@ TEST_F(TestVector, CanConvertToString)
 
 TEST_F(TestVector, CanResize)
 {
-    mc::Vector v;
+    mc::Vector v(0);
     EXPECT_EQ( v.size(), 0 );
 
     v.Resize(3);

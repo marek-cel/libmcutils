@@ -57,7 +57,7 @@ public:
      * @param zeta [-] <0.0;1.0> dampipng ratio
      * @param value initial output value
      */
-    Oscillator(double omega = 1.0, double zeta = 1.0, double value = 0.0);
+    explicit Oscillator(double omega = 1.0, double zeta = 1.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value

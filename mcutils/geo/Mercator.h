@@ -50,7 +50,7 @@ public:
      * @param a [m] ellipsoid semi major axis
      * @param e [-] ellipsoid first eccentricity
      */
-    Mercator(double a = 0.0, double e = 0.0);
+    explicit Mercator(double a = 0.0, double e = 0.0);
 
     /**
      * @brief Calculates geodetic latitude.

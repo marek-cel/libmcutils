@@ -50,7 +50,7 @@ public:
      * @param val value
      * @param key key value
      */
-    Table(double val = 0.0, double key = 0.0);
+    explicit Table(double val = 0.0, double key = 0.0);
 
     /**
      * @brief Constructor.
@@ -71,9 +71,6 @@ public:
      */
     Table(const std::vector<double>& key_values,
           const std::vector<double>& table_data);
-
-    /** @brief Constructor. */
-    Table(const char* str);
 
     /**
      * @brief Returns key for the given index.

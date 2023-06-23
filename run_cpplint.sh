@@ -4,8 +4,10 @@
 
 rm -f out_cpplint.txt
 
+FILTER="-build/c++11,+build/c++14,-readability/multiline_comment,-readability/alt_tokens,-whitespace/parens,-whitespace/braces,-whitespace/indent,-whitespace/comments,-whitespace/newline,-whitespace/blank_line,-whitespace/comma,-whitespace/line_length,-build/include_order"
+
 cpplint \
-    --filter=-build/c++11,+build/c++14,-readability/multiline_comment,-readability/alt_tokens,-whitespace/parens,-whitespace/braces,-whitespace/indent,-whitespace/comments,-whitespace/newline,-whitespace/blank_line,-whitespace/comma,-whitespace/line_length,-build/include_order \
+    --filter=$FILTER \
     --linelength=100 \
     --extensions=h,cpp --root=./ \
     ./mcutils/*.h \

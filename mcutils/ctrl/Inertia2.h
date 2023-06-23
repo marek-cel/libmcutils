@@ -47,7 +47,7 @@ public:
      * @param tc2 time constant 2
      * @param value initial output value
      */
-    Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
+    explicit Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value

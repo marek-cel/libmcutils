@@ -61,10 +61,10 @@ class MCUTILSAPI Quaternion
 public:
 
     /** @brief Constructor. */
-    Quaternion(double e0 = 1.0, double ex = 0.0, double ey = 0.0, double ez = 0.0);
+    explicit Quaternion(double e0 = 1.0, double ex = 0.0, double ey = 0.0, double ez = 0.0);
 
     /** @brief Constructor. */
-    Quaternion(const Angles& angl);
+    explicit Quaternion(const Angles& angl);
 
     /** @brief Constructor. */
     Quaternion(double angl, const Vector3& vect);

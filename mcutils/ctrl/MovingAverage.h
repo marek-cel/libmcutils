@@ -50,7 +50,7 @@ public:
      * @param length length of the sliding window
      * @param value initial output value
      */
-    MovingAverage(unsigned int length = 1, double value = 0.0);
+    explicit MovingAverage(unsigned int length = 1, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value

@@ -147,7 +147,7 @@ public:
      */
     void SetFromString(const char* str)
     {
-        double elements[size_];
+        double elements[SIZE];
 
         for ( unsigned int i = 0; i < size_; ++i )
         {

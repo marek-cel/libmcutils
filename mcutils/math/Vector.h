@@ -40,9 +40,6 @@ class MCUTILSAPI Vector
 {
 public:
 
-    /** @brief Constructor. */
-    Vector() = default;
-
     /** @brief Copy constructor. */
     Vector(const Vector& vect);
 
@@ -56,7 +53,7 @@ public:
      * @brief Constructor.
      * @param size vector size
      */
-    Vector(unsigned int size);
+    explicit Vector(unsigned int size);
 
     /** @return TRUE if all elements are valid */
     bool IsValid() const;

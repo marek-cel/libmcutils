@@ -66,13 +66,13 @@ public:
      * @brief Constructor.
      * @param pos_geo geodetic coordinates
      */
-    WGS84(const Geo& pos_geo);
+    explicit WGS84(const Geo& pos_geo);
 
     /**
      * @brief Constructor.
      * @param pos_wgs [m] coordinates vector expressed in ECEF
      */
-    WGS84(const Vector3& pos_wgs);
+    explicit WGS84(const Vector3& pos_wgs);
 
     /** @brief Destructor. */
     virtual ~WGS84() = default;

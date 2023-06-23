@@ -55,7 +55,7 @@ public:
      * @param max maximal value for saturation
      * @param kaw filter gain
      */
-    AWFilter(double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
+    explicit AWFilter(double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
 
     void Update(double dt, double y_p, double y_i, double y_d,
                 double* value, double* error_i, const class PID* pid) override;
