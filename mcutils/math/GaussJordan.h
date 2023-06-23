@@ -52,11 +52,11 @@ namespace mc { namespace GaussJordan
  * </ul>
  */
 template <unsigned int SIZE>
-Result solve( const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
-              VectorN<SIZE>* x, double eps = 1.0e-9 )
+Result Solve(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
+             VectorN<SIZE>* x, double eps = 1.0e-9)
 {
     MatrixNxN<SIZE> mtr_temp = mtr;
-    VectorN<SIZE> rhs_temp = rhs;
+    VectorN<SIZE>   rhs_temp = rhs;
 
     for ( unsigned int r = 0; r < SIZE; ++r )
     {
