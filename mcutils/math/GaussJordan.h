@@ -44,12 +44,10 @@ namespace mc { namespace GaussJordan
  * @param eps minimum value treated as not-zero
  * @return mc::Result::Success on success and mc::Result::Failure on failure
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.41</li>
- *   <li>Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.41
+ * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]
+ * - [Gaussian elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
  */
 template <unsigned int SIZE>
 Result Solve(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,

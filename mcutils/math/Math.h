@@ -144,10 +144,8 @@ MCUTILSAPI inline float SineWave(float x)
  * @param x argument value
  * @return normalized smoothstep function value
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
 MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
                                     double x)
@@ -161,10 +159,8 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
  * @param x normalized argument value
  * @return normalized smoothstep function value
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
 MCUTILSAPI inline double Smoothstep(double x)
 {
@@ -180,10 +176,8 @@ MCUTILSAPI inline double Smoothstep(double x)
  * @param x argument value
  * @return smoothstep function value within the given range
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Smoothstep">Smoothstep - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
 MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
                                     const double& ymin, const double& ymax,
@@ -199,11 +193,9 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
  * @param n number of samples
  * @return standard deviation
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard deviation - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Algorithms for calculating variance - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)
+ * - [Algorithms for calculating variance - Wikipedia](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance)
  */
 MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
 {
@@ -219,11 +211,9 @@ MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
  * @param n number of samples
  * @return standard deviation
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Standard_deviation">Standard deviation - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance">Algorithms for calculating variance - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)
+ * - [Algorithms for calculating variance - Wikipedia](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance)
  */
 MCUTILSAPI inline double StdDev(const double x[], int n)
 {

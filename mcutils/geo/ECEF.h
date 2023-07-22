@@ -50,12 +50,10 @@ namespace mc
  * an equatorial plane and positive through 0 longitude and 0 latitude,
  * and y-axis completing right-handed system.<br/>
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Burtch R.: A Comparison of Methods Used in Rectangular to Geodetic Coordinate Transformations, 2006</li>
- *   <li>Bowring B.: Transformation from spatial to geocentric coordinates, 1976</li>
- *   <li>Zhu J.: Conversion of Earth-centered Earth-fixed coordinates to geodetic coordinates, 1994</li>
- * </ul>
+ * ### Refernces:
+ * - Burtch R.: A Comparison of Methods Used in Rectangular to Geodetic Coordinate Transformations, 2006
+ * - Bowring B.: Transformation from spatial to geocentric coordinates, 1976
+ * - Zhu J.: Conversion of Earth-centered Earth-fixed coordinates to geodetic coordinates, 1994
  */
 class MCUTILSAPI ECEF
 {

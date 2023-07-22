@@ -36,10 +36,8 @@ namespace mc
 /**
  * @brief Moving median filter class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Median">Median - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Median - Wikipedia](https://en.wikipedia.org/wiki/Median)
  */
 class MCUTILSAPI MovingMedian
 {

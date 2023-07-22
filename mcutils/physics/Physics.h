@@ -37,11 +37,9 @@ namespace mc
 {
 
 /**
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>The International System of Units (SI) 9th edition, Bureau International des Poids et Mesures, 2019</li>
- *   <li><a href="https://ntrs.nasa.gov/citations/19730018242">The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012</a></li>
- * </ul>
+ * ### Refernces:
+ * - The International System of Units (SI) 9th edition, Bureau International des Poids et Mesures, 2019
+ * - [The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012](https://ntrs.nasa.gov/citations/19730018242)
  */
 namespace Physics
 {
@@ -84,11 +82,9 @@ inline double Inertia( double u, double y, double dt, double tc )
  * @param e e coefficient
  * @return Pacejka "Magic Formula" coefficient
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Hans_B._Pacejka#Magic_Formula_tire_models">Magic Formula tire models - Wikipedia</a></li>
- *   <li><a href="https://www.mathworks.com/help/physmod/sdl/ref/tireroadinteractionmagicformula.html">Tire-road dynamics given by magic formula coefficients - MATLAB</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Magic Formula tire models - Wikipedia](https://en.wikipedia.org/wiki/Hans_B._Pacejka#Magic_Formula_tire_models)
+ * - [Tire-road dynamics given by magic formula coefficients - MATLAB](https://www.mathworks.com/help/physmod/sdl/ref/tireroadinteractionmagicformula.html)
  */
 inline double PacejkaFormula(double kappa,
                              double b = 10.0, double c = 1.9,
@@ -104,11 +100,9 @@ inline double PacejkaFormula(double kappa,
  * @param r [m] position
  * @return shifted inertia tensor [kg*m^2]
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Parallel_axis_theorem">Parallel axis theorem - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163
+ * - [Parallel axis theorem - Wikipedia](https://en.wikipedia.org/wiki/Parallel_axis_theorem)
  */
 inline Matrix3x3 ParallelAxisInertia(double m, const Matrix3x3 &i, const Vector3 &r)
 {

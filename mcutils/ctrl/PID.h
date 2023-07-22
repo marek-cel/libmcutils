@@ -54,14 +54,12 @@ namespace mc
  * G(s)  =  Kp*( 1 + 1/( s*Ti ) + s*Td )
  * </p>
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Skup Z.: Podstawy automatyki i sterowania, 2012, p.118. [in Polish]</li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.280. [in Polish]</li>
- *   <li>McCormack A., Godfrey K.: Rule-Based Autotuning Based on Frequency Domain Identification, 1998</li>
- *   <li><a href="https://en.wikipedia.org/wiki/PID_controller">PID controller - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method">Ziegler–Nichols method - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Skup Z.: Podstawy automatyki i sterowania, 2012, p.118. [in Polish]
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.280. [in Polish]
+ * - McCormack A., Godfrey K.: Rule-Based Autotuning Based on Frequency Domain Identification, 1998
+ * - [PID controller - Wikipedia](https://en.wikipedia.org/wiki/PID_controller)
+ * - [Ziegler–Nichols method - Wikipedia](https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method)
  */
 class MCUTILSAPI PID
 {

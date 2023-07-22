@@ -46,15 +46,16 @@
  * @subsection misc
  * This module contains miscellaneous utilities.
  *
- * @subsection net
- * This module contains various networking utilities.
- *
  * @subsection physics
  * This module contains utilities for various physical computations.
  *
  * @subsection time
  * This module contains time and date ralted utilities.
  *
+ * @section Licensing
+ *
+ * <tt>libmcutil</tt> is distributed under the terms of the
+ * [MIT License](https://opensource.org/license/mit/).
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),

@@ -37,13 +37,11 @@ namespace mc
 /**
  * @brief Anti-windup filter for PID controller.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Duzinkiewicz K., et al.: Zadania do cwiczen laboratoryjnych T10: Sterowanie predkoscia obrotowa silnika pradu stalego, 2016. [in Polish]</li>
- *   <li>Brdys M., et al.: Silnik pradu stalego (NI Elvis 2) - Dobieranie nastaw regulatorow P, PI, PI. Filtr przeciwnasyceniowy Anti-windup, 2010. [in Polish]</li>
- *   <li>Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Integral_windup">Integral windup - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Duzinkiewicz K., et al.: Zadania do cwiczen laboratoryjnych T10: Sterowanie predkoscia obrotowa silnika pradu stalego, 2016. [in Polish]
+ * - Brdys M., et al.: Silnik pradu stalego (NI Elvis 2) - Dobieranie nastaw regulatorow P, PI, PI. Filtr przeciwnasyceniowy Anti-windup, 2010. [in Polish]
+ * - Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010
+ * - [Integral windup - Wikipedia](https://en.wikipedia.org/wiki/Integral_windup)
  */
 class MCUTILSAPI AWFilter : public IAntiWindup
 {

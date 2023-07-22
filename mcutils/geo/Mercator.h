@@ -34,12 +34,10 @@ namespace mc
 /**
  * @brief Mercator map projection coordinates computation class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Evenden G.: libproj4: A Comprehensive Library of Cartographic Projection Functions (Preliminary Draft), 2005, p.37</li>
- *   <li>Grafarend E., et al.: Map Projections: Carthographic Information Systems, 2006, p.490</li>
- *   <li>Deetz C., Adams O.: Elements of Map Projection, US Coast and Geodetic Survery, 1931, p.101</li>
- * </ul>
+ * ### Refernces:
+ * - Evenden G.: libproj4: A Comprehensive Library of Cartographic Projection Functions (Preliminary Draft), 2005, p.37
+ * - Grafarend E., et al.: Map Projections: Carthographic Information Systems, 2006, p.490
+ * - Deetz C., Adams O.: Elements of Map Projection, US Coast and Geodetic Survery, 1931, p.101
  */
 class MCUTILSAPI Mercator
 {

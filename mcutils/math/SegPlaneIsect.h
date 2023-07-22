@@ -39,11 +39,9 @@ namespace mc
  * Checks if there is an intersection between the given line segment and
  * the given plane.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
- *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
- * </ul>
+ * ### Refernces:
+ * - O'Rourke J.: Computational Geometry in C, 1998, p.226
+ * - [Notes on points, lines and planes](http://paulbourke.net/geometry/pointlineplane/)
  *
  * @param b segment beginning
  * @param e segment end
@@ -61,11 +59,9 @@ MCUTILSAPI bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
  * Gets an intersection point between the given line segment and
  * the given plane.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
- *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
- * </ul>
+ * ### Refernces:
+ * - O'Rourke J.: Computational Geometry in C, 1998, p.226
+ * - [Notes on points, lines and planes](http://paulbourke.net/geometry/pointlineplane/)
  *
  * @param b segment beginning
  * @param e segment end

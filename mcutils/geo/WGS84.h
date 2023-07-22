@@ -38,10 +38,8 @@ namespace mc
  *
  * US Department of Defense World Geodetic System 1984 (WGS84) class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA-TR-8350.2</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)
  */
 class MCUTILSAPI WGS84 : public ECEF
 {

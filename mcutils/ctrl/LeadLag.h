@@ -37,11 +37,9 @@ namespace mc
  * Transfer function:
  * G(s)  =  ( c1*s + c2 ) / ( c3*s + c4 )
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Boulet B.: Fundamentals of Signals and Systems, 2006, p.300</li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]</li>
- * </ul>
+ * ### Refernces:
+ * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.300
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]
  */
 class MCUTILSAPI LeadLag
 {

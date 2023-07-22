@@ -36,10 +36,8 @@ namespace mc
 /**
  * @brief Moving average filter class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Moving_average">Moving average - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Moving average - Wikipedia](https://en.wikipedia.org/wiki/Moving_average)
  */
 class MCUTILSAPI MovingAverage
 {

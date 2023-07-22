@@ -73,7 +73,7 @@
  *
  * Refernces:
  * <ul>
- *   <li>Krysicki W., Wlodarski L.: Analiza matematyczna w zadaniach, Tom II. PWN, Ed. XXVII, 2018 [in Polish], p.287</li>
+ * - Krysicki W., Wlodarski L.: Analiza matematyczna w zadaniach, Tom II. PWN, Ed. XXVII, 2018 [in Polish], p.287
  * </ul>
  */
 class DiffEquationSolver

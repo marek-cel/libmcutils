@@ -40,12 +40,10 @@ namespace mc
  * omega [rad/s] undamped angular frequency
  * zeta  [-] <0.0;1.0> damping ratio
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Harmonic_oscillator">Harmonic oscillator - Wikipedia</a></li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.88. [in Polish]</li>
- *   <li>Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]</li>
- * </ul>
+ * ### Refernces:
+ * - [Harmonic oscillator - Wikipedia](https://en.wikipedia.org/wiki/Harmonic_oscillator)
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.88. [in Polish]
+ * - Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]
  */
 class MCUTILSAPI Oscillator
 {

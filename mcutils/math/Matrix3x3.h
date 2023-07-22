@@ -46,17 +46,15 @@ namespace mc
  *
  * Notice that rotations are considered to be passive (alias) rotations.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Allerton D.: Principles of Flight Simulation, 2009, p.120</li>
- *   <li>Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373</li>
- *   <li>Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]</li>
- *   <li>Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]</li>
- *   <li>Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Rotation_matrix">Rotation matrix - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Allerton D.: Principles of Flight Simulation, 2009, p.120
+ * - Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373
+ * - Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]
+ * - Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]
+ * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]
+ * - [Rotation matrix - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
+ * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
+ * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
 class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
 {

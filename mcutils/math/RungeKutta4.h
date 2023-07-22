@@ -38,13 +38,11 @@ namespace mc
 /**
  * @brief Runge-Kutta 4th order numerical integration class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907</li>
- *   <li>Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]</li>
- *   <li>Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge–Kutta methods - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
+ * - Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]
+ * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]
+ * - [Runge–Kutta methods - Wikipedia](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods)
  */
 class MCUTILSAPI RungeKutta4 : public Integrator
 {

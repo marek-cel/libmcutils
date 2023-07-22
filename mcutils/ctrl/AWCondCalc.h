@@ -37,11 +37,9 @@ namespace mc
 /**
  * @brief Conditional calculation anti-windup method for PID controller.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Integral_windup">Integral windup - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010
+ * - [Integral windup - Wikipedia](https://en.wikipedia.org/wiki/Integral_windup)
  */
 class MCUTILSAPI AWCondCalc : public IAntiWindup
 {

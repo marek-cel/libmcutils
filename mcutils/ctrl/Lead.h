@@ -37,12 +37,10 @@ namespace mc
  * Transfer function:
  * G(s)  =  Tc*s + 1
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Boulet B.: Fundamentals of Signals and Systems, 2006, p.298</li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.224. [in Polish]</li>
- *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
- * </ul>
+ * ### Refernces:
+ * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.298
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.224. [in Polish]
+ * - [Typical Transfer Functions and their corresponding Frequency Domain Plots](https://pages.mtu.edu/~tbco/cm416/TFBODE.html)
  */
 class MCUTILSAPI Lead
 {

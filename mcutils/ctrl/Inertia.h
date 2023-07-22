@@ -37,15 +37,13 @@ namespace mc
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Oledzki A., et al.: Zarys dynamiki i automatyki ukladow, 1991, p.74. [in Polish]</li>
- *   <li>Skup Z.: Podstawy automatyki i sterowania, 2012, p.54. [in Polish]</li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.48. [in Polish]</li>
- *   <li>Kaczorek T., et al.: Podstawy teorii sterowania, 2005, p.102. [in Polish]</li>
- *   <li><a href="https://www.mathworks.com/help/physmod/sps/powersys/ref/firstorderfilter.html">Implement first-order filter - Simulink</a></li>
- *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
- * </ul>
+ * ### Refernces:
+ * - Oledzki A., et al.: Zarys dynamiki i automatyki ukladow, 1991, p.74. [in Polish]
+ * - Skup Z.: Podstawy automatyki i sterowania, 2012, p.54. [in Polish]
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.48. [in Polish]
+ * - Kaczorek T., et al.: Podstawy teorii sterowania, 2005, p.102. [in Polish]
+ * - [Implement first-order filter - Simulink](https://www.mathworks.com/help/physmod/sps/powersys/ref/firstorderfilter.html)
+ * - [Typical Transfer Functions and their corresponding Frequency Domain Plots](https://pages.mtu.edu/~tbco/cm416/TFBODE.html)
  */
 class MCUTILSAPI Inertia
 {

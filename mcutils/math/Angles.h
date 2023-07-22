@@ -39,10 +39,8 @@ namespace mc
  * This class represents three angles of rotation about three axes in Z-Y-X
  * (yaw-pitch-roll) convention.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
  */
 class MCUTILSAPI Angles
 {

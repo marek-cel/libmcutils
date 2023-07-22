@@ -38,15 +38,13 @@ namespace mc
 /**
  * @brief Euler's rectangular numerical integration class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907</li>
- *   <li>Allerton D.: Principles of Flight Simulation, 2009, p.58</li>
- *   <li>DeLoura M.: Game Programming Gems Vol. 1, 2000, p.176</li>
- *   <li>Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.29. [in Polish]</li>
- *   <li>Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.309. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_method">Euler method - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
+ * - Allerton D.: Principles of Flight Simulation, 2009, p.58
+ * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.176
+ * - Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.29. [in Polish]
+ * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.309. [in Polish]
+ * - [Euler method - Wikipedia](https://en.wikipedia.org/wiki/Euler_method)
  */
 class MCUTILSAPI EulerRect : public Integrator
 {

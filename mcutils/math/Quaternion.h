@@ -41,20 +41,18 @@ namespace mc
  *
  * Notice that rotations are considered to be passive (alias) rotations.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Allerton D.: Principles of Flight Simulation, 2009, p.122</li>
- *   <li>Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.372</li>
- *   <li>Pamadi B.: Performance Stability Dynamics and Control of Airplanes, 2004, p.346</li>
- *   <li>Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.33. [in Polish]</li>
- *   <li>Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.519. [in Polish]</li>
- *   <li>DeLoura M.: Game Programming Gems Vol. 1, 2000, p.213</li>
- *   <li>Roziecki R.: Bifurkacyjna Analiza Dynamiki Lotu Samolotu z Wektorowaniem Ciagu, 2006, p.22 [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Quaternion">Quaternion - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation">Quaternions and spatial rotation - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles">Conversion between quaternions and Euler angles - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Allerton D.: Principles of Flight Simulation, 2009, p.122
+ * - Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.372
+ * - Pamadi B.: Performance Stability Dynamics and Control of Airplanes, 2004, p.346
+ * - Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.33. [in Polish]
+ * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.519. [in Polish]
+ * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.213
+ * - Roziecki R.: Bifurkacyjna Analiza Dynamiki Lotu Samolotu z Wektorowaniem Ciagu, 2006, p.22 [in Polish]
+ * - [Quaternion - Wikipedia](https://en.wikipedia.org/wiki/Quaternion)
+ * - [Quaternions and spatial rotation - Wikipedia](https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation)
+ * - [Conversion between quaternions and Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles)
+ * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
 class MCUTILSAPI Quaternion
 {
