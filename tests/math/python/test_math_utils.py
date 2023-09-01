@@ -11,3 +11,8 @@ def get_rotation_matrix(phi, tht, psi):
     m = r.as_matrix()
     m = m.T
     return np.asarray(m)
+
+
+def get_quaternion(phi, tht, psi):
+    r = R.from_matrix(get_rotation_matrix(phi, tht, psi))
+    return r.as_quat()
