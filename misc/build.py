@@ -66,6 +66,7 @@ def buildForWindows():
 
 if __name__ == "__main__":
     clean()
+    os.chdir("..")
     createBuildDir()
     with_tests = False
     if "--with-tests" in sys.argv:

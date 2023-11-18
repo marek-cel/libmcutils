@@ -37,6 +37,7 @@ def setLibraryPathOnWindows():
 
 
 if __name__ == "__main__":
+    os.chdir("..")
     os_name = platform.system()
     if os_name == "Linux":
         runTestsOnLinux()

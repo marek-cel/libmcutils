@@ -2,6 +2,7 @@
 
 ################################################################################
 
+import os
 import subprocess
 import clean
 
@@ -37,7 +38,7 @@ def captureCoverage():
 
 
 def getExclusions():
-    file_path = 'lcov_exclude.txt'
+    file_path = 'misc/lcov_exclude.txt'
     with open(file_path, 'r') as file:
         exclusions = file.readlines()
     exclusions = [line.strip() for line in exclusions]
@@ -71,4 +72,5 @@ def generateCoverageReport():
 
 if __name__ == "__main__":
     clean.removeCoverageReport()
+    os.chdir("..")
     executeAllSteps()

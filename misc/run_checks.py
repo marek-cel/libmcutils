@@ -53,6 +53,7 @@ def runScanBuild():
 if __name__ == "__main__":
     clean.removeCheckOutputs()
     print("Running checks...")
+    os.chdir("..")
     run_cloc()
     run_cppcheck()
     run_cpplint()
