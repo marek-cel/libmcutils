@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'ubuntu:22.04' }
+        docker { image 'libmcutils-build-env:1' }
     }
 
     environment {
@@ -18,20 +18,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cmake -B ./build -DTESTING=On'
-                sh 'cd build; make -j4'
+                sh 'python3 ./build.py'
             }
         }
-        stage('Test'){
+        stage('Test') {
             steps {
-                sh './run_tests.sh'
+                sh 'python3 ./run_tests.py'
             }
         }
-        stage('Generate coverage report'){
+        stage('Generate coverage report') {
             steps {
-                sh './generate_coverage-report.sh'
-                sh "mkdir -p $JENKINS_HOME/userContent/libmcutils/coverage-reports"
-                sh "cp -r coverage-report $JENKINS_HOME/userContent/libmcutils/coverage-reports/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
+                sh 'python3 ./generate_coverage-report.py'
             }
         }
     }
