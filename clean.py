@@ -44,6 +44,10 @@ def removeDocumentation():
     removeDir("docs")
 
 
+def removePyCache():
+    removeDir("__pycache__")
+
+
 ################################################################################
 
 
@@ -53,4 +57,5 @@ if __name__ == "__main__":
     removeCoverageReport()
     removeCheckOutputs()
     removeDocumentation()
+    removePyCache()
     print("Cleaning done.")
