@@ -18,7 +18,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cd misc; python3 ./build.py'
+                sh 'cd misc; python3 ./build.py --with-tests'
             }
         }
         stage('Test') {
