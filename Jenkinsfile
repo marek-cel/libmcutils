@@ -32,18 +32,23 @@ pipeline {
         stage('Generate coverage report') {
             steps {
                 sh 'cd misc; python3 ./generate_coverage-report.py'
-                sh "cp -r coverage-report /var/www/html/jenkins/libmcutils/coverage-reports/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
+                sh "cp -r coverage-report /var/www/html/jenkins/libmcutils/\${env.JOB_NAME}/coverage-reports/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
             }
         }
     }
 
     post {
         success {
+            script {
+                def buildDate = new Date(currentBuild.startTimeInMillis).format("yyyy-MM-dd")
+                env.BUILD_DATE = buildDate
+            }
             emailext (
                 to: "${env.RECIPIENT_LIST}",
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>""",
+                <p>Check console output at <a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a></p>
+                <p>Check coverage report at <a href='${getJenkinsBaseUrl()}/$jenkins/${env.JOB_NAME}/${env.BUILD_NUMBER}${env.BUILD_DATE}'>XXXXXX</a></p>""",
                 mimeType: 'text/html'
             )
         }
