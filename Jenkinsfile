@@ -29,6 +29,7 @@ pipeline {
         stage('Generate coverage report') {
             steps {
                 sh 'cd misc; python3 ./generate_coverage-report.py'
+                sh "cp -r coverage-report /var/www/html/jenkins/libmcutils/coverage-reports/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
             }
         }
     }
