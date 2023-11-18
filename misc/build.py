@@ -61,6 +61,24 @@ def buildForWindows():
         subprocess.run("cmake --build . --config Release", shell=True)
 
 
+def install():
+    print("Installing...")
+    os_name = platform.system()
+    if os_name == "Linux":
+        installForLinux()
+    elif os_name == "Windows":
+        installForWindows()
+    print("Installing done.")
+
+
+def installForLinux():
+    subprocess.run("sudo make install", shell=True)
+
+
+def installForWindows():
+    subprocess.run("cmake --build . --config Release --target INSTALL", shell=True)
+
+
 ################################################################################
 
 
@@ -72,3 +90,5 @@ if __name__ == "__main__":
     if "--with-tests" in sys.argv:
         with_tests = True
     build(with_tests)
+    if "--install" in sys.argv:
+        install()
