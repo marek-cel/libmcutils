@@ -18,17 +18,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python3 ./build.py'
+                sh 'cd misc; python3 ./build.py'
             }
         }
         stage('Test') {
             steps {
-                sh 'python3 ./run_tests.py'
+                sh 'cd misc; python3 ./run_tests.py'
             }
         }
         stage('Generate coverage report') {
             steps {
-                sh 'python3 ./generate_coverage-report.py'
+                sh 'cd misc; python3 ./generate_coverage-report.py'
             }
         }
     }
