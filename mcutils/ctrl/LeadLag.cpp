@@ -32,69 +32,31 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LeadLag::LeadLag( double c1, double c2, double c3, double c4, double y )
-    : _c1 ( c1 )
-    , _c2 ( c2 )
-    , _c3 ( c3 )
-    , _c4 ( c4 )
-    , _u_prev ( 0.0 )
-    , _y_prev ( y )
-    , _y ( y )
+LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
+    : c1_(c1)
+    , c2_(c2)
+    , c3_(c3)
+    , c4_(c4)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void LeadLag::setValue( double y )
-{
-    _y = y;
-    _y_prev = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC1( double c1 )
-{
-    _c1 = c1;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC2( double c2 )
-{
-    _c2 = c2;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC3( double c3 )
-{
-    _c3 = c3;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::setC4( double c4 )
-{
-    _c4 = c4;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void LeadLag::update( double dt, double u )
+void LeadLag::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        double den = 2.0 * _c3 + dt * _c4;
+        double den = 2.0 * c3_ + dt * c4_;
         double den_inv = 1.0 / den;
 
-        double ca = ( 2.0 * _c1 + dt  * _c2 ) * den_inv;
-        double cb = ( dt  * _c2 - 2.0 * _c1 ) * den_inv;
-        double cc = ( 2.0 * _c3 - dt  * _c4 ) * den_inv;
+        double ca = (2.0 * c1_ + dt  * c2_) * den_inv;
+        double cb = (dt  * c2_ - 2.0 * c1_) * den_inv;
+        double cc = (2.0 * c3_ - dt  * c4_) * den_inv;
 
-        _y = u * ca + _u_prev * cb + _y_prev * cc;
+        double y_prev = value_;
+        value_ = u * ca + u_prev_ * cb + y_prev * cc;
 
-        _u_prev = u;
-        _y_prev = _y;
+        u_prev_ = u;
     }
 }
 

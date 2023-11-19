@@ -16,11 +16,11 @@ public:
 
     /**
      * @brief Reads data from Xcos binary output file
-     * @param filePath file path
+     * @param file_path file path
      * @param vals vector of doubles to store data
      * @return true on success false on failure
      */
-    static bool readData( const char *filePath, std::vector<double> *vals );
+    static bool ReadData(const char* file_path, std::vector<double>* vals);
 };
 
 ////////////////////////////////////////////////////////////////////////////////

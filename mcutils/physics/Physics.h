@@ -37,25 +37,23 @@ namespace mc
 {
 
 /**
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>The International System of Units (SI) 9th edition, Bureau International des Poids et Mesures, 2019</li>
- *   <li><a href="https://ntrs.nasa.gov/citations/19730018242">The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012</a></li>
- * </ul>
+ * ### Refernces:
+ * - The International System of Units (SI) 9th edition, Bureau International des Poids et Mesures, 2019
+ * - [The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012](https://ntrs.nasa.gov/citations/19730018242)
  */
 namespace Physics
 {
 
-static constexpr double speedOfLight        = 299'792'458.0;   ///< [m/s] speed of light in vacuum
-static constexpr double gravitationalConst  = 6.6732e-11;      ///< [N*m^2/kg^2] gravitational constant
-static constexpr double avogadroConst       = 6.02214076e23;   ///< [1/kmol] Avogadro constant
-static constexpr double boltzmannConst      = 1.380649e-23;    ///< [J/K] Boltzmann constant
-static constexpr double universalGasConst   = 8.31434e3;       ///< [J/(kmol*K)] universal gas constant
-static constexpr double faradayConst        = 9.64867e7;       ///< [C/kmol] Faraday constant
-static constexpr double planckConst         = 6.62607015e-34;  ///< [J*s] Planck constant
-static constexpr double elementaryCharge    = 1.602176634e-19; ///< [C] elementary (electron) charge
-static constexpr double stefanBoltzmanConst = 5.66961e-8;      ///< [W/(m^2*K^4)] Stefan-Boltzmann constant
-static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] standard acceleration due to gravity
+static constexpr double kSpeedOfLight        = 299'792'458.0;   ///< [m/s] speed of light in vacuum
+static constexpr double kGravitationalConst  = 6.6732e-11;      ///< [N*m^2/kg^2] gravitational constant
+static constexpr double kAvogadroConst       = 6.02214076e23;   ///< [1/kmol] Avogadro constant
+static constexpr double kBoltzmannConst      = 1.380649e-23;    ///< [J/K] Boltzmann constant
+static constexpr double kUniversalGasConst   = 8.31434e3;       ///< [J/(kmol*K)] universal gas constant
+static constexpr double kFaradayConst        = 9.64867e7;       ///< [C/kmol] Faraday constant
+static constexpr double kPlanckConst         = 6.62607015e-34;  ///< [J*s] Planck constant
+static constexpr double kElementaryCharge    = 1.602176634e-19; ///< [C] elementary (electron) charge
+static constexpr double kStefanBoltzmanConst = 5.66961e-8;      ///< [W/(m^2*K^4)] Stefan-Boltzmann constant
+static constexpr double kStandardGravity     = 9.80665;         ///< [m/s^2] standard acceleration due to gravity
 
 /**
  * @brief Firt order inertia.
@@ -65,11 +63,11 @@ static constexpr double standardGravity     = 9.80665;         ///< [m/s^2] stan
  * @param tc [s] time constant
  * @return firt order inertia output
  */
-inline double inertia( double u, double y, double dt, double tc )
+inline double Inertia( double u, double y, double dt, double tc )
 {
     if ( tc > 0.0 )
     {
-        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+        return y + ( 1.0 - exp(-dt / tc) ) * ( u - y );
     }
 
     return u;
@@ -84,17 +82,15 @@ inline double inertia( double u, double y, double dt, double tc )
  * @param e e coefficient
  * @return Pacejka "Magic Formula" coefficient
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Hans_B._Pacejka#Magic_Formula_tire_models">Magic Formula tire models - Wikipedia</a></li>
- *   <li><a href="https://www.mathworks.com/help/physmod/sdl/ref/tireroadinteractionmagicformula.html">Tire-road dynamics given by magic formula coefficients - MATLAB</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Magic Formula tire models - Wikipedia](https://en.wikipedia.org/wiki/Hans_B._Pacejka#Magic_Formula_tire_models)
+ * - [Tire-road dynamics given by magic formula coefficients - MATLAB](https://www.mathworks.com/help/physmod/sdl/ref/tireroadinteractionmagicformula.html)
  */
-inline double pacejkaFormula( double kappa,
-                              double b = 10.0, double c = 1.9,
-                              double d = 1.0,  double e = 0.97 )
+inline double PacejkaFormula(double kappa,
+                             double b = 10.0, double c = 1.9,
+                             double d = 1.0,  double e = 0.97)
 {
-    return d * sin( c * atan( b*( 1.0 - e )*kappa + e*atan( b*kappa ) ) );
+    return d * sin( c * atan(b*(1.0 - e)*kappa + e*atan(b*kappa)) );
 }
 
 /**
@@ -104,13 +100,11 @@ inline double pacejkaFormula( double kappa,
  * @param r [m] position
  * @return shifted inertia tensor [kg*m^2]
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Parallel_axis_theorem">Parallel axis theorem - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163
+ * - [Parallel axis theorem - Wikipedia](https://en.wikipedia.org/wiki/Parallel_axis_theorem)
  */
-inline Matrix3x3 parallelAxisInertia( double m, const Matrix3x3 &i, const Vector3 &r )
+inline Matrix3x3 ParallelAxisInertia(double m, const Matrix3x3 &i, const Vector3 &r)
 {
     Matrix3x3 a(  r.y()*r.y() + r.z()*r.z() , -r.x()*r.y()               , -r.x()*r.z(),
                  -r.y()*r.x()               ,  r.x()*r.x() + r.z()*r.z() , -r.y()*r.z(),

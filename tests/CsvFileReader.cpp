@@ -5,22 +5,22 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool CsvFileReader::readData( const char *filePath,
-                              std::vector< double > *col1 )
+bool CsvFileReader::ReadData(const char* file_path,
+                             std::vector<double>* col1)
 {
-    std::ifstream ifs( filePath, std::ifstream::in );
+    std::ifstream ifs(file_path, std::ifstream::in);
 
     if ( ifs.is_open() )
     {
         std::string line;
 
-        while ( getline( ifs, line ) )
+        while ( getline(ifs, line) )
         {
-            std::stringstream ss( line );
+            std::stringstream ss(line);
 
             float c1;
             ss >> c1;
-            col1->push_back( c1 );
+            col1->push_back(c1);
         }
 
         ifs.close();
@@ -37,19 +37,19 @@ bool CsvFileReader::readData( const char *filePath,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool CsvFileReader::readData( const char *filePath,
-                              std::vector< double > *col1,
-                              std::vector< double > *col2 )
+bool CsvFileReader::ReadData(const char* file_path,
+                             std::vector<double>* col1,
+                             std::vector<double>* col2)
 {
-    std::ifstream ifs( filePath, std::ifstream::in );
+    std::ifstream ifs(file_path, std::ifstream::in);
 
     if ( ifs.is_open() )
     {
         std::string line;
 
-        while ( getline( ifs, line ) )
+        while ( getline(ifs, line) )
         {
-            std::stringstream ss( line );
+            std::stringstream ss(line);
 
             float c1;
             float c2;
@@ -57,8 +57,8 @@ bool CsvFileReader::readData( const char *filePath,
             ss >> c1;
             ss >> c2;
 
-            col1->push_back( c1 );
-            col2->push_back( c2 );
+            col1->push_back(c1);
+            col2->push_back(c2);
         }
 
         ifs.close();

@@ -28,7 +28,6 @@
 #include <ctime>
 
 #include <iomanip>
-#include <iostream>
 #include <sstream>
 
 #ifdef _LINUX_
@@ -40,6 +39,8 @@
 #   include <Windows.h>
 #endif
 
+#include <mcutils/time/ISO8601.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -47,101 +48,93 @@ namespace mc
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::e( const char *format, ... )
+void Log::Error(const char* format, ...)
 {
     va_list args;
-    va_start( args, format );
-    instance()->print( VerboseLevel::Error, format, args );
-    va_end( args );
+    va_start(args, format);
+    instance()->Print(VerboseLevel::Error, format, args);
+    va_end(args);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::w( const char *format, ... )
+void Log::Warning(const char* format, ...)
 {
     va_list args;
-    va_start( args, format );
-    instance()->print( VerboseLevel::Warning, format, args );
-    va_end( args );
+    va_start(args, format);
+    instance()->Print(VerboseLevel::Warning, format, args);
+    va_end(args);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::i( const char *format, ... )
+void Log::Info(const char* format, ...)
 {
     va_list args;
-    va_start( args, format );
-    instance()->print( VerboseLevel::Info, format, args );
-    va_end( args );
+    va_start(args, format);
+    instance()->Print(VerboseLevel::Info, format, args);
+    va_end(args);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::d( const char *format, ... )
+void Log::Debug( const char* format, ... )
 {
     va_list args;
-    va_start( args, format );
-    instance()->print( VerboseLevel::Debug, format, args );
-    va_end( args );
+    va_start(args, format);
+    instance()->Print(VerboseLevel::Debug, format, args);
+    va_end(args);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-std::ostream& Log::out()
+std::ostream& Log::Out()
 {
-    return instance()->_outputStream == nullptr ? std::cout : *(instance()->_outputStream);
+    return instance()->out_stream_ == nullptr ? std::cout : *(instance()->out_stream_);
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::setOutputStream( std::ostream *outputStream )
+void Log::set_out_stream(std::ostream* out_stream)
 {
-    instance()->_outputStream = outputStream;
+    instance()->out_stream_ = out_stream;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::setSyslogOutput( bool syslogOutput )
+void Log::set_syslog_out(bool syslog_out)
 {
-    instance()->_syslogOutput = syslogOutput;
+    instance()->syslog_out_ = syslog_out;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-void Log::setVerboseLevel( VerboseLevel verboseLevel )
+void Log::set_verb_level(VerboseLevel verb_level)
 {
-    instance()->_verboseLevel = verboseLevel;
+    instance()->verb_level_ = verb_level;
 }
 
 //////////////////////////////////////////////////////////////////////////////////
 
-Log::Log()
-    : _outputStream ( &std::cout )
-    , _verboseLevel ( VerboseLevel::Info )
-    , _syslogOutput ( true )
-{}
-
-//////////////////////////////////////////////////////////////////////////////////
-
-void Log::print( VerboseLevel level, const char *format, va_list args )
+void Log::Print(VerboseLevel level, const char* format, va_list args)
 {
-    if ( level <= _verboseLevel
+    if ( level <= verb_level_
 #   ifdef _LINUX_
-         || _syslogOutput
+         || syslog_out_
 #   endif // _LINUX_
        )
     {
         char *buf = nullptr;
 
         va_list args2;
-        va_copy( args2, args );
-        int size = vsnprintf( nullptr, 0, format, args );
+        va_copy(args2, args);
+        int size = vsnprintf(nullptr, 0, format, args);
         va_end(args);
 
         if ( size > 0 )
         {
             buf = new char[size+1];
-            vsnprintf( buf, size+1, format, args2 );
+            vsnprintf(buf, size+1, format, args2);
         }
 
         va_end(args2);
@@ -155,23 +148,21 @@ void Log::print( VerboseLevel level, const char *format, va_list args )
             case VerboseLevel::Debug   : levelTag = "DEBUG";   break;
         }
 
-
-
-        if ( level <= _verboseLevel )
+        if ( level <= verb_level_ )
         {
             std::stringstream ss;
             ss << "[" << levelTag << "]";
             ss << " " << buf << "\n";
             std::string msg = ss.str();
 
-            std::ostream *out = _outputStream == nullptr ? &std::cout : _outputStream;
-            (*out) << timestamp();
-            (*out) << msg;
-            (*out).flush();
+            std::ostream *out = out_stream_ == nullptr ? &std::cout : out_stream_;
+            *out << Timestamp();
+            *out << msg;
+            out->flush();
         }
 
 #       ifdef _LINUX_
-        if ( _syslogOutput )
+        if ( syslog_out_ )
         {
             int priority = LOG_DEBUG;
             switch ( level )
@@ -182,7 +173,7 @@ void Log::print( VerboseLevel level, const char *format, va_list args )
                 case VerboseLevel::Debug   : priority = LOG_DEBUG;   break;
             }
 
-            syslog( priority, "%s", (levelTag + " " + buf).c_str() );
+            syslog(priority, "%s", (levelTag + " " + buf).c_str());
         }
 #       endif // _LINUX_
 
@@ -192,7 +183,7 @@ void Log::print( VerboseLevel level, const char *format, va_list args )
 
 //////////////////////////////////////////////////////////////////////////////////
 
-std::string Log::timestamp()
+std::string Log::Timestamp()
 {
     int year = 2000;
     int mon  = 1;
@@ -204,8 +195,8 @@ std::string Log::timestamp()
 
 #   ifdef _LINUX_
     struct timeval tp;
-    gettimeofday( &tp, NULL );
-    std::tm *tm = std::localtime( &tp.tv_sec );
+    gettimeofday(&tp, NULL);
+    std::tm *tm = std::localtime(&tp.tv_sec);
 
     year = 1900 + tm->tm_year;
     mon  = tm->tm_mon + 1;
@@ -213,12 +204,12 @@ std::string Log::timestamp()
     hour = tm->tm_hour;
     min  = tm->tm_min;
     sec  = tm->tm_sec;
-    msec = floor( tp.tv_usec * 0.001 );
+    msec = floor(tp.tv_usec * 0.001);
 #   endif // _LINUX_
 
 #   ifdef WIN32
     SYSTEMTIME st;
-    GetLocalTime( &st );
+    GetLocalTime(&st);
 
     year = st.wYear;
     mon  = st.wMonth;
@@ -229,25 +220,7 @@ std::string Log::timestamp()
     msec = st.wMilliseconds;
 #   endif // WIN32
 
-    std::stringstream ss;
-
-    ss << "[";
-    ss << year;
-    ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << mon;
-    ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << day;
-    ss << "T";
-    ss << std::setfill('0') << std::setw( 2 ) << hour;
-    ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << min;
-    ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << sec;
-    ss << ".";
-    ss << std::setfill('0') << std::setw( 3 ) << msec;
-    ss << "]";
-
-    return ss.str();
+    return "[" + ToISO8601(year, mon, day, hour, min, sec, msec) + "]";
 }
 
 ////////////////////////////////////////////////////////////////////////////////

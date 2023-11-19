@@ -1,10 +1,13 @@
-set( TARGET_NAME mcutils-ctrl )
+set( TARGET_NAME ctrl )
 
 ################################################################################
 
 set( HEADERS
-    AntiWindupPID.h
+    AWBackCalc.h
+    AWCondCalc.h
+    AWFilter.h
     HighPassFilter.h
+    IAntiWindup.h
     Inertia.h
     Inertia2.h
     Lead.h
@@ -18,7 +21,9 @@ set( HEADERS
 )
 
 set( SOURCES
-    AntiWindupPID.cpp
+    AWBackCalc.cpp
+    AWCondCalc.cpp
+    AWFilter.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp
@@ -34,19 +39,16 @@ set( SOURCES
 
 ################################################################################
 
-add_library( ${TARGET_NAME} ${SOURCES} )
+add_library( ${TARGET_NAME} OBJECT ${SOURCES} )
 
 ################################################################################
 
 include( GNUInstallDirs )
 
 set_target_properties( ${TARGET_NAME} PROPERTIES 
-    VERSION ${MCUTILS_VERSION_STRING}
-    SOVERSION ${MCUTILS_VERSION_MAJOR}
     PUBLIC_HEADER "${HEADERS}"
 )
 
 install( TARGETS ${TARGET_NAME}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/ctrl
 )

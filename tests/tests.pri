@@ -18,7 +18,9 @@ SOURCES += \
 ################################################################################
 
 SOURCES += \
-    $$PWD/ctrl/TestAntiWindupPID.cpp \
+    $$PWD/ctrl/TestAWBackCalc.cpp \
+    $$PWD/ctrl/TestAWCondCalc.cpp \
+    $$PWD/ctrl/TestAWFilter.cpp \
     $$PWD/ctrl/TestHighPassFilter.cpp \
     $$PWD/ctrl/TestInertia.cpp \
     $$PWD/ctrl/TestInertia2.cpp \
@@ -46,12 +48,13 @@ SOURCES += \
     $$PWD/math/TestAngles.cpp \
     $$PWD/math/TestDegMinSec.cpp \
     $$PWD/math/TestEulerRect.cpp \
+    $$PWD/math/TestGaussJordan.cpp \
     $$PWD/math/TestMath.cpp \
-    $$PWD/math/TestMatrix.cpp \
     $$PWD/math/TestMatrix3x3.cpp \
     $$PWD/math/TestMatrix4x4.cpp \
     $$PWD/math/TestMatrix6x6.cpp \
-    $$PWD/math/TestMatrixSq.cpp \
+    $$PWD/math/TestMatrixMxN.cpp \
+    $$PWD/math/TestMatrixNxN.cpp \
     $$PWD/math/TestQuaternion.cpp \
     $$PWD/math/TestRandom.cpp \
     $$PWD/math/TestRungeKutta4.cpp \
@@ -68,14 +71,10 @@ SOURCES += \
 
 SOURCES += \
     $$PWD/misc/TestCheck.cpp \
+    $$PWD/misc/TestMapUtils.cpp \
     $$PWD/misc/TestLog.cpp \
     $$PWD/misc/TestString.cpp \
     $$PWD/misc/TestUnits.cpp
-
-################################################################################
-
-SOURCES += \
-    $$PWD/net/TestEndianness.cpp
 
 ################################################################################
 

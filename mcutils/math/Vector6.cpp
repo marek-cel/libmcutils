@@ -29,122 +29,88 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6::Vector6()
-    : Vector<6>()
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6::Vector6( const Vector6 &vect )
-    : Vector<6>( vect )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6::Vector6( const double items[] )
-    : Vector<6>( items )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6::Vector6( const char *str )
-    : Vector<6>( str )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6 Vector6::getNormalized() const
+Vector6 Vector6::GetNormalized() const
 {
-    Vector6 result( *this );
-
-    result.normalize();
-
+    Vector6 result(*this);
+    result.Normalize();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6& Vector6::operator= ( const Vector6 &vect )
+Vector6 Vector6::operator+(const Vector6& vect) const
 {
-    setArray( vect._items );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6 Vector6::operator+ ( const Vector6 &vect ) const
-{
-    Vector6 result( *this );
-    result.add( vect );
+    Vector6 result(*this);
+    result.Add(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Vector6::operator- () const
+Vector6 Vector6::operator-() const
 {
-    Vector6 result( *this );
-    result.negate();
+    Vector6 result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Vector6::operator- ( const Vector6 &vect ) const
+Vector6 Vector6::operator-(const Vector6& vect) const
 {
-    Vector6 result( *this );
-    result.substract( vect );
+    Vector6 result(*this);
+    result.Substract(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Vector6::operator* ( double value ) const
+Vector6 Vector6::operator*(double value) const
 {
-    Vector6 result( *this );
-    result.multiply( value );
+    Vector6 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6 Vector6::operator/ ( double value ) const
+Vector6 Vector6::operator/(double value) const
 {
-    Vector6 result( *this );
-    result.divide( value );
+    Vector6 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6& Vector6::operator+= ( const Vector6 &vect )
+Vector6& Vector6::operator+=(const Vector6& vect)
 {
-    add( vect );
-    return (*this);
+    Add(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6& Vector6::operator-= ( const Vector6 &vect )
+Vector6& Vector6::operator-=(const Vector6& vect)
 {
-    substract( vect );
-    return (*this);
+    Substract(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6& Vector6::operator*= ( double value )
+Vector6& Vector6::operator*=(double value)
 {
-    multiply( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector6& Vector6::operator/= ( double value )
+Vector6& Vector6::operator/=(double value)
 {
-    divide( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

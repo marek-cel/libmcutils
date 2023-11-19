@@ -31,137 +31,106 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4::Matrix4x4()
-    : MatrixSq<4>()
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4::Matrix4x4( const Matrix4x4 &mtrx )
-    : MatrixSq<4>( mtrx )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4::Matrix4x4( const double items[] )
-    : MatrixSq<4>( items )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4::Matrix4x4( const char *str )
-    : MatrixSq<4>( str )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4 Matrix4x4::getTransposed() const
+Matrix4x4 Matrix4x4::GetTransposed() const
 {
-    Matrix4x4 result( *this );
-    result.transpose();
-    return result;
-}
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4& Matrix4x4::operator= ( const Matrix4x4 &matrix )
-{
-    setArray( matrix._items );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix4x4 Matrix4x4::operator+ ( const Matrix4x4 &matrix ) const
-{
-    Matrix4x4 result( *this );
-    result.add( matrix );
+    Matrix4x4 result(*this);
+    result.Transpose();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator- () const
+Matrix4x4 Matrix4x4::operator+(const Matrix4x4& matrix) const
 {
-    Matrix4x4 result( *this );
-    result.negate();
+    Matrix4x4 result(*this);
+    result.Add(matrix);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator- ( const Matrix4x4 &matrix ) const
+Matrix4x4 Matrix4x4::operator-() const
 {
-    Matrix4x4 result( *this );
-    result.substract( matrix );
+    Matrix4x4 result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator* ( double value ) const
+Matrix4x4 Matrix4x4::operator-(const Matrix4x4& matrix) const
 {
-    Matrix4x4 result( *this );
-    result.multiplyByValue( value );
+    Matrix4x4 result(*this);
+    result.Substract(matrix);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator* ( const Matrix4x4 &matrix ) const
+Matrix4x4 Matrix4x4::operator*(double value) const
+{
+    Matrix4x4 result(*this);
+    result.MultiplyByValue(value);
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Matrix4x4 Matrix4x4::operator*(const Matrix4x4& matrix) const
 {
     Matrix4x4 result;
-    multiplyByMatrix( matrix, &result );
+    MultiplyByMatrix(matrix, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Matrix4x4::operator* ( const Vector4 &vect ) const
+Vector4 Matrix4x4::operator*(const Vector4& vect) const
 {
     Vector4 result;
-    multiplyByVector( vect, &result );
+    MultiplyByVector(vect, &result);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4 Matrix4x4::operator/ ( double value ) const
+Matrix4x4 Matrix4x4::operator/(double value) const
 {
-    Matrix4x4 result( *this );
-    result.divideByValue( value );
+    Matrix4x4 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator+= ( const Matrix4x4 &matrix )
+Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& matrix)
 {
-    add( matrix );
-    return (*this);
+    Add(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator-= ( const Matrix4x4 &matrix )
+Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& matrix)
 {
-    substract( matrix );
-    return (*this);
+    Substract(matrix);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator*= ( double value )
+Matrix4x4& Matrix4x4::operator*=(double value)
 {
-    multiplyByValue( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Matrix4x4& Matrix4x4::operator/= ( double value )
+Matrix4x4& Matrix4x4::operator/=(double value)
 {
-    divideByValue( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -29,122 +29,88 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4::Vector4()
-    : Vector<4>()
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector4::Vector4( const Vector4 &vect )
-    : Vector<4>( vect )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector4::Vector4( const double items[] )
-    : Vector<4>( items )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector4::Vector4( const char *str )
-    : Vector<4>( str )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector4 Vector4::getNormalized() const
+Vector4 Vector4::GetNormalized() const
 {
-    Vector4 result( *this );
-
-    result.normalize();
-
+    Vector4 result(*this);
+    result.Normalize();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator= ( const Vector4 &vect )
+Vector4 Vector4::operator+(const Vector4& vect) const
 {
-    setArray( vect._items );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector4 Vector4::operator+ ( const Vector4 &vect ) const
-{
-    Vector4 result( *this );
-    result.add( vect );
+    Vector4 result(*this);
+    result.Add(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator- () const
+Vector4 Vector4::operator-() const
 {
-    Vector4 result( *this );
-    result.negate();
+    Vector4 result(*this);
+    result.Negate();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator- ( const Vector4 &vect ) const
+Vector4 Vector4::operator-(const Vector4& vect) const
 {
-    Vector4 result( *this );
-    result.substract( vect );
+    Vector4 result(*this);
+    result.Substract(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator* ( double value ) const
+Vector4 Vector4::operator*(double value) const
 {
-    Vector4 result( *this );
-    result.multiply( value );
+    Vector4 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4 Vector4::operator/ ( double value ) const
+Vector4 Vector4::operator/(double value) const
 {
-    Vector4 result( *this );
-    result.divide( value );
+    Vector4 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator+= ( const Vector4 &vect )
+Vector4& Vector4::operator+=(const Vector4& vect)
 {
-    add( vect );
-    return (*this);
+    Add(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator-= ( const Vector4 &vect )
+Vector4& Vector4::operator-=(const Vector4& vect)
 {
-    substract( vect );
-    return (*this);
+    Substract(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator*= ( double value )
+Vector4& Vector4::operator*=(double value)
 {
-    multiply( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector4& Vector4::operator/= ( double value )
+Vector4& Vector4::operator/=(double value)
 {
-    divide( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

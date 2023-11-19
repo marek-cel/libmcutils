@@ -39,12 +39,10 @@ namespace mc
  * This class represents three angles of rotation about three axes in Z-Y-X
  * (yaw-pitch-roll) convention.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
  */
-class MCUTILSAPI Angles final
+class MCUTILSAPI Angles
 {
 public:
 
@@ -54,13 +52,10 @@ public:
      * @param min minimum value
      * @return normalized angle
      */
-    static double normalize( double val, double min = 0.0 );
+    static double Normalize(double val, double min = 0.0);
 
-    /** @brief Constructor. */
-    Angles();
-
-    /** @brief Copy constructor. */
-    Angles( const Angles &angl );
+    /** Constructor. */
+    Angles() = default;
 
     /**
      * @brief Constructor.
@@ -68,47 +63,49 @@ public:
      * @param tht [rad] angle of rotation about y-axis
      * @param psi [rad] angle of rotation about z-axis
      */
-    Angles( double phi, double tht, double psi );
+    Angles(double phi, double tht, double psi);
 
     /** @brief Destructor. */
     ~Angles() = default;
 
     /** @return true if all items are valid */
-    bool isValid() const;
+    bool IsValid() const;
 
     /**
      * @brief Normalizes angles.
      * Limits phi to [-pi,pi] theta to [-pi/2,pi/2] and psi to [0,2*pi].
      */
-    void normalize();
+    void Normalize();
 
-    inline double  phi() const { return _phi; }
-    inline double  tht() const { return _tht; }
-    inline double  psi() const { return _psi; }
-    inline double& phi()       { return _phi; }
-    inline double& tht()       { return _tht; }
-    inline double& psi()       { return _psi; }
-
-    /** @brief Sets angles values. */
-    void set( double phi, double tht, double psi );
+    /**
+     * @brief Sets angles values.
+     * @param phi [rad] angle of rotation about x-axis
+     * @param tht [rad] angle of rotation about y-axis
+     * @param psi [rad] angle of rotation about z-axis
+     */
+    void Set(double phi, double tht, double psi);
 
     /** @brief Returns string represtation of the angles. */
-    std::string toString() const;
+    std::string ToString() const;
 
-    /** @brief Assignment operator. */
-    Angles& operator= ( const Angles &angl );
+    inline double  phi() const { return phi_; }
+    inline double  tht() const { return tht_; }
+    inline double  psi() const { return psi_; }
+    inline double& phi()       { return phi_; }
+    inline double& tht()       { return tht_; }
+    inline double& psi()       { return psi_; }
 
     /** @brief Equality operator. */
-    bool operator== ( const Angles &angl ) const;
+    bool operator==( const Angles& angl ) const;
 
     /** @brief Inequality operator. */
-    bool operator!= ( const Angles &angl ) const;
+    bool operator!=( const Angles& angl ) const;
 
 private:
 
-    double _phi;    ///< [rad] angle of rotation about x-axis
-    double _tht;    ///< [rad] angle of rotation about y-axis
-    double _psi;    ///< [rad] angle of rotation about z-axis
+    double phi_ = 0.0;  ///< [rad] angle of rotation about x-axis
+    double tht_ = 0.0;  ///< [rad] angle of rotation about y-axis
+    double psi_ = 0.0;  ///< [rad] angle of rotation about z-axis
 };
 
 } // namespace mc

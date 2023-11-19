@@ -26,7 +26,11 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/VectorN.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+template class MCUTILSAPI mc::VectorN<4>;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,66 +40,47 @@ namespace mc
 /**
  * @brief 4 elements column vector class.
  */
-class MCUTILSAPI Vector4 final : public Vector<4>
+class MCUTILSAPI Vector4 : public VectorN<4>
 {
 public:
 
-    /** @brief Constructor. */
-    Vector4();
-
-    /** @brief Copy constructor. */
-    Vector4( const Vector4 &vect );
-
-    /** @brief Constructor. */
-    Vector4( const double items[] );
-
-    /** @brief Constructor. */
-    Vector4( const char *str );
-
-    /** @brief Destructor. */
-    virtual ~Vector4() = default;
-
     /** @return normalized vector */
-    Vector4 getNormalized() const;
-
-    /** @brief Assignment operator. */
-    Vector4& operator= ( const Vector4 &vect );
+    Vector4 GetNormalized() const;
 
     /** @brief Addition operator. */
-    Vector4 operator+ ( const Vector4 &vect ) const;
+    Vector4 operator+(const Vector4& vect) const;
 
     /** @brief Negation operator. */
-    Vector4 operator- () const;
+    Vector4 operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector4 operator- ( const Vector4 &vect ) const;
+    Vector4 operator-(const Vector4& vect) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector4 operator* ( double value ) const;
+    Vector4 operator*(double value) const;
 
     /** @brief Division operator (by scalar). */
-    Vector4 operator/ ( double value ) const;
+    Vector4 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Vector4& operator+= ( const Vector4 &vect );
+    Vector4& operator+=(const Vector4& vect);
 
     /** @brief Unary subtraction operator. */
-    Vector4& operator-= ( const Vector4 &vect );
+    Vector4& operator-=(const Vector4& vect);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector4& operator*= ( double value );
+    Vector4& operator*=(double value);
 
     /** Unary division operator (by scalar). */
-    Vector4& operator/= ( double value );
-
+    Vector4& operator/=(double value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Vector4 operator* ( double value, const Vector4 &vect )
+inline Vector4 operator*(double value, const Vector4& vect)
 {
-    return ( vect * value );
+    return vect * value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -26,8 +26,13 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/MatrixSq.h>
+#include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Vector4.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+template class MCUTILSAPI mc::MatrixMxN<4,4>;
+template class MCUTILSAPI mc::MatrixNxN<4>;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -37,71 +42,53 @@ namespace mc
 /**
  * @brief 4 by 4 matrix class.
  */
-class MCUTILSAPI Matrix4x4 final : public MatrixSq<4>
+class MCUTILSAPI Matrix4x4 : public MatrixNxN<4>
 {
 public:
 
-    /** @brief Constructor. */
-    Matrix4x4();
-
-    /** @brief Copy constructor. */
-    Matrix4x4( const Matrix4x4 &matrix );
-
-    /** @brief Constructor. */
-    Matrix4x4( const double items[] );
-
-    /** @brief Constructor. */
-    Matrix4x4( const char *str );
-
-    /** @brief Destructor. */
-    virtual ~Matrix4x4() = default;
-
     /** @brief Returns transposed matrix. */
-    Matrix4x4 getTransposed() const;
-
-    /** @brief Assignment operator. */
-    Matrix4x4& operator= ( const Matrix4x4 &matrix );
+    Matrix4x4 GetTransposed() const;
 
     /** @brief Addition operator. */
-    Matrix4x4 operator+ ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator+(const Matrix4x4& matrix) const;
 
     /** @brief Negation operator. */
-    Matrix4x4 operator- () const;
+    Matrix4x4 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix4x4 operator- ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator-(const Matrix4x4& matrix) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix4x4 operator* ( double value ) const;
+    Matrix4x4 operator*(double value) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix4x4 operator* ( const Matrix4x4 &matrix ) const;
+    Matrix4x4 operator*(const Matrix4x4& matrix) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector4 operator* ( const Vector4 &vect ) const;
+    Vector4 operator*(const Vector4& vect) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix4x4 operator/ ( double value ) const;
+    Matrix4x4 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Matrix4x4& operator+= ( const Matrix4x4 &matrix );
+    Matrix4x4& operator+=(const Matrix4x4& matrix);
 
     /** @brief Unary subtraction operator. */
-    Matrix4x4& operator-= ( const Matrix4x4 &matrix );
+    Matrix4x4& operator-=(const Matrix4x4& matrix);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix4x4& operator*= ( double value );
+    Matrix4x4& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Matrix4x4& operator/= ( double value );
+    Matrix4x4& operator/=(double value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix4x4 operator* ( double value, const Matrix4x4 &matrix )
+inline Matrix4x4 operator*(double value, const Matrix4x4& matrix)
 {
-    return ( matrix * value );
+    return matrix * value;
 }
 
 } // namespace mc

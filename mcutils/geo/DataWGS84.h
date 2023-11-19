@@ -35,10 +35,8 @@ namespace mc
  * @brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
  * parameters and other physical data.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA-TR-8350.2</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)
  */
 namespace DataWGS84
 {

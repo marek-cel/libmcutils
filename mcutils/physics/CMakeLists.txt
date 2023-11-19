@@ -1,4 +1,4 @@
-set( TARGET_NAME mcutils-physics )
+set( TARGET_NAME physics )
 
 ################################################################################
 

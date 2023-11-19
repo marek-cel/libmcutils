@@ -39,7 +39,7 @@ typedef uint16_t       UInt16;  ///< 16-bits unsigned integer type
 typedef uint32_t       UInt32;  ///< 32-bits unsigned integer type
 #else
 typedef unsigned char  UInt8;   ///< 8-bits unsigned integer type
-typedef unsigned short UInt16;  ///< 16-bits unsigned integer type
+typedef unsigned short UInt16;  ///< 16-bits unsigned integer type NOLINT(runtime/int)
 typedef unsigned int   UInt32;  ///< 32-bits unsigned integer type
 #endif // __cplusplus > 199711L
 

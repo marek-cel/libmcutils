@@ -2,26 +2,22 @@ set( TARGET_NAME mcutils )
 
 ################################################################################
 
+if( WIN32 )
+    if(BUILD_SHARED_LIBS)
+        add_definitions( -DMCUTILS_DLL_EXPORTS )
+    endif()
+endif()
+
+################################################################################
+
 set( HEADERS
     defs.h
     Result.h
     Types.h
 )
 
-################################################################################
-
-add_library( ${TARGET_NAME} INTERFACE )
-
-################################################################################
-
-include( GNUInstallDirs )
-
-set_target_properties( ${TARGET_NAME} PROPERTIES 
-    PUBLIC_HEADER "${HEADERS}"
-)
-
-install( TARGETS ${TARGET_NAME}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils
+set( SOURCES
+    mcutils.cpp
 )
 
 ################################################################################
@@ -30,6 +26,35 @@ add_subdirectory( ctrl )
 add_subdirectory( geo )
 add_subdirectory( math )
 add_subdirectory( misc )
-add_subdirectory( net )
 add_subdirectory( physics )
 add_subdirectory( time )
+
+################################################################################
+
+add_library( ${TARGET_NAME} ${SOURCES}
+    $<TARGET_OBJECTS:ctrl>
+    $<TARGET_OBJECTS:geo>
+    $<TARGET_OBJECTS:math>
+    $<TARGET_OBJECTS:misc>
+    $<TARGET_OBJECTS:time>
+)
+
+################################################################################
+
+include( GNUInstallDirs )
+
+set_target_properties( ${TARGET_NAME} PROPERTIES
+    VERSION ${MCUTILS_VERSION_STRING}
+    SOVERSION ${MCUTILS_VERSION_MAJOR}
+    PUBLIC_HEADER "${HEADERS}"
+)
+
+install( TARGETS ${TARGET_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils
+)
+
+################################################################################
+
+target_link_libraries( ${TARGET_NAME} )
+

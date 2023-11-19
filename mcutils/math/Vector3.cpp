@@ -29,226 +29,138 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const Vector3 Vector3::_ex = Vector3( 1.0, 0.0, 0.0 );
-const Vector3 Vector3::_ey = Vector3( 0.0, 1.0, 0.0 );
-const Vector3 Vector3::_ez = Vector3( 0.0, 0.0, 1.0 );
+const Vector3 Vector3::ex_ = Vector3(1.0, 0.0, 0.0);
+const Vector3 Vector3::ey_ = Vector3(0.0, 1.0, 0.0);
+const Vector3 Vector3::ez_ = Vector3(0.0, 0.0, 1.0);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3::Vector3()
-    : Vector<3>()
-
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const Vector3 &vect )
-    : Vector<3>( vect )
-
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const double items[] )
-    : Vector<3>( items )
-
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( const char *str )
-    : Vector<3>( str )
-
-    , _x ( _items[ 0 ] )
-    , _y ( _items[ 1 ] )
-    , _z ( _items[ 2 ] )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3::Vector3( double x, double y, double z )
-    : Vector3()
+Vector3::Vector3(double x, double y, double z)
 {
-    _x = x;
-    _y = y;
-    _z = z;
+    Set(x, y, z);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::getNormalized() const
+Vector3 Vector3::GetNormalized() const
 {
-    Vector3 result( *this );
-
-    result.normalize();
-
+    Vector3 result(*this);
+    result.Normalize();
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Vector3::set( double x, double y, double z )
+void Vector3::Set(double x, double y, double z)
 {
-    _x = x;
-    _y = y;
-    _z = z;
+    elements_[0] = x;
+    elements_[1] = y;
+    elements_[2] = z;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3& Vector3::operator= ( const Vector3 &vect )
+Vector3 Vector3::operator+(const Vector3& vect) const
 {
-    _x = vect._x;
-    _y = vect._y;
-    _z = vect._z;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3 Vector3::operator+ ( const Vector3 &vect ) const
-{
-    Vector3 result( *this );
-
-    result._x += vect._x;
-    result._y += vect._y;
-    result._z += vect._z;
-
+    Vector3 result(*this);
+    result.Add(vect);
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator- () const
+Vector3 Vector3::operator-() const
+{
+    Vector3 result(*this);
+    result.Negate();
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Vector3 Vector3::operator-(const Vector3& vect) const
+{
+    Vector3 result(*this);
+    result.Substract(vect);
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Vector3 Vector3::operator*(double value) const
+{
+    Vector3 result(*this);
+    result.MultiplyByValue(value);
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Vector3 Vector3::operator/(double value) const
+{
+    Vector3 result(*this);
+    result.DivideByValue(value);
+    return result;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+double Vector3::operator*(const Vector3& vect) const
+{
+    return x()*vect.x() + y()*vect.y() + z()*vect.z();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Vector3 Vector3::operator%(const Vector3& vect) const
 {
     Vector3 result;
 
-    result._x = -_x;
-    result._y = -_y;
-    result._z = -_z;
+    result.x() = y() * vect.z() - z() * vect.y();
+    result.y() = z() * vect.x() - x() * vect.z();
+    result.z() = x() * vect.y() - y() * vect.x();
 
     return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator- ( const Vector3 &vect ) const
+Vector3& Vector3::operator+=(const Vector3& vect)
 {
-    Vector3 result( *this );
-
-    result._x -= vect._x;
-    result._y -= vect._y;
-    result._z -= vect._z;
-
-    return result;
+    Add(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator* ( double value ) const
+Vector3& Vector3::operator-=(const Vector3& vect)
 {
-    Vector3 result( *this );
-
-    result._x *= value;
-    result._y *= value;
-    result._z *= value;
-
-    return result;
+    Substract(vect);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator/ ( double value ) const
+Vector3& Vector3::operator*=(double value)
 {
-    Vector3 result( *this );
-
-    result._x /= value;
-    result._y /= value;
-    result._z /= value;
-
-    return result;
+    MultiplyByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Vector3::operator* ( const Vector3 &vect ) const
+Vector3& Vector3::operator/=(double value)
 {
-    return ( _x*vect._x + _y*vect._y + _z*vect._z );
+    DivideByValue(value);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 Vector3::operator% ( const Vector3 &vect ) const
+Vector3& Vector3::operator%=(const Vector3& vect)
 {
-    Vector3 result;
-
-    result._x = _y * vect._z - _z * vect._y;
-    result._y = _z * vect._x - _x * vect._z;
-    result._z = _x * vect._y - _y * vect._x;
-
-    return result;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator+= ( const Vector3 &vect )
-{
-    _x += vect._x;
-    _y += vect._y;
-    _z += vect._z;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator-= ( const Vector3 &vect )
-{
-    _x -= vect._x;
-    _y -= vect._y;
-    _z -= vect._z;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator*= ( double value )
-{
-    _x *= value;
-    _y *= value;
-    _z *= value;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator/= ( double value )
-{
-    _x /= value;
-    _y /= value;
-    _z /= value;
-
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Vector3& Vector3::operator%= ( const Vector3 &vect )
-{
-    (*this) = (*this) % vect;
-    return (*this);
+    *this = *this % vect;
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

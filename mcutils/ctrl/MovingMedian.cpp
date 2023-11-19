@@ -32,55 +32,48 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-MovingMedian::MovingMedian( unsigned int length , double y )
-    : _length ( length )
-    , _y ( y )
+MovingMedian::MovingMedian(unsigned int length , double value)
+    : length_(length)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void MovingMedian::setLength( unsigned int length )
+void MovingMedian::Update(double, double u)
 {
-    _length = length;
-}
+    fifo_.push_back(u);
 
-////////////////////////////////////////////////////////////////////////////////
-
-void MovingMedian::update( double, double u )
-{
-    _fifo.push_back( u );
-
-    while ( _fifo.size() > _length )
+    while ( fifo_.size() > length_ )
     {
-        _fifo.pop_front();
+        fifo_.pop_front();
     }
 
-    if ( _fifo.size() > 1 )
+    if ( fifo_.size() > 1 )
     {
         std::vector<double> v;
 
-        for ( double &val : _fifo )
+        for ( double &val : fifo_ )
         {
-            v.push_back( val );
+            v.push_back(val);
         }
 
-        std::sort( v.begin(), v.end() );
+        std::sort(v.begin(), v.end());
 
         if ( v.size() % 2 == 0 )
         {
-            int i1 = static_cast<int>( v.size() ) / 2;
+            int i1 = static_cast<int>(v.size()) / 2;
             int i2 = i1 - 1;
 
-            _y = ( v[ i1 ] + v[ i2 ] ) / 2.0;
+            value_ = (v[i1] + v[i2]) / 2.0;
         }
         else
         {
-            _y = v[ v.size() / 2 ];
+            value_ = v[v.size() / 2];
         }
     }
     else
     {
-        _y = u;
+        value_ = u;
     }
 }
 

@@ -29,25 +29,18 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-EulerRect::EulerRect( Fun fun )
+void EulerRect::Integrate(double step, Vector* vect)
 {
-    setDerivFun( fun );
-}
+    xt_ = *vect;
 
-////////////////////////////////////////////////////////////////////////////////
-
-void EulerRect::integrate( double step, VectorN *vect )
-{
-    _xt = (*vect);
-
-    _k0.resize( vect->getSize() );
-    _k0.zeroize();
+    k0_.Resize(vect->size());
+    k0_.Zeroize();
 
     // derivatives calculation
-    _fun( _xt, &_k0 );
+    deriv_fun_(xt_, &k0_);
 
     // integration
-    (*vect) = (*vect) + _k0 * step;
+    *vect += k0_ * step;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

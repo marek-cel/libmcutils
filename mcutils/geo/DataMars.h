@@ -39,13 +39,11 @@ namespace mc
  *
  * Martian prime merdian goes through the Airy-0 crater.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015</li>
- *   <li>Mars Geodesy/Cartography Working Group Recommendations on Mars Cartographic Constants and Coordinate Systems, 2011</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Mars">Mars - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Airy-0">Airy-0 - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015
+ * - Mars Geodesy/Cartography Working Group Recommendations on Mars Cartographic Constants and Coordinate Systems, 2011
+ * - [Mars - Wikipedia](https://en.wikipedia.org/wiki/Mars)
+ * - [Airy-0 - Wikipedia](https://en.wikipedia.org/wiki/Airy-0)
  */
 namespace DataMars
 {

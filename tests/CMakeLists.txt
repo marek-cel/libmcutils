@@ -19,7 +19,9 @@ set( SOURCES
     XcosBinFileReader.cpp
     main.cpp
 
-    ctrl/TestAntiWindupPID.cpp
+    ctrl/TestAWBackCalc.cpp
+    ctrl/TestAWCondCalc.cpp
+    ctrl/TestAWFilter.cpp
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
     ctrl/TestInertia2.cpp
@@ -41,12 +43,13 @@ set( SOURCES
     math/TestAngles.cpp
     math/TestDegMinSec.cpp
     math/TestEulerRect.cpp
+    math/TestGaussJordan.cpp
     math/TestMath.cpp
-    math/TestMatrix.cpp
     math/TestMatrix3x3.cpp
     math/TestMatrix4x4.cpp
     math/TestMatrix6x6.cpp
-    math/TestMatrixSq.cpp
+    math/TestMatrixMxN.cpp
+    math/TestMatrixNxN.cpp
     math/TestQuaternion.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp
@@ -61,10 +64,9 @@ set( SOURCES
 
     misc/TestCheck.cpp
     misc/TestLog.cpp
+    misc/TestMapUtils.cpp
     misc/TestString.cpp
     misc/TestUnits.cpp
-
-    net/TestEndianness.cpp
 
     physics/TestPhysics.cpp
 
@@ -82,12 +84,7 @@ target_link_libraries( ${TARGET_NAME}
 
     gcov
 
-    mcutils-ctrl
-    mcutils-geo
-    mcutils-math
-    mcutils-misc
-    mcutils-net
-    mcutils-time
+    mcutils
 
     GTest::gtest
     GTest::gtest_main

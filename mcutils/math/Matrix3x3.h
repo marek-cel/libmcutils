@@ -27,9 +27,14 @@
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Angles.h>
-#include <mcutils/math/MatrixSq.h>
+#include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
+
+////////////////////////////////////////////////////////////////////////////////
+
+template class MCUTILSAPI mc::MatrixMxN<3,3>;
+template class MCUTILSAPI mc::MatrixNxN<3>;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -41,70 +46,55 @@ namespace mc
  *
  * Notice that rotations are considered to be passive (alias) rotations.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Allerton D.: Principles of Flight Simulation, 2009, p.120</li>
- *   <li>Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373</li>
- *   <li>Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]</li>
- *   <li>Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]</li>
- *   <li>Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Rotation_matrix">Rotation matrix - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_angles">Euler angles - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Active_and_passive_transformation">Active and passive transformation - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Allerton D.: Principles of Flight Simulation, 2009, p.120
+ * - Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373
+ * - Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]
+ * - Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]
+ * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]
+ * - [Rotation matrix - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
+ * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
+ * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
-class MCUTILSAPI Matrix3x3 final : public MatrixSq<3>
+class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
 {
 public:
 
     /** @brief Creates identity matrix. */
-    static Matrix3x3 identityMatrix();
+    static Matrix3x3 GetIdentityMatrix();
+
+    Matrix3x3() = default;
 
     /** @brief Constructor. */
-    Matrix3x3();
-
-    /** @brief Copy constructor. */
-    Matrix3x3( const Matrix3x3 &matrix );
-
-    /** @brief Constructor. */
-    Matrix3x3( const double items[] );
-
-    /** @brief Constructor. */
-    Matrix3x3( double xx, double xy, double xz,
-               double yx, double yy, double yz,
-               double zx, double zy, double zz );
-
-    /** @brief Constructor. */
-    Matrix3x3( const char *str );
+    Matrix3x3(double xx, double xy, double xz,
+              double yx, double yy, double yz,
+              double zx, double zy, double zz);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Angles &angl );
+    explicit Matrix3x3(const Angles& angl);
 
     /** @brief Creates passive (alias) rotation matrix. */
-    Matrix3x3( const Quaternion &qtrn );
+    explicit Matrix3x3(const Quaternion& qtrn);
 
-    /** @brief Destructor. */
-    virtual ~Matrix3x3() = default;
+    inline double xx() const { return elements_[0]; }
+    inline double xy() const { return elements_[1]; }
+    inline double xz() const { return elements_[2]; }
+    inline double yx() const { return elements_[3]; }
+    inline double yy() const { return elements_[4]; }
+    inline double yz() const { return elements_[5]; }
+    inline double zx() const { return elements_[6]; }
+    inline double zy() const { return elements_[7]; }
+    inline double zz() const { return elements_[8]; }
 
-    inline double xx() const { return _xx; }
-    inline double xy() const { return _xy; }
-    inline double xz() const { return _xz; }
-    inline double yx() const { return _yx; }
-    inline double yy() const { return _yy; }
-    inline double yz() const { return _yz; }
-    inline double zx() const { return _zx; }
-    inline double zy() const { return _zy; }
-    inline double zz() const { return _zz; }
-
-    inline double& xx() { return _xx; }
-    inline double& xy() { return _xy; }
-    inline double& xz() { return _xz; }
-    inline double& yx() { return _yx; }
-    inline double& yy() { return _yy; }
-    inline double& yz() { return _yz; }
-    inline double& zx() { return _zx; }
-    inline double& zy() { return _zy; }
-    inline double& zz() { return _zz; }
+    inline double& xx() { return elements_[0]; }
+    inline double& xy() { return elements_[1]; }
+    inline double& xz() { return elements_[2]; }
+    inline double& yx() { return elements_[3]; }
+    inline double& yy() { return elements_[4]; }
+    inline double& yz() { return elements_[5]; }
+    inline double& zx() { return elements_[6]; }
+    inline double& zy() { return elements_[7]; }
+    inline double& zz() { return elements_[8]; }
 
     /**
      * @brief Sets items of the matrix.
@@ -118,76 +108,59 @@ public:
      * @param zy item at position zy
      * @param zz item at position zz
      */
-    void set( double xx, double xy, double xz,
-              double yx, double yy, double yz,
-              double zx, double zy, double zz );
+    void Set(double xx, double xy, double xz,
+             double yx, double yy, double yz,
+             double zx, double zy, double zz);
 
     /** @brief Returns Bryant angles of rotation matrix. */
-    Angles getAngles() const;
+    Angles GetAngles() const;
 
     /** @brief Returns quaternion of rotation matrix. */
-    Quaternion getQuaternion() const;
+    Quaternion GetQuaternion() const;
 
     /** @brief Returns transposed matrix. */
-    Matrix3x3 getTransposed() const;
-
-    /** @brief Assignment operator. */
-    Matrix3x3& operator= ( const Matrix3x3 &matrix );
+    Matrix3x3 GetTransposed() const;
 
     /** @brief Addition operator. */
-    Matrix3x3 operator+ ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator+(const Matrix3x3& matrix) const;
 
     /** @brief Negation operator. */
-    Matrix3x3 operator- () const;
+    Matrix3x3 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix3x3 operator- ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator-(const Matrix3x3& matrix) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix3x3 operator* ( double value ) const;
+    Matrix3x3 operator*(double value) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix3x3 operator* ( const Matrix3x3 &matrix ) const;
+    Matrix3x3 operator*(const Matrix3x3& matrix) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector3 operator* ( const Vector3 &vect ) const;
+    Vector3 operator*(const Vector3& vect) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix3x3 operator/ ( double value ) const;
+    Matrix3x3 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Matrix3x3& operator+= ( const Matrix3x3 &matrix );
+    Matrix3x3& operator+=(const Matrix3x3& matrix);
 
     /** @brief Unary subtraction operator. */
-    Matrix3x3& operator-= ( const Matrix3x3 &matrix );
+    Matrix3x3& operator-=(const Matrix3x3& matrix);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix3x3& operator*= ( double value );
+    Matrix3x3& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Matrix3x3& operator/= ( double value );
-
-private:
-
-    double &_xx;    ///< xx element
-    double &_xy;    ///< xy element
-    double &_xz;    ///< xz element
-
-    double &_yx;    ///< yx element
-    double &_yy;    ///< yy element
-    double &_yz;    ///< yz element
-
-    double &_zx;    ///< zx element
-    double &_zy;    ///< zy element
-    double &_zz;    ///< zz element
+    Matrix3x3& operator/=(double value);
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 
 /** @brief Multiplication operator (by scalar). */
-inline Matrix3x3 operator* ( double value, const Matrix3x3 &matrix )
+inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
 {
-    return ( matrix * value );
+    return matrix * value;
 }
 
 } // namespace mc

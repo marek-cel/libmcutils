@@ -39,13 +39,13 @@ namespace mc
  */
 struct MCUTILSAPI DateTime
 {
-    UInt16 year;        ///< year
-    UInt8  month;       ///< month
-    UInt8  day;          ///< day
-    UInt8  hour;        ///< hour
-    UInt8  minute;      ///< minute
-    UInt8  second;      ///< second
-    UInt16 msec;        ///< millisecond
+    UInt16 year   = 0;  ///< year
+    UInt8  month  = 0;  ///< month
+    UInt8  day    = 0;  ///< day
+    UInt8  hour   = 0;  ///< hour
+    UInt8  minute = 0;  ///< minute
+    UInt8  second = 0;  ///< second
+    UInt16 msec   = 0;  ///< millisecond
 };
 
 } // namespace mc

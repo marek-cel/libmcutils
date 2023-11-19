@@ -24,6 +24,8 @@
 
 #include <utility>
 
+#include <mcutils/math/Math.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -35,71 +37,70 @@ namespace mc
 //1.0,  0.0,  0.0
 //0.0,  0.0, -1.0
 
-const Matrix3x3 ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
-const Matrix3x3 ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
+const Matrix3x3 ECEF::enu2ned_( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
+const Matrix3x3 ECEF::ned2enu_( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF::ECEF()
-    : ECEF( 0.0, 0.0 )
+ECEF::ECEF() : ECEF(0.0, 0.0)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF::ECEF( const ECEF &ecef )
+ECEF::ECEF(const ECEF& ecef)
 {
-    copyParams ( ecef );
-    copyData   ( ecef );
+    CopyParams( ecef );
+    CopyData( ecef );
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF::ECEF( ECEF &&ecef )
+ECEF::ECEF(ECEF&& ecef)
 {
-    _a = std::exchange( ecef._a, 0.0 );
-    _f = std::exchange( ecef._f, 0.0 );
+    a_ = std::exchange(ecef.a_, 0.0);
+    f_ = std::exchange(ecef.f_, 0.0);
 
-    _b   = std::exchange( ecef._b   , 0.0 );
-    _r1  = std::exchange( ecef._r1  , 0.0 );
-    _a2  = std::exchange( ecef._a2  , 0.0 );
-    _b2  = std::exchange( ecef._b2  , 0.0 );
-    _e2  = std::exchange( ecef._e2  , 0.0 );
-    _e   = std::exchange( ecef._e   , 0.0 );
-    _ep2 = std::exchange( ecef._ep2 , 0.0 );
-    _ep  = std::exchange( ecef._ep  , 0.0 );
+    b_   = std::exchange(ecef.b_   , 0.0);
+    r1_  = std::exchange(ecef.r1_  , 0.0);
+    a2_  = std::exchange(ecef.a2_  , 0.0);
+    b2_  = std::exchange(ecef.b2_  , 0.0);
+    e2_  = std::exchange(ecef.e2_  , 0.0);
+    e_   = std::exchange(ecef.e_   , 0.0);
+    ep2_ = std::exchange(ecef.ep2_ , 0.0);
+    ep_  = std::exchange(ecef.ep_  , 0.0);
 
-    _pos_geo  = std::move( ecef._pos_geo  );
-    _pos_ecef = std::move( ecef._pos_ecef );
+    pos_geo_  = std::move(ecef.pos_geo_);
+    pos_cart_ = std::move(ecef.pos_cart_);
 
-    _enu2ecef = std::move( ecef._enu2ecef );
-    _ned2ecef = std::move( ecef._ned2ecef );
-    _ecef2enu = std::move( ecef._ecef2enu );
-    _ecef2ned = std::move( ecef._ecef2ned );
+    enu2ecef_ = std::move(ecef.enu2ecef_);
+    ned2ecef_ = std::move(ecef.ned2ecef_);
+    ecef2enu_ = std::move(ecef.ecef2enu_);
+    ecef2ned_ = std::move(ecef.ecef2ned_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 ECEF::ECEF( double a, double f )
 {
-    _a = a;
-    _f = f;
+    a_ = a;
+    f_ = f;
 
-    _b   = _a - _f*_a;
-    _r1  = ( 2.0 * _a + _b ) / 3.0;
-    _a2  = _a * _a;
-    _b2  = _b * _b;
-    _e2  = 1.0 - _b2 / _a2;
-    _e   = sqrt(_e2);
-    _ep2 = _a2 / _b2 - 1.0;
-    _ep  = sqrt(_ep2);
+    b_   = a_ - f_*a_;
+    r1_  = (2.0 * a_ + b_) / 3.0;
+    a2_  = a_ * a_;
+    b2_  = b_ * b_;
+    e2_  = 1.0 - b2_ / a2_;
+    e_   = sqrt(e2_);
+    ep2_ = a2_ / b2_ - 1.0;
+    ep_  = sqrt(ep2_);
 
-    _pos_geo.lat = 0.0;
-    _pos_geo.lon = 0.0;
-    _pos_geo.alt = 0.0;
+    pos_geo_.lat = 0.0;
+    pos_geo_.lon = 0.0;
+    pos_geo_.alt = 0.0;
 
-    _pos_ecef.x() = _a;
-    _pos_ecef.y() = 0.0;
-    _pos_ecef.z() = 0.0;
+    pos_cart_.x() = a_;
+    pos_cart_.y() = 0.0;
+    pos_cart_.z() = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,293 +109,295 @@ ECEF::~ECEF() {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::geo2ecef( double lat, double lon, double alt,
-                     double *x, double *y, double *z ) const
+void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
+                           double* x, double* y, double* z) const
 {
-    double sinLat = sin( lat );
-    double cosLat = cos( lat );
-    double sinLon = sin( lon );
-    double cosLon = cos( lon );
+    double sinLat = sin(lat);
+    double cosLat = cos(lat);
+    double sinLon = sin(lon);
+    double cosLon = cos(lon);
 
-    double n = _a / sqrt( 1.0 - _e2 * sinLat*sinLat );
+    double n = a_ / sqrt(1.0 - e2_ * sinLat*sinLat);
 
-    *x = ( n + alt ) * cosLat * cosLon;
-    *y = ( n + alt ) * cosLat * sinLon;
-    *z = ( n * ( _b2 / _a2 ) + alt ) * sinLat;
+    *x = (n + alt) * cosLat * cosLon;
+    *y = (n + alt) * cosLat * sinLon;
+    *z = (n * (b2_ / a2_) + alt) * sinLat;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 ECEF::geo2ecef( double lat, double lon, double alt ) const
+Vector3 ECEF::ConvertGeo2Cart(double lat, double lon, double alt) const
 {
-    Vector3 pos_ecef;
+    Vector3 pos_cart;
 
-    geo2ecef( lat, lon, alt, &pos_ecef.x(), &pos_ecef.y(), &pos_ecef.z() );
+    ConvertGeo2Cart(lat, lon, alt, &pos_cart.x(), &pos_cart.y(), &pos_cart.z());
 
-    return pos_ecef;
+    return pos_cart;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Vector3 ECEF::geo2ecef( const Geo &geo ) const
+Vector3 ECEF::ConvertGeo2Cart(const Geo& geo) const
 {
-    return geo2ecef( geo.lat, geo.lon, geo.alt );
+    return ConvertGeo2Cart(geo.lat, geo.lon, geo.alt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::geo2ecef( const Geo &geo, Vector3 *pos_ecef ) const
+void ECEF::ConvertGeo2Cart(const Geo& geo, Vector3* pos_cart) const
 {
-    *pos_ecef = geo2ecef( geo );
+    *pos_cart = ConvertGeo2Cart(geo);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::ecef2geo( double x, double y, double z,
-                     double *lat, double *lon, double *alt ) const
+void ECEF::ConvertCart2Geo(double x, double y, double z,
+                           double* lat, double* lon, double* alt) const
 {
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
-    double p   = sqrt( x*x + y*y );
-    double tht = atan2( z*_a, p*_b );
-    double ed2 = ( _a2 - _b2 ) / _b2;
+    double p   = sqrt(x*x + y*y);
+    double tht = atan2(z*a_, p*b_);
+    double ed2 = (a2_ - b2_) / b2_;
 
-    double sinTht = sin( tht );
-    double cosTht = cos( tht );
+    double sinTht = sin(tht);
+    double cosTht = cos(tht);
 
-    *lat = atan( (z + ed2*_b*sinTht*sinTht*sinTht) / ( p - _e2*_a*cosTht*cosTht*cosTht ) );
-    *lon = atan2( y, x );
+    *lat = atan((z + ed2*_b*sinTht*sinTht*sinTht) / (p - e2_*a_*cosTht*cosTht*cosTht));
+    *lon = atan2(y, x);
 
-    double sinLat = sin( lat );
-    double n = _a / sqrt( 1.0 - _e2*sinLat*sinLat );
+    double sinLat = sin(lat);
+    double n = a_ / sqrt(1.0 - _e2*sinLat*sinLat);
 
-    *alt = p / cos( lat ) - n;
+    *alt = p / cos(lat) - n;
 #   else
     double z2 = z*z;
-    double r  = sqrt( x*x + y*y );
+    double r  = sqrt(x*x + y*y);
     double r2 = r*r;
-    double e2 = _a2 - _b2;
-    double f  = 54.0 * _b2 * z2;
-    double g  = r2 + ( 1.0 - _e2 )*z2 - _e2*e2;
-    double c  = _e2*_e2 * f * r2 / ( g*g*g );
-    double s  = pow( 1.0 + c + sqrt( c*c + 2.0*c ), 1.0/3.0 );
+    double e2 = a2_ - b2_;
+    double f  = 54.0 * b2_ * z2;
+    double g  = r2 + (1.0 - e2_)*z2 - e2_*e2;
+    double c  = e2_*e2_ * f * r2 / Math::Pow3(g);
+    double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
     double p0 = s + 1.0/s + 1.0;
-    double p  = f / ( 3.0 * p0*p0 * g*g );
-    double q  = sqrt( 1.0 + 2.0*( _e2*_e2 )*p );
-    double r0 = -( p * _e2 * r )/( 1.0 + q ) + sqrt( 0.5*_a2*( 1.0 + 1.0/q )
-                - p*( 1.0 - _e2 )*z2/( q + q*q ) - 0.5*p*r2 );
-    double uv = r - _e2*r0;
-    double u  = sqrt( uv*uv + z2 );
-    double v  = sqrt( uv*uv + ( 1.0 - _e2 )*z2 );
-    double z0 = _b2 * z / ( _a * v );
+    double p  = f / (3.0 * p0*p0 * g*g);
+    double q  = sqrt(1.0 + 2.0*(e2_*e2_)*p);
+    double r0 = -(p * e2_ * r)/(1.0 + q)
+                + sqrt(
+                    0.5*a2_*(1.0 + 1.0/q) - p*(1.0 - e2_)*z2/(q + q*q) - 0.5*p*r2
+                );
+    double uv = r - e2_*r0;
+    double u  = sqrt(uv*uv + z2);
+    double v  = sqrt(uv*uv + (1.0 - e2_)*z2);
+    double z0 = b2_ * z / (a_ * v);
 
-    *alt = u * ( 1.0 - _b2 / ( _a * v ) );
-    *lat = atan( ( z + _ep2*z0 )/r );
-    *lon = atan2( y, x );
+    *alt = u * (1.0 - b2_ / (a_ * v));
+    *lat = atan((z + ep2_*z0)/r);
+    *lon = atan2(y, x);
 #   endif
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Geo ECEF::ecef2geo( double x, double y, double z ) const
+Geo ECEF::ConvertCart2Geo(double x, double y, double z) const
 {
     Geo pos_geo;
 
-    ecef2geo( x, y, z, &pos_geo.lat, &pos_geo.lon, &pos_geo.alt );
+    ConvertCart2Geo(x, y, z, &pos_geo.lat, &pos_geo.lon, &pos_geo.alt);
 
     return pos_geo;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Geo ECEF::ecef2geo( const Vector3 &pos_ecef ) const
+Geo ECEF::ConvertCart2Geo(const Vector3& pos_cart) const
 {
-    return ecef2geo( pos_ecef.x(), pos_ecef.y(), pos_ecef.z() );
+    return ConvertCart2Geo(pos_cart.x(), pos_cart.y(), pos_cart.z());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::ecef2geo( const Vector3 &pos_ecef, Geo *pos_geo ) const
+void ECEF::ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const
 {
-    *pos_geo = ecef2geo( pos_ecef );
+    *pos_geo = ConvertCart2Geo(pos_cart);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Geo ECEF::getGeoOffset( double heading, double offset_x, double offset_y ) const
+Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
 {
-    Matrix3x3 ned2bas( Angles( 0.0, 0.0, heading ) );
-    Matrix3x3 bas2ned = ned2bas.getTransposed();
+    Matrix3x3 ned2bas(Angles(0.0, 0.0, heading));
+    Matrix3x3 bas2ned = ned2bas.GetTransposed();
 
-    Vector3 r_bas( offset_x, offset_y, 0.0 );
+    Vector3 r_bas(offset_x, offset_y, 0.0);
     Vector3 r_ned = bas2ned * r_bas;
 
-    Vector3 pos_ecef = _pos_ecef + _ned2ecef * r_ned;
+    Vector3 pos_cart = pos_cart_ + ned2ecef_ * r_ned;
 
-    return ecef2geo( pos_ecef );
+    return ConvertCart2Geo(pos_cart);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles ECEF::getAngles_NED( const Angles &angles_ecf ) const
+Angles ECEF::ConvertAttitudeECEF2NED(const Angles& angles_ecef) const
 {
-    return getNED2BAS( Quaternion( angles_ecf ) ).getAngles();
+    return ConvertAttitudeECEF2NED(Quaternion(angles_ecef)).GetAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Angles ECEF::getAngles_ECEF( const Angles &angles_ned ) const
+Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
 {
-    return getECEF2BAS( Quaternion( angles_ned ) ).getAngles();
+    return ConvertAttitudeNED2ECEF(Quaternion(angles_ned)).GetAngles();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion ECEF::getNED2BAS( const Quaternion &att_ecf ) const
+Quaternion ECEF::ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const
 {
-    return _ned2ecef.getQuaternion() * att_ecf;
+    return ned2ecef_.GetQuaternion() * att_ecef;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Quaternion ECEF::getECEF2BAS( const Quaternion &att_ned ) const
+Quaternion ECEF::ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const
 {
-    return _ecef2ned.getQuaternion() * att_ned;
+    return ecef2ned_.GetQuaternion() * att_ned;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::setPos_Geo( const Geo &pos_geo )
+void ECEF::SetPositionFromGeo(const Geo& pos_geo)
 {
-    _pos_geo.lat = pos_geo.lat;
-    _pos_geo.lon = pos_geo.lon;
-    _pos_geo.alt = pos_geo.alt;
+    pos_geo_.lat = pos_geo.lat;
+    pos_geo_.lon = pos_geo.lon;
+    pos_geo_.alt = pos_geo.alt;
 
-    geo2ecef( _pos_geo, &_pos_ecef );
-    update();
+    ConvertGeo2Cart(pos_geo_, &pos_cart_);
+    Update();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::setPos_ECEF( const Vector3 &pos_ecef )
+void ECEF::SetPositionFromCart(const Vector3& pos_cart)
 {
-    _pos_ecef = pos_ecef;
+    pos_cart_ = pos_cart;
 
-    ecef2geo( _pos_ecef, &_pos_geo );
-    update();
+    ConvertCart2Geo(pos_cart_, &pos_geo_);
+    Update();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF& ECEF::operator= ( const ECEF &ecef )
+ECEF& ECEF::operator=(const ECEF& ecef)
 {
-    copyParams ( ecef );
-    copyData   ( ecef );
-    return (*this);
+    CopyParams(ecef);
+    CopyData(ecef);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-ECEF& ECEF::operator= ( ECEF &&ecef )
+ECEF& ECEF::operator=(ECEF&& ecef)
 {
-    _a = std::exchange( ecef._a, 0.0 );
-    _f = std::exchange( ecef._f, 0.0 );
+    a_ = std::exchange(ecef.a_, 0.0);
+    f_ = std::exchange(ecef.f_, 0.0);
 
-    _b   = std::exchange( ecef._b   , 0.0 );
-    _r1  = std::exchange( ecef._r1  , 0.0 );
-    _a2  = std::exchange( ecef._a2  , 0.0 );
-    _b2  = std::exchange( ecef._b2  , 0.0 );
-    _e2  = std::exchange( ecef._e2  , 0.0 );
-    _e   = std::exchange( ecef._e   , 0.0 );
-    _ep2 = std::exchange( ecef._ep2 , 0.0 );
-    _ep  = std::exchange( ecef._ep  , 0.0 );
+    b_   = std::exchange(ecef.b_   , 0.0);
+    r1_  = std::exchange(ecef.r1_  , 0.0);
+    a2_  = std::exchange(ecef.a2_  , 0.0);
+    b2_  = std::exchange(ecef.b2_  , 0.0);
+    e2_  = std::exchange(ecef.e2_  , 0.0);
+    e_   = std::exchange(ecef.e_   , 0.0);
+    ep2_ = std::exchange(ecef.ep2_ , 0.0);
+    ep_  = std::exchange(ecef.ep_  , 0.0);
 
-    _pos_geo  = std::move( ecef._pos_geo  );
-    _pos_ecef = std::move( ecef._pos_ecef );
+    pos_geo_  = std::move(ecef.pos_geo_);
+    pos_cart_ = std::move(ecef.pos_cart_);
 
-    _enu2ecef = std::move( ecef._enu2ecef );
-    _ned2ecef = std::move( ecef._ned2ecef );
-    _ecef2enu = std::move( ecef._ecef2enu );
-    _ecef2ned = std::move( ecef._ecef2ned );
+    enu2ecef_ = std::move(ecef.enu2ecef_);
+    ned2ecef_ = std::move(ecef.ned2ecef_);
+    ecef2enu_ = std::move(ecef.ecef2enu_);
+    ecef2ned_ = std::move(ecef.ecef2ned_);
 
-    return (*this);
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::update()
+void ECEF::Update()
 {
-    updateMatrices();
+    UpdateMatrices();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::copyData( const ECEF &ecef )
+void ECEF::CopyData(const ECEF& ecef)
 {
-    _pos_geo  = ecef._pos_geo;
-    _pos_ecef = ecef._pos_ecef;
+    pos_geo_  = ecef.pos_geo_;
+    pos_cart_ = ecef.pos_cart_;
 
-    _enu2ecef = ecef._enu2ecef;
-    _ned2ecef = ecef._ned2ecef;
-    _ecef2enu = ecef._ecef2enu;
-    _ecef2ned = ecef._ecef2ned;
+    enu2ecef_ = ecef.enu2ecef_;
+    ned2ecef_ = ecef.ned2ecef_;
+    ecef2enu_ = ecef.ecef2enu_;
+    ecef2ned_ = ecef.ecef2ned_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::copyParams( const ECEF &ecef )
+void ECEF::CopyParams(const ECEF& ecef)
 {
-    _a = ecef._a;
-    _f = ecef._f;
+    a_ = ecef.a_;
+    f_ = ecef.f_;
 
-    _b   = ecef._b;
-    _r1  = ecef._r1;
-    _a2  = ecef._a2;
-    _b2  = ecef._b2;
-    _e2  = ecef._e2;
-    _e   = ecef._e;
-    _ep2 = ecef._ep2;
-    _ep  = ecef._ep;
+    b_   = ecef.b_;
+    r1_  = ecef.r1_;
+    a2_  = ecef.a2_;
+    b2_  = ecef.b2_;
+    e2_  = ecef.e2_;
+    e_   = ecef.e_;
+    ep2_ = ecef.ep2_;
+    ep_  = ecef.ep_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void ECEF::updateMatrices()
+void ECEF::UpdateMatrices()
 {
-    double cosLat = cos( _pos_geo.lat );
-    double cosLon = cos( _pos_geo.lon );
-    double sinLat = sin( _pos_geo.lat );
-    double sinLon = sin( _pos_geo.lon );
+    double cosLat = cos(pos_geo_.lat);
+    double cosLon = cos(pos_geo_.lon);
+    double sinLat = sin(pos_geo_.lat);
+    double sinLon = sin(pos_geo_.lon);
 
     // NED to ECF
-    _ned2ecef(0,0) = -cosLon*sinLat;
-    _ned2ecef(0,1) = -sinLon;
-    _ned2ecef(0,2) = -cosLon*cosLat;
+    ned2ecef_(0,0) = -cosLon*sinLat;
+    ned2ecef_(0,1) = -sinLon;
+    ned2ecef_(0,2) = -cosLon*cosLat;
 
-    _ned2ecef(1,0) = -sinLon*sinLat;
-    _ned2ecef(1,1) =  cosLon;
-    _ned2ecef(1,2) = -sinLon*cosLat;
+    ned2ecef_(1,0) = -sinLon*sinLat;
+    ned2ecef_(1,1) =  cosLon;
+    ned2ecef_(1,2) = -sinLon*cosLat;
 
-    _ned2ecef(2,0) =  cosLat;
-    _ned2ecef(2,1) =  0.0;
-    _ned2ecef(2,2) = -sinLat;
+    ned2ecef_(2,0) =  cosLat;
+    ned2ecef_(2,1) =  0.0;
+    ned2ecef_(2,2) = -sinLat;
 
-    _enu2ecef = _ned2ecef * _enu2ned;
+    enu2ecef_ = ned2ecef_ * enu2ned_;
 
     // ECF to NED
-    _ecef2ned(0,0) = -cosLon * sinLat;
-    _ecef2ned(0,1) = -sinLon * sinLat;
-    _ecef2ned(0,2) =  cosLat;
+    ecef2ned_(0,0) = -cosLon * sinLat;
+    ecef2ned_(0,1) = -sinLon * sinLat;
+    ecef2ned_(0,2) =  cosLat;
 
-    _ecef2ned(1,0) = -sinLon;
-    _ecef2ned(1,1) =  cosLon;
-    _ecef2ned(1,2) =  0.0;
+    ecef2ned_(1,0) = -sinLon;
+    ecef2ned_(1,1) =  cosLon;
+    ecef2ned_(1,2) =  0.0;
 
-    _ecef2ned(2,0) = -cosLon * cosLat;
-    _ecef2ned(2,1) = -sinLon * cosLat;
-    _ecef2ned(2,2) = -sinLat;
+    ecef2ned_(2,0) = -cosLon * cosLat;
+    ecef2ned_(2,1) = -sinLon * cosLat;
+    ecef2ned_(2,2) = -sinLat;
 
-    _ecef2enu = _ned2enu * _ecef2ned;
+    ecef2enu_ = ned2enu_ * ecef2ned_;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

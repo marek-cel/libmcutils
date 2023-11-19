@@ -31,38 +31,30 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Lead::Lead( double tc, double y )
-    : _tc ( tc )
-    , _u_prev ( 0.0 )
-    , _y ( y )
+Lead::Lead(double tc, double value)
+    : time_const_(tc)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lead::setValue( double y )
+void Lead::Update(double dt, double u)
 {
-    _y = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Lead::setTimeConst( double tc )
-{
-    if ( tc > 0.0 )
+    if ( dt > 0.0 )
     {
-        _tc = tc;
+        double du_dt = (u - u_prev_) / dt;
+        value_ = time_const_ * du_dt + u;
+        u_prev_ = u;
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Lead::update( double dt, double u )
+void Lead::set_time_const(double tc)
 {
-    if ( dt > 0.0 )
+    if ( tc > 0.0 )
     {
-        double du_dt = ( u - _u_prev ) / dt;
-        _y = _tc * du_dt + u;
-        _u_prev = u;
+        time_const_ = tc;
     }
 }
 

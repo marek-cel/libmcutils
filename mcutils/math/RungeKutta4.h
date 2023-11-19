@@ -38,41 +38,31 @@ namespace mc
 /**
  * @brief Runge-Kutta 4th order numerical integration class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907</li>
- *   <li>Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]</li>
- *   <li>Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge–Kutta methods - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
+ * - Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]
+ * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]
+ * - [Runge–Kutta methods - Wikipedia](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods)
  */
-class MCUTILSAPI RungeKutta4 final : public Integrator
+class MCUTILSAPI RungeKutta4 : public Integrator
 {
 public:
-
-    RungeKutta4() = default;
-
-    /**
-     * @brief Constructor.
-     * @param fun function which calculates vector derivative
-     */
-    RungeKutta4( Fun fun );
 
     /**
      * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.
      * @param step integration time step [s]
      * @param vect integrating vector
      */
-    void integrate( double step, VectorN *vect ) override;
+    void Integrate(double step, Vector* vect) override;
 
 private:
 
-    VectorN _k1;        ///< auxiliary vector
-    VectorN _k2;        ///< auxiliary vector
-    VectorN _k3;        ///< auxiliary vector
-    VectorN _k4;        ///< auxiliary vector
+    Vector k1_ { 0 };   ///< auxiliary vector
+    Vector k2_ { 0 };   ///< auxiliary vector
+    Vector k3_ { 0 };   ///< auxiliary vector
+    Vector k4_ { 0 };   ///< auxiliary vector
 
-    VectorN _xt;        ///< auxiliary vector
+    Vector xt_ { 0 };   ///< auxiliary vector
 };
 
 } // namespace mc
