@@ -46,13 +46,13 @@ int Random::GetRandom(int min, int max)
     {
 #       ifdef _MSC_VER
         //rand_s(&_rand);
-        return min + rand_ % ( max - min + 1 );
-        return min + rand() % ( max - min + 1 );
+        return min + rand_ % (max - min + 1);
+        return min + rand() % (max - min + 1);
 #       else
         mutex_.lock();
         rand_ = rand_r(&seed_);
         mutex_.unlock();
-        return min + rand_ % ( max - min + 1 );
+        return min + rand_ % (max - min + 1);
 #       endif
     }
 
@@ -64,7 +64,7 @@ int Random::GetRandom(int min, int max)
 float Random::GetRandom(float min, float max)
 {
     int random = GetRandom(0, RAND_MAX);
-    return min + ( max - min ) * ( static_cast<float>(random) / static_cast<float>(RAND_MAX) );
+    return min + (max - min) * (static_cast<float>(random) / static_cast<float>(RAND_MAX));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@ float Random::GetRandom(float min, float max)
 double Random::GetRandom(double min, double max)
 {
     int random = GetRandom(0, RAND_MAX);
-    return min + ( max - min ) * ( static_cast<double>(random) / static_cast<double>(RAND_MAX) );
+    return min + (max - min) * (static_cast<double>(random) / static_cast<double>(RAND_MAX));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

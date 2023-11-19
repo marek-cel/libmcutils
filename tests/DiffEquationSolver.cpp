@@ -28,10 +28,10 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
     s(1) = x_1;
 
     integrator_->set_deriv_fun(
-        [this]( const mc::Vector &state,
-                      mc::Vector *deriv )
+        [this](const mc::Vector &state,
+                     mc::Vector *deriv)
         {
-            ComputeStateDeriv( state, deriv );
+            ComputeStateDeriv(state, deriv);
         }
     );
 
@@ -49,8 +49,8 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
 
         // a  =  -c / ( 2 * m )
         // b  =  sqrt( 4 * m * k  -  c^2 ) / ( 2 * m )
-        double a = -c_ / ( 2.0 * m_ );
-        double b = sqrt( 4.0*m_*k_ - c_*c_ ) / ( 2.0 * m_ );
+        double a = -c_ / (2.0 * m_);
+        double b = sqrt(4.0*m_*k_ - c_*c_) / (2.0 * m_);
 
         // x ( t )  =  e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
         // x'( t )  =  a * e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
@@ -65,15 +65,15 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
         // C_1  =  x_0
         // C_2  = ( x_1 - C_1 * a ) / b
         double c_1 = x_0;
-        double c_2 = ( x_1 - c_1 * a ) / b;
+        double c_2 = (x_1 - c_1 * a) / b;
 
         while ( t <= T_MAX )
         {
-            x = exp( a * t ) * (  c_1 * cos( b*t )  +  c_2 * sin( b*t )  );
+            x = exp(a * t) * (c_1 * cos(b*t) + c_2 * sin(b*t));
 
             //std::cout << t << "," << x << "," << s( 0 ) << std::endl;
 
-            if ( fabs( s(0) - x ) > DELTA_MAX ) return false;
+            if ( fabs(s(0) - x) > DELTA_MAX ) return false;
 
             t += T_STEP;
 
@@ -86,9 +86,9 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
 
         //  r_1  =  ( -c - sqrt( Delta ) ) / ( 2 * m )
         //  r_2  =  ( -c + sqrt( Delta ) ) / ( 2 * m )
-        double sqrt_delta = sqrt( delta );
-        double r_1 = ( -c_ - sqrt_delta ) / ( 2.0 * m_ );
-        double r_2 = ( -c_ + sqrt_delta ) / ( 2.0 * m_ );
+        double sqrt_delta = sqrt(delta);
+        double r_1 = (-c_ - sqrt_delta) / (2.0 * m_);
+        double r_2 = (-c_ + sqrt_delta) / (2.0 * m_);
 
         // x ( t )  =  C_1 * e^( r_1 * t )  +  C_2 * e^( r_2 * t )
         // x'( t )  =  C_1 * r_1 * e^( r_1 * t )  +  C_2 * r_2 * e^( r_2 * t )
@@ -101,16 +101,16 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
         //
         // C_2  =  ( x_1 - x_0 * r_1 ) / ( r_2 - r_1 )
         // C_1  =  x_0 - C_2
-        double c_2 = ( x_1 - x_0 * r_1 ) / ( r_2 - r_1 );
+        double c_2 = (x_1 - x_0 * r_1) / (r_2 - r_1);
         double c_1 = x_0 - c_2;
 
         while ( t <= T_MAX )
         {
-            x = c_1 * exp( r_1 * t ) + c_2 * exp( r_2 * t );
+            x = c_1 * exp(r_1 * t) + c_2 * exp(r_2 * t);
 
             //std::cout << t << "," << x << "," << s( 0 ) << std::endl;
 
-            if ( fabs( s(0) - x ) > DELTA_MAX ) return false;
+            if ( fabs(s(0) - x) > DELTA_MAX ) return false;
 
             t += T_STEP;
 
@@ -122,7 +122,7 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
         // x( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
 
         // r_1  =  -c / ( 2 * m )
-        double r_1 = -c_ / ( 2.0 * m_ );
+        double r_1 = -c_ / (2.0 * m_);
 
         // x ( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
         // x'( t )  =  C_1  * e^( r_1 * t ) + ( C_1 * t + C_2 ) * r_1 * e^( r_1 * t )
@@ -140,11 +140,11 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
 
         while ( t <= T_MAX )
         {
-            x = ( c_1 * t + c_2 ) * exp( r_1 * t );
+            x = (c_1 * t + c_2) * exp(r_1 * t);
 
             //std::cout << t << "," << x << "," << s( 0 ) << std::endl;
 
-            if ( fabs( s(0) - x ) > DELTA_MAX ) return false;
+            if ( fabs(s(0) - x) > DELTA_MAX ) return false;
 
             t += T_STEP;
 

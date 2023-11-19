@@ -33,11 +33,11 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
-    : c1_( c1 )
-    , c2_( c2 )
-    , c3_( c3 )
-    , c4_( c4 )
-    , value_( value )
+    : c1_(c1)
+    , c2_(c2)
+    , c3_(c3)
+    , c4_(c4)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -49,9 +49,9 @@ void LeadLag::Update(double dt, double u)
         double den = 2.0 * c3_ + dt * c4_;
         double den_inv = 1.0 / den;
 
-        double ca = ( 2.0 * c1_ + dt  * c2_ ) * den_inv;
-        double cb = ( dt  * c2_ - 2.0 * c1_ ) * den_inv;
-        double cc = ( 2.0 * c3_ - dt  * c4_ ) * den_inv;
+        double ca = (2.0 * c1_ + dt  * c2_) * den_inv;
+        double cb = (dt  * c2_ - 2.0 * c1_) * den_inv;
+        double cc = (2.0 * c3_ - dt  * c4_) * den_inv;
 
         double y_prev = value_;
         value_ = u * ca + u_prev_ * cb + y_prev * cc;

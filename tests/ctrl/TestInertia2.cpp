@@ -80,7 +80,7 @@ TEST_F(TestInertia2, CanUpdateStep)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = (i < 101) ? 0.0 : 1.0;
 
@@ -114,7 +114,7 @@ TEST_F(TestInertia2, CanUpdateStep2)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < y_ref.size(); i++)
+    for ( unsigned int i = 0; i < y_ref.size(); i++ )
     {
         double u = ( i == 0 ) ? 0.0 : 1.0;
         inertia.Update(TIME_STEP, u);
@@ -142,7 +142,7 @@ TEST_F(TestInertia2, CanUpdateSine)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = sin( t + TIME_STEP );
 

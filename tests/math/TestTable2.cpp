@@ -19,8 +19,8 @@ protected:
 
 TEST_F(TestTable2, CanConstruct)
 {
-    mc::Table2 *tab = nullptr;
-    EXPECT_NO_THROW( tab = new mc::Table2() );
+    mc::Table2* tab = nullptr;
+    EXPECT_NO_THROW(tab = new mc::Table2());
     delete tab;
 }
 
@@ -28,8 +28,8 @@ TEST_F(TestTable2, CanConstruct)
 
 TEST_F(TestTable2, CanDestruct)
 {
-    mc::Table2 *tab = new mc::Table2();
-    EXPECT_NO_THROW( delete tab );
+    mc::Table2* tab = new mc::Table2();
+    EXPECT_NO_THROW(delete tab);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,16 +38,16 @@ TEST_F(TestTable2, CanInstantiate)
 {
     mc::Table2 tab;
 
-    EXPECT_EQ( tab.rows(), 1 );
-    EXPECT_EQ( tab.cols(), 1 );
-    EXPECT_DOUBLE_EQ( tab.GetValue(0.0, 0.0), 0.0 );
-    EXPECT_DOUBLE_EQ( tab.GetValue(2.2, 3.3), 0.0 );
+    EXPECT_EQ(tab.rows(), 1);
+    EXPECT_EQ(tab.cols(), 1);
+    EXPECT_DOUBLE_EQ(tab.GetValue(0.0, 0.0), 0.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue(2.2, 3.3), 0.0);
 
     mc::Table2 tab2(1.1, 2.2, 3.3);
-    EXPECT_EQ( tab2.rows(), 1 );
-    EXPECT_EQ( tab2.cols(), 1 );
-    EXPECT_DOUBLE_EQ( tab2.GetValue(0.0, 0.0), 1.1 );
-    EXPECT_DOUBLE_EQ( tab2.GetValue(2.2, 3.3), 1.1 );
+    EXPECT_EQ(tab2.rows(), 1);
+    EXPECT_EQ(tab2.cols(), 1);
+    EXPECT_DOUBLE_EQ(tab2.GetValue(0.0, 0.0), 1.1);
+    EXPECT_DOUBLE_EQ(tab2.GetValue(2.2, 3.3), 1.1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,12 +72,12 @@ TEST_F(TestTable2, CanInstantiateAndCopy)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue( r[ir], c[ic] ), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue( r[ir], c[ic] ), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -100,12 +100,12 @@ TEST_F(TestTable2, CanInstantiateAndMove)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,12 +128,12 @@ TEST_F(TestTable2, CanInstantiateAndSetDataFromArray)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -156,12 +156,12 @@ TEST_F(TestTable2, CanInstantiateAndSetDataFromVector)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +178,7 @@ TEST_F(TestTable2, CanGetRows)
 
     mc::Table2 tab(r, c, v, 4, 2);
 
-    EXPECT_EQ( tab.rows(), 4 );
+    EXPECT_EQ(tab.rows(), 4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -195,7 +195,7 @@ TEST_F(TestTable2, CanGetCols)
 
     mc::Table2 tab(r, c, v, 4, 2);
 
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -215,25 +215,25 @@ TEST_F(TestTable2, CanGetTable)
     mc::Table tab0 = tab.GetTable(0);
     mc::Table tab1 = tab.GetTable(1);
 
-    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(0), -1.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(1),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(2),  1.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetKeyByIndex(3),  2.0 );
+    EXPECT_DOUBLE_EQ(tab0.GetKeyByIndex(0), -1.0);
+    EXPECT_DOUBLE_EQ(tab0.GetKeyByIndex(1),  0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetKeyByIndex(2),  1.0);
+    EXPECT_DOUBLE_EQ(tab0.GetKeyByIndex(3),  2.0);
 
-    EXPECT_DOUBLE_EQ( tab0.GetValue( -1.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetValue(  0.0 ), -1.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetValue(  1.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetValue(  2.0 ),  3.0 );
+    EXPECT_DOUBLE_EQ(tab0.GetValue( -1.0 ),  0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(  0.0 ), -1.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(  1.0 ),  0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(  2.0 ),  3.0);
 
-    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(0), -1.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(1),  0.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(2),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetKeyByIndex(3),  2.0 );
+    EXPECT_DOUBLE_EQ(tab1.GetKeyByIndex(0), -1.0);
+    EXPECT_DOUBLE_EQ(tab1.GetKeyByIndex(1),  0.0);
+    EXPECT_DOUBLE_EQ(tab1.GetKeyByIndex(2),  1.0);
+    EXPECT_DOUBLE_EQ(tab1.GetKeyByIndex(3),  2.0);
 
-    EXPECT_DOUBLE_EQ( tab1.GetValue( -1.0 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetValue(  0.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetValue(  1.0 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab1.GetValue(  2.0 ),  4.0 );
+    EXPECT_DOUBLE_EQ(tab1.GetValue( -1.0 ),  1.0);
+    EXPECT_DOUBLE_EQ(tab1.GetValue(  0.0 ),  0.0);
+    EXPECT_DOUBLE_EQ(tab1.GetValue(  1.0 ),  1.0);
+    EXPECT_DOUBLE_EQ(tab1.GetValue(  2.0 ),  4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -256,7 +256,7 @@ TEST_F(TestTable2, CanGetValue)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -275,9 +275,9 @@ TEST_F(TestTable2, CanGetValueInterpolate)
 
     mc::Table2 tab(r, c, v);
 
-    EXPECT_DOUBLE_EQ( tab.GetValue(  0.5, 0.0 ), -0.5 );
-    EXPECT_DOUBLE_EQ( tab.GetValue( -1.0, 0.5 ),  0.5 );
-    EXPECT_DOUBLE_EQ( tab.GetValue( -0.5, 0.5 ),  0.0 );
+    EXPECT_DOUBLE_EQ(tab.GetValue(  0.5, 0.0 ), -0.5);
+    EXPECT_DOUBLE_EQ(tab.GetValue( -1.0, 0.5 ),  0.5);
+    EXPECT_DOUBLE_EQ(tab.GetValue( -0.5, 0.5 ),  0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -285,8 +285,8 @@ TEST_F(TestTable2, CanGetValueInterpolate)
 TEST_F(TestTable2, CanGetValueOutOfRange)
 {
     mc::Table2 tab0;
-    EXPECT_DOUBLE_EQ( tab0.GetValue(0.0, 0.0), 0.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetValue(3.0, 0.0), 0.0 );
+    EXPECT_DOUBLE_EQ(tab0.GetValue(0.0, 0.0), 0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(3.0, 0.0), 0.0);
 
     // z = x^2 + y - 1
     std::vector<double> r { -1.0,  0.0,  1.0,  2.0 };
@@ -298,11 +298,11 @@ TEST_F(TestTable2, CanGetValueOutOfRange)
 
     mc::Table2 tab(r, c, v);
 
-    EXPECT_DOUBLE_EQ( tab.GetValue(  3.0,  0.0 ),  3.0 );
-    EXPECT_DOUBLE_EQ( tab.GetValue( -2.0,  0.0 ),  0.0 );
-    EXPECT_DOUBLE_EQ( tab.GetValue( -1.0,  2.0 ),  1.0 );
-    EXPECT_DOUBLE_EQ( tab.GetValue(  3.0,  2.0 ),  4.0 );
-    EXPECT_DOUBLE_EQ( tab.GetValue(  0.0, -1.0 ), -1.0 );
+    EXPECT_DOUBLE_EQ(tab.GetValue(  3.0,  0.0 ),  3.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue( -2.0,  0.0 ),  0.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue( -1.0,  2.0 ),  1.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue(  3.0,  2.0 ),  4.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue(  0.0, -1.0 ), -1.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -310,10 +310,10 @@ TEST_F(TestTable2, CanGetValueOutOfRange)
 TEST_F(TestTable2, CanGetValueByIndex)
 {
     mc::Table2 tab0;
-    EXPECT_DOUBLE_EQ( tab0.GetValueByIndex(0, 0), 0.0 );
-    EXPECT_TRUE( std::isnan(tab0.GetValueByIndex(1, 0)) );
-    EXPECT_TRUE( std::isnan(tab0.GetValueByIndex(0, 1)) );
-    EXPECT_TRUE( std::isnan(tab0.GetValueByIndex(1, 1)) );
+    EXPECT_DOUBLE_EQ(tab0.GetValueByIndex(0, 0), 0.0);
+    EXPECT_TRUE(std::isnan(tab0.GetValueByIndex(1, 0)));
+    EXPECT_TRUE(std::isnan(tab0.GetValueByIndex(0, 1)));
+    EXPECT_TRUE(std::isnan(tab0.GetValueByIndex(1, 1)));
 
     // z = x^2 + y - 1
     std::vector<double> r { -1.0,  0.0,  1.0,  2.0 };
@@ -331,7 +331,7 @@ TEST_F(TestTable2, CanGetValueByIndex)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValueByIndex(ir, ic), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValueByIndex(ir, ic), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -346,7 +346,7 @@ TEST_F(TestTable2, CanValidate)
                              1.0, 4.0,
                              2.0, 5.0 };
     mc::Table2 t1(r1, c1, v1);
-    EXPECT_TRUE( t1.IsValid() );
+    EXPECT_TRUE(t1.IsValid());
 
     std::vector<double> r2 { std::numeric_limits<double>::quiet_NaN(), 1.0, 2.0 };
     std::vector<double> c2 { 0.0, 1.0 };
@@ -354,7 +354,7 @@ TEST_F(TestTable2, CanValidate)
                              1.0, 4.0,
                              2.0, 5.0 };
     mc::Table2 t2(r2, c2, v2);
-    EXPECT_FALSE( t2.IsValid() );
+    EXPECT_FALSE(t2.IsValid());
 
     std::vector<double> r3 { 0.0, 1.0, 2.0 };
     std::vector<double> c3 { std::numeric_limits<double>::quiet_NaN(), 1.0 };
@@ -362,7 +362,7 @@ TEST_F(TestTable2, CanValidate)
                              1.0, 4.0,
                              2.0, 5.0 };
     mc::Table2 t3(r3, c3, v3);
-    EXPECT_FALSE( t3.IsValid() );
+    EXPECT_FALSE(t3.IsValid());
 
     std::vector<double> r4 { 0.0, 1.0, 2.0 };
     std::vector<double> c4 { 0.0, 1.0 };
@@ -370,7 +370,7 @@ TEST_F(TestTable2, CanValidate)
                              1.0, 4.0,
                              2.0, 5.0 };
     mc::Table2 t4(r4, c4, v4);
-    EXPECT_FALSE( t4.IsValid() );
+    EXPECT_FALSE(t4.IsValid());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -398,7 +398,7 @@ TEST_F(TestTable2, CanMultiplyRowsAndCols)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r_coef*r[ir], c_coef*c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r_coef*r[ir], c_coef*c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -427,7 +427,7 @@ TEST_F(TestTable2, CanMultiplyRows)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r_coef*r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r_coef*r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -456,7 +456,7 @@ TEST_F(TestTable2, CanMultiplyCols)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c_coef*c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c_coef*c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -485,7 +485,7 @@ TEST_F(TestTable2, CanMultiplyValues)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), v_coef*fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), v_coef*fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 }
@@ -511,12 +511,12 @@ TEST_F(TestTable2, CanSetDataFromArray)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -540,12 +540,12 @@ TEST_F(TestTable2, CanSetDataFromVector)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -562,10 +562,10 @@ TEST_F(TestTable2, CanSetDataFromString)
     mc::Table2 tab;
     tab.SetFromString(str);
 
-    EXPECT_TRUE( tab.IsValid() );
+    EXPECT_TRUE(tab.IsValid());
 
-    EXPECT_EQ( tab.cols(), 3 );
-    EXPECT_EQ( tab.rows(), 2 );
+    EXPECT_EQ(tab.cols(), 3);
+    EXPECT_EQ(tab.rows(), 2);
 
     for ( unsigned int ir = 0; ir < 2; ++ir )
     {
@@ -574,14 +574,14 @@ TEST_F(TestTable2, CanSetDataFromString)
             double xr = ir + 1;
             double xc = ic + 1;
             double y = xr + xc;
-            EXPECT_DOUBLE_EQ( tab.GetValue(xr, xc), y );
+            EXPECT_DOUBLE_EQ(tab.GetValue(xr, xc), y);
         }
     }
 
     char str2[] = { "lorem ipsum" };
     mc::Table2 tab2;
     tab2.SetFromString(str2);
-    EXPECT_FALSE( tab2.IsValid() );
+    EXPECT_FALSE(tab2.IsValid());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -597,7 +597,7 @@ TEST_F(TestTable2, CanConvertToString)
 
     mc::Table2 tab(r, c, v);
 
-    EXPECT_STREQ( tab.ToString().c_str(), "\t0\t1\n0\t0\t1\n1\t2\t3\n2\t4\t5\n" );
+    EXPECT_STREQ(tab.ToString().c_str(), "\t0\t1\n0\t0\t1\n1\t2\t3\n2\t4\t5\n");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -624,12 +624,12 @@ TEST_F(TestTable2, CanAssign)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -653,10 +653,10 @@ TEST_F(TestTable2, CanAssignAndMove)
     {
         for ( unsigned int ic = 0; ic < tab.cols(); ++ic )
         {
-             EXPECT_DOUBLE_EQ( tab.GetValue(r[ir], c[ic]), fun(ir,ic) ) << "ir= " << ir << " ic= " << ic;
+             EXPECT_DOUBLE_EQ(tab.GetValue(r[ir], c[ic]), fun(ir,ic)) << "ir= " << ir << " ic= " << ic;
         }
     }
 
-    EXPECT_EQ( tab.rows(), 4 );
-    EXPECT_EQ( tab.cols(), 2 );
+    EXPECT_EQ(tab.rows(), 4);
+    EXPECT_EQ(tab.cols(), 2);
 }

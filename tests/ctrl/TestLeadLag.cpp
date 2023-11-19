@@ -85,7 +85,7 @@ TEST_F(TestLeadLag, CanUpdateStep)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 
@@ -116,7 +116,7 @@ TEST_F(TestLeadLag, CanUpdateSine)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = sin( t );
 

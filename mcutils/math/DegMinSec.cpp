@@ -59,9 +59,9 @@ void DegMinSec::SetAngle(double angle)
 
     double deg_abs = fabs(Units::rad2deg(angle));
 
-    deg_ = static_cast<int>( floor(deg_abs) );
-    min_ = static_cast<int>( floor(( deg_abs - deg_ ) * 60) );
-    sec_ = ( deg_abs - deg_ - min_ / 60.0 ) * 3600.0;
+    deg_ = static_cast<int>(floor(deg_abs));
+    min_ = static_cast<int>(floor((deg_abs - deg_) * 60));
+    sec_ = (deg_abs - deg_ - min_ / 60.0) * 3600.0;
 
     if ( angle < 0.0 ) deg_ *= -1;
 }
@@ -86,9 +86,9 @@ std::string DegMinSec::ToString() const
 
 bool DegMinSec::operator==(const DegMinSec& dms) const
 {
-    return ( ( deg_ == dms.deg_ )
-          && ( min_ == dms.min_ )
-          && ( sec_ == dms.sec_ ) );
+    return ( (deg_ == dms.deg_)
+          && (min_ == dms.min_)
+          && (sec_ == dms.sec_) );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

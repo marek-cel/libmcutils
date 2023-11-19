@@ -44,7 +44,7 @@ Mercator::Mercator(double a, double e)
 double Mercator::CalculateLat(double y, double max_error, unsigned int max_iterations)
 {
     // for lat_ts=0 k0=a
-    return CalculateT_inv( exp(-y / a_), max_error, max_iterations );
+    return CalculateT_inv(exp(-y / a_), max_error, max_iterations);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +57,7 @@ double Mercator::CalculateLon(double x)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Mercator::CalculateX( double lon )
+double Mercator::CalculateX(double lon)
 {
     // for lat_ts=0 k0=a
     return a_ * lon;
@@ -65,19 +65,18 @@ double Mercator::CalculateX( double lon )
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Mercator::CalculateY( double lat )
+double Mercator::CalculateY(double lat)
 {
     // for lat_ts=0 k0=a
-    return a_ * log(CalculateT( lat ));
+    return a_ * log(CalculateT(lat));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-double Mercator::CalculateT( double lat )
+double Mercator::CalculateT(double lat)
 {
     double e_sinLat = e_ * sin(lat);
-    return tan(M_PI_4 + 0.5 * lat) * pow( ( 1.0 - e_sinLat ) / ( 1.0 + e_sinLat ),
-                                              0.5 * e_ );
+    return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * e_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +93,7 @@ double Mercator::CalculateT_inv(double t, double max_error, unsigned int max_ite
     {
         double e_sinLat = e_ * sin(lat);
         double lat_new = M_PI_2 - 2.0
-                * atan( t * pow( ( 1.0 - e_sinLat ) / ( 1.0 + e_sinLat ), ex ) );
+                * atan(t * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), ex));
 
         er = fabs(lat_new - lat);
         lat = lat_new;

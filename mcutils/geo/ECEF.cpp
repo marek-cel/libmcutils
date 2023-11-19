@@ -24,6 +24,8 @@
 
 #include <utility>
 
+#include <mcutils/math/Math.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 namespace mc
@@ -84,7 +86,7 @@ ECEF::ECEF( double a, double f )
     f_ = f;
 
     b_   = a_ - f_*a_;
-    r1_  = ( 2.0 * a_ + b_ ) / 3.0;
+    r1_  = (2.0 * a_ + b_) / 3.0;
     a2_  = a_ * a_;
     b2_  = b_ * b_;
     e2_  = 1.0 - b2_ / a2_;
@@ -115,11 +117,11 @@ void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
     double sinLon = sin(lon);
     double cosLon = cos(lon);
 
-    double n = a_ / sqrt( 1.0 - e2_ * sinLat*sinLat );
+    double n = a_ / sqrt(1.0 - e2_ * sinLat*sinLat);
 
-    *x = ( n + alt ) * cosLat * cosLon;
-    *y = ( n + alt ) * cosLat * sinLon;
-    *z = ( n * ( b2_ / a2_ ) + alt ) * sinLat;
+    *x = (n + alt) * cosLat * cosLon;
+    *y = (n + alt) * cosLat * sinLon;
+    *z = (n * (b2_ / a2_) + alt) * sinLat;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -154,42 +156,44 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
 {
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
-    double p   = sqrt( x*x + y*y );
-    double tht = atan2( z*a_, p*b_ );
-    double ed2 = ( a2_ - b2_ ) / b2_;
+    double p   = sqrt(x*x + y*y);
+    double tht = atan2(z*a_, p*b_);
+    double ed2 = (a2_ - b2_) / b2_;
 
-    double sinTht = sin( tht );
-    double cosTht = cos( tht );
+    double sinTht = sin(tht);
+    double cosTht = cos(tht);
 
-    *lat = atan( (z + ed2*_b*sinTht*sinTht*sinTht) / ( p - e2_*a_*cosTht*cosTht*cosTht ) );
-    *lon = atan2( y, x );
+    *lat = atan((z + ed2*_b*sinTht*sinTht*sinTht) / (p - e2_*a_*cosTht*cosTht*cosTht));
+    *lon = atan2(y, x);
 
-    double sinLat = sin( lat );
-    double n = a_ / sqrt( 1.0 - _e2*sinLat*sinLat );
+    double sinLat = sin(lat);
+    double n = a_ / sqrt(1.0 - _e2*sinLat*sinLat);
 
-    *alt = p / cos( lat ) - n;
+    *alt = p / cos(lat) - n;
 #   else
     double z2 = z*z;
-    double r  = sqrt( x*x + y*y );
+    double r  = sqrt(x*x + y*y);
     double r2 = r*r;
     double e2 = a2_ - b2_;
     double f  = 54.0 * b2_ * z2;
-    double g  = r2 + ( 1.0 - e2_ )*z2 - e2_*e2;
-    double c  = e2_*e2_ * f * r2 / ( g*g*g );
-    double s  = pow( 1.0 + c + sqrt( c*c + 2.0*c ), 1.0/3.0 );
+    double g  = r2 + (1.0 - e2_)*z2 - e2_*e2;
+    double c  = e2_*e2_ * f * r2 / Math::Pow3(g);
+    double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
     double p0 = s + 1.0/s + 1.0;
-    double p  = f / ( 3.0 * p0*p0 * g*g );
-    double q  = sqrt( 1.0 + 2.0*( e2_*e2_ )*p );
-    double r0 = -( p * e2_ * r )/( 1.0 + q ) + sqrt( 0.5*a2_*( 1.0 + 1.0/q )
-                - p*( 1.0 - e2_ )*z2/( q + q*q ) - 0.5*p*r2 );
+    double p  = f / (3.0 * p0*p0 * g*g);
+    double q  = sqrt(1.0 + 2.0*(e2_*e2_)*p);
+    double r0 = -(p * e2_ * r)/(1.0 + q)
+                + sqrt(
+                    0.5*a2_*(1.0 + 1.0/q) - p*(1.0 - e2_)*z2/(q + q*q) - 0.5*p*r2
+                );
     double uv = r - e2_*r0;
-    double u  = sqrt( uv*uv + z2 );
-    double v  = sqrt( uv*uv + ( 1.0 - e2_ )*z2 );
-    double z0 = b2_ * z / ( a_ * v );
+    double u  = sqrt(uv*uv + z2);
+    double v  = sqrt(uv*uv + (1.0 - e2_)*z2);
+    double z0 = b2_ * z / (a_ * v);
 
-    *alt = u * ( 1.0 - b2_ / ( a_ * v ) );
-    *lat = atan( ( z + ep2_*z0 )/r );
-    *lon = atan2( y, x );
+    *alt = u * (1.0 - b2_ / (a_ * v));
+    *lat = atan((z + ep2_*z0)/r);
+    *lon = atan2(y, x);
 #   endif
 }
 
@@ -225,7 +229,7 @@ Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
     Matrix3x3 ned2bas(Angles(0.0, 0.0, heading));
     Matrix3x3 bas2ned = ned2bas.GetTransposed();
 
-    Vector3 r_bas( offset_x, offset_y, 0.0 );
+    Vector3 r_bas(offset_x, offset_y, 0.0);
     Vector3 r_ned = bas2ned * r_bas;
 
     Vector3 pos_cart = pos_cart_ + ned2ecef_ * r_ned;
@@ -287,8 +291,8 @@ void ECEF::SetPositionFromCart(const Vector3& pos_cart)
 
 ECEF& ECEF::operator=(const ECEF& ecef)
 {
-    CopyParams( ecef );
-    CopyData( ecef );
+    CopyParams(ecef);
+    CopyData(ecef);
     return *this;
 }
 

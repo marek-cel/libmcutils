@@ -32,10 +32,10 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Inertia2::Inertia2(double tc1, double tc2, double value)
-    : time_const_1_( tc1 )
-    , time_const_2_( tc2 )
-    , value_int_ ( value )
-    , value_     ( value )
+    : time_const_1_(tc1)
+    , time_const_2_(tc2)
+    , value_int_ (value)
+    , value_     (value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////

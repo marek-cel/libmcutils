@@ -5,8 +5,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool CsvFileReader::ReadData( const char* file_path,
-                              std::vector<double>* col1 )
+bool CsvFileReader::ReadData(const char* file_path,
+                             std::vector<double>* col1)
 {
     std::ifstream ifs(file_path, std::ifstream::in);
 
@@ -37,9 +37,9 @@ bool CsvFileReader::ReadData( const char* file_path,
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool CsvFileReader::ReadData( const char* file_path,
-                              std::vector<double>* col1,
-                              std::vector<double>* col2 )
+bool CsvFileReader::ReadData(const char* file_path,
+                             std::vector<double>* col1,
+                             std::vector<double>* col2)
 {
     std::ifstream ifs(file_path, std::ifstream::in);
 

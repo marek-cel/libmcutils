@@ -173,11 +173,11 @@ double Table2::GetValue(double row_value, double col_value) const
             if ( col_value >= col_values_[col_1] && col_value < col_values_[col_2] ) break;
         }
 
-        double result_1 = ( col_value - col_values_[col_1] )
+        double result_1 = (col_value - col_values_[col_1])
                         * inter_data_[row_1 * cols_ + col_1]
                         + table_data_[row_1 * cols_ + col_1];
 
-        double result_2 = ( col_value - col_values_[col_1] )
+        double result_2 = (col_value - col_values_[col_1])
                         * inter_data_[row_2 * cols_ + col_1]
                         + table_data_[row_2 * cols_ + col_1];
 
@@ -186,10 +186,10 @@ double Table2::GetValue(double row_value, double col_value) const
 
         if ( fabs(rowDelta) > 1.0e-16 )
         {
-            rowFactor = ( row_value - row_values_[row_1] ) / rowDelta;
+            rowFactor = (row_value - row_values_[row_1]) / rowDelta;
         }
 
-        return rowFactor * ( result_2 - result_1 ) + result_1;
+        return rowFactor * (result_2 - result_1) + result_1;
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -533,8 +533,8 @@ void Table2::UpdateInterpolationData()
         for ( unsigned int c = 0; c < cols_ - 1; ++c )
         {
             inter_data_[r * cols_ + c] =
-                ( table_data_[r * cols_ + c + 1] - table_data_[r * cols_ + c] )
-              / ( col_values_[c + 1] - col_values_[c] );
+                (table_data_[r * cols_ + c + 1] - table_data_[r * cols_ + c])
+              / (col_values_[c + 1] - col_values_[c]);
         }
     }
 }

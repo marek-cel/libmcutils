@@ -228,7 +228,7 @@ TEST_F(TestPID, CanUpdate)
 
     mc::PID pid(KP, KI, KD);
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = (i < 500) ? 0.0 : 1.0;
         double e = u - y;

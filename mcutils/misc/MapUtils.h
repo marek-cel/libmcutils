@@ -73,7 +73,7 @@ TYPE_ITEM GetItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
     return TYPE_ITEM {};
 }
 
-} // MapUtils
+} // namespace MapUtils
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////

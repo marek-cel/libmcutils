@@ -19,8 +19,8 @@ protected:
 
 TEST_F(TestVector, CanConstruct)
 {
-    mc::Vector *v = nullptr;
-    EXPECT_NO_THROW( v = new mc::Vector(0) );
+    mc::Vector* v = nullptr;
+    EXPECT_NO_THROW(v = new mc::Vector(0));
     delete v;
 }
 
@@ -28,8 +28,8 @@ TEST_F(TestVector, CanConstruct)
 
 TEST_F(TestVector, CanDestruct)
 {
-    mc::Vector *v = new mc::Vector(0);
-    EXPECT_NO_THROW( delete v );
+    mc::Vector* v = new mc::Vector(0);
+    EXPECT_NO_THROW(delete v);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,11 +38,11 @@ TEST_F(TestVector, CanInstantiate)
 {
     mc::Vector v1(3);
 
-    EXPECT_EQ( v1.size(), 3 );
+    EXPECT_EQ(v1.size(), 3);
 
-    EXPECT_DOUBLE_EQ( v1(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v1(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v1(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v1(0), 0.0);
+    EXPECT_DOUBLE_EQ(v1(1), 0.0);
+    EXPECT_DOUBLE_EQ(v1(2), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -57,11 +57,11 @@ TEST_F(TestVector, CanInstantiateAndCopy)
 
     mc::Vector v2(v1);
 
-    EXPECT_DOUBLE_EQ( v2(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v2(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v2(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v2(0), 1.0);
+    EXPECT_DOUBLE_EQ(v2(1), 2.0);
+    EXPECT_DOUBLE_EQ(v2(2), 3.0);
 
-    EXPECT_EQ( v2.size(), 3 );
+    EXPECT_EQ(v2.size(), 3);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -76,11 +76,11 @@ TEST_F(TestVector, CanInstantiateAndMove)
 
     mc::Vector v2(std::move(v1));
 
-    EXPECT_DOUBLE_EQ( v2(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v2(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v2(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v2(0), 1.0);
+    EXPECT_DOUBLE_EQ(v2(1), 2.0);
+    EXPECT_DOUBLE_EQ(v2(2), 3.0);
 
-    EXPECT_EQ( v2.size(), 3 );
+    EXPECT_EQ(v2.size(), 3);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -93,31 +93,31 @@ TEST_F(TestVector, CanValidate)
     v1(1) = 2.0;
     v1(2) = 3.0;
 
-    EXPECT_TRUE( v1.IsValid() );
+    EXPECT_TRUE(v1.IsValid());
 
     v1(0) = std::numeric_limits<double>::quiet_NaN();
     v1(1) = 2.0;
     v1(2) = 3.0;
 
-    EXPECT_FALSE( v1.IsValid() );
+    EXPECT_FALSE(v1.IsValid());
 
     v1(0) = 1.0;
     v1(1) = std::numeric_limits<double>::quiet_NaN();
     v1(2) = 3.0;
 
-    EXPECT_FALSE( v1.IsValid() );
+    EXPECT_FALSE(v1.IsValid());
 
     v1(0) = 1.0;
     v1(1) = 2.0;
     v1(2) = std::numeric_limits<double>::quiet_NaN();
 
-    EXPECT_FALSE( v1.IsValid() );
+    EXPECT_FALSE(v1.IsValid());
 
     v1(0) = std::numeric_limits<double>::quiet_NaN();
     v1(1) = std::numeric_limits<double>::quiet_NaN();
     v1(2) = std::numeric_limits<double>::quiet_NaN();
 
-    EXPECT_FALSE( v1.IsValid() );
+    EXPECT_FALSE(v1.IsValid());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,14 +129,14 @@ TEST_F(TestVector, CanGetLength)
 
     mc::Vector v1(3);
 
-    EXPECT_DOUBLE_EQ( v1.GetLength(), 0.0 );
+    EXPECT_DOUBLE_EQ(v1.GetLength(), 0.0);
 
     v1(0) = 1.0;
     v1(1) = 2.0;
     v1(2) = 3.0;
 
     // sqrt( 1^2 + 2^2 + 3^2 ) = sqrt( 1 + 4 + 9 ) = sqrt( 14 )
-    EXPECT_NEAR( v1.GetLength(), 3.741657, 1.0e-5 );
+    EXPECT_NEAR(v1.GetLength(), 3.741657, 1.0e-5);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -155,11 +155,11 @@ TEST_F(TestVector, CanNormalize)
 
     v1.Normalize();
 
-    EXPECT_NEAR( v1(0), 0.267261, 1.0e-5 );
-    EXPECT_NEAR( v1(1), 0.534522, 1.0e-5 );
-    EXPECT_NEAR( v1(2), 0.801784, 1.0e-5 );
+    EXPECT_NEAR(v1(0), 0.267261, 1.0e-5);
+    EXPECT_NEAR(v1(1), 0.534522, 1.0e-5);
+    EXPECT_NEAR(v1(2), 0.801784, 1.0e-5);
 
-    EXPECT_DOUBLE_EQ( v1.GetLength(), 1.0 );
+    EXPECT_DOUBLE_EQ(v1.GetLength(), 1.0);
 
     mc::Vector v2(4);
 
@@ -170,12 +170,12 @@ TEST_F(TestVector, CanNormalize)
 
     v2.Normalize();
 
-    EXPECT_NEAR( v2(0), 0.182574, 1.0e-5 );
-    EXPECT_NEAR( v2(1), 0.365148, 1.0e-5 );
-    EXPECT_NEAR( v2(2), 0.547723, 1.0e-5 );
-    EXPECT_NEAR( v2(3), 0.730297, 1.0e-5 );
+    EXPECT_NEAR(v2(0), 0.182574, 1.0e-5);
+    EXPECT_NEAR(v2(1), 0.365148, 1.0e-5);
+    EXPECT_NEAR(v2(2), 0.547723, 1.0e-5);
+    EXPECT_NEAR(v2(3), 0.730297, 1.0e-5);
 
-    EXPECT_DOUBLE_EQ( v2.GetLength(), 1.0 );
+    EXPECT_DOUBLE_EQ(v2.GetLength(), 1.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -188,9 +188,9 @@ TEST_F(TestVector, CanGetElement)
     v1(1) = 2.0;
     v1(2) = 3.0;
 
-    EXPECT_DOUBLE_EQ( v1.GetElement(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v1.GetElement(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v1.GetElement(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v1.GetElement(0), 1.0);
+    EXPECT_DOUBLE_EQ(v1.GetElement(1), 2.0);
+    EXPECT_DOUBLE_EQ(v1.GetElement(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -208,10 +208,10 @@ TEST_F(TestVector, CanPutIntoArray)
 
     v1.PutIntoArray(x);
 
-    EXPECT_DOUBLE_EQ( x[0], 1.0 );
-    EXPECT_DOUBLE_EQ( x[1], 2.0 );
-    EXPECT_DOUBLE_EQ( x[2], 3.0 );
-    EXPECT_DOUBLE_EQ( x[3], 4.0 );
+    EXPECT_DOUBLE_EQ(x[0], 1.0);
+    EXPECT_DOUBLE_EQ(x[1], 2.0);
+    EXPECT_DOUBLE_EQ(x[2], 3.0);
+    EXPECT_DOUBLE_EQ(x[3], 4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -224,7 +224,7 @@ TEST_F(TestVector, CanGetElementOutOfRange)
     v1(1) = 2.0;
     v1(2) = 3.0;
 
-    EXPECT_TRUE( std::isnan( v1.GetElement(3) ) );
+    EXPECT_TRUE(std::isnan(v1.GetElement(3)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -237,9 +237,9 @@ TEST_F(TestVector, CanSetElement)
     v1.SetElement(1, 2.0);
     v1.SetElement(2, 3.0);
 
-    EXPECT_DOUBLE_EQ( v1(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v1(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v1(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v1(0), 1.0);
+    EXPECT_DOUBLE_EQ(v1(1), 2.0);
+    EXPECT_DOUBLE_EQ(v1(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -252,9 +252,9 @@ TEST_F(TestVector, CanSetFromArray)
 
     v1.SetFromArray(x);
 
-    EXPECT_DOUBLE_EQ( v1(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v1(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v1(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v1(0), 1.0);
+    EXPECT_DOUBLE_EQ(v1(1), 2.0);
+    EXPECT_DOUBLE_EQ(v1(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -262,10 +262,10 @@ TEST_F(TestVector, CanSetFromArray)
 TEST_F(TestVector, CanGetSize)
 {
     mc::Vector v0(0);
-    EXPECT_EQ( v0.size(), 0 );
+    EXPECT_EQ(v0.size(), 0);
 
     mc::Vector v3(3);
-    EXPECT_EQ( v3.size(), 3 );
+    EXPECT_EQ(v3.size(), 3);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -278,7 +278,7 @@ TEST_F(TestVector, CanConvertToString)
     v1(1) = 2.0;
     v1(2) = 3.0;
 
-    EXPECT_STREQ( v1.ToString().c_str(), "1,2,3" );
+    EXPECT_STREQ(v1.ToString().c_str(), "1,2,3");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -286,13 +286,13 @@ TEST_F(TestVector, CanConvertToString)
 TEST_F(TestVector, CanResize)
 {
     mc::Vector v(0);
-    EXPECT_EQ( v.size(), 0 );
+    EXPECT_EQ(v.size(), 0);
 
     v.Resize(3);
-    EXPECT_EQ( v.size(), 3 );
+    EXPECT_EQ(v.size(), 3);
 
     v.Resize(6);
-    EXPECT_EQ( v.size(), 6 );
+    EXPECT_EQ(v.size(), 6);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -307,9 +307,9 @@ TEST_F(TestVector, CanZeroize)
 
     v1.Zeroize();
 
-    EXPECT_DOUBLE_EQ( v1(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v1(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v1(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v1(0), 0.0);
+    EXPECT_DOUBLE_EQ(v1(1), 0.0);
+    EXPECT_DOUBLE_EQ(v1(2), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -323,10 +323,10 @@ TEST_F(TestVector, CanAccessItemViaOperator)
     v1(2) = 3.0;
     v1(3) = 4.0;
 
-    EXPECT_DOUBLE_EQ( v1(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v1(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v1(2), 3.0 );
-    EXPECT_DOUBLE_EQ( v1(3), 4.0 );
+    EXPECT_DOUBLE_EQ(v1(0), 1.0);
+    EXPECT_DOUBLE_EQ(v1(1), 2.0);
+    EXPECT_DOUBLE_EQ(v1(2), 3.0);
+    EXPECT_DOUBLE_EQ(v1(3), 4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -351,24 +351,24 @@ TEST_F(TestVector, CanAssign)
     v4.SetFromArray(x4);
 
     v = v1;
-    EXPECT_DOUBLE_EQ( v(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v(0), 1.0);
+    EXPECT_DOUBLE_EQ(v(1), 0.0);
+    EXPECT_DOUBLE_EQ(v(2), 0.0);
 
     v = v2;
-    EXPECT_DOUBLE_EQ( v(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v(1), 1.0 );
-    EXPECT_DOUBLE_EQ( v(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v(0), 0.0);
+    EXPECT_DOUBLE_EQ(v(1), 1.0);
+    EXPECT_DOUBLE_EQ(v(2), 0.0);
 
     v = v3;
-    EXPECT_DOUBLE_EQ( v(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v(2), 1.0 );
+    EXPECT_DOUBLE_EQ(v(0), 0.0);
+    EXPECT_DOUBLE_EQ(v(1), 0.0);
+    EXPECT_DOUBLE_EQ(v(2), 1.0);
 
     v = v4;
-    EXPECT_DOUBLE_EQ( v(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v(0), 1.0);
+    EXPECT_DOUBLE_EQ(v(1), 2.0);
+    EXPECT_DOUBLE_EQ(v(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -393,24 +393,24 @@ TEST_F(TestVector, CanAssignAndMove)
     v4.SetFromArray(x4);
 
     v = std::move(v1);
-    EXPECT_DOUBLE_EQ( v(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v(0), 1.0);
+    EXPECT_DOUBLE_EQ(v(1), 0.0);
+    EXPECT_DOUBLE_EQ(v(2), 0.0);
 
     v = std::move(v2);
-    EXPECT_DOUBLE_EQ( v(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v(1), 1.0 );
-    EXPECT_DOUBLE_EQ( v(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v(0), 0.0);
+    EXPECT_DOUBLE_EQ(v(1), 1.0);
+    EXPECT_DOUBLE_EQ(v(2), 0.0);
 
     v = std::move(v3);
-    EXPECT_DOUBLE_EQ( v(0), 0.0 );
-    EXPECT_DOUBLE_EQ( v(1), 0.0 );
-    EXPECT_DOUBLE_EQ( v(2), 1.0 );
+    EXPECT_DOUBLE_EQ(v(0), 0.0);
+    EXPECT_DOUBLE_EQ(v(1), 0.0);
+    EXPECT_DOUBLE_EQ(v(2), 1.0);
 
     v = std::move(v4);
-    EXPECT_DOUBLE_EQ( v(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v(0), 1.0);
+    EXPECT_DOUBLE_EQ(v(1), 2.0);
+    EXPECT_DOUBLE_EQ(v(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -435,13 +435,13 @@ TEST_F(TestVector, CanAdd)
     mc::Vector v12 = v1 + v2;
     mc::Vector v34 = v3 + v4;
 
-    EXPECT_DOUBLE_EQ( v12(0), 4.0 );
-    EXPECT_DOUBLE_EQ( v12(1), 4.0 );
-    EXPECT_DOUBLE_EQ( v12(2), 4.0 );
+    EXPECT_DOUBLE_EQ(v12(0), 4.0);
+    EXPECT_DOUBLE_EQ(v12(1), 4.0);
+    EXPECT_DOUBLE_EQ(v12(2), 4.0);
 
-    EXPECT_DOUBLE_EQ( v34(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v34(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v34(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v34(0), 1.0);
+    EXPECT_DOUBLE_EQ(v34(1), 2.0);
+    EXPECT_DOUBLE_EQ(v34(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -453,9 +453,9 @@ TEST_F(TestVector, CanAddWrongSize)
 
     mc::Vector v12 = v1 + v2;
 
-    EXPECT_TRUE( std::isnan(v12(0)) );
-    EXPECT_TRUE( std::isnan(v12(1)) );
-    EXPECT_TRUE( std::isnan(v12(2)) );
+    EXPECT_TRUE(std::isnan(v12(0)));
+    EXPECT_TRUE(std::isnan(v12(1)));
+    EXPECT_TRUE(std::isnan(v12(2)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -469,9 +469,9 @@ TEST_F(TestVector, CanNegate)
 
     mc::Vector v2 = -v1;
 
-    EXPECT_DOUBLE_EQ( v2(0), -1.0 );
-    EXPECT_DOUBLE_EQ( v2(1), -2.0 );
-    EXPECT_DOUBLE_EQ( v2(2), -3.0 );
+    EXPECT_DOUBLE_EQ(v2(0), -1.0);
+    EXPECT_DOUBLE_EQ(v2(1), -2.0);
+    EXPECT_DOUBLE_EQ(v2(2), -3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -489,9 +489,9 @@ TEST_F(TestVector, CanSubstract)
 
     mc::Vector v = v1 - v2;
 
-    EXPECT_DOUBLE_EQ( v(0), 2.0 );
-    EXPECT_DOUBLE_EQ( v(1), 1.0 );
-    EXPECT_DOUBLE_EQ( v(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v(0), 2.0);
+    EXPECT_DOUBLE_EQ(v(1), 1.0);
+    EXPECT_DOUBLE_EQ(v(2), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -503,9 +503,9 @@ TEST_F(TestVector, CanSubstractWrongSize)
 
     mc::Vector v12 = v1 - v2;
 
-    EXPECT_TRUE( std::isnan(v12(0)) );
-    EXPECT_TRUE( std::isnan(v12(1)) );
-    EXPECT_TRUE( std::isnan(v12(2)) );
+    EXPECT_TRUE(std::isnan(v12(0)));
+    EXPECT_TRUE(std::isnan(v12(1)));
+    EXPECT_TRUE(std::isnan(v12(2)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -520,9 +520,9 @@ TEST_F(TestVector, CanMultiplyByScalar)
 
     mc::Vector v2 = v1 * 2.0;
 
-    EXPECT_DOUBLE_EQ( v2(0), 2.0 );
-    EXPECT_DOUBLE_EQ( v2(1), 4.0 );
-    EXPECT_DOUBLE_EQ( v2(2), 6.0 );
+    EXPECT_DOUBLE_EQ(v2(0), 2.0);
+    EXPECT_DOUBLE_EQ(v2(1), 4.0);
+    EXPECT_DOUBLE_EQ(v2(2), 6.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -537,9 +537,9 @@ TEST_F(TestVector, CandivideByScalar)
 
     mc::Vector v2 = v1 / 2.0;
 
-    EXPECT_DOUBLE_EQ( v2(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v2(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v2(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v2(0), 1.0);
+    EXPECT_DOUBLE_EQ(v2(1), 2.0);
+    EXPECT_DOUBLE_EQ(v2(2), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -557,9 +557,9 @@ TEST_F(TestVector, CanUnaryAdd)
 
     v0 += v1;
 
-    EXPECT_DOUBLE_EQ( v0(0), 4.0 );
-    EXPECT_DOUBLE_EQ( v0(1), 4.0 );
-    EXPECT_DOUBLE_EQ( v0(2), 4.0 );
+    EXPECT_DOUBLE_EQ(v0(0), 4.0);
+    EXPECT_DOUBLE_EQ(v0(1), 4.0);
+    EXPECT_DOUBLE_EQ(v0(2), 4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -577,9 +577,9 @@ TEST_F(TestVector, CanUnarySubstract)
 
     v0 -= v1;
 
-    EXPECT_DOUBLE_EQ( v0(0), 2.0 );
-    EXPECT_DOUBLE_EQ( v0(1), 1.0 );
-    EXPECT_DOUBLE_EQ( v0(2), 0.0 );
+    EXPECT_DOUBLE_EQ(v0(0), 2.0);
+    EXPECT_DOUBLE_EQ(v0(1), 1.0);
+    EXPECT_DOUBLE_EQ(v0(2), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -594,9 +594,9 @@ TEST_F(TestVector, CanUnaryMultiplyByScalar)
 
     v0 *= 2.0;
 
-    EXPECT_DOUBLE_EQ( v0(0), 2.0 );
-    EXPECT_DOUBLE_EQ( v0(1), 4.0 );
-    EXPECT_DOUBLE_EQ( v0(2), 6.0 );
+    EXPECT_DOUBLE_EQ(v0(0), 2.0);
+    EXPECT_DOUBLE_EQ(v0(1), 4.0);
+    EXPECT_DOUBLE_EQ(v0(2), 6.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -611,7 +611,7 @@ TEST_F(TestVector, CanUnaryDivideByScalar)
 
     v0 /= 2.0;
 
-    EXPECT_DOUBLE_EQ( v0(0), 1.0 );
-    EXPECT_DOUBLE_EQ( v0(1), 2.0 );
-    EXPECT_DOUBLE_EQ( v0(2), 3.0 );
+    EXPECT_DOUBLE_EQ(v0(0), 1.0);
+    EXPECT_DOUBLE_EQ(v0(1), 2.0);
+    EXPECT_DOUBLE_EQ(v0(2), 3.0);
 }

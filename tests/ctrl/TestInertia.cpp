@@ -38,7 +38,7 @@ TEST_F(TestInertia, CanCalculate)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = (i < 101) ? 0.0 : 1.0;
         y = mc::Inertia::Calculate(u, y, TIME_STEP, TIME_CONSTANT);
@@ -56,7 +56,7 @@ TEST_F(TestInertia, CanCalculateWithZeroTimeConst)
 {
     double y = 0.0;
 
-    for (unsigned int i = 0; i < 200; i++)
+    for ( unsigned int i = 0; i < 200; i++ )
     {
         double u = (i < 101) ? 0.0 : 1.0;
         y = mc::Inertia::Calculate(u, y, TIME_STEP, 0.0);
@@ -82,7 +82,7 @@ TEST_F(TestInertia, CanCalculate2)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < t_ref.size(); i++)
+    for ( unsigned int i = 0; i < t_ref.size(); i++ )
     {
         double u = (i == 0) ? 0.0 : 1.0;
         y = mc::Inertia::Calculate(u, y, TIME_STEP, TIME_CONSTANT);
@@ -185,7 +185,7 @@ TEST_F(TestInertia, CanUpdateStep)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = ( i < 101 ) ? 0.0 : 1.0;
 

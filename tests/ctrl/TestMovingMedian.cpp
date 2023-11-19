@@ -54,7 +54,7 @@ TEST_F(TestMovingMedian, CanUpdate)
 {
     mc::MovingMedian mm(5);
 
-    double u[] = {44.0, 64.0, 18.0, 65.0, 81.0, 28.0, 1.0, 25.0, 41.0, 39.0};
+    double u[] = { 44.0, 64.0, 18.0, 65.0, 81.0, 28.0, 1.0, 25.0, 41.0, 39.0 };
 
     mm.Update(1.0, u[0]);
     // [44]

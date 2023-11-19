@@ -79,7 +79,7 @@ TEST_F(TestOscillator, CanUpdateStep)
     double t = 0.0;
     double y = 0.0;
 
-    for (unsigned int i = 0; i < vals.size(); i++)
+    for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 

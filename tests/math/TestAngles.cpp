@@ -20,16 +20,16 @@ protected:
 
 TEST_F(TestAngles, CanNormalizeAngle)
 {
-    EXPECT_DOUBLE_EQ( mc::Angles::Normalize(2.0 * M_PI + M_PI_4), M_PI_4 );
-    EXPECT_DOUBLE_EQ( mc::Angles::Normalize(2.0 * M_PI - M_PI_4), 1.75 * M_PI );
+    EXPECT_DOUBLE_EQ(mc::Angles::Normalize(2.0 * M_PI + M_PI_4), M_PI_4);
+    EXPECT_DOUBLE_EQ(mc::Angles::Normalize(2.0 * M_PI - M_PI_4), 1.75 * M_PI);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAngles, CanConstruct)
 {
-    mc::Angles *angles = nullptr;
-    EXPECT_NO_THROW( angles = new mc::Angles() );
+    mc::Angles* angles = nullptr;
+    EXPECT_NO_THROW(angles = new mc::Angles());
     delete angles;
 }
 
@@ -37,8 +37,8 @@ TEST_F(TestAngles, CanConstruct)
 
 TEST_F(TestAngles, CanDestruct)
 {
-    mc::Angles *angles = new mc::Angles();
-    EXPECT_NO_THROW( delete angles );
+    mc::Angles* angles = new mc::Angles();
+    EXPECT_NO_THROW(delete angles);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -47,9 +47,9 @@ TEST_F(TestAngles, CanInstantiate)
 {
     mc::Angles angles;
 
-    EXPECT_DOUBLE_EQ( angles.phi(), 0.0 );
-    EXPECT_DOUBLE_EQ( angles.tht(), 0.0 );
-    EXPECT_DOUBLE_EQ( angles.psi(), 0.0 );
+    EXPECT_DOUBLE_EQ(angles.phi(), 0.0);
+    EXPECT_DOUBLE_EQ(angles.tht(), 0.0);
+    EXPECT_DOUBLE_EQ(angles.psi(), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -58,27 +58,27 @@ TEST_F(TestAngles, CanInstantiateAndSetData)
 {
     mc::Angles angles1(M_PI_4, 0.0, 0.0);
 
-    EXPECT_DOUBLE_EQ( angles1.phi(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles1.tht(), 0.0    );
-    EXPECT_DOUBLE_EQ( angles1.psi(), 0.0    );
+    EXPECT_DOUBLE_EQ(angles1.phi(), M_PI_4);
+    EXPECT_DOUBLE_EQ(angles1.tht(), 0.0   );
+    EXPECT_DOUBLE_EQ(angles1.psi(), 0.0   );
 
-    mc::Angles angles2( 0.0, M_PI_4, 0.0 );
+    mc::Angles angles2(0.0, M_PI_4, 0.0);
 
-    EXPECT_DOUBLE_EQ( angles2.phi(), 0.0    );
-    EXPECT_DOUBLE_EQ( angles2.tht(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles2.psi(), 0.0    );
+    EXPECT_DOUBLE_EQ(angles2.phi(), 0.0   );
+    EXPECT_DOUBLE_EQ(angles2.tht(), M_PI_4);
+    EXPECT_DOUBLE_EQ(angles2.psi(), 0.0   );
 
-    mc::Angles angles3( 0.0, 0.0, M_PI_4 );
+    mc::Angles angles3(0.0, 0.0, M_PI_4);
 
-    EXPECT_DOUBLE_EQ( angles3.phi(), 0.0    );
-    EXPECT_DOUBLE_EQ( angles3.tht(), 0.0    );
-    EXPECT_DOUBLE_EQ( angles3.psi(), M_PI_4 );
+    EXPECT_DOUBLE_EQ(angles3.phi(), 0.0   );
+    EXPECT_DOUBLE_EQ(angles3.tht(), 0.0   );
+    EXPECT_DOUBLE_EQ(angles3.psi(), M_PI_4);
 
-    mc::Angles angles4( M_PI_4, M_PI_4, M_PI_4 );
+    mc::Angles angles4(M_PI_4, M_PI_4, M_PI_4);
 
-    EXPECT_DOUBLE_EQ( angles4.phi(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles4.tht(), M_PI_4 );
-    EXPECT_DOUBLE_EQ( angles4.psi(), M_PI_4 );
+    EXPECT_DOUBLE_EQ(angles4.phi(), M_PI_4);
+    EXPECT_DOUBLE_EQ(angles4.tht(), M_PI_4);
+    EXPECT_DOUBLE_EQ(angles4.psi(), M_PI_4);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -86,16 +86,16 @@ TEST_F(TestAngles, CanInstantiateAndSetData)
 TEST_F(TestAngles, CanValidate)
 {
     mc::Angles angles1(0.0, 0.0, 0.0);
-    EXPECT_TRUE( angles1.IsValid() );
+    EXPECT_TRUE(angles1.IsValid());
 
     mc::Angles angles2(std::numeric_limits<double>::quiet_NaN(), 0.0, 0.0);
-    EXPECT_FALSE( angles2.IsValid() );
+    EXPECT_FALSE(angles2.IsValid());
 
     mc::Angles angles3(0.0, std::numeric_limits<double>::quiet_NaN(), 0.0);
-    EXPECT_FALSE( angles3.IsValid() );
+    EXPECT_FALSE(angles3.IsValid());
 
     mc::Angles angles4(0.0, 0.0, std::numeric_limits<double>::quiet_NaN());
-    EXPECT_FALSE( angles4.IsValid() );
+    EXPECT_FALSE(angles4.IsValid());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,9 +108,9 @@ TEST_F(TestAngles, CanNormalize)
 
     a.Normalize();
 
-    EXPECT_NEAR( a.phi(), a1.phi(), 1.0e-9 );
-    EXPECT_NEAR( a.tht(), a1.tht(), 1.0e-9 );
-    EXPECT_NEAR( a.psi(), a1.psi(), 1.0e-9 );
+    EXPECT_NEAR(a.phi(), a1.phi(), 1.0e-9);
+    EXPECT_NEAR(a.tht(), a1.tht(), 1.0e-9);
+    EXPECT_NEAR(a.psi(), a1.psi(), 1.0e-9);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -118,8 +118,7 @@ TEST_F(TestAngles, CanNormalize)
 TEST_F(TestAngles, CanConvertToString)
 {
     mc::Angles a(M_PI_4, M_PI_4, M_PI_4);
-
-    EXPECT_STREQ( a.ToString().c_str(), "45.00,45.00,45.00" );
+    EXPECT_STREQ(a.ToString().c_str(), "45.00,45.00,45.00");
 }
 
 ////////////////////////////////////////////////////////////////////////////////

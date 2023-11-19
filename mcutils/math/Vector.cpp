@@ -37,17 +37,16 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector::Vector(const Vector& vect)
-    : size_ (vect.size_)
+    : size_(vect.size_)
 {
     elements_ = new double [size_];
-
     SetFromArray(vect.elements_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 Vector::Vector(Vector&& vect)
-    : size_ (std::exchange(vect.size_, 0))
+    : size_(std::exchange(vect.size_, 0))
     , elements_(std::exchange(vect.elements_, nullptr))
 {}
 
@@ -153,7 +152,6 @@ std::string Vector::ToString() const
     for ( unsigned int i = 0; i < size_; ++i )
     {
         if ( i != 0 ) ss << ",";
-
         ss << elements_[i];
     }
     return ss.str();

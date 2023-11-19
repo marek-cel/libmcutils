@@ -64,10 +64,10 @@ Quaternion::Quaternion(const Angles& angl)
     double sin_phi_2_sin_psi_2 = sin_phi_2 * sin_psi_2;
     double sin_phi_2_cos_psi_2 = sin_phi_2 * cos_psi_2;
 
-    e0_ = ( cos_phi_2_cos_psi_2 * cos_tht_2 ) + ( sin_phi_2_sin_psi_2 * sin_tht_2 );
-    ex_ = ( sin_phi_2_cos_psi_2 * cos_tht_2 ) - ( cos_phi_2_sin_psi_2 * sin_tht_2 );
-    ey_ = ( cos_phi_2_cos_psi_2 * sin_tht_2 ) + ( sin_phi_2_sin_psi_2 * cos_tht_2 );
-    ez_ = ( cos_phi_2_sin_psi_2 * cos_tht_2 ) - ( sin_phi_2_cos_psi_2 * sin_tht_2 );
+    e0_ = (cos_phi_2_cos_psi_2 * cos_tht_2) + (sin_phi_2_sin_psi_2 * sin_tht_2);
+    ex_ = (sin_phi_2_cos_psi_2 * cos_tht_2) - (cos_phi_2_sin_psi_2 * sin_tht_2);
+    ey_ = (cos_phi_2_cos_psi_2 * sin_tht_2) + (sin_phi_2_sin_psi_2 * cos_tht_2);
+    ez_ = (cos_phi_2_sin_psi_2 * cos_tht_2) - (sin_phi_2_cos_psi_2 * sin_tht_2);
 
     Normalize();
 }
@@ -165,9 +165,9 @@ Angles Quaternion::GetAngles() const
     }
     else
     {
-        result.phi() = atan2( 2.0*( e0_*ex_ + ey_*ez_ ), 1.0 - 2.0*( ex_*ex_ + ey_*ey_ ) );
-        result.tht() =  asin( 2.0*sin_tht_2 );
-        result.psi() = atan2( 2.0*( e0_*ez_ + ex_*ey_ ), 1.0 - 2.0*( ey_*ey_ + ez_*ez_ ) );
+        result.phi() = atan2(2.0*(e0_*ex_ + ey_*ez_), 1.0 - 2.0*(ex_*ex_ + ey_*ey_));
+        result.tht() =  asin(2.0*sin_tht_2 );
+        result.psi() = atan2(2.0*(e0_*ez_ + ex_*ey_), 1.0 - 2.0*(ey_*ey_ + ez_*ez_));
     }
 
     result.Normalize();
@@ -405,10 +405,10 @@ Quaternion& Quaternion::operator/=(double val)
 
 bool Quaternion::operator==(const Quaternion& quat) const
 {
-    return ( e0_ == quat.e0_ )
-        && ( ex_ == quat.ex_ )
-        && ( ey_ == quat.ey_ )
-        && ( ez_ == quat.ez_ );
+    return (e0_ == quat.e0_)
+        && (ex_ == quat.ex_)
+        && (ey_ == quat.ey_)
+        && (ez_ == quat.ez_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

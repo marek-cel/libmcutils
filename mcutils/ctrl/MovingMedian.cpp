@@ -33,8 +33,8 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 MovingMedian::MovingMedian(unsigned int length , double value)
-    : length_ ( length )
-    , value_ ( value )
+    : length_(length)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ void MovingMedian::Update(double, double u)
             int i1 = static_cast<int>(v.size()) / 2;
             int i2 = i1 - 1;
 
-            value_ = ( v[i1] + v[i2] ) / 2.0;
+            value_ = (v[i1] + v[i2]) / 2.0;
         }
         else
         {

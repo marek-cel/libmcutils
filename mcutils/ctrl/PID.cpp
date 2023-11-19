@@ -51,7 +51,7 @@ void PID::Update(double dt, double u)
     if ( dt > 0.0 )
     {
         error_i_ = error_i_ + u  * dt;
-        error_d_ = ( dt > 0.0 ) ? ( u - error_ ) / dt : 0.0;
+        error_d_ = (dt > 0.0) ? (u - error_) / dt : 0.0;
         error_ = u;
 
         double y_p = kp_ * error_;
@@ -94,7 +94,7 @@ void PID::SetAsParallel(double kp, double ki, double kd)
 
 void PID::SetAsSeries( double k, double tau_i, double tau_d )
 {
-    kp_ = k * ( 1.0 + tau_d / tau_i );
+    kp_ = k * (1.0 + tau_d / tau_i);
     ki_ = k / tau_i;
     kd_ = k * tau_d;
 }
@@ -112,9 +112,9 @@ void PID::SetAsStandard(double kp, double ti, double td )
 
 void PID::SetValueAndError( double value, double error, double dt )
 {
-    error_d_ = ( dt > 0.0 ) ? ( error - error_ ) / dt : 0.0;
+    error_d_ = (dt > 0.0) ? (error - error_) / dt : 0.0;
     error_i_ = fabs(ki_) > 0.0
-            ? ( ( value  - kp_ * error - kd_ * error_d_ ) / ki_ )
+            ? ((value  - kp_ * error - kd_ * error_d_) / ki_)
             : 0.0;
 
     error_ = error;

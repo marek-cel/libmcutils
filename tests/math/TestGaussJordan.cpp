@@ -45,9 +45,9 @@ TEST_F(TestGaussJordan, CanSolve)
     mc::VectorN<3> x;
     mc::GaussJordan::Solve(m, rhs, &x);
 
-    EXPECT_NEAR( x(0), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(1), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(2), 2.0, 1.0e-9 );
+    EXPECT_NEAR(x(0), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(1), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(2), 2.0, 1.0e-9);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,9 +82,9 @@ TEST_F(TestGaussJordan, CanSolveNotInOrder)
     mc::VectorN<3> x;
     mc::GaussJordan::Solve(m, rhs, &x);
 
-    EXPECT_NEAR( x(0), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(1), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(2), 2.0, 1.0e-9 );
+    EXPECT_NEAR(x(0), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(1), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(2), 2.0, 1.0e-9);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ TEST_F(TestGaussJordan, CanSolveWithZerosAtDiagonal)
     mc::VectorN<3> x;
     mc::GaussJordan::Solve(m, rhs, &x);
 
-    EXPECT_NEAR( x(0), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(1), 1.0, 1.0e-9 );
-    EXPECT_NEAR( x(2), 2.0, 1.0e-9 );
+    EXPECT_NEAR(x(0), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(1), 1.0, 1.0e-9);
+    EXPECT_NEAR(x(2), 2.0, 1.0e-9);
 }

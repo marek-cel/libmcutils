@@ -59,7 +59,7 @@ void Oscillator::Update( double dt, double u )
         double ca = omega2_ * dt2 * den_inv;
         double cb = 2.0 * ca;
         double cc = cb - 8.0 * den_inv;
-        double cd = ca + ( 4.0 - 2.0 * zetomg2_ * dt ) * den_inv;
+        double cd = ca + (4.0 - 2.0 * zetomg2_ * dt) * den_inv;
 
         value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * ca
                         - y_prev_1_ * cc - y_prev_2_ * cd;

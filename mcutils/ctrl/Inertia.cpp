@@ -35,7 +35,7 @@ double Inertia::Calculate(double u, double y, double dt, double tc)
 {
     if ( tc > 0.0 )
     {
-        return y + ( 1.0 - exp(-dt / tc) ) * ( u - y );
+        return y + (1.0 - exp(-dt / tc)) * (u - y);
     }
 
     return u;
@@ -44,8 +44,8 @@ double Inertia::Calculate(double u, double y, double dt, double tc)
 ////////////////////////////////////////////////////////////////////////////////
 
 Inertia::Inertia(double tc, double value)
-    : time_const_( tc )
-    , value_( value )
+    : time_const_(tc)
+    , value_(value)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////

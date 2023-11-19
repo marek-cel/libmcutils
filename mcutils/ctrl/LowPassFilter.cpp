@@ -33,8 +33,8 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 LowPassFilter::LowPassFilter(double omega, double value)
-    : omega_( omega )
-    , time_const_( 1.0 / omega )
+    : omega_(omega)
+    , time_const_(1.0 / omega)
     , value_(value)
 {}
 
@@ -52,7 +52,7 @@ void LowPassFilter::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        value_ += + ( 1.0 - exp(-dt / time_const_) ) * ( u - value_ );
+        value_ += (1.0 - exp(-dt / time_const_)) * (u - value_);
     }
 }
 

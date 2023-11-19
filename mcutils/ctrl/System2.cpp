@@ -57,11 +57,11 @@ void System2::Update(double dt, double u)
         double den = 4.0 * c4_ + 2.0 * c5_ * dt + c6_ * dt2;
         double den_inv = 1.0 / den;
 
-        double ca = ( 4.0 * c1_       + 2.0 * c2_ * dt + c3_ * dt2 ) * den_inv;
-        double cb = ( 2.0 * c3_ * dt2 - 8.0 * c1_                  ) * den_inv;
-        double cc = ( 4.0 * c1_       - 2.0 * c2_ * dt + c3_ * dt2 ) * den_inv;
-        double cd = ( 2.0 * c6_ * dt2 - 8.0 * c4_                  ) * den_inv;
-        double ce = ( 4.0 * c4_       - 2.0 * c5_ * dt + c6_ * dt2 ) * den_inv;
+        double ca = (4.0 * c1_       + 2.0 * c2_ * dt + c3_ * dt2) * den_inv;
+        double cb = (2.0 * c3_ * dt2 - 8.0 * c1_                 ) * den_inv;
+        double cc = (4.0 * c1_       - 2.0 * c2_ * dt + c3_ * dt2) * den_inv;
+        double cd = (2.0 * c6_ * dt2 - 8.0 * c4_                 ) * den_inv;
+        double ce = (4.0 * c4_       - 2.0 * c5_ * dt + c6_ * dt2) * den_inv;
 
         value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * cc
                         - y_prev_1_ * cd - y_prev_2_ * ce;

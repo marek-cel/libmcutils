@@ -119,9 +119,9 @@ std::string Angles::ToString() const
 
 bool Angles::operator==(const Angles& angl) const
 {
-    return ( phi_ == angl.phi_ )
-        && ( tht_ == angl.tht_ )
-        && ( psi_ == angl.psi_ );
+    return (phi_ == angl.phi_)
+        && (tht_ == angl.tht_)
+        && (psi_ == angl.psi_);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

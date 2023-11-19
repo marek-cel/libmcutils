@@ -47,11 +47,11 @@ void RungeKutta4::Integrate(double step, Vector* vect)
     deriv_fun_(xt_, &k1_);
 
     // k2 - derivatives calculation
-    xt_ = *vect + k1_ * ( step / 2.0 );
+    xt_ = *vect + k1_ * (step / 2.0);
     deriv_fun_(xt_, &k2_);
 
     // k3 - derivatives calculation
-    xt_ = *vect + k2_ * ( step / 2.0 );
+    xt_ = *vect + k2_ * (step / 2.0);
     deriv_fun_(xt_, &k3_);
 
     // k4 - derivatives calculation
@@ -59,7 +59,7 @@ void RungeKutta4::Integrate(double step, Vector* vect)
     deriv_fun_(xt_, &k4_);
 
     // integration
-    *vect += ( k1_ + k2_ * 2.0 + k3_ * 2.0 + k4_ ) * ( step / 6.0 );
+    *vect += (k1_ + k2_ * 2.0 + k3_ * 2.0 + k4_) * (step / 6.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

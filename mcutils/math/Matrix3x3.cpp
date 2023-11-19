@@ -69,13 +69,13 @@ Matrix3x3::Matrix3x3(const Angles& angl)
     xy() =  cos_tht * sin_psi;
     xz() = -sin_tht;
 
-    yx() = -( cos_phi * sin_psi ) + ( sin_phi_sin_tht * cos_psi );
-    yy() =  ( cos_phi * cos_psi ) + ( sin_phi_sin_tht * sin_psi );
-    yz() =  ( sin_phi * cos_tht );
+    yx() = -(cos_phi * sin_psi) + (sin_phi_sin_tht * cos_psi);
+    yy() =  (cos_phi * cos_psi) + (sin_phi_sin_tht * sin_psi);
+    yz() =  (sin_phi * cos_tht);
 
-    zx() =  ( sin_phi * sin_psi ) + ( cos_phi_sin_tht * cos_psi );
-    zy() = -( sin_phi * cos_psi ) + ( cos_phi_sin_tht * sin_psi );
-    zz() =  ( cos_phi * cos_tht );
+    zx() =  (sin_phi * sin_psi) + (cos_phi_sin_tht * cos_psi);
+    zy() = -(sin_phi * cos_psi) + (cos_phi_sin_tht * sin_psi);
+    zz() =  (cos_phi * cos_tht);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -93,15 +93,15 @@ Matrix3x3::Matrix3x3(const Quaternion& qtrn)
     double ez2 = ez*ez;
 
     xx() = e02 + ex2 - ey2 - ez2;
-    xy() = 2.0 * ( e0*ez + ex*ey );
-    xz() = 2.0 * ( ex*ez - e0*ey );
+    xy() = 2.0 * (e0*ez + ex*ey);
+    xz() = 2.0 * (ex*ez - e0*ey);
 
-    yx() = 2.0 * ( ex*ey - e0*ez );
+    yx() = 2.0 * (ex*ey - e0*ez);
     yy() = e02 - ex2 + ey2 - ez2;
-    yz() = 2.0 * ( e0*ex + ey*ez );
+    yz() = 2.0 * (e0*ex + ey*ez);
 
-    zx() = 2.0 * ( e0*ey + ex*ez );
-    zy() = 2.0 * ( ey*ez - e0*ex );
+    zx() = 2.0 * (e0*ey + ex*ez);
+    zy() = 2.0 * (ey*ez - e0*ex);
     zz() = e02 - ex2 - ey2 + ez2;
 }
 
@@ -131,7 +131,7 @@ Angles Matrix3x3::GetAngles() const
     Angles result;
 
     double sin_tht = -xz();
-    double cos_tht = sqrt( 1.0 - std::min(1.0, sin_tht*sin_tht) );
+    double cos_tht = sqrt(1.0 - std::min(1.0, sin_tht*sin_tht));
 
     result.tht() = atan2(sin_tht, cos_tht);
 

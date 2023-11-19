@@ -29,5 +29,5 @@ TEST_F(TestClockTime, CanGetClockTime)
 
     double outputValue = mc::GetClockTime();
 
-    EXPECT_NEAR( expectedValue, outputValue, 1.0e-6 );
+    EXPECT_NEAR(expectedValue, outputValue, 1.0e-6);
 }
