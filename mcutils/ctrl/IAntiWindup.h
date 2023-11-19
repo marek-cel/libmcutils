@@ -44,7 +44,7 @@ public:
     virtual ~IAntiWindup() = default;
     // LCOV_EXCL_STOP
 
-    virtual void update(double dt, double y_p, double y_i, double y_d,
+    virtual void Update(double dt, double y_p, double y_i, double y_d,
                         double* value, double* error_i, const class PID* pid) = 0;
 };
 

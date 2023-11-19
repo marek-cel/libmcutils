@@ -53,9 +53,9 @@ TEST_F(TestAWFilter, CanInstantiate)
 {
     mc::AWFilter aw;
 
-    EXPECT_DOUBLE_EQ(aw.getKaw(), 0.0);
-    EXPECT_DOUBLE_EQ(aw.getMin(), DBL_MIN);
-    EXPECT_DOUBLE_EQ(aw.getMax(), DBL_MAX);
+    EXPECT_DOUBLE_EQ(aw.kaw(), 0.0);
+    EXPECT_DOUBLE_EQ(aw.min(), DBL_MIN);
+    EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,9 +64,9 @@ TEST_F(TestAWFilter, CanInstantiateAndSetData)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
 
-    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    EXPECT_DOUBLE_EQ(aw.kaw(), KAW);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ TEST_F(TestAWFilter, CanInstantiateAndSetData)
 TEST_F(TestAWFilter, CanGetKaw)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
+    EXPECT_DOUBLE_EQ(aw.kaw(), KAW);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ TEST_F(TestAWFilter, CanGetKaw)
 TEST_F(TestAWFilter, CanGetMin)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ TEST_F(TestAWFilter, CanGetMin)
 TEST_F(TestAWFilter, CanGetMax)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +98,8 @@ TEST_F(TestAWFilter, CanGetMax)
 TEST_F(TestAWFilter, CanSetKaw)
 {
     mc::AWFilter aw;
-    aw.setKaw(KAW);
-    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
+    aw.set_kaw(KAW);
+    EXPECT_DOUBLE_EQ(aw.kaw(), KAW);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,8 +107,8 @@ TEST_F(TestAWFilter, CanSetKaw)
 TEST_F(TestAWFilter, CanSetMin)
 {
     mc::AWFilter aw;
-    aw.setMin(MIN);
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    aw.set_min(MIN);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,8 +116,8 @@ TEST_F(TestAWFilter, CanSetMin)
 TEST_F(TestAWFilter, CanSetMax)
 {
     mc::AWFilter aw;
-    aw.setMax(MAX);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    aw.set_max(MAX);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

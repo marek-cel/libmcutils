@@ -60,7 +60,7 @@ void PID::Update(double dt, double u)
 
         if ( anti_windup_ != nullptr )
         {
-            anti_windup_->update(dt, y_p, y_i, y_d, &value_, &error_i_, this);
+            anti_windup_->Update(dt, y_p, y_i, y_d, &value_, &error_i_, this);
         }
         else
         {

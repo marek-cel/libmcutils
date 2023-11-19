@@ -55,28 +55,28 @@ public:
      */
     explicit AWFilter(double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
 
-    void update(double dt, double y_p, double y_i, double y_d,
+    void Update(double dt, double y_p, double y_i, double y_d,
                 double* value, double* error_i, const class PID* pid) override;
 
-    double getKaw() const { return _kaw; }
+    double kaw() const { return kaw_; }
 
-    double getMin() const { return _min; }
-    double getMax() const { return _max; }
+    double min() const { return min_; }
+    double max() const { return max_; }
 
-    inline void setKaw(double kaw) { _kaw = kaw; }
+    inline void set_kaw(double kaw) { kaw_ = kaw; }
 
-    inline void setMin(double min) { _min = min; }
-    inline void setMax(double max) { _max = max; }
+    inline void set_min(double min) { min_ = min; }
+    inline void set_max(double max) { max_ = max; }
 
 private:
 
-    double _min = DBL_MIN;      ///< minimum output value
-    double _max = DBL_MAX;      ///< maximum output value
+    double min_ = DBL_MIN;      ///< minimum output value
+    double max_ = DBL_MAX;      ///< maximum output value
 
-    double _kaw = 0.0;          ///< filter gain
+    double kaw_ = 0.0;          ///< filter gain
 
-    double _delta = 0.0;        ///< difference between raw and saturated output values
-    double _value = 0.0;        ///< PID output
+    double delta_ = 0.0;        ///< difference between raw and saturated output values
+    double value_ = 0.0;        ///< PID output
 };
 
 } // namespace mc

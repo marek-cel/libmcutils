@@ -52,19 +52,19 @@ public:
      */
     explicit AWBackCalc(double min = DBL_MIN, double max = DBL_MAX);
 
-    void update(double dt, double y_p, double y_i, double y_d,
+    void Update(double dt, double y_p, double y_i, double y_d,
                 double *value, double *error_i, const class PID* pid) override;
 
-    double getMin() const { return _min; }
-    double getMax() const { return _max; }
+    double min() const { return min_; }
+    double max() const { return max_; }
 
-    inline void setMin(double min) { _min = min; }
-    inline void setMax(double max) { _max = max; }
+    inline void set_min(double min) { min_ = min; }
+    inline void set_max(double max) { max_ = max; }
 
 private:
 
-    double _min = DBL_MIN;      ///< minimum output value
-    double _max = DBL_MAX;      ///< maximum output value
+    double min_ = DBL_MIN;      ///< minimum output value
+    double max_ = DBL_MAX;      ///< maximum output value
 };
 
 } // namespace mc

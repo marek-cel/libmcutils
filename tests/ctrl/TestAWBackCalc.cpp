@@ -52,8 +52,8 @@ TEST_F(TestAWBackCalc, CanInstantiate)
 {
     mc::AWBackCalc aw;
 
-    EXPECT_DOUBLE_EQ(aw.getMin(), DBL_MIN);
-    EXPECT_DOUBLE_EQ(aw.getMax(), DBL_MAX);
+    EXPECT_DOUBLE_EQ(aw.min(), DBL_MIN);
+    EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +62,8 @@ TEST_F(TestAWBackCalc, CanInstantiateAndSetData)
 {
     mc::AWBackCalc aw(MIN, MAX);
 
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ TEST_F(TestAWBackCalc, CanInstantiateAndSetData)
 TEST_F(TestAWBackCalc, CanGetMin)
 {
     mc::AWBackCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ TEST_F(TestAWBackCalc, CanGetMin)
 TEST_F(TestAWBackCalc, CanGetMax)
 {
     mc::AWBackCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -87,8 +87,8 @@ TEST_F(TestAWBackCalc, CanGetMax)
 TEST_F(TestAWBackCalc, CanSetMin)
 {
     mc::AWBackCalc aw;
-    aw.setMin(MIN);
-    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    aw.set_min(MIN);
+    EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +96,8 @@ TEST_F(TestAWBackCalc, CanSetMin)
 TEST_F(TestAWBackCalc, CanSetMax)
 {
     mc::AWBackCalc aw;
-    aw.setMax(MAX);
-    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
+    aw.set_max(MAX);
+    EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
