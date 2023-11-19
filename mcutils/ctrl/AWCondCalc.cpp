@@ -32,22 +32,22 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 AWCondCalc::AWCondCalc(double min, double max)
-    : min_(min)
-    , max_(max)
+    : _min(min)
+    , _max(max)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AWCondCalc::Update(double, double y_p, double y_i, double y_d,
+void AWCondCalc::update(double, double y_p, double y_i, double y_d,
                         double* value, double* error_i, const PID*)
 {
     double y = y_p + y_i + y_d;
 
-    *value = Math::Satur(min_, max_, y);
+    *value = Math::Satur(_min, _max, y);
 
-    if ( y != *value ) *error_i = error_i_prev_;
+    if ( y != *value ) *error_i = _error_i_prev;
 
-    error_i_prev_ = *error_i;
+    _error_i_prev = *error_i;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

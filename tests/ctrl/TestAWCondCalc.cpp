@@ -33,8 +33,8 @@ protected:
 
 TEST_F(TestAWCondCalc, CanConstruct)
 {
-    mc::AWCondCalc *aw = nullptr;
-    EXPECT_NO_THROW( aw = new mc::AWCondCalc() );
+    mc::AWCondCalc* aw = nullptr;
+    EXPECT_NO_THROW(aw = new mc::AWCondCalc());
     delete aw;
 }
 
@@ -42,8 +42,8 @@ TEST_F(TestAWCondCalc, CanConstruct)
 
 TEST_F(TestAWCondCalc, CanDestruct)
 {
-    mc::AWCondCalc *aw = new mc::AWCondCalc();
-    EXPECT_NO_THROW( delete aw );
+    mc::AWCondCalc* aw = new mc::AWCondCalc();
+    EXPECT_NO_THROW(delete aw);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -52,8 +52,8 @@ TEST_F(TestAWCondCalc, CanInstantiate)
 {
     mc::AWCondCalc aw;
 
-    EXPECT_DOUBLE_EQ( aw.min(), DBL_MIN );
-    EXPECT_DOUBLE_EQ( aw.max(), DBL_MAX );
+    EXPECT_DOUBLE_EQ(aw.getMin(), DBL_MIN);
+    EXPECT_DOUBLE_EQ(aw.getMax(), DBL_MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,8 +62,8 @@ TEST_F(TestAWCondCalc, CanInstantiateAndSetData)
 {
     mc::AWCondCalc aw(MIN, MAX);
 
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +71,7 @@ TEST_F(TestAWCondCalc, CanInstantiateAndSetData)
 TEST_F(TestAWCondCalc, CanGetMin)
 {
     mc::AWCondCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +79,7 @@ TEST_F(TestAWCondCalc, CanGetMin)
 TEST_F(TestAWCondCalc, CanGetMax)
 {
     mc::AWCondCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -87,8 +87,8 @@ TEST_F(TestAWCondCalc, CanGetMax)
 TEST_F(TestAWCondCalc, CanSetMin)
 {
     mc::AWCondCalc aw;
-    aw.set_min(MIN);
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
+    aw.setMin(MIN);
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -96,8 +96,8 @@ TEST_F(TestAWCondCalc, CanSetMin)
 TEST_F(TestAWCondCalc, CanSetMax)
 {
     mc::AWCondCalc aw;
-    aw.set_max(MAX);
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    aw.setMax(MAX);
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -108,23 +108,23 @@ TEST_F(TestAWCondCalc, CanUpdate)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_pid.xcos
-    XcosBinFileReader::ReadData( "../tests/ctrl/data/test_pid_antiwindup_conditional.bin", &vals );
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_pid_antiwindup_conditional.bin", &vals);
 
-    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+    EXPECT_GT(vals.size(), 0) << "No input data.";
 
     double t = 0.0;
     double y = 0.0;
 
-    mc::PID pid( KP, KI, KD, std::make_unique<mc::AWCondCalc>(MIN, MAX) );
+    mc::PID pid(KP, KI, KD, std::make_unique<mc::AWCondCalc>(MIN, MAX));
 
-    for ( unsigned int i = 0; i < vals.size(); i++ )
+    for (unsigned int i = 0; i < vals.size(); i++)
     {
-        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double u = (i < 500) ? 0.0 : 1.0;
         double e = u - y;
-        pid.Update( DT, e );
-        y = mc::Inertia::Calculate( pid.value(), y, DT, TC );
+        pid.Update(DT, e);
+        y = mc::Inertia::Calculate(pid.value(), y, DT, TC);
 
-        EXPECT_NEAR( y, vals.at( i ), 1.0e-1 );
+        EXPECT_NEAR(y, vals.at(i), 1.0e-1);
 
         t += DT;
     }

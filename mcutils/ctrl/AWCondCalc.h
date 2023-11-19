@@ -52,21 +52,21 @@ public:
      */
     explicit AWCondCalc(double min = DBL_MIN, double max = DBL_MAX);
 
-    void Update(double dt, double y_p, double y_i, double y_d,
+    void update(double dt, double y_p, double y_i, double y_d,
                 double *value, double *error_i, const class PID* pid) override;
 
-    double min() const { return min_; }
-    double max() const { return max_; }
+    double getMin() const { return _min; }
+    double getMax() const { return _max; }
 
-    inline void set_min(double min) { min_ = min; }
-    inline void set_max(double max) { max_ = max; }
+    inline void setMin(double min) { _min = min; }
+    inline void setMax(double max) { _max = max; }
 
 private:
 
-    double min_ = DBL_MIN;      ///< minimum output value
-    double max_ = DBL_MAX;      ///< maximum output value
+    double _min = DBL_MIN;      ///< minimum output value
+    double _max = DBL_MAX;      ///< maximum output value
 
-    double error_i_prev_ = 0.0; ///< error integral sum previous value
+    double _error_i_prev = 0.0; ///< error integral sum previous value
 };
 
 } // namespace mc

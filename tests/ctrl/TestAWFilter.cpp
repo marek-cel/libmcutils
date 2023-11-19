@@ -34,8 +34,8 @@ protected:
 
 TEST_F(TestAWFilter, CanConstruct)
 {
-    mc::AWFilter *aw = nullptr;
-    EXPECT_NO_THROW( aw = new mc::AWFilter() );
+    mc::AWFilter* aw = nullptr;
+    EXPECT_NO_THROW(aw = new mc::AWFilter());
     delete aw;
 }
 
@@ -43,8 +43,8 @@ TEST_F(TestAWFilter, CanConstruct)
 
 TEST_F(TestAWFilter, CanDestruct)
 {
-    mc::AWFilter *aw = new mc::AWFilter();
-    EXPECT_NO_THROW( delete aw );
+    mc::AWFilter* aw = new mc::AWFilter();
+    EXPECT_NO_THROW(delete aw);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,9 +53,9 @@ TEST_F(TestAWFilter, CanInstantiate)
 {
     mc::AWFilter aw;
 
-    EXPECT_DOUBLE_EQ( aw.kaw(), 0.0 );
-    EXPECT_DOUBLE_EQ( aw.min(), DBL_MIN );
-    EXPECT_DOUBLE_EQ( aw.max(), DBL_MAX );
+    EXPECT_DOUBLE_EQ(aw.getKaw(), 0.0);
+    EXPECT_DOUBLE_EQ(aw.getMin(), DBL_MIN);
+    EXPECT_DOUBLE_EQ(aw.getMax(), DBL_MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,9 +64,9 @@ TEST_F(TestAWFilter, CanInstantiateAndSetData)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
 
-    EXPECT_DOUBLE_EQ( aw.kaw(), KAW );
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ TEST_F(TestAWFilter, CanInstantiateAndSetData)
 TEST_F(TestAWFilter, CanGetKaw)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ( aw.kaw(), KAW );
+    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -82,7 +82,7 @@ TEST_F(TestAWFilter, CanGetKaw)
 TEST_F(TestAWFilter, CanGetMin)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,7 @@ TEST_F(TestAWFilter, CanGetMin)
 TEST_F(TestAWFilter, CanGetMax)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,8 +98,8 @@ TEST_F(TestAWFilter, CanGetMax)
 TEST_F(TestAWFilter, CanSetKaw)
 {
     mc::AWFilter aw;
-    aw.set_kaw(KAW);
-    EXPECT_DOUBLE_EQ( aw.kaw(), KAW );
+    aw.setKaw(KAW);
+    EXPECT_DOUBLE_EQ(aw.getKaw(), KAW);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,8 +107,8 @@ TEST_F(TestAWFilter, CanSetKaw)
 TEST_F(TestAWFilter, CanSetMin)
 {
     mc::AWFilter aw;
-    aw.set_min(MIN);
-    EXPECT_DOUBLE_EQ( aw.min(), MIN );
+    aw.setMin(MIN);
+    EXPECT_DOUBLE_EQ(aw.getMin(), MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -116,8 +116,8 @@ TEST_F(TestAWFilter, CanSetMin)
 TEST_F(TestAWFilter, CanSetMax)
 {
     mc::AWFilter aw;
-    aw.set_max(MAX);
-    EXPECT_DOUBLE_EQ( aw.max(), MAX );
+    aw.setMax(MAX);
+    EXPECT_DOUBLE_EQ(aw.getMax(), MAX);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -130,21 +130,21 @@ TEST_F(TestAWFilter, CanUpdate)
     // tests/control/xcos/test_pid.xcos
     XcosBinFileReader::ReadData("../tests/ctrl/data/test_pid_antiwindup_filter.bin", &vals);
 
-    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+    EXPECT_GT(vals.size(), 0) << "No input data.";
 
     double t = 0.0;
     double y = 0.0;
 
-    mc::PID pid( KP, KI, KD, std::make_unique<mc::AWFilter>(MIN, MAX, KAW) );
+    mc::PID pid(KP, KI, KD, std::make_unique<mc::AWFilter>(MIN, MAX, KAW));
 
-    for ( unsigned int i = 0; i < vals.size(); i++ )
+    for (unsigned int i = 0; i < vals.size(); i++)
     {
-        double u = ( i < 500 ) ? 0.0 : 1.0;
+        double u = (i < 500) ? 0.0 : 1.0;
         double e = u - y;
         pid.Update(DT, e);
         y = mc::Inertia::Calculate(pid.value(), y, DT, TC);
 
-        EXPECT_NEAR( y, vals.at(i), 1.0e-1 );
+        EXPECT_NEAR(y, vals.at(i), 1.0e-1);
 
         t += DT;
     }

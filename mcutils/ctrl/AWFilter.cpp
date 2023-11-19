@@ -32,22 +32,22 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 AWFilter::AWFilter(double min, double max, double kaw)
-    : min_(min)
-    , max_(max)
-    , kaw_(kaw)
+    : _min(min)
+    , _max(max)
+    , _kaw(kaw)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
+void AWFilter::update(double dt, double y_p, double y_i, double y_d,
                       double* value, double* error_i, const PID*)
 {
     double y = y_p + y_i + y_d;
-    value_ = Math::Satur(min_, max_, y);
-    delta_ = y - value_;
+    _value = Math::Satur(_min, _max, y);
+    _delta = y - _value;
 
-    *value = value_;
-    *error_i -= kaw_ * delta_ * dt;
+    *value = _value;
+    *error_i -= _kaw * _delta * dt;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

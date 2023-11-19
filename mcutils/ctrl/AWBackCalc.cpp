@@ -33,22 +33,22 @@ namespace mc
 ////////////////////////////////////////////////////////////////////////////////
 
 AWBackCalc::AWBackCalc(double min, double max)
-    : min_(min)
-    , max_(max)
+    : _min(min)
+    , _max(max)
 {}
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AWBackCalc::Update(double, double y_p, double y_i, double y_d,
+void AWBackCalc::update(double, double y_p, double y_i, double y_d,
                         double* value, double* error_i, const PID* pid)
 {
     double y = y_p + y_i + y_d;
 
-    *value = Math::Satur(min_, max_, y);
+    *value = Math::Satur(_min, _max, y);
 
     if ( fabs(pid->ki()) > 0.0 )
     {
-        double y_pd = Math::Satur(min_, max_, y_p + y_d);
+        double y_pd = Math::Satur(_min, _max, y_p + y_d);
         *error_i = (*value - y_pd) / pid->ki();
     }
 }
