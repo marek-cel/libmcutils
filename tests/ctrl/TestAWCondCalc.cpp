@@ -15,6 +15,7 @@ class TestAWCondCalc : public ::testing::Test
 protected:
 
     static constexpr double DT { 0.01 };
+
     static constexpr double TC { 5.0 };
     static constexpr double KP { 5.0 };
     static constexpr double KI { 0.5 };

@@ -29,8 +29,8 @@ protected:
 
 TEST_F(TestLeadLag, CanConstruct)
 {
-    mc::LeadLag *leadLag = nullptr;
-    EXPECT_NO_THROW( leadLag = new mc::LeadLag() );
+    mc::LeadLag* leadLag = nullptr;
+    EXPECT_NO_THROW(leadLag = new mc::LeadLag());
     delete leadLag;
 }
 
@@ -38,8 +38,8 @@ TEST_F(TestLeadLag, CanConstruct)
 
 TEST_F(TestLeadLag, CanDestruct)
 {
-    mc::LeadLag *leadLag = new mc::LeadLag();
-    EXPECT_NO_THROW( delete leadLag );
+    mc::LeadLag* leadLag = new mc::LeadLag();
+    EXPECT_NO_THROW(delete leadLag);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -48,11 +48,11 @@ TEST_F(TestLeadLag, CanInstantiate)
 {
     mc::LeadLag leadLag;
 
-    EXPECT_DOUBLE_EQ( leadLag.c1(), 0.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c2(), 1.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c3(), 0.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c4(), 1.0 );
-    EXPECT_DOUBLE_EQ( leadLag.value(), 0.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c1(), 0.0);
+    EXPECT_DOUBLE_EQ(leadLag.c2(), 1.0);
+    EXPECT_DOUBLE_EQ(leadLag.c3(), 0.0);
+    EXPECT_DOUBLE_EQ(leadLag.c4(), 1.0);
+    EXPECT_DOUBLE_EQ(leadLag.value(), 0.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -61,11 +61,11 @@ TEST_F(TestLeadLag, CanInstantiateAndSetData)
 {
     mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
 
-    EXPECT_DOUBLE_EQ( leadLag.c1(), 1.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c2(), 2.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c3(), 3.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c4(), 4.0 );
-    EXPECT_DOUBLE_EQ( leadLag.value(), 99.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c1(), 1.0);
+    EXPECT_DOUBLE_EQ(leadLag.c2(), 2.0);
+    EXPECT_DOUBLE_EQ(leadLag.c3(), 3.0);
+    EXPECT_DOUBLE_EQ(leadLag.c4(), 4.0);
+    EXPECT_DOUBLE_EQ(leadLag.value(), 99.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,22 +78,22 @@ TEST_F(TestLeadLag, CanUpdateStep)
     // tests/control/xcos/test_lead_lag.xcos
     XcosBinFileReader::ReadData("../tests/ctrl/data/test_lead_lag_step.bin", &vals);
 
-    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+    EXPECT_GT(vals.size(), 0) << "No input data.";
 
     mc::LeadLag leadLag(C_1, C_2, C_3, C_4);
 
     double t = 0.0;
     double y = 0.0;
 
-    for ( unsigned int i = 0; i < vals.size(); i++ )
+    for (unsigned int i = 0; i < vals.size(); i++)
     {
         double u = ( i < 100 ) ? 0.0 : 1.0;
 
         leadLag.Update(TIME_STEP, u);
         y = leadLag.value();
 
-        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at(i) );
-        EXPECT_NEAR( y, vals.at(i), tolerance ) << "Error at index " << i;
+        double tolerance = std::max(1.0e-2, 1.0e-2 * vals.at(i));
+        EXPECT_NEAR(y, vals.at(i), tolerance) << "Error at index " << i;
 
         t += TIME_STEP;
     }
@@ -109,22 +109,22 @@ TEST_F(TestLeadLag, CanUpdateSine)
     // tests/control/xcos/test_lead_lag.xcos
     XcosBinFileReader::ReadData("../tests/ctrl/data/test_lead_lag_sine.bin", &vals);
 
-    EXPECT_GT( vals.size(), 0 ) << "No input data.";
+    EXPECT_GT(vals.size(), 0) << "No input data.";
 
     mc::LeadLag leadLag(C_1, C_2, C_3, C_4);
 
     double t = 0.0;
     double y = 0.0;
 
-    for ( unsigned int i = 0; i < vals.size(); i++ )
+    for (unsigned int i = 0; i < vals.size(); i++)
     {
         double u = sin( t );
 
         leadLag.Update(TIME_STEP, u);
         y = leadLag.value();
 
-        double tolerance = std::max( 1.0e-2, 1.0e-2 * vals.at(i) );
-        EXPECT_NEAR( y, vals.at(i), tolerance ) << "Error at index " << i;
+        double tolerance = std::max(1.0e-2, 1.0e-2 * vals.at(i));
+        EXPECT_NEAR(y, vals.at(i), tolerance) << "Error at index " << i;
 
         t += TIME_STEP;
     }
@@ -134,40 +134,40 @@ TEST_F(TestLeadLag, CanUpdateSine)
 
 TEST_F(TestLeadLag, CanGetC1)
 {
-    mc::LeadLag leadLag( 1.0, 2.0, 3.0, 4.0, 99.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c1(), 1.0 );
+    mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
+    EXPECT_DOUBLE_EQ(leadLag.c1(), 1.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLeadLag, CanGetC2)
 {
-    mc::LeadLag leadLag( 1.0, 2.0, 3.0, 4.0, 99.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c2(), 2.0 );
+    mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
+    EXPECT_DOUBLE_EQ(leadLag.c2(), 2.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLeadLag, CanGetC3)
 {
-    mc::LeadLag leadLag( 1.0, 2.0, 3.0, 4.0, 99.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c3(), 3.0 );
+    mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
+    EXPECT_DOUBLE_EQ(leadLag.c3(), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLeadLag, CanGetC4)
 {
-    mc::LeadLag leadLag( 1.0, 2.0, 3.0, 4.0, 99.0 );
-    EXPECT_DOUBLE_EQ( leadLag.c4(), 4.0 );
+    mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
+    EXPECT_DOUBLE_EQ(leadLag.c4(), 4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLeadLag, CanGetValue)
 {
-    mc::LeadLag leadLag( 1.0, 2.0, 3.0, 4.0, 99.0 );
-    EXPECT_DOUBLE_EQ( leadLag.value(), 99.0 );
+    mc::LeadLag leadLag(1.0, 2.0, 3.0, 4.0, 99.0);
+    EXPECT_DOUBLE_EQ(leadLag.value(), 99.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +176,7 @@ TEST_F(TestLeadLag, CanSetC1)
 {
     mc::LeadLag leadLag;
     leadLag.set_c1(1.0);
-    EXPECT_DOUBLE_EQ( leadLag.c1(), 1.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c1(), 1.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -185,7 +185,7 @@ TEST_F(TestLeadLag, CanSetC2)
 {
     mc::LeadLag leadLag;
     leadLag.set_c2(2.0);
-    EXPECT_DOUBLE_EQ( leadLag.c2(), 2.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c2(), 2.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +194,7 @@ TEST_F(TestLeadLag, CanSetC3)
 {
     mc::LeadLag leadLag;
     leadLag.set_c3(3.0);
-    EXPECT_DOUBLE_EQ( leadLag.c3(), 3.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c3(), 3.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -203,7 +203,7 @@ TEST_F(TestLeadLag, CanSetC4)
 {
     mc::LeadLag leadLag;
     leadLag.set_c4(4.0);
-    EXPECT_DOUBLE_EQ( leadLag.c4(), 4.0 );
+    EXPECT_DOUBLE_EQ(leadLag.c4(), 4.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -212,5 +212,5 @@ TEST_F(TestLeadLag, CanSetValue)
 {
     mc::LeadLag leadLag;
     leadLag.set_value(1.0);
-    EXPECT_DOUBLE_EQ( leadLag.value(), 1.0 );
+    EXPECT_DOUBLE_EQ(leadLag.value(), 1.0);
 }

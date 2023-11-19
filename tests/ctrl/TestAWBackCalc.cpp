@@ -15,10 +15,11 @@ class TestAWBackCalc : public ::testing::Test
 protected:
 
     static constexpr double DT { 0.01 };
-    static constexpr double TC { 5.0  };
-    static constexpr double KP { 5.0  };
-    static constexpr double KI { 0.5  };
-    static constexpr double KD { 0.1  };
+
+    static constexpr double TC { 5.0 };
+    static constexpr double KP { 5.0 };
+    static constexpr double KI { 0.5 };
+    static constexpr double KD { 0.1 };
 
     static constexpr double MIN { -0.5 };
     static constexpr double MAX {  0.5 };
