@@ -42,7 +42,7 @@ HighPassFilter::HighPassFilter(double omega, double value)
 
 void HighPassFilter::SetCutoffFreq(double freq)
 {
-    omega_ = 2.0 * M_PI * std::max( 0.0, freq );
+    omega_ = 2.0 * M_PI * std::max(0.0, freq);
     time_const_ = 1.0 / omega_;
 }
 
@@ -50,10 +50,10 @@ void HighPassFilter::SetCutoffFreq(double freq)
 
 void HighPassFilter::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
-        double u_dif = ( dt > 0.0 ) ? ( u - u_prev_ ) / dt : 0.0;
-        value_ += ( 1.0 - exp(-dt / time_const_) ) * ( time_const_ * u_dif - value_ );
+        double u_dif = (dt > 0.0) ? (u - u_prev_) / dt : 0.0;
+        value_ += (1.0 - exp(-dt / time_const_)) * (time_const_ * u_dif - value_);
         u_prev_ = u;
     }
 }
