@@ -47,7 +47,7 @@ def buildForLinux(with_tests):
         cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 -fno-elide-constructors -fno-default-inline -fprofile-arcs -ftest-coverage')
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
-        subprocess.run("make")
+        subprocess.run("make -j 4", shell=True)
 
 
 def buildForWindows():
