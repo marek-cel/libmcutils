@@ -56,10 +56,6 @@ pipeline {
         }
 
         failure {
-            script {
-                def buildDate = new Date(currentBuild.startTimeInMillis).format("yyyy-MM-dd")
-                env.BUILD_DATE = buildDate
-            }
             emailext (
                 to: "${env.RECIPIENT_LIST}",
                 subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
