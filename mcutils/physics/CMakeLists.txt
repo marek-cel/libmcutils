@@ -1,27 +1,27 @@
-set( TARGET_NAME physics )
+set(TARGET_NAME physics)
 
 ################################################################################
 
-set( HEADERS
+set(HEADERS
     Physics.h
 )
 
-set( SOURCES
+set(SOURCES
 
 )
 
 ################################################################################
 
-add_library( ${TARGET_NAME} INTERFACE )
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
-include( GNUInstallDirs )
+include(GNUInstallDirs)
 
-set_target_properties( ${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES 
     PUBLIC_HEADER "${HEADERS}"
 )
 
-install( TARGETS ${TARGET_NAME}
+install(TARGETS ${TARGET_NAME}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/physics
 )
