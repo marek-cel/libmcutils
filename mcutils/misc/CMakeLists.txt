@@ -1,8 +1,8 @@
-set( TARGET_NAME misc )
+set(TARGET_NAME misc)
 
 ################################################################################
 
-set( HEADERS
+set(HEADERS
     Check.h
     Log.h
     MapUtils.h
@@ -11,7 +11,7 @@ set( HEADERS
     Units.h
 )
 
-set( SOURCES
+set(SOURCES
     Log.cpp
     String.cpp
     Units.cpp
@@ -19,16 +19,16 @@ set( SOURCES
 
 ################################################################################
 
-add_library( ${TARGET_NAME} OBJECT ${SOURCES} )
+add_library(${TARGET_NAME} OBJECT ${SOURCES})
 
 ################################################################################
 
-include( GNUInstallDirs )
+include(GNUInstallDirs)
 
-set_target_properties( ${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES 
     PUBLIC_HEADER "${HEADERS}"
 )
 
-install( TARGETS ${TARGET_NAME}
+install(TARGETS ${TARGET_NAME}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/misc
 )

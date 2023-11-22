@@ -1,17 +1,17 @@
-set( TARGET_NAME tests )
+set(TARGET_NAME tests)
 
 ################################################################################
 
-find_package( GTest REQUIRED )
-find_package( Threads REQUIRED )
+find_package(GTest REQUIRED)
+find_package(Threads REQUIRED)
 
 ################################################################################
 
-include_directories( . )
+include_directories(.)
 
 ################################################################################
 
-set( SOURCES
+set(SOURCES
     CsvFileReader.cpp
     DiffEquationSolver.cpp
     TestDummy.cpp
@@ -76,9 +76,9 @@ set( SOURCES
 
 ################################################################################
 
-add_executable( ${TARGET_NAME} WIN32 ${SOURCES} )
+add_executable(${TARGET_NAME} WIN32 ${SOURCES})
 
-target_link_libraries( ${TARGET_NAME}
+target_link_libraries(${TARGET_NAME}
 
     -Wl,--start-group
 
@@ -95,4 +95,6 @@ target_link_libraries( ${TARGET_NAME}
 
 ################################################################################
 
-add_test( NAME ${TARGET_NAME} COMMAND ${TARGET_NAME} )
+gtest_discover_tests(${TARGET_NAME}
+    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+)
