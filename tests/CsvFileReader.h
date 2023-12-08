@@ -1,5 +1,5 @@
-#ifndef LIBMCSIM_TESTS_CSVFILEREADER_H_
-#define LIBMCSIM_TESTS_CSVFILEREADER_H_
+#ifndef LIBMCUTILS_TESTS_CSVFILEREADER_H_
+#define LIBMCUTILS_TESTS_CSVFILEREADER_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -39,4 +39,4 @@ public:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCSIM_TESTS_CSVFILEREADER_H_
+#endif // LIBMCUTILS_TESTS_CSVFILEREADER_H_
