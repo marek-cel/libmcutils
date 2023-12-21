@@ -21,6 +21,7 @@ set(SOURCES
     DiffEquationSolver.cpp
     TestDummy.cpp
     TestingEnvironment.cpp
+    TestingUtils.cpp
     XcosBinFileReader.cpp
     main.cpp
 

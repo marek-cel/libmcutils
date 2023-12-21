@@ -6,6 +6,8 @@
 
 #include <mcutils/math/MatrixMxN.h>
 
+#include <TestingUtils.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // To achieve full test coverage of MatrixMxN template class tests have to be
@@ -947,7 +949,7 @@ TEST_F(TestMatrixMxN, CanAdd3x3)
     mr = m1 + m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -989,7 +991,7 @@ TEST_F(TestMatrixMxN, CanAdd4x4)
     mr = m1 + m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -1033,7 +1035,7 @@ TEST_F(TestMatrixMxN, CanAdd6x6)
     mr = m1 + m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -1159,7 +1161,7 @@ TEST_F(TestMatrixMxN, CanSubstract3x3)
     mr = m1 - m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -1201,7 +1203,7 @@ TEST_F(TestMatrixMxN, CanSubstract4x4)
     mr = m1 - m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -1245,7 +1247,7 @@ TEST_F(TestMatrixMxN, CanSubstract6x6)
     mr = m1 - m2;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat ma2(rows, cols);
     arma::mat mar;
     ma2.fill(val);
@@ -1284,7 +1286,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar3x3)
     mr = m1 * scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 * scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1322,7 +1324,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar4x4)
     mr = m1 * scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 * scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1362,7 +1364,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar6x6)
     mr = m1 * scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 * scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1477,7 +1479,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector3)
     mc::VectorN<rows> vr5 = m5 * v;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::vec va;
     va << 1.0 << arma::endr
        << 2.0 << arma::endr
@@ -1521,7 +1523,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector4)
     mc::VectorN<rows> vr = m * v;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::vec va;
     va << 1.0 << arma::endr
        << 2.0 << arma::endr
@@ -1571,7 +1573,7 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector6)
     mc::VectorN<rows> vr = m * v;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::vec va;
     va << 1.0 << arma::endr
        << 2.0 << arma::endr
@@ -1617,7 +1619,7 @@ TEST_F(TestMatrixMxN, CanDivideByScalar3x3)
     mr = m1 / scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 / scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1655,7 +1657,7 @@ TEST_F(TestMatrixMxN, CanDivideByScalar4x4)
     mr = m1 / scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 / scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1695,7 +1697,7 @@ TEST_F(TestMatrixMxN, CanDivideByScalar6x6)
     mr = m1 / scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar;
     mar = ma1 / scalar;
 #   endif // TEST_USING_ARMADILLO
@@ -1733,7 +1735,7 @@ TEST_F(TestMatrixMxN, CanUnaryAdd3x3)
     mr += m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar += ma1;
@@ -1772,7 +1774,7 @@ TEST_F(TestMatrixMxN, CanUnaryAdd4x4)
     mr += m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar += ma1;
@@ -1813,7 +1815,7 @@ TEST_F(TestMatrixMxN, CanUnaryAdd6x6)
     mr += m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar += ma1;
@@ -1851,7 +1853,7 @@ TEST_F(TestMatrixMxN, CanUnarySubstract3x3)
     mr -= m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar -= ma1;
@@ -1890,7 +1892,7 @@ TEST_F(TestMatrixMxN, CanUnarySubstract4x4)
     mr -= m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar -= ma1;
@@ -1931,7 +1933,7 @@ TEST_F(TestMatrixMxN, CanUnarySubstract6x6)
     mr -= m1;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = arma::mat(x, rows, cols, false).t();
+    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
     arma::mat mar(rows, cols, arma::fill::zeros);
     mar.fill(val);
     mar -= ma1;
@@ -1967,7 +1969,7 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar3x3)
     m *= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma *= scalar;
 #   endif // TEST_USING_ARMADILLO
 
@@ -2003,7 +2005,7 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar4x4)
     m *= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma *= scalar;
 #   endif // TEST_USING_ARMADILLO
 
@@ -2041,7 +2043,7 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar6x6)
     m *= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma *= scalar;
 #   endif // TEST_USING_ARMADILLO
 
@@ -2076,7 +2078,7 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar3x3)
     m /= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma /= scalar;
 #   endif // TEST_USING_ARMADILLO
 
@@ -2112,7 +2114,7 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar4x4)
     m /= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma /= scalar;
 #   endif // TEST_USING_ARMADILLO
 
@@ -2150,7 +2152,7 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar6x6)
     m /= scalar;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = arma::mat(x, rows, cols, false).t();
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     ma /= scalar;
 #   endif // TEST_USING_ARMADILLO
 
