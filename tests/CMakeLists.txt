@@ -2,6 +2,11 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
+add_definitions(-DTEST_USING_ARMADILLO)
+
+################################################################################
+
+find_package(Armadillo REQUIRED)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
@@ -88,6 +93,7 @@ target_link_libraries(${TARGET_NAME}
 
     GTest::gtest
     GTest::gtest_main
+    ${ARMADILLO_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 
     -Wl,--end-group
