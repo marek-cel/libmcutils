@@ -57,7 +57,7 @@ public:
     }
 
     /** @brief Returns transposed matrix. */
-    MatrixNxN<N> getTransposed() const
+    MatrixNxN<N> GetTransposed() const
     {
         MatrixNxN<N> result(*this);
         result.Transpose();
