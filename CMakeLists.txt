@@ -55,7 +55,7 @@ if(UNIX)
 
     if (BUILD_TESTING)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage -fno-default-inline -fno-inline -fno-inline-small-functions -fprofile-arcs -ftest-coverage -pedantic")
-        set(CMAKE_CXX_FLAGS_DEBUG   "-O0")
+        set(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g")
         set(CMAKE_CXX_FLAGS_RELEASE "-O0")
     else()
         set(CMAKE_CXX_FLAGS_DEBUG   "-O0")
