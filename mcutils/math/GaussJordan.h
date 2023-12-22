@@ -32,7 +32,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-namespace mc { namespace GaussJordan
+namespace mc
 {
 
 /**
@@ -50,8 +50,8 @@ namespace mc { namespace GaussJordan
  * - [Gaussian elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
  */
 template <unsigned int SIZE>
-Result Solve(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
-             VectorN<SIZE>* x, double eps = 1.0e-9)
+Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
+                        VectorN<SIZE>* x, double eps = 1.0e-9)
 {
     MatrixNxN<SIZE> mtr_temp = mtr;
     VectorN<SIZE>   rhs_temp = rhs;
@@ -110,7 +110,6 @@ Result Solve(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
     return Result::Success;
 }
 
-} // namespace GaussJordan
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
