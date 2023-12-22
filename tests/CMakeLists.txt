@@ -74,7 +74,8 @@ set(SOURCES
     misc/TestString.cpp
     misc/TestUnits.cpp
 
-    physics/TestPhysics.cpp
+    physics/TestInertia.cpp
+    physics/TestParallelAxis.cpp
 
     time/TestClockTime.cpp
     time/TestISO8601.cpp
