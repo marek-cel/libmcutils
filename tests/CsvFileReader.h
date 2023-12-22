@@ -8,34 +8,37 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 /**
- * @brief The CsvFileReader class
+ * @brief Reads data from CSV file
+ * @param path file path
+ * @param cols vector of pointers to vectors of doubles to store columns data
+ * @return true on success false on failure
  */
-class CsvFileReader
+bool ReadCsvColumnsDataFromFile(const char* path, std::vector<std::vector<double>*> cols);
+
+template <typename T>
+void PackColumnsVectors(std::vector<std::vector<T>*>& cols) {}
+
+template <typename T, typename... Args>
+void PackColumnsVectors(std::vector<std::vector<T>*>& cols, std::vector<T>* first, Args... args)
 {
-public:
+    cols.push_back(first);
+    PackColumnsVectors(cols, args...);
+}
 
-    /**
-     * @brief Reads data from CSV file
-     * Version for 1 column.
-     * @param file_path file path
-     * @param col1 vector of doubles to store data
-     * @return true on success false on failure
-     */
-    static bool ReadData( const char* file_path,
-                          std::vector<double>* col1 );
-
-    /**
-     * @brief Reads data from CSV file
-     * Version for 2 columns.
-     * @param file_path file path
-     * @param col1 vector of doubles to store data of column 1
-     * @param col2 vector of doubles to store data of column 2
-     * @return true on success false on failure
-     */
-    static bool ReadData( const char* file_path,
-                          std::vector<double>* col1,
-                          std::vector<double>* col2 );
-};
+/**
+ * @brief Reads data from CSV file
+ * @param path file path
+ * @param first first column data vector
+ * @param args subsequent columns data vectors
+ * @return true on success false on failure
+ */
+template <typename T, typename... Args>
+bool ReadCsvDataFromFile(const char* path, std::vector<T>* first, Args... args)
+{
+    std::vector<std::vector<T>*> cols;
+    PackColumnsVectors(cols, first, args...);
+    return ReadCsvColumnsDataFromFile(path, cols);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 
