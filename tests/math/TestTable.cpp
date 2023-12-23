@@ -88,12 +88,27 @@ TEST_F(TestTable, CanInstantiateAndCopy)
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
     mc::Table tab(key_values, table_data);
-
     mc::Table tab1(tab);
 
     for ( unsigned int i = 0; i < key_values.size(); ++i )
     {
         EXPECT_DOUBLE_EQ(tab1.GetValue(key_values[i]), tab.GetValue(key_values[i]));
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanInstantiateAndMove)
+{
+    // y = x^2 - 1
+    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+
+    mc::Table tab(std::move(mc::Table(key_values, table_data, 6)));
+
+    for ( unsigned int i = 0; i < tab.size(); ++i )
+    {
+        EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
     }
 }
 
@@ -511,4 +526,40 @@ TEST_F(TestTable, CanMultiply)
     }
 
     EXPECT_DOUBLE_EQ(tab.GetValue(1.5), 3.0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanAssign)
+{
+    // y = x^2 - 1
+    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+
+    mc::Table tab1(key_values, table_data, 6);
+    mc::Table tab;
+
+    tab = tab1;
+
+    for ( unsigned int i = 0; i < tab.size(); ++i )
+    {
+        EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+TEST_F(TestTable, CanAssignAndMove)
+{
+    // y = x^2 - 1
+    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+
+    mc::Table tab;
+    tab = std::move(mc::Table(key_values, table_data, 6));
+
+    for ( unsigned int i = 0; i < tab.size(); ++i )
+    {
+        EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
+    }
 }

@@ -54,6 +54,18 @@ public:
     static constexpr unsigned int cols_ = COLS;        ///< number of columns
     static constexpr unsigned int size_ = ROWS * COLS; ///< matrix size
 
+    /**
+     * @brief Fills all matrix elements with the given value.
+     * @param value given value to fill all matrix elements
+     */
+    void Fill(double value)
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] = value;
+        }
+    }
+
     /** @return "true" if all elements are valid */
     bool IsValid() const
     {

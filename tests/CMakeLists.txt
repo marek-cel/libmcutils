@@ -2,6 +2,11 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
+add_definitions(-DTEST_USING_ARMADILLO)
+
+################################################################################
+
+find_package(Armadillo REQUIRED)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
@@ -16,6 +21,7 @@ set(SOURCES
     DiffEquationSolver.cpp
     TestDummy.cpp
     TestingEnvironment.cpp
+    TestingUtils.cpp
     XcosBinFileReader.cpp
     main.cpp
 
@@ -68,7 +74,8 @@ set(SOURCES
     misc/TestString.cpp
     misc/TestUnits.cpp
 
-    physics/TestPhysics.cpp
+    physics/TestInertia.cpp
+    physics/TestParallelAxis.cpp
 
     time/TestClockTime.cpp
     time/TestISO8601.cpp
@@ -88,6 +95,7 @@ target_link_libraries(${TARGET_NAME}
 
     GTest::gtest
     GTest::gtest_main
+    ${ARMADILLO_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
 
     -Wl,--end-group

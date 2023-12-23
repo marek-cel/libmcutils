@@ -103,7 +103,7 @@ TEST_F(TestInertia2, CanUpdateStep2)
 
     // expected values calculated with GNU Octave
     // tests/control/octave/test_lag2.m
-    CsvFileReader::ReadData("../tests/ctrl/data/test_inertia2_step.csv", &t_ref, &y_ref);
+    ReadCsvDataFromFile("../tests/ctrl/data/test_inertia2_step.csv", &t_ref, &y_ref);
 
     EXPECT_GT(t_ref.size(), 0) << "No reference data.";
     EXPECT_GT(y_ref.size(), 0) << "No reference data.";

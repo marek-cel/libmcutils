@@ -1,5 +1,5 @@
-#ifndef LIBMCSIM_TESTS_DIFFEQUATIONSOLVER_H_
-#define LIBMCSIM_TESTS_DIFFEQUATIONSOLVER_H_
+#ifndef LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_
+#define LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -130,4 +130,4 @@ private:
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // LIBMCSIM_TESTS_DIFFEQUATIONSOLVER_H_
+#endif // LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_

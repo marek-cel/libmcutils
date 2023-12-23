@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2023 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,16 +19,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_MAPUTILS_H_
-#define MCUTILS_MISC_MAPUTILS_H_
+#ifndef MCUTILS_PHYSICS_INERTIA_H_
+#define MCUTILS_PHYSICS_INERTIA_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <map>
-#include <utility>
-
-#include <mcutils/defs.h>
-#include <mcutils/Result.h>
+#include <cmath>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,45 +32,25 @@ namespace mc
 {
 
 /**
- * @brief Adds item.
- * @param key
- * @param item
- * @return returns mc::Result::Success on success and mc::Result::Failure on failure
+ * @brief Firt order inertia.
+ * @param u desired value
+ * @param y current value
+ * @param dt [s] time step
+ * @param tc [s] time constant
+ * @return firt order inertia output
  */
-template <typename TYPE_KEY, typename TYPE_ITEM>
-Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
+inline double Inertia( double u, double y, double dt, double tc )
 {
-    std::pair<typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
-            map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
-
-    if ( temp.second == true )
+    if ( tc > 0.0 )
     {
-        return Result::Success;
+        return y + ( 1.0 - exp(-dt / tc) ) * ( u - y );
     }
 
-    return Result::Failure;
-}
-
-/**
- * @brief Returns pinter of item by key value.
- * @param key
- * @return pinter of item or NULL
- */
-template <typename TYPE_KEY, typename TYPE_ITEM>
-TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
-{
-    typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find(key);
-
-    if ( it != map->end() )
-    {
-        return it->second;
-    }
-
-    return TYPE_ITEM {};
+    return u;
 }
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MISC_MAPUTILS_H_
+#endif // MCUTILS_PHYSICS_INERTIA_H_

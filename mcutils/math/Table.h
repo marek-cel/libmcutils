@@ -43,6 +43,12 @@ class MCUTILSAPI Table
 {
 public:
 
+    /** @brief Copy constructor. */
+    Table(const Table& table);
+
+    /** @brief Move constructor. */
+    Table(Table&& table) noexcept;
+
     /**
      * @brief Constructor.
      * This constructor creates table with only one row initialized with a given
@@ -71,6 +77,8 @@ public:
      */
     Table(const std::vector<double>& key_values,
           const std::vector<double>& table_data);
+    
+    ~Table();
 
     /**
      * @brief Returns key for the given index.
@@ -203,45 +211,26 @@ public:
     /** @brief Multiplication operator (by scalar). */
     Table operator*(double va ) const;
 
+    /** @brief Assignment operator. */
+    Table& operator=(const Table& table);
+
+    /** @brief Move assignment operator. */
+    Table& operator=(Table&& table);
+
 private:
 
-    using Data = std::map<double,std::pair<double,double>>;
+    unsigned int size_ = 0;         ///< number of table elements
+    unsigned int last_ = 0;         ///< last element index
 
-    unsigned int size_ = 0;     ///< number of table elements
-    Data data_;                 ///< table data
+    double* key_values_ = nullptr;  ///< key values
+    double* table_data_ = nullptr;  ///< table data
+    double* inter_data_ = nullptr;  ///< interpolation data
 
-    /**
-     * @brief Initializes data with a given data set. Variant for every except the last entry.
-     * @param key_0 current key
-     * @param value_0 current value
-     * @param key_1 next key
-     * @param value_1 next value
-     */
-    void InitializeData(double key_0, double value_0, double key_1, double value_1);
+    mutable unsigned int prev_ = 0; ///< previous index
 
-    /**
-     * @brief Initializes data with a given data set. Variant for the last entry.
-     * @param key_0 current key
-     * @param value_0 current value
-     */
-    void InitializeData(double key_0, double value_0);
+    bool DoesIndexMatchKey(int index, double key_value) const;
 
-    /**
-     * @brief Inserts data set into data structure.
-     * @param key key
-     * @param value value
-     * @param inter interpolation data (gradient)
-     */
-    void InsertDataSet(double key, double value, double inter);
-
-    /**
-     * @brief Inserts data set into data structure.
-     * @param data given data structure
-     * @param key key
-     * @param value value
-     * @param inter interpolation data (gradient)
-     */
-    void InsertDataSet(Data* data, double key, double value, double inter) const;
+    double CalculateInterpolatedValue(int index, double key_value) const;
 
     /**
      * @brief Calculates interpolation data (gradient).
@@ -253,6 +242,15 @@ private:
      */
     double CalculateInterpolationData(double key_0, double value_0,
                                       double key_1, double value_1) const;
+
+    /** Creates data tables. */
+    void CreateArrays();
+
+    /** Deletes data tables. */
+    void DeleteArrays();
+
+    /** @brief Updates interpolation data due to table data. */
+    void UpdateInterpolationData();
 };
 
 ////////////////////////////////////////////////////////////////////////////////

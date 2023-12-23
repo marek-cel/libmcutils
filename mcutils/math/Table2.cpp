@@ -60,7 +60,7 @@ Table2::Table2(const Table2& table)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Table2::Table2( Table2&& table ) noexcept
+Table2::Table2(Table2&& table) noexcept
     : rows_(std::exchange(table.rows_, 0))
     , cols_(std::exchange(table.cols_, 0))
     , size_(std::exchange(table.size_, 0))

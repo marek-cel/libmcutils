@@ -39,10 +39,46 @@ namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
+Table::Table(const Table& table)
+    : size_(table.size_)
+    , last_(table.last_)
+{
+    if ( size_ > 0 )
+    {
+        CreateArrays();
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            key_values_[i] = table.key_values_[i];
+            table_data_[i] = table.table_data_[i];
+            inter_data_[i] = table.inter_data_[i];
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Table::Table(Table&& table) noexcept
+    : size_(std::exchange(table.size_, 0))
+    , last_(std::exchange(table.last_, 0))
+
+    , key_values_(std::exchange(table.key_values_, nullptr))
+    , table_data_(std::exchange(table.table_data_, nullptr))
+    , inter_data_(std::exchange(table.inter_data_, nullptr))
+{}
+
+////////////////////////////////////////////////////////////////////////////////
+
 Table::Table(double val, double key)
 {
     size_ = 1;
-    InitializeData(key, val);
+    last_ = 0;
+    
+    CreateArrays();
+
+    key_values_[0] = key;
+    table_data_[0] = val;
+    inter_data_[0] = 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -64,13 +100,18 @@ Table::Table(const std::vector<double>& key_values,
 
 ////////////////////////////////////////////////////////////////////////////////
 
+Table::~Table()
+{
+    DeleteArrays();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 double Table::GetKeyByIndex(unsigned int index) const
 {
-    if ( data_.size() > 0 && index < data_.size() )
+    if ( size_ > 0 && index < size_ )
     {
-        Data::const_iterator it = data_.begin();
-        std::advance(it, index);
-        return it->first;
+        return key_values_[index];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -83,15 +124,12 @@ double Table::GetKeyOfValueMin() const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::max();
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key = it->first;
-        const double &val = it->second.first;
-
-        if ( val < min_value )
+        if ( table_data_[i] < min_value )
         {
-            result = key;
-            min_value = val;
+            result = key_values_[i];
+            min_value = table_data_[i];
         }
     }
 
@@ -105,19 +143,16 @@ double Table::GetKeyOfValueMin(double key_min, double key_max) const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::max();
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key = it->first;
-        const double &val = it->second.first;
-
-        if ( val < min_value )
+        if ( table_data_[i] < min_value )
         {
-            if ( key <= key_max )
+            if ( key_values_[i] <= key_max )
             {
-                if ( key >= key_min )
+                if ( key_values_[i] >= key_min )
                 {
-                    result = key;
-                    min_value = val;
+                    result = key_values_[i];
+                    min_value = table_data_[i];
                 }
             }
             else
@@ -137,15 +172,12 @@ double Table::GetKeyOfValueMax() const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double max_value = std::numeric_limits<double>::min();
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key = it->first;
-        const double &val = it->second.first;
-
-        if ( val > max_value )
+        if ( table_data_[i] > max_value )
         {
-            result = key;
-            max_value = val;
+            result = key_values_[i];
+            max_value = table_data_[i];
         }
     }
 
@@ -159,19 +191,16 @@ double Table::GetKeyOfValueMax(double key_min, double key_max) const
     double result    = std::numeric_limits<double>::quiet_NaN();
     double min_value = std::numeric_limits<double>::min();
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key = it->first;
-        const double &val = it->second.first;
-
-        if ( val > min_value )
+        if ( table_data_[i] > min_value )
         {
-            if ( key <= key_max )
+            if ( key_values_[i] <= key_max )
             {
-                if ( key >= key_min )
+                if ( key_values_[i] >= key_min )
                 {
-                    result = key;
-                    min_value = val;
+                    result = key_values_[i];
+                    min_value = table_data_[i];
                 }
             }
             else
@@ -188,35 +217,35 @@ double Table::GetKeyOfValueMax(double key_min, double key_max) const
 
 double Table::GetValue(double key_value) const
 {
-    if ( data_.size() > 0 )
+    if ( size_ > 0 )
     {
-        const double &key_b = data_.begin()->first;
-        const double &key_l = data_.rbegin()->first;
-
-        if ( key_value <= key_b )
-            return GetFirstValue();
-
-        if ( key_value >= key_l )
-            return GetLastValue();
-
-        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+        // checking if previous index is still valid
+        // change between two subsequent queries is typically small
+        // it is possible that new query is within the same interval
+        // so there is no need to iterate through all the data
+        if ( DoesIndexMatchKey(prev_, key_value) )
         {
-            Data::const_iterator nx = std::next( it );
+            return CalculateInterpolatedValue(prev_, key_value);
+        }
 
-            const double &key_0 = it->first;
+        if ( key_value <= key_values_[0] )
+        {
+            prev_ = 0;
+            return table_data_[0];
+        }
 
-            if ( nx != data_.end() )
+        if ( key_value >= key_values_[last_] )
+        {
+            prev_ = last_;
+            return table_data_[last_];
+        }
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            if ( DoesIndexMatchKey(i, key_value) )
             {
-                const double &key_1 = nx->first;
-
-                if ( key_value >= key_0
-                  && key_value <  key_1 )
-                {
-                    const double &value_0 = it->second.first;
-                    const double &inter_0 = it->second.second;
-
-                    return ( key_value - key_0 ) * inter_0 + value_0;
-                }
+                prev_ = i;
+                return CalculateInterpolatedValue(i, key_value);
             }
         }
     }
@@ -228,11 +257,9 @@ double Table::GetValue(double key_value) const
 
 double Table::GetValueByIndex(unsigned int index) const
 {
-    if ( data_.size() > 0 && index < data_.size() )
+    if ( size_ > 0 && index < size_ )
     {
-        auto it = data_.begin();
-        std::advance( it, index );
-        return it->second.first;
+        return table_data_[index];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -242,9 +269,9 @@ double Table::GetValueByIndex(unsigned int index) const
 
 double Table::GetFirstValue() const
 {
-    if ( data_.size() > 0 )
+    if ( size_ > 0 )
     {
-        return data_.begin()->second.first;
+        return table_data_[0];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -254,9 +281,9 @@ double Table::GetFirstValue() const
 
 double Table::GetLastValue() const
 {
-    if ( data_.size() > 0 )
+    if ( size_ > 0 )
     {
-        return data_.rbegin()->second.first;
+        return table_data_[last_];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -268,17 +295,15 @@ double Table::GetValueMin() const
 {
     double result = std::numeric_limits<double>::quiet_NaN();
 
-    if ( data_.size() > 0 )
+    if ( size_ > 0 )
     {
         result = std::numeric_limits<double>::max();
 
-        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            const double &val = it->second.first;
-
-            if ( val < result )
+            if ( table_data_[i] < result )
             {
-                result = val;
+                result = table_data_[i];
             }
         }
     }
@@ -292,17 +317,15 @@ double Table::GetValueMax() const
 {
     double result = std::numeric_limits<double>::quiet_NaN();
 
-    if ( data_.size() > 0 )
+    if ( size_ > 0 )
     {
         result = std::numeric_limits<double>::min();
 
-        for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+        for ( unsigned int i = 0; i < size_; ++i )
         {
-            const double &val = it->second.first;
-
-            if ( val > result )
+            if ( table_data_[i] > result )
             {
-                result = val;
+                result = table_data_[i];
             }
         }
     }
@@ -314,17 +337,13 @@ double Table::GetValueMax() const
 
 bool Table::IsValid() const
 {
-    bool result = ( data_.size() > 0 ) ? true : false;
+    bool result = ( size_ > 0 ) ? true : false;
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key   = it->first;
-        const double &value = it->second.first;
-        const double &inter = it->second.second;
-
-        if ( result ) result = mc::IsValid(key);
-        if ( result ) result = mc::IsValid(value);
-        if ( result ) result = mc::IsValid(inter);
+        if ( result ) result = mc::IsValid(key_values_[i]);
+        if ( result ) result = mc::IsValid(table_data_[i]);
+        if ( result ) result = mc::IsValid(inter_data_[i]);
 
         if ( !result ) break;
     }
@@ -336,56 +355,24 @@ bool Table::IsValid() const
 
 void Table::MultiplyKeys(double factor)
 {
-    Data temp = data_;
-    data_.clear();
-
-    for ( Data::const_iterator it = temp.begin(); it != temp.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        Data::const_iterator nx = std::next(it);
-
-        double key_0 = it->first * factor;
-        double val_0 = it->second.first;
-
-        if ( nx != temp.end() )
-        {
-            double key_1 = nx->first * factor;
-            double val_1 = nx->second.first;
-
-            InitializeData(key_0, val_0, key_1, val_1);
-        }
-        else
-        {
-            InitializeData(key_0, val_0);
-        }
+        key_values_[i] *= factor;
     }
+
+    UpdateInterpolationData();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void Table::MultiplyValues(double factor)
 {
-    for ( Data::iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        Data::const_iterator nx = std::next(it);
-
-        it->second.first *= factor;
-
-        double key_0 = it->first;
-        double val_0 = it->second.first;
-
-        if ( nx != data_.end() )
-        {
-            double key_1 = nx->first;
-            double val_1 = nx->second.first * factor;
-
-            it->second.second = CalculateInterpolationData(key_0, val_0,
-                                                           key_1, val_1);
-        }
-        else
-        {
-            it->second.second = 0.0;
-        }
+        table_data_[i] *= factor;
     }
+
+    UpdateInterpolationData();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -394,25 +381,27 @@ void Table::SetData(const double key_values[],
                     const double table_data[],
                     unsigned int size)
 {
+    DeleteArrays();
+
     size_ = 0;
-    data_.clear();
+    last_ = 0;
+    prev_ = 0;
 
     if ( size > 0 )
     {
         size_ = size;
+        last_ = size_ - 1;
 
-        for ( unsigned int i = 0; i < size_; ++i )
+        CreateArrays();
+
+        for ( unsigned int i = 0; i < size; ++i )
         {
-            if ( i < size_ - 1 )
-            {
-                InitializeData(key_values[i]   , table_data[i],
-                               key_values[i+1] , table_data[i+1]);
-            }
-            else
-            {
-                InitializeData(key_values[i], table_data[i]);
-            }
+            key_values_[i] = key_values[i];
+            table_data_[i] = table_data[i];
+            inter_data_[i] = 0.0;
         }
+
+        UpdateInterpolationData();
     }
 }
 
@@ -421,28 +410,27 @@ void Table::SetData(const double key_values[],
 void Table::SetData(const std::vector<double>& key_values,
                     const std::vector<double>& table_data)
 {
+    DeleteArrays();
+
     size_ = 0;
-    data_.clear();
+    last_ = 0;
+    prev_ = 0;
 
-    if ( key_values.size() == table_data.size() )
+    if ( key_values.size() > 0 && key_values.size() == table_data.size() )
     {
-        size_ = static_cast<unsigned int>( key_values.size() );
+        size_ = static_cast<unsigned int>(key_values.size());
+        last_ = size_ - 1;
 
-        if ( size_ > 0 )
+        CreateArrays();
+
+        for ( unsigned int i = 0; i < key_values.size(); ++i )
         {
-            for ( unsigned int i = 0; i < size_; ++i )
-            {
-                if ( i < size_ - 1 )
-                {
-                    InitializeData(key_values[i]   , table_data[i],
-                                   key_values[i+1] , table_data[i+1]);
-                }
-                else
-                {
-                    InitializeData(key_values[i], table_data[i]);
-                }
-            }
+            key_values_[i] = key_values[i];
+            table_data_[i] = table_data[i];
+            inter_data_[i] = 0.0;
         }
+
+        UpdateInterpolationData();
     }
 }
 
@@ -488,12 +476,9 @@ std::string Table::ToString()
 {
     std::stringstream ss;
 
-    for ( Data::iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        const double &key = it->first;
-        const double &val = it->second.first;
-
-        ss << key << "\t" << val << std::endl;
+        ss << key_values_[i] << "\t" << table_data_[i] << std::endl;
     }
 
     return ss.str();
@@ -503,32 +488,19 @@ std::string Table::ToString()
 
 Table Table::operator+(const Table& table) const
 {
-    Table result;
-    Data temp;
+    std::vector<double> key_values;
+    std::vector<double> table_data;
 
-    for ( Data::const_iterator it = data_.begin(); it != data_.end(); ++it )
+    for ( unsigned int i = 0; i < size_; ++i )
     {
-        Data::const_iterator nx = std::next( it );
+        double key = key_values_[i];
+        double val = table_data_[i] + table.GetValue(key);
 
-        double key_0   = it->first;
-        double value_0 = it->second.first + table.GetValue(key_0);
-        double inter_0 = 0.0;
-
-        if ( nx != data_.end() )
-        {
-            double key_1   = nx->first;
-            double value_1 = nx->second.first + table.GetValue(key_1);
-
-            inter_0 = CalculateInterpolationData(key_0, value_0,
-                                                 key_1, value_1);
-        }
-
-        InsertDataSet(&temp, key_0, value_0, inter_0);
+        key_values.push_back(key);
+        table_data.push_back(val);
     }
 
-    result.data_ = temp;
-
-    return result;
+    return Table(key_values, table_data);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -542,33 +514,59 @@ Table Table::operator*(double val) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::InitializeData(double key_0, double value_0, double key_1, double value_1)
+Table& Table::operator=(const Table& table)
 {
-    double inter = CalculateInterpolationData(key_0, value_0, key_1, value_1);
-    InsertDataSet(key_0, value_0, inter);
+    if ( this != &table )
+    {
+        DeleteArrays();
+
+        size_ = table.size_;
+        last_ = table.last_;
+
+        if ( size_ > 0 )
+        {
+            CreateArrays();
+
+            for ( unsigned int i = 0; i < size_; ++i )
+            {
+                key_values_[i] = table.key_values_[i];
+                table_data_[i] = table.table_data_[i];
+                inter_data_[i] = table.inter_data_[i];
+            }
+        }
+    }
+
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::InitializeData(double key_0, double value_0)
+Table& Table::operator=(Table&& table)
 {
-    InsertDataSet(key_0, value_0, 0.0);
+    DeleteArrays();
+
+    size_ = std::exchange(table.size_, 0);
+    last_ = std::exchange(table.last_, 0);
+
+    key_values_ = std::exchange(table.key_values_, nullptr);
+    table_data_ = std::exchange(table.table_data_, nullptr);
+    inter_data_ = std::exchange(table.inter_data_, nullptr);
+
+    return *this;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::InsertDataSet(double key, double value, double inter)
+bool Table::DoesIndexMatchKey(int index, double key_value) const
 {
-    InsertDataSet(&data_, key, value, inter);
+    return key_value >= key_values_[index] && key_value < key_values_[index+1];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Table::InsertDataSet(Data* data, double key, double value, double inter) const
+double Table::CalculateInterpolatedValue(int index, double key_value) const
 {
-    data->insert( std::pair< double, std::pair<double, double> >(
-        key, std::pair<double, double>(value, inter)
-    ));
+    return (key_value - key_values_[index]) * inter_data_[index] + table_data_[index];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -576,7 +574,43 @@ void Table::InsertDataSet(Data* data, double key, double value, double inter) co
 double Table::CalculateInterpolationData(double key_0, double value_0,
                                          double key_1, double value_1) const
 {
-    return ( value_1 - value_0 ) / ( key_1 - key_0 );
+    return (value_1 - value_0) / (key_1 - key_0);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::CreateArrays()
+{
+    key_values_ = new double [size_];
+    table_data_ = new double [size_];
+    inter_data_ = new double [size_];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::DeleteArrays()
+{
+    if ( key_values_ ) { delete [] key_values_; } key_values_ = nullptr;
+    if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
+    if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Table::UpdateInterpolationData()
+{
+    for ( unsigned int i = 0; i < size_; ++i )
+    {
+        if ( i < last_ )
+        {
+            inter_data_[i] = CalculateInterpolationData(key_values_[i]   , table_data_[i],
+                                                        key_values_[i+1] , table_data_[i+1]);
+        }
+        else
+        {
+            inter_data_[i] = 0.0;
+        }
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

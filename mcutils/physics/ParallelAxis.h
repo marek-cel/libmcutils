@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2023 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,16 +19,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_MAPUTILS_H_
-#define MCUTILS_MISC_MAPUTILS_H_
+#ifndef MCUTILS_PHYSICS_PARALLELAXIS_H_
+#define MCUTILS_PHYSICS_PARALLELAXIS_H_
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <map>
-#include <utility>
-
-#include <mcutils/defs.h>
-#include <mcutils/Result.h>
+#include <mcutils/math/Matrix3x3.h>
+#include <mcutils/math/Vector3.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,45 +33,27 @@ namespace mc
 {
 
 /**
- * @brief Adds item.
- * @param key
- * @param item
- * @return returns mc::Result::Success on success and mc::Result::Failure on failure
+ * @brief Gets matrix of inertia about parallel axis.
+ * @param m [kg] mass
+ * @param i [kg*m^2] inertia tensor
+ * @param r [m] position
+ * @return shifted inertia tensor [kg*m^2]
+ *
+ * ### Refernces:
+ * - Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163
+ * - [Parallel axis theorem - Wikipedia](https://en.wikipedia.org/wiki/Parallel_axis_theorem)
  */
-template <typename TYPE_KEY, typename TYPE_ITEM>
-Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
+inline Matrix3x3 ParallelAxisInertia(double m, const Matrix3x3& i, const Vector3& r)
 {
-    std::pair<typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
-            map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
+    Matrix3x3 a(  r.y()*r.y() + r.z()*r.z() , -r.x()*r.y()               , -r.x()*r.z(),
+                 -r.y()*r.x()               ,  r.x()*r.x() + r.z()*r.z() , -r.y()*r.z(),
+                 -r.z()*r.x()               , -r.z()*r.y()               ,  r.x()*r.x() + r.y()*r.y() );
 
-    if ( temp.second == true )
-    {
-        return Result::Success;
-    }
-
-    return Result::Failure;
-}
-
-/**
- * @brief Returns pinter of item by key value.
- * @param key
- * @return pinter of item or NULL
- */
-template <typename TYPE_KEY, typename TYPE_ITEM>
-TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
-{
-    typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find(key);
-
-    if ( it != map->end() )
-    {
-        return it->second;
-    }
-
-    return TYPE_ITEM {};
+    return (i + m * a);
 }
 
 } // namespace mc
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#endif // MCUTILS_MISC_MAPUTILS_H_
+#endif // MCUTILS_PHYSICS_PARALLELAXIS_H_

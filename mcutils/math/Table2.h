@@ -204,7 +204,6 @@ private:
     double* row_values_ = nullptr;  ///< rows keys values
     double* col_values_ = nullptr;  ///< columns keys values
     double* table_data_ = nullptr;  ///< table data
-
     double* inter_data_ = nullptr;  ///< interpolation data matrix
 
     /** Creates data tables. */
