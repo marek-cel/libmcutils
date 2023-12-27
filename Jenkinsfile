@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { 
-            image 'libmcutils-dev-env:1' 
+            image 'libmcutils-dev-env' 
             args '-v /var/www/html/jenkins/:/var/www/html/jenkins/'
         }
     }

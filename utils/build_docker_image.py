@@ -10,7 +10,7 @@ if __name__ == "__main__":
     docker_cmd = [
         'docker', 'build',
         '-f',  dockerfile,
-        '-t', 'libmcutils-dev-env:1',
+        '-t', 'libmcutils-dev-env',
         '.'
     ]
     print(" ".join(docker_cmd))
