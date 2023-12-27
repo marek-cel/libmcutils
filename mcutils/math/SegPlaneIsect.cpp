@@ -22,12 +22,7 @@
 
 #include <mcutils/math/SegPlaneIsect.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
                      const Vector3& r, const Vector3& n)
@@ -46,8 +41,6 @@ bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
 
     return false;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
                          const Vector3& r, const Vector3& n)
@@ -78,7 +71,5 @@ Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
 
     return r_i;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

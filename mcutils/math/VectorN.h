@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_VECTORN_H_
 #define MCUTILS_MATH_VECTORN_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cmath>
 #include <cstring>
 #include <limits>
@@ -36,10 +34,7 @@
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Column vector base class template.
@@ -369,7 +364,5 @@ protected:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_VECTORN_H_

@@ -22,8 +22,6 @@
 #ifndef MCUTILS_GEO_ECEF_H_
 #define MCUTILS_GEO_ECEF_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/geo/Geo.h>
@@ -33,10 +31,7 @@
 #include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Earth-centered, Earth-fixed (ECEF) coordinate system class.
@@ -237,25 +232,25 @@ public:
 
 protected:
 
-    double a_ = 0.0;                ///< [m] equatorial radius
-    double f_ = 0.0;                ///< [-] ellipsoid flattening
+    double a_ = 0.0;            ///< [m] equatorial radius
+    double f_ = 0.0;            ///< [-] ellipsoid flattening
 
-    double b_   = 0.0;              ///< [m] polar radius
-    double r1_  = 0.0;              ///< [m] mean radius
-    double a2_  = 0.0;              ///< [m^2] equatorial radius squared
-    double b2_  = 0.0;              ///< [m^2] polar radius squared
-    double e2_  = 0.0;              ///< [-] ellipsoid first eccentricity squared
-    double e_   = 0.0;              ///< [-] ellipsoid first eccentricity
-    double ep2_ = 0.0;              ///< [-] ellipsoid second eccentricity squared
-    double ep_  = 0.0;              ///< [-] ellipsoid second eccentricity
+    double b_   = 0.0;          ///< [m] polar radius
+    double r1_  = 0.0;          ///< [m] mean radius
+    double a2_  = 0.0;          ///< [m^2] equatorial radius squared
+    double b2_  = 0.0;          ///< [m^2] polar radius squared
+    double e2_  = 0.0;          ///< [-] ellipsoid first eccentricity squared
+    double e_   = 0.0;          ///< [-] ellipsoid first eccentricity
+    double ep2_ = 0.0;          ///< [-] ellipsoid second eccentricity squared
+    double ep_  = 0.0;          ///< [-] ellipsoid second eccentricity
 
-    Geo pos_geo_;                   ///< geodetic coordinates (latitude, longitude, altitude)
-    Vector3 pos_cart_;              ///< [m] cartesian coordinates vector (x, y, z)
+    Geo pos_geo_;               ///< geodetic coordinates (latitude, longitude, altitude)
+    Vector3 pos_cart_;          ///< [m] cartesian coordinates vector (x, y, z)
 
-    Matrix3x3 enu2ecef_;            ///< rotation matrix from ENU to ECEF
-    Matrix3x3 ned2ecef_;            ///< rotation matrix from NED to ECEF
-    Matrix3x3 ecef2enu_;            ///< rotation matrix from ECEF to ENU
-    Matrix3x3 ecef2ned_;            ///< rotation matrix from ECEF to NED
+    Matrix3x3 enu2ecef_;        ///< rotation matrix from ENU to ECEF
+    Matrix3x3 ned2ecef_;        ///< rotation matrix from NED to ECEF
+    Matrix3x3 ecef2enu_;        ///< rotation matrix from ECEF to ENU
+    Matrix3x3 ecef2ned_;        ///< rotation matrix from ECEF to NED
 
     virtual void Update();
 
@@ -272,7 +267,5 @@ private:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_ECEF_H_

@@ -5,16 +5,12 @@
 #include <mcutils/geo/DataMars.h>
 #include <mcutils/geo/DataWGS84.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 // linear position tolerance (0.1 mm)
 #define LINEAR_POSITION_TOLERANCE 1.0e-4
 // latitude and longitude tolerance (10^-9 rad ~ ca. 6 mm)
 #define LAT_LON_TOLERANCE 1.0e-9
 // attitude tolerance (10^-6 rad ~ ca. 0.00005 deg)
 #define ATTITUDE_TOLERANCE 1.0e-6
-
-////////////////////////////////////////////////////////////////////////////////
 
 class TestECEF : public ::testing::Test
 {
@@ -25,8 +21,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanConstruct)
 {
     mc::ECEF* ecef = nullptr;
@@ -34,15 +28,11 @@ TEST_F(TestECEF, CanConstruct)
     delete ecef;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanDestruct)
 {
     mc::ECEF* ecef = new mc::ECEF();
     EXPECT_NO_THROW(delete ecef);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanInstantiate)
 {
@@ -66,8 +56,6 @@ TEST_F(TestECEF, CanInstantiate)
     EXPECT_FALSE(ep  == ep ); // NaN
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanInstantiateAndCopy)
 {
     mc::ECEF ecef0(mc::DataMars::a, mc::DataMars::f);
@@ -86,8 +74,6 @@ TEST_F(TestECEF, CanInstantiateAndCopy)
     EXPECT_NEAR(ecef.ep()  , mc::DataMars::ep  , 1.0e-4);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanInstantiateAndMove)
 {
     mc::ECEF ecef( std::move(mc::ECEF(mc::DataMars::a, mc::DataMars::f)) );
@@ -104,8 +90,6 @@ TEST_F(TestECEF, CanInstantiateAndMove)
     EXPECT_NEAR(ecef.ep()  , mc::DataMars::ep  , 1.0e-4);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanInstantiateAndSetData)
 {
     mc::ECEF ecef(mc::DataMars::a, mc::DataMars::f);
@@ -121,8 +105,6 @@ TEST_F(TestECEF, CanInstantiateAndSetData)
     EXPECT_NEAR(ecef.ep2() , mc::DataMars::ep2 , 1.0e-4);
     EXPECT_NEAR(ecef.ep()  , mc::DataMars::ep  , 1.0e-4);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanConvertFromCartToGeo)
 {
@@ -305,8 +287,6 @@ TEST_F(TestECEF, CanConvertFromCartToGeo)
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanConvertFromGeoToCart)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -488,8 +468,6 @@ TEST_F(TestECEF, CanConvertFromGeoToCart)
     EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanGetGeoOffset)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -578,8 +556,6 @@ TEST_F(TestECEF, CanGetGeoOffset)
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -642,8 +618,6 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
     EXPECT_NEAR(angles_ned.psi(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -705,8 +679,6 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.phi(),  M_PI   , ATTITUDE_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
 {
@@ -792,8 +764,6 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -858,8 +828,6 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanUpdateAndGetPosGeo)
 {
@@ -990,8 +958,6 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeo)
     EXPECT_NEAR(pos_geo.lon, M_PI_4 , LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanUpdateAndGetPosCart)
 {
@@ -1135,8 +1101,6 @@ TEST_F(TestECEF, CanUpdateAndGetPosCart)
     EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanGetENU2NED)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -1151,8 +1115,6 @@ TEST_F(TestECEF, CanGetENU2NED)
     EXPECT_DOUBLE_EQ(v_ned.z(), -3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanGetNED2ENU)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -1166,8 +1128,6 @@ TEST_F(TestECEF, CanGetNED2ENU)
     EXPECT_DOUBLE_EQ(v_enu.y(),  1.0);
     EXPECT_DOUBLE_EQ(v_enu.z(), -3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanGetENU2ECEF)
 {
@@ -1233,8 +1193,6 @@ TEST_F(TestECEF, CanGetENU2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.z(),  2.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanGetNED2ECEF)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -1298,8 +1256,6 @@ TEST_F(TestECEF, CanGetNED2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.y(), -2.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanGetECEF2ENU)
 {
@@ -1365,8 +1321,6 @@ TEST_F(TestECEF, CanGetECEF2ENU)
     EXPECT_DOUBLE_EQ(v_enu.z(), -1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanGetECEF2NED)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
@@ -1430,8 +1384,6 @@ TEST_F(TestECEF, CanGetECEF2NED)
     EXPECT_DOUBLE_EQ(v_ned.y(), -2.0);
     EXPECT_DOUBLE_EQ(v_ned.z(),  1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanSetPositionFromGeo)
 {
@@ -1548,8 +1500,6 @@ TEST_F(TestECEF, CanSetPositionFromGeo)
     EXPECT_NEAR(pos_geo.lon, M_PI_4 , LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanSetPositionFromCart)
 {
@@ -1688,8 +1638,6 @@ TEST_F(TestECEF, CanSetPositionFromCart)
     EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestECEF, CanAssign)
 {
     mc::ECEF ecef;
@@ -1709,8 +1657,6 @@ TEST_F(TestECEF, CanAssign)
     EXPECT_NEAR(ecef.ep2() , mc::DataMars::ep2 , 1.0e-4);
     EXPECT_NEAR(ecef.ep()  , mc::DataMars::ep  , 1.0e-4);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestECEF, CanAssignMove)
 {

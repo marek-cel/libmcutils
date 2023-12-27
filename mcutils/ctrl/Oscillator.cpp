@@ -25,27 +25,17 @@
 #include <algorithm>
 #include <cmath>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Oscillator::Oscillator( double omega, double zeta, double value)
-    : omega_ ( omega )
-    , zeta_  ( zeta  )
-
-    , omega2_  ( omega_ * omega_ )
-    , zetomg2_ ( 2.0 * zeta_ * omega_ )
-
+    : omega_(omega)
+    , zeta_(zeta)
+    , omega2_(omega_ * omega_)
+    , zetomg2_(2.0 * zeta_ * omega_)
     , y_prev_1_(value)
     , y_prev_2_(value)
-
     , value_(value)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Oscillator::Update( double dt, double u )
 {
@@ -72,8 +62,6 @@ void Oscillator::Update( double dt, double u )
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Oscillator::set_omega(double omega)
 {
     omega_ = std::max(0.0, omega);
@@ -82,8 +70,6 @@ void Oscillator::set_omega(double omega)
     zetomg2_ = 2.0 * zeta_ * omega_;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Oscillator::set_zeta(double zeta)
 {
     zeta_ = std::max(0.0, std::min(1.0, zeta));
@@ -91,15 +77,11 @@ void Oscillator::set_zeta(double zeta)
     zetomg2_ = 2.0 * zeta_ * omega_;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Oscillator::set_value(double value)
 {
     value_ = value;
     y_prev_1_ = value;
     y_prev_2_ = value;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

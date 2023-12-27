@@ -25,20 +25,13 @@
 #include <cstdlib>
 #include <ctime>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Random::Random()
     : seed_(static_cast<unsigned int>(time(nullptr)))
 {
     srand(seed_);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 int Random::GetRandom(int min, int max)
 {
@@ -59,22 +52,16 @@ int Random::GetRandom(int min, int max)
     return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 float Random::GetRandom(float min, float max)
 {
     int random = GetRandom(0, RAND_MAX);
     return min + (max - min) * (static_cast<float>(random) / static_cast<float>(RAND_MAX));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Random::GetRandom(double min, double max)
 {
     int random = GetRandom(0, RAND_MAX);
     return min + (max - min) * (static_cast<double>(random) / static_cast<double>(RAND_MAX));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

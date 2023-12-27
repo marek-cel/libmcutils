@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestLead : public ::testing::Test
 {
 protected:
@@ -22,8 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLead, CanConstruct)
 {
     mc::Lead* lead = nullptr;
@@ -31,15 +27,11 @@ TEST_F(TestLead, CanConstruct)
     delete lead;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLead, CanDestruct)
 {
     mc::Lead* lead = new mc::Lead();
     EXPECT_NO_THROW(delete lead);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLead, CanInstantiate)
 {
@@ -49,8 +41,6 @@ TEST_F(TestLead, CanInstantiate)
     EXPECT_DOUBLE_EQ(lead.value(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLead, CanInstantiateAndSetData)
 {
     mc::Lead lead(2.0, 3.0);
@@ -58,8 +48,6 @@ TEST_F(TestLead, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(lead.time_const(), 2.0);
     EXPECT_DOUBLE_EQ(lead.value(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLead, CanUpdateSine)
 {
@@ -91,16 +79,12 @@ TEST_F(TestLead, CanUpdateSine)
 
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLead, CanGetValue)
 {
     mc::Lead lead(2.0, 3.0);
 
     EXPECT_DOUBLE_EQ(lead.value(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLead, CanSetValue)
 {
@@ -110,16 +94,12 @@ TEST_F(TestLead, CanSetValue)
     EXPECT_DOUBLE_EQ(lead.value(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLead, CanGetTimeConst)
 {
     mc::Lead lead(2.0, 3.0);
 
     EXPECT_DOUBLE_EQ(lead.time_const(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLead, CanSetTimeConst)
 {

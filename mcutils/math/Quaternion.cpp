@@ -30,19 +30,12 @@
 
 #include <mcutils/misc/Check.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Quaternion::Quaternion(double e0, double ex, double ey, double ez)
 {
     Set(e0, ex, ey, ez);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion::Quaternion(const Angles& angl)
 {
@@ -72,8 +65,6 @@ Quaternion::Quaternion(const Angles& angl)
     Normalize();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion::Quaternion(double angl, const Vector3& vect)
 {
     double len_inv = 1.0 / vect.GetLength();
@@ -87,8 +78,6 @@ Quaternion::Quaternion(double angl, const Vector3& vect)
     ez_ = sin_angl_2 * vect.z() * len_inv;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Quaternion::IsValid() const
 {
     return mc::IsValid(e0_)
@@ -97,8 +86,6 @@ bool Quaternion::IsValid() const
         && mc::IsValid(ez_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Quaternion::Conjugate()
 {
     ex_ = -ex_;
@@ -106,29 +93,21 @@ void Quaternion::Conjugate()
     ez_ = -ez_;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Quaternion::Invert()
 {
     Conjugate();
     Normalize();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Quaternion::GetLength2() const
 {
     return e0_*e0_ + ex_*ex_ + ey_*ey_ + ez_*ez_;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Quaternion::GetLength() const
 {
     return sqrt(GetLength2());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Quaternion::Normalize()
 {
@@ -142,8 +121,6 @@ void Quaternion::Normalize()
         ez_ = ez_ / length;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Angles Quaternion::GetAngles() const
 {
@@ -175,16 +152,12 @@ Angles Quaternion::GetAngles() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::GetConjugated() const
 {
     Quaternion result(*this);
     result.Conjugate();
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion Quaternion::GetDerivative(const Vector3& omega, double lambda) const
 {
@@ -198,21 +171,21 @@ Quaternion Quaternion::GetDerivative(const Vector3& omega, double lambda) const
     // | ey_dot | = -0.5 * | -Q  R  0 -P | | ey | = | -0.5 * ( ex*R - e0*Q - ez*P ) |
     // | ez_dot |          | -R -Q  P  0 | | ez |   | -0.5 * ( ey*P - e0*R - ex*Q ) |
 
-    result.e0_ = -0.5 * ( ez_ * omega.r()
-                        + ey_ * omega.q()
-                        + ex_ * omega.p() );
+    result.e0_ = -0.5 * (ez_ * omega.r()
+                       + ey_ * omega.q()
+                       + ex_ * omega.p());
 
-    result.ex_ = -0.5 * ( ez_ * omega.q()
-                        - ey_ * omega.r()
-                        - e0_ * omega.p() );
+    result.ex_ = -0.5 * (ez_ * omega.q()
+                       - ey_ * omega.r()
+                       - e0_ * omega.p());
 
-    result.ey_ = -0.5 * ( ex_ * omega.r()
-                        - e0_ * omega.q()
-                        - ez_ * omega.p() );
+    result.ey_ = -0.5 * (ex_ * omega.r()
+                       - e0_ * omega.q()
+                       - ez_ * omega.p());
 
-    result.ez_ = -0.5 * ( ey_ * omega.p()
-                        - e0_ * omega.r()
-                        - ex_ * omega.q() );
+    result.ez_ = -0.5 * (ey_ * omega.p()
+                       - e0_ * omega.r()
+                       - ex_ * omega.q());
 
     // Pamadi - Performance Stability Dynamics and Control of Airplanes, 2004, p.348
     // Sibilski - Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34
@@ -231,8 +204,6 @@ Quaternion Quaternion::GetDerivative(const Vector3& omega, double lambda) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::GetInverted() const
 {
     Quaternion result(*this);
@@ -240,16 +211,12 @@ Quaternion Quaternion::GetInverted() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::GetNormalized() const
 {
     Quaternion result(*this);
     result.Normalize();
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Quaternion::Set(double e0, double ex, double ey, double ez)
 {
@@ -259,16 +226,12 @@ void Quaternion::Set(double e0, double ex, double ey, double ez)
     ez_ = ez;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string Quaternion::ToString() const
 {
     std::stringstream ss;
     ss << e0_ <<  "," << ex_ <<  "," << ey_ <<  "," << ez_;
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion Quaternion::operator+(const Quaternion& quat) const
 {
@@ -282,8 +245,6 @@ Quaternion Quaternion::operator+(const Quaternion& quat) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::operator-(const Quaternion& quat) const
 {
     Quaternion result;
@@ -296,8 +257,6 @@ Quaternion Quaternion::operator-(const Quaternion& quat) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::operator*(double val) const
 {
     Quaternion result;
@@ -309,8 +268,6 @@ Quaternion Quaternion::operator*(double val) const
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion Quaternion::operator*(const Quaternion& quat) const
 {
@@ -339,8 +296,6 @@ Quaternion Quaternion::operator*(const Quaternion& quat) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion Quaternion::operator/(double val) const
 {
     Quaternion result;
@@ -353,8 +308,6 @@ Quaternion Quaternion::operator/(double val) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion& Quaternion::operator+=(const Quaternion& quat)
 {
     e0_ += quat.e0_;
@@ -364,8 +317,6 @@ Quaternion& Quaternion::operator+=(const Quaternion& quat)
 
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion& Quaternion::operator-=(const Quaternion& quat)
 {
@@ -377,8 +328,6 @@ Quaternion& Quaternion::operator-=(const Quaternion& quat)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion& Quaternion::operator*=(double val)
 {
     e0_ *= val;
@@ -388,8 +337,6 @@ Quaternion& Quaternion::operator*=(double val)
 
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion& Quaternion::operator/=(double val)
 {
@@ -401,8 +348,6 @@ Quaternion& Quaternion::operator/=(double val)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Quaternion::operator==(const Quaternion& quat) const
 {
     return (e0_ == quat.e0_)
@@ -411,13 +356,9 @@ bool Quaternion::operator==(const Quaternion& quat) const
         && (ez_ == quat.ez_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Quaternion::operator!=(const Quaternion& quat) const
 {
-    return !( *this == quat );
+    return !(*this == quat);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

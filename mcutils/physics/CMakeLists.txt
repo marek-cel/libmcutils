@@ -4,7 +4,6 @@ set(TARGET_NAME physics)
 
 set(HEADERS
     Constants.h
-    Inertia.h
     ParallelAxis.h
 )
 

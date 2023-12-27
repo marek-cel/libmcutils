@@ -2,8 +2,6 @@
 
 #include <mcutils/math/VectorN.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestVectorN : public ::testing::Test
 {
 protected:
@@ -13,16 +11,12 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanConstruct)
 {
     mc::VectorN<3>* v = nullptr;
     EXPECT_NO_THROW((v = new mc::VectorN<3>()));
     delete v;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanDestruct)
 {
@@ -35,8 +29,6 @@ TEST_F(TestVectorN, CanDestruct)
     mc::VectorN<6>* v6 = new mc::VectorN<6>();
     EXPECT_NO_THROW(delete v6);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanInstantiate)
 {
@@ -63,8 +55,6 @@ TEST_F(TestVectorN, CanInstantiate)
     EXPECT_DOUBLE_EQ(v6(5), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanValidate)
 {
     const double d3[] { 1.0, 2.0, 3.0 };
@@ -83,8 +73,6 @@ TEST_F(TestVectorN, CanValidate)
     EXPECT_FALSE(v6.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanGetLength2)
 {
     mc::VectorN<3> v3;
@@ -102,8 +90,6 @@ TEST_F(TestVectorN, CanGetLength2)
     mc::VectorN<6> v6;
     EXPECT_DOUBLE_EQ(v6.GetLength2(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanGetLength)
 {
@@ -125,8 +111,6 @@ TEST_F(TestVectorN, CanGetLength)
     mc::VectorN<6> v6;
     EXPECT_DOUBLE_EQ(v6.GetLength(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanNormalize)
 {
@@ -174,8 +158,6 @@ TEST_F(TestVectorN, CanNormalize)
     EXPECT_DOUBLE_EQ(v6.GetLength(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanGetElement)
 {
     const double d31[] { 1.0, 2.0, 3.0 };
@@ -212,8 +194,6 @@ TEST_F(TestVectorN, CanGetElement)
 
     EXPECT_TRUE(v6.GetElement(666) != v3.GetElement(666));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanPutIntoArray)
 {
@@ -254,8 +234,6 @@ TEST_F(TestVectorN, CanPutIntoArray)
     EXPECT_DOUBLE_EQ(d62[4], d61[4]);
     EXPECT_DOUBLE_EQ(d62[5], d61[5]);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanSetElement)
 {
@@ -298,8 +276,6 @@ TEST_F(TestVectorN, CanSetElement)
     EXPECT_DOUBLE_EQ(v6(5), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanSetFromArray)
 {
     const double d31[] { 1.0, 2.0, 3.0 };
@@ -340,8 +316,6 @@ TEST_F(TestVectorN, CanSetFromArray)
     EXPECT_DOUBLE_EQ(d62[5], d61[5]);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanSetFromString)
 {
     char str3[] = { " 1.0  2.0  3.0 " };
@@ -378,8 +352,6 @@ TEST_F(TestVectorN, CanSetFromString)
     EXPECT_FALSE(v62.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanSwapRows)
 {
     const double d3[] { 1.0, 2.0, 3.0 };
@@ -412,8 +384,6 @@ TEST_F(TestVectorN, CanSwapRows)
     EXPECT_DOUBLE_EQ(v6(5), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanConvertToString)
 {
     const double d3[] { 1.0, 2.0, 3.0 };
@@ -431,8 +401,6 @@ TEST_F(TestVectorN, CanConvertToString)
     v6.SetFromArray(d6);
     EXPECT_STREQ(v6.ToString().c_str(), "1,2,3,4,5,6");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanZeroize)
 {
@@ -465,8 +433,6 @@ TEST_F(TestVectorN, CanZeroize)
     EXPECT_DOUBLE_EQ(v6(5), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanAccessItemViaOperator)
 {
     const double d3[] { 1.0, 2.0, 3.0 };
@@ -495,8 +461,6 @@ TEST_F(TestVectorN, CanAccessItemViaOperator)
     EXPECT_DOUBLE_EQ(v6(4), 5.0);
     EXPECT_DOUBLE_EQ(v6(5), 6.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanAdd)
 {
@@ -553,8 +517,6 @@ TEST_F(TestVectorN, CanAdd)
     EXPECT_DOUBLE_EQ(v612(5), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanNegate)
 {
     double x[] { 1.0, 2.0, 3.0 };
@@ -589,8 +551,6 @@ TEST_F(TestVectorN, CanNegate)
     EXPECT_DOUBLE_EQ(v6n(4), -5.0);
     EXPECT_DOUBLE_EQ(v6n(5), -6.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanSubstract)
 {
@@ -644,8 +604,6 @@ TEST_F(TestVectorN, CanSubstract)
     EXPECT_DOUBLE_EQ(v6(5), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanMultiplyByScalar)
 {
     double x31[] { 1.0, 2.0, 3.0 };
@@ -676,8 +634,6 @@ TEST_F(TestVectorN, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v6(4), 10.0);
     EXPECT_DOUBLE_EQ(v6(5), 12.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanCalculateDotProduct)
 {
@@ -740,8 +696,6 @@ TEST_F(TestVectorN, CanCalculateDotProduct)
     EXPECT_DOUBLE_EQ(s55, 30.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanSivideByScalar)
 {
     double x[] { 2.0, 4.0, 6.0 };
@@ -772,8 +726,6 @@ TEST_F(TestVectorN, CanSivideByScalar)
     EXPECT_DOUBLE_EQ(v6(4), 5.0 / 2.0);
     EXPECT_DOUBLE_EQ(v6(5), 6.0 / 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanUnaryAdd)
 {
@@ -815,8 +767,6 @@ TEST_F(TestVectorN, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(v61(5), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanUnarySubstract)
 {
     double x0[] { 3.0, 3.0, 3.0 };
@@ -857,8 +807,6 @@ TEST_F(TestVectorN, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(v61(5), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanUnaryMultiplyByScalar)
 {
     double x0[] { 1.0, 2.0, 3.0 };
@@ -890,8 +838,6 @@ TEST_F(TestVectorN, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v61(5), 12.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVectorN, CanUnaryDivideByScalar)
 {
     double x0[] { 2.0, 4.0, 6.0 };
@@ -922,8 +868,6 @@ TEST_F(TestVectorN, CanUnaryDivideByScalar)
     EXPECT_DOUBLE_EQ(v61(4), 5.0);
     EXPECT_DOUBLE_EQ(v61(5), 6.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVectorN, CanComparer)
 {

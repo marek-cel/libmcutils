@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Matrix3x3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMatrix3x3 : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanGetIdentityMatrix)
 {
@@ -32,8 +28,6 @@ TEST_F(TestMatrix3x3, CanGetIdentityMatrix)
     EXPECT_DOUBLE_EQ(m(2,2), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanConstruct)
 {
     mc::Matrix3x3* m = nullptr;
@@ -41,15 +35,11 @@ TEST_F(TestMatrix3x3, CanConstruct)
     delete m;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanDestruct)
 {
     mc::Matrix3x3* m = new mc::Matrix3x3();
     EXPECT_NO_THROW(delete m);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanInstantiate)
 {
@@ -65,8 +55,6 @@ TEST_F(TestMatrix3x3, CanInstantiate)
     EXPECT_DOUBLE_EQ(m1(2,1), 0.0);
     EXPECT_DOUBLE_EQ(m1(2,2), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
 {
@@ -84,8 +72,6 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(m1(2,1), 8.0);
     EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
 {
@@ -206,8 +192,6 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR(ma8.zy(), -0.8536, 1.0e-3);
     EXPECT_NEAR(ma8.zz(),  0.5000, 1.0e-3);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
 {
@@ -339,8 +323,6 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
     EXPECT_NEAR(mq8.zz(),  0.5000, 1.0e-3);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAccessXX)
 {
     mc::Matrix3x3 m0;
@@ -357,8 +339,6 @@ TEST_F(TestMatrix3x3, CanAccessXX)
     EXPECT_DOUBLE_EQ(m0.zy(), 0.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanAccessXY)
 {
@@ -377,8 +357,6 @@ TEST_F(TestMatrix3x3, CanAccessXY)
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAccessXZ)
 {
     mc::Matrix3x3 m0;
@@ -395,8 +373,6 @@ TEST_F(TestMatrix3x3, CanAccessXZ)
     EXPECT_DOUBLE_EQ(m0.zy(), 0.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanAccessYX)
 {
@@ -415,8 +391,6 @@ TEST_F(TestMatrix3x3, CanAccessYX)
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAccessYY)
 {
     mc::Matrix3x3 m0;
@@ -433,8 +407,6 @@ TEST_F(TestMatrix3x3, CanAccessYY)
     EXPECT_DOUBLE_EQ(m0.zy(), 0.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanAccessYZ)
 {
@@ -453,8 +425,6 @@ TEST_F(TestMatrix3x3, CanAccessYZ)
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAccessZX)
 {
     mc::Matrix3x3 m0;
@@ -471,8 +441,6 @@ TEST_F(TestMatrix3x3, CanAccessZX)
     EXPECT_DOUBLE_EQ(m0.zy(), 0.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanAccessZY)
 {
@@ -491,8 +459,6 @@ TEST_F(TestMatrix3x3, CanAccessZY)
     EXPECT_DOUBLE_EQ(m0.zz(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAccessZZ)
 {
     mc::Matrix3x3 m0;
@@ -509,8 +475,6 @@ TEST_F(TestMatrix3x3, CanAccessZZ)
     EXPECT_DOUBLE_EQ(m0.zy(), 0.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanSetDat)
 {
@@ -531,8 +495,6 @@ TEST_F(TestMatrix3x3, CanSetDat)
     EXPECT_DOUBLE_EQ(m0.zz(), 33.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanTranspose)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -551,8 +513,6 @@ TEST_F(TestMatrix3x3, CanTranspose)
     EXPECT_DOUBLE_EQ(m1.zy(), 6.0);
     EXPECT_DOUBLE_EQ(m1.zz(), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanGetAngles)
 {
@@ -609,8 +569,6 @@ TEST_F(TestMatrix3x3, CanGetAngles)
     EXPECT_NEAR(as5.tht(),  M_PI_2, 1.0e-9);
     EXPECT_NEAR(as5.psi(),     0.0, 1.0e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanGetQuaternion)
 {
@@ -679,8 +637,6 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
     EXPECT_NEAR(qa4.ez(), qm4.ez(), 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanGetTransposed)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -710,8 +666,6 @@ TEST_F(TestMatrix3x3, CanGetTransposed)
     EXPECT_DOUBLE_EQ(mt.zz(), 9.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanAdd)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -735,8 +689,6 @@ TEST_F(TestMatrix3x3, CanAdd)
     EXPECT_DOUBLE_EQ(m0.zz(), 10.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanNegate)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -755,8 +707,6 @@ TEST_F(TestMatrix3x3, CanNegate)
     EXPECT_DOUBLE_EQ(m0.zy(), -8.0);
     EXPECT_DOUBLE_EQ(m0.zz(), -9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanSubstract)
 {
@@ -781,8 +731,6 @@ TEST_F(TestMatrix3x3, CanSubstract)
     EXPECT_DOUBLE_EQ(m0.zz(), 8.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanMultiplyByScalar)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -801,8 +749,6 @@ TEST_F(TestMatrix3x3, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m0.zy(), 4.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 4.5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanMultiplyByMatrix)
 {
@@ -826,8 +772,6 @@ TEST_F(TestMatrix3x3, CanMultiplyByMatrix)
     EXPECT_NEAR(m0.zy(), 138.6, 1.0e-9);
     EXPECT_NEAR(m0.zz(), 165.0, 1.0e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanMultiplyByVector)
 {
@@ -870,8 +814,6 @@ TEST_F(TestMatrix3x3, CanMultiplyByVector)
     EXPECT_NEAR(v4.z(), -2.0, 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanDivideByScalar)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -889,8 +831,6 @@ TEST_F(TestMatrix3x3, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(m0.zy(), 4.0);
     EXPECT_DOUBLE_EQ(m0.zz(), 4.5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanUnaryAdd)
 {
@@ -915,8 +855,6 @@ TEST_F(TestMatrix3x3, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(m1.zz(), 10.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanUnarySubstract)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -940,8 +878,6 @@ TEST_F(TestMatrix3x3, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(m1.zz(), 8.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix3x3, CanUnaryMultiplyByScalar)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
@@ -960,8 +896,6 @@ TEST_F(TestMatrix3x3, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m1.zy(), 4.0);
     EXPECT_DOUBLE_EQ(m1.zz(), 4.5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix3x3, CanUnaryDivideByScalar)
 {

@@ -4,8 +4,6 @@
 
 #include <mcutils/misc/Check.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestCheck : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestCheck, CanCheckIfIsInf)
 {
@@ -32,8 +28,6 @@ TEST_F(TestCheck, CanCheckIfIsInf)
     EXPECT_TRUE(mc::IsInf(1.0 / zero));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestCheck, CanCheckIfIsNaN)
 {
     EXPECT_FALSE(mc::IsNaN(0.0));
@@ -44,8 +38,6 @@ TEST_F(TestCheck, CanCheckIfIsNaN)
 
     EXPECT_TRUE(mc::IsNaN(std::numeric_limits<double>::quiet_NaN()));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestCheck, CanCheckIfIsValid)
 {
@@ -61,8 +53,6 @@ TEST_F(TestCheck, CanCheckIfIsValid)
     EXPECT_FALSE(mc::IsValid(std::numeric_limits<double>::infinity()));
     EXPECT_FALSE(mc::IsValid(1.0 / zero));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestCheck, CanCheckIfIsValidArray)
 {

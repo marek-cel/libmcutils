@@ -3,8 +3,6 @@
 #include <mcutils/math/DegMinSec.h>
 #include <mcutils/misc/Units.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestDegMinSec : public ::testing::Test
 {
 protected:
@@ -14,8 +12,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanConstruct)
 {
     mc::DegMinSec* dms = nullptr;
@@ -23,15 +19,11 @@ TEST_F(TestDegMinSec, CanConstruct)
     delete dms;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanDestruct)
 {
     mc::DegMinSec* dms = new mc::DegMinSec();
     EXPECT_NO_THROW(delete dms);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestDegMinSec, CanInstantiate)
 {
@@ -42,8 +34,6 @@ TEST_F(TestDegMinSec, CanInstantiate)
     EXPECT_DOUBLE_EQ(dms.sec(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 {
     mc::DegMinSec dms(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
@@ -52,8 +42,6 @@ TEST_F(TestDegMinSec, CanInstantiateAndSetData)
     EXPECT_EQ(dms.min(), 2);
     EXPECT_NEAR(dms.sec(), 3.0, 1e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestDegMinSec, CanValidate)
 {
@@ -64,15 +52,11 @@ TEST_F(TestDegMinSec, CanValidate)
     EXPECT_FALSE(dms2.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanGetAngle)
 {
     mc::DegMinSec dms(M_PI_4);
     EXPECT_DOUBLE_EQ(dms.GetAngle(), M_PI_4);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestDegMinSec, CanSetAngle)
 {
@@ -81,15 +65,11 @@ TEST_F(TestDegMinSec, CanSetAngle)
     EXPECT_DOUBLE_EQ(dms.GetAngle(), M_PI_4);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestDegMinSec, CanConvertToString)
 {
     mc::DegMinSec dms(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
     EXPECT_STREQ(dms.ToString().c_str(), "1 deg 2 min 3.00 sec");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestDegMinSec, CanCompare)
 {

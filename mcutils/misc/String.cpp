@@ -31,12 +31,8 @@
 
 #include <mcutils/misc/Check.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc { namespace String
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
+namespace String {
 
 std::string GetFirstLine(const std::string& str)
 {
@@ -46,8 +42,6 @@ std::string GetFirstLine(const std::string& str)
 
     return firstLine;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 int Compare(const std::string& str_1, const std::string& str_2,
             bool case_sensitive)
@@ -63,8 +57,6 @@ int Compare(const std::string& str_1, const std::string& str_2,
 
     return strTemp_1.compare(strTemp_2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::vector<std::string> SplitString(const std::string& str,
                                      const std::string& sep)
@@ -86,8 +78,6 @@ std::vector<std::string> SplitString(const std::string& str,
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string StripLeadingSpaces(const std::string& str)
 {
     std::string::size_type offset = 0;
@@ -103,8 +93,6 @@ std::string StripLeadingSpaces(const std::string& str)
     return str.substr(offset);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string StripTrailingSpaces(const std::string& str)
 {
     std::string::size_type offset = 0;
@@ -118,8 +106,6 @@ std::string StripTrailingSpaces(const std::string& str)
 
     return str.substr(0, offset + 1);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string StripSpaces(const std::string& str)
 {
@@ -144,8 +130,6 @@ std::string StripSpaces(const std::string& str)
     return str.substr(offset_l, offset_t - offset_l + 1);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool ToBool(const std::string& str, bool def)
 {
     bool result = def;
@@ -161,8 +145,6 @@ bool ToBool(const std::string& str, bool def)
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 int ToInt(const std::string& str, int def)
 {
@@ -180,8 +162,6 @@ int ToInt(const std::string& str, int def)
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double ToDouble(const std::string& str, double def)
 {
     double result = def;
@@ -198,16 +178,12 @@ double ToDouble(const std::string& str, double def)
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string ToString(int val)
 {
     std::stringstream ss;
     ss << val;
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string ToString(float val)
 {
@@ -216,16 +192,12 @@ std::string ToString(float val)
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string ToString(double val)
 {
     std::stringstream ss;
     ss << val;
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string ToLower(const std::string& str)
 {
@@ -241,8 +213,6 @@ std::string ToLower(const std::string& str)
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string ToUpper(const std::string& str)
 {
     std::string result;
@@ -256,8 +226,6 @@ std::string ToUpper(const std::string& str)
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace String
 } // namespace mc

@@ -8,13 +8,9 @@
 
 #include <TestingUtils.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 // To achieve full test coverage of MatrixMxN template class tests have to be
 // done for 3x3, 4x4 and 6x6 matrices, as template class MatrixMxN has derived 
 // classes which are not templates.
-
-////////////////////////////////////////////////////////////////////////////////
 
 class TestMatrixMxN : public ::testing::Test
 {
@@ -25,16 +21,12 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanConstruct)
 {
     mc::MatrixMxN<3,3>* m = nullptr;
     EXPECT_NO_THROW((m = new mc::MatrixMxN<3,3>()));
     delete m;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanDestruct)
 {
@@ -47,8 +39,6 @@ TEST_F(TestMatrixMxN, CanDestruct)
     mc::MatrixMxN<6,6>* m6 = new mc::MatrixMxN<6,6>();
     EXPECT_NO_THROW(delete m6);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanInstantiate3x3)
 {
@@ -66,8 +56,6 @@ TEST_F(TestMatrixMxN, CanInstantiate3x3)
     EXPECT_DOUBLE_EQ(m1(2,1), 0.0);
     EXPECT_DOUBLE_EQ(m1(2,2), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanFill3x3)
 {
@@ -87,8 +75,6 @@ TEST_F(TestMatrixMxN, CanFill3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanFill4x4)
 {
     constexpr int rows = 4;
@@ -107,8 +93,6 @@ TEST_F(TestMatrixMxN, CanFill4x4)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanFill6x6)
 {
     constexpr int rows = 6;
@@ -126,8 +110,6 @@ TEST_F(TestMatrixMxN, CanFill6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanValidate3x3)
 {
@@ -160,8 +142,6 @@ TEST_F(TestMatrixMxN, CanValidate3x3)
     EXPECT_FALSE(m5.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanValidate4x4)
 {
     constexpr int rows = 4;
@@ -193,8 +173,6 @@ TEST_F(TestMatrixMxN, CanValidate4x4)
     m5.Fill(std::numeric_limits<double>::quiet_NaN());
     EXPECT_FALSE(m5.IsValid());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanValidate6x6)
 {
@@ -230,8 +208,6 @@ TEST_F(TestMatrixMxN, CanValidate6x6)
     EXPECT_FALSE(m5.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanGetElement3x3)
 {
     constexpr int rows = 3;
@@ -262,8 +238,6 @@ TEST_F(TestMatrixMxN, CanGetElement3x3)
     EXPECT_FALSE(r23 == r23); // NaN
     EXPECT_FALSE(r32 == r32); // NaN
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanGetElement4x4)
 {
@@ -305,8 +279,6 @@ TEST_F(TestMatrixMxN, CanGetElement4x4)
     EXPECT_FALSE(r42 == r42); // NaN
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanGetElement6x6)
 {
     constexpr int rows = 6;
@@ -337,8 +309,6 @@ TEST_F(TestMatrixMxN, CanGetElement6x6)
     EXPECT_FALSE(r62 == r62); // NaN
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanPutIntoArray3x3)
 {
     constexpr int rows = 3;
@@ -358,8 +328,6 @@ TEST_F(TestMatrixMxN, CanPutIntoArray3x3)
         EXPECT_DOUBLE_EQ(xx[i], x[i]) << "Error at index " << i;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanPutIntoArray4x4)
 {
@@ -381,8 +349,6 @@ TEST_F(TestMatrixMxN, CanPutIntoArray4x4)
         EXPECT_DOUBLE_EQ(xx[i], x[i]) << "Error at index " << i;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanPutIntoArray6x6)
 {
@@ -407,8 +373,6 @@ TEST_F(TestMatrixMxN, CanPutIntoArray6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanSetElement3x3)
 {
     constexpr int rows = 3;
@@ -426,8 +390,6 @@ TEST_F(TestMatrixMxN, CanSetElement3x3)
     EXPECT_DOUBLE_EQ(m(2,2), 3.0);
     EXPECT_DOUBLE_EQ(m(0,2), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSetElement4x4)
 {
@@ -448,8 +410,6 @@ TEST_F(TestMatrixMxN, CanSetElement4x4)
     EXPECT_DOUBLE_EQ(m(3,3), 4.0);
     EXPECT_DOUBLE_EQ(m(0,3), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSetElement6x6)
 {
@@ -475,8 +435,6 @@ TEST_F(TestMatrixMxN, CanSetElement6x6)
     EXPECT_DOUBLE_EQ(m(0,5), 9.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanSetFromArray)
 {
     mc::MatrixMxN<3,3> m1;
@@ -499,8 +457,6 @@ TEST_F(TestMatrixMxN, CanSetFromArray)
     EXPECT_DOUBLE_EQ(m1(2,1), 8.0);
     EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSetFromString3x3)
 {
@@ -534,8 +490,6 @@ TEST_F(TestMatrixMxN, CanSetFromString3x3)
     m2.SetFromString(str2);
     EXPECT_FALSE(m2.IsValid());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSetFromString4x4)
 {
@@ -578,8 +532,6 @@ TEST_F(TestMatrixMxN, CanSetFromString4x4)
     m2.SetFromString(str2);
     EXPECT_FALSE(m2.IsValid());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSetFromString6x6)
 {
@@ -646,8 +598,6 @@ TEST_F(TestMatrixMxN, CanSetFromString6x6)
     m2.SetFromString(str2);
     EXPECT_FALSE(m2.IsValid());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSwapRows3x3)
 {
@@ -719,8 +669,6 @@ TEST_F(TestMatrixMxN, CanSwapRows3x3)
     EXPECT_DOUBLE_EQ(m12(1,2), 9.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanSwapRows4x4)
 {
     constexpr int rows = 4;
@@ -755,8 +703,6 @@ TEST_F(TestMatrixMxN, CanSwapRows4x4)
     EXPECT_DOUBLE_EQ(m(3,2), 43.0);
     EXPECT_DOUBLE_EQ(m(3,3), 44.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSwapRows6x6)
 {
@@ -817,8 +763,6 @@ TEST_F(TestMatrixMxN, CanSwapRows6x6)
     EXPECT_DOUBLE_EQ(m(5,5), 66.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanConvertToString3x3)
 {
     double x[] { 1.0, 2.0, 3.0,
@@ -829,8 +773,6 @@ TEST_F(TestMatrixMxN, CanConvertToString3x3)
     m.SetFromArray(x);
     EXPECT_STREQ(m.ToString().c_str(), "1\t2\t3\t\n4\t5\t6\t\n7\t8\t9");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanConvertToString4x4)
 {
@@ -843,8 +785,6 @@ TEST_F(TestMatrixMxN, CanConvertToString4x4)
     m.SetFromArray(x);
     EXPECT_STREQ(m.ToString().c_str(), "1\t2\t3\t4\t\n5\t6\t7\t8\t\n9\t10\t11\t12\t\n13\t14\t15\t16");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanConvertToString6x6)
 {
@@ -859,8 +799,6 @@ TEST_F(TestMatrixMxN, CanConvertToString6x6)
     m.SetFromArray(x);
     EXPECT_STREQ(m.ToString().c_str(), "1\t2\t3\t4\t5\t6\t\n7\t8\t9\t10\t11\t12\t\n13\t14\t15\t16\t17\t18\t\n19\t20\t21\t22\t23\t24\t\n25\t26\t27\t28\t29\t30\t\n31\t32\t33\t34\t35\t36");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanAccessItem3x3)
 {
@@ -879,8 +817,6 @@ TEST_F(TestMatrixMxN, CanAccessItem3x3)
     EXPECT_DOUBLE_EQ(mr(2,2), 3.0);
     EXPECT_DOUBLE_EQ(mr(0,2), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanAccessItem4x4)
 {
@@ -901,8 +837,6 @@ TEST_F(TestMatrixMxN, CanAccessItem4x4)
     EXPECT_DOUBLE_EQ(mr(3,3), 4.0);
     EXPECT_DOUBLE_EQ(mr(0,3), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanAccessItem6x6)
 {
@@ -927,8 +861,6 @@ TEST_F(TestMatrixMxN, CanAccessItem6x6)
     EXPECT_DOUBLE_EQ(mr(5,5), 6.0);
     EXPECT_DOUBLE_EQ(mr(0,5), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanAdd3x3)
 {
@@ -969,8 +901,6 @@ TEST_F(TestMatrixMxN, CanAdd3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanAdd4x4)
 {
     constexpr int rows = 4;
@@ -1010,8 +940,6 @@ TEST_F(TestMatrixMxN, CanAdd4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanAdd6x6)
 {
@@ -1055,8 +983,6 @@ TEST_F(TestMatrixMxN, CanAdd6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanNegate3x3)
 {
     constexpr int rows = 3;
@@ -1081,8 +1007,6 @@ TEST_F(TestMatrixMxN, CanNegate3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanNegate4x4)
 {
@@ -1109,8 +1033,6 @@ TEST_F(TestMatrixMxN, CanNegate4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanNegate6x6)
 {
@@ -1139,8 +1061,6 @@ TEST_F(TestMatrixMxN, CanNegate6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSubstract3x3)
 {
@@ -1181,8 +1101,6 @@ TEST_F(TestMatrixMxN, CanSubstract3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanSubstract4x4)
 {
     constexpr int rows = 4;
@@ -1222,8 +1140,6 @@ TEST_F(TestMatrixMxN, CanSubstract4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanSubstract6x6)
 {
@@ -1267,8 +1183,6 @@ TEST_F(TestMatrixMxN, CanSubstract6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanMultiplyByScalar3x3)
 {
     constexpr int rows = 3;
@@ -1303,8 +1217,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanMultiplyByScalar4x4)
 {
@@ -1341,8 +1253,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanMultiplyByScalar6x6)
 {
@@ -1381,8 +1291,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanMultiplyByVector3)
 {
@@ -1500,8 +1408,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector3)
     EXPECT_DOUBLE_EQ(vr5(2), 50.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanMultiplyByVector4)
 {
     constexpr int rows = 4;
@@ -1545,8 +1451,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector4)
     EXPECT_DOUBLE_EQ(vr(2), 110.0);
     EXPECT_DOUBLE_EQ(vr(3), 150.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanMultiplyByVector6)
 {
@@ -1600,8 +1504,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector6)
     EXPECT_DOUBLE_EQ(vr(5), 721.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanDivideByScalar3x3)
 {
     constexpr int rows = 3;
@@ -1636,8 +1538,6 @@ TEST_F(TestMatrixMxN, CanDivideByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanDivideByScalar4x4)
 {
@@ -1674,8 +1574,6 @@ TEST_F(TestMatrixMxN, CanDivideByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanDivideByScalar6x6)
 {
@@ -1715,8 +1613,6 @@ TEST_F(TestMatrixMxN, CanDivideByScalar6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanUnaryAdd3x3)
 {
     constexpr int rows = 3;
@@ -1752,8 +1648,6 @@ TEST_F(TestMatrixMxN, CanUnaryAdd3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryAdd4x4)
 {
@@ -1791,8 +1685,6 @@ TEST_F(TestMatrixMxN, CanUnaryAdd4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryAdd6x6)
 {
@@ -1833,8 +1725,6 @@ TEST_F(TestMatrixMxN, CanUnaryAdd6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanUnarySubstract3x3)
 {
     constexpr int rows = 3;
@@ -1870,8 +1760,6 @@ TEST_F(TestMatrixMxN, CanUnarySubstract3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnarySubstract4x4)
 {
@@ -1909,8 +1797,6 @@ TEST_F(TestMatrixMxN, CanUnarySubstract4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnarySubstract6x6)
 {
@@ -1951,8 +1837,6 @@ TEST_F(TestMatrixMxN, CanUnarySubstract6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar3x3)
 {
     constexpr int rows = 3;
@@ -1985,8 +1869,6 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar4x4)
 {
@@ -2021,8 +1903,6 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar6x6)
 {
@@ -2060,8 +1940,6 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanUnaryDivideByScalar3x3)
 {
     constexpr int rows = 3;
@@ -2094,8 +1972,6 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryDivideByScalar4x4)
 {
@@ -2130,8 +2006,6 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanUnaryDivideByScalar6x6)
 {
@@ -2169,8 +2043,6 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixMxN, CanCompare3x3)
 {
     constexpr int rows = 3;
@@ -2193,8 +2065,6 @@ TEST_F(TestMatrixMxN, CanCompare3x3)
     EXPECT_FALSE(m1 != m2);
     EXPECT_FALSE(m1 == m0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanCompare4x4)
 {
@@ -2219,8 +2089,6 @@ TEST_F(TestMatrixMxN, CanCompare4x4)
     EXPECT_FALSE(m1 != m2);
     EXPECT_FALSE(m1 == m0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixMxN, CanCompare6x6)
 {

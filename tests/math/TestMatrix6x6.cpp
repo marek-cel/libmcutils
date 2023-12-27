@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Matrix6x6.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMatrix6x6 : public ::testing::Test
 {
 protected:
@@ -13,8 +11,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanConstruct)
 {
     mc::Matrix6x6* m = nullptr;
@@ -22,15 +18,11 @@ TEST_F(TestMatrix6x6, CanConstruct)
     delete m;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanDestruct)
 {
     mc::Matrix6x6* m = new mc::Matrix6x6();
     EXPECT_NO_THROW(delete m);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanInstantiate)
 {
@@ -73,8 +65,6 @@ TEST_F(TestMatrix6x6, CanInstantiate)
     EXPECT_DOUBLE_EQ(m(5,4), 0.0);
     EXPECT_DOUBLE_EQ(m(5,5), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanTranspose)
 {
@@ -132,8 +122,6 @@ TEST_F(TestMatrix6x6, CanTranspose)
     EXPECT_DOUBLE_EQ(m(5,4), 30.0);
     EXPECT_DOUBLE_EQ(m(5,5), 36.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanGetTransposed)
 {
@@ -226,8 +214,6 @@ TEST_F(TestMatrix6x6, CanGetTransposed)
     EXPECT_DOUBLE_EQ(m1(5,5), 36.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanAdd)
 {
     double x[] = {
@@ -283,8 +269,6 @@ TEST_F(TestMatrix6x6, CanAdd)
     EXPECT_DOUBLE_EQ(m(5,5), 36.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanNegate)
 {
     double x[] = {
@@ -338,8 +322,6 @@ TEST_F(TestMatrix6x6, CanNegate)
     EXPECT_DOUBLE_EQ(m(5,4), -35.0);
     EXPECT_DOUBLE_EQ(m(5,5), -36.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanSubstract)
 {
@@ -396,8 +378,6 @@ TEST_F(TestMatrix6x6, CanSubstract)
     EXPECT_DOUBLE_EQ(m(5,5), - 36.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanMultiplyByScalar)
 {
     double x[] = {
@@ -451,8 +431,6 @@ TEST_F(TestMatrix6x6, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m(5,4), 17.5);
     EXPECT_DOUBLE_EQ(m(5,5), 18.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanMultiplyByMatrix)
 {
@@ -528,8 +506,6 @@ TEST_F(TestMatrix6x6, CanMultiplyByMatrix)
     EXPECT_DOUBLE_EQ(m(5,5), 4116.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanMultiplyByVector)
 {
     // expected values calculated with GNU Octave
@@ -561,8 +537,6 @@ TEST_F(TestMatrix6x6, CanMultiplyByVector)
     EXPECT_DOUBLE_EQ(v(4), 595.0);
     EXPECT_DOUBLE_EQ(v(5), 721.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanDivideByScalar)
 {
@@ -617,8 +591,6 @@ TEST_F(TestMatrix6x6, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(m(5,4), 17.5);
     EXPECT_DOUBLE_EQ(m(5,5), 18.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanUnaryAdd)
 {
@@ -675,8 +647,6 @@ TEST_F(TestMatrix6x6, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(m(5,5), 36.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanUnarySubstract)
 {
     double x[] = {
@@ -732,8 +702,6 @@ TEST_F(TestMatrix6x6, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(m(5,5), - 36.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrix6x6, CanUnaryMultiplyByScalar)
 {
     double x[] = {
@@ -787,8 +755,6 @@ TEST_F(TestMatrix6x6, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m(5,4), 17.5);
     EXPECT_DOUBLE_EQ(m(5,5), 18.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrix6x6, CanUnaryDivideByScalar)
 {

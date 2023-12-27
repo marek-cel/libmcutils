@@ -6,8 +6,6 @@
 
 #include <DiffEquationSolver.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestEulerRect : public ::testing::Test
 {
 protected:
@@ -17,8 +15,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestEulerRect, CanConstruct)
 {
     mc::EulerRect* er = nullptr;
@@ -26,23 +22,17 @@ TEST_F(TestEulerRect, CanConstruct)
     delete er;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestEulerRect, CanDestruct)
 {
     mc::EulerRect* er = new mc::EulerRect();
     EXPECT_NO_THROW(delete er);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestEulerRect, CanInstantiate)
 {
     mc::EulerRect er;
     EXPECT_FALSE(static_cast<bool>(er.deriv_fun()));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestEulerRect, CanSolve)
 {
@@ -70,8 +60,6 @@ TEST_F(TestEulerRect, CanSolve)
     DiffEquationSolver des6(1.0, 1.0, 1.0, &er6);
     EXPECT_TRUE(des6.Solve(1.0, 1.0));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestEulerRect, CanSetDerivFun)
 {

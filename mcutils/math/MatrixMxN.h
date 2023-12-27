@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_MATRIXMXN_H_
 #define MCUTILS_MATH_MATRIXMXN_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cstring>
 #include <limits>
 #include <sstream>
@@ -35,10 +33,7 @@
 #include <mcutils/math/VectorN.h>
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Rectangular matrix class template.
@@ -382,7 +377,5 @@ protected:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATRIXMXN_H_

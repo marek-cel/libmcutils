@@ -26,12 +26,7 @@
 
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 //0.0,  1.0,  0.0
 //1.0,  0.0,  0.0
@@ -40,20 +35,14 @@ namespace mc
 const Matrix3x3 ECEF::enu2ned_( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 const Matrix3x3 ECEF::ned2enu_( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
-////////////////////////////////////////////////////////////////////////////////
-
 ECEF::ECEF() : ECEF(0.0, 0.0)
 {}
 
-////////////////////////////////////////////////////////////////////////////////
-
 ECEF::ECEF(const ECEF& ecef)
 {
-    CopyParams( ecef );
-    CopyData( ecef );
+    CopyParams(ecef);
+    CopyData(ecef);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 ECEF::ECEF(ECEF&& ecef)
 {
@@ -78,9 +67,7 @@ ECEF::ECEF(ECEF&& ecef)
     ecef2ned_ = std::move(ecef.ecef2ned_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-ECEF::ECEF( double a, double f )
+ECEF::ECEF(double a, double f)
 {
     a_ = a;
     f_ = f;
@@ -103,11 +90,7 @@ ECEF::ECEF( double a, double f )
     pos_cart_.z() = 0.0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 ECEF::~ECEF() {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
                            double* x, double* y, double* z) const
@@ -124,32 +107,22 @@ void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
     *z = (n * (b2_ / a2_) + alt) * sinLat;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3 ECEF::ConvertGeo2Cart(double lat, double lon, double alt) const
 {
     Vector3 pos_cart;
-
     ConvertGeo2Cart(lat, lon, alt, &pos_cart.x(), &pos_cart.y(), &pos_cart.z());
-
     return pos_cart;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 ECEF::ConvertGeo2Cart(const Geo& geo) const
 {
     return ConvertGeo2Cart(geo.lat, geo.lon, geo.alt);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void ECEF::ConvertGeo2Cart(const Geo& geo, Vector3* pos_cart) const
 {
     *pos_cart = ConvertGeo2Cart(geo);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::ConvertCart2Geo(double x, double y, double z,
                            double* lat, double* lon, double* alt) const
@@ -197,8 +170,6 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
 #   endif
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Geo ECEF::ConvertCart2Geo(double x, double y, double z) const
 {
     Geo pos_geo;
@@ -208,21 +179,15 @@ Geo ECEF::ConvertCart2Geo(double x, double y, double z) const
     return pos_geo;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Geo ECEF::ConvertCart2Geo(const Vector3& pos_cart) const
 {
     return ConvertCart2Geo(pos_cart.x(), pos_cart.y(), pos_cart.z());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void ECEF::ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const
 {
     *pos_geo = ConvertCart2Geo(pos_cart);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
 {
@@ -237,35 +202,25 @@ Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
     return ConvertCart2Geo(pos_cart);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Angles ECEF::ConvertAttitudeECEF2NED(const Angles& angles_ecef) const
 {
     return ConvertAttitudeECEF2NED(Quaternion(angles_ecef)).GetAngles();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
 {
     return ConvertAttitudeNED2ECEF(Quaternion(angles_ned)).GetAngles();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion ECEF::ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const
 {
     return ned2ecef_.GetQuaternion() * att_ecef;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Quaternion ECEF::ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const
 {
     return ecef2ned_.GetQuaternion() * att_ned;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::SetPositionFromGeo(const Geo& pos_geo)
 {
@@ -277,17 +232,12 @@ void ECEF::SetPositionFromGeo(const Geo& pos_geo)
     Update();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void ECEF::SetPositionFromCart(const Vector3& pos_cart)
 {
     pos_cart_ = pos_cart;
-
     ConvertCart2Geo(pos_cart_, &pos_geo_);
     Update();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 ECEF& ECEF::operator=(const ECEF& ecef)
 {
@@ -295,8 +245,6 @@ ECEF& ECEF::operator=(const ECEF& ecef)
     CopyData(ecef);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 ECEF& ECEF::operator=(ECEF&& ecef)
 {
@@ -323,14 +271,10 @@ ECEF& ECEF::operator=(ECEF&& ecef)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void ECEF::Update()
 {
     UpdateMatrices();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::CopyData(const ECEF& ecef)
 {
@@ -342,8 +286,6 @@ void ECEF::CopyData(const ECEF& ecef)
     ecef2enu_ = ecef.ecef2enu_;
     ecef2ned_ = ecef.ecef2ned_;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::CopyParams(const ECEF& ecef)
 {
@@ -359,8 +301,6 @@ void ECEF::CopyParams(const ECEF& ecef)
     ep2_ = ecef.ep2_;
     ep_  = ecef.ep_;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void ECEF::UpdateMatrices()
 {
@@ -399,7 +339,5 @@ void ECEF::UpdateMatrices()
 
     ecef2enu_ = ned2enu_ * ecef2ned_;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

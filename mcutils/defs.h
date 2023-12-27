@@ -22,8 +22,6 @@
 #ifndef MCUTILS_DEFS_H_
 #define MCUTILS_DEFS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #if defined(_MSC_VER) && !defined(MCUTILS_STATIC_LIB)
 #   if defined(MCUTILS_DLL_EXPORTS)
 #       define MCUTILS_DLL_SPEC __declspec(dllexport)
@@ -41,7 +39,5 @@
 #if !defined(MCUTILSAPI)
 #   define MCUTILSAPI
 #endif
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_DEFS_H_

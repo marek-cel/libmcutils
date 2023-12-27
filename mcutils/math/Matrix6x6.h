@@ -22,22 +22,15 @@
 #ifndef MCUTILS_MATH_MATRIX6X6_H_
 #define MCUTILS_MATH_MATRIX6X6_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Vector6.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 template class MCUTILSAPI mc::MatrixMxN<6,6>;
 template class MCUTILSAPI mc::MatrixNxN<6>;
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 6 by 6 matrix class.
@@ -83,8 +76,6 @@ public:
     Matrix6x6& operator/=(double value);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Binary multiplication by scalar operator. */
 inline Matrix6x6 operator*(double value, const Matrix6x6& matrix)
 {
@@ -92,7 +83,5 @@ inline Matrix6x6 operator*(double value, const Matrix6x6& matrix)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATRIX6X6_H_

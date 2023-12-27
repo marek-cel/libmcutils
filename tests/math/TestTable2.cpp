@@ -4,8 +4,6 @@
 
 #include <mcutils/math/Table2.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestTable2 : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanConstruct)
 {
     mc::Table2* tab = nullptr;
@@ -24,15 +20,11 @@ TEST_F(TestTable2, CanConstruct)
     delete tab;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanDestruct)
 {
     mc::Table2* tab = new mc::Table2();
     EXPECT_NO_THROW(delete tab);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanInstantiate)
 {
@@ -49,8 +41,6 @@ TEST_F(TestTable2, CanInstantiate)
     EXPECT_DOUBLE_EQ(tab2.GetValue(0.0, 0.0), 1.1);
     EXPECT_DOUBLE_EQ(tab2.GetValue(2.2, 3.3), 1.1);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanInstantiateAndCopy)
 {
@@ -80,8 +70,6 @@ TEST_F(TestTable2, CanInstantiateAndCopy)
     EXPECT_EQ(tab.cols(), 2);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanInstantiateAndMove)
 {
     // z = x^2 + y - 1
@@ -107,8 +95,6 @@ TEST_F(TestTable2, CanInstantiateAndMove)
     EXPECT_EQ(tab.rows(), 4);
     EXPECT_EQ(tab.cols(), 2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanInstantiateAndSetDataFromArray)
 {
@@ -136,8 +122,6 @@ TEST_F(TestTable2, CanInstantiateAndSetDataFromArray)
     EXPECT_EQ(tab.cols(), 2);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanInstantiateAndSetDataFromVector)
 {
     // z = x^2 + y - 1
@@ -164,8 +148,6 @@ TEST_F(TestTable2, CanInstantiateAndSetDataFromVector)
     EXPECT_EQ(tab.cols(), 2);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanGetRows)
 {
     // z = x^2 + y - 1
@@ -181,8 +163,6 @@ TEST_F(TestTable2, CanGetRows)
     EXPECT_EQ(tab.rows(), 4);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanGetCols)
 {
     // z = x^2 + y - 1
@@ -197,8 +177,6 @@ TEST_F(TestTable2, CanGetCols)
 
     EXPECT_EQ(tab.cols(), 2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanGetTable)
 {
@@ -236,8 +214,6 @@ TEST_F(TestTable2, CanGetTable)
     EXPECT_DOUBLE_EQ(tab1.GetValue(  2.0 ),  4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanGetValue)
 {
     // z = x^2 + y - 1
@@ -261,8 +237,6 @@ TEST_F(TestTable2, CanGetValue)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanGetValueInterpolate)
 {
     // z = x^2 + y - 1
@@ -279,8 +253,6 @@ TEST_F(TestTable2, CanGetValueInterpolate)
     EXPECT_DOUBLE_EQ(tab.GetValue( -1.0, 0.5 ),  0.5);
     EXPECT_DOUBLE_EQ(tab.GetValue( -0.5, 0.5 ),  0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanGetValueOutOfRange)
 {
@@ -304,8 +276,6 @@ TEST_F(TestTable2, CanGetValueOutOfRange)
     EXPECT_DOUBLE_EQ(tab.GetValue(  3.0,  2.0 ),  4.0);
     EXPECT_DOUBLE_EQ(tab.GetValue(  0.0, -1.0 ), -1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanGetValueByIndex)
 {
@@ -335,8 +305,6 @@ TEST_F(TestTable2, CanGetValueByIndex)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanValidate)
 {
@@ -373,8 +341,6 @@ TEST_F(TestTable2, CanValidate)
     EXPECT_FALSE(t4.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanMultiplyRowsAndCols)
 {
     const double c_coef = 2.0;
@@ -403,8 +369,6 @@ TEST_F(TestTable2, CanMultiplyRowsAndCols)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanMultiplyRows)
 {
     const double r_coef = 2.0;
@@ -431,8 +395,6 @@ TEST_F(TestTable2, CanMultiplyRows)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanMultiplyCols)
 {
@@ -461,8 +423,6 @@ TEST_F(TestTable2, CanMultiplyCols)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanMultiplyValues)
 {
     const double v_coef = 2.0;
@@ -489,8 +449,6 @@ TEST_F(TestTable2, CanMultiplyValues)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanSetDataFromArray)
 {
@@ -519,8 +477,6 @@ TEST_F(TestTable2, CanSetDataFromArray)
     EXPECT_EQ(tab.cols(), 2);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanSetDataFromVector)
 {
     // z = x^2 + y - 1
@@ -547,8 +503,6 @@ TEST_F(TestTable2, CanSetDataFromVector)
     EXPECT_EQ(tab.rows(), 4);
     EXPECT_EQ(tab.cols(), 2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanSetDataFromString)
 {
@@ -584,8 +538,6 @@ TEST_F(TestTable2, CanSetDataFromString)
     EXPECT_FALSE(tab2.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable2, CanConvertToString)
 {
     // z = x^2 + y - 1
@@ -599,8 +551,6 @@ TEST_F(TestTable2, CanConvertToString)
 
     EXPECT_STREQ(tab.ToString().c_str(), "\t0\t1\n0\t0\t1\n1\t2\t3\n2\t4\t5\n");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanAssign)
 {
@@ -631,8 +581,6 @@ TEST_F(TestTable2, CanAssign)
     EXPECT_EQ(tab.rows(), 4);
     EXPECT_EQ(tab.cols(), 2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable2, CanAssignAndMove)
 {

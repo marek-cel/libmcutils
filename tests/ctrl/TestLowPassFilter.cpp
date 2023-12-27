@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestLowPassFilter : public ::testing::Test
 {
 protected:
@@ -22,8 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanConstruct)
 {
     mc::LowPassFilter* lpf = nullptr;
@@ -31,15 +27,11 @@ TEST_F(TestLowPassFilter, CanConstruct)
     delete lpf;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanDestruct)
 {
     mc::LowPassFilter* lpf = new mc::LowPassFilter();
     EXPECT_NO_THROW(delete lpf);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLowPassFilter, CanInstantiate)
 {
@@ -49,8 +41,6 @@ TEST_F(TestLowPassFilter, CanInstantiate)
     EXPECT_DOUBLE_EQ(lpf.value(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanInstantiateAndSetData)
 {
     mc::LowPassFilter lpf(2.0, 3.0);
@@ -59,16 +49,12 @@ TEST_F(TestLowPassFilter, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(lpf.value(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanSetCutoffFreq)
 {
     mc::LowPassFilter lpf;
     lpf.SetCutoffFreq(1.0);
     EXPECT_DOUBLE_EQ(lpf.omega(), 2.0 * M_PI);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLowPassFilter, CanUpdateStep)
 {
@@ -99,8 +85,6 @@ TEST_F(TestLowPassFilter, CanUpdateStep)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanUpdateSine)
 {
     std::vector<double> vals;
@@ -130,15 +114,11 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanGetOmega)
 {
     mc::LowPassFilter lpf(2.0, 3.0);
     EXPECT_DOUBLE_EQ(lpf.omega(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLowPassFilter, CanGetValue)
 {
@@ -146,16 +126,12 @@ TEST_F(TestLowPassFilter, CanGetValue)
     EXPECT_DOUBLE_EQ(lpf.value(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLowPassFilter, CanSetOmega)
 {
     mc::LowPassFilter lpf;
     lpf.set_omega(2.0);
     EXPECT_DOUBLE_EQ(lpf.omega(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLowPassFilter, CanSetValue)
 {

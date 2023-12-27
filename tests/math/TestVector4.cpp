@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Vector4.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestVector4 : public ::testing::Test
 {
 protected:
@@ -13,8 +11,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanConstruct)
 {
     mc::Vector4* v = nullptr;
@@ -22,15 +18,11 @@ TEST_F(TestVector4, CanConstruct)
     delete v;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanDestruct)
 {
     mc::Vector4* v = new mc::Vector4();
     EXPECT_NO_THROW(delete v);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector4, CanInstantiate)
 {
@@ -41,8 +33,6 @@ TEST_F(TestVector4, CanInstantiate)
     EXPECT_DOUBLE_EQ(v1(2), 0.0);
     EXPECT_DOUBLE_EQ(v1(3), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector4, CanGetNormalized)
 {
@@ -61,8 +51,6 @@ TEST_F(TestVector4, CanGetNormalized)
 
     EXPECT_DOUBLE_EQ(v1_n.GetLength(), 1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector4, CanAssign)
 {
@@ -117,8 +105,6 @@ TEST_F(TestVector4, CanAssign)
     EXPECT_DOUBLE_EQ(v(3), 4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanAdd)
 {
     double x1[] = { 0.0, 0.0, 0.0, 0.0 };
@@ -150,8 +136,6 @@ TEST_F(TestVector4, CanAdd)
     EXPECT_DOUBLE_EQ(v34(3), 5.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanNegate)
 {
     double x1[] = { 1.0, 2.0, 3.0, 4.0 };
@@ -177,8 +161,6 @@ TEST_F(TestVector4, CanNegate)
     EXPECT_DOUBLE_EQ(v2n(3), -1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanSubstract)
 {
     double x1[] = { 4.0, 4.0, 4.0, 4.0 };
@@ -198,8 +180,6 @@ TEST_F(TestVector4, CanSubstract)
     EXPECT_DOUBLE_EQ(v(3), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanMultiplyByScalar)
 {
     double x1[] = { 1.0, 2.0, 3.0, 4.0 };
@@ -215,8 +195,6 @@ TEST_F(TestVector4, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v(3), 8.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanDivideByScalar)
 {
     double x1[] = { 2.0, 4.0, 6.0, 8.0 };
@@ -231,8 +209,6 @@ TEST_F(TestVector4, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(v(2), 3.0);
     EXPECT_DOUBLE_EQ(v(3), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector4, CanUnaryAdd)
 {
@@ -253,8 +229,6 @@ TEST_F(TestVector4, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(v1(3), 4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanUnarySubstract)
 {
     double x1[] = { 4.0, 4.0, 4.0, 4.0 };
@@ -274,8 +248,6 @@ TEST_F(TestVector4, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(v1(3), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector4, CanUnaryMultiplyByScalar)
 {
     double x1[] = { 1.0, 2.0, 3.0, 4.0 };
@@ -290,8 +262,6 @@ TEST_F(TestVector4, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v1(2), 6.0);
     EXPECT_DOUBLE_EQ(v1(3), 8.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector4, CanUnaryDivideByScalar)
 {

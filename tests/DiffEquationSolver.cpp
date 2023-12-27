@@ -2,8 +2,6 @@
 
 #include <cmath>
 
-////////////////////////////////////////////////////////////////////////////////
-
 DiffEquationSolver::DiffEquationSolver(double m, double k, double c,
                                        mc::Integrator* integrator)
 {
@@ -13,8 +11,6 @@ DiffEquationSolver::DiffEquationSolver(double m, double k, double c,
 
     integrator_ = integrator;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 bool DiffEquationSolver::Solve(double x_0, double x_1)
 {
@@ -155,14 +151,10 @@ bool DiffEquationSolver::Solve(double x_0, double x_1)
     return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double DiffEquationSolver::CalcDelta(double a, double b, double c)
 {
     return b*b - 4.0 * a * c;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void DiffEquationSolver::ComputeStateDeriv(const mc::Vector& state,
                                            mc::Vector* deriv)

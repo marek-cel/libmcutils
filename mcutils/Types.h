@@ -22,16 +22,11 @@
 #ifndef MCUTILS_TYPES_H_
 #define MCUTILS_TYPES_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #if __cplusplus > 199711L
 #   include <stdint.h>
 #endif // __cplusplus > 199711L
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 #if __cplusplus > 199711L
 typedef uint8_t        UInt8;   ///< 8-bits unsigned integer type
@@ -44,7 +39,5 @@ typedef unsigned int   UInt32;  ///< 32-bits unsigned integer type
 #endif // __cplusplus > 199711L
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_TYPES_H_

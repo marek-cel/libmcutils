@@ -24,14 +24,10 @@
 
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
+namespace Units {
 
-namespace mc { namespace Units
-{
-
-////////////////////////////////////////////////////////////////////////////////
-
-Units::Converter GetUnitConverter( const char* name )
+Units::Converter GetUnitConverter(const char* name)
 {
     // angle
     if ( 0 == String::Compare(name, "rad") )
@@ -143,8 +139,6 @@ Units::Converter GetUnitConverter( const char* name )
 
     return nullptr;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace Units
 } // namespace mc

@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestOscillator : public ::testing::Test
 {
 protected:
@@ -23,8 +21,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanConstruct)
 {
     mc::Oscillator* oscillator = nullptr;
@@ -32,15 +28,11 @@ TEST_F(TestOscillator, CanConstruct)
     delete oscillator;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanDestruct)
 {
     mc::Oscillator* oscillator = new mc::Oscillator();
     EXPECT_NO_THROW(delete oscillator);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanInstantiate)
 {
@@ -51,8 +43,6 @@ TEST_F(TestOscillator, CanInstantiate)
     EXPECT_DOUBLE_EQ(oscillator.value() , 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanInstantiateAndSetData)
 {
     mc::Oscillator oscillator(2.0, 3.0, 4.0);
@@ -61,8 +51,6 @@ TEST_F(TestOscillator, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(oscillator.zeta()  , 3.0);
     EXPECT_DOUBLE_EQ(oscillator.value() , 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanUpdateStep)
 {
@@ -93,8 +81,6 @@ TEST_F(TestOscillator, CanUpdateStep)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanUpdateSine)
 {
     std::vector<double> vals;
@@ -124,15 +110,11 @@ TEST_F(TestOscillator, CanUpdateSine)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanGetOmega)
 {
     mc::Oscillator oscillator(2.0, 3.0, 4.0);
     EXPECT_DOUBLE_EQ(oscillator.omega(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanGetZeta)
 {
@@ -140,15 +122,11 @@ TEST_F(TestOscillator, CanGetZeta)
     EXPECT_DOUBLE_EQ(oscillator.zeta(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestOscillator, CanGetValue)
 {
     mc::Oscillator oscillator(2.0, 3.0, 4.0);
     EXPECT_DOUBLE_EQ(oscillator.value(), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanSetOmega)
 {
@@ -160,8 +138,6 @@ TEST_F(TestOscillator, CanSetOmega)
     oscillator.set_omega(-1.0);
     EXPECT_DOUBLE_EQ(oscillator.omega(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanSetDamping)
 {
@@ -176,8 +152,6 @@ TEST_F(TestOscillator, CanSetDamping)
     oscillator.set_zeta(0.5);
     EXPECT_DOUBLE_EQ(oscillator.zeta(), 0.5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestOscillator, CanSetValue)
 {

@@ -26,12 +26,7 @@
 #include <sstream>
 #include <string>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 std::string ToISO8601(int year, int mon, int day,
                       int hour, int min, int sec, int msec,
@@ -40,8 +35,6 @@ std::string ToISO8601(int year, int mon, int day,
     return ToISO8601(year, mon, day) + "T" +
            ToISO8601(hour, min, sec, msec, show_msec);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string ToISO8601(int year, int mon, int day)
 {
@@ -55,8 +48,6 @@ std::string ToISO8601(int year, int mon, int day)
 
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string ToISO8601(int hour, int min, int sec, int msec,
                       bool show_msec)
@@ -77,7 +68,5 @@ std::string ToISO8601(int hour, int min, int sec, int msec,
 
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

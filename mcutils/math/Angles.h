@@ -22,16 +22,11 @@
 #ifndef MCUTILS_MATH_ANGLES_H_
 #define MCUTILS_MATH_ANGLES_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <string>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Tait-Bryant angles class.
@@ -96,10 +91,10 @@ public:
     inline double& psi()       { return psi_; }
 
     /** @brief Equality operator. */
-    bool operator==( const Angles& angl ) const;
+    bool operator==(const Angles& angl) const;
 
     /** @brief Inequality operator. */
-    bool operator!=( const Angles& angl ) const;
+    bool operator!=(const Angles& angl) const;
 
 private:
 
@@ -109,7 +104,5 @@ private:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_ANGLES_H_

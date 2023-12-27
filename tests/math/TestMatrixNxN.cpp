@@ -8,13 +8,9 @@
 
 #include <TestingUtils.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 // To achieve full test coverage of MatrixNxN template class tests have to be
 // done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has derived 
 // classes which are not templates.
-
-////////////////////////////////////////////////////////////////////////////////
 
 class TestMatrixNxN : public ::testing::Test
 {
@@ -24,8 +20,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanConstruct)
 {
@@ -42,8 +36,6 @@ TEST_F(TestMatrixNxN, CanConstruct)
     delete m6;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanDestruct)
 {
     mc::MatrixNxN<3>* m3 = new mc::MatrixNxN<3>();
@@ -55,8 +47,6 @@ TEST_F(TestMatrixNxN, CanDestruct)
     mc::MatrixNxN<6>* m6 = new mc::MatrixNxN<6>();
     EXPECT_NO_THROW(delete m6);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanInstantiate3x3)
 {
@@ -73,8 +63,6 @@ TEST_F(TestMatrixNxN, CanInstantiate3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanInstantiate4x4)
 {
     constexpr int size = 4;
@@ -90,8 +78,6 @@ TEST_F(TestMatrixNxN, CanInstantiate4x4)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanInstantiate6x6)
 {
     constexpr int size = 6;
@@ -106,8 +92,6 @@ TEST_F(TestMatrixNxN, CanInstantiate6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanInstantiateAndCopy3x3)
 {
@@ -131,8 +115,6 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanInstantiateAndCopy4x4)
 {
     constexpr int size = 4;
@@ -155,8 +137,6 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanInstantiateAndCopy6x6)
 {
@@ -183,8 +163,6 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanTranspose)
 {
     constexpr int size = 3;
@@ -208,8 +186,6 @@ TEST_F(TestMatrixNxN, CanTranspose)
     EXPECT_DOUBLE_EQ(m1(2,1), 6.0);
     EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanGetTransposed3x3)
 {
@@ -243,8 +219,6 @@ TEST_F(TestMatrixNxN, CanGetTransposed3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanGetTransposed4x4)
 {
     constexpr int size = 4;
@@ -277,8 +251,6 @@ TEST_F(TestMatrixNxN, CanGetTransposed4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanGetTransposed6x6)
 {
@@ -315,8 +287,6 @@ TEST_F(TestMatrixNxN, CanGetTransposed6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanAssign3x3)
 {
     constexpr int size = 3;
@@ -338,8 +308,6 @@ TEST_F(TestMatrixNxN, CanAssign3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanAssign4x4)
 {
@@ -363,8 +331,6 @@ TEST_F(TestMatrixNxN, CanAssign4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanAssign6x6)
 {
@@ -390,8 +356,6 @@ TEST_F(TestMatrixNxN, CanAssign6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanAdd3x3)
 {
@@ -431,8 +395,6 @@ TEST_F(TestMatrixNxN, CanAdd3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanAdd4x4)
 {
     constexpr int size = 4;
@@ -471,8 +433,6 @@ TEST_F(TestMatrixNxN, CanAdd4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanAdd6x6)
 {
@@ -515,8 +475,6 @@ TEST_F(TestMatrixNxN, CanAdd6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanNegate3x3)
 {
     constexpr int size = 3;
@@ -540,8 +498,6 @@ TEST_F(TestMatrixNxN, CanNegate3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanNegate4x4)
 {
@@ -567,8 +523,6 @@ TEST_F(TestMatrixNxN, CanNegate4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanNegate6x6)
 {
@@ -596,8 +550,6 @@ TEST_F(TestMatrixNxN, CanNegate6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanSubstract3x3)
 {
@@ -637,8 +589,6 @@ TEST_F(TestMatrixNxN, CanSubstract3x3)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanSubstract4x4)
 {
     constexpr int size = 4;
@@ -677,8 +627,6 @@ TEST_F(TestMatrixNxN, CanSubstract4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanSubstract6x6)
 {
@@ -721,8 +669,6 @@ TEST_F(TestMatrixNxN, CanSubstract6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanMultiplyByScalar3x3)
 {
     constexpr int size = 3;
@@ -755,8 +701,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanMultiplyByScalar4x4)
 {
@@ -791,8 +735,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanMultiplyByScalar6x6)
 {
@@ -829,8 +771,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar6x6)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanMultiplyByMatrix3x3)
 {
@@ -871,8 +811,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix3x3)
     }
 #   endif // TEST_USING_ARMADILLO
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanMultiplyByMatrix4x4)
 {
@@ -933,8 +871,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix4x4)
     }
 #   endif // TEST_USING_ARMADILLO
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanMultiplyByMatrix6x6)
 {
@@ -1022,8 +958,6 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix6x6)
 #   endif // TEST_USING_ARMADILLO
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanDivideByScalar3x3)
 {
     constexpr int size = 3;
@@ -1057,8 +991,6 @@ TEST_F(TestMatrixNxN, CanDivideByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanDivideByScalar4x4)
 {
@@ -1094,8 +1026,6 @@ TEST_F(TestMatrixNxN, CanDivideByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanDivideByScalar6x6)
 {
@@ -1134,8 +1064,6 @@ TEST_F(TestMatrixNxN, CanDivideByScalar6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanUnaryAdd3x3)
 {
     constexpr int size = 3;
@@ -1170,8 +1098,6 @@ TEST_F(TestMatrixNxN, CanUnaryAdd3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryAdd4x4)
 {
@@ -1208,8 +1134,6 @@ TEST_F(TestMatrixNxN, CanUnaryAdd4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryAdd6x6)
 {
@@ -1249,8 +1173,6 @@ TEST_F(TestMatrixNxN, CanUnaryAdd6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanUnarySubstract3x3)
 {
     constexpr int size = 3;
@@ -1285,8 +1207,6 @@ TEST_F(TestMatrixNxN, CanUnarySubstract3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnarySubstract4x4)
 {
@@ -1323,8 +1243,6 @@ TEST_F(TestMatrixNxN, CanUnarySubstract4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnarySubstract6x6)
 {
@@ -1364,8 +1282,6 @@ TEST_F(TestMatrixNxN, CanUnarySubstract6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar3x3)
 {
     constexpr int size = 3;
@@ -1397,8 +1313,6 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar4x4)
 {
@@ -1432,8 +1346,6 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar6x6)
 {
@@ -1470,8 +1382,6 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar6x6)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMatrixNxN, CanUnaryDivideByScalar3x3)
 {
     constexpr int size = 3;
@@ -1503,8 +1413,6 @@ TEST_F(TestMatrixNxN, CanUnaryDivideByScalar3x3)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryDivideByScalar4x4)
 {
@@ -1538,8 +1446,6 @@ TEST_F(TestMatrixNxN, CanUnaryDivideByScalar4x4)
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMatrixNxN, CanUnaryDivideByScalar6x6)
 {

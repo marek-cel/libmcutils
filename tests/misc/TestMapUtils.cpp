@@ -2,8 +2,6 @@
 
 #include <mcutils/misc/MapUtils.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMapUtils : public ::testing::Test
 {
 protected:
@@ -14,15 +12,11 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMapUtils, CanAddMapItem)
 {
     std::map<int,double> map;
     EXPECT_EQ(mc::AddMapItem(&map, 0, 3.14), mc::Result::Success);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMapUtils, CanGetMapItem)
 {

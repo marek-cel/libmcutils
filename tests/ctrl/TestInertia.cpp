@@ -7,8 +7,6 @@
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestInertia : public ::testing::Test
 {
 protected:
@@ -22,8 +20,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanCalculate)
 {
@@ -50,8 +46,6 @@ TEST_F(TestInertia, CanCalculate)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanCalculateWithZeroTimeConst)
 {
     double y = 0.0;
@@ -63,8 +57,6 @@ TEST_F(TestInertia, CanCalculateWithZeroTimeConst)
         EXPECT_NEAR(y, u, 1.0e-3) << "Error at index " << i;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanCalculate2)
 {
@@ -93,8 +85,6 @@ TEST_F(TestInertia, CanCalculate2)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanConstruct)
 {
     mc::Inertia* inertia = nullptr;
@@ -102,15 +92,11 @@ TEST_F(TestInertia, CanConstruct)
     delete inertia;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanDestruct)
 {
     mc::Inertia* inertia = new mc::Inertia();
     EXPECT_NO_THROW(delete inertia);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanInstantiate)
 {
@@ -120,8 +106,6 @@ TEST_F(TestInertia, CanInstantiate)
     EXPECT_DOUBLE_EQ(inertia.value(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanInstantiateAndSetData)
 {
     mc::Inertia inertia(2.0, 3.0);
@@ -130,16 +114,12 @@ TEST_F(TestInertia, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(inertia.value(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanGetValue)
 {
     mc::Inertia inertia(2.0, 3.0);
 
     EXPECT_DOUBLE_EQ(inertia.value(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanSetValue)
 {
@@ -149,16 +129,12 @@ TEST_F(TestInertia, CanSetValue)
     EXPECT_DOUBLE_EQ(inertia.value(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestInertia, CanGetTimeConst)
 {
     mc::Inertia inertia(2.0);
 
     EXPECT_DOUBLE_EQ(inertia.time_const(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanSetTimeConst)
 {
@@ -167,8 +143,6 @@ TEST_F(TestInertia, CanSetTimeConst)
     inertia.set_time_const(2.0);
     EXPECT_DOUBLE_EQ(inertia.time_const(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanUpdateStep)
 {
@@ -198,8 +172,6 @@ TEST_F(TestInertia, CanUpdateStep)
         t += TIME_STEP;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanUpdateStep2)
 {
@@ -231,8 +203,6 @@ TEST_F(TestInertia, CanUpdateStep2)
         t += TIME_STEP;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestInertia, CanUpdateSine)
 {

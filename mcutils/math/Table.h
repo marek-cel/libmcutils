@@ -22,19 +22,12 @@
 #ifndef MCUTILS_MATH_TABLE_H_
 #define MCUTILS_MATH_TABLE_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
-#include <map>
 #include <string>
-#include <utility>
 #include <vector>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Table and linear interpolation class.
@@ -253,8 +246,6 @@ private:
     void UpdateInterpolationData();
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
 inline Table operator*(double val, const Table& table)
 {
@@ -262,7 +253,5 @@ inline Table operator*(double val, const Table& table)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_TABLE_H_

@@ -28,12 +28,7 @@
 
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 PID::PID(double kp, double ki, double kd,
          std::unique_ptr<IAntiWindup> anti_windup)
@@ -43,8 +38,6 @@ PID::PID(double kp, double ki, double kd,
     , ki_(ki)
     , kd_(kd)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void PID::Update(double dt, double u)
 {
@@ -69,8 +62,6 @@ void PID::Update(double dt, double u)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void PID::Reset()
 {
     error_i_ = 0.0;
@@ -81,16 +72,12 @@ void PID::Reset()
     value_ = 0.0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void PID::SetAsParallel(double kp, double ki, double kd)
 {
     kp_ = kp;
     ki_ = ki;
     kd_ = kd;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void PID::SetAsSeries( double k, double tau_i, double tau_d )
 {
@@ -99,16 +86,12 @@ void PID::SetAsSeries( double k, double tau_i, double tau_d )
     kd_ = k * tau_d;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void PID::SetAsStandard(double kp, double ti, double td )
 {
     kp_ = kp;
     ki_ = kp / ti;
     kd_ = kp * td;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void PID::SetValueAndError( double value, double error, double dt )
 {
@@ -122,8 +105,6 @@ void PID::SetValueAndError( double value, double error, double dt )
     value_ = value;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void PID::set_value(double value)
 {
     error_i_ = fabs(ki_) > 0.0 ? value / ki_ : 0.0;
@@ -133,7 +114,5 @@ void PID::set_value(double value)
 
     value_ = value;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

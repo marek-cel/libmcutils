@@ -25,19 +25,12 @@
 #include <cmath>
 #include <limits>
 #include <sstream>
-#include <string>
 #include <utility>
-#include <vector>
 
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Table::Table(const Table& table)
     : size_(table.size_)
@@ -56,8 +49,6 @@ Table::Table(const Table& table)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table::Table(Table&& table) noexcept
     : size_(std::exchange(table.size_, 0))
     , last_(std::exchange(table.last_, 0))
@@ -66,8 +57,6 @@ Table::Table(Table&& table) noexcept
     , table_data_(std::exchange(table.table_data_, nullptr))
     , inter_data_(std::exchange(table.inter_data_, nullptr))
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 Table::Table(double val, double key)
 {
@@ -81,8 +70,6 @@ Table::Table(double val, double key)
     inter_data_[0] = 0.0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table::Table(const double key_values[],
              const double table_data[],
              unsigned int size)
@@ -90,22 +77,16 @@ Table::Table(const double key_values[],
     SetData(key_values, table_data, size);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table::Table(const std::vector<double>& key_values,
              const std::vector<double>& table_data)
 {
     SetData(key_values, table_data);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table::~Table()
 {
     DeleteArrays();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetKeyByIndex(unsigned int index) const
 {
@@ -116,8 +97,6 @@ double Table::GetKeyByIndex(unsigned int index) const
 
     return std::numeric_limits<double>::quiet_NaN();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetKeyOfValueMin() const
 {
@@ -135,8 +114,6 @@ double Table::GetKeyOfValueMin() const
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetKeyOfValueMin(double key_min, double key_max) const
 {
@@ -165,8 +142,6 @@ double Table::GetKeyOfValueMin(double key_min, double key_max) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table::GetKeyOfValueMax() const
 {
     double result    = std::numeric_limits<double>::quiet_NaN();
@@ -183,8 +158,6 @@ double Table::GetKeyOfValueMax() const
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetKeyOfValueMax(double key_min, double key_max) const
 {
@@ -212,8 +185,6 @@ double Table::GetKeyOfValueMax(double key_min, double key_max) const
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetValue(double key_value) const
 {
@@ -253,8 +224,6 @@ double Table::GetValue(double key_value) const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table::GetValueByIndex(unsigned int index) const
 {
     if ( size_ > 0 && index < size_ )
@@ -264,8 +233,6 @@ double Table::GetValueByIndex(unsigned int index) const
 
     return std::numeric_limits<double>::quiet_NaN();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetFirstValue() const
 {
@@ -277,8 +244,6 @@ double Table::GetFirstValue() const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table::GetLastValue() const
 {
     if ( size_ > 0 )
@@ -288,8 +253,6 @@ double Table::GetLastValue() const
 
     return std::numeric_limits<double>::quiet_NaN();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::GetValueMin() const
 {
@@ -311,8 +274,6 @@ double Table::GetValueMin() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table::GetValueMax() const
 {
     double result = std::numeric_limits<double>::quiet_NaN();
@@ -333,8 +294,6 @@ double Table::GetValueMax() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Table::IsValid() const
 {
     bool result = ( size_ > 0 ) ? true : false;
@@ -351,8 +310,6 @@ bool Table::IsValid() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table::MultiplyKeys(double factor)
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -363,8 +320,6 @@ void Table::MultiplyKeys(double factor)
     UpdateInterpolationData();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table::MultiplyValues(double factor)
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -374,8 +329,6 @@ void Table::MultiplyValues(double factor)
 
     UpdateInterpolationData();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table::SetData(const double key_values[],
                     const double table_data[],
@@ -405,8 +358,6 @@ void Table::SetData(const double key_values[],
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table::SetData(const std::vector<double>& key_values,
                     const std::vector<double>& table_data)
 {
@@ -433,8 +384,6 @@ void Table::SetData(const std::vector<double>& key_values,
         UpdateInterpolationData();
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table::SetFromString(const char* str)
 {
@@ -470,8 +419,6 @@ void Table::SetFromString(const char* str)
     SetData(key_values, table_data);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string Table::ToString()
 {
     std::stringstream ss;
@@ -483,8 +430,6 @@ std::string Table::ToString()
 
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Table Table::operator+(const Table& table) const
 {
@@ -503,16 +448,12 @@ Table Table::operator+(const Table& table) const
     return Table(key_values, table_data);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table Table::operator*(double val) const
 {
     Table result(*this);
     result.MultiplyValues(val);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Table& Table::operator=(const Table& table)
 {
@@ -539,8 +480,6 @@ Table& Table::operator=(const Table& table)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table& Table::operator=(Table&& table)
 {
     DeleteArrays();
@@ -555,29 +494,21 @@ Table& Table::operator=(Table&& table)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Table::DoesIndexMatchKey(int index, double key_value) const
 {
     return key_value >= key_values_[index] && key_value < key_values_[index+1];
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table::CalculateInterpolatedValue(int index, double key_value) const
 {
     return (key_value - key_values_[index]) * inter_data_[index] + table_data_[index];
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table::CalculateInterpolationData(double key_0, double value_0,
                                          double key_1, double value_1) const
 {
     return (value_1 - value_0) / (key_1 - key_0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table::CreateArrays()
 {
@@ -586,8 +517,6 @@ void Table::CreateArrays()
     inter_data_ = new double [size_];
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table::DeleteArrays()
 {
     if ( key_values_ ) { delete [] key_values_; } key_values_ = nullptr;
@@ -595,16 +524,16 @@ void Table::DeleteArrays()
     if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table::UpdateInterpolationData()
 {
     for ( unsigned int i = 0; i < size_; ++i )
     {
         if ( i < last_ )
         {
-            inter_data_[i] = CalculateInterpolationData(key_values_[i]   , table_data_[i],
-                                                        key_values_[i+1] , table_data_[i+1]);
+            inter_data_[i] = CalculateInterpolationData(key_values_[i],
+                                                        table_data_[i],
+                                                        key_values_[i+1],
+                                                        table_data_[i+1]);
         }
         else
         {
@@ -612,7 +541,5 @@ void Table::UpdateInterpolationData()
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

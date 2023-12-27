@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMath : public ::testing::Test
 {
 protected:
@@ -13,8 +11,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculatePow2)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Pow2(0.0), 0.0);
@@ -22,8 +18,6 @@ TEST_F(TestMath, CanCalculatePow2)
     EXPECT_DOUBLE_EQ(mc::Math::Pow2(2.0), 4.0);
     EXPECT_DOUBLE_EQ(mc::Math::Pow2(3.0), 9.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMath, CanCalculatePow3)
 {
@@ -33,8 +27,6 @@ TEST_F(TestMath, CanCalculatePow3)
     EXPECT_DOUBLE_EQ(mc::Math::Pow3(3.0), 27.0);
 }
 
-//////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculatePow4)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Pow4(0.0),  0.0);
@@ -43,8 +35,6 @@ TEST_F(TestMath, CanCalculatePow4)
     EXPECT_DOUBLE_EQ(mc::Math::Pow4(3.0), 81.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculatePow5)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Pow5(0.0),   0.0);
@@ -52,8 +42,6 @@ TEST_F(TestMath, CanCalculatePow5)
     EXPECT_DOUBLE_EQ(mc::Math::Pow5(2.0),  32.0);
     EXPECT_DOUBLE_EQ(mc::Math::Pow5(3.0), 243.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMath, CanDetermineIfIsInside)
 {
@@ -67,8 +55,6 @@ TEST_F(TestMath, CanDetermineIfIsInside)
     EXPECT_FALSE(mc::Math::IsInside(0.0, 1.0,  2.0));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanDetermineIfIsOutside)
 {
     EXPECT_FALSE(mc::Math::IsOutside(0.0, 1.0,  0.0));
@@ -81,8 +67,6 @@ TEST_F(TestMath, CanDetermineIfIsOutside)
     EXPECT_TRUE(mc::Math::IsOutside(0.0, 1.0,  2.0));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculateSign)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Sign( -2.0 ), -1.0);
@@ -93,8 +77,6 @@ TEST_F(TestMath, CanCalculateSign)
     EXPECT_DOUBLE_EQ(mc::Math::Sign(  1.0 ),  1.0);
     EXPECT_DOUBLE_EQ(mc::Math::Sign(  2.0 ),  1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMath, CanSaturate)
 {
@@ -119,8 +101,6 @@ TEST_F(TestMath, CanSaturate)
     EXPECT_DOUBLE_EQ(mc::Math::Satur( -1.0, 1.0,  2.0 ),  1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculateSineWave)
 {
     float x = -1.0;
@@ -135,8 +115,6 @@ TEST_F(TestMath, CanCalculateSineWave)
         x += 0.1f;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMath, CanCalculateSmoothstep1Arg)
 {
@@ -154,8 +132,6 @@ TEST_F(TestMath, CanCalculateSmoothstep1Arg)
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep(  2.0 ), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculateSmoothstep3Args)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep( -1.0, 1.0, -1.0 ), 0.0);
@@ -172,8 +148,6 @@ TEST_F(TestMath, CanCalculateSmoothstep3Args)
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep( -1.0, 1.0,  2.0 ), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMath, CanCalculateSmoothstep5Args)
 {
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep( -1.0, 1.0, -5.0, 5.0, -1.0 ), -5.0);
@@ -189,8 +163,6 @@ TEST_F(TestMath, CanCalculateSmoothstep5Args)
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep( -1.0, 1.0, -5.0, 5.0, -2.0 ), -5.0);
     EXPECT_DOUBLE_EQ(mc::Math::Smoothstep( -1.0, 1.0, -5.0, 5.0,  2.0 ),  5.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMath, CanCalculateStandardDeviation)
 {

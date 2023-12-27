@@ -5,8 +5,6 @@
 #include <mcutils/math/Matrix3x3.h>
 #include <mcutils/math/Quaternion.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestQuaternion : public ::testing::Test
 {
 protected:
@@ -16,8 +14,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanConstruct)
 {
     mc::Quaternion *q = nullptr;
@@ -25,15 +21,11 @@ TEST_F(TestQuaternion, CanConstruct)
     delete q;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanDestruct)
 {
     mc::Quaternion *q = new mc::Quaternion();
     EXPECT_NO_THROW( delete q );
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanInstantiate)
 {
@@ -45,8 +37,6 @@ TEST_F(TestQuaternion, CanInstantiate)
     EXPECT_DOUBLE_EQ(q0.ez(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanInstantiateAndSetData)
 {
     mc::Quaternion q0(0.1, 0.2, 0.3, 0.4);
@@ -56,8 +46,6 @@ TEST_F(TestQuaternion, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(q0.ey(), 0.3);
     EXPECT_DOUBLE_EQ(q0.ez(), 0.4);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngles)
 {
@@ -71,8 +59,6 @@ TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngles)
     EXPECT_NEAR(q0.ey(), 0.43968, 1.0e-5);
     EXPECT_NEAR(q0.ez(), 0.36042, 1.0e-5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngleAndVector)
 {
@@ -109,8 +95,6 @@ TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngleAndVector)
     EXPECT_NEAR(q4.ey(), 0.22094, 1.0e-5);
     EXPECT_NEAR(q4.ez(), 0.22094, 1.0e-5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanValidate)
 {
@@ -161,8 +145,6 @@ TEST_F(TestQuaternion, CanValidate)
     EXPECT_FALSE(q0.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanConjugate)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
@@ -174,8 +156,6 @@ TEST_F(TestQuaternion, CanConjugate)
     EXPECT_DOUBLE_EQ(q0.ey(), -3.0);
     EXPECT_DOUBLE_EQ(q0.ez(), -4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanInverse)
 {
@@ -201,8 +181,6 @@ TEST_F(TestQuaternion, CanInverse)
     EXPECT_NEAR(q0.ez(), -0.22094, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanNormalize)
 {
     // expected values calculated with GNU Octave
@@ -218,8 +196,6 @@ TEST_F(TestQuaternion, CanNormalize)
     EXPECT_NEAR(q0.ez(), 0.73030, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanGetLength2)
 {
     // expected values calculated with GNU Octave
@@ -232,8 +208,6 @@ TEST_F(TestQuaternion, CanGetLength2)
     EXPECT_NEAR(q2.GetLength2(), 1.0, 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanGetLength)
 {
     // expected values calculated with GNU Octave
@@ -245,8 +219,6 @@ TEST_F(TestQuaternion, CanGetLength)
     EXPECT_NEAR(q1.GetLength(), 2.0, 1.0e-9);
     EXPECT_NEAR(q2.GetLength(), 1.0, 1.0e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanGetAngles)
 {
@@ -305,8 +277,6 @@ TEST_F(TestQuaternion, CanGetAngles)
     EXPECT_DOUBLE_EQ(aq2.psi(), am2.psi());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanGetConjugated)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
@@ -322,8 +292,6 @@ TEST_F(TestQuaternion, CanGetConjugated)
     EXPECT_DOUBLE_EQ(q1.ey(), -3.0);
     EXPECT_DOUBLE_EQ(q1.ez(), -4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanGetInverted)
 {
@@ -355,8 +323,6 @@ TEST_F(TestQuaternion, CanGetInverted)
     EXPECT_NEAR(q1.ez(), -0.22094, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanGetDerivative)
 {
     // expected values calculated with GNU Octave
@@ -375,8 +341,6 @@ TEST_F(TestQuaternion, CanGetDerivative)
     EXPECT_NEAR(q0.ey(),  0.70294, 1.0e-5);
     EXPECT_NEAR(q0.ez(),  1.49630, 1.0e-5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanGetDerivativeLambdaGreaterThanZero)
 {
@@ -397,8 +361,6 @@ TEST_F(TestQuaternion, CanGetDerivativeLambdaGreaterThanZero)
     EXPECT_NEAR(q0.ez(),  1.49630, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanGetNormalized)
 {
     // expected values calculated with GNU Octave
@@ -418,8 +380,6 @@ TEST_F(TestQuaternion, CanGetNormalized)
     EXPECT_NEAR(q1.ez(), 0.73030, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanSetValues)
 {
     mc::Quaternion q0;
@@ -431,8 +391,6 @@ TEST_F(TestQuaternion, CanSetValues)
     EXPECT_DOUBLE_EQ(q0.ey(), 3.0);
     EXPECT_DOUBLE_EQ(q0.ez(), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanAdd)
 {
@@ -446,8 +404,6 @@ TEST_F(TestQuaternion, CanAdd)
     EXPECT_DOUBLE_EQ(q2.ez(), 12.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanSubstract)
 {
     mc::Quaternion q0(4.0, 3.0, 2.0, 1.0);
@@ -460,8 +416,6 @@ TEST_F(TestQuaternion, CanSubstract)
     EXPECT_DOUBLE_EQ(q2.ez(), 7.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanMultiplyByScalar)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
@@ -472,8 +426,6 @@ TEST_F(TestQuaternion, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(q1.ey(), 6.0);
     EXPECT_DOUBLE_EQ(q1.ez(), 8.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanMultiplyByQuaternion)
 {
@@ -490,8 +442,6 @@ TEST_F(TestQuaternion, CanMultiplyByQuaternion)
     EXPECT_NEAR(q.ez(), 0.27060, 1.0e-5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanDivideByScalar)
 {
     mc::Quaternion q0(2.0, 4.0, 6.0, 8.0);
@@ -502,8 +452,6 @@ TEST_F(TestQuaternion, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(q1.ey(), 3.0);
     EXPECT_DOUBLE_EQ(q1.ez(), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanUnaryAdd)
 {
@@ -518,8 +466,6 @@ TEST_F(TestQuaternion, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(q0.ez(), 12.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanUnarySubstract)
 {
     mc::Quaternion q0(4.0, 3.0, 2.0, 1.0);
@@ -533,8 +479,6 @@ TEST_F(TestQuaternion, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(q1.ez(), 7.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanUnaryMultiplyByScalar)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
@@ -546,8 +490,6 @@ TEST_F(TestQuaternion, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(q0.ey(), 6.0);
     EXPECT_DOUBLE_EQ(q0.ez(), 8.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestQuaternion, CanUnaryDivideByScalar)
 {
@@ -561,17 +503,11 @@ TEST_F(TestQuaternion, CanUnaryDivideByScalar)
     EXPECT_DOUBLE_EQ(q0.ez(), 4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestQuaternion, CanConvertToString)
 {
     mc::Quaternion q(1.0, 2.0, 3.0, 4.0);
     EXPECT_STREQ(q.ToString().c_str(), "1,2,3,4");
 }
-
-////////////////////////////////////////////////////////////////////////////////
-
-#include <iostream>
 
 TEST_F(TestQuaternion, CanCompare)
 {

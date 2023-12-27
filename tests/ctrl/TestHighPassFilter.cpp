@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestHighPassFilter : public ::testing::Test
 {
 protected:
@@ -22,8 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanConstruct)
 {
     mc::HighPassFilter* hpf = nullptr;
@@ -31,15 +27,11 @@ TEST_F(TestHighPassFilter, CanConstruct)
     delete hpf;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanDestruct)
 {
     mc::HighPassFilter* hpf = new mc::HighPassFilter();
     EXPECT_NO_THROW(delete hpf);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestHighPassFilter, CanInstantiate)
 {
@@ -48,8 +40,6 @@ TEST_F(TestHighPassFilter, CanInstantiate)
     EXPECT_DOUBLE_EQ(hpf.value(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanInstantiateAndSetData)
 {
     mc::HighPassFilter hpf(2.0, 3.0);
@@ -57,16 +47,12 @@ TEST_F(TestHighPassFilter, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(hpf.value(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanSetCutoffFreq)
 {
     mc::HighPassFilter hpf;
     hpf.SetCutoffFreq(1.0);
     EXPECT_DOUBLE_EQ(hpf.omega(), 2.0 * M_PI);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestHighPassFilter, CanUpdateStep)
 {
@@ -97,8 +83,6 @@ TEST_F(TestHighPassFilter, CanUpdateStep)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanUpdateSine)
 {
     std::vector<double> vals;
@@ -128,15 +112,11 @@ TEST_F(TestHighPassFilter, CanUpdateSine)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanGetOmega)
 {
     mc::HighPassFilter hpf(2.0, 3.0);
     EXPECT_DOUBLE_EQ(hpf.omega(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestHighPassFilter, CanGetValue)
 {
@@ -144,16 +124,12 @@ TEST_F(TestHighPassFilter, CanGetValue)
     EXPECT_DOUBLE_EQ(hpf.value(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestHighPassFilter, CanSetOmega)
 {
     mc::HighPassFilter hpf;
     hpf.set_omega(2.0);
     EXPECT_DOUBLE_EQ(hpf.omega(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestHighPassFilter, CanSetValue)
 {

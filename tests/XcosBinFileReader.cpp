@@ -2,8 +2,6 @@
 
 #include <cstdio>
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool XcosBinFileReader::ReadData(const char* file_path, std::vector<double>* vals)
 {
     FILE* file = fopen(file_path, "rb");

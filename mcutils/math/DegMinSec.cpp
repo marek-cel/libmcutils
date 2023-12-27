@@ -29,19 +29,12 @@
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/Units.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 DegMinSec::DegMinSec(double angle)
 {
     SetAngle(angle);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 bool DegMinSec::IsValid() const
 {
@@ -50,8 +43,6 @@ bool DegMinSec::IsValid() const
         && mc::IsValid(min_)
         && mc::IsValid(sec_);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void DegMinSec::SetAngle(double angle)
 {
@@ -65,8 +56,6 @@ void DegMinSec::SetAngle(double angle)
 
     if ( angle < 0.0 ) deg_ *= -1;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string DegMinSec::ToString() const
 {
@@ -82,22 +71,16 @@ std::string DegMinSec::ToString() const
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool DegMinSec::operator==(const DegMinSec& dms) const
 {
-    return ( (deg_ == dms.deg_)
-          && (min_ == dms.min_)
-          && (sec_ == dms.sec_) );
+    return ((deg_ == dms.deg_)
+         && (min_ == dms.min_)
+         && (sec_ == dms.sec_));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 bool DegMinSec::operator!=(const DegMinSec& dms) const
 {
-    return !( *this == dms );
+    return !(*this == dms);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

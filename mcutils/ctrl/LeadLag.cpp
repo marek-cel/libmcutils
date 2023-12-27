@@ -25,12 +25,7 @@
 #include <algorithm>
 #include <cmath>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
     : c1_(c1)
@@ -39,8 +34,6 @@ LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
     , c4_(c4)
     , value_(value)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void LeadLag::Update(double dt, double u)
 {
@@ -59,7 +52,5 @@ void LeadLag::Update(double dt, double u)
         u_prev_ = u;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

@@ -29,12 +29,7 @@
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/Units.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 double Angles::Normalize(double val, double min)
 {
@@ -47,14 +42,10 @@ double Angles::Normalize(double val, double min)
     return tmp;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Angles::Angles(double phi, double tht, double psi)
 {
     Set(phi, tht, psi);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 bool Angles::IsValid() const
 {
@@ -62,8 +53,6 @@ bool Angles::IsValid() const
         && mc::IsValid(tht_)
         && mc::IsValid(psi_);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Angles::Normalize()
 {
@@ -88,16 +77,12 @@ void Angles::Normalize()
     while ( psi_ <  0.0        ) psi_ += 2.0 * M_PI;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Angles::Set(double phi, double tht, double psi)
 {
     phi_ = phi;
     tht_ = tht;
     psi_ = psi;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string Angles::ToString() const
 {
@@ -115,8 +100,6 @@ std::string Angles::ToString() const
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Angles::operator==(const Angles& angl) const
 {
     return (phi_ == angl.phi_)
@@ -124,13 +107,9 @@ bool Angles::operator==(const Angles& angl) const
         && (psi_ == angl.psi_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Angles::operator!=(const Angles& angl) const
 {
     return !( *this == angl );
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

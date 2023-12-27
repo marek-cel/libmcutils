@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Random.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestRandom : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestRandom, CanGetInt)
 {
@@ -45,8 +41,6 @@ TEST_F(TestRandom, CanGetInt)
     EXPECT_EQ(temp, 0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestRandom, CanGetFloat)
 {
     float min;
@@ -71,8 +65,6 @@ TEST_F(TestRandom, CanGetFloat)
     EXPECT_GE(temp, min);
     EXPECT_LE(temp, max);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestRandom, CanGetDouble)
 {

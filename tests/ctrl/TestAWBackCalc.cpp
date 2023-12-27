@@ -8,8 +8,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestAWBackCalc : public ::testing::Test
 {
 protected:
@@ -30,8 +28,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanConstruct)
 {
     mc::AWBackCalc* aw = nullptr;
@@ -39,15 +35,11 @@ TEST_F(TestAWBackCalc, CanConstruct)
     delete aw;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanDestruct)
 {
     mc::AWBackCalc* aw = new mc::AWBackCalc();
     EXPECT_NO_THROW(delete aw);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWBackCalc, CanInstantiate)
 {
@@ -57,8 +49,6 @@ TEST_F(TestAWBackCalc, CanInstantiate)
     EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanInstantiateAndSetData)
 {
     mc::AWBackCalc aw(MIN, MAX);
@@ -67,23 +57,17 @@ TEST_F(TestAWBackCalc, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanGetMin)
 {
     mc::AWBackCalc aw(MIN, MAX);
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanGetMax)
 {
     mc::AWBackCalc aw(MIN, MAX);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWBackCalc, CanSetMin)
 {
@@ -92,16 +76,12 @@ TEST_F(TestAWBackCalc, CanSetMin)
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWBackCalc, CanSetMax)
 {
     mc::AWBackCalc aw;
     aw.set_max(MAX);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWBackCalc, CanUpdate)
 {

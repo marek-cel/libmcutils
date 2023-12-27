@@ -22,16 +22,11 @@
 #ifndef MCUTILS_GEO_DATAMARS_H_
 #define MCUTILS_GEO_DATAMARS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cmath>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Martian Coordinate System ellipsoid parameters according to the IAU
@@ -45,8 +40,7 @@ namespace mc
  * - [Mars - Wikipedia](https://en.wikipedia.org/wiki/Mars)
  * - [Airy-0 - Wikipedia](https://en.wikipedia.org/wiki/Airy-0)
  */
-namespace DataMars
-{
+namespace DataMars {
 
 static constexpr double a   = 3396190.0;                ///< [m] equatorial radius
 static constexpr double b   = 3376200.0;                ///< [m] polar radius
@@ -66,7 +60,5 @@ static constexpr double mm    = 6.4171e23;              ///< [kg] mass of the Ma
 
 } // namespace DataMars
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_DATAMARS_H_

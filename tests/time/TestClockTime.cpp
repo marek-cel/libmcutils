@@ -2,8 +2,6 @@
 
 #include <mcutils/time/ClockTime.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestClockTime : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestClockTime, CanGetClockTime)
 {

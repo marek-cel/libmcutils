@@ -22,8 +22,6 @@
 #ifndef MCUTILS_CTRL_PID_H_
 #define MCUTILS_CTRL_PID_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <memory>
 #include <utility>
 
@@ -31,10 +29,7 @@
 
 #include <mcutils/ctrl/IAntiWindup.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Proportional-Integral-Derivative controller.
@@ -155,7 +150,5 @@ private:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_PID_H_

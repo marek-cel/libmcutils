@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_INTEGRATOR_H_
 #define MCUTILS_MATH_INTEGRATOR_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <functional>
 #include <memory>
 
@@ -31,10 +29,7 @@
 
 #include <mcutils/math/Vector.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Abstract numerical integration base class.
@@ -75,7 +70,5 @@ protected:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_INTEGRATOR_H_
