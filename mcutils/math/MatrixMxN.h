@@ -139,24 +139,29 @@ public:
      */
     void SetFromString(const char* str)
     {
-        double elements[size_];
-
-        for ( unsigned int i = 0; i < size_; ++i )
+        if ( size_ > 0 )
         {
-            elements [i] = std::numeric_limits<double>::quiet_NaN();
-            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+            double elements = new double [size_];
+
+            for ( unsigned int i = 0; i < size_; ++i )
+            {
+                elements [i] = std::numeric_limits<double>::quiet_NaN();
+                elements_[i] = std::numeric_limits<double>::quiet_NaN();
+            }
+
+            std::stringstream ss(String::StripSpaces(str));
+            bool valid = true;
+
+            for ( unsigned int i = 0; i < size_; ++i )
+            {
+                ss >> elements[i];
+                valid &= mc::IsValid(elements[i]);
+            }
+
+            if ( valid ) SetFromArray(elements);
+
+            delete [] elements;
         }
-
-        std::stringstream ss(String::StripSpaces(str));
-        bool valid = true;
-
-        for ( unsigned int i = 0; i < size_; ++i )
-        {
-            ss >> elements[i];
-            valid &= mc::IsValid(elements[i]);
-        }
-
-        if ( valid ) SetFromArray(elements);
     }
 
     /** @brief Swaps matrix rows. */

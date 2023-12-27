@@ -40,7 +40,7 @@ namespace mc {
  */
 inline Matrix3x3 ParallelAxisInertia(double m, const Matrix3x3& i, const Vector3& r)
 {
-    Matrix3x3 a(  
+    Matrix3x3 a(
         r.y()*r.y() + r.z()*r.z() , -r.x()*r.y()               , -r.x()*r.z(),
        -r.y()*r.x()               ,  r.x()*r.x() + r.z()*r.z() , -r.y()*r.z(),
        -r.z()*r.x()               , -r.z()*r.y()               ,  r.x()*r.x() + r.y()*r.y()

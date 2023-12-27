@@ -54,7 +54,7 @@ class MCUTILSAPI Quaternion
 public:
 
     /** @brief Constructor. */
-    explicit Quaternion(double e0 = 1.0, double ex = 0.0, 
+    explicit Quaternion(double e0 = 1.0, double ex = 0.0,
                         double ey = 0.0, double ez = 0.0);
 
     /** @brief Constructor. */

@@ -70,7 +70,7 @@ public:
      */
     Table(const std::vector<double>& key_values,
           const std::vector<double>& table_data);
-    
+
     ~Table();
 
     /**

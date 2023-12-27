@@ -62,7 +62,7 @@ Table::Table(double val, double key)
 {
     size_ = 1;
     last_ = 0;
-    
+
     CreateArrays();
 
     key_values_[0] = key;
