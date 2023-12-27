@@ -26,12 +26,7 @@
 #   include <algorithm>
 #endif
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Matrix3x3 Matrix3x3::GetIdentityMatrix()
 {
@@ -40,16 +35,12 @@ Matrix3x3 Matrix3x3::GetIdentityMatrix()
                      0.0, 0.0, 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3::Matrix3x3(double xx, double xy, double xz,
                      double yx, double yy, double yz,
                      double zx, double zy, double zz)
 {
     Set(xx, xy, xz, yx, yy, yz, zx, zy, zz);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3::Matrix3x3(const Angles& angl)
 {
@@ -78,8 +69,6 @@ Matrix3x3::Matrix3x3(const Angles& angl)
     zz() =  (cos_phi * cos_tht);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3::Matrix3x3(const Quaternion& qtrn)
 {
     double e0 = qtrn.e0();
@@ -105,8 +94,6 @@ Matrix3x3::Matrix3x3(const Quaternion& qtrn)
     zz() = e02 - ex2 - ey2 + ez2;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Matrix3x3::Set(double xx, double xy, double xz,
                     double yx, double yy, double yz,
                     double zx, double zy, double zz)
@@ -123,8 +110,6 @@ void Matrix3x3::Set(double xx, double xy, double xz,
     this->zy() = zy;
     this->zz() = zz;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Angles Matrix3x3::GetAngles() const
 {
@@ -150,8 +135,6 @@ Angles Matrix3x3::GetAngles() const
 
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Quaternion Matrix3x3::GetQuaternion() const
 {
@@ -204,16 +187,12 @@ Quaternion Matrix3x3::GetQuaternion() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3 Matrix3x3::GetTransposed() const
 {
     Matrix3x3 result(*this);
     result.Transpose();
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3 Matrix3x3::operator+(const Matrix3x3& mtrx) const
 {
@@ -222,16 +201,12 @@ Matrix3x3 Matrix3x3::operator+(const Matrix3x3& mtrx) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3 Matrix3x3::operator-() const
 {
     Matrix3x3 result(*this);
     result.Negate();
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3 Matrix3x3::operator-(const Matrix3x3& mtrx) const
 {
@@ -240,16 +215,12 @@ Matrix3x3 Matrix3x3::operator-(const Matrix3x3& mtrx) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3 Matrix3x3::operator*(double value) const
 {
     Matrix3x3 result(*this);
     result.MultiplyByValue(value);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3 Matrix3x3::operator*(const Matrix3x3& matrix) const
 {
@@ -258,16 +229,12 @@ Matrix3x3 Matrix3x3::operator*(const Matrix3x3& matrix) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3 Matrix3x3::operator*(const Vector3& vect) const
 {
     Vector3 result;
     MultiplyByVector(vect, &result);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3 Matrix3x3::operator/(double value) const
 {
@@ -276,15 +243,11 @@ Matrix3x3 Matrix3x3::operator/(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3& Matrix3x3::operator+=(const Matrix3x3& matrix)
 {
     Add(matrix);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix3x3& Matrix3x3::operator-=(const Matrix3x3& matrix)
 {
@@ -292,22 +255,16 @@ Matrix3x3& Matrix3x3::operator-=(const Matrix3x3& matrix)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3& Matrix3x3::operator*=(double value)
 {
     MultiplyByValue(value);
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix3x3& Matrix3x3::operator/=(double value)
 {
     DivideByValue(value);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

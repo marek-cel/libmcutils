@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestSystem2 : public ::testing::Test
 {
 protected:
@@ -20,8 +18,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanConstruct)
 {
     mc::System2* s = nullptr;
@@ -29,15 +25,11 @@ TEST_F(TestSystem2, CanConstruct)
     delete s;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanDestruct)
 {
     mc::System2* s = new mc::System2();
     EXPECT_NO_THROW(delete s);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanInstantiate)
 {
@@ -53,8 +45,6 @@ TEST_F(TestSystem2, CanInstantiate)
     EXPECT_DOUBLE_EQ(s.value(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanInstantiateAndSetData)
 {
     mc::System2 s(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0);
@@ -68,8 +58,6 @@ TEST_F(TestSystem2, CanInstantiateAndSetData)
 
     EXPECT_DOUBLE_EQ(s.value(), 99.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanUpdateOscillatorStep)
 {
@@ -103,8 +91,6 @@ TEST_F(TestSystem2, CanUpdateOscillatorStep)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanUpdateOscillatorSine)
 {
     std::vector<double> vals;
@@ -137,15 +123,11 @@ TEST_F(TestSystem2, CanUpdateOscillatorSine)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanGetC1)
 {
     mc::System2 s(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0);
     EXPECT_DOUBLE_EQ(s.c1(), 1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanGetC2)
 {
@@ -153,15 +135,11 @@ TEST_F(TestSystem2, CanGetC2)
     EXPECT_DOUBLE_EQ(s.c2(), 2.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanGetC3)
 {
     mc::System2 s(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0);
     EXPECT_DOUBLE_EQ(s.c3(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanGetC4)
 {
@@ -169,15 +147,11 @@ TEST_F(TestSystem2, CanGetC4)
     EXPECT_DOUBLE_EQ(s.c4(), 4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanGetC5)
 {
     mc::System2 s(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0);
     EXPECT_DOUBLE_EQ(s.c5(), 5.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanGetC6)
 {
@@ -185,15 +159,11 @@ TEST_F(TestSystem2, CanGetC6)
     EXPECT_DOUBLE_EQ(s.c6(), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanGetValue)
 {
     mc::System2 s(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 99.0);
     EXPECT_DOUBLE_EQ(s.value(), 99.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanSetC1)
 {
@@ -202,16 +172,12 @@ TEST_F(TestSystem2, CanSetC1)
     EXPECT_DOUBLE_EQ(s.c1(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanSetC2)
 {
     mc::System2 s;
     s.set_c2(2.0);
     EXPECT_DOUBLE_EQ(s.c2(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanSetC3)
 {
@@ -220,16 +186,12 @@ TEST_F(TestSystem2, CanSetC3)
     EXPECT_DOUBLE_EQ(s.c3(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanSetC4)
 {
     mc::System2 s;
     s.set_c4(4.0);
     EXPECT_DOUBLE_EQ(s.c4(), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanSetC5)
 {
@@ -238,16 +200,12 @@ TEST_F(TestSystem2, CanSetC5)
     EXPECT_DOUBLE_EQ(s.c5(), 5.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestSystem2, CanSetC6)
 {
     mc::System2 s;
     s.set_c6(6.0);
     EXPECT_DOUBLE_EQ(s.c6(), 6.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSystem2, CanSetValue)
 {

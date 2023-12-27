@@ -29,12 +29,7 @@
 
 #include <mcutils/misc/Check.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Vector::Vector(const Vector& vect)
     : size_(vect.size_)
@@ -43,37 +38,27 @@ Vector::Vector(const Vector& vect)
     SetFromArray(vect.elements_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector::Vector(Vector&& vect)
     : size_(std::exchange(vect.size_, 0))
     , elements_(std::exchange(vect.elements_, nullptr))
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector::~Vector()
 {
     DeleteElementsArray();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Vector::Vector( unsigned int size )
-    : size_( size )
+Vector::Vector(unsigned int size)
+    : size_(size)
 {
     elements_ = new double [size_];
     Zeroize();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 bool Vector::IsValid() const
 {
     return mc::IsValid(elements_, size_);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Vector::GetLength() const
 {
@@ -84,8 +69,6 @@ double Vector::GetLength() const
     }
     return sqrt(length2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Vector::Normalize()
 {
@@ -102,8 +85,6 @@ void Vector::Normalize()
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Vector::GetElement(unsigned int index) const
 {
     if ( index < size_ )
@@ -114,8 +95,6 @@ double Vector::GetElement(unsigned int index) const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::PutIntoArray(double elements[]) const
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -123,8 +102,6 @@ void Vector::PutIntoArray(double elements[]) const
         elements[i] = elements_[i];
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Vector::SetElement(unsigned int index, double val)
 {
@@ -134,8 +111,6 @@ void Vector::SetElement(unsigned int index, double val)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::SetFromArray(const double elements[])
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -143,8 +118,6 @@ void Vector::SetFromArray(const double elements[])
         elements_[i] = elements[i];
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 std::string Vector::ToString() const
 {
@@ -157,8 +130,6 @@ std::string Vector::ToString() const
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::Resize(unsigned int size)
 {
     if ( size_ != size )
@@ -170,8 +141,6 @@ void Vector::Resize(unsigned int size)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::Zeroize()
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -180,16 +149,12 @@ void Vector::Zeroize()
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector& Vector::operator=(const Vector& vect)
 {
     Resize(vect.size_);
     SetFromArray(vect.elements_);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector& Vector::operator=(Vector&& vect)
 {
@@ -201,16 +166,12 @@ Vector& Vector::operator=(Vector&& vect)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector Vector::operator+(const Vector& vect) const
 {
     Vector result(*this);
     result.Add(vect);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector Vector::operator-() const
 {
@@ -219,16 +180,12 @@ Vector Vector::operator-() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector Vector::operator-(const Vector& vect) const
 {
     Vector result(*this);
     result.Substract(vect);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector Vector::operator*(double value) const
 {
@@ -237,8 +194,6 @@ Vector Vector::operator*(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector Vector::operator/(double value) const
 {
     Vector result(*this);
@@ -246,15 +201,11 @@ Vector Vector::operator/(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector& Vector::operator+=(const Vector& vect)
 {
     Add(vect);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector& Vector::operator-=(const Vector& vect)
 {
@@ -262,23 +213,17 @@ Vector& Vector::operator-=(const Vector& vect)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector& Vector::operator*=(double value)
 {
     MultiplyByValue(value);
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector& Vector::operator/=(double value)
 {
     DivideByValue(value);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Vector::Add(const Vector& vect)
 {
@@ -298,8 +243,6 @@ void Vector::Add(const Vector& vect)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::Negate()
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -307,8 +250,6 @@ void Vector::Negate()
         elements_[i] = -elements_[i];
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Vector::Substract(const Vector& vect)
 {
@@ -328,8 +269,6 @@ void Vector::Substract(const Vector& vect)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::MultiplyByValue(double value)
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -337,8 +276,6 @@ void Vector::MultiplyByValue(double value)
         elements_[i] *= value;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Vector::DivideByValue( double value )
 {
@@ -348,13 +285,9 @@ void Vector::DivideByValue( double value )
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector::DeleteElementsArray()
 {
     if ( elements_ ) { delete [] elements_; } elements_ = nullptr;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MATH_EULERRECT_H_
 #define MCUTILS_MATH_EULERRECT_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <functional>
 
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Integrator.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Euler's rectangular numerical integration class.
@@ -59,12 +54,10 @@ public:
 
 private:
 
-    Vector k0_ { 0 };   ///< auxiliary vector
-    Vector xt_ { 0 };   ///< auxiliary vector
+    Vector k0_;     ///< auxiliary vector
+    Vector xt_;     ///< auxiliary vector
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_EULERRECT_H_

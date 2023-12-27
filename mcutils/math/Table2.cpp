@@ -25,18 +25,12 @@
 #include <cmath>
 #include <limits>
 #include <sstream>
-#include <string>
-#include <vector>
+#include <utility>
 
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Table2::Table2(const Table2& table)
     : rows_(table.rows_)
@@ -58,8 +52,6 @@ Table2::Table2(const Table2& table)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2::Table2(Table2&& table) noexcept
     : rows_(std::exchange(table.rows_, 0))
     , cols_(std::exchange(table.cols_, 0))
@@ -71,8 +63,6 @@ Table2::Table2(Table2&& table) noexcept
 
     , inter_data_(std::exchange(table.inter_data_, nullptr))
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 Table2::Table2(double val, double row_val, double col_val)
 {
@@ -90,8 +80,6 @@ Table2::Table2(double val, double row_val, double col_val)
     UpdateInterpolationData();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2::Table2(const double row_values[],
                const double col_values[],
                const double table_data[],
@@ -101,8 +89,6 @@ Table2::Table2(const double row_values[],
     SetData(row_values, col_values, table_data, rows, cols);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2::Table2(const std::vector<double>& row_values,
                const std::vector<double>& col_values,
                const std::vector<double>& table_data)
@@ -110,14 +96,10 @@ Table2::Table2(const std::vector<double>& row_values,
     SetData(row_values, col_values, table_data);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2::~Table2()
 {
     DeleteArrays();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Table Table2::GetTable(double col_value) const
 {
@@ -132,8 +114,6 @@ Table Table2::GetTable(double col_value) const
 
     return Table(keyValues, tableData);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 double Table2::GetValue(double row_value, double col_value) const
 {
@@ -195,8 +175,6 @@ double Table2::GetValue(double row_value, double col_value) const
     return std::numeric_limits<double>::quiet_NaN();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Table2::GetValueByIndex(unsigned int row_index, unsigned int col_index) const
 {
     if ( rows_ > 0 && row_index < rows_
@@ -207,8 +185,6 @@ double Table2::GetValueByIndex(unsigned int row_index, unsigned int col_index) c
 
     return std::numeric_limits<double>::quiet_NaN();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 bool Table2::IsValid() const
 {
@@ -252,8 +228,6 @@ bool Table2::IsValid() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table2::MultiplyRowsAndCols(double f_rows, double f_cols )
 {
     for ( unsigned int i = 0; i < rows_; ++i )
@@ -269,8 +243,6 @@ void Table2::MultiplyRowsAndCols(double f_rows, double f_cols )
     UpdateInterpolationData();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table2::MultiplyRows(double factor)
 {
     for ( unsigned int i = 0; i < rows_; ++i )
@@ -280,8 +252,6 @@ void Table2::MultiplyRows(double factor)
 
     UpdateInterpolationData();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table2::MultiplyCols(double factor)
 {
@@ -293,8 +263,6 @@ void Table2::MultiplyCols(double factor)
     UpdateInterpolationData();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table2::MultiplyValues(double factor)
 {
     for ( unsigned int i = 0; i < size_; ++i )
@@ -304,8 +272,6 @@ void Table2::MultiplyValues(double factor)
 
     UpdateInterpolationData();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table2::SetData(const double row_values[],
                      const double col_values[],
@@ -335,8 +301,6 @@ void Table2::SetData(const double row_values[],
         UpdateInterpolationData();
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table2::SetData(const std::vector<double>& row_values,
                      const std::vector<double>& col_values,
@@ -368,8 +332,6 @@ void Table2::SetData(const std::vector<double>& row_values,
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table2::SetFromString(const char* str)
 {
@@ -424,8 +386,6 @@ void Table2::SetFromString(const char* str)
     SetData(row_values, col_values, table_data);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 std::string Table2::ToString()
 {
     std::stringstream ss;
@@ -455,8 +415,6 @@ std::string Table2::ToString()
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2& Table2::operator=(const Table2& table)
 {
     if ( this != &table )
@@ -485,8 +443,6 @@ Table2& Table2::operator=(const Table2& table)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Table2& Table2::operator=(Table2&& table)
 {
     DeleteArrays();
@@ -504,8 +460,6 @@ Table2& Table2::operator=(Table2&& table)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table2::CreateArrays()
 {
     row_values_ = new double [rows_];
@@ -514,8 +468,6 @@ void Table2::CreateArrays()
     inter_data_ = new double [size_];
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Table2::DeleteArrays()
 {
     if ( row_values_ ) { delete [] row_values_; } row_values_ = nullptr;
@@ -523,8 +475,6 @@ void Table2::DeleteArrays()
     if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
     if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Table2::UpdateInterpolationData()
 {
@@ -538,7 +488,5 @@ void Table2::UpdateInterpolationData()
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

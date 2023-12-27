@@ -22,17 +22,12 @@
 #ifndef MCUTILS_CTRL_AWBACKCALC_H_
 #define MCUTILS_CTRL_AWBACKCALC_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cfloat>
 #include <limits>
 
 #include <mcutils/ctrl/IAntiWindup.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Back calculation anti-windup method for PID controller.
@@ -68,7 +63,5 @@ private:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_AWBACKCALC_H_

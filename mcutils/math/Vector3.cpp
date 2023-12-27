@@ -22,25 +22,16 @@
 
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 const Vector3 Vector3::ex_ = Vector3(1.0, 0.0, 0.0);
 const Vector3 Vector3::ey_ = Vector3(0.0, 1.0, 0.0);
 const Vector3 Vector3::ez_ = Vector3(0.0, 0.0, 1.0);
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3::Vector3(double x, double y, double z)
 {
     Set(x, y, z);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::GetNormalized() const
 {
@@ -49,16 +40,12 @@ Vector3 Vector3::GetNormalized() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Vector3::Set(double x, double y, double z)
 {
     elements_[0] = x;
     elements_[1] = y;
     elements_[2] = z;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::operator+(const Vector3& vect) const
 {
@@ -67,16 +54,12 @@ Vector3 Vector3::operator+(const Vector3& vect) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3 Vector3::operator-() const
 {
     Vector3 result(*this);
     result.Negate();
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::operator-(const Vector3& vect) const
 {
@@ -85,16 +68,12 @@ Vector3 Vector3::operator-(const Vector3& vect) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3 Vector3::operator*(double value) const
 {
     Vector3 result(*this);
     result.MultiplyByValue(value);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::operator/(double value) const
 {
@@ -103,14 +82,10 @@ Vector3 Vector3::operator/(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 double Vector3::operator*(const Vector3& vect) const
 {
     return x()*vect.x() + y()*vect.y() + z()*vect.z();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3 Vector3::operator%(const Vector3& vect) const
 {
@@ -123,15 +98,11 @@ Vector3 Vector3::operator%(const Vector3& vect) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3& Vector3::operator+=(const Vector3& vect)
 {
     Add(vect);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3& Vector3::operator-=(const Vector3& vect)
 {
@@ -139,15 +110,11 @@ Vector3& Vector3::operator-=(const Vector3& vect)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3& Vector3::operator*=(double value)
 {
     MultiplyByValue(value);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector3& Vector3::operator/=(double value)
 {
@@ -155,14 +122,10 @@ Vector3& Vector3::operator/=(double value)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Vector3& Vector3::operator%=(const Vector3& vect)
 {
     *this = *this % vect;
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

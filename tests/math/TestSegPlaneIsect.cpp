@@ -2,8 +2,6 @@
 
 #include <mcutils/math/SegPlaneIsect.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestSegPlaneIsect : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSegPlaneIsect, CanCheckIfThereIsSegPlaneIsect)
 {
@@ -34,8 +30,6 @@ TEST_F(TestSegPlaneIsect, CanCheckIfThereIsSegPlaneIsect)
     n.Set(0.0, 0.0,  1.0);
     EXPECT_FALSE(mc::IsSegPlaneIsect(b, e, r, n));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsect)
 {

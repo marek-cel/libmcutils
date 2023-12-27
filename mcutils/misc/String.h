@@ -22,18 +22,14 @@
 #ifndef MCUTILS_MISC_STRING_H_
 #define MCUTILS_MISC_STRING_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <limits>
 #include <string>
 #include <vector>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc { namespace String
-{
+namespace mc {
+namespace String {
 
 /**
  * @brief Returns string first line;
@@ -147,7 +143,5 @@ MCUTILSAPI std::string ToUpper(const std::string& str);
 
 } // namespace String
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_STRING_H_

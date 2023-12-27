@@ -3,8 +3,6 @@
 #include <mcutils/ctrl/MovingAverage.h>
 #include <mcutils/math/Random.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMovingAverage : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingAverage, CanConstruct)
 {
     mc::MovingAverage* ma = nullptr;
@@ -24,15 +20,11 @@ TEST_F(TestMovingAverage, CanConstruct)
     delete ma;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingAverage, CanDestruct)
 {
     mc::MovingAverage* ma = new mc::MovingAverage();
     EXPECT_NO_THROW(delete ma);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingAverage, CanInstantiate)
 {
@@ -41,16 +33,12 @@ TEST_F(TestMovingAverage, CanInstantiate)
     EXPECT_NEAR(ma.value(), 0.0, 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingAverage, CanInstantiateAndSetData)
 {
     mc::MovingAverage ma(5, 1.0);
     EXPECT_EQ(ma.length(), 5);
     EXPECT_NEAR(ma.value(), 1.0, 1.0e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingAverage, CanUpdate)
 {
@@ -99,16 +87,12 @@ TEST_F(TestMovingAverage, CanUpdate)
     EXPECT_DOUBLE_EQ(ma.value(), 26.8);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingAverage, CanSetLenght)
 {
     mc::MovingAverage ma;
     EXPECT_NO_THROW(ma.set_length(5));
     EXPECT_EQ(ma.length(), 5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingAverage, CanGetLenght)
 {

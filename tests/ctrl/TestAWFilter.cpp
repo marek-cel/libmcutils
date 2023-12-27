@@ -8,8 +8,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestAWFilter : public ::testing::Test
 {
 protected:
@@ -31,8 +29,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanConstruct)
 {
     mc::AWFilter* aw = nullptr;
@@ -40,15 +36,11 @@ TEST_F(TestAWFilter, CanConstruct)
     delete aw;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanDestruct)
 {
     mc::AWFilter* aw = new mc::AWFilter();
     EXPECT_NO_THROW(delete aw);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWFilter, CanInstantiate)
 {
@@ -59,8 +51,6 @@ TEST_F(TestAWFilter, CanInstantiate)
     EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanInstantiateAndSetData)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
@@ -70,15 +60,11 @@ TEST_F(TestAWFilter, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanGetKaw)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
     EXPECT_DOUBLE_EQ(aw.kaw(), KAW);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWFilter, CanGetMin)
 {
@@ -86,15 +72,11 @@ TEST_F(TestAWFilter, CanGetMin)
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanGetMax)
 {
     mc::AWFilter aw(MIN, MAX, KAW);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWFilter, CanSetKaw)
 {
@@ -103,8 +85,6 @@ TEST_F(TestAWFilter, CanSetKaw)
     EXPECT_DOUBLE_EQ(aw.kaw(), KAW);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanSetMin)
 {
     mc::AWFilter aw;
@@ -112,16 +92,12 @@ TEST_F(TestAWFilter, CanSetMin)
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWFilter, CanSetMax)
 {
     mc::AWFilter aw;
     aw.set_max(MAX);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWFilter, CanUpdate)
 {

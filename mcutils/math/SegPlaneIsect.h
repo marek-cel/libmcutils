@@ -22,16 +22,11 @@
 #ifndef MCUTILS_MATH_SEGPLANEISECT_H_
 #define MCUTILS_MATH_SEGPLANEISECT_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Checks if intersection occurs.
@@ -74,7 +69,5 @@ MCUTILSAPI Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
                                     const Vector3& r, const Vector3& n);
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_SEGPLANEISECT_H_

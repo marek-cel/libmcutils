@@ -22,17 +22,12 @@
 #ifndef MCUTILS_MISC_UNITS_H_
 #define MCUTILS_MISC_UNITS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cmath>
 #include <string>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Units convertion functions.
@@ -42,8 +37,7 @@ namespace mc
  * - https://ntrs.nasa.gov/citations/19730018242">The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012
  * </ul>
  */
-namespace Units
-{
+namespace Units {
 
 using Converter = double (*)(double);
 
@@ -1152,7 +1146,5 @@ MCUTILSAPI inline double g_kNs_2_kg_Ns(double tsfc = 1.0)
 
 } // namespace Units
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_UNITS_H_

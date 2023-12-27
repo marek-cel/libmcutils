@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_QUATERNION_H_
 #define MCUTILS_MATH_QUATERNION_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <string>
 
 #include <mcutils/defs.h>
@@ -31,10 +29,7 @@
 #include <mcutils/math/Angles.h>
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Quaternion class.
@@ -59,7 +54,8 @@ class MCUTILSAPI Quaternion
 public:
 
     /** @brief Constructor. */
-    explicit Quaternion(double e0 = 1.0, double ex = 0.0, double ey = 0.0, double ez = 0.0);
+    explicit Quaternion(double e0 = 1.0, double ex = 0.0,
+                        double ey = 0.0, double ez = 0.0);
 
     /** @brief Constructor. */
     explicit Quaternion(const Angles& angl);
@@ -161,8 +157,6 @@ private:
     double ez_ = 0.0;   ///< quaternion ez (z) component
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
 inline Quaternion operator*(double val, const Quaternion& quat)
 {
@@ -170,7 +164,5 @@ inline Quaternion operator*(double val, const Quaternion& quat)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_QUATERNION_H_

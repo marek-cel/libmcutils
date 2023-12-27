@@ -24,12 +24,7 @@
 
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Matrix4x4 Matrix4x4::GetTransposed() const
 {
@@ -38,16 +33,12 @@ Matrix4x4 Matrix4x4::GetTransposed() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4 Matrix4x4::operator+(const Matrix4x4& matrix) const
 {
     Matrix4x4 result(*this);
     result.Add(matrix);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix4x4 Matrix4x4::operator-() const
 {
@@ -56,16 +47,12 @@ Matrix4x4 Matrix4x4::operator-() const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4 Matrix4x4::operator-(const Matrix4x4& matrix) const
 {
     Matrix4x4 result(*this);
     result.Substract(matrix);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix4x4 Matrix4x4::operator*(double value) const
 {
@@ -74,16 +61,12 @@ Matrix4x4 Matrix4x4::operator*(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4 Matrix4x4::operator*(const Matrix4x4& matrix) const
 {
     Matrix4x4 result;
     MultiplyByMatrix(matrix, &result);
     return result;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Vector4 Matrix4x4::operator*(const Vector4& vect) const
 {
@@ -92,8 +75,6 @@ Vector4 Matrix4x4::operator*(const Vector4& vect) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4 Matrix4x4::operator/(double value) const
 {
     Matrix4x4 result(*this);
@@ -101,15 +82,11 @@ Matrix4x4 Matrix4x4::operator/(double value) const
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4& Matrix4x4::operator+=(const Matrix4x4& matrix)
 {
     Add(matrix);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& matrix)
 {
@@ -117,22 +94,16 @@ Matrix4x4& Matrix4x4::operator-=(const Matrix4x4& matrix)
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4& Matrix4x4::operator*=(double value)
 {
     MultiplyByValue(value);
     return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 Matrix4x4& Matrix4x4::operator/=(double value)
 {
     DivideByValue(value);
     return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

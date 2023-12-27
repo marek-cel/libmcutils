@@ -2,8 +2,6 @@
 
 #include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestString : public ::testing::Test
 {
 protected:
@@ -14,8 +12,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanGetFirstLine)
 {
     std::string l1 = "abc123";
@@ -25,8 +21,6 @@ TEST_F(TestString, CanGetFirstLine)
     std::string res = mc::String::GetFirstLine( ml );
     EXPECT_STREQ(l1.c_str(), res.c_str());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanICompare)
 {
@@ -50,8 +44,6 @@ TEST_F(TestString, CanICompare)
     EXPECT_FALSE(0 == mc::String::Compare(upperCase, camelCase1));
     EXPECT_FALSE(0 == mc::String::Compare(lowerCase, camelCase1));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanSplitString)
 {
@@ -77,8 +69,6 @@ TEST_F(TestString, CanSplitString)
     EXPECT_STREQ(vs2[4].c_str(), "amet");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanStripLeadingSpaces)
 {
     std::string s1 = "      Lorem ipsum dolor sit amet";
@@ -86,8 +76,6 @@ TEST_F(TestString, CanStripLeadingSpaces)
 
     EXPECT_STREQ(s2.c_str(), "Lorem ipsum dolor sit amet");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanStripTrailingSpaces)
 {
@@ -97,8 +85,6 @@ TEST_F(TestString, CanStripTrailingSpaces)
     EXPECT_STREQ(s2.c_str(), "Lorem ipsum dolor sit amet");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanStripSpaces)
 {
     std::string s1 = "      Lorem ipsum dolor sit amet      ";
@@ -106,8 +92,6 @@ TEST_F(TestString, CanStripSpaces)
 
     EXPECT_STREQ(s2.c_str(), "Lorem ipsum dolor sit amet");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanConvertToBool)
 {
@@ -120,8 +104,6 @@ TEST_F(TestString, CanConvertToBool)
     EXPECT_TRUE(mc::String::ToBool(s1));
     EXPECT_TRUE(mc::String::ToBool(s2));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanConvertToInt)
 {
@@ -136,8 +118,6 @@ TEST_F(TestString, CanConvertToInt)
     EXPECT_EQ(-2, mc::String::ToInt(s3));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanConvertToDouble)
 {
     std::string s0 = "0";
@@ -150,8 +130,6 @@ TEST_F(TestString, CanConvertToDouble)
     EXPECT_DOUBLE_EQ( 3.14 , mc::String::ToDouble(s2));
     EXPECT_DOUBLE_EQ(-2.1  , mc::String::ToDouble(s3));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanConvertIntToString)
 {
@@ -166,8 +144,6 @@ TEST_F(TestString, CanConvertIntToString)
     EXPECT_STREQ("-2" , mc::String::ToString(v3).c_str());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanConvertFloatToString)
 {
     float v0 =  0.0f;
@@ -180,8 +156,6 @@ TEST_F(TestString, CanConvertFloatToString)
     EXPECT_STREQ( "3.14" , mc::String::ToString(v2).c_str());
     EXPECT_STREQ("-2.1"  , mc::String::ToString(v3).c_str());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanConvertDoubleToString)
 {
@@ -196,8 +170,6 @@ TEST_F(TestString, CanConvertDoubleToString)
     EXPECT_STREQ("-2.1"  , mc::String::ToString(v3).c_str());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestString, CanConvertToLowerCase)
 {
     std::string s1 = "LOREM IPSUM DOLOR SIT AMET";
@@ -205,8 +177,6 @@ TEST_F(TestString, CanConvertToLowerCase)
 
     EXPECT_STREQ(s2.c_str(), "lorem ipsum dolor sit amet");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestString, CanConvertToUpperCase)
 {

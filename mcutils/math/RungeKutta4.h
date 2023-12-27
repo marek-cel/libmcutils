@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MATH_RUNGEKUTTA4_H_
 #define MCUTILS_MATH_RUNGEKUTTA4_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <functional>
 
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Integrator.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Runge-Kutta 4th order numerical integration class.
@@ -57,16 +52,14 @@ public:
 
 private:
 
-    Vector k1_ { 0 };   ///< auxiliary vector
-    Vector k2_ { 0 };   ///< auxiliary vector
-    Vector k3_ { 0 };   ///< auxiliary vector
-    Vector k4_ { 0 };   ///< auxiliary vector
+    Vector k1_;     ///< auxiliary vector
+    Vector k2_;     ///< auxiliary vector
+    Vector k3_;     ///< auxiliary vector
+    Vector k4_;     ///< auxiliary vector
 
-    Vector xt_ { 0 };   ///< auxiliary vector
+    Vector xt_;     ///< auxiliary vector
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_RUNGEKUTTA4_H_

@@ -3,14 +3,10 @@
 #include <mcutils/geo/WGS84.h>
 #include <mcutils/geo/DataWGS84.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 // linear position tolerance (0.1 mm)
 #define LINEAR_POSITION_TOLERANCE 1.0e-4
 // latitude and longitude tolerance (10^-9 rad ~ ca. 6 mm)
 #define LAT_LON_TOLERANCE 1.0e-9
-
-////////////////////////////////////////////////////////////////////////////////
 
 class TestWGS84 : public ::testing::Test
 {
@@ -21,8 +17,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestWGS84, CanConstruct)
 {
     mc::WGS84* wgs = nullptr;
@@ -30,15 +24,11 @@ TEST_F(TestWGS84, CanConstruct)
     delete wgs;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestWGS84, CanDestruct)
 {
     mc::WGS84* wgs = new mc::WGS84;
     EXPECT_NO_THROW(delete wgs);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestWGS84, CanInstantiate)
 {
@@ -55,8 +45,6 @@ TEST_F(TestWGS84, CanInstantiate)
     EXPECT_NEAR(wgs.ep2() , mc::DataWGS84::ep2 , 1.0e-4);
     EXPECT_NEAR(wgs.ep()  , mc::DataWGS84::ep  , 1.0e-4);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestWGS84, CanInstantiateAndCopy)
 {
@@ -78,8 +66,6 @@ TEST_F(TestWGS84, CanInstantiateAndCopy)
     EXPECT_NEAR(pos_geo_out.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestWGS84, CanInstantiateAndMove)
 {
     mc::Geo pos_geo;
@@ -97,8 +83,6 @@ TEST_F(TestWGS84, CanInstantiateAndMove)
     EXPECT_NEAR(pos_geo_out.lon, M_PI_4 , LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo_out.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestWGS84, CanInstantiateAndSetPosGeo)
 {
@@ -122,8 +106,6 @@ TEST_F(TestWGS84, CanInstantiateAndSetPosGeo)
     EXPECT_NEAR(pos_wgs_out.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestWGS84, CanInstantiateAndSetPosWGS)
 {
     mc::Vector3 pos_wgs;
@@ -145,8 +127,6 @@ TEST_F(TestWGS84, CanInstantiateAndSetPosWGS)
     EXPECT_NEAR( pos_wgs_out.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR( pos_wgs_out.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestWGS84, CanAssign)
 {
@@ -173,8 +153,6 @@ TEST_F(TestWGS84, CanAssign)
     EXPECT_NEAR( pos_wgs_out.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR( pos_wgs_out.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestWGS84, CanAssignMove)
 {

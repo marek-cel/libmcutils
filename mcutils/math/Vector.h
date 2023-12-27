@@ -22,16 +22,11 @@
 #ifndef MCUTILS_MATH_VECTOR_H_
 #define MCUTILS_MATH_VECTOR_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <string>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Variable length dynamic allocated vector class.
@@ -53,7 +48,7 @@ public:
      * @brief Constructor.
      * @param size vector size
      */
-    explicit Vector(unsigned int size);
+    explicit Vector(unsigned int size = 0);
 
     /** @return TRUE if all elements are valid */
     bool IsValid() const;
@@ -180,15 +175,11 @@ protected:
     void DeleteElementsArray();
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
 inline Vector operator*(double val, const Vector& vect)
 {
     return vect * val;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc
 

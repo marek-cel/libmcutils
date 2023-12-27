@@ -25,19 +25,12 @@
 #include <mcutils/ctrl/PID.h>
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 AWBackCalc::AWBackCalc(double min, double max)
     : min_(min)
     , max_(max)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void AWBackCalc::Update(double, double y_p, double y_i, double y_d,
                         double* value, double* error_i, const PID* pid)
@@ -52,7 +45,5 @@ void AWBackCalc::Update(double, double y_p, double y_i, double y_d,
         *error_i = (*value - y_pd) / pid->ki();
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

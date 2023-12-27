@@ -22,16 +22,12 @@
 #ifndef MCUTILS_MATH_MATH_H_
 #define MCUTILS_MATH_MATH_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cmath>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc { namespace Math
-{
+namespace mc {
+namespace Math {
 
 /**
  * @brief Checks if value is within the given range.
@@ -231,7 +227,5 @@ MCUTILSAPI inline double StdDev(const double x[], int n)
 
 } // namespace Math
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATH_H_

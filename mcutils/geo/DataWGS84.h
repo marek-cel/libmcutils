@@ -22,14 +22,9 @@
 #ifndef MCUTILS_GEO_DATAWGS84_H_
 #define MCUTILS_GEO_DATAWGS84_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
@@ -38,8 +33,7 @@ namespace mc
  * ### Refernces:
  * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)
  */
-namespace DataWGS84
-{
+namespace DataWGS84 {
 
 static constexpr double a   = 6378137.0;                ///< [m] equatorial radius
 static constexpr double b   = 6356752.3142;             ///< [m] polar radius
@@ -66,7 +60,5 @@ static constexpr double m       = 0.00344978650684;     ///< [-] m = omega^2 * a
 
 } // namespace DataWGS84
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_DATAWGS84_H_

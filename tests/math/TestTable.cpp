@@ -4,8 +4,6 @@
 
 #include <mcutils/math/Table.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestTable : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanConstruct)
 {
     mc::Table* tab = nullptr;
@@ -24,15 +20,11 @@ TEST_F(TestTable, CanConstruct)
     delete tab;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanDestruct)
 {
     mc::Table* tab = new mc::Table();
     EXPECT_NO_THROW(delete tab);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanInstantiate)
 {
@@ -46,8 +38,6 @@ TEST_F(TestTable, CanInstantiate)
     EXPECT_DOUBLE_EQ(tab2.GetValue(0.0), 2.2);
     EXPECT_DOUBLE_EQ(tab2.GetValue(1.7), 2.2);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanInstantiateAndSetDataFromArray)
 {
@@ -63,8 +53,6 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromArray)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanInstantiateAndSetDataFromVector)
 {
     // y = x^2 - 1
@@ -78,8 +66,6 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromVector)
         EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanInstantiateAndCopy)
 {
@@ -96,8 +82,6 @@ TEST_F(TestTable, CanInstantiateAndCopy)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanInstantiateAndMove)
 {
     // y = x^2 - 1
@@ -111,8 +95,6 @@ TEST_F(TestTable, CanInstantiateAndMove)
         EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetKeyByIndex)
 {
@@ -133,15 +115,11 @@ TEST_F(TestTable, CanGetKeyByIndex)
     EXPECT_DOUBLE_EQ(tab.GetKeyByIndex(5),  3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetKeyByIndexNotInited)
 {
     mc::Table tab;
     EXPECT_TRUE(std::isnan(tab.GetKeyByIndex(1)));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetSize)
 {
@@ -154,8 +132,6 @@ TEST_F(TestTable, CanGetSize)
     EXPECT_EQ(tab.size(), 6);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetKeyOfValueMin)
 {
     // y = x^2 - 1
@@ -166,8 +142,6 @@ TEST_F(TestTable, CanGetKeyOfValueMin)
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetKeyOfValueMinRanged)
 {
@@ -180,8 +154,6 @@ TEST_F(TestTable, CanGetKeyOfValueMinRanged)
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(1.0, 2.0), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetKeyOfValueMax)
 {
     // y = x^2 - 1
@@ -193,8 +165,6 @@ TEST_F(TestTable, CanGetKeyOfValueMax)
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMax(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetKeyOfValueMaxRanged)
 {
     // y = x^2 - 1
@@ -205,8 +175,6 @@ TEST_F(TestTable, CanGetKeyOfValueMaxRanged)
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMax(1.0, 2.0), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetValue)
 {
@@ -223,8 +191,6 @@ TEST_F(TestTable, CanGetValue)
     EXPECT_DOUBLE_EQ(tab.GetValue(2.0), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetValueAndInterpolate)
 {
     // y = x^2 - 1
@@ -235,8 +201,6 @@ TEST_F(TestTable, CanGetValueAndInterpolate)
 
     EXPECT_DOUBLE_EQ(tab.GetValue(2.5), 5.5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetValueOutOfRange)
 {
@@ -249,8 +213,6 @@ TEST_F(TestTable, CanGetValueOutOfRange)
     EXPECT_DOUBLE_EQ(tab.GetValue( -9.0 ), 1.0);
     EXPECT_DOUBLE_EQ(tab.GetValue(  9.0 ), 8.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetValueByIndex)
 {
@@ -272,8 +234,6 @@ TEST_F(TestTable, CanGetValueByIndex)
     EXPECT_DOUBLE_EQ(tab.GetValueByIndex(5), table_data[5]);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetFirstValue)
 {
     mc::Table tab0;
@@ -287,8 +247,6 @@ TEST_F(TestTable, CanGetFirstValue)
 
     EXPECT_DOUBLE_EQ(tab.GetFirstValue(), table_data[0]);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanGetLastValue)
 {
@@ -304,8 +262,6 @@ TEST_F(TestTable, CanGetLastValue)
     EXPECT_DOUBLE_EQ(tab.GetLastValue(), table_data[5]);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetValueMin)
 {
     mc::Table tab0;
@@ -320,8 +276,6 @@ TEST_F(TestTable, CanGetValueMin)
     EXPECT_DOUBLE_EQ(tab.GetValueMin(), -1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanGetValueMax)
 {
     mc::Table tab0;
@@ -335,8 +289,6 @@ TEST_F(TestTable, CanGetValueMax)
 
     EXPECT_DOUBLE_EQ(tab.GetValueMax(), 8.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanValidate)
 {
@@ -355,8 +307,6 @@ TEST_F(TestTable, CanValidate)
     mc::Table t3(k3, v3);
     EXPECT_FALSE(t3.IsValid());
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanMultiplyKeys)
 {
@@ -379,8 +329,6 @@ TEST_F(TestTable, CanMultiplyKeys)
     EXPECT_DOUBLE_EQ(tab.GetValue(1.5 * coef), 1.5);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanMultiplyValues)
 {
     const double coef = 2.0;
@@ -402,8 +350,6 @@ TEST_F(TestTable, CanMultiplyValues)
     EXPECT_DOUBLE_EQ(tab.GetValue(1.5), 1.5 * coef);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanConvertToString)
 {
     std::vector<double> key_values { 0.0,  1.0,  2.0 };
@@ -413,8 +359,6 @@ TEST_F(TestTable, CanConvertToString)
 
     EXPECT_STREQ(tab.ToString().c_str(), "0\t0\n1\t2\n2\t4\n");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanSetDataFromArray)
 {
@@ -431,8 +375,6 @@ TEST_F(TestTable, CanSetDataFromArray)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanSetDataFromVector)
 {
     // y = x^2 - 1
@@ -447,8 +389,6 @@ TEST_F(TestTable, CanSetDataFromVector)
         EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanSetFromString)
 {
@@ -481,8 +421,6 @@ TEST_F(TestTable, CanSetFromString)
     EXPECT_FALSE(tab2.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanAdd)
 {
     mc::Table tab;
@@ -502,8 +440,6 @@ TEST_F(TestTable, CanAdd)
         EXPECT_DOUBLE_EQ(tab.GetValue(k0[i]), t1[i] + t2[i]);
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanMultiply)
 {
@@ -528,8 +464,6 @@ TEST_F(TestTable, CanMultiply)
     EXPECT_DOUBLE_EQ(tab.GetValue(1.5), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestTable, CanAssign)
 {
     // y = x^2 - 1
@@ -546,8 +480,6 @@ TEST_F(TestTable, CanAssign)
         EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestTable, CanAssignAndMove)
 {

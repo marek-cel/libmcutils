@@ -8,8 +8,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestAWCondCalc : public ::testing::Test
 {
 protected:
@@ -30,8 +28,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanConstruct)
 {
     mc::AWCondCalc* aw = nullptr;
@@ -39,15 +35,11 @@ TEST_F(TestAWCondCalc, CanConstruct)
     delete aw;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanDestruct)
 {
     mc::AWCondCalc* aw = new mc::AWCondCalc();
     EXPECT_NO_THROW(delete aw);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWCondCalc, CanInstantiate)
 {
@@ -57,8 +49,6 @@ TEST_F(TestAWCondCalc, CanInstantiate)
     EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanInstantiateAndSetData)
 {
     mc::AWCondCalc aw(MIN, MAX);
@@ -67,23 +57,17 @@ TEST_F(TestAWCondCalc, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanGetMin)
 {
     mc::AWCondCalc aw(MIN, MAX);
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanGetMax)
 {
     mc::AWCondCalc aw(MIN, MAX);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWCondCalc, CanSetMin)
 {
@@ -92,16 +76,12 @@ TEST_F(TestAWCondCalc, CanSetMin)
     EXPECT_DOUBLE_EQ(aw.min(), MIN);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAWCondCalc, CanSetMax)
 {
     mc::AWCondCalc aw;
     aw.set_max(MAX);
     EXPECT_DOUBLE_EQ(aw.max(), MAX);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAWCondCalc, CanUpdate)
 {

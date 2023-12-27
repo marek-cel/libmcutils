@@ -2,8 +2,6 @@
 
 #include <mcutils/time/ISO8601.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestISO8601 : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestISO8601, CanConvertToISO8601FromYMDHMSms)
 {
@@ -29,8 +25,6 @@ TEST_F(TestISO8601, CanConvertToISO8601FromYMDHMSms)
     EXPECT_STREQ(result.c_str(), "2001-02-03T14:15:16");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestISO8601, CanConvertToISO8601FromYMD)
 {
     std::string result;
@@ -38,8 +32,6 @@ TEST_F(TestISO8601, CanConvertToISO8601FromYMD)
     result = mc::ToISO8601(2001, 02, 03);
     EXPECT_STREQ(result.c_str(), "2001-02-03");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestISO8601, CanConvertToISO8601FromHMSms)
 {
@@ -54,8 +46,6 @@ TEST_F(TestISO8601, CanConvertToISO8601FromHMSms)
     result = mc::ToISO8601(14, 15, 16, 123, false);
     EXPECT_STREQ(result.c_str(), "14:15:16");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestISO8601, CanConvertToISO8601FromDateTime)
 {

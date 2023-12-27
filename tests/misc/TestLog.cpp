@@ -2,8 +2,6 @@
 
 #include <mcutils/misc/Log.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestLog : public ::testing::Test
 {
 protected:
@@ -13,8 +11,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLog, CanPrintNullStream)
 {
@@ -30,8 +26,6 @@ TEST_F(TestLog, CanPrintNullStream)
     EXPECT_NO_THROW(mc::Log::Debug(msg.c_str()));
     EXPECT_NO_THROW(mc::Log::Out() << msg);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLog, CanPrintFormatedStream)
 {
@@ -51,8 +45,6 @@ TEST_F(TestLog, CanPrintFormatedStream)
     EXPECT_TRUE(result == expected);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLog, CanPrintErrorMsg)
 {
     std::string msg = "Lorem ipsum dolor sit amet";
@@ -69,8 +61,6 @@ TEST_F(TestLog, CanPrintErrorMsg)
     expected = "[ERROR] " + msg + "\n";
     EXPECT_TRUE(result == expected);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLog, CanPrintWarningMsg)
 {
@@ -95,8 +85,6 @@ TEST_F(TestLog, CanPrintWarningMsg)
     EXPECT_TRUE(result == expected);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLog, CanPrintInfoMsg)
 {
     std::string msg = "Lorem ipsum dolor sit amet";
@@ -119,8 +107,6 @@ TEST_F(TestLog, CanPrintInfoMsg)
     expected = "[INFO] " + msg + "\n";
     EXPECT_TRUE(result == expected);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLog, CanPrintDebugMsg)
 {
@@ -145,23 +131,17 @@ TEST_F(TestLog, CanPrintDebugMsg)
     EXPECT_TRUE(result == expected);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLog, CanSetOutStream)
 {
     std::stringstream ss;
     EXPECT_NO_THROW(mc::Log::set_out_stream(&ss));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestLog, CanSetSyslogOut)
 {
     std::stringstream ss;
     EXPECT_NO_THROW(mc::Log::set_syslog_out(false));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestLog, CanSetVerbLevel)
 {

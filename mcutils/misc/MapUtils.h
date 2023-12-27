@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MISC_MAPUTILS_H_
 #define MCUTILS_MISC_MAPUTILS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <map>
 #include <utility>
 
 #include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Adds item.
@@ -74,7 +69,5 @@ TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_MAPUTILS_H_

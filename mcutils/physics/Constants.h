@@ -22,10 +22,7 @@
 #ifndef MCUTILS_PHYSICS_CONSTANTS_H_
 #define MCUTILS_PHYSICS_CONSTANTS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * ### Refernces:
@@ -45,7 +42,5 @@ static constexpr double kStefanBoltzmanConst = 5.66961e-8;      ///< [W/(m^2*K^4
 static constexpr double kStandardGravity     = 9.80665;         ///< [m/s^2] standard acceleration due to gravity
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_PHYSICS_CONSTANTS_H_

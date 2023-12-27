@@ -24,20 +24,13 @@
 
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 AWFilter::AWFilter(double min, double max, double kaw)
     : min_(min)
     , max_(max)
     , kaw_(kaw)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
                       double* value, double* error_i, const PID*)
@@ -49,7 +42,5 @@ void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
     *value = value_;
     *error_i -= kaw_ * delta_ * dt;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

@@ -2,8 +2,6 @@
 
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestVector3 : public ::testing::Test
 {
 protected:
@@ -13,8 +11,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanConstruct)
 {
     mc::Vector3* v = nullptr;
@@ -22,15 +18,11 @@ TEST_F(TestVector3, CanConstruct)
     delete v;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanDestruct)
 {
     mc::Vector3* v = new mc::Vector3();
     EXPECT_NO_THROW(delete v);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanCreateEx)
 {
@@ -41,8 +33,6 @@ TEST_F(TestVector3, CanCreateEx)
     EXPECT_DOUBLE_EQ(v1.z(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanCreateEy)
 {
     mc::Vector3 v1 = mc::Vector3::ey();
@@ -51,8 +41,6 @@ TEST_F(TestVector3, CanCreateEy)
     EXPECT_DOUBLE_EQ(v1.y(), 1.0);
     EXPECT_DOUBLE_EQ(v1.z(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanCreateEz)
 {
@@ -63,8 +51,6 @@ TEST_F(TestVector3, CanCreateEz)
     EXPECT_DOUBLE_EQ(v1.z(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanCreateI)
 {
     mc::Vector3 v1 = mc::Vector3::i();
@@ -73,8 +59,6 @@ TEST_F(TestVector3, CanCreateI)
     EXPECT_DOUBLE_EQ(v1.y(), 0.0);
     EXPECT_DOUBLE_EQ(v1.z(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanCreateJ)
 {
@@ -85,8 +69,6 @@ TEST_F(TestVector3, CanCreateJ)
     EXPECT_DOUBLE_EQ(v1.z(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanCreateK)
 {
     mc::Vector3 v1 = mc::Vector3::k();
@@ -95,8 +77,6 @@ TEST_F(TestVector3, CanCreateK)
     EXPECT_DOUBLE_EQ(v1.y(), 0.0);
     EXPECT_DOUBLE_EQ(v1.z(), 1.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanInstantiate)
 {
@@ -107,8 +87,6 @@ TEST_F(TestVector3, CanInstantiate)
     EXPECT_DOUBLE_EQ(v1.z(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanInstantiateAndSetData)
 {
     mc::Vector3 v1(1.0, 2.0, 3.0);
@@ -117,8 +95,6 @@ TEST_F(TestVector3, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(v1.y(), 2.0);
     EXPECT_DOUBLE_EQ(v1.z(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanGetLengthXY)
 {
@@ -131,8 +107,6 @@ TEST_F(TestVector3, CanGetLengthXY)
     EXPECT_DOUBLE_EQ(v2.GetLengthXY(), sqrt(13.0));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanGetLengthXZ)
 {
     mc::Vector3 v1(1.0, 2.0, 3.0);
@@ -144,8 +118,6 @@ TEST_F(TestVector3, CanGetLengthXZ)
     EXPECT_DOUBLE_EQ(v2.GetLengthXZ(), sqrt(20.0));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanGetLengthYZ)
 {
     mc::Vector3 v1(1.0, 2.0, 3.0);
@@ -156,8 +128,6 @@ TEST_F(TestVector3, CanGetLengthYZ)
     // 3^2 + 4^2 = 9 + 16 = 25
     EXPECT_DOUBLE_EQ(v2.GetLengthYZ(), sqrt(25.0));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanGetNormalized)
 {
@@ -183,8 +153,6 @@ TEST_F(TestVector3, CanGetNormalized)
     EXPECT_DOUBLE_EQ(v2_n.GetLength(), 1.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanSetData)
 {
     mc::Vector3 v;
@@ -209,8 +177,6 @@ TEST_F(TestVector3, CanSetData)
     EXPECT_DOUBLE_EQ(v.y(), 2.0);
     EXPECT_DOUBLE_EQ(v.z(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanAccessElementsViaFunctions)
 {
@@ -254,8 +220,6 @@ TEST_F(TestVector3, CanAccessElementsViaFunctions)
     EXPECT_DOUBLE_EQ(v2(2), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanAssign)
 {
     mc::Vector3 v;
@@ -285,8 +249,6 @@ TEST_F(TestVector3, CanAssign)
     EXPECT_DOUBLE_EQ(v.y(), 2.0);
     EXPECT_DOUBLE_EQ(v.z(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanAdd)
 {
@@ -340,8 +302,6 @@ TEST_F(TestVector3, CanAdd)
     EXPECT_DOUBLE_EQ(v4123.z(), 4.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanNegate)
 {
     mc::Vector3 v1(1.0, 0.0, 0.0);
@@ -370,8 +330,6 @@ TEST_F(TestVector3, CanNegate)
     EXPECT_DOUBLE_EQ(v4_n.y(), -2.0);
     EXPECT_DOUBLE_EQ(v4_n.z(), -3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanSubstract)
 {
@@ -402,8 +360,6 @@ TEST_F(TestVector3, CanSubstract)
     EXPECT_DOUBLE_EQ(v4123.y(), 1.0);
     EXPECT_DOUBLE_EQ(v4123.z(), 2.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanMultiplyByScalar)
 {
@@ -455,8 +411,6 @@ TEST_F(TestVector3, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v4_3.z(), 9.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanDivideByScalar)
 {
     mc::Vector3 v1(1.0, 0.0, 0.0);
@@ -507,8 +461,6 @@ TEST_F(TestVector3, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(v4_4.z(), 0.75);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanCalculateVectorDotProduct)
 {
     // expected values calculated with wxMaxima
@@ -529,8 +481,6 @@ TEST_F(TestVector3, CanCalculateVectorDotProduct)
     EXPECT_DOUBLE_EQ(s43,  3.0);
     EXPECT_DOUBLE_EQ(s44, 14.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanCalculateVectorCrossProduct)
 {
@@ -575,8 +525,6 @@ TEST_F(TestVector3, CanCalculateVectorCrossProduct)
     EXPECT_DOUBLE_EQ(v34.z(),  0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanUnaryAdd)
 {
     mc::Vector3 v0(1.0, 2.0, 3.0);
@@ -588,8 +536,6 @@ TEST_F(TestVector3, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(v0.y(), 5.0);
     EXPECT_DOUBLE_EQ(v0.z(), 7.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanUnarySubstract)
 {
@@ -603,8 +549,6 @@ TEST_F(TestVector3, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(v0.z(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanUnaryMultiplyByScalar)
 {
     mc::Vector3 v0(2.0, 4.0, 6.0);
@@ -616,8 +560,6 @@ TEST_F(TestVector3, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v0.z(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestVector3, CanUnaryDivideByScalar)
 {
     mc::Vector3 v0(2.0, 4.0, 6.0);
@@ -628,8 +570,6 @@ TEST_F(TestVector3, CanUnaryDivideByScalar)
     EXPECT_DOUBLE_EQ(v0.y(), 2.0);
     EXPECT_DOUBLE_EQ(v0.z(), 3.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanUnaryVectorCrossProduct)
 {
@@ -662,8 +602,6 @@ TEST_F(TestVector3, CanUnaryVectorCrossProduct)
     EXPECT_DOUBLE_EQ(vt.y(), -1.0);
     EXPECT_DOUBLE_EQ(vt.z(),  0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestVector3, CanMultiplyScalarByVector)
 {

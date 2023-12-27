@@ -1,11 +1,7 @@
 #ifndef LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_
 #define LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/math/Integrator.h>
-
-////////////////////////////////////////////////////////////////////////////////
 
 /**
  * @brief The DiffEquationSolver class
@@ -127,7 +123,5 @@ private:
     double k_;      ///< [N/m]      stiffness
     double c_;      ///< [N/(m/s)]  damping
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_

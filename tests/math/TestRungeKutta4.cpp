@@ -4,8 +4,6 @@
 
 #include <DiffEquationSolver.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestRungeKutta4 : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestRungeKutta4, CanConstruct)
 {
     mc::RungeKutta4* rk = nullptr;
@@ -24,23 +20,17 @@ TEST_F(TestRungeKutta4, CanConstruct)
     delete rk;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestRungeKutta4, CanDestruct)
 {
     mc::RungeKutta4* rk = new mc::RungeKutta4();
     EXPECT_NO_THROW(delete rk);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestRungeKutta4, CanInstantiate)
 {
     mc::RungeKutta4 rk;
     EXPECT_FALSE(static_cast<bool>(rk.deriv_fun()));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestRungeKutta4, CanSolve)
 {
@@ -68,8 +58,6 @@ TEST_F(TestRungeKutta4, CanSolve)
     DiffEquationSolver des6(1.0, 1.0, 1.0, &rk6);
     EXPECT_TRUE(des6.Solve(1.0, 1.0));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestRungeKutta4, CanSetDerivFun)
 {

@@ -22,18 +22,13 @@
 #ifndef MCUTILS_TIME_ISO8601_H_
 #define MCUTILS_TIME_ISO8601_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <string>
 
 #include <mcutils/defs.h>
 
 #include <mcutils/time/DateTime.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -86,7 +81,5 @@ MCUTILSAPI inline std::string ToISO8601(const DateTime& dt,
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_TIME_ISO8601_H_

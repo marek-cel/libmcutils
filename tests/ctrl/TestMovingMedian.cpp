@@ -3,8 +3,6 @@
 #include <mcutils/ctrl/MovingMedian.h>
 #include <mcutils/math/Random.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestMovingMedian : public ::testing::Test
 {
 protected:
@@ -15,8 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingMedian, CanConstruct)
 {
     mc::MovingMedian* mm = nullptr;
@@ -24,15 +20,11 @@ TEST_F(TestMovingMedian, CanConstruct)
     delete mm;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingMedian, CanDestruct)
 {
     mc::MovingMedian* mm = new mc::MovingMedian();
     EXPECT_NO_THROW(delete mm);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingMedian, CanInstantiate)
 {
@@ -40,15 +32,11 @@ TEST_F(TestMovingMedian, CanInstantiate)
     EXPECT_EQ(mm.length(), 1);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingMedian, CanInstantiateAndSetData)
 {
     mc::MovingMedian mm(5);
     EXPECT_EQ(mm.length(), 5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingMedian, CanUpdate)
 {
@@ -99,16 +87,12 @@ TEST_F(TestMovingMedian, CanUpdate)
     EXPECT_DOUBLE_EQ(mm.value(), 28.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMovingMedian, CanSetLenght)
 {
     mc::MovingMedian mm;
     EXPECT_NO_THROW(mm.set_length(5));
     EXPECT_EQ(mm.length(), 5);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMovingMedian, CanGetLenght)
 {

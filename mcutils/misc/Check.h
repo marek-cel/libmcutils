@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MISC_CHECK_H_
 #define MCUTILS_MISC_CHECK_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #ifdef _MSC_VER
 #   include <float.h>
 #endif
@@ -32,10 +30,7 @@
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Checks if given varaible is Infinite.
@@ -88,7 +83,5 @@ MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_CHECK_H_

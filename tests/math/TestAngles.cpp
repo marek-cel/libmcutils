@@ -5,8 +5,6 @@
 #include <mcutils/math/Angles.h>
 #include <mcutils/math/Quaternion.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestAngles : public ::testing::Test
 {
 protected:
@@ -16,15 +14,11 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanNormalizeAngle)
 {
     EXPECT_DOUBLE_EQ(mc::Angles::Normalize(2.0 * M_PI + M_PI_4), M_PI_4);
     EXPECT_DOUBLE_EQ(mc::Angles::Normalize(2.0 * M_PI - M_PI_4), 1.75 * M_PI);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAngles, CanConstruct)
 {
@@ -33,15 +27,11 @@ TEST_F(TestAngles, CanConstruct)
     delete angles;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanDestruct)
 {
     mc::Angles* angles = new mc::Angles();
     EXPECT_NO_THROW(delete angles);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAngles, CanInstantiate)
 {
@@ -51,8 +41,6 @@ TEST_F(TestAngles, CanInstantiate)
     EXPECT_DOUBLE_EQ(angles.tht(), 0.0);
     EXPECT_DOUBLE_EQ(angles.psi(), 0.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAngles, CanInstantiateAndSetData)
 {
@@ -81,8 +69,6 @@ TEST_F(TestAngles, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(angles4.psi(), M_PI_4);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanValidate)
 {
     mc::Angles angles1(0.0, 0.0, 0.0);
@@ -98,8 +84,6 @@ TEST_F(TestAngles, CanValidate)
     EXPECT_FALSE(angles4.IsValid());
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanNormalize)
 {
     mc::Angles a(2.2 * M_PI, 2.3 * M_PI, 2.4 * M_PI);
@@ -113,15 +97,11 @@ TEST_F(TestAngles, CanNormalize)
     EXPECT_NEAR(a.psi(), a1.psi(), 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestAngles, CanConvertToString)
 {
     mc::Angles a(M_PI_4, M_PI_4, M_PI_4);
     EXPECT_STREQ(a.ToString().c_str(), "45.00,45.00,45.00");
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestAngles, CanCompare)
 {

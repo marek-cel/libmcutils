@@ -1,11 +1,7 @@
 #ifndef LIBMCUTILS_TESTS_CSVFILEREADER_H_
 #define LIBMCUTILS_TESTS_CSVFILEREADER_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <vector>
-
-////////////////////////////////////////////////////////////////////////////////
 
 /**
  * @brief Reads data from CSV file
@@ -39,7 +35,5 @@ bool ReadCsvDataFromFile(const char* path, std::vector<T>* first, Args... args)
     PackColumnsVectors(cols, first, args...);
     return ReadCsvColumnsDataFromFile(path, cols);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // LIBMCUTILS_TESTS_CSVFILEREADER_H_

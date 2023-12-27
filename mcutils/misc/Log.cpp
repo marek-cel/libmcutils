@@ -41,12 +41,7 @@
 
 #include <mcutils/time/ISO8601.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-//////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 void Log::Error(const char* format, ...)
 {
@@ -56,8 +51,6 @@ void Log::Error(const char* format, ...)
     va_end(args);
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
 void Log::Warning(const char* format, ...)
 {
     va_list args;
@@ -65,8 +58,6 @@ void Log::Warning(const char* format, ...)
     instance()->Print(VerboseLevel::Warning, format, args);
     va_end(args);
 }
-
-//////////////////////////////////////////////////////////////////////////////////
 
 void Log::Info(const char* format, ...)
 {
@@ -76,9 +67,7 @@ void Log::Info(const char* format, ...)
     va_end(args);
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
-void Log::Debug( const char* format, ... )
+void Log::Debug(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
@@ -86,35 +75,25 @@ void Log::Debug( const char* format, ... )
     va_end(args);
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
 std::ostream& Log::Out()
 {
     return instance()->out_stream_ == nullptr ? std::cout : *(instance()->out_stream_);
 }
-
-//////////////////////////////////////////////////////////////////////////////////
 
 void Log::set_out_stream(std::ostream* out_stream)
 {
     instance()->out_stream_ = out_stream;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
 void Log::set_syslog_out(bool syslog_out)
 {
     instance()->syslog_out_ = syslog_out;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
 void Log::set_verb_level(VerboseLevel verb_level)
 {
     instance()->verb_level_ = verb_level;
 }
-
-//////////////////////////////////////////////////////////////////////////////////
 
 void Log::Print(VerboseLevel level, const char* format, va_list args)
 {
@@ -181,8 +160,6 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
     }
 }
 
-//////////////////////////////////////////////////////////////////////////////////
-
 std::string Log::Timestamp()
 {
     int year = 2000;
@@ -222,7 +199,5 @@ std::string Log::Timestamp()
 
     return "[" + ToISO8601(year, mon, day, hour, min, sec, msec) + "]";
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

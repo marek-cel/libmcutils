@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MATH_GAUSSJORDAN_H_
 #define MCUTILS_MATH_GAUSSJORDAN_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
 #include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/VectorN.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Solves system of linear equations using Gauss-Jordan method.
@@ -111,7 +106,5 @@ Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_GAUSSJORDAN_H_

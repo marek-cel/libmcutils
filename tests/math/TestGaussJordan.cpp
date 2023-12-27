@@ -2,8 +2,6 @@
 
 #include <mcutils/math/GaussJordan.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestGaussJordan : public ::testing::Test
 {
 protected:
@@ -12,8 +10,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestGaussJordan, CanSolve)
 {
@@ -50,8 +46,6 @@ TEST_F(TestGaussJordan, CanSolve)
     EXPECT_NEAR(x(2), 2.0, 1.0e-9);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestGaussJordan, CanSolveNotInOrder)
 {
     // x = 1
@@ -86,8 +80,6 @@ TEST_F(TestGaussJordan, CanSolveNotInOrder)
     EXPECT_NEAR(x(1), 1.0, 1.0e-9);
     EXPECT_NEAR(x(2), 2.0, 1.0e-9);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestGaussJordan, CanSolveWithZerosAtDiagonal)
 {

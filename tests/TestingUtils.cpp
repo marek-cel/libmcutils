@@ -1,7 +1,5 @@
 #include <TestingUtils.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 #ifdef TEST_USING_ARMADILLO
 arma::mat SetArmaMatFromArray(double* array, int rows, int cols)
 {

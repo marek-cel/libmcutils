@@ -5,14 +5,10 @@
 #include <mcutils/geo/Mercator.h>
 #include <mcutils/geo/DataWGS84.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 // linear position tolerance (0.1 mm)
 #define LINEAR_POSITION_TOLERANCE 1.0e-4
 // latitude and longitude tolerance (10^-9 rad ~ ca. 6 mm)
 #define LAT_LON_TOLERANCE 1.0e-9
-
-////////////////////////////////////////////////////////////////////////////////
 
 class TestMercator : public ::testing::Test
 {
@@ -23,8 +19,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMercator, CanConstruct)
 {
     mc::Mercator* merc = nullptr;
@@ -32,22 +26,16 @@ TEST_F(TestMercator, CanConstruct)
     delete merc;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMercator, CanDestruct)
 {
     mc::Mercator* merc = new mc::Mercator(mc::DataWGS84::a, mc::DataWGS84::e);
     EXPECT_NO_THROW(delete merc);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMercator, CanInstantiate)
 {
     mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMercator, CanCalculateLat)
 {
@@ -76,8 +64,6 @@ TEST_F(TestMercator, CanCalculateLat)
     EXPECT_NEAR(merc.CalculateLat(-arc_deg60), -0.8979087261408334 , LAT_LON_TOLERANCE);
     EXPECT_NEAR(merc.CalculateLat(-arc_deg90), -1.1622044409794392 , LAT_LON_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMercator, CanCalculateLon)
 {
@@ -115,8 +101,6 @@ TEST_F(TestMercator, CanCalculateLon)
     EXPECT_NEAR(merc.CalculateLon(-arc_deg150) , -2.613302285604715  , LAT_LON_TOLERANCE);
     EXPECT_NEAR(merc.CalculateLon(-arc_deg180) , -3.1359627427256576 , LAT_LON_TOLERANCE);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestMercator, CanCalculateX)
 {
@@ -171,9 +155,6 @@ TEST_F(TestMercator, CanCalculateX)
     EXPECT_NEAR(merc.CalculateX(lon), -20037508.342789244, LINEAR_POSITION_TOLERANCE);
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestMercator, CanCalculateY)
 {
     mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
@@ -207,5 +188,4 @@ TEST_F(TestMercator, CanCalculateY)
 
     lat = -85.0 * (M_PI / 180.0);
     EXPECT_NEAR(merc.CalculateY(lat), -19929239.113379147, LINEAR_POSITION_TOLERANCE);
-
 }

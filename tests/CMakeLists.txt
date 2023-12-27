@@ -19,7 +19,6 @@ include_directories(.)
 set(SOURCES
     CsvFileReader.cpp
     DiffEquationSolver.cpp
-    TestDummy.cpp
     TestingEnvironment.cpp
     TestingUtils.cpp
     XcosBinFileReader.cpp
@@ -40,8 +39,6 @@ set(SOURCES
     ctrl/TestPID.cpp
     ctrl/TestSystem2.cpp
 
-    geo/TestDataMars.cpp
-    geo/TestDataWGS84.cpp
     geo/TestECEF.cpp
     geo/TestMercator.cpp
     geo/TestWGS84.cpp
@@ -74,7 +71,6 @@ set(SOURCES
     misc/TestString.cpp
     misc/TestUnits.cpp
 
-    physics/TestInertia.cpp
     physics/TestParallelAxis.cpp
 
     time/TestClockTime.cpp

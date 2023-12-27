@@ -24,12 +24,7 @@
 
 #include <mcutils/ctrl/Inertia.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Inertia2::Inertia2(double tc1, double tc2, double value)
     : time_const_1_(tc1)
@@ -37,8 +32,6 @@ Inertia2::Inertia2(double tc1, double tc2, double value)
     , value_int_ (value)
     , value_     (value)
 {}
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Inertia2::Update(double dt, double u)
 {
@@ -49,15 +42,11 @@ void Inertia2::Update(double dt, double u)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Inertia2::set_value(double value)
 {
     value_int_ = value;
     value_     = value;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 void Inertia2::set_time_const_1(double tc1)
 {
@@ -67,8 +56,6 @@ void Inertia2::set_time_const_1(double tc1)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 void Inertia2::set_time_const_2(double tc2)
 {
     if ( tc2 > 0.0 )
@@ -76,7 +63,5 @@ void Inertia2::set_time_const_2(double tc2)
         time_const_2_ = tc2;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

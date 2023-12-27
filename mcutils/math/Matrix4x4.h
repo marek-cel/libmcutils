@@ -22,22 +22,15 @@
 #ifndef MCUTILS_MATH_MATRIX4X4_H_
 #define MCUTILS_MATH_MATRIX4X4_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Vector4.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 template class MCUTILSAPI mc::MatrixMxN<4,4>;
 template class MCUTILSAPI mc::MatrixNxN<4>;
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 4 by 4 matrix class.
@@ -83,8 +76,6 @@ public:
     Matrix4x4& operator/=(double value);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
 inline Matrix4x4 operator*(double value, const Matrix4x4& matrix)
 {
@@ -92,7 +83,5 @@ inline Matrix4x4 operator*(double value, const Matrix4x4& matrix)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATRIX4X4_H_

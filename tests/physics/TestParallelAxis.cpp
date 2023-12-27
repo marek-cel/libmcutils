@@ -2,8 +2,6 @@
 
 #include <mcutils/physics/ParallelAxis.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestParallelAxis : public ::testing::Test
 {
 protected:
@@ -16,8 +14,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestParallelAxis, CanComputeParallelAxisInertia)
 {

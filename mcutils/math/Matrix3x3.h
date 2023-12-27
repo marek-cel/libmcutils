@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_MATRIX3X3_H_
 #define MCUTILS_MATH_MATRIX3X3_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Angles.h>
@@ -31,15 +29,10 @@
 #include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 template class MCUTILSAPI mc::MatrixMxN<3,3>;
 template class MCUTILSAPI mc::MatrixNxN<3>;
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 3 by 3 matrix class.
@@ -155,8 +148,6 @@ public:
     Matrix3x3& operator/=(double value);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
 inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
 {
@@ -164,7 +155,5 @@ inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATRIX3X3_H_

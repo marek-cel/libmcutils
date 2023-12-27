@@ -5,8 +5,6 @@
 
 #include <XcosBinFileReader.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestPID : public ::testing::Test
 {
 protected:
@@ -24,8 +22,6 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanConstruct)
 {
     mc::PID* pid = nullptr;
@@ -33,15 +29,11 @@ TEST_F(TestPID, CanConstruct)
     delete pid;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanDestruct)
 {
     mc::PID* pid = new mc::PID();
     EXPECT_NO_THROW(delete pid);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanInstantiate)
 {
@@ -52,8 +44,6 @@ TEST_F(TestPID, CanInstantiate)
     EXPECT_DOUBLE_EQ(pid.kd(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanInstantiateAndSetData)
 {
     mc::PID pid(2.0, 3.0, 4.0);
@@ -62,8 +52,6 @@ TEST_F(TestPID, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(pid.ki(), 3.0);
     EXPECT_DOUBLE_EQ(pid.kd(), 4.0);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanReset)
 {
@@ -78,8 +66,6 @@ TEST_F(TestPID, CanReset)
     EXPECT_DOUBLE_EQ(pid.error(), 0.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetAsParallel)
 {
     mc::PID pid;
@@ -90,8 +76,6 @@ TEST_F(TestPID, CanSetAsParallel)
     EXPECT_DOUBLE_EQ(pid.ki(), KI);
     EXPECT_DOUBLE_EQ(pid.kd(), KD);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanSetAsSeries)
 {
@@ -107,8 +91,6 @@ TEST_F(TestPID, CanSetAsSeries)
     EXPECT_DOUBLE_EQ(pid.kd(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetAsStandard)
 {
     mc::PID pid;
@@ -123,8 +105,6 @@ TEST_F(TestPID, CanSetAsStandard)
     EXPECT_DOUBLE_EQ(pid.kd(), 3.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetValueAndError)
 {
     mc::PID pid(KP, KI, KD);
@@ -134,8 +114,6 @@ TEST_F(TestPID, CanSetValueAndError)
     EXPECT_DOUBLE_EQ(pid.error(), 7.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanGetValue)
 {
     mc::PID pid(KP, KI, KD);
@@ -143,15 +121,11 @@ TEST_F(TestPID, CanGetValue)
     EXPECT_DOUBLE_EQ(pid.value(), 7.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanGetKp)
 {
     mc::PID pid(KP, KI, KD);
     EXPECT_DOUBLE_EQ(pid.kp(), KP);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanGetKi)
 {
@@ -159,15 +133,11 @@ TEST_F(TestPID, CanGetKi)
     EXPECT_DOUBLE_EQ(pid.ki(), KI);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanGetKd)
 {
     mc::PID pid(KP, KI, KD);
     EXPECT_DOUBLE_EQ(pid.kd(), KD);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanSetError)
 {
@@ -176,8 +146,6 @@ TEST_F(TestPID, CanSetError)
     EXPECT_DOUBLE_EQ(pid.error(), 6.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetValue)
 {
     mc::PID pid(KP, KI, KD);
@@ -185,15 +153,12 @@ TEST_F(TestPID, CanSetValue)
     EXPECT_DOUBLE_EQ(pid.value(), 7.0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetKp)
 {
     mc::PID pid;
     EXPECT_NO_THROW(pid.set_kp(KP));
     EXPECT_DOUBLE_EQ(pid.kp(), KP);
 }
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanSetKi)
 {
@@ -202,16 +167,12 @@ TEST_F(TestPID, CanSetKi)
     EXPECT_DOUBLE_EQ(pid.ki(), KI);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestPID, CanSetKd)
 {
     mc::PID pid;
     EXPECT_NO_THROW(pid.set_kd(KD));
     EXPECT_DOUBLE_EQ(pid.kd(), KD);
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 TEST_F(TestPID, CanUpdate)
 {

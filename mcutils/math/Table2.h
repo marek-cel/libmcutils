@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MATH_TABLE2_H_
 #define MCUTILS_MATH_TABLE2_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <string>
 #include <vector>
 
@@ -31,10 +29,7 @@
 
 #include <mcutils/math/Table.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 2D table and bilinear interpolation class.
@@ -217,7 +212,5 @@ private:
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_TABLE2_H_
