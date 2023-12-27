@@ -4,13 +4,10 @@ import os
 import platform
 import subprocess
 import sys
+import clean
 import misc
 
 build_dir = "build"
-
-
-def clean():
-    subprocess.run(["python3", "clean.py"])
 
 
 def build(with_tests):
@@ -65,7 +62,7 @@ def buildForWindows():
 
 
 if __name__ == "__main__":
-    clean()
+    clean.removeBuildDirs()
     os.chdir("..")
     with_tests = False
     if "--with-tests" in sys.argv:

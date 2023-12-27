@@ -2,6 +2,7 @@ bin/*
 build/*
 docs/*
 lib/*
+temp/*
 
 out_cloc.txt
 out_cppcheck.txt
