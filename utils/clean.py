@@ -15,26 +15,27 @@ def removeFile(file_path):
 
 
 def removeBuildDirs():
-    removeDir("bin")
-    removeDir("build")
-    removeDir("lib")
+    removeDir("../bin")
+    removeDir("../build")
+    removeDir("../lib")
 
 
 def removeCoverageReport():
-    removeFile("coverage_full.info")
-    removeFile("coverage.info")
-    removeDir("coverage-report")
-    removeFile("coverage_summary.txt")
+    removeFile("../coverage_full.info")
+    removeFile("../coverage.info")
+    removeDir("../coverage-report")
+    removeFile("../coverage_summary.txt")
 
 
 def removeCheckOutputs():
-    removeFile("out_cloc.txt")
-    removeFile("out_cppcheck.txt")
-    removeFile("out_cpplint.txt")
+    removeFile("../out_cloc.txt")
+    removeFile("../out_cppcheck.txt")
+    removeFile("../out_cpplint.txt")
+    removeFile("../out_pep.txt")
 
 
 def removeDocumentation():
-    removeDir("docs")
+    removeDir("../docs")
 
 
 def removePyCache():
@@ -44,7 +45,6 @@ def removePyCache():
 if __name__ == "__main__":
     print("Cleaning...")
     removePyCache()
-    os.chdir("..")
     removeBuildDirs()
     removeCoverageReport()
     removeCheckOutputs()
