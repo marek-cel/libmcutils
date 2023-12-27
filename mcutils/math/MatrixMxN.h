@@ -141,7 +141,7 @@ public:
     {
         if ( size_ > 0 )
         {
-            double elements = new double [size_];
+            double* elements = new double [size_];
 
             for ( unsigned int i = 0; i < size_; ++i )
             {
