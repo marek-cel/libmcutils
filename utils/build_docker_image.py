@@ -6,7 +6,7 @@ import misc
 
 if __name__ == "__main__":
     misc.printGreen("Building Docker image...")
-    dockerfile = 'Dockerfile'
+    dockerfile = '../Dockerfile'
     docker_cmd = [
         'docker', 'build',
         '-f',  dockerfile,
