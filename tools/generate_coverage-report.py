@@ -1,29 +1,24 @@
 #!/usr/bin/env python3
 
-################################################################################
-
 import os
 import subprocess
 import clean
-
-################################################################################
+import misc
 
 build_dir = "./build"
-base_dir  = "./mcutils"
+base_dir = "./mcutils"
 
 coverage_file_full = "coverage_full.info"
-coverage_file      = "coverage.info"
-
-################################################################################
+coverage_file = "coverage.info"
 
 
 def executeAllSteps():
-    print("Generating coverage report...")
+    misc.printGreen("Generating coverage report...")
     captureCoverage()
     removeExclusions()
     generateCoverageSummary()
     generateCoverageReport()
-    print("Generating coverage report done.")
+    misc.printGreen("Generating coverage report done.")
 
 
 def captureCoverage():
@@ -38,7 +33,7 @@ def captureCoverage():
 
 
 def getExclusions():
-    file_path = 'utils/lcov_exclude.txt'
+    file_path = 'tools/lcov_exclude.txt'
     with open(file_path, 'r') as file:
         exclusions = file.readlines()
     exclusions = [line.strip() for line in exclusions]
@@ -55,19 +50,20 @@ def removeExclusions():
 
 
 def generateCoverageSummary():
-    subprocess.run("lcov --summary" + coverage_file + " > coverage_summary.txt", shell=True)
+    subprocess.run(
+        "lcov --summary" + coverage_file + " > coverage_summary.txt",
+        shell=True
+    )
 
 
 def generateCoverageReport():
-    cmd = ["genhtml", coverage_file,
+    cmd = [
+        "genhtml", coverage_file,
         "--legend",
         "--function-coverage",
         "--output-directory", "coverage-report"
     ]
     subprocess.run(cmd)
-
-
-################################################################################
 
 
 if __name__ == "__main__":

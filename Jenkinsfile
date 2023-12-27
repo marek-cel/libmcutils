@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { 
-            image 'libmcutils-build-env:1' 
+            image 'libmcutils-dev-env' 
             args '-v /var/www/html/jenkins/:/var/www/html/jenkins/'
         }
     }
@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Generate coverage report') {
             steps {
-                sh 'cd utils && python3 ./generate_coverage-report.py'
+                sh 'cd tools && python3 ./generate_coverage-report.py'
                 sh "mkdir -p /var/www/html/jenkins/coverage-reports/${env.JOB_NAME}"
                 sh "cp -r coverage-report /var/www/html/jenkins/coverage-reports/${env.JOB_NAME}/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
             }

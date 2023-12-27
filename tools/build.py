@@ -1,34 +1,26 @@
 #!/usr/bin/env python3
 
-################################################################################
-
 import os
 import platform
 import subprocess
 import sys
-
-################################################################################
+import clean
+import misc
 
 build_dir = "build"
-
-################################################################################
-
-
-def clean():
-    subprocess.run(["python3", "clean.py"])
 
 
 def build(with_tests):
     if with_tests:
-        print("Building with tests...")
+        misc.printGreen("Building with tests...")
     else:
-        print("Building...")
+        misc.printGreen("Building...")
     os_name = platform.system()
     if os_name == "Linux":
         buildForLinux(with_tests)
     elif os_name == "Windows":
         buildForWindows()
-    print("Building done.")
+    misc.printGreen("Building done.")
 
 
 def buildForLinux(with_tests):
@@ -39,12 +31,18 @@ def buildForLinux(with_tests):
         '-B', build_dir
     ]
     if with_tests:
-        cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 -fno-elide-constructors -fno-default-inline -fprofile-arcs -ftest-coverage')
+        cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 \
+                         -fno-elide-constructors \
+                         -fno-default-inline \
+                         -fprofile-arcs -ftest-coverage')
     else:
         cmake_cmd.append('-DBUILD_TESTING=Off')
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
-        subprocess.run("cmake --build " + build_dir + " --config Release -j 4", shell=True)
+        subprocess.run(
+            "cmake --build " + build_dir + " --config Release -j 4",
+            shell=True
+        )
 
 
 def buildForWindows():
@@ -57,14 +55,14 @@ def buildForWindows():
     ]
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
-        subprocess.run("cmake --build " + build_dir + " --config Release -j 4", shell=True)
-
-
-################################################################################
+        subprocess.run(
+            "cmake --build " + build_dir + " --config Release -j 4",
+            shell=True
+        )
 
 
 if __name__ == "__main__":
-    clean()
+    clean.removeBuildDirs()
     os.chdir("..")
     with_tests = False
     if "--with-tests" in sys.argv:
