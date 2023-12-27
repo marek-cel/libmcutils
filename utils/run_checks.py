@@ -3,6 +3,7 @@
 import os
 import subprocess
 import clean
+import misc
 
 build_dir = "build"
 src_dir = "mcutils"
@@ -71,10 +72,10 @@ def runScanBuild():
 
 if __name__ == "__main__":
     clean.removeCheckOutputs()
-    print("Running checks...")
+    misc.printGreen("Running checks...")
     run_pycodestyle()
     os.chdir("..")
     run_cloc()
     run_cppcheck()
     run_cpplint()
-    print("Running checks done.")
+    misc.printGreen("Running checks done.")
