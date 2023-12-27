@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
-################################################################################
-
 import os
 import shutil
-
-################################################################################
 
 
 def removeDir(dir_path):
@@ -16,9 +12,6 @@ def removeDir(dir_path):
 def removeFile(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
-
-
-################################################################################
 
 
 def removeBuildDirs():
@@ -46,9 +39,6 @@ def removeDocumentation():
 
 def removePyCache():
     removeDir("__pycache__")
-
-
-################################################################################
 
 
 if __name__ == "__main__":

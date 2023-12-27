@@ -1,24 +1,26 @@
 #!/usr/bin/env python3
 
-################################################################################
-
 import os
 import platform
 import subprocess
-
-################################################################################
 
 
 def runTestsOnLinux():
     setLibraryPathOnLinux()
     os.chdir("bin")
-    subprocess.run("./tests --gtest_filter=* --gtest_break_on_failure", shell=True)
+    subprocess.run(
+        "./tests --gtest_filter=* --gtest_break_on_failure",
+        shell=True
+    )
 
 
 def runTestsOnWindows():
     setLibraryPathOnWindows()
     os.chdir("bin")
-    subprocess.run("tests.exe --gtest_filter=* --gtest_break_on_failure", shell=True)
+    subprocess.run(
+        "tests.exe --gtest_filter=* --gtest_break_on_failure",
+        shell=True
+    )
 
 
 def setLibraryPathOnLinux():
@@ -32,8 +34,6 @@ def setLibraryPathOnWindows():
     gtest_dir = str(os.environ.get("GTEST_DIR"))
     path = path + ";" + str(os.path.join(gtest_dir, "bin"))
     os.environ["PATH"] = path
-
-################################################################################
 
 
 if __name__ == "__main__":
