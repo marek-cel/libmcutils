@@ -27,7 +27,10 @@
 namespace mc {
 
 /**
- * @brief Singleton class template.
+ * @brief Singleton base class template.
+ * 
+ * ### References:
+ * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.36-40
  */
 template <class TYPE>
 class Singleton
