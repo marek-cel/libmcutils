@@ -107,13 +107,16 @@ private:
 
     bool syslog_out_ = true;    ///< specifies if syslog is enabled (default true)
 
+    // LCOV_EXCL_START
     /**
-     * You should use static function instance() due to get refernce
-     * to Random class instance.
+     * You should use static function instance() due to get refernce the class.
      */
     Log() = default;
     Log(const Log&) = delete;
     Log(Log&&) = delete;
+    Log& operator=(const Log&) = delete;
+    Log& operator=(Log&&) = delete;
+    // LCOV_EXCL_STOP
 
     /**
      * @brief Prints log message.

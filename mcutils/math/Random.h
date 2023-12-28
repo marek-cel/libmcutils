@@ -102,9 +102,17 @@ private:
     int rand_ = 0;      ///< random value
     unsigned int seed_; ///< seed
 
+    /**
+     * You should use static function instance() due to get refernce the class.
+     */
     Random();
+    
+    // LCOV_EXCL_START
     Random(const Random&) = delete;
     Random(Random&&) = delete;
+    Random& operator=(const Random&) = delete;
+    Random& operator=(Random&&) = delete;
+    // LCOV_EXCL_STOP
 };
 
 } // namespace mc
