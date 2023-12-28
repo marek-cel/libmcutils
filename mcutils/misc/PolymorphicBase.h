@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2023 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,45 +19,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_SINGLETON_H_
-#define MCUTILS_MISC_SINGLETON_H_
-
-#include <mcutils/defs.h>
-
-namespace mc {
+#ifndef MCUTILS_MISC_POLYMORPHICBASE_H_
+#define MCUTILS_MISC_POLYMORPHICBASE_H_
 
 /**
- * @brief Singleton base class template.
+ * @brief Base for polymorphic classes.
+ * 
+ * Use this class as a base class for polymorphic classes to ensure meeting 
+ * rule of three/five/zero, declaring virtual destructor for classes intended 
+ * for polymorphic use, and avoiding boilerplate code.
  * 
  * ### References:
- * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.36-40
+ * - [The rule of three/five/zero - cppreference.com](https://en.cppreference.com/w/cpp/language/rule_of_three)
+ * - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#example-good-6)
  */
-template <class TYPE>
-class Singleton
+class PolymorphicBase
 {
 public:
-
-    /**
-     * @brief Returns singleton object instance pointer, creates it if necessary.
-     * @return singleton object instance pointer
-     */
-    static TYPE* instance()
-    {
-        if ( !instance_ )
-        {
-            instance_ = new TYPE();
-        }
-
-        return instance_;
-    }
-
-private:
-
-    static TYPE* instance_;     ///< singleton object instance pointer
+    // LCOV_EXCL_START
+    PolymorphicBase() = default;
+    PolymorphicBase(const PolymorphicBase&) = delete;
+    PolymorphicBase(PolymorphicBase&&) = delete;
+    PolymorphicBase& operator=(const PolymorphicBase&) = delete;
+    PolymorphicBase& operator=(PolymorphicBase&&) = delete;
+    virtual ~PolymorphicBase() = default;
+    // LCOV_EXCL_STOP
 };
 
-template <class TYPE> TYPE* Singleton<TYPE>::instance_ = nullptr;
-
-} // namespace mc
-
-#endif // MCUTILS_MISC_SINGLETON_H_
+#endif  // MCUTILS_MISC_POLYMORPHICBASE_H_
