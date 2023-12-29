@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_POLYMORPHICBASE_H_
-#define MCUTILS_MISC_POLYMORPHICBASE_H_
+#ifndef MCUTILS_MISC_POLYMORPHIC_H_
+#define MCUTILS_MISC_POLYMORPHIC_H_
 
 /**
  * @brief Base for polymorphic classes.
@@ -33,17 +33,17 @@
  * - [The rule of three/five/zero - cppreference.com](https://en.cppreference.com/w/cpp/language/rule_of_three)
  * - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#example-good-6)
  */
-class PolymorphicBase
+class Polymorphic
 {
 public:
     // LCOV_EXCL_START
-    PolymorphicBase() = default;
-    PolymorphicBase(const PolymorphicBase&) = delete;
-    PolymorphicBase(PolymorphicBase&&) = delete;
-    PolymorphicBase& operator=(const PolymorphicBase&) = delete;
-    PolymorphicBase& operator=(PolymorphicBase&&) = delete;
-    virtual ~PolymorphicBase() = default;
+    Polymorphic() = default;
+    Polymorphic(const Polymorphic&) = delete;
+    Polymorphic(Polymorphic&&) = delete;
+    Polymorphic& operator=(const Polymorphic&) = delete;
+    Polymorphic& operator=(Polymorphic&&) = delete;
+    virtual ~Polymorphic() = default;
     // LCOV_EXCL_STOP
 };
 
-#endif  // MCUTILS_MISC_POLYMORPHICBASE_H_
+#endif  // MCUTILS_MISC_POLYMORPHIC_H_
