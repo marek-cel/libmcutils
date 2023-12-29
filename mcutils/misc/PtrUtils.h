@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2023 Marek M. Cel
+ * Copyright (C) 2022 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,31 +19,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MISC_POLYMORPHICBASE_H_
-#define MCUTILS_MISC_POLYMORPHICBASE_H_
+#ifndef MCUTILS_MISC_PTRUTILS_H_
+#define MCUTILS_MISC_PTRUTILS_H_
+
+namespace mc {
 
 /**
- * @brief Base for polymorphic classes.
- * 
- * Use this class as a base class for polymorphic classes to ensure meeting 
- * rule of three/five/zero, declaring virtual destructor for classes intended 
- * for polymorphic use, and avoiding boilerplate code.
- * 
- * ### References:
- * - [The rule of three/five/zero - cppreference.com](https://en.cppreference.com/w/cpp/language/rule_of_three)
- * - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#example-good-6)
+ * @brief Deletes a pointer and sets it to 'nullptr'.
+ * @param ptr pointer to delete
  */
-class PolymorphicBase
+template <typename T>
+void deletePtr(T*& ptr)
 {
-public:
-    // LCOV_EXCL_START
-    PolymorphicBase() = default;
-    PolymorphicBase(const PolymorphicBase&) = delete;
-    PolymorphicBase(PolymorphicBase&&) = delete;
-    PolymorphicBase& operator=(const PolymorphicBase&) = delete;
-    PolymorphicBase& operator=(PolymorphicBase&&) = delete;
-    virtual ~PolymorphicBase() = default;
-    // LCOV_EXCL_STOP
-};
+    if ( ptr )
+    {
+        delete ptr;
+    }
+    ptr = nullptr;
+}
 
-#endif  // MCUTILS_MISC_POLYMORPHICBASE_H_
+/**
+ * @brief Deletes an array pointer and sets it to 'nullptr'.
+ * @param ptr pointer to delete
+ */
+template <typename T>
+void deleteArrayPtr(T*& ptr)
+{
+    if ( ptr )
+    {
+        delete [] ptr;
+    }
+    ptr = nullptr;
+}
+
+} // namespace mc
+
+#endif // MCUTILS_MISC_PTRUTILS_H_

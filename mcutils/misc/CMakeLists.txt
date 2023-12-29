@@ -6,7 +6,8 @@ set(HEADERS
     Check.h
     Log.h
     MapUtils.h
-    PolymorphicBase.h
+    Polymorphic.h
+    PtrUtils.h
     Singleton.h
     String.h
     Units.h
