@@ -28,12 +28,12 @@ TEST_F(TestPtrUtils, CanDelPtr)
 TEST_F(TestPtrUtils, CanDelPtrArrayNull)
 {
     double* ptr = nullptr;
-    EXPECT_NO_THROW(mc::deleteArrayPtr(ptr));
+    EXPECT_NO_THROW(mc::deletePtrArray(ptr));
 }
 
-TEST_F(TestPtrUtils, CanDelArrayPtr)
+TEST_F(TestPtrUtils, CanDelPtrArray)
 {
     double* ptr = new double [10];
-    EXPECT_NO_THROW(mc::deleteArrayPtr(ptr));
+    EXPECT_NO_THROW(mc::deletePtrArray(ptr));
     EXPECT_TRUE(ptr == nullptr);
 }

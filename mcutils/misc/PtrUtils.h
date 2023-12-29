@@ -39,11 +39,11 @@ void deletePtr(T*& ptr)
 }
 
 /**
- * @brief Deletes an array pointer and sets it to 'nullptr'.
+ * @brief Deletes a pointer to an array and sets it to 'nullptr'.
  * @param ptr pointer to delete
  */
 template <typename T>
-void deleteArrayPtr(T*& ptr)
+void deletePtrArray(T*& ptr)
 {
     if ( ptr )
     {

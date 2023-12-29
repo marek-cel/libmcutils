@@ -39,6 +39,7 @@
 #   include <Windows.h>
 #endif
 
+#include <mcutils/misc/PtrUtils.h>
 #include <mcutils/time/ISO8601.h>
 
 namespace mc {
@@ -156,7 +157,7 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
         }
 #       endif // _LINUX_
 
-        if ( buf ) { delete [] buf; } buf = nullptr;
+        deletePtrArray(buf);
     }
 }
 

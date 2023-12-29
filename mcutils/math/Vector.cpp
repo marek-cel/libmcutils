@@ -28,6 +28,7 @@
 #include <utility>
 
 #include <mcutils/misc/Check.h>
+#include <mcutils/misc/PtrUtils.h>
 
 namespace mc {
 
@@ -287,7 +288,7 @@ void Vector::DivideByValue( double value )
 
 void Vector::DeleteElementsArray()
 {
-    if ( elements_ ) { delete [] elements_; } elements_ = nullptr;
+    deletePtrArray(elements_);
 }
 
 } // namespace mc

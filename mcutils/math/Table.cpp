@@ -28,6 +28,7 @@
 #include <utility>
 
 #include <mcutils/misc/Check.h>
+#include <mcutils/misc/PtrUtils.h>
 #include <mcutils/misc/String.h>
 
 namespace mc {
@@ -519,9 +520,9 @@ void Table::CreateArrays()
 
 void Table::DeleteArrays()
 {
-    if ( key_values_ ) { delete [] key_values_; } key_values_ = nullptr;
-    if ( table_data_ ) { delete [] table_data_; } table_data_ = nullptr;
-    if ( inter_data_ ) { delete [] inter_data_; } inter_data_ = nullptr;
+    deletePtrArray(key_values_);
+    deletePtrArray(table_data_);
+    deletePtrArray(inter_data_);
 }
 
 void Table::UpdateInterpolationData()
