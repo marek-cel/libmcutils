@@ -31,6 +31,7 @@
 #include <mcutils/defs.h>
 
 #include <mcutils/math/VectorN.h>
+#include <mcutils/misc/PtrUtils.h>
 #include <mcutils/misc/String.h>
 
 namespace mc {
@@ -160,7 +161,7 @@ public:
 
             if ( valid ) SetFromArray(elements);
 
-            delete [] elements;
+            deletePtrArray(elements);
         }
     }
 
