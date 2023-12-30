@@ -18,7 +18,6 @@ include_directories(.)
 
 set(SOURCES
     CsvFileReader.cpp
-    DiffEquationSolver.cpp
     TestingEnvironment.cpp
     TestingUtils.cpp
     XcosBinFileReader.cpp

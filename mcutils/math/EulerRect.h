@@ -24,14 +24,10 @@
 
 #include <functional>
 
-#include <mcutils/defs.h>
-
-#include <mcutils/math/Integrator.h>
-
 namespace mc {
 
 /**
- * @brief Euler's rectangular numerical integration class.
+ * @brief Euler's rectangular numerical integration class template.
  *
  * ### Refernces:
  * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
@@ -41,21 +37,32 @@ namespace mc {
  * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.309. [in Polish]
  * - [Euler method - Wikipedia](https://en.wikipedia.org/wiki/Euler_method)
  */
-class MCUTILSAPI EulerRect : public Integrator
+template <typename T>
+class EulerRect
 {
 public:
 
+    using DerivFun = std::function<T(const T&)>;
+
     /**
-     * @brief Integrates given vector using Euler's rectangular integration algorithm.
-     * @param step integration time step [s]
-     * @param vect integrating vector
+     * @brief Integrates using Euler's rectangular integration algorithm.
+     * @param dx integration step
+     * @param yn current value to be integrated
+     * @return integration result
      */
-    void Integrate(double step, Vector* vect) override;
+    T Integrate(double dx, const T& yn)
+    {
+        // integration
+        return yn + fun_(yn) * dx;
+    }
+
+    inline DerivFun fun() const { return fun_; }
+
+    void set_fun(DerivFun fun) { fun_ = fun; }
 
 private:
 
-    Vector k0_;     ///< auxiliary vector
-    Vector xt_;     ///< auxiliary vector
+    DerivFun fun_;  ///< function which calculates vector derivative
 };
 
 } // namespace mc

@@ -24,14 +24,10 @@
 
 #include <functional>
 
-#include <mcutils/defs.h>
-
-#include <mcutils/math/Integrator.h>
-
 namespace mc {
 
 /**
- * @brief Runge-Kutta 4th order numerical integration class.
+ * @brief Runge-Kutta 4th order numerical integration class template.
  *
  * ### Refernces:
  * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
@@ -39,25 +35,49 @@ namespace mc {
  * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]
  * - [Runge–Kutta methods - Wikipedia](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods)
  */
-class MCUTILSAPI RungeKutta4 : public Integrator
+template <typename T>
+class RungeKutta4
 {
 public:
 
+    using DerivFun = std::function<T(const T&)>;
+
     /**
-     * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.
-     * @param step integration time step [s]
-     * @param vect integrating vector
+     * @brief Integrates using Runge-Kutta 4th order integration algorithm.
+     * @param dx integration step
+     * @param yn current value to be integrated
+     * @return integration result
      */
-    void Integrate(double step, Vector* vect) override;
+    T Integrate(double dx, const T& yn)
+    {
+        T y0 = yn;
+
+        // k1 - derivatives calculation
+        T k1 = fun_(y0);
+
+        // k2 - derivatives calculation
+        y0 = yn + k1 * (dx / 2.0);
+        T k2 = fun_(y0);
+
+        // k3 - derivatives calculation
+        y0 = yn + k2 * (dx / 2.0);
+        T k3 = fun_(y0);
+
+        // k4 - derivatives calculation
+        y0 = yn + k3 * dx;
+        T k4 = fun_(y0);
+
+        // integration
+        return yn + (k1 + k2 * 2.0 + k3 * 2.0 + k4) * (dx / 6.0);
+    }
+
+    inline DerivFun fun() const { return fun_; }
+
+    void set_fun(DerivFun fun) { fun_ = fun; }
 
 private:
 
-    Vector k1_;     ///< auxiliary vector
-    Vector k2_;     ///< auxiliary vector
-    Vector k3_;     ///< auxiliary vector
-    Vector k4_;     ///< auxiliary vector
-
-    Vector xt_;     ///< auxiliary vector
+    DerivFun fun_;  ///< function which calculates vector derivative
 };
 
 } // namespace mc
