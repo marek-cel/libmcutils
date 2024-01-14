@@ -25,6 +25,12 @@
 #include <cstdlib>
 #include <ctime>
 
+#ifdef _MSC_VER
+#   define _CRT_RAND_S
+#   include <stdlib.h>
+#   undef _CRT_RAND_S
+#endif // _MSC_VER
+
 namespace mc {
 
 Random::Random()

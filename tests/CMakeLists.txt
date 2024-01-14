@@ -14,6 +14,10 @@ find_package(Threads REQUIRED)
 
 include_directories(.)
 
+if (WIN32)
+    include_directories("${ARMADILLO_INCLUDE_DIRS}/armadillo/include")
+endif()
+
 ################################################################################
 
 set(SOURCES
@@ -83,21 +87,19 @@ set(SOURCES
 
 add_executable(${TARGET_NAME} WIN32 ${SOURCES})
 
-target_link_libraries(${TARGET_NAME}
-
-    -Wl,--start-group
-
-    gcov
-
+set(LIBS
     mcutils
-
     GTest::gtest
     GTest::gtest_main
     ${ARMADILLO_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
-
-    -Wl,--end-group
 )
+
+if (UNIX)
+    set(LIBS ${LIBS} gcov)
+endif()
+
+target_link_libraries(${TARGET_NAME}  ${LIBS})
 
 ################################################################################
 
