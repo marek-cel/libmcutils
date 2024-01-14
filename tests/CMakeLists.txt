@@ -82,21 +82,17 @@ set(SOURCES
 
 add_executable(${TARGET_NAME} WIN32 ${SOURCES})
 
-target_link_libraries(${TARGET_NAME}
-
-    -Wl,--start-group
-
-    gcov
-
+set(LIBS
     mcutils
-
     GTest::gtest
     GTest::gtest_main
     ${ARMADILLO_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
-
-    -Wl,--end-group
 )
+
+set(LIBS ${LIBS} gcov)
+
+target_link_libraries(${TARGET_NAME} ${LIBS})
 
 ################################################################################
 
