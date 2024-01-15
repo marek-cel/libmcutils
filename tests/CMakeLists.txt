@@ -102,6 +102,7 @@ target_link_libraries(${TARGET_NAME} ${LIBS})
 
 ################################################################################
 
+# TODO: fix this for Windows
 if (NOT WIN32)
     gtest_discover_tests(${TARGET_NAME}
         WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
