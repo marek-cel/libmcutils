@@ -84,7 +84,7 @@ set(SOURCES
 
 ################################################################################
 
-add_executable(${TARGET_NAME} WIN32 ${SOURCES})
+add_executable(${TARGET_NAME} ${SOURCES})
 
 set(LIBS
     mcutils
@@ -98,10 +98,12 @@ if (UNIX)
     set(LIBS ${LIBS} gcov)
 endif()
 
-target_link_libraries(${TARGET_NAME}  ${LIBS})
+target_link_libraries(${TARGET_NAME} ${LIBS})
 
 ################################################################################
 
-gtest_discover_tests(${TARGET_NAME}
-    WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
-)
+if (NOT WIN32)
+    gtest_discover_tests(${TARGET_NAME}
+        WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    )
+endif()
