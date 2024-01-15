@@ -50,9 +50,15 @@ def buildForWindows():
         'cmake', '.',
         '-DCMAKE_BUILD_TYPE=Release',
         '-DCMAKE_INSTALL_PREFIX=%LIBMCUTILS_DIR%',
-        '-DBUILD_TESTING=Off',
         '-B', build_dir
     ]
+    if with_tests:
+        cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 \
+                         -fno-elide-constructors \
+                         -fno-default-inline \
+                         -fprofile-arcs -ftest-coverage')
+    else:
+        cmake_cmd.append('-DBUILD_TESTING=Off')
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
         subprocess.run(
