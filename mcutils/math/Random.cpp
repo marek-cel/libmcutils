@@ -44,9 +44,10 @@ int Random::GetRandom(int min, int max)
     if ( max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
-        rand_s(&rand_);
-        return min + rand_ % (max - min + 1);
-        //return min + rand() % (max - min + 1);
+        // TODO: switch to rand_s()
+        //rand_s(&rand_);
+        //return min + rand_ % (max - min + 1);
+        return min + rand() % (max - min + 1);
 #       else
         mutex_.lock();
         rand_ = rand_r(&seed_);
