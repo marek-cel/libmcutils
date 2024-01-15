@@ -22,16 +22,11 @@
 #ifndef MCUTILS_GEO_DATAMARS_H_
 #define MCUTILS_GEO_DATAMARS_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <cmath>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Martian Coordinate System ellipsoid parameters according to the IAU
@@ -39,16 +34,13 @@ namespace mc
  *
  * Martian prime merdian goes through the Airy-0 crater.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015</li>
- *   <li>Mars Geodesy/Cartography Working Group Recommendations on Mars Cartographic Constants and Coordinate Systems, 2011</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Mars">Mars - Wikipedia</a></li>
- *   <li><a href="https://en.wikipedia.org/wiki/Airy-0">Airy-0 - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015
+ * - Mars Geodesy/Cartography Working Group Recommendations on Mars Cartographic Constants and Coordinate Systems, 2011
+ * - [Mars - Wikipedia](https://en.wikipedia.org/wiki/Mars)
+ * - [Airy-0 - Wikipedia](https://en.wikipedia.org/wiki/Airy-0)
  */
-namespace DataMars
-{
+namespace DataMars {
 
 static constexpr double a   = 3396190.0;                ///< [m] equatorial radius
 static constexpr double b   = 3376200.0;                ///< [m] polar radius
@@ -68,7 +60,5 @@ static constexpr double mm    = 6.4171e23;              ///< [kg] mass of the Ma
 
 } // namespace DataMars
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_DATAMARS_H_

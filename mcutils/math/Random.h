@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MATH_RANDOM_H_
 #define MCUTILS_MATH_RANDOM_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mutex>
 
 #include <mcutils/defs.h>
 
 #include <mcutils/misc/Singleton.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Random number generator.
@@ -50,9 +45,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static int get( int min, int max )
+    inline static int Get(int min, int max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -61,9 +56,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static float get( float min, float max )
+    inline static float Get(float min, float max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -72,9 +67,9 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    inline static double get( double min, double max )
+    inline static double Get(double min, double max)
     {
-        return Random::instance()->getRandom( min, max );
+        return Random::instance()->GetRandom(min, max);
     }
 
     /**
@@ -83,7 +78,7 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    int getRandom( int min, int max );
+    int GetRandom(int min, int max);
 
     /**
      * @brief Gets random number from the given range.
@@ -91,7 +86,7 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    float getRandom( float min, float max );
+    float GetRandom(float min, float max);
 
     /**
      * @brief Gets random number from the given range.
@@ -99,23 +94,27 @@ public:
      * @param max maximum random number value
      * @return random value
      */
-    double getRandom( double min, double max );
+    double GetRandom(double min, double max);
 
 private:
 
-    std::mutex _mutex;  ///< mutex
-    int _rand;          ///< random value
-    unsigned int _seed; ///< seed
+    std::mutex mutex_;  ///< mutex
+    int rand_ = 0;      ///< random value
+    unsigned int seed_; ///< seed
 
     /**
-     * You should use static function instance() due to get refernce
-     * to Random class instance.
+     * You should use static function instance() due to get refernce the class.
      */
     Random();
+    
+    // LCOV_EXCL_START
+    Random(const Random&) = delete;
+    Random(Random&&) = delete;
+    Random& operator=(const Random&) = delete;
+    Random& operator=(Random&&) = delete;
+    // LCOV_EXCL_STOP
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_RANDOM_H_

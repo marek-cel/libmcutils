@@ -22,8 +22,6 @@
 #ifndef MCUTILS_GEO_ECEF_H_
 #define MCUTILS_GEO_ECEF_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/geo/Geo.h>
@@ -33,10 +31,7 @@
 #include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Earth-centered, Earth-fixed (ECEF) coordinate system class.
@@ -50,19 +45,17 @@ namespace mc
  * an equatorial plane and positive through 0 longitude and 0 latitude,
  * and y-axis completing right-handed system.<br/>
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Burtch R.: A Comparison of Methods Used in Rectangular to Geodetic Coordinate Transformations, 2006</li>
- *   <li>Bowring B.: Transformation from spatial to geocentric coordinates, 1976</li>
- *   <li>Zhu J.: Conversion of Earth-centered Earth-fixed coordinates to geodetic coordinates, 1994</li>
- * </ul>
+ * ### Refernces:
+ * - Burtch R.: A Comparison of Methods Used in Rectangular to Geodetic Coordinate Transformations, 2006
+ * - Bowring B.: Transformation from spatial to geocentric coordinates, 1976
+ * - Zhu J.: Conversion of Earth-centered Earth-fixed coordinates to geodetic coordinates, 1994
  */
 class MCUTILSAPI ECEF
 {
 public:
 
-    static const Matrix3x3 _enu2ned;    ///< matrix of rotation from ENU to NED
-    static const Matrix3x3 _ned2enu;    ///< matrix of rotation from NED to ENU
+    static const Matrix3x3 enu2ned_;    ///< matrix of rotation from ENU to NED
+    static const Matrix3x3 ned2enu_;    ///< matrix of rotation from NED to ENU
 
     /** @brief Constructor. */
     ECEF();
@@ -71,93 +64,93 @@ public:
      * @brief Copy constructor.
      * @param ecef object to copy
      */
-    ECEF( const ECEF &ecef );
+    ECEF(const ECEF& ecef);
 
     /**
      * @brief Moving constructor.
      * @param ecef object to move
      */
-    ECEF( ECEF &&ecef );
+    ECEF(ECEF&& ecef);
 
     /**
      * @brief Constructor.
      * @param a [m] equatorial radius
      * @param f [-] ellipsoid flattening
      */
-    ECEF( double a, double f );
+    ECEF(double a, double f);
 
     /** @brief Destructor. */
     virtual ~ECEF();
 
     /**
-     * @brief Converts geodetic coordinates into ECEF coordinates.
+     * @brief Converts geodetic coordinates into cartesian coordinates.
      * @param lat [rad] geodetic latitude
      * @param lon [rad] geodetic longitude
      * @param alt [m] altitude above mean sea level
-     * @param x [m] resulting ECEF x-coordinate pointer
-     * @param y [m] resulting ECEF y-coordinate pointer
-     * @param z [m] resulting ECEF z-coordinate pointer
+     * @param x [m] resulting cartesian x-coordinate pointer
+     * @param y [m] resulting cartesian y-coordinate pointer
+     * @param z [m] resulting cartesian z-coordinate pointer
      */
-    void geo2ecef( double lat, double lon, double alt,
-                   double *x, double *y, double *z ) const;
+    void ConvertGeo2Cart(double lat, double lon, double alt,
+                         double* x, double* y, double* z) const;
 
     /**
-     * @brief Converts geodetic coordinates into ECEF coordinates.
+     * @brief Converts geodetic coordinates into cartesian coordinates.
      * @param lat [rad] geodetic latitude
      * @param lon [rad] geodetic longitude
      * @param alt [m] altitude above mean sea level
-     * @return [m] resulting ECEF coordinates vector
+     * @return [m] resulting cartesian coordinates vector
      */
-    Vector3 geo2ecef( double lat, double lon, double alt ) const;
+    Vector3 ConvertGeo2Cart(double lat, double lon, double alt) const;
 
     /**
-     * @brief Converts geodetic coordinates into ECEF coordinates.
+     * @brief Converts geodetic coordinates into cartesian coordinates.
      * @param pos_geo [m] geodetic coordinates
-     * @return [m] resulting ECEF coordinates vector
+     * @return [m] resulting cartesian coordinates vector
      */
-    Vector3 geo2ecef( const Geo &pos_geo ) const;
+    Vector3 ConvertGeo2Cart(const Geo& pos_geo) const;
 
     /**
-     * @brief Converts geodetic coordinates into ECEF coordinates.
+     * @brief Converts geodetic coordinates into cartesian coordinates.
      * @param pos_geo [m] geodetic coordinates
-     * @param pos_ecef [m] resulting ECEF coordinates vector pointer
+     * @param pos_cart [m] resulting cartesian coordinates vector pointer
      */
-    void geo2ecef( const Geo &pos_geo, Vector3 *pos_ecef ) const;
+    void ConvertGeo2Cart(const Geo& pos_geo, Vector3* pos_cart) const;
 
     /**
-     * @brief Converts ECEF coordinates into geodetic coordinates.
-     * @param x [m] ECEF x-coordinate
-     * @param y [m] ECEF y-coordinate
-     * @param z [m] ECEF z-coordinate
+     * @brief Converts cartesian coordinates into geodetic coordinates.
+     * @param x [m] cartesian x-coordinate
+     * @param y [m] cartesian y-coordinate
+     * @param z [m] cartesian z-coordinate
      * @param lat [rad] resulting geodetic latitude pointer
      * @param lon [rad] resulting geodetic longitude pointer
      * @param alt [m] resulting altitude above mean sea level pointer
      */
-    void ecef2geo( double x, double y, double z,
-                   double *lat, double *lon, double *alt ) const;
+    void ConvertCart2Geo(double x, double y, double z,
+                         double* lat, double* lon, double* alt) const;
 
     /**
-     * @brief Converts ECEF coordinates into geodetic coordinates.
-     * @param x [m] ECEF x-coordinate
-     * @param y [m] ECEF y-coordinate
-     * @param z [m] ECEF z-coordinate
+     * @brief Converts cartesian coordinates into geodetic coordinates.
+     * @param x [m] cartesian x-coordinate
+     * @param y [m] cartesian y-coordinate
+     * @param z [m] cartesian z-coordinate
      * @return resulting geodetic coordinates
      */
-    Geo ecef2geo( double x, double y, double z ) const;
+    Geo ConvertCart2Geo(double x, double y, double z) const;
 
     /**
-     * @brief Converts ECEF coordinates into geodetic coordinates.
-     * @param pos_ecef [m] ECEF coordinates vector
+     * @brief Converts cartesian coordinates into geodetic coordinates.
+     * @param pos_cart [m] cartesian coordinates vector
      * @return resulting geodetic coordinates
      */
-    Geo ecef2geo( const Vector3 &pos_ecef ) const;
+    Geo ConvertCart2Geo(const Vector3& pos_cart) const;
 
     /**
-     * @brief Converts ECEF coordinates into geodetic coordinates.
-     * @param pos_ecef [m] ECEF coordinates vector
+     * @brief Converts cartesian coordinates into geodetic coordinates.
+     * @param pos_cart [m] cartesian coordinates vector
      * @param pos_geo resulting geodetic coordinates pointer
      */
-    void ecef2geo( const Vector3 &pos_ecef, Geo *pos_geo ) const;
+    void ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const;
 
     /**
      * @brief Calculates coordinates moved by the given offset.
@@ -166,87 +159,113 @@ public:
      * @param offset_y [m] lateral offset
      * @return resulting geodetic coordinates
      */
-    Geo getGeoOffset( double heading, double offset_x, double offset_y ) const;
+    Geo GetGeoOffset(double heading, double offset_x, double offset_y) const;
 
-    inline double getA   () const { return _a;   }
-    inline double getF   () const { return _f;   }
-    inline double getB   () const { return _b;   }
-    inline double getR1  () const { return _r1;  }
-    inline double getA2  () const { return _a2;  }
-    inline double getB2  () const { return _b2;  }
-    inline double getE2  () const { return _e2;  }
-    inline double getE   () const { return _e;   }
-    inline double getEp2 () const { return _ep2; }
-    inline double getEp  () const { return _ep;  }
+    inline double a   () const { return a_;   }
+    inline double f   () const { return f_;   }
+    inline double b   () const { return b_;   }
+    inline double r1  () const { return r1_;  }
+    inline double a2  () const { return a2_;  }
+    inline double b2  () const { return b2_;  }
+    inline double e2  () const { return e2_;  }
+    inline double e   () const { return e_;   }
+    inline double ep2 () const { return ep2_; }
+    inline double ep  () const { return ep_;  }
 
-    Angles getAngles_NED  ( const Angles &angles_ecef ) const;
-    Angles getAngles_ECEF ( const Angles &angles_ned  ) const;
+    /**
+     * @brief Converts attitude angles expressed in NED.
+     * @param angles_ecef attitude angles expressed in ECEF
+     * @return attitude angles expressed in NED
+     */
+    Angles ConvertAttitudeECEF2NED(const Angles& angles_ecef) const;
 
-    Quaternion getNED2BAS  ( const Quaternion &att_ecef ) const;
-    Quaternion getECEF2BAS ( const Quaternion &att_ned  ) const;
+    /**
+     * @brief Converts attitude angles expressed in ECEF.
+     * @param angles_ecef attitude angles expressed in NED
+     * @return attitude angles expressed in ECEF
+     */
+    Angles ConvertAttitudeNED2ECEF(const Angles& angles_ned) const;
 
-    inline Geo     getPos_Geo  () const { return _pos_geo;  }
-    inline Vector3 getPos_ECEF () const { return _pos_ecef; }
+    /**
+     * @brief Converts attitude quaternion expressed in NED.
+     * @param angles_ecef attitude quaternion expressed in ECEF
+     * @return attitude quaternion expressed in NED
+     */
+    Quaternion ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const;
 
-    inline Matrix3x3 getENU2NED() const { return _enu2ned; }
-    inline Matrix3x3 getNED2ENU() const { return _ned2enu; }
+    /**
+     * @brief Converts attitude quaternion expressed in ECEF.
+     * @param angles_ecef attitude quaternion expressed in NED
+     * @return attitude quaternion expressed in ECEF
+     */
+    Quaternion ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const;
 
-    inline Matrix3x3 getENU2ECEF() const { return _enu2ecef; }
-    inline Matrix3x3 getNED2ECEF() const { return _ned2ecef; }
-    inline Matrix3x3 getECEF2ENU() const { return _ecef2enu; }
-    inline Matrix3x3 getECEF2NED() const { return _ecef2ned; }
+    /**
+     * @brief Sets position from geodetic coordinates
+     * @param pos_geo position expressed in geodetic coordinates
+     */
+    void SetPositionFromGeo(const Geo& pos_geo);
 
-    /** */
-    void setPos_Geo( const Geo &pos_geo );
+    /**
+     * @brief Sets position from cartesian coordinates
+     * @param pos_geo position expressed in geodetic coordinates
+     */
+    void SetPositionFromCart(const Vector3& pos_cart);
 
-    /** */
-    void setPos_ECEF( const Vector3 &pos_ecef );
+    inline const Geo& pos_geo() const { return pos_geo_; }
+
+    inline const Vector3& pos_cart() const { return pos_cart_; }
+
+    inline const Matrix3x3& enu2ned() const { return enu2ned_; }
+    inline const Matrix3x3& ned2enu() const { return ned2enu_; }
+
+    inline const Matrix3x3& enu2ecef() const { return enu2ecef_; }
+    inline const Matrix3x3& ned2ecef() const { return ned2ecef_; }
+    inline const Matrix3x3& ecef2enu() const { return ecef2enu_; }
+    inline const Matrix3x3& ecef2ned() const { return ecef2ned_; }
 
     /** @brief Assignment operator. */
-    ECEF& operator= ( const ECEF &ecef );
+    ECEF& operator=(const ECEF& ecef);
 
     /** @brief Moving assignment operator. */
-    ECEF& operator= ( ECEF &&ecef );
+    ECEF& operator=(ECEF&& ecef);
 
 protected:
 
-    double _a;                      ///< [m] equatorial radius
-    double _f;                      ///< [-] ellipsoid flattening
+    double a_ = 0.0;            ///< [m] equatorial radius
+    double f_ = 0.0;            ///< [-] ellipsoid flattening
 
-    double _b;                      ///< [m] polar radius
-    double _r1;                     ///< [m] mean radius
-    double _a2;                     ///< [m^2] equatorial radius squared
-    double _b2;                     ///< [m^2] polar radius squared
-    double _e2;                     ///< [-] ellipsoid first eccentricity squared
-    double _e;                      ///< [-] ellipsoid first eccentricity
-    double _ep2;                    ///< [-] ellipsoid second eccentricity squared
-    double _ep;                     ///< [-] ellipsoid second eccentricity
+    double b_   = 0.0;          ///< [m] polar radius
+    double r1_  = 0.0;          ///< [m] mean radius
+    double a2_  = 0.0;          ///< [m^2] equatorial radius squared
+    double b2_  = 0.0;          ///< [m^2] polar radius squared
+    double e2_  = 0.0;          ///< [-] ellipsoid first eccentricity squared
+    double e_   = 0.0;          ///< [-] ellipsoid first eccentricity
+    double ep2_ = 0.0;          ///< [-] ellipsoid second eccentricity squared
+    double ep_  = 0.0;          ///< [-] ellipsoid second eccentricity
 
-    Geo _pos_geo;                   ///< geodetic coordinates
+    Geo pos_geo_;               ///< geodetic coordinates (latitude, longitude, altitude)
+    Vector3 pos_cart_;          ///< [m] cartesian coordinates vector (x, y, z)
 
-    Vector3 _pos_ecef;              ///< [m] coordinates vector expressed in ECEF
+    Matrix3x3 enu2ecef_;        ///< rotation matrix from ENU to ECEF
+    Matrix3x3 ned2ecef_;        ///< rotation matrix from NED to ECEF
+    Matrix3x3 ecef2enu_;        ///< rotation matrix from ECEF to ENU
+    Matrix3x3 ecef2ned_;        ///< rotation matrix from ECEF to NED
 
-    Matrix3x3 _enu2ecef;            ///< rotation matrix from ENU to ECEF
-    Matrix3x3 _ned2ecef;            ///< rotation matrix from NED to ECEF
-    Matrix3x3 _ecef2enu;            ///< rotation matrix from ECEF to ENU
-    Matrix3x3 _ecef2ned;            ///< rotation matrix from ECEF to NED
-
-    virtual void update();
+    virtual void Update();
 
 private:
 
-    void copyData( const ECEF &ecef );
-    void copyParams( const ECEF &ecef );
+    void CopyData(const ECEF& ecef);
+    void CopyParams(const ECEF& ecef);
 
     /**
      * @brief Updates rotation matrices due to position.
      * This function updates rotation matrices due to current ECEF coordinates.
      */
-    void updateMatrices();
+    void UpdateMatrices();
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_ECEF_H_

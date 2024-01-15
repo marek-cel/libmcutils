@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MISC_CHECK_H_
 #define MCUTILS_MISC_CHECK_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #ifdef _MSC_VER
 #   include <float.h>
 #endif
@@ -32,22 +30,19 @@
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Checks if given varaible is Infinite.
  * @param val double precision value to test
  * @return function returns TRUE if tested value is Infinite
  */
-MCUTILSAPI inline bool isInf( const double &val )
+MCUTILSAPI inline bool IsInf(const double& val)
 {
 #   ifdef _MSC_VER
-    return !( _finite( val ) );
+    return !_finite(val);
 #   else
-    return std::isinf( val );
+    return std::isinf(val);
 #   endif
 }
 
@@ -56,9 +51,9 @@ MCUTILSAPI inline bool isInf( const double &val )
  * @param val double precision value to test
  * @return function returns TRUE if tested value is NaN
  */
-MCUTILSAPI inline bool isNaN( const double &val )
+MCUTILSAPI inline bool IsNaN(const double& val)
 {
-    return ( val != val );
+    return val != val;
 }
 
 /**
@@ -66,9 +61,9 @@ MCUTILSAPI inline bool isNaN( const double &val )
  * @param val double precision value to test
  * @return function returns FALSE if tested value is Infinite or NaN
  */
-MCUTILSAPI inline bool isValid( const double &val )
+MCUTILSAPI inline bool IsValid(const double& val)
 {
-    return !( isNaN( val ) || isInf( val ) );
+    return !( IsNaN(val) || IsInf(val) );
 }
 
 /**
@@ -77,18 +72,16 @@ MCUTILSAPI inline bool isValid( const double &val )
  * @param size the size of given array
  * @return function returns FALSE if tested array is Infinite or NaN
  */
-MCUTILSAPI inline bool isValid( const double array[], unsigned int size )
+MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
 {
     for ( unsigned int i = 0; i < size; ++i )
     {
-        if ( isNaN( array[ i ] ) || isInf( array[ i ] ) ) return false;
+        if ( IsNaN(array[i]) || IsInf(array[i]) ) return false;
     }
 
     return true;
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_CHECK_H_

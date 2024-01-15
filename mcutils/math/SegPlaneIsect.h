@@ -22,16 +22,11 @@
 #ifndef MCUTILS_MATH_SEGPLANEISECT_H_
 #define MCUTILS_MATH_SEGPLANEISECT_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Vector3.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Checks if intersection occurs.
@@ -39,11 +34,9 @@ namespace mc
  * Checks if there is an intersection between the given line segment and
  * the given plane.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
- *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
- * </ul>
+ * ### Refernces:
+ * - O'Rourke J.: Computational Geometry in C, 1998, p.226
+ * - [Notes on points, lines and planes](http://paulbourke.net/geometry/pointlineplane/)
  *
  * @param b segment beginning
  * @param e segment end
@@ -52,8 +45,8 @@ namespace mc
  *
  * @return true if there is an intersection, false otherwise
  */
-MCUTILSAPI bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                                 const Vector3 &r, const Vector3 &n );
+MCUTILSAPI bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
+                                const Vector3& r, const Vector3& n);
 
 /**
  * @brief Returns segment and plane intersection point.
@@ -61,11 +54,9 @@ MCUTILSAPI bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
  * Gets an intersection point between the given line segment and
  * the given plane.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>O'Rourke J.: Computational Geometry in C, 1998, p.226</li>
- *   <li><a href="http://paulbourke.net/geometry/pointlineplane/">Notes on points, lines and planes</a></li>
- * </ul>
+ * ### Refernces:
+ * - O'Rourke J.: Computational Geometry in C, 1998, p.226
+ * - [Notes on points, lines and planes](http://paulbourke.net/geometry/pointlineplane/)
  *
  * @param b segment beginning
  * @param e segment end
@@ -74,11 +65,9 @@ MCUTILSAPI bool isSegPlaneIsect( const Vector3 &b, const Vector3 &e,
  *
  * @return intersection point, or end point if there is no intersection, or beginning point if segment lies on the plane
  */
-MCUTILSAPI Vector3 getSegPlaneIsect( const Vector3 &b, const Vector3 &e,
-                                     const Vector3 &r, const Vector3 &n );
+MCUTILSAPI Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
+                                    const Vector3& r, const Vector3& n);
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_SEGPLANEISECT_H_

@@ -22,14 +22,9 @@
 #ifndef MCUTILS_CTRL_SYSTEM2_H_
 #define MCUTILS_CTRL_SYSTEM2_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Second-order system class.
@@ -41,56 +36,67 @@ class MCUTILSAPI System2
 {
 public:
 
-    /** @brief Constructor. */
-    System2( double c1 = 0.0, double c2 = 0.0, double c3 = 1.0,
-             double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
-             double y = 0.0 );
-
-    inline double getValue() const { return _y; }
-
-    inline double getC1() const { return _c1; }
-    inline double getC2() const { return _c2; }
-    inline double getC3() const { return _c3; }
-    inline double getC4() const { return _c4; }
-    inline double getC5() const { return _c5; }
-    inline double getC6() const { return _c6; }
-
-    void setValue( double y );
-
-    void setC1( double c1 );
-    void setC2( double c2 );
-    void setC3( double c3 );
-    void setC4( double c4 );
-    void setC5( double c5 );
-    void setC6( double c6 );
+    /**
+     * @brief Constructor.
+     * @param c1 coefficient of the transfer function
+     * @param c2 coefficient of the transfer function
+     * @param c3 coefficient of the transfer function
+     * @param c4 coefficient of the transfer function
+     * @param c5 coefficient of the transfer function
+     * @param c6 coefficient of the transfer function
+     * @param value initial output value
+     */
+    System2(double c1 = 0.0, double c2 = 0.0, double c3 = 1.0,
+            double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
+            double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+
+    inline double c1() const { return c1_; }
+    inline double c2() const { return c2_; }
+    inline double c3() const { return c3_; }
+    inline double c4() const { return c4_; }
+    inline double c5() const { return c5_; }
+    inline double c6() const { return c6_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    void set_value(double value);
+
+    inline void set_c1(double c1) { c1_ = c1; }
+    inline void set_c2(double c2) { c2_ = c2; }
+    inline void set_c3(double c3) { c3_ = c3; }
+    inline void set_c4(double c4) { c4_ = c4; }
+    inline void set_c5(double c5) { c5_ = c5; }
+    inline void set_c6(double c6) { c6_ = c6; }
 
 private:
 
-    double _c1;             ///< c1 coefficient
-    double _c2;             ///< c2 coefficient
-    double _c3;             ///< c3 coefficient
-    double _c4;             ///< c4 coefficient
-    double _c5;             ///< c5 coefficient
-    double _c6;             ///< c6 coefficient
+    double c1_ = 0.0;       ///< c1 coefficient
+    double c2_ = 0.0;       ///< c2 coefficient
+    double c3_ = 0.0;       ///< c3 coefficient
+    double c4_ = 0.0;       ///< c4 coefficient
+    double c5_ = 0.0;       ///< c5 coefficient
+    double c6_ = 0.0;       ///< c6 coefficient
 
-    double _u_prev_1;       ///< input previous value
-    double _u_prev_2;       ///< input value 2 steps before
+    double u_prev_1_ = 0.0; ///< input previous value
+    double u_prev_2_ = 0.0; ///< input value 2 steps before
 
-    double _y_prev_1;       ///< previous value
-    double _y_prev_2;       ///< value 2 steps before
+    double y_prev_1_ = 0.0; ///< previous value
+    double y_prev_2_ = 0.0; ///< value 2 steps before
 
-    double _y;              ///< current value
+    double value_ = 0.0;    ///< current value
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_SYSTEM2_H_

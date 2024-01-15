@@ -22,25 +22,18 @@
 #ifndef MCUTILS_GEO_GEO_H_
 #define MCUTILS_GEO_GEO_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /** Geodetic coordinates. */
 struct MCUTILSAPI Geo
 {
-    double lat;                     ///< [rad] geodetic latitude (positive north)
-    double lon;                     ///< [rad] geodetic longitude (positive east)
-    double alt;                     ///< [m] altitude above mean sea level
+    double lat = 0.0;   ///< [rad] geodetic latitude (positive north)
+    double lon = 0.0;   ///< [rad] geodetic longitude (positive east)
+    double alt = 0.0;   ///< [m] altitude above mean sea level
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_GEO_H_

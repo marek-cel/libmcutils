@@ -22,18 +22,13 @@
 #ifndef MCUTILS_TIME_ISO8601_H_
 #define MCUTILS_TIME_ISO8601_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <string>
 
 #include <mcutils/defs.h>
 
 #include <mcutils/time/DateTime.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -47,9 +42,9 @@ namespace mc
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-MCUTILSAPI std::string toISO8601( int year, int mon, int day,
-                                     int hour, int min, int sec, int msec,
-                                     bool show_msec = true );
+MCUTILSAPI std::string ToISO8601(int year, int mon, int day,
+                                 int hour, int min, int sec, int msec,
+                                 bool show_msec = true);
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -58,7 +53,7 @@ MCUTILSAPI std::string toISO8601( int year, int mon, int day,
  * @param day
  * @return ISO-8601 date and time string
  */
-MCUTILSAPI std::string toISO8601( int year, int mon, int day );
+MCUTILSAPI std::string ToISO8601(int year, int mon, int day);
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -69,8 +64,8 @@ MCUTILSAPI std::string toISO8601( int year, int mon, int day );
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
-                                     bool show_msec = true );
+MCUTILSAPI std::string ToISO8601(int hour, int min, int sec, int msec,
+                                 bool show_msec = true);
 
 /**
  * @brief Converts time to the ISO-8601 date and time string.
@@ -78,15 +73,13 @@ MCUTILSAPI std::string toISO8601( int hour, int min, int sec, int msec,
  * @param show_msec specifies if millisecons should be shown
  * @return ISO-8601 date and time string
  */
-MCUTILSAPI inline std::string toISO8601( const DateTime &dt,
-                                            bool show_msec = true )
+MCUTILSAPI inline std::string ToISO8601(const DateTime& dt,
+                                        bool show_msec = true)
 {
-    return toISO8601( dt.year, dt.month, dt.day,
-                      dt.hour, dt.minute, dt.second, dt.msec, show_msec );
+    return ToISO8601(dt.year, dt.month, dt.day,
+                     dt.hour, dt.minute, dt.second, dt.msec, show_msec);
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_TIME_ISO8601_H_

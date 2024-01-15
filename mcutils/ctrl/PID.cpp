@@ -28,111 +28,91 @@
 
 #include <mcutils/math/Math.h>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
+PID::PID(double kp, double ki, double kd,
+         std::unique_ptr<IAntiWindup> anti_windup)
+    : anti_windup_(std::move(anti_windup))
 
-////////////////////////////////////////////////////////////////////////////////
-
-PID::PID( double kp, double ki, double kd )
-    : _kp ( kp )
-    , _ki ( ki )
-    , _kd ( kd )
-
-    , _error   ( 0.0 )
-    , _error_i ( 0.0 )
-    , _error_d ( 0.0 )
-
-    , _value ( 0.0 )
+    , kp_(kp)
+    , ki_(ki)
+    , kd_(kd)
 {}
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::update( double dt, double u )
+void PID::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        _error_i = _error_i + u  * dt;
-        _error_d = ( dt > 0.0 ) ? ( u - _error ) / dt : 0.0;
-        _error = u;
+        error_i_ = error_i_ + u  * dt;
+        error_d_ = (dt > 0.0) ? (u - error_) / dt : 0.0;
+        error_ = u;
 
-        _value = _kp * _error + _kd * _error_d + _ki * _error_i;
+        double y_p = kp_ * error_;
+        double y_i = ki_ * error_i_;
+        double y_d = kd_ * error_d_;
+
+        if ( anti_windup_ != nullptr )
+        {
+            anti_windup_->Update(dt, y_p, y_i, y_d, &value_, &error_i_, this);
+        }
+        else
+        {
+            value_ = y_p + y_d + y_i;
+        }
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::reset()
+void PID::Reset()
 {
-    _error_i = 0.0;
-    _error_d = 0.0;
+    error_i_ = 0.0;
+    error_d_ = 0.0;
 
-    _error = 0.0;
+    error_ = 0.0;
 
-    _value = 0.0;
+    value_ = 0.0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setParallel( double kp, double ki, double kd )
+void PID::SetAsParallel(double kp, double ki, double kd)
 {
-    _kp = kp;
-    _ki = ki;
-    _kd = kd;
+    kp_ = kp;
+    ki_ = ki;
+    kd_ = kd;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setSeries( double k, double tau_i, double tau_d )
+void PID::SetAsSeries( double k, double tau_i, double tau_d )
 {
-    _kp = k * ( 1.0 + tau_d / tau_i );
-    _ki = k / tau_i;
-    _kd = k * tau_d;
+    kp_ = k * (1.0 + tau_d / tau_i);
+    ki_ = k / tau_i;
+    kd_ = k * tau_d;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setStandard( double Kp, double Ti, double Td )
+void PID::SetAsStandard(double kp, double ti, double td )
 {
-    _kp = Kp;
-    _ki = Kp / Ti;
-    _kd = Kp * Td;
+    kp_ = kp;
+    ki_ = kp / ti;
+    kd_ = kp * td;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setError( double error )
+void PID::SetValueAndError( double value, double error, double dt )
 {
-    _error = error;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setValue( double value )
-{
-    _error_i = fabs( _ki ) > 0.0 ? value / _ki : 0.0;
-    _error_d = 0.0;
-
-    _error = 0.0;
-
-    _value = value;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void PID::setValue( double timeStep, double error, double value )
-{
-    _error_d = ( timeStep > 0.0 ) ? ( error - _error ) / timeStep : 0.0;
-    _error_i = fabs( _ki ) > 0.0
-            ? ( ( value  - _kp * error - _kd * _error_d ) / _ki )
+    error_d_ = (dt > 0.0) ? (error - error_) / dt : 0.0;
+    error_i_ = fabs(ki_) > 0.0
+            ? ((value  - kp_ * error - kd_ * error_d_) / ki_)
             : 0.0;
 
-    _error = error;
+    error_ = error;
 
-    _value = value;
+    value_ = value;
 }
 
-////////////////////////////////////////////////////////////////////////////////
+void PID::set_value(double value)
+{
+    error_i_ = fabs(ki_) > 0.0 ? value / ki_ : 0.0;
+    error_d_ = 0.0;
+
+    error_ = 0.0;
+
+    value_ = value;
+}
 
 } // namespace mc

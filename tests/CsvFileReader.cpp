@@ -3,62 +3,24 @@
 #include <fstream>
 #include <sstream>
 
-////////////////////////////////////////////////////////////////////////////////
-
-bool CsvFileReader::readData( const char *filePath,
-                              std::vector< double > *col1 )
+bool ReadCsvColumnsDataFromFile(const char* path, std::vector<std::vector<double>*> cols)
 {
-    std::ifstream ifs( filePath, std::ifstream::in );
+    std::ifstream ifs(path, std::ifstream::in);
 
     if ( ifs.is_open() )
     {
         std::string line;
 
-        while ( getline( ifs, line ) )
+        while ( getline(ifs, line) )
         {
-            std::stringstream ss( line );
+            std::stringstream ss(line);
 
-            float c1;
-            ss >> c1;
-            col1->push_back( c1 );
-        }
-
-        ifs.close();
-    }
-    else
-    {
-        return false;
-    }
-
-    return true;
-
-
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-bool CsvFileReader::readData( const char *filePath,
-                              std::vector< double > *col1,
-                              std::vector< double > *col2 )
-{
-    std::ifstream ifs( filePath, std::ifstream::in );
-
-    if ( ifs.is_open() )
-    {
-        std::string line;
-
-        while ( getline( ifs, line ) )
-        {
-            std::stringstream ss( line );
-
-            float c1;
-            float c2;
-
-            ss >> c1;
-            ss >> c2;
-
-            col1->push_back( c1 );
-            col2->push_back( c2 );
+            for ( auto col : cols )
+            {
+                float val;
+                ss >> val;
+                col->push_back(val);
+            }
         }
 
         ifs.close();

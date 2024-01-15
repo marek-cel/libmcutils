@@ -25,81 +25,63 @@
 #include <algorithm>
 #include <cmath>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
-
-Oscillator::Oscillator( double omega, double zeta, double y )
-    : _omega ( omega )
-    , _zeta  ( zeta  )
-
-    , _omega2 ( _omega * _omega )
-    , _2zetomg ( 2.0 * _zeta * _omega )
-
-    , _u_prev_1 ( 0.0 )
-    , _u_prev_2 ( 0.0 )
-    , _y_prev_1 ( y )
-    , _y_prev_2 ( y )
-
-    , _y ( y )
+Oscillator::Oscillator( double omega, double zeta, double value)
+    : omega_(omega)
+    , zeta_(zeta)
+    , omega2_(omega_ * omega_)
+    , zetomg2_(2.0 * zeta_ * omega_)
+    , y_prev_1_(value)
+    , y_prev_2_(value)
+    , value_(value)
 {}
 
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::setOmega( double omega )
-{
-    _omega = std::max( 0.0, omega );
-    _omega2 = _omega * _omega;
-    _2zetomg = 2.0 * _zeta * _omega;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::setDamping( double zeta )
-{
-    _zeta = std::max( 0.0, std::min( 1.0, zeta ) );
-    _2zetomg = 2.0 * _zeta * _omega;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::setValue( double y )
-{
-    _y = y;
-    _y_prev_1 = y;
-    _y_prev_2 = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Oscillator::update( double dt, double u )
+void Oscillator::Update( double dt, double u )
 {
     if ( dt > 0.0 )
     {
         double dt2 = dt * dt;
 
-        double den = 4.0 + 2.0 * _2zetomg*dt + _omega2 * dt2;
+        double den = 4.0 + 2.0 * zetomg2_*dt + omega2_ * dt2;
         double den_inv = 1.0 / den;
 
-        double ca = _omega2 * dt2 * den_inv;
+        double ca = omega2_ * dt2 * den_inv;
         double cb = 2.0 * ca;
         double cc = cb - 8.0 * den_inv;
-        double cd = ca + ( 4.0 - 2.0 * _2zetomg * dt ) * den_inv;
+        double cd = ca + (4.0 - 2.0 * zetomg2_ * dt) * den_inv;
 
-        _y = u * ca + _u_prev_1 * cb + _u_prev_2 * ca
-                    - _y_prev_1 * cc - _y_prev_2 * cd;
+        value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * ca
+                        - y_prev_1_ * cc - y_prev_2_ * cd;
 
-        _u_prev_2 = _u_prev_1;
-        _u_prev_1 = u;
+        u_prev_2_ = u_prev_1_;
+        u_prev_1_ = u;
 
-        _y_prev_2 = _y_prev_1;
-        _y_prev_1 = _y;
+        y_prev_2_ = y_prev_1_;
+        y_prev_1_ = value_;
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
+void Oscillator::set_omega(double omega)
+{
+    omega_ = std::max(0.0, omega);
+
+    omega2_ = omega_ * omega_;
+    zetomg2_ = 2.0 * zeta_ * omega_;
+}
+
+void Oscillator::set_zeta(double zeta)
+{
+    zeta_ = std::max(0.0, std::min(1.0, zeta));
+
+    zetomg2_ = 2.0 * zeta_ * omega_;
+}
+
+void Oscillator::set_value(double value)
+{
+    value_ = value;
+    y_prev_1_ = value;
+    y_prev_2_ = value;
+}
 
 } // namespace mc

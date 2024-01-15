@@ -24,53 +24,38 @@
 
 #include <algorithm>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
-
-MovingAverage::MovingAverage( unsigned int length , double y )
-    : _length ( length )
-    , _y ( y )
+MovingAverage::MovingAverage(unsigned int length , double value)
+    : length_(length)
+    , value_(value)
 {}
 
-////////////////////////////////////////////////////////////////////////////////
 
-void MovingAverage::setLength( unsigned int length )
+void MovingAverage::Update(double, double u)
 {
-    _length = length;
-}
+    fifo_.push_back(u);
 
-////////////////////////////////////////////////////////////////////////////////
-
-void MovingAverage::update( double, double u )
-{
-    _fifo.push_back( u );
-
-    while ( _fifo.size() > _length )
+    while ( fifo_.size() > length_ )
     {
-        _fifo.pop_front();
+        fifo_.pop_front();
     }
 
-    if ( _fifo.size() > 1 )
+    if ( fifo_.size() > 1 )
     {
         double sum = 0.0;
 
-        for ( double &val : _fifo )
+        for ( double &val : fifo_ )
         {
             sum += val;
         }
 
-        _y = sum / static_cast<double>( _fifo.size() );
+        value_ = sum / static_cast<double>(fifo_.size());
     }
     else
     {
-        _y = u;
+        value_ = u;
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

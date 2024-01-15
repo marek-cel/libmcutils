@@ -22,64 +22,69 @@
 #ifndef MCUTILS_MATH_TABLE_H_
 #define MCUTILS_MATH_TABLE_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
-#include <map>
 #include <string>
-#include <utility>
 #include <vector>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief Table and linear interpolation class.
  */
-class MCUTILSAPI Table final
+class MCUTILSAPI Table
 {
 public:
 
+    /** @brief Copy constructor. */
+    Table(const Table& table);
+
+    /** @brief Move constructor. */
+    Table(Table&& table) noexcept;
+
     /**
-     * @brief Creates table with only one record.
-     * @param val record value
-     * @param key record key value
+     * @brief Constructor.
+     * This constructor creates table with only one row initialized with a given
+     * value and key.
+     * @param val value
+     * @param key key value
      */
-    static Table oneRecordTable( double val = 0.0, double key = 0.0 );
+    explicit Table(double val = 0.0, double key = 0.0);
 
-    /** @brief Constructor. */
-    Table() = default;
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * @param key_values key values ordered array
+     * @param table_data table values ordered array
+     * @param size array size
+     */
+    Table(const double key_values[],
+          const double table_data[],
+          unsigned int size);
 
-    /** @brief Constructor. */
-    Table( const double key_values[],
-           const double table_data[],
-           unsigned int size );
+    /**
+     * @brief Constructor.
+     * This constructor is used to initialize table with data.
+     * @param key_values key values ordered vector
+     * @param table_data table values ordered vector
+     */
+    Table(const std::vector<double>& key_values,
+          const std::vector<double>& table_data);
 
-    /** @brief Constructor. */
-    Table( const std::vector<double> &key_values,
-           const std::vector<double> &table_data );
-
-    /** @brief Constructor. */
-    Table( const char *str );
+    ~Table();
 
     /**
      * @brief Returns key for the given index.
      * @param index index
      * @return key value on success or NaN on failure
      */
-    double getKeyByIndex( unsigned int index ) const;
-
-    /** */
-    inline unsigned int getSize() const { return static_cast<unsigned int>( _data.size() ); }
+    double GetKeyByIndex(unsigned int index) const;
 
     /**
      * @brief Returns key of minimum table value.
      * @return key of minimum table value
      */
-    double getKeyOfValueMin() const;
+    double GetKeyOfValueMin() const;
 
     /**
      * @brief Returns key of minimum table value within given range.
@@ -87,13 +92,13 @@ public:
      * @param key_max range maximum
      * @return key of minimum table value
      */
-    double getKeyOfValueMin( double key_min, double key_max ) const;
+    double GetKeyOfValueMin(double key_min, double key_max) const;
 
     /**
      * @brief Returns key of maximum table value.
      * @return key of maximum table value
      */
-    double getKeyOfValueMax() const;
+    double GetKeyOfValueMax() const;
 
     /**
      * @brief Returns key of maximum table value within given range.
@@ -101,7 +106,7 @@ public:
      * @param key_max range maximum
      * @return key of maximum table value
      */
-    double getKeyOfValueMax( double key_min, double key_max ) const;
+    double GetKeyOfValueMax(double key_min, double key_max) const;
 
     /**
      * @brief Returns table value for the given key.
@@ -110,106 +115,115 @@ public:
      * @param key_value key value
      * @return interpolated value on success or NaN on failure
      */
-    double getValue( double key_value ) const;
+    double GetValue(double key_value) const;
 
     /**
      * @brief Returns table value for the given key index.
      * @param key_index key index
      * @return value on success or NaN on failure
      */
-    double getValueByIndex( unsigned int key_index ) const;
+    double GetValueByIndex(unsigned int key_index) const;
 
     /**
      * @brief Returns table first value.
      * @return value on success or NaN on failure
      */
-    double getFirstValue() const;
+    double GetFirstValue() const;
 
     /**
      * @brief Returns table last value.
      * @return value on success or NaN on failure
      */
-    double getLastValue() const;
+    double GetLastValue() const;
 
     /**
      * @brief Returns minimum table value.
      * @return minimum table value
      */
-    double getValueMin() const;
+    double GetValueMin() const;
 
     /**
      * @brief Returns maximum table value.
      * @return maximum table value
      */
-    double getValueMax() const;
+    double GetValueMax() const;
 
     /**
      * @brief Checks if table is valid.
      * @return returns true if size is greater than 0 and all data is valid
      */
-    bool isValid() const;
+    bool IsValid() const;
 
     /**
      * @brief Multiplies keys by the given factor.
      * @param factor given factor
      */
-    void multiplyKeys( double factor );
+    void MultiplyKeys(double factor);
 
     /**
      * @brief Multiplies values by the given factor.
      * @param factor given factor
      */
-    void multiplyValues( double factor );
+    void MultiplyValues(double factor);
+
+    /**
+     * @brief Sets table data.
+     * @param key_values key values ordered array
+     * @param table_data table values ordered array
+     * @param size array size
+     */
+    void SetData(const double key_values[],
+                 const double table_data[],
+                 unsigned int size);
+
+    /**
+     * @brief Sets table data.
+     * @param key_values key values ordered vector
+     * @param table_data table values ordered vector
+     */
+    void SetData(const std::vector<double>& key_values,
+                 const std::vector<double>& table_data);
+
+    /**
+     * @brief Sets table data from string.
+     * Values in the given string should be separated with whitespaces.
+     * @param str given string
+     */
+    void SetFromString(const char* str);
 
     /**
      * @brief Returns string representation of the table.
      */
-    std::string toString();
+    std::string ToString();
+
+    inline unsigned int size() const { return size_; }
 
     /** @brief Addition operator. */
-    Table operator+ ( const Table &table ) const;
+    Table operator+(const Table& table) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Table operator* ( double val ) const;
+    Table operator*(double va ) const;
+
+    /** @brief Assignment operator. */
+    Table& operator=(const Table& table);
+
+    /** @brief Move assignment operator. */
+    Table& operator=(Table&& table);
 
 private:
 
-    using Data = std::map< double, std::pair<double,double> >;
+    unsigned int size_ = 0;         ///< number of table elements
+    unsigned int last_ = 0;         ///< last element index
 
-    Data _data;     ///< table data
+    double* key_values_ = nullptr;  ///< key values
+    double* table_data_ = nullptr;  ///< table data
+    double* inter_data_ = nullptr;  ///< interpolation data
 
-    /**
-     * @brief Initializes data with a given data set. Variant for every except the last entry.
-     * @param key_0 current key
-     * @param value_0 current value
-     * @param key_1 next key
-     * @param value_1 next value
-     */
-    void initializeData( double key_0, double value_0, double key_1, double value_1 );
+    mutable unsigned int prev_ = 0; ///< previous index
 
-    /**
-     * @brief Initializes data with a given data set. Variant for the last entry.
-     * @param key_0 current key
-     * @param value_0 current value
-     */
-    void initializeData( double key_0, double value_0 );
+    bool DoesIndexMatchKey(int index, double key_value) const;
 
-    /**
-     * @brief Inserts data set into data structure.
-     * @param key key
-     * @param value value
-     * @param inter interpolation data (gradient)
-     */
-    void insertDataSet( double key, double value, double inter );
-
-    /**
-     * @brief Inserts data set into data structure.
-     * @param data given data structure
-     * @param key key
-     * @param value value
-     * @param inter interpolation data (gradient)
-     */
-    void insertDataSet( Data *data, double key, double value, double inter ) const;
+    double CalculateInterpolatedValue(int index, double key_value) const;
 
     /**
      * @brief Calculates interpolation data (gradient).
@@ -219,20 +233,25 @@ private:
      * @param value_1 next value
      * @return
      */
-    double calculateInterpolationData( double key_0, double value_0,
-                                       double key_1, double value_1 ) const;
+    double CalculateInterpolationData(double key_0, double value_0,
+                                      double key_1, double value_1) const;
+
+    /** Creates data tables. */
+    void CreateArrays();
+
+    /** Deletes data tables. */
+    void DeleteArrays();
+
+    /** @brief Updates interpolation data due to table data. */
+    void UpdateInterpolationData();
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
-inline Table operator* ( double val, const Table &table )
+inline Table operator*(double val, const Table& table)
 {
-    return ( table * val );
+    return table * val;
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_TABLE_H_

@@ -26,58 +26,47 @@
 #include <sstream>
 #include <string>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
+std::string ToISO8601(int year, int mon, int day,
+                      int hour, int min, int sec, int msec,
+                      bool show_msec)
 {
-
-////////////////////////////////////////////////////////////////////////////////
-
-std::string toISO8601( int year, int mon, int day,
-                       int hour, int min, int sec, int msec,
-                       bool show_msec )
-{
-    return toISO8601( year, mon, day ) + "T" +
-           toISO8601( hour, min, sec, msec, show_msec );
+    return ToISO8601(year, mon, day) + "T" +
+           ToISO8601(hour, min, sec, msec, show_msec);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-std::string toISO8601( int year, int mon, int day )
+std::string ToISO8601(int year, int mon, int day)
 {
     std::stringstream ss;
 
     ss << year;
     ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << mon;
+    ss << std::setfill('0') << std::setw(2) << mon;
     ss << "-";
-    ss << std::setfill('0') << std::setw( 2 ) << day;
+    ss << std::setfill('0') << std::setw(2) << day;
 
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-std::string toISO8601( int hour, int min, int sec, int msec,
-                       bool show_msec )
+std::string ToISO8601(int hour, int min, int sec, int msec,
+                      bool show_msec)
 {
     std::stringstream ss;
 
-    ss << std::setfill('0') << std::setw( 2 ) << hour;
+    ss << std::setfill('0') << std::setw(2) << hour;
     ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << min;
+    ss << std::setfill('0') << std::setw(2) << min;
     ss << ":";
-    ss << std::setfill('0') << std::setw( 2 ) << sec;
+    ss << std::setfill('0') << std::setw(2) << sec;
 
     if ( show_msec )
     {
         ss << ".";
-        ss << std::setfill('0') << std::setw( 3 ) << msec;
+        ss << std::setfill('0') << std::setw(3) << msec;
     }
 
     return ss.str();
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

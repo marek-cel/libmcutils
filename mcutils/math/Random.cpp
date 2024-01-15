@@ -25,57 +25,50 @@
 #include <cstdlib>
 #include <ctime>
 
-////////////////////////////////////////////////////////////////////////////////
+#ifdef _MSC_VER
+#   define _CRT_RAND_S
+#   include <stdlib.h>
+#   undef _CRT_RAND_S
+#endif // _MSC_VER
 
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
 Random::Random()
-    : _rand ( 0 )
-    , _seed ( static_cast<unsigned int>( time(nullptr) ) )
+    : seed_(static_cast<unsigned int>(time(nullptr)))
 {
-    srand( _seed );
+    srand(seed_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-int Random::getRandom( int min, int max )
+int Random::GetRandom(int min, int max)
 {
     if ( max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
-        //rand_s( &_rand );
-        return min + _rand % ( max - min + 1 );
-        return min + rand() % ( max - min + 1 );
+        // TODO: switch to rand_s()
+        //rand_s(&rand_);
+        //return min + rand_ % (max - min + 1);
+        return min + rand() % (max - min + 1);
 #       else
-        _mutex.lock();
-        _rand = rand_r( &_seed );
-        _mutex.unlock();
-        return min + _rand % ( max - min + 1 );
+        mutex_.lock();
+        rand_ = rand_r(&seed_);
+        mutex_.unlock();
+        return min + rand_ % (max - min + 1);
 #       endif
     }
 
     return 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-float Random::getRandom( float min, float max )
+float Random::GetRandom(float min, float max)
 {
-    int random = getRandom( 0, RAND_MAX );
-    return min + ( max - min ) * ( static_cast<float>(random) / static_cast<float>(RAND_MAX) );
+    int random = GetRandom(0, RAND_MAX);
+    return min + (max - min) * (static_cast<float>(random) / static_cast<float>(RAND_MAX));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-double Random::getRandom( double min, double max )
+double Random::GetRandom(double min, double max)
 {
-    int random = getRandom( 0, RAND_MAX );
-    return min + ( max - min ) * ( static_cast<double>(random) / static_cast<double>(RAND_MAX) );
+    int random = GetRandom(0, RAND_MAX);
+    return min + (max - min) * (static_cast<double>(random) / static_cast<double>(RAND_MAX));
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

@@ -24,57 +24,37 @@
 
 #include <cmath>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
-
-double Inertia::calculate( double u, double y, double dt, double tc )
+double Inertia::Calculate(double u, double y, double dt, double tc)
 {
     if ( tc > 0.0 )
     {
-        return y + ( 1.0 - exp( -dt / tc ) ) * ( u - y );
+        return y + (1.0 - exp(-dt / tc)) * (u - y);
     }
 
     return u;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Inertia::Inertia( double tc, double y )
-    : _tc ( tc )
-    , _y ( y )
+Inertia::Inertia(double tc, double value)
+    : time_const_(tc)
+    , value_(value)
 {}
 
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia::setValue( double y )
-{
-    _y = y;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia::setTimeConst( double tc )
-{
-    if ( tc > 0.0 )
-    {
-        _tc = tc;
-    }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Inertia::update( double dt, double u )
+void Inertia::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        _y = calculate( u, _y, dt, _tc );
+        value_ = Calculate(u, value_, dt, time_const_);
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
+void Inertia::set_time_const(double time_const)
+{
+    if ( time_const > 0.0 )
+    {
+        time_const_ = time_const;
+    }
+}
 
 } // namespace mc

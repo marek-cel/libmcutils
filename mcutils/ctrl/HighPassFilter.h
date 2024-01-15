@@ -22,14 +22,9 @@
 #ifndef MCUTILS_CTRL_HIGHPASSFILTER_H_
 #define MCUTILS_CTRL_HIGHPASSFILTER_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief High-pass filter (HPF) or washout filter class.
@@ -44,50 +39,48 @@ public:
     /**
      * @brief Constructor.
      * @param omega [rad/s] cutoff angular frequency
-     * @param y initial output value
+     * @param value initial output value
      */
-    HighPassFilter( double omega = 1.0, double y = 0.0 );
-
-    inline double getValue() const { return _y; }
-    inline double getOmega() const { return _omega; }
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets cutoff angular frequency.
-     * @param omega [rad/s] cutoff angular frequency
-     */
-    void setOmega( double omega );
+    explicit HighPassFilter(double omega = 1.0, double value = 0.0 );
 
     /**
      * @brief Sets cutoff frequency.
      * @param freq [Hz] cutoff frequency
      */
-    void setCutoffFreq( double freq );
+    void SetCutoffFreq(double freq);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double omega() const { return omega_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    inline void set_value(double value) { value_ = value; }
+
+    /**
+     * @brief Sets cutoff angular frequency.
+     * @param omega [rad/s] cutoff angular frequency
+     */
+    void set_omega(double omega);
 
 private:
 
-    double _omega;          ///< [rad/s] cutoff angular frequency
-    double _tc;             ///< time constant
+    double omega_ = 1.0;        ///< [rad/s] cutoff angular frequency
+    double time_const_ = 1.0;   ///< time constant
 
-    double _u_prev;         ///< previous input value
+    double u_prev_ = 0.0;       ///< previous input value
 
-    double _y;              ///< current value
+    double value_ = 0.0;        ///< current value
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_HIGHPASSFILTER_H_

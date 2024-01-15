@@ -22,26 +22,19 @@
 #ifndef MCUTILS_GEO_WGS84_H_
 #define MCUTILS_GEO_WGS84_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
 #include <mcutils/geo/ECEF.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief World Geodetic System 1984 (WGS84) class.
  *
  * US Department of Defense World Geodetic System 1984 (WGS84) class.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li><a href="https://apps.dtic.mil/sti/citations/ADA280358">Department of Defence World Geodetic System 1984, NIMA-TR-8350.2</a></li>
- * </ul>
+ * ### Refernces:
+ * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)
  */
 class MCUTILSAPI WGS84 : public ECEF
 {
@@ -54,74 +47,36 @@ public:
      * @brief Copy constructor.
      * @param ecef object to copy
      */
-    WGS84( const WGS84 &wgs );
+    WGS84(const WGS84& wgs);
 
     /**
      * @brief Moving constructor.
      * @param ecef object to move
      */
-    WGS84( WGS84 &&wgs );
+    WGS84(WGS84&& wgs);
 
     /**
      * @brief Constructor.
      * @param pos_geo geodetic coordinates
      */
-    WGS84( const Geo &pos_geo );
+    explicit WGS84(const Geo& pos_geo);
 
     /**
      * @brief Constructor.
      * @param pos_wgs [m] coordinates vector expressed in ECEF
      */
-    WGS84( const Vector3 &pos_wgs );
+    explicit WGS84(const Vector3& pos_wgs);
 
     /** @brief Destructor. */
     virtual ~WGS84() = default;
 
-    inline Vector3 getPos_WGS() const { return getPos_ECEF(); }
-
-    inline void setPos_WGS( const Vector3 &pos_wgs ) { setPos_ECEF( pos_wgs ); }
-
     /** @brief Assignment operator. */
-    WGS84& operator= ( const WGS84 &wgs );
+    WGS84& operator=(const WGS84& wgs);
 
     /** @brief Moving assignment operator. */
-    WGS84& operator= ( WGS84 &&wgs );
-
-private:
-
-    double _a;                      ///< [m] equatorial radius
-    double _f;                      ///< [-] ellipsoid flattening
-
-    double _b;                      ///< [m] polar radius
-    double _r1;                     ///< [m] mean radius
-    double _a2;                     ///< [m^2] equatorial radius squared
-    double _b2;                     ///< [m^2] polar radius squared
-    double _e2;                     ///< [-] ellipsoid first eccentricity squared
-    double _e;                      ///< [-] ellipsoid first eccentricity
-    double _ep2;                    ///< [-] ellipsoid second eccentricity squared
-    double _ep;                     ///< [-] ellipsoid second eccentricity
-
-    Geo _pos_geo;                   ///< geodetic coordinates
-
-    Vector3 _pos_ecef;              ///< [m] coordinates vector expressed in ECEF
-
-    Matrix3x3 _enu2ecef;            ///< rotation matrix from ENU to ECEF
-    Matrix3x3 _ned2ecef;            ///< rotation matrix from NED to ECEF
-    Matrix3x3 _ecef2enu;            ///< rotation matrix from ECEF to ENU
-    Matrix3x3 _ecef2ned;            ///< rotation matrix from ECEF to NED
-
-    void copyData( const ECEF &ecef );
-    void copyParams( const ECEF &ecef );
-
-    /**
-     * @brief Updates rotation matrices due to position.
-     * This function updates rotation matrices due to current ECEF coordinates.
-     */
-    void updateMatrices();
+    WGS84& operator=(WGS84&& wgs);
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_GEO_WGS84_H_

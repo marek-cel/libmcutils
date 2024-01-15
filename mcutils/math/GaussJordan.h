@@ -22,18 +22,13 @@
 #ifndef MCUTILS_MATH_GAUSSJORDAN_H_
 #define MCUTILS_MATH_GAUSSJORDAN_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
-#include <mcutils/math/Matrix.h>
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/MatrixNxN.h>
+#include <mcutils/math/VectorN.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc { namespace GaussJordan
-{
+namespace mc {
 
 /**
  * @brief Solves system of linear equations using Gauss-Jordan method.
@@ -42,31 +37,29 @@ namespace mc { namespace GaussJordan
  * @param rhs right hand size vector
  * @param x result vector
  * @param eps minimum value treated as not-zero
- * @return sl::Success on success and sl::Failure on failure
+ * @return mc::Result::Success on success and mc::Result::Failure on failure
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.41</li>
- *   <li>Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Gaussian_elimination">Gaussian elimination - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.41
+ * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]
+ * - [Gaussian elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
  */
 template <unsigned int SIZE>
-Result solve( const Matrix<SIZE, SIZE> &mtr, const Vector<SIZE> &rhs,
-              Vector<SIZE> *x, double eps = 1.0e-14 )
+Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
+                        VectorN<SIZE>* x, double eps = 1.0e-9)
 {
-    Matrix<SIZE, SIZE> mtr_temp = mtr;
-    Vector<SIZE> rhs_temp = rhs;
+    MatrixNxN<SIZE> mtr_temp = mtr;
+    VectorN<SIZE>   rhs_temp = rhs;
 
     for ( unsigned int r = 0; r < SIZE; ++r )
     {
         // run along diagonal, swapping rows to move zeros (outside the diagonal) downwards
-        if ( fabs( mtr_temp(r,r) ) < fabs( eps ) )
+        if ( fabs(mtr_temp(r,r)) < fabs(eps) )
         {
             if ( r < SIZE - 1 )
             {
-                mtr_temp.swapRows( r, r+1 );
-                rhs_temp.swapRows( r, r+1 );
+                mtr_temp.SwapRows(r, r+1);
+                rhs_temp.SwapRows(r, r+1);
             }
             else
             {
@@ -107,14 +100,11 @@ Result solve( const Matrix<SIZE, SIZE> &mtr, const Vector<SIZE> &rhs,
     }
 
     // rewritting results
-    (*x) = rhs_temp;
+    *x = rhs_temp;
 
     return Result::Success;
 }
 
-} // namespace GaussJordan
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_GAUSSJORDAN_H_

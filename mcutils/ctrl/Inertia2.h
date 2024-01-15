@@ -22,17 +22,12 @@
 #ifndef MCUTILS_CTRL_INERTIA2_H_
 #define MCUTILS_CTRL_INERTIA2_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
- * @brief Second-order lag (inertia) class.
+ * @brief Second-order inertia class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
@@ -45,50 +40,48 @@ public:
      * @brief Constructor.
      * @param tc1 time constant 1
      * @param tc2 time constant 2
-     * @param y initial output value
+     * @param value initial output value
      */
-    Inertia2( double tc1 = 0.0, double tc2 = 0.0, double y = 0.0 );
-
-    inline double getValue() const { return _y; }
-
-    inline double getTimeConst1() const { return _tc1; }
-    inline double getTimeConst2() const { return _tc2; }
-
-    /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant tc1.
-     * @param tc1 time constant tc1
-     */
-    void setTimeConst1( double tc1 );
-
-    /**
-     * @brief Sets time constant tc2.
-     * @param tc2 time constant tc2
-     */
-    void setTimeConst2( double tc2 );
+    explicit Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+
+    inline double time_const_1() const { return time_const_1_; }
+    inline double time_const_2() const { return time_const_2_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    void set_value(double y);
+
+    /**
+     * @brief Sets time constant tc1.
+     * @param tc1 time constant tc1
+     */
+    void set_time_const_1(double tc1);
+
+    /**
+     * @brief Sets time constant tc2.
+     * @param tc2 time constant tc2
+     */
+    void set_time_const_2(double tc2);
 
 private:
 
-    double _tc1;            ///< time constant 1
-    double _tc2;            ///< time constant 2
-    double _y1;             ///< intermediate value
-    double _y;              ///< current value
+    double time_const_1_ = 0.0; ///< time constant 1
+    double time_const_2_ = 0.0; ///< time constant 2
+    double value_int_ = 0.0;    ///< intermediate value
+    double value_     = 0.0;    ///< current value
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_INERTIA2_H_

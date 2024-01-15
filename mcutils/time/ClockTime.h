@@ -22,32 +22,25 @@
 #ifndef MCUTILS_TIME_CLOCKTIME_H_
 #define MCUTILS_TIME_CLOCKTIME_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <ctime>
 
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
-
-MCUTILSAPI inline double getClockTime()
+MCUTILSAPI inline double GetClockTime()
 {
 #   ifdef _LINUX_
     timespec ts;
-    clock_gettime( CLOCK_MONOTONIC_RAW, &ts );
+    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
     return ts.tv_sec + 1.0e-9 * ts.tv_nsec;
 #   endif
 
 #   ifdef WIN32
-    return static_cast<double>( clock() ) / static_cast<double>( CLOCKS_PER_SEC );
+    return static_cast<double>(clock()) / static_cast<double>(CLOCKS_PER_SEC);
 #   endif
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_TIME_CLOCKTIME_H_

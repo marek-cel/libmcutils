@@ -22,61 +22,64 @@
 #ifndef MCUTILS_MATH_RUNGEKUTTA4_H_
 #define MCUTILS_MATH_RUNGEKUTTA4_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <functional>
 
-#include <mcutils/defs.h>
-
-#include <mcutils/math/Integrator.h>
-
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
- * @brief Runge-Kutta 4th order numerical integration class.
+ * @brief Runge-Kutta 4th order numerical integration class template.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907</li>
- *   <li>Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]</li>
- *   <li>Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge–Kutta methods - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
+ * - Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.185. [in Polish]
+ * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.331. [in Polish]
+ * - [Runge–Kutta methods - Wikipedia](https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods)
  */
-class MCUTILSAPI RungeKutta4 final : public Integrator
+template <typename T>
+class RungeKutta4
 {
 public:
 
-    RungeKutta4() = default;
+    using DerivFun = std::function<T(const T&)>;
 
     /**
-     * @brief Constructor.
-     * @param fun function which calculates vector derivative
+     * @brief Integrates using Runge-Kutta 4th order integration algorithm.
+     * @param dx integration step
+     * @param yn current value to be integrated
+     * @return integration result
      */
-    RungeKutta4( Fun fun );
+    T Integrate(double dx, const T& yn)
+    {
+        T y0 = yn;
 
-    /**
-     * @brief Integrates given vector using Runge-Kutta 4th order integration algorithm.
-     * @param step integration time step [s]
-     * @param vect integrating vector
-     */
-    void integrate( double step, VectorN *vect ) override;
+        // k1 - derivatives calculation
+        T k1 = fun_(y0);
+
+        // k2 - derivatives calculation
+        y0 = yn + k1 * (dx / 2.0);
+        T k2 = fun_(y0);
+
+        // k3 - derivatives calculation
+        y0 = yn + k2 * (dx / 2.0);
+        T k3 = fun_(y0);
+
+        // k4 - derivatives calculation
+        y0 = yn + k3 * dx;
+        T k4 = fun_(y0);
+
+        // integration
+        return yn + (k1 + k2 * 2.0 + k3 * 2.0 + k4) * (dx / 6.0);
+    }
+
+    inline DerivFun fun() const { return fun_; }
+
+    void set_fun(DerivFun fun) { fun_ = fun; }
 
 private:
 
-    VectorN _k1;        ///< auxiliary vector
-    VectorN _k2;        ///< auxiliary vector
-    VectorN _k3;        ///< auxiliary vector
-    VectorN _k4;        ///< auxiliary vector
-
-    VectorN _xt;        ///< auxiliary vector
+    DerivFun fun_;  ///< function which calculates vector derivative
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_RUNGEKUTTA4_H_

@@ -22,17 +22,15 @@
 #ifndef MCUTILS_MISC_SINGLETON_H_
 #define MCUTILS_MISC_SINGLETON_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
- * @brief Singleton class template.
+ * @brief Singleton base class template.
+ * 
+ * ### References:
+ * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.36-40
  */
 template <class TYPE>
 class Singleton
@@ -45,23 +43,21 @@ public:
      */
     static TYPE* instance()
     {
-        if ( !_instance )
+        if ( !instance_ )
         {
-            _instance = new TYPE();
+            instance_ = new TYPE();
         }
 
-        return _instance;
+        return instance_;
     }
 
 private:
 
-    static TYPE *_instance;     ///< singleton object instance pointer
+    static TYPE* instance_;     ///< singleton object instance pointer
 };
 
-template <class TYPE> TYPE* Singleton<TYPE>::_instance = nullptr;
+template <class TYPE> TYPE* Singleton<TYPE>::instance_ = nullptr;
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MISC_SINGLETON_H_

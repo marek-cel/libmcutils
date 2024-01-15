@@ -22,59 +22,49 @@
 #ifndef MCUTILS_MATH_EULERRECT_H_
 #define MCUTILS_MATH_EULERRECT_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <functional>
 
-#include <mcutils/defs.h>
-
-#include <mcutils/math/Integrator.h>
-
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
- * @brief Euler's rectangular numerical integration class.
+ * @brief Euler's rectangular numerical integration class template.
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907</li>
- *   <li>Allerton D.: Principles of Flight Simulation, 2009, p.58</li>
- *   <li>DeLoura M.: Game Programming Gems Vol. 1, 2000, p.176</li>
- *   <li>Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.29. [in Polish]</li>
- *   <li>Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.309. [in Polish]</li>
- *   <li><a href="https://en.wikipedia.org/wiki/Euler_method">Euler method - Wikipedia</a></li>
- * </ul>
+ * ### Refernces:
+ * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
+ * - Allerton D.: Principles of Flight Simulation, 2009, p.58
+ * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.176
+ * - Krupowicz A.: Metody numeryczne zagadnien poczatkowych rownan rozniczkowych zwyczajnych, 1986, p.29. [in Polish]
+ * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.309. [in Polish]
+ * - [Euler method - Wikipedia](https://en.wikipedia.org/wiki/Euler_method)
  */
-class MCUTILSAPI EulerRect final : public Integrator
+template <typename T>
+class EulerRect
 {
 public:
 
-    EulerRect() = default;
+    using DerivFun = std::function<T(const T&)>;
 
     /**
-     * @brief Constructor.
-     * @param fun function which calculates vector derivative
+     * @brief Integrates using Euler's rectangular integration algorithm.
+     * @param dx integration step
+     * @param yn current value to be integrated
+     * @return integration result
      */
-    EulerRect( Fun fun );
+    T Integrate(double dx, const T& yn)
+    {
+        // integration
+        return yn + fun_(yn) * dx;
+    }
 
-    /**
-     * @brief Integrates given vector using Euler's rectangular integration algorithm.
-     * @param step integration time step [s]
-     * @param vect integrating vector
-     */
-    void integrate( double step, VectorN *vect ) override;
+    inline DerivFun fun() const { return fun_; }
+
+    void set_fun(DerivFun fun) { fun_ = fun; }
 
 private:
 
-    VectorN _k0;        ///< auxiliary vector
-    VectorN _xt;        ///< auxiliary vector
+    DerivFun fun_;  ///< function which calculates vector derivative
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_EULERRECT_H_

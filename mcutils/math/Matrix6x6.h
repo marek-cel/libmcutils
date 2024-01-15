@@ -22,90 +22,66 @@
 #ifndef MCUTILS_MATH_MATRIX6X6_H_
 #define MCUTILS_MATH_MATRIX6X6_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-#include <mcutils/math/MatrixSq.h>
+#include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Vector6.h>
 
-////////////////////////////////////////////////////////////////////////////////
+template class MCUTILSAPI mc::MatrixMxN<6,6>;
+template class MCUTILSAPI mc::MatrixNxN<6>;
 
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 6 by 6 matrix class.
  */
-class MCUTILSAPI Matrix6x6 final : public MatrixSq<6>
+class MCUTILSAPI Matrix6x6 : public MatrixNxN<6>
 {
 public:
 
-    /** @brief Constructor. */
-    Matrix6x6();
-
-    /** @brief Copy constructor. */
-    Matrix6x6( const Matrix6x6 &matrix );
-
-    /** @brief Constructor. */
-    Matrix6x6( const double items[] );
-
-    /** @brief Constructor. */
-    Matrix6x6( const char *str );
-
-    /** @brief Destructor. */
-    virtual ~Matrix6x6() = default;
-
     /** @brief Returns transposed matrix. */
-    Matrix6x6 getTransposed() const;
-
-    /** @brief Assignment operator. */
-    Matrix6x6& operator= ( const Matrix6x6 &matrix );
+    Matrix6x6 GetTransposed() const;
 
     /** @brief Addition operator. */
-    Matrix6x6 operator+ ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator+(const Matrix6x6& matrix) const;
 
     /** @brief Negation operator. */
-    Matrix6x6 operator- () const;
+    Matrix6x6 operator-() const;
 
     /** @brief Subtraction operator. */
-    Matrix6x6 operator- ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator-(const Matrix6x6& matrix) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Matrix6x6 operator* ( double value ) const;
+    Matrix6x6 operator*(double value) const;
 
     /** @brief Multiplication operator (by matrix). */
-    Matrix6x6 operator* ( const Matrix6x6 &matrix ) const;
+    Matrix6x6 operator*(const Matrix6x6& matrix) const;
 
     /** @brief Multiplication operator (by vector). */
-    Vector6 operator* ( const Vector6 &vect ) const;
+    Vector6 operator*(const Vector6& vect) const;
 
     /** @brief Division operator (by scalar). */
-    Matrix6x6 operator/ ( double value ) const;
+    Matrix6x6 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Matrix6x6& operator+= ( const Matrix6x6 &matrix );
+    Matrix6x6& operator+=(const Matrix6x6& matrix);
 
     /** @brief Unary subtraction operator. */
-    Matrix6x6& operator-= ( const Matrix6x6 &matrix );
+    Matrix6x6& operator-=(const Matrix6x6& matrix);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Matrix6x6& operator*= ( double value );
+    Matrix6x6& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Matrix6x6& operator/= ( double value );
+    Matrix6x6& operator/=(double value);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Binary multiplication by scalar operator. */
-inline Matrix6x6 operator* ( double value, const Matrix6x6 &matrix )
+inline Matrix6x6 operator*(double value, const Matrix6x6& matrix)
 {
-    return ( matrix * value );
+    return matrix * value;
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_MATRIX6X6_H_

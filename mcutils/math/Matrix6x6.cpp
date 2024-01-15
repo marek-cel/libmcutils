@@ -22,147 +22,86 @@
 
 #include <mcutils/math/Matrix6x6.h>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
+Matrix6x6 Matrix6x6::GetTransposed() const
 {
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6::Matrix6x6()
-    : MatrixSq<6>()
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6::Matrix6x6( const Matrix6x6 &mtrx )
-    : MatrixSq<6>( mtrx )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6::Matrix6x6( const double items[] )
-    : MatrixSq<6>( items )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6::Matrix6x6( const char *str )
-    : MatrixSq<6>( str )
-{}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::getTransposed() const
-{
-    Matrix6x6 result( *this );
-    result.transpose();
+    Matrix6x6 result(*this);
+    result.Transpose();
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6& Matrix6x6::operator= ( const Matrix6x6 &matrix )
+Matrix6x6 Matrix6x6::operator+(const Matrix6x6& matrix) const
 {
-    setArray( matrix._items );
-    return (*this);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator+ ( const Matrix6x6 &matrix ) const
-{
-    Matrix6x6 result( *this );
-    result.add( matrix );
+    Matrix6x6 result(*this);
+    result.Add(matrix);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator- () const
+Matrix6x6 Matrix6x6::operator-() const
 {
-    Matrix6x6 result( *this );
-    result.negate();
+    Matrix6x6 result(*this);
+    result.Negate();
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator- ( const Matrix6x6 &matrix ) const
+Matrix6x6 Matrix6x6::operator-(const Matrix6x6& matrix) const
 {
-    Matrix6x6 result( *this );
-    result.substract( matrix );
+    Matrix6x6 result(*this);
+    result.Substract(matrix);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator* ( double value ) const
+Matrix6x6 Matrix6x6::operator*(double value) const
 {
-    Matrix6x6 result( *this );
-    result.multiplyByValue( value );
+    Matrix6x6 result(*this);
+    result.MultiplyByValue(value);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator* ( const Matrix6x6 &matrix ) const
+Matrix6x6 Matrix6x6::operator*(const Matrix6x6& matrix) const
 {
     Matrix6x6 result;
-    multiplyByMatrix( matrix, &result );
+    MultiplyByMatrix(matrix, &result);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Vector6 Matrix6x6::operator* ( const Vector6 &vect ) const
+Vector6 Matrix6x6::operator*(const Vector6& vect) const
 {
     Vector6 result;
-    multiplyByVector( vect, &result );
+    MultiplyByVector(vect, &result);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6 Matrix6x6::operator/ ( double value ) const
+Matrix6x6 Matrix6x6::operator/(double value) const
 {
-    Matrix6x6 result( *this );
-    result.divideByValue( value );
+    Matrix6x6 result(*this);
+    result.DivideByValue(value);
     return result;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6& Matrix6x6::operator+= ( const Matrix6x6 &matrix )
+Matrix6x6& Matrix6x6::operator+=(const Matrix6x6& matrix)
 {
-    add( matrix );
-    return (*this);
+    Add(matrix);
+    return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6& Matrix6x6::operator-= ( const Matrix6x6 &matrix )
+Matrix6x6& Matrix6x6::operator-=(const Matrix6x6& matrix)
 {
-    substract( matrix );
-    return (*this);
+    Substract(matrix);
+    return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6& Matrix6x6::operator*= ( double value )
+Matrix6x6& Matrix6x6::operator*=(double value)
 {
-    multiplyByValue( value );
-    return (*this);
+    MultiplyByValue(value);
+    return *this;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Matrix6x6& Matrix6x6::operator/= ( double value )
+Matrix6x6& Matrix6x6::operator/=(double value)
 {
-    divideByValue( value );
-    return (*this);
+    DivideByValue(value);
+    return *this;
 }
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc

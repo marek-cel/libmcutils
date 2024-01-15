@@ -22,14 +22,9 @@
 #ifndef MCUTILS_CTRL_LEAD_H_
 #define MCUTILS_CTRL_LEAD_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief First-order lead class.
@@ -37,52 +32,52 @@ namespace mc
  * Transfer function:
  * G(s)  =  Tc*s + 1
  *
- * <h3>Refernces:</h3>
- * <ul>
- *   <li>Boulet B.: Fundamentals of Signals and Systems, 2006, p.298</li>
- *   <li>Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.224. [in Polish]</li>
- *   <li><a href="https://pages.mtu.edu/~tbco/cm416/TFBODE.html">Typical Transfer Functions and their corresponding Frequency Domain Plots</a></li>
- * </ul>
+ * ### Refernces:
+ * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.298
+ * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.224. [in Polish]
+ * - [Typical Transfer Functions and their corresponding Frequency Domain Plots](https://pages.mtu.edu/~tbco/cm416/TFBODE.html)
  */
 class MCUTILSAPI Lead
 {
 public:
 
-    /** @brief Constructor. */
-    Lead( double tc = 0.0, double y = 0.0 );
-
-    inline double getValue() const { return _y; }
-    inline double getTimeConst() const { return _tc; }
-
     /**
-     * @brief Sets output value
-     * @param y output value
-     */
-    void setValue( double y );
-
-    /**
-     * @brief Sets time constant.
+     * @brief Constructor.
      * @param tc time constant
+     * @param value initial output value
      */
-    void setTimeConst( double tc );
+    explicit Lead(double tc = 0.0, double value = 0.0);
 
     /**
      * @brief Updates element due to time step and input value
      * @param dt [s] time step
      * @param u input value
      */
-    void update( double dt, double u );
+    void Update(double dt, double u);
+
+    inline double value() const { return value_; }
+    inline double time_const() const { return time_const_; }
+
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    inline void set_value(double value) { value_ = value; }
+
+    /**
+     * @brief Sets time constant.
+     * @param tc time constant
+     */
+    void set_time_const(double tc);
 
 private:
 
-    double _tc;             ///< time constant
+    double time_const_ = 0.0;   ///< time constant
 
-    double _u_prev;         ///< previous input
-    double _y;              ///< current value
+    double u_prev_ = 0.0;       ///< previous input
+    double value_  = 0.0;       ///< current value
 };
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_CTRL_LEAD_H_

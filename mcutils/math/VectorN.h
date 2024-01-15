@@ -22,110 +22,177 @@
 #ifndef MCUTILS_MATH_VECTORN_H_
 #define MCUTILS_MATH_VECTORN_H_
 
-////////////////////////////////////////////////////////////////////////////////
+#include <cmath>
+#include <cstring>
+#include <limits>
+#include <sstream>
+#include <string>
+#include <utility>
 
 #include <mcutils/defs.h>
 
-#include <string>
+#include <mcutils/misc/Check.h>
+#include <mcutils/misc/String.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
-namespace mc
-{
+namespace mc {
 
 /**
- * @brief N elements dynamic allocated vector class.
+ * @brief Column vector base class template.
+ * Column vector base class template which is using integer template parameters
+ * to specify vector size. Such an approach does not allow to perform
+ * mathematical operation between vectors which sizes do not match each other
+ * as they are of different types.
+ * @tparam SIZE vector size
  */
-class MCUTILSAPI VectorN
+template <unsigned int SIZE>
+class VectorN
 {
 public:
 
-    /** @brief Constructor. */
-    VectorN();
-
-    /**
-     * @brief Constructor.
-     * @param size vector size
-     */
-    VectorN( unsigned int size );
-
-    /** @brief Copy constructor. */
-    VectorN( const VectorN &vect );
-
-    /** @brief Destructor. */
-    virtual ~VectorN();
+    static constexpr unsigned int size_ = SIZE; ///< vector size
 
     /** @return TRUE if all items are valid */
-    bool isValid() const;
+    bool IsValid() const
+    {
+        return mc::IsValid(elements_, size_);
+    }
+
+    /** @return vector length squared */
+    double GetLength2() const
+    {
+        double length2 = 0.0;
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            length2 += elements_[i] * elements_[i];
+        }
+        return length2;
+    }
 
     /** @return vector length */
-    double getLength() const;
+    double GetLength() const
+    {
+        return sqrt(GetLength2());
+    }
 
-    /** @brief This function normalizes vector. */
-    void normalize();
-
-    /** @brief uts vector items into given array. */
-    void getArray( double items[] ) const;
+    /** @brief Normalizes vector. */
+    void Normalize()
+    {
+        double length = GetLength();
+        if ( length > 0.0 )
+        {
+            double length_inv = 1.0 / length;
+            for ( unsigned int i = 0; i < size_; ++i )
+            {
+                elements_[i] *= length_inv;
+            }
+        }
+    }
 
     /**
      * @brief Gets vector item of given indicies.
      * This function is bound-checked which may affect performance.
-     * Throws an exception when index is out of range.
+     * Returns NaN if index is out of range.
+     * @param index item index
      * @return vector item of given indicies.
      */
-    double getItem( unsigned int index ) const;
+    double GetElement(unsigned int index) const
+    {
+        if ( index < size_ )
+        {
+            return elements_[index];
+        }
 
-    /** @brief Sets vector items from given array. */
-    void setArray( const double items[] );
+        return std::numeric_limits<double>::quiet_NaN();
+    }
 
     /**
-     * @brief Sets vector item of given indicies.
+     * @brief Puts vector elements into given array.
+     * @param elements output array
+     */
+    void PutIntoArray(double elements[]) const
+    {
+        std::memcpy(elements, elements_, sizeof(elements_));
+    }
+
+    /**
+     * @brief Sets vector element of given indicies.
      * This function is bound-checked which may affect performance.
-     * Throws an exception when index is out of range.
      */
-    void setItem( unsigned int index, double val );
-
-    void setValue( double val );
+    void SetElement(unsigned int index, double val)
+    {
+        if ( index < size_ )
+        {
+            elements_[index] = val;
+        }
+    }
 
     /**
-     * @brief Returns vector size (number of elements)
-     * @return vector size (number of elements)
+     * @brief Sets vector elements from array.
+     * @param elements input array
      */
-    unsigned int getSize() const { return _size; }
+    void SetFromArray(const double elements[])
+    {
+        std::memcpy(elements_, elements, sizeof(elements_));
+    }
+
+    /**
+     * @brief Sets vector items from string.
+     * Values in the given string should be separated with whitespaces.
+     * @param str given string
+     */
+    void SetFromString(const char* str)
+    {
+        double elements[SIZE];
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements [i] = std::numeric_limits<double>::quiet_NaN();
+            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+        }
+
+        std::stringstream ss(String::StripSpaces(str));
+        bool valid = true;
+
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            ss >> elements[i];
+            valid &= mc::IsValid(elements[i]);
+        }
+
+        if ( valid ) SetFromArray(elements);
+    }
+
+    /** @brief Swaps vector rows. */
+    void SwapRows(unsigned int row1, unsigned int row2)
+    {
+        if ( row1 < size_ && row2 < size_ )
+        {
+            std::swap(elements_[row1], elements_[row2]);
+        }
+    }
 
     /** @brief Returns string representation of the vector. */
-    std::string toString() const;
+    std::string ToString() const
+    {
+        std::stringstream ss;
 
-    /** @brief Resizes vector if needed. */
-    void resize( unsigned int size );
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            if ( i != 0 ) ss << ",";
+
+            ss << elements_[i];
+        }
+
+        return ss.str();
+    }
 
     /** @brief Sets all vector items to zero. */
-    void zeroize();
-
-    /** @brief Adds vector. */
-    void add( const VectorN &vect );
-
-    /** @brief Negates (inverts) vector. */
-    void negate();
-
-    /** @brief Substracts vector. */
-    void substract( const VectorN &vect );
-
-    /** @brief Multiplies by value. */
-    void multiply( double value );
-
-    /** @brief Divides by value. */
-    void divide( double value );
-
-    /**
-     * @brief Items accessor.
-     * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked item accessor use getItem(int) or
-     * setItem(int,double) functions.
-     */
-    inline double operator() ( unsigned int index ) const
+    void Zeroize()
     {
-        return _items[ index ];
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] = 0.0;
+        }
     }
 
     /**
@@ -134,60 +201,168 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double& operator() ( unsigned int index )
+    inline double operator()(unsigned int index) const
     {
-        return _items[ index ];
+        return elements_[index];
     }
 
-    /** @brief Assignment operator. */
-    VectorN& operator= ( const VectorN &vect );
+    /**
+     * @brief Items accessor.
+     * Please notice that this operator is NOT bound-checked.
+     * If you want bound-checked item accessor use getItem(int) or
+     * setItem(int,double) functions.
+     */
+    inline double& operator()(unsigned int index)
+    {
+        return elements_[index];
+    }
 
     /** @brief Addition operator. */
-    VectorN operator+ ( const VectorN &vect ) const;
+    VectorN<SIZE> operator+(const VectorN<SIZE>& vect) const
+    {
+        VectorN<SIZE> result(*this);
+        result.Add(vect);
+        return result;
+    }
 
     /** @brief Negation operator. */
-    VectorN operator- () const;
+    VectorN<SIZE> operator-() const
+    {
+        VectorN<SIZE> result(*this);
+        result.Negate();
+        return result;
+    }
 
     /** @brief Subtraction operator. */
-    VectorN operator- ( const VectorN &vect ) const;
+    VectorN<SIZE> operator-(const VectorN<SIZE>& vect) const
+    {
+        VectorN<SIZE> result(*this);
+        result.Substract(vect);
+        return result;
+    }
 
     /** @brief Multiplication operator (by scalar). */
-    VectorN operator* ( double value ) const;
+    VectorN<SIZE> operator*(double value) const
+    {
+        VectorN<SIZE> result(*this);
+        result.MultiplyByValue(value);
+        return result;
+    }
+
+    /** @brief Dot product operator. */
+    double operator*(const VectorN<SIZE>& vect) const
+    {
+        double result = 0.0;
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            result += elements_[i] * vect.elements_[i];
+        }
+        return result;
+    }
 
     /** @brief Division operator (by scalar). */
-    VectorN operator/ ( double value ) const;
+    VectorN<SIZE> operator/(double val) const
+    {
+        VectorN<SIZE> result(*this);
+        result.DivideByValue(val);
+        return result;
+    }
 
     /** @brief Unary addition operator. */
-    VectorN& operator+= ( const VectorN &vect );
+    VectorN<SIZE>& operator+=(const VectorN<SIZE>& vect)
+    {
+        Add(vect);
+        return *this;
+    }
 
     /** @brief Unary subtraction operator. */
-    VectorN& operator-= ( const VectorN &vect );
+    VectorN<SIZE>& operator-=(const VectorN<SIZE>& vect)
+    {
+        Substract(vect);
+        return *this;
+    }
 
     /** @brief Unary multiplication operator (by scalar). */
-    VectorN& operator*= ( double value );
+    VectorN<SIZE>& operator*=(double value)
+    {
+        MultiplyByValue(value);
+        return *this;
+    }
 
     /** @brief Unary division operator (by scalar). */
-    VectorN& operator/= ( double value );
+    VectorN<SIZE>& operator/=(double value)
+    {
+        DivideByValue(value);
+        return *this;
+    }
+
+    /** @brief Equality operator. */
+    bool operator==(const VectorN<SIZE>& vect) const
+    {
+        bool result = true;
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            result = result && ( elements_[i] == vect.elements_[i] );
+        }
+        return result;
+    }
+
+    /** @brief Inequality operator. */
+    bool operator!=(const VectorN<SIZE>& vect) const
+    {
+        return !( *this == vect );
+    }
 
 protected:
 
-    unsigned int _size;     ///< vector size
+    double elements_[size_] = { 0.0 };  ///< vector items
 
-    double *_items;         ///< vector items
+    /** @brief Adds vector. */
+    void Add(const VectorN<SIZE>& vect)
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] += vect.elements_[i];
+        }
+    }
+
+    /** @brief Negates (inverts) vector. */
+    void Negate()
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] = -elements_[i];
+        }
+    }
+
+    /** @brief Substracts vector. */
+    void Substract(const VectorN<SIZE>& vect)
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] -= vect.elements_[i];
+        }
+    }
+
+    /** @brief Multiplies by value. */
+    void MultiplyByValue(double value)
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] *= value;
+        }
+    }
+
+    /** @brief Divides by value. */
+    void DivideByValue(double value)
+    {
+        for ( unsigned int i = 0; i < size_; ++i )
+        {
+            elements_[i] /= value;
+        }
+    }
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
-/** @brief Multiplication operator (by scalar). */
-inline VectorN operator* ( double val, const VectorN & vect )
-{
-    return ( vect * val );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_VECTORN_H_

@@ -22,86 +22,58 @@
 #ifndef MCUTILS_MATH_VECTOR6_H_
 #define MCUTILS_MATH_VECTOR6_H_
 
-////////////////////////////////////////////////////////////////////////////////
-
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Vector.h>
+#include <mcutils/math/VectorN.h>
 
-////////////////////////////////////////////////////////////////////////////////
+template class MCUTILSAPI mc::VectorN<6>;
 
-namespace mc
-{
+namespace mc {
 
 /**
  * @brief 6 elements column vector class.
  */
-class MCUTILSAPI Vector6 final : public Vector<6>
+class MCUTILSAPI Vector6 : public VectorN<6>
 {
 public:
 
-    /** @brief Constructor. */
-    Vector6();
-
-    /** @brief Copy constructor. */
-    Vector6( const Vector6 &vect );
-
-    /** @brief Constructor. */
-    Vector6( const double items[] );
-
-    /** @brief Constructor. */
-    Vector6( const char *str );
-
-    /** @brief Destructor. */
-    virtual ~Vector6() = default;
-
     /** @return normalized vector */
-    Vector6 getNormalized() const;
-
-    /** @brief Assignment operator. */
-    Vector6& operator= ( const Vector6 &vect );
+    Vector6 GetNormalized() const;
 
     /** @brief Addition operator. */
-    Vector6 operator+ ( const Vector6 &vect ) const;
+    Vector6 operator+(const Vector6& vect) const;
 
     /** @brief Negation operator. */
-    Vector6 operator- () const;
+    Vector6 operator-() const;
 
     /** @brief Subtraction operator. */
-    Vector6 operator- ( const Vector6 &vect ) const;
+    Vector6 operator-(const Vector6& vect) const;
 
     /** @brief Multiplication operator (by scalar). */
-    Vector6 operator* ( double value ) const;
+    Vector6 operator*(double value) const;
 
     /** @brief Division operator (by scalar). */
-    Vector6 operator/ ( double value ) const;
+    Vector6 operator/(double value) const;
 
     /** @brief Unary addition operator. */
-    Vector6& operator+= ( const Vector6 &vect );
+    Vector6& operator+=(const Vector6& vect);
 
     /** @brief Unary subtraction operator. */
-    Vector6& operator-= ( const Vector6 &vect );
+    Vector6& operator-=(const Vector6& vect);
 
     /** @brief Unary multiplication operator (by scalar). */
-    Vector6& operator*= ( double value );
+    Vector6& operator*=(double value);
 
     /** @brief Unary division operator (by scalar). */
-    Vector6& operator/= ( double value );
-
+    Vector6& operator/=(double value);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 /** @brief Multiplication operator (by scalar). */
-inline Vector6 operator* ( double value, const Vector6 & vect )
+inline Vector6 operator*(double value, const Vector6& vect)
 {
-    return ( vect * value );
+    return vect * value;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_VECTOR6_H_

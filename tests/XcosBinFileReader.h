@@ -1,11 +1,7 @@
-#ifndef LIBMCSIM_TESTS_XCOSBINFILEREADER_H_
-#define LIBMCSIM_TESTS_XCOSBINFILEREADER_H_
-
-////////////////////////////////////////////////////////////////////////////////
+#ifndef LIBMCUTILS_TESTS_XCOSBINFILEREADER_H_
+#define LIBMCUTILS_TESTS_XCOSBINFILEREADER_H_
 
 #include <vector>
-
-////////////////////////////////////////////////////////////////////////////////
 
 /**
  * @brief The XcosBinFileReader class
@@ -16,13 +12,11 @@ public:
 
     /**
      * @brief Reads data from Xcos binary output file
-     * @param filePath file path
+     * @param file_path file path
      * @param vals vector of doubles to store data
      * @return true on success false on failure
      */
-    static bool readData( const char *filePath, std::vector<double> *vals );
+    static bool ReadData(const char* file_path, std::vector<double>* vals);
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
-#endif // LIBMCSIM_TESTS_XCOSBINFILEREADER_H_
+#endif // LIBMCUTILS_TESTS_XCOSBINFILEREADER_H_

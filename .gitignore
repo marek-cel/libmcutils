@@ -2,14 +2,17 @@ bin/*
 build/*
 docs/*
 lib/*
+temp/*
 
 out_cloc.txt
 out_cppcheck.txt
 out_cpplint.txt
+out_pep.txt
 
 coverage.info
 coverage_full.info
 coverage-report
+coverage_summary.txt
 
 ################################################################################
 
@@ -46,6 +49,8 @@ coverage-report
 *.out
 *.app
 
+################################################################################
+
 # Qt-es
 object_script.*.Release
 object_script.*.Debug
@@ -78,3 +83,17 @@ target_wrapper.*
 
 # QtCreator CMake
 CMakeLists.txt.user*
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix

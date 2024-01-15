@@ -2,8 +2,6 @@
 
 #include <mcutils/time/ClockTime.h>
 
-////////////////////////////////////////////////////////////////////////////////
-
 class TestClockTime : public ::testing::Test
 {
 protected:
@@ -13,21 +11,19 @@ protected:
     void TearDown() override {}
 };
 
-////////////////////////////////////////////////////////////////////////////////
-
 TEST_F(TestClockTime, CanGetClockTime)
 {
 #   ifdef _LINUX_
     timespec ts;
-    clock_gettime( CLOCK_MONOTONIC_RAW, &ts );
+    clock_gettime(CLOCK_MONOTONIC_RAW, &ts);
     double expectedValue = ts.tv_sec + 1.0e-9 * ts.tv_nsec;
 #   endif
 
 #   ifdef WIN32
-    double expectedValue = static_cast<double>( clock() ) / static_cast<double>( CLOCKS_PER_SEC );
+    double expectedValue = static_cast<double>(clock()) / static_cast<double>(CLOCKS_PER_SEC);
 #   endif
 
-    double outputValue = mc::getClockTime();
+    double outputValue = mc::GetClockTime();
 
-    EXPECT_NEAR( expectedValue, outputValue, 1.0e-6 );
+    EXPECT_NEAR(expectedValue, outputValue, 1.0e-6);
 }

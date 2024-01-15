@@ -29,14 +29,9 @@
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/Units.h>
 
-////////////////////////////////////////////////////////////////////////////////
+namespace mc {
 
-namespace mc
-{
-
-////////////////////////////////////////////////////////////////////////////////
-
-double Angles::normalize( double val, double min )
+double Angles::Normalize(double val, double min)
 {
     double tmp = val;
     double max = min + 2.0 * M_PI;
@@ -47,114 +42,74 @@ double Angles::normalize( double val, double min )
     return tmp;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Angles::Angles()
+Angles::Angles(double phi, double tht, double psi)
 {
-    _phi = 0.0;
-    _tht = 0.0;
-    _psi = 0.0;
+    Set(phi, tht, psi);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Angles::Angles( const Angles &angl )
+bool Angles::IsValid() const
 {
-    set( angl._phi, angl._tht, angl._psi );
+    return mc::IsValid(phi_)
+        && mc::IsValid(tht_)
+        && mc::IsValid(psi_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Angles::Angles( double phi, double tht, double psi )
+void Angles::Normalize()
 {
-    set( phi, tht, psi );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-bool Angles::isValid() const
-{
-    return ( mc::isValid( _phi )
-          && mc::isValid( _tht )
-          && mc::isValid( _psi ) );
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Angles::normalize()
-{
-    while ( _tht >  M_PI_2 )
+    while ( tht_ >  M_PI_2 )
     {
-        _phi += M_PI;
-        _tht =  M_PI_2 - ( _tht - M_PI_2 );
-        _psi += M_PI;
+        phi_ += M_PI;
+        tht_ =  M_PI_2 - ( tht_ - M_PI_2 );
+        psi_ += M_PI;
     }
 
-    while ( _tht < -M_PI_2 )
+    while ( tht_ < -M_PI_2 )
     {
-        _phi += M_PI;
-        _tht = -M_PI_2 - ( _tht + M_PI_2 );
-        _psi += M_PI;
+        phi_ += M_PI;
+        tht_ = -M_PI_2 - ( tht_ + M_PI_2 );
+        psi_ += M_PI;
     }
 
-    while ( _phi >  M_PI ) _phi -= 2.0 * M_PI;
-    while ( _phi < -M_PI ) _phi += 2.0 * M_PI;
+    while ( phi_ >  M_PI ) phi_ -= 2.0 * M_PI;
+    while ( phi_ < -M_PI ) phi_ += 2.0 * M_PI;
 
-    while ( _psi >= 2.0 * M_PI ) _psi -= 2.0 * M_PI;
-    while ( _psi <  0.0        ) _psi += 2.0 * M_PI;
+    while ( psi_ >= 2.0 * M_PI ) psi_ -= 2.0 * M_PI;
+    while ( psi_ <  0.0        ) psi_ += 2.0 * M_PI;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-void Angles::set( double phi, double tht, double psi )
+void Angles::Set(double phi, double tht, double psi)
 {
-    _phi = phi;
-    _tht = tht;
-    _psi = psi;
+    phi_ = phi;
+    tht_ = tht;
+    psi_ = psi;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-std::string Angles::toString() const
+std::string Angles::ToString() const
 {
     std::stringstream ss;
 
-    ss.setf( std::ios_base::showpoint );
-    ss.setf( std::ios_base::fixed );
+    ss.setf(std::ios_base::showpoint);
+    ss.setf(std::ios_base::fixed);
 
-    ss << std::setprecision( 2 ) << Units::rad2deg( _phi );
+    ss << std::setprecision(2) << Units::rad2deg(phi_);
     ss << ",";
-    ss << std::setprecision( 2 ) << Units::rad2deg( _tht );
+    ss << std::setprecision(2) << Units::rad2deg(tht_);
     ss << ",";
-    ss << std::setprecision( 2 ) << Units::rad2deg( _psi );
+    ss << std::setprecision(2) << Units::rad2deg(psi_);
 
     return ss.str();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-Angles& Angles::operator= ( const Angles &angl )
+bool Angles::operator==(const Angles& angl) const
 {
-    set( angl._phi, angl._tht, angl._psi );
-    return (*this);
+    return (phi_ == angl.phi_)
+        && (tht_ == angl.tht_)
+        && (psi_ == angl.psi_);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-bool Angles::operator== ( const Angles &angl ) const
+bool Angles::operator!=(const Angles& angl) const
 {
-    return ( ( _phi == angl._phi )
-          && ( _tht == angl._tht )
-          && ( _psi == angl._psi ) );
+    return !( *this == angl );
 }
-
-////////////////////////////////////////////////////////////////////////////////
-
-bool Angles::operator!= ( const Angles &angl ) const
-{
-    return !( (*this) == angl );
-}
-
-////////////////////////////////////////////////////////////////////////////////
 
 } // namespace mc
