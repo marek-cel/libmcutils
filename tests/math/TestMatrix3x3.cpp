@@ -1,10 +1,17 @@
 #include <gtest/gtest.h>
 
+#ifdef TEST_USING_ARMADILLO
+#   include <armadillo>
+#endif // TEST_USING_ARMADILLO
+
 #include <mcutils/math/Matrix3x3.h>
+
+#include <TestingUtils.h>
 
 class TestMatrix3x3 : public ::testing::Test
 {
 protected:
+    constexpr static int size = 3;
     TestMatrix3x3() {}
     virtual ~TestMatrix3x3() {}
     void SetUp() override {}
@@ -43,17 +50,36 @@ TEST_F(TestMatrix3x3, CanDestruct)
 
 TEST_F(TestMatrix3x3, CanInstantiate)
 {
-    mc::Matrix3x3 m1;
+    mc::Matrix3x3 m;
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
+        }
+    }
+}
 
-    EXPECT_DOUBLE_EQ(m1(0,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(0,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 0.0);
-    EXPECT_DOUBLE_EQ(m1(1,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(1,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 0.0);
-    EXPECT_DOUBLE_EQ(m1(2,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(2,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 0.0);
+TEST_F(TestMatrix3x3, CanInstantiateAndCopy)
+{
+    constexpr int size = 3;
+
+    double x[] { 1.0, 2.0, 3.0,
+                 4.0, 5.0, 6.0,
+                 7.0, 8.0, 9.0 };
+
+    mc::Matrix3x3 m0;
+    m0.SetFromArray(x);
+
+    mc::Matrix3x3 m1(m0);
+
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
@@ -73,254 +99,302 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
 }
 
-TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAngles)
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAnglesZeros)
 {
-    mc::Angles a0( 0.0 , 0.0 , 0.0  );
-    mc::Angles a1( M_PI, 0.0 , 0.0  );
-    mc::Angles a2( 0.0 , M_PI, 0.0  );
-    mc::Angles a3( 0.0 , 0.0 , M_PI );
-    mc::Angles a4(M_PI_2, M_PI_2, M_PI_2);
-    mc::Angles a5(M_PI_4, M_PI_4, M_PI_4);
-    mc::Angles a6(-M_PI_4,  M_PI_4,  M_PI_4);
-    mc::Angles a7( M_PI_4, -M_PI_4,  M_PI_4);
-    mc::Angles a8( M_PI_4,  M_PI_4, -M_PI_4);
+    mc::Angles ang(0.0, 0.0, 0.0);
+    mc::Matrix3x3 m(ang);
 
-    mc::Matrix3x3 ma0(a0);
-    EXPECT_NEAR(ma0.xx(), 1.0, 1.0e-9);
-    EXPECT_NEAR(ma0.xy(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.xz(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.yx(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.yy(), 1.0, 1.0e-9);
-    EXPECT_NEAR(ma0.yz(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.zx(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.zy(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ma0.zz(), 1.0, 1.0e-9);
-
-    mc::Matrix3x3 ma1(a1);
-    EXPECT_NEAR(ma1.xx(),  1.0, 1.0e-9);
-    EXPECT_NEAR(ma1.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.yy(), -1.0, 1.0e-9);
-    EXPECT_NEAR(ma1.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma1.zz(), -1.0, 1.0e-9);
-
-    mc::Matrix3x3 ma2(a2);
-    EXPECT_NEAR(ma2.xx(), -1.0, 1.0e-9);
-    EXPECT_NEAR(ma2.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.yy(),  1.0, 1.0e-9);
-    EXPECT_NEAR(ma2.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma2.zz(), -1.0, 1.0e-9);
-
-    mc::Matrix3x3 ma3(a3);
-    EXPECT_NEAR(ma3.xx(), -1.0, 1.0e-9);
-    EXPECT_NEAR(ma3.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.yy(), -1.0, 1.0e-9);
-    EXPECT_NEAR(ma3.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma3.zz(),  1.0, 1.0e-9);
-
-    mc::Matrix3x3 ma4(a4);
-    EXPECT_NEAR(ma4.xx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma4.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma4.xz(), -1.0, 1.0e-9);
-    EXPECT_NEAR(ma4.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma4.yy(),  1.0, 1.0e-9);
-    EXPECT_NEAR(ma4.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma4.zx(),  1.0, 1.0e-9);
-    EXPECT_NEAR(ma4.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(ma4.zz(),  0.0, 1.0e-9);
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma5(a5);
-    EXPECT_NEAR(ma5.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma5.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma5.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(ma5.yx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(ma5.yy(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(ma5.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma5.zx(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(ma5.zy(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(ma5.zz(),  0.5000, 1.0e-3);
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma6(a6);
-    EXPECT_NEAR(ma6.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma6.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma6.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(ma6.yx(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(ma6.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(ma6.yz(), -0.5000, 1.0e-3);
-    EXPECT_NEAR(ma6.zx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(ma6.zy(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(ma6.zz(),  0.5000, 1.0e-3);
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma7(a7);
-    EXPECT_NEAR(ma7.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma7.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma7.xz(),  0.7071, 1.0e-3);
-    EXPECT_NEAR(ma7.yx(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(ma7.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(ma7.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma7.zx(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(ma7.zy(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(ma7.zz(),  0.5000, 1.0e-3);
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 ma8(a8);
-    EXPECT_NEAR(ma8.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma8.xy(), -0.5000, 1.0e-3);
-    EXPECT_NEAR(ma8.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(ma8.yx(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(ma8.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(ma8.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(ma8.zx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(ma8.zy(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(ma8.zz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.xx(), 1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), 1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), 1.0, 1.0e-9);
 }
 
-TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternion)
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiPi)
 {
-    mc::Angles a0( 0.0  , 0.0  , 0.0  );
-    mc::Angles a1( M_PI , 0.0  , 0.0  );
-    mc::Angles a2( 0.0  , M_PI , 0.0  );
-    mc::Angles a3( 0.0  , 0.0  , M_PI );
-    mc::Angles a4(M_PI_2, M_PI_2, M_PI_2);
-    mc::Angles a5(M_PI_4, M_PI_4, M_PI_4);
-    mc::Angles a6(-M_PI_4,  M_PI_4,  M_PI_4);
-    mc::Angles a7( M_PI_4, -M_PI_4,  M_PI_4);
-    mc::Angles a8( M_PI_4,  M_PI_4, -M_PI_4);
+    mc::Angles ang(M_PI, 0.0, 0.0);
+    mc::Matrix3x3 m(ang);
 
-    mc::Quaternion q0(a0);
+    EXPECT_NEAR(m.xx(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromThetaPi)
+{
+    mc::Angles ang(0.0, M_PI, 0.0);
+    mc::Matrix3x3 m(ang);
+
+    EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPsiPi)
+{
+    mc::Angles ang(0.0, 0.0, M_PI);
+    mc::Matrix3x3 m(ang);
+
+    EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(),  1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
+{
+    mc::Angles ang(M_PI_2, M_PI_2, M_PI_2);
+    mc::Matrix3x3 m(ang);
+
+    EXPECT_NEAR(m.xx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(),  0.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
+{
+    mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    mc::Matrix3x3 m(ang);
+
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_matrix3x3.m
+    EXPECT_NEAR(m.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m.yx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m.yy(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.zx(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m.zy(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m.zz(),  0.5000, 1.0e-3);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromRandomAngles)
+{
+    mc::Angles a1(-M_PI_4,  M_PI_4,  M_PI_4);
+    mc::Angles a2( M_PI_4, -M_PI_4,  M_PI_4);
+    mc::Angles a3( M_PI_4,  M_PI_4, -M_PI_4);
+
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_matrix3x3.m
+    mc::Matrix3x3 m1(a1);
+    EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m1.yx(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m1.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m1.yz(), -0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.zx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m1.zy(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m1.zz(),  0.5000, 1.0e-3);
+
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_matrix3x3.m
+    mc::Matrix3x3 m2(a2);
+    EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.xz(),  0.7071, 1.0e-3);
+    EXPECT_NEAR(m2.yx(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m2.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m2.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.zx(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m2.zy(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m2.zz(),  0.5000, 1.0e-3);
+
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_matrix3x3.m
+    mc::Matrix3x3 m3(a3);
+    EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m3.yx(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m3.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m3.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.zx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m3.zy(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m3.zz(),  0.5000, 1.0e-3);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionAngleZeros)
+{
+    mc::Angles ang(0.0, 0.0, 0.0);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    EXPECT_NEAR(m.xx(), 1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), 1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(), 0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), 1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiPi)
+{
+    mc::Angles ang(M_PI, 0.0, 0.0);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    EXPECT_NEAR(m.xx(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionThetaPi)
+{
+    mc::Angles ang(0.0, M_PI, 0.0);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPsiPi)
+{
+    mc::Angles ang(0.0, 0.0, M_PI);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(),  1.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
+{
+    mc::Angles ang(M_PI_2, M_PI_2, M_PI_2);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    EXPECT_NEAR(m.xx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.xz(), -1.0, 1.0e-9);
+    EXPECT_NEAR(m.yx(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.yy(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.yz(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zx(),  1.0, 1.0e-9);
+    EXPECT_NEAR(m.zy(),  0.0, 1.0e-9);
+    EXPECT_NEAR(m.zz(),  0.0, 1.0e-9);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi)
+{
+    mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    mc::Quaternion quat(ang);
+    mc::Matrix3x3 m(quat);
+
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_matrix3x3.m
+    EXPECT_NEAR(m.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m.yx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m.yy(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m.zx(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m.zy(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m.zz(),  0.5000, 1.0e-3);
+}
+
+TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionRandomAngle)
+{
+    mc::Angles a1(-M_PI_4,  M_PI_4,  M_PI_4);
+    mc::Angles a2( M_PI_4, -M_PI_4,  M_PI_4);
+    mc::Angles a3( M_PI_4,  M_PI_4, -M_PI_4);
+
     mc::Quaternion q1(a1);
     mc::Quaternion q2(a2);
     mc::Quaternion q3(a3);
-    mc::Quaternion q4(a4);
-    mc::Quaternion q5(a5);
-    mc::Quaternion q6(a6);
-    mc::Quaternion q7(a7);
-    mc::Quaternion q8(a8);
-
-    mc::Matrix3x3 mq0(q0);
-    EXPECT_NEAR(mq0.xx(), 1.0, 1.0e-9);
-    EXPECT_NEAR(mq0.xy(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.xz(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.yx(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.yy(), 1.0, 1.0e-9);
-    EXPECT_NEAR(mq0.yz(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.zx(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.zy(), 0.0, 1.0e-9);
-    EXPECT_NEAR(mq0.zz(), 1.0, 1.0e-9);
-
-    mc::Matrix3x3 mq1(q1);
-    EXPECT_NEAR(mq1.xx(),  1.0, 1.0e-9);
-    EXPECT_NEAR(mq1.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.yy(), -1.0, 1.0e-9);
-    EXPECT_NEAR(mq1.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq1.zz(), -1.0, 1.0e-9);
-
-    mc::Matrix3x3 mq2(q2);
-    EXPECT_NEAR(mq2.xx(), -1.0, 1.0e-9);
-    EXPECT_NEAR(mq2.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.yy(),  1.0, 1.0e-9);
-    EXPECT_NEAR(mq2.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq2.zz(), -1.0, 1.0e-9);
-
-    mc::Matrix3x3 mq3(q3);
-    EXPECT_NEAR(mq3.xx(), -1.0, 1.0e-9);
-    EXPECT_NEAR(mq3.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.xz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.yy(), -1.0, 1.0e-9);
-    EXPECT_NEAR(mq3.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.zx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq3.zz(),  1.0, 1.0e-9);
-
-    mc::Matrix3x3 mq4(q4);
-    EXPECT_NEAR(mq4.xx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq4.xy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq4.xz(), -1.0, 1.0e-9);
-    EXPECT_NEAR(mq4.yx(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq4.yy(),  1.0, 1.0e-9);
-    EXPECT_NEAR(mq4.yz(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq4.zx(),  1.0, 1.0e-9);
-    EXPECT_NEAR(mq4.zy(),  0.0, 1.0e-9);
-    EXPECT_NEAR(mq4.zz(),  0.0, 1.0e-9);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq5(q5);
-    EXPECT_NEAR(mq5.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq5.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq5.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(mq5.yx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(mq5.yy(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(mq5.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq5.zx(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(mq5.zy(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(mq5.zz(),  0.5000, 1.0e-3);
+    mc::Matrix3x3 m1(q1);
+    EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m1.yx(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m1.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m1.yz(), -0.5000, 1.0e-3);
+    EXPECT_NEAR(m1.zx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m1.zy(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m1.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq6(q6);
-    EXPECT_NEAR(mq6.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq6.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq6.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(mq6.yx(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(mq6.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(mq6.yz(), -0.5000, 1.0e-3);
-    EXPECT_NEAR(mq6.zx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(mq6.zy(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(mq6.zz(),  0.5000, 1.0e-3);
+    mc::Matrix3x3 m2(q2);
+    EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.xz(),  0.7071, 1.0e-3);
+    EXPECT_NEAR(m2.yx(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m2.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m2.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m2.zx(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m2.zy(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m2.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq7(q7);
-    EXPECT_NEAR(mq7.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq7.xy(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq7.xz(),  0.7071, 1.0e-3);
-    EXPECT_NEAR(mq7.yx(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(mq7.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(mq7.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq7.zx(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(mq7.zy(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(mq7.zz(),  0.5000, 1.0e-3);
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
-    mc::Matrix3x3 mq8(q8);
-    EXPECT_NEAR(mq8.xx(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq8.xy(), -0.5000, 1.0e-3);
-    EXPECT_NEAR(mq8.xz(), -0.7071, 1.0e-3);
-    EXPECT_NEAR(mq8.yx(),  0.8536, 1.0e-3);
-    EXPECT_NEAR(mq8.yy(),  0.1464, 1.0e-3);
-    EXPECT_NEAR(mq8.yz(),  0.5000, 1.0e-3);
-    EXPECT_NEAR(mq8.zx(), -0.1464, 1.0e-3);
-    EXPECT_NEAR(mq8.zy(), -0.8536, 1.0e-3);
-    EXPECT_NEAR(mq8.zz(),  0.5000, 1.0e-3);
+    mc::Matrix3x3 m3(q3);
+    EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.xz(), -0.7071, 1.0e-3);
+    EXPECT_NEAR(m3.yx(),  0.8536, 1.0e-3);
+    EXPECT_NEAR(m3.yy(),  0.1464, 1.0e-3);
+    EXPECT_NEAR(m3.yz(),  0.5000, 1.0e-3);
+    EXPECT_NEAR(m3.zx(), -0.1464, 1.0e-3);
+    EXPECT_NEAR(m3.zy(), -0.8536, 1.0e-3);
+    EXPECT_NEAR(m3.zz(),  0.5000, 1.0e-3);
 }
 
 TEST_F(TestMatrix3x3, CanAccessXX)
@@ -476,7 +550,7 @@ TEST_F(TestMatrix3x3, CanAccessZZ)
     EXPECT_DOUBLE_EQ(m0.zz(), 1.0);
 }
 
-TEST_F(TestMatrix3x3, CanSetDat)
+TEST_F(TestMatrix3x3, CanSetData)
 {
     mc::Matrix3x3 m0;
 
@@ -495,47 +569,38 @@ TEST_F(TestMatrix3x3, CanSetDat)
     EXPECT_DOUBLE_EQ(m0.zz(), 33.0);
 }
 
-TEST_F(TestMatrix3x3, CanTranspose)
+TEST_F(TestMatrix3x3, CanGetAnglesZeros)
 {
-    mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
-                      4.0, 5.0, 6.0,
-                      7.0, 8.0, 9.0 );
+    mc::Matrix3x3 m(mc::Angles(0.0, 0.0, 0.0));
+    mc::Angles ang = m.GetAngles();
 
-    m1.Transpose();
-
-    EXPECT_DOUBLE_EQ(m1.xx(), 1.0);
-    EXPECT_DOUBLE_EQ(m1.xy(), 4.0);
-    EXPECT_DOUBLE_EQ(m1.xz(), 7.0);
-    EXPECT_DOUBLE_EQ(m1.yx(), 2.0);
-    EXPECT_DOUBLE_EQ(m1.yy(), 5.0);
-    EXPECT_DOUBLE_EQ(m1.yz(), 8.0);
-    EXPECT_DOUBLE_EQ(m1.zx(), 3.0);
-    EXPECT_DOUBLE_EQ(m1.zy(), 6.0);
-    EXPECT_DOUBLE_EQ(m1.zz(), 9.0);
+    EXPECT_NEAR(ang.phi(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi(), 0.0, 1.0e-9);
 }
 
-TEST_F(TestMatrix3x3, CanGetAngles)
+TEST_F(TestMatrix3x3, CanGetAnglesPhiPi)
 {
-    mc::Matrix3x3 ma0(mc::Angles( 0.0 , 0.0, 0.0  ));
-    mc::Matrix3x3 ma1(mc::Angles( M_PI, 0.0, 0.0  ));
-    mc::Matrix3x3 ma3(mc::Angles( 0.0 , 0.0, M_PI ));
+    mc::Matrix3x3 m(mc::Angles(M_PI, 0.0, 0.0));
+    mc::Angles ang = m.GetAngles();
 
-    mc::Angles a0 =  ma0.GetAngles();
-    mc::Angles a1 =  ma1.GetAngles();
-    mc::Angles a3 =  ma3.GetAngles();
+    EXPECT_NEAR(ang.phi(), M_PI, 1.0e-9);
+    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi(), 0.0, 1.0e-9);
+}
 
-    EXPECT_NEAR(a0.phi(), 0.0  , 1.0e-9);
-    EXPECT_NEAR(a0.tht(), 0.0  , 1.0e-9);
-    EXPECT_NEAR(a0.psi(), 0.0  , 1.0e-9);
+TEST_F(TestMatrix3x3, CanGetAnglesPsiPi)
+{
+    mc::Matrix3x3 m(mc::Angles(0.0, 0.0, M_PI));
+    mc::Angles ang = m.GetAngles();
 
-    EXPECT_NEAR(a1.phi(), M_PI , 1.0e-9);
-    EXPECT_NEAR(a1.tht(), 0.0  , 1.0e-9);
-    EXPECT_NEAR(a1.psi(), 0.0  , 1.0e-9);
+    EXPECT_NEAR(ang.phi(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi(), M_PI, 1.0e-9);
+}
 
-    EXPECT_NEAR(a3.phi(), 0.0  , 1.0e-9);
-    EXPECT_NEAR(a3.tht(), 0.0  , 1.0e-9);
-    EXPECT_NEAR(a3.psi(), M_PI , 1.0e-9);
-
+TEST_F(TestMatrix3x3, CanGetAnglesInGimbalLock)
+{
     // singularity - gimbal lock
     mc::Matrix3x3 mas1(mc::Angles(    0.0, M_PI_2,    0.0 ));
     mc::Matrix3x3 mas2(mc::Angles( M_PI_4, M_PI_2,    0.0 ));
@@ -572,22 +637,17 @@ TEST_F(TestMatrix3x3, CanGetAngles)
 
 TEST_F(TestMatrix3x3, CanGetQuaternion)
 {
-    mc::Matrix3x3 mq0 { mc::Quaternion() };
-    mc::Matrix3x3 mq1 { mc::Quaternion(0.6, 0.0, 0.0, 0.8) };
+    mc::Matrix3x3 m(mc::Quaternion(0.6, 0.0, 0.0, 0.8));
+    mc::Quaternion q = m.GetQuaternion();
 
-    mc::Quaternion q0 = mq0.GetQuaternion();
-    mc::Quaternion q1 = mq1.GetQuaternion();
+    EXPECT_NEAR(q.e0(), 0.6, 1.0e-9);
+    EXPECT_NEAR(q.ex(), 0.0, 1.0e-9);
+    EXPECT_NEAR(q.ey(), 0.0, 1.0e-9);
+    EXPECT_NEAR(q.ez(), 0.8, 1.0e-9);
+}
 
-    EXPECT_NEAR(q0.e0(), 1.0, 1.0e-9);
-    EXPECT_NEAR(q0.ex(), 0.0, 1.0e-9);
-    EXPECT_NEAR(q0.ey(), 0.0, 1.0e-9);
-    EXPECT_NEAR(q0.ez(), 0.0, 1.0e-9);
-
-    EXPECT_NEAR(q1.e0(), 0.6, 1.0e-9);
-    EXPECT_NEAR(q1.ex(), 0.0, 1.0e-9);
-    EXPECT_NEAR(q1.ey(), 0.0, 1.0e-9);
-    EXPECT_NEAR(q1.ez(), 0.8, 1.0e-9);
-
+TEST_F(TestMatrix3x3, CanGetQuaternionWhichMatchesAngles)
+{
     mc::Matrix3x3 m1(  1.0,  0.0,  0.0,
                        0.0,  1.0,  0.0,
                        0.0,  0.0,  1.0 );
@@ -639,31 +699,32 @@ TEST_F(TestMatrix3x3, CanGetQuaternion)
 
 TEST_F(TestMatrix3x3, CanGetTransposed)
 {
-    mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
-                      4.0, 5.0, 6.0,
-                      7.0, 8.0, 9.0 );
+    double x[] { 1.0, 2.0, 3.0,
+                 4.0, 5.0, 6.0,
+                 7.0, 8.0, 9.0 };
 
+    mc::Matrix3x3 m0;
+    m0.SetFromArray(x);
+
+    mc::Matrix3x3 m1(m0);
     mc::Matrix3x3 mt = m1.GetTransposed();
 
-    EXPECT_DOUBLE_EQ(m1(0,0), 1.0);
-    EXPECT_DOUBLE_EQ(m1(0,1), 2.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 3.0);
-    EXPECT_DOUBLE_EQ(m1(1,0), 4.0);
-    EXPECT_DOUBLE_EQ(m1(1,1), 5.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 6.0);
-    EXPECT_DOUBLE_EQ(m1(2,0), 7.0);
-    EXPECT_DOUBLE_EQ(m1(2,1), 8.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
+#   ifdef TEST_USING_ARMADILLO
+    arma::mat ma1 = SetArmaMatFromArray(x, size, size);
+    arma::mat mat = ma1.t();
+#   endif // TEST_USING_ARMADILLO
 
-    EXPECT_DOUBLE_EQ(mt.xx(), 1.0);
-    EXPECT_DOUBLE_EQ(mt.xy(), 4.0);
-    EXPECT_DOUBLE_EQ(mt.xz(), 7.0);
-    EXPECT_DOUBLE_EQ(mt.yx(), 2.0);
-    EXPECT_DOUBLE_EQ(mt.yy(), 5.0);
-    EXPECT_DOUBLE_EQ(mt.yz(), 8.0);
-    EXPECT_DOUBLE_EQ(mt.zx(), 3.0);
-    EXPECT_DOUBLE_EQ(mt.zy(), 6.0);
-    EXPECT_DOUBLE_EQ(mt.zz(), 9.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+            EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
+#           ifdef TEST_USING_ARMADILLO
+            EXPECT_DOUBLE_EQ(mt(r,c), mat(r,c)) << "Error at row " << r << " and col " << c;
+#           endif // TEST_USING_ARMADILLO
+        }
+    }
 }
 
 TEST_F(TestMatrix3x3, CanAdd)

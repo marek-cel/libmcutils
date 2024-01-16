@@ -1,10 +1,17 @@
 #include <gtest/gtest.h>
 
+#ifdef TEST_USING_ARMADILLO
+#   include <armadillo>
+#endif // TEST_USING_ARMADILLO
+
 #include <mcutils/math/Matrix4x4.h>
+
+#include <TestingUtils.h>
 
 class TestMatrix4x4 : public ::testing::Test
 {
 protected:
+    constexpr static int size = 4;
     TestMatrix4x4() {}
     virtual ~TestMatrix4x4() {}
     void SetUp() override {}
@@ -27,107 +34,71 @@ TEST_F(TestMatrix4x4, CanDestruct)
 TEST_F(TestMatrix4x4, CanInstantiate)
 {
     mc::Matrix4x4 m;
-
-    EXPECT_DOUBLE_EQ(m(0,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 0.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
-TEST_F(TestMatrix4x4, CanTranspose)
+TEST_F(TestMatrix4x4, CanInstantiateAndCopy)
 {
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix4x4.m
+    constexpr int size = 4;
 
-    double elements[] = {
-         1.0,  2.0,  3.0,  4.0,
-         5.0,  6.0,  7.0,  8.0,
-         9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0
-    };
+    double x[] = { 11.0, 12.0, 13.0, 14.0,
+                   21.0, 22.0, 23.0, 24.0,
+                   31.0, 32.0, 33.0, 34.0,
+                   41.0, 42.0, 43.0, 44.0 };
 
-    mc::Matrix4x4 m;
-    m.SetFromArray(elements);
+    mc::Matrix4x4 m0;
+    m0.SetFromArray(x);
 
-    m.Transpose();
+    mc::Matrix4x4 m1(m0);
 
-    EXPECT_DOUBLE_EQ(m(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m(0,1),  5.0);
-    EXPECT_DOUBLE_EQ(m(0,2),  9.0);
-    EXPECT_DOUBLE_EQ(m(0,3), 13.0);
-    EXPECT_DOUBLE_EQ(m(1,0),  2.0);
-    EXPECT_DOUBLE_EQ(m(1,1),  6.0);
-    EXPECT_DOUBLE_EQ(m(1,2), 10.0);
-    EXPECT_DOUBLE_EQ(m(1,3), 14.0);
-    EXPECT_DOUBLE_EQ(m(2,0),  3.0);
-    EXPECT_DOUBLE_EQ(m(2,1),  7.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 11.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 15.0);
-    EXPECT_DOUBLE_EQ(m(3,0),  4.0);
-    EXPECT_DOUBLE_EQ(m(3,1),  8.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 12.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 16.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrix4x4, CanGetTransposed)
 {
-    double elements[] = {
+    constexpr int size = 4;
+
+    double x[] = {
          1.0,  2.0,  3.0,  4.0,
          5.0,  6.0,  7.0,  8.0,
          9.0, 10.0, 11.0, 12.0,
         13.0, 14.0, 15.0, 16.0
     };
 
-    mc::Matrix4x4 m;
-    m.SetFromArray(elements);
+    mc::Matrix4x4 m0;
+    m0.SetFromArray(x);
 
-    mc::Matrix4x4 m1 = m.GetTransposed();
+    mc::Matrix4x4 m1(m0);
+    mc::Matrix4x4 mt = m1.GetTransposed();
 
-    EXPECT_DOUBLE_EQ(m(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m(0,1),  2.0);
-    EXPECT_DOUBLE_EQ(m(0,2),  3.0);
-    EXPECT_DOUBLE_EQ(m(0,3),  4.0);
-    EXPECT_DOUBLE_EQ(m(1,0),  5.0);
-    EXPECT_DOUBLE_EQ(m(1,1),  6.0);
-    EXPECT_DOUBLE_EQ(m(1,2),  7.0);
-    EXPECT_DOUBLE_EQ(m(1,3),  8.0);
-    EXPECT_DOUBLE_EQ(m(2,0),  9.0);
-    EXPECT_DOUBLE_EQ(m(2,1), 10.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 11.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 12.0);
-    EXPECT_DOUBLE_EQ(m(3,0), 13.0);
-    EXPECT_DOUBLE_EQ(m(3,1), 14.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 15.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 16.0);
+#   ifdef TEST_USING_ARMADILLO
+    arma::mat ma1 = SetArmaMatFromArray(x, size, size);
+    arma::mat mat = ma1.t();
+#   endif // TEST_USING_ARMADILLO
 
-    EXPECT_DOUBLE_EQ(m1(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m1(0,1),  5.0);
-    EXPECT_DOUBLE_EQ(m1(0,2),  9.0);
-    EXPECT_DOUBLE_EQ(m1(0,3), 13.0);
-    EXPECT_DOUBLE_EQ(m1(1,0),  2.0);
-    EXPECT_DOUBLE_EQ(m1(1,1),  6.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 10.0);
-    EXPECT_DOUBLE_EQ(m1(1,3), 14.0);
-    EXPECT_DOUBLE_EQ(m1(2,0),  3.0);
-    EXPECT_DOUBLE_EQ(m1(2,1),  7.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 11.0);
-    EXPECT_DOUBLE_EQ(m1(2,3), 15.0);
-    EXPECT_DOUBLE_EQ(m1(3,0),  4.0);
-    EXPECT_DOUBLE_EQ(m1(3,1),  8.0);
-    EXPECT_DOUBLE_EQ(m1(3,2), 12.0);
-    EXPECT_DOUBLE_EQ(m1(3,3), 16.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+            EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
+#           ifdef TEST_USING_ARMADILLO
+            EXPECT_DOUBLE_EQ(mt(r,c), mat(r,c)) << "Error at row " << r << " and col " << c;
+#           endif // TEST_USING_ARMADILLO
+        }
+    }
 }
 
 TEST_F(TestMatrix4x4, CanAdd)

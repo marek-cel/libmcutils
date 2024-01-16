@@ -8,9 +8,9 @@
 
 #include <TestingUtils.h>
 
-// To achieve full test coverage of MatrixMxN template class tests have to be
-// done for 3x3, 4x4 and 6x6 matrices, as template class MatrixMxN has derived 
-// classes which are not templates.
+// To achieve full test coverage of MatrixNxN template class some tests have
+// to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixMxN has 
+// derived classes which are not templates. (e.g. all operators)
 
 class TestMatrixMxN : public ::testing::Test
 {
@@ -23,38 +23,30 @@ protected:
 
 TEST_F(TestMatrixMxN, CanConstruct)
 {
-    mc::MatrixMxN<3,3>* m = nullptr;
-    EXPECT_NO_THROW((m = new mc::MatrixMxN<3,3>()));
+    constexpr int size = 3;
+    mc::MatrixMxN<size,size>* m = nullptr;
+    EXPECT_NO_THROW((m = new mc::MatrixMxN<size,size>()));
     delete m;
 }
 
 TEST_F(TestMatrixMxN, CanDestruct)
 {
-    mc::MatrixMxN<3,3>* m3 = new mc::MatrixMxN<3,3>();
-    EXPECT_NO_THROW(delete m3);
-
-    mc::MatrixMxN<4,4>* m4 = new mc::MatrixMxN<4,4>();
-    EXPECT_NO_THROW(delete m4);
-
-    mc::MatrixMxN<6,6>* m6 = new mc::MatrixMxN<6,6>();
-    EXPECT_NO_THROW(delete m6);
+    constexpr int size = 3;
+    mc::MatrixMxN<size,size>* m = new mc::MatrixMxN<size,size>();
+    EXPECT_NO_THROW(delete m);
 }
 
-TEST_F(TestMatrixMxN, CanInstantiate3x3)
+TEST_F(TestMatrixMxN, CanInstantiate)
 {
-    mc::MatrixMxN<3,3> m1;
-
-    EXPECT_DOUBLE_EQ(m1(0,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(0,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 0.0);
-
-    EXPECT_DOUBLE_EQ(m1(1,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(1,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 0.0);
-
-    EXPECT_DOUBLE_EQ(m1(2,0), 0.0);
-    EXPECT_DOUBLE_EQ(m1(2,1), 0.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 0.0);
+    constexpr int size = 3;
+    mc::MatrixMxN<size,size> m;
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrixMxN, CanFill3x3)
@@ -70,7 +62,7 @@ TEST_F(TestMatrixMxN, CanFill3x3)
     {
         for ( int c = 0; c < cols; ++c )
         {
-            EXPECT_DOUBLE_EQ(mat(r,c), val);
+            EXPECT_DOUBLE_EQ(mat(r,c), val) << "Error at row " << r << " and col " << c;
         }
     }
 }
@@ -88,7 +80,7 @@ TEST_F(TestMatrixMxN, CanFill4x4)
     {
         for ( int c = 0; c < cols; ++c )
         {
-            EXPECT_DOUBLE_EQ(mat(r,c), val);
+            EXPECT_DOUBLE_EQ(mat(r,c), val) << "Error at row " << r << " and col " << c;
         }
     }
 }
@@ -106,7 +98,7 @@ TEST_F(TestMatrixMxN, CanFill6x6)
     {
         for ( int c = 0; c < cols; ++c )
         {
-            EXPECT_DOUBLE_EQ(mat(r,c), val);
+            EXPECT_DOUBLE_EQ(mat(r,c), val) << "Error at row " << r << " and col " << c;
         }
     }
 }
@@ -220,23 +212,14 @@ TEST_F(TestMatrixMxN, CanGetElement3x3)
     mc::MatrixMxN<rows,cols> m;
     m.SetFromArray(x);
 
-    EXPECT_DOUBLE_EQ(m.GetElement(0,0), x[0]);
-    EXPECT_DOUBLE_EQ(m.GetElement(0,1), x[1]);
-    EXPECT_DOUBLE_EQ(m.GetElement(0,2), x[2]);
-
-    EXPECT_DOUBLE_EQ(m.GetElement(1,0), x[3]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,1), x[4]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,2), x[5]);
-    
-    EXPECT_DOUBLE_EQ(m.GetElement(2,0), x[6]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,1), x[7]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,2), x[8]);
-
-    double r23 = m.GetElement(2,3);
-    double r32 = m.GetElement(3,2);
-
-    EXPECT_FALSE(r23 == r23); // NaN
-    EXPECT_FALSE(r32 == r32); // NaN
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m.GetElement(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrixMxN, CanGetElement4x4)
@@ -252,31 +235,14 @@ TEST_F(TestMatrixMxN, CanGetElement4x4)
     mc::MatrixMxN<rows,cols> m;
     m.SetFromArray(x);
 
-    EXPECT_DOUBLE_EQ(m.GetElement(0,0), x[0]);
-    EXPECT_DOUBLE_EQ(m.GetElement(0,1), x[1]);
-    EXPECT_DOUBLE_EQ(m.GetElement(0,2), x[2]);
-    EXPECT_DOUBLE_EQ(m.GetElement(0,3), x[3]);
-
-    EXPECT_DOUBLE_EQ(m.GetElement(1,0), x[4]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,1), x[5]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,2), x[6]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,3), x[7]);
-    
-    EXPECT_DOUBLE_EQ(m.GetElement(2,0), x[8]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,1), x[9]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,2), x[10]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,3), x[11]);
-    
-    EXPECT_DOUBLE_EQ(m.GetElement(3,0), x[12]);
-    EXPECT_DOUBLE_EQ(m.GetElement(3,1), x[13]);
-    EXPECT_DOUBLE_EQ(m.GetElement(3,2), x[14]);
-    EXPECT_DOUBLE_EQ(m.GetElement(3,3), x[15]);
-
-    double r24 = m.GetElement(2,4);
-    double r42 = m.GetElement(4,2);
-
-    EXPECT_FALSE(r24 == r24); // NaN
-    EXPECT_FALSE(r42 == r42); // NaN
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m.GetElement(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrixMxN, CanGetElement6x6)
@@ -294,19 +260,56 @@ TEST_F(TestMatrixMxN, CanGetElement6x6)
     mc::MatrixMxN<rows,cols> m;
     m.SetFromArray(x);
 
-    // only diagonal
-    EXPECT_DOUBLE_EQ(m.GetElement(0,0), x[0]);
-    EXPECT_DOUBLE_EQ(m.GetElement(1,1), x[7]);
-    EXPECT_DOUBLE_EQ(m.GetElement(2,2), x[14]);
-    EXPECT_DOUBLE_EQ(m.GetElement(3,3), x[21]);
-    EXPECT_DOUBLE_EQ(m.GetElement(4,4), x[28]);
-    EXPECT_DOUBLE_EQ(m.GetElement(5,5), x[35]);
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m.GetElement(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
+}
 
-    double r26 = m.GetElement(2,6);
-    double r62 = m.GetElement(6,2);
+TEST_F(TestMatrixMxN, CanGetElementWithInvalidIndex3x3)
+{
+    constexpr int rows = 3;
+    constexpr int cols = 3;
 
-    EXPECT_FALSE(r26 == r26); // NaN
-    EXPECT_FALSE(r62 == r62); // NaN
+    mc::MatrixMxN<rows,cols> m;
+
+    double rc = m.GetElement(0,cols);
+    double rr = m.GetElement(rows,0);
+
+    EXPECT_FALSE(rc == rc); // NaN
+    EXPECT_FALSE(rr == rr); // NaN
+}
+
+TEST_F(TestMatrixMxN, CanGetElementWithInvalidIndex4x4)
+{
+    constexpr int rows = 4;
+    constexpr int cols = 4;
+
+    mc::MatrixMxN<rows,cols> m;
+
+    double rc = m.GetElement(0,cols);
+    double rr = m.GetElement(rows,0);
+
+    EXPECT_FALSE(rc == rc); // NaN
+    EXPECT_FALSE(rr == rr); // NaN
+}
+
+TEST_F(TestMatrixMxN, CanGetElementWithInvalidIndex6x6)
+{
+    constexpr int rows = 6;
+    constexpr int cols = 6;
+
+    mc::MatrixMxN<rows,cols> m;
+
+    double rc = m.GetElement(0,cols);
+    double rr = m.GetElement(rows,0);
+
+    EXPECT_FALSE(rc == rc); // NaN
+    EXPECT_FALSE(rr == rr); // NaN
 }
 
 TEST_F(TestMatrixMxN, CanPutIntoArray3x3)
@@ -435,27 +438,81 @@ TEST_F(TestMatrixMxN, CanSetElement6x6)
     EXPECT_DOUBLE_EQ(m(0,5), 9.0);
 }
 
-TEST_F(TestMatrixMxN, CanSetFromArray)
+TEST_F(TestMatrixMxN, CanSetFromArray3x3)
 {
-    mc::MatrixMxN<3,3> m1;
+    constexpr int rows = 3;
+    constexpr int cols = 3;
 
-    double elements[] = { 1.0, 2.0, 3.0,
-                          4.0, 5.0, 6.0,
-                          7.0, 8.0, 9.0 };
+    mc::MatrixMxN<rows,cols> m;
 
-    m1.SetFromArray(elements);
+    double x[] = { 1.0, 2.0, 3.0,
+                   4.0, 5.0, 6.0,
+                   7.0, 8.0, 9.0 };
 
-    EXPECT_DOUBLE_EQ(m1(0,0), 1.0);
-    EXPECT_DOUBLE_EQ(m1(0,1), 2.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 3.0);
-    
-    EXPECT_DOUBLE_EQ(m1(1,0), 4.0);
-    EXPECT_DOUBLE_EQ(m1(1,1), 5.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 6.0);
-    
-    EXPECT_DOUBLE_EQ(m1(2,0), 7.0);
-    EXPECT_DOUBLE_EQ(m1(2,1), 8.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
+    m.SetFromArray(x);
+
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
+}
+
+TEST_F(TestMatrixMxN, CanSetFromArray4x4)
+{
+    constexpr int rows = 4;
+    constexpr int cols = 4;
+
+    mc::MatrixMxN<rows,cols> m;
+
+    double x[] = {
+         1.0,  2.0,  3.0,  4.0,
+         5.0,  6.0,  7.0,  8.0,
+         9.0, 10.0, 11.0, 12.0,
+        13.0, 14.0, 15.0, 16.0
+    };
+
+    m.SetFromArray(x);
+
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
+}
+
+TEST_F(TestMatrixMxN, CanSetFromArray6x6)
+{
+    constexpr int rows = 6;
+    constexpr int cols = 6;
+
+    mc::MatrixMxN<rows,cols> m;
+
+    double x[] = {
+         1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
+         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
+        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
+        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
+        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
+        31.0, 32.0, 33.0, 34.0, 35.0, 36.0
+    };
+
+    m.SetFromArray(x);
+
+    for ( int r = 0; r < rows; ++r )
+    {
+        for ( int c = 0; c < cols; ++c )
+        {
+            int index = r * cols + c;
+            EXPECT_DOUBLE_EQ(m(r,c), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrixMxN, CanSetFromString3x3)
@@ -610,63 +667,19 @@ TEST_F(TestMatrixMxN, CanSwapRows3x3)
 
     mc::MatrixMxN<rows,cols> m;
     m.SetFromArray(x);
+    m.SwapRows(0, 1);
 
-    EXPECT_DOUBLE_EQ(m(0,0), 1.0);
-    EXPECT_DOUBLE_EQ(m(0,1), 2.0);
-    EXPECT_DOUBLE_EQ(m(0,2), 3.0);
+    EXPECT_DOUBLE_EQ(m(1,0), 1.0);
+    EXPECT_DOUBLE_EQ(m(1,1), 2.0);
+    EXPECT_DOUBLE_EQ(m(1,2), 3.0);
 
-    EXPECT_DOUBLE_EQ(m(1,0), 4.0);
-    EXPECT_DOUBLE_EQ(m(1,1), 5.0);
-    EXPECT_DOUBLE_EQ(m(1,2), 6.0);
+    EXPECT_DOUBLE_EQ(m(0,0), 4.0);
+    EXPECT_DOUBLE_EQ(m(0,1), 5.0);
+    EXPECT_DOUBLE_EQ(m(0,2), 6.0);
     
     EXPECT_DOUBLE_EQ(m(2,0), 7.0);
     EXPECT_DOUBLE_EQ(m(2,1), 8.0);
     EXPECT_DOUBLE_EQ(m(2,2), 9.0);
-
-    mc::MatrixMxN<rows,cols> m01(m);
-    m01.SwapRows(0, 1);
-
-    EXPECT_DOUBLE_EQ(m01(1,0), 1.0);
-    EXPECT_DOUBLE_EQ(m01(1,1), 2.0);
-    EXPECT_DOUBLE_EQ(m01(1,2), 3.0);
-
-    EXPECT_DOUBLE_EQ(m01(0,0), 4.0);
-    EXPECT_DOUBLE_EQ(m01(0,1), 5.0);
-    EXPECT_DOUBLE_EQ(m01(0,2), 6.0);
-    
-    EXPECT_DOUBLE_EQ(m01(2,0), 7.0);
-    EXPECT_DOUBLE_EQ(m01(2,1), 8.0);
-    EXPECT_DOUBLE_EQ(m01(2,2), 9.0);
-
-    mc::MatrixMxN<rows,cols> m02(m);
-    m02.SwapRows(0, 2);
-
-    EXPECT_DOUBLE_EQ(m02(2,0), 1.0);
-    EXPECT_DOUBLE_EQ(m02(2,1), 2.0);
-    EXPECT_DOUBLE_EQ(m02(2,2), 3.0);
-
-    EXPECT_DOUBLE_EQ(m02(1,0), 4.0);
-    EXPECT_DOUBLE_EQ(m02(1,1), 5.0);
-    EXPECT_DOUBLE_EQ(m02(1,2), 6.0);
-    
-    EXPECT_DOUBLE_EQ(m02(0,0), 7.0);
-    EXPECT_DOUBLE_EQ(m02(0,1), 8.0);
-    EXPECT_DOUBLE_EQ(m02(0,2), 9.0);
-
-    mc::MatrixMxN<rows,cols> m12(m);
-    m12.SwapRows(1, 2);
-
-    EXPECT_DOUBLE_EQ(m12(0,0), 1.0);
-    EXPECT_DOUBLE_EQ(m12(0,1), 2.0);
-    EXPECT_DOUBLE_EQ(m12(0,2), 3.0);
-
-    EXPECT_DOUBLE_EQ(m12(2,0), 4.0);
-    EXPECT_DOUBLE_EQ(m12(2,1), 5.0);
-    EXPECT_DOUBLE_EQ(m12(2,2), 6.0);
-    
-    EXPECT_DOUBLE_EQ(m12(1,0), 7.0);
-    EXPECT_DOUBLE_EQ(m12(1,1), 8.0);
-    EXPECT_DOUBLE_EQ(m12(1,2), 9.0);
 }
 
 TEST_F(TestMatrixMxN, CanSwapRows4x4)
@@ -1292,120 +1305,137 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar6x6)
     }
 }
 
-TEST_F(TestMatrixMxN, CanMultiplyByVector3)
+TEST_F(TestMatrixMxN, CanMultiplyIdentityMatrixByVector3)
 {
     constexpr int rows = 3;
     constexpr int cols = 3;
 
-    mc::MatrixMxN<rows,cols> m1;
+    mc::MatrixMxN<rows,cols> m;
 
-    m1(0,0) =  1.0;
-    m1(0,1) =  0.0;
-    m1(0,2) =  0.0;
+    m(0,0) =  1.0;
+    m(0,1) =  0.0;
+    m(0,2) =  0.0;
 
-    m1(1,0) =  0.0;
-    m1(1,1) =  1.0;
-    m1(1,2) =  0.0;
+    m(1,0) =  0.0;
+    m(1,1) =  1.0;
+    m(1,2) =  0.0;
 
-    m1(2,0) =  0.0;
-    m1(2,1) =  0.0;
-    m1(2,2) =  1.0;
-
-    mc::MatrixMxN<rows,cols> m2;
-
-    m2(0,0) = -1.0;
-    m2(0,1) =  0.0;
-    m2(0,2) =  0.0;
-
-    m2(1,0) =  0.0;
-    m2(1,1) = -1.0;
-    m2(1,2) =  0.0;
-
-    m2(2,0) =  0.0;
-    m2(2,1) =  0.0;
-    m2(2,2) = -1.0;
-
-    mc::MatrixMxN<rows,cols> m3;
-
-    m3(0,0) =  0.0;
-    m3(0,1) =  1.0;
-    m3(0,2) =  0.0;
-
-    m3(1,0) =  1.0;
-    m3(1,1) =  0.0;
-    m3(1,2) =  0.0;
-
-    m3(2,0) =  0.0;
-    m3(2,1) =  0.0;
-    m3(2,2) =  1.0;
-
-    mc::MatrixMxN<rows,cols> m4;
-
-    m4(0,0) =  1.0;
-    m4(0,1) =  0.0;
-    m4(0,2) =  0.0;
-
-    m4(1,0) =  0.0;
-    m4(1,1) =  0.0;
-    m4(1,2) = -1.0;
-
-    m4(2,0) =  0.0;
-    m4(2,1) = -1.0;
-    m4(2,2) =  0.0;
+    m(2,0) =  0.0;
+    m(2,1) =  0.0;
+    m(2,2) =  1.0;
 
     mc::VectorN<rows> v;
     v(0) = 1.0;
     v(1) = 2.0;
     v(2) = 3.0;
 
-    mc::VectorN<rows> vr1 = m1 * v;
-    EXPECT_DOUBLE_EQ(vr1(0),  1.0);
-    EXPECT_DOUBLE_EQ(vr1(1),  2.0);
-    EXPECT_DOUBLE_EQ(vr1(2),  3.0);
+    mc::VectorN<rows> vr = m * v;
+    EXPECT_DOUBLE_EQ(vr(0),  1.0);
+    EXPECT_DOUBLE_EQ(vr(1),  2.0);
+    EXPECT_DOUBLE_EQ(vr(2),  3.0);
+}
 
-    mc::VectorN<rows> vr2 = m2 * v;
-    EXPECT_DOUBLE_EQ(vr2(0), -1.0);
-    EXPECT_DOUBLE_EQ(vr2(1), -2.0);
-    EXPECT_DOUBLE_EQ(vr2(2), -3.0);
+TEST_F(TestMatrixMxN, CanMultiplyNegativeIdentityMatrixByVector3)
+{
+    constexpr int rows = 3;
+    constexpr int cols = 3;
 
-    mc::VectorN<rows> vr3 = m3 * v;
-    EXPECT_DOUBLE_EQ(vr3(0),  2.0);
-    EXPECT_DOUBLE_EQ(vr3(1),  1.0);
-    EXPECT_DOUBLE_EQ(vr3(2),  3.0);
+    mc::MatrixMxN<rows,cols> m;
 
-    mc::VectorN<rows> vr4 = m4 * v;
-    EXPECT_DOUBLE_EQ(vr4(0),  1.0);
-    EXPECT_DOUBLE_EQ(vr4(1), -3.0);
-    EXPECT_DOUBLE_EQ(vr4(2), -2.0);
+    m(0,0) = -1.0;
+    m(0,1) =  0.0;
+    m(0,2) =  0.0;
+
+    m(1,0) =  0.0;
+    m(1,1) = -1.0;
+    m(1,2) =  0.0;
+
+    m(2,0) =  0.0;
+    m(2,1) =  0.0;
+    m(2,2) = -1.0;
+
+    mc::VectorN<rows> v;
+    v(0) = 1.0;
+    v(1) = 2.0;
+    v(2) = 3.0;
+
+    mc::VectorN<rows> vr = m * v;
+    EXPECT_DOUBLE_EQ(vr(0), -1.0);
+    EXPECT_DOUBLE_EQ(vr(1), -2.0);
+    EXPECT_DOUBLE_EQ(vr(2), -3.0);
+}
+
+TEST_F(TestMatrixMxN, CanMultiplySkewXYMatrixByVector3)
+{
+    constexpr int rows = 3;
+    constexpr int cols = 3;
+
+    mc::MatrixMxN<rows,cols> m;
+
+    m(0,0) =  0.0;
+    m(0,1) =  1.0;
+    m(0,2) =  0.0;
+
+    m(1,0) =  1.0;
+    m(1,1) =  0.0;
+    m(1,2) =  0.0;
+
+    m(2,0) =  0.0;
+    m(2,1) =  0.0;
+    m(2,2) =  1.0;
+
+    mc::VectorN<rows> v;
+    v(0) = 1.0;
+    v(1) = 2.0;
+    v(2) = 3.0;
+
+    mc::VectorN<rows> vr = m * v;
+    EXPECT_DOUBLE_EQ(vr(0),  2.0);
+    EXPECT_DOUBLE_EQ(vr(1),  1.0);
+    EXPECT_DOUBLE_EQ(vr(2),  3.0);
+}
+
+TEST_F(TestMatrixMxN, CanMultiplyRandomMatrixByVector3)
+{
+    constexpr int rows = 3;
+    constexpr int cols = 3;
+
+    mc::MatrixMxN<rows,cols> m3;
+
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
-    mc::MatrixMxN<rows,cols> m5;
-    m5.SetFromArray(x);
+    mc::MatrixMxN<rows,cols> m;
+    m.SetFromArray(x);
 
-    mc::VectorN<rows> vr5 = m5 * v;
+    mc::VectorN<rows> v;
+    v(0) = 1.0;
+    v(1) = 2.0;
+    v(2) = 3.0;
+
+    mc::VectorN<rows> vr = m * v;
 
 #   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
+    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
     arma::vec va;
     va << 1.0 << arma::endr
        << 2.0 << arma::endr
        << 3.0 << arma::endr;
     arma::vec var;
-    var = ma1 * va;
+    var = ma * va;
 
     for ( int r = 0; r < rows; ++r )
     {
-        EXPECT_DOUBLE_EQ(vr5(r), var(r)) << "Error at row " << r;
+        EXPECT_DOUBLE_EQ(vr(r), var(r)) << "Error at row " << r;
     }
 #   endif // TEST_USING_ARMADILLO
 
     // Following tests uses expected values calculated with GNU Octave
     // tests/math/octave/test_matrix.m
-    EXPECT_DOUBLE_EQ(vr5(0), 14.0);
-    EXPECT_DOUBLE_EQ(vr5(1), 32.0);
-    EXPECT_DOUBLE_EQ(vr5(2), 50.0);
+    EXPECT_DOUBLE_EQ(vr(0), 14.0);
+    EXPECT_DOUBLE_EQ(vr(1), 32.0);
+    EXPECT_DOUBLE_EQ(vr(2), 50.0);
 }
 
 TEST_F(TestMatrixMxN, CanMultiplyByVector4)

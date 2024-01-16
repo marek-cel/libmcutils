@@ -8,9 +8,9 @@
 
 #include <TestingUtils.h>
 
-// To achieve full test coverage of MatrixNxN template class tests have to be
-// done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has derived 
-// classes which are not templates.
+// To achieve full test coverage of MatrixNxN template class some tests have
+// to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has 
+// derived classes which are not templates. (e.g. all operators)
 
 class TestMatrixNxN : public ::testing::Test
 {
@@ -23,37 +23,23 @@ protected:
 
 TEST_F(TestMatrixNxN, CanConstruct)
 {
-    mc::MatrixNxN<3>* m3 = nullptr;
-    EXPECT_NO_THROW(m3 = new mc::MatrixNxN<3>());
-    delete m3;
-
-    mc::MatrixNxN<4>* m4 = nullptr;
-    EXPECT_NO_THROW(m4 = new mc::MatrixNxN<4>());
-    delete m4;
-
-    mc::MatrixNxN<6>* m6 = nullptr;
-    EXPECT_NO_THROW(m6 = new mc::MatrixNxN<6>());
-    delete m6;
+    constexpr int size = 3;
+    mc::MatrixNxN<size>* m = nullptr;
+    EXPECT_NO_THROW(m = new mc::MatrixNxN<size>());
+    delete m;
 }
 
 TEST_F(TestMatrixNxN, CanDestruct)
 {
-    mc::MatrixNxN<3>* m3 = new mc::MatrixNxN<3>();
-    EXPECT_NO_THROW(delete m3);
-
-    mc::MatrixNxN<4>* m4 = new mc::MatrixNxN<4>();
-    EXPECT_NO_THROW(delete m4);
-
-    mc::MatrixNxN<6>* m6 = new mc::MatrixNxN<6>();
-    EXPECT_NO_THROW(delete m6);
+    constexpr int size = 3;
+    mc::MatrixNxN<size>* m = new mc::MatrixNxN<size>();
+    EXPECT_NO_THROW(delete m);
 }
 
-TEST_F(TestMatrixNxN, CanInstantiate3x3)
+TEST_F(TestMatrixNxN, CanInstantiate)
 {
     constexpr int size = 3;
-
     mc::MatrixNxN<size> m;
-
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
@@ -63,91 +49,13 @@ TEST_F(TestMatrixNxN, CanInstantiate3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanInstantiate4x4)
-{
-    constexpr int size = 4;
-
-    mc::MatrixNxN<size> m;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanInstantiate6x6)
-{
-    constexpr int size = 6;
-
-    mc::MatrixNxN<size> m;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanInstantiateAndCopy3x3)
+TEST_F(TestMatrixNxN, CanInstantiateAndCopy)
 {
     constexpr int size = 3;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
-
-    mc::MatrixNxN<size> m0;
-    m0.SetFromArray(x);
-
-    mc::MatrixNxN<size> m1(m0);
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanInstantiateAndCopy4x4)
-{
-    constexpr int size = 4;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m0;
-    m0.SetFromArray(x);
-
-    mc::MatrixNxN<size> m1(m0);
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanInstantiateAndCopy6x6)
-{
-    constexpr int size = 6;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
 
     mc::MatrixNxN<size> m0;
     m0.SetFromArray(x);
@@ -171,20 +79,20 @@ TEST_F(TestMatrixNxN, CanTranspose)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    m1.SetFromArray(x);
+    mc::MatrixNxN<size> m;
+    m.SetFromArray(x);
 
-    m1.Transpose();
+    m.Transpose();
 
-    EXPECT_DOUBLE_EQ(m1(0,0), 1.0);
-    EXPECT_DOUBLE_EQ(m1(0,1), 4.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 7.0);
-    EXPECT_DOUBLE_EQ(m1(1,0), 2.0);
-    EXPECT_DOUBLE_EQ(m1(1,1), 5.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 8.0);
-    EXPECT_DOUBLE_EQ(m1(2,0), 3.0);
-    EXPECT_DOUBLE_EQ(m1(2,1), 6.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            int index = r * size + c;
+            // matrix 'm' transposed (row and col inverted)
+            EXPECT_DOUBLE_EQ(m(c,r), x[index]) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrixNxN, CanGetTransposed3x3)
@@ -223,10 +131,12 @@ TEST_F(TestMatrixNxN, CanGetTransposed4x4)
 {
     constexpr int size = 4;
 
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
+    double x[] = {
+         1.0,  2.0,  3.0,  4.0,
+         5.0,  6.0,  7.0,  8.0,
+         9.0, 10.0, 11.0, 12.0,
+        13.0, 14.0, 15.0, 16.0
+    };
 
     mc::MatrixNxN<size> m0;
     m0.SetFromArray(x);
@@ -256,12 +166,14 @@ TEST_F(TestMatrixNxN, CanGetTransposed6x6)
 {
     constexpr int size = 6;
 
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
+    double x[] = {
+         1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
+         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
+        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
+        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
+        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
+        31.0, 32.0, 33.0, 34.0, 35.0, 36.0
+    };
 
     mc::MatrixNxN<size> m0;
     m0.SetFromArray(x);
@@ -287,61 +199,13 @@ TEST_F(TestMatrixNxN, CanGetTransposed6x6)
     }
 }
 
-TEST_F(TestMatrixNxN, CanAssign3x3)
+TEST_F(TestMatrixNxN, CanAssign)
 {
     constexpr int size = 3;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
-
-    mc::MatrixNxN<size> m0;
-    mc::MatrixNxN<size> m1;
-    m0.SetFromArray(x);
-    m1 = m0;
-
-        for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanAssign4x4)
-{
-    constexpr int size = 4;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m0;
-    mc::MatrixNxN<size> m1;
-    m0.SetFromArray(x);
-    m1 = m0;
-
-        for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanAssign6x6)
-{
-    constexpr int size = 6;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
 
     mc::MatrixNxN<size> m0;
     mc::MatrixNxN<size> m1;
