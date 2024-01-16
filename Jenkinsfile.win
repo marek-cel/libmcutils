@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 bat 'cmake . -DCMAKE_BUILD_TYPE=Release -B build'
-                bat 'cmake --build build -j 4'
+                bat 'cmake --build build --config Release -j 4'
             }
         }
         stage('Test') {
