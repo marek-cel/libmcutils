@@ -112,27 +112,27 @@ TEST_F(TestAngles, CanCompare)
     mc::Angles a3(0.0, 0.0, M_PI);
     mc::Angles a4(1.0, 2.0, 3.0);
 
-    EXPECT_FALSE( a == a1 );
-    EXPECT_TRUE(  a != a1 );
+    EXPECT_FALSE(a == a1);
+    EXPECT_TRUE(a != a1);
     a = a1;
-    EXPECT_TRUE(  a == a1 );
-    EXPECT_FALSE( a != a1 );
+    EXPECT_TRUE(a == a1);
+    EXPECT_FALSE(a != a1);
 
-    EXPECT_FALSE( a == a2 );
-    EXPECT_TRUE(  a != a2 );
+    EXPECT_FALSE(a == a2);
+    EXPECT_TRUE(a != a2);
     a = a2;
-    EXPECT_TRUE(  a == a2 );
-    EXPECT_FALSE( a != a2 );
+    EXPECT_TRUE(a == a2);
+    EXPECT_FALSE(a != a2);
 
-    EXPECT_FALSE( a == a3 );
-    EXPECT_TRUE(  a != a3 );
+    EXPECT_FALSE(a == a3);
+    EXPECT_TRUE(a != a3);
     a = a3;
-    EXPECT_TRUE(  a == a3 );
-    EXPECT_FALSE( a != a3 );
+    EXPECT_TRUE(a == a3);
+    EXPECT_FALSE(a != a3);
 
-    EXPECT_FALSE( a == a4 );
-    EXPECT_TRUE(  a != a4 );
+    EXPECT_FALSE(a == a4);
+    EXPECT_TRUE(a != a4);
     a = a4;
-    EXPECT_TRUE(  a == a4 );
-    EXPECT_FALSE( a != a4 );
+    EXPECT_TRUE(a == a4);
+    EXPECT_FALSE(a != a4);
 }
