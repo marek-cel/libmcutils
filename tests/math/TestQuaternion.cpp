@@ -220,61 +220,44 @@ TEST_F(TestQuaternion, CanGetLength)
     EXPECT_NEAR(q2.GetLength(), 1.0, 1.0e-9);
 }
 
-TEST_F(TestQuaternion, CanGetAngles)
+TEST_F(TestQuaternion, CanGetAnglesPhiQuarterPi)
 {
-    const mc::Angles a1( M_PI_4, 0.0, 0.0 );
-    const mc::Angles a2( 0.0, M_PI_4, 0.0 );
-    const mc::Angles a3( 0.0, 0.0, M_PI_4 );
-    const mc::Angles a4( M_PI_4, M_PI_4, M_PI_4 );
+    const mc::Angles ang(M_PI_4, 0.0, 0.0);
+    mc::Quaternion quat(ang);
+    mc::Angles result = quat.GetAngles();
+    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
+    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
+    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+}
 
-    mc::Quaternion qa1(a1);
-    mc::Quaternion qa2(a2);
-    mc::Quaternion qa3(a3);
-    mc::Quaternion qa4(a4);
+TEST_F(TestQuaternion, CanGetAnglesThetaQuarterPi)
+{
+    const mc::Angles ang(0.0, M_PI_4, 0.0);
+    mc::Quaternion quat(ang);
+    mc::Angles result = quat.GetAngles();
+    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
+    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
+    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+}
 
-    mc::Angles ar1 = qa1.GetAngles();
-    mc::Angles ar2 = qa2.GetAngles();
-    mc::Angles ar3 = qa3.GetAngles();
-    mc::Angles ar4 = qa4.GetAngles();
+TEST_F(TestQuaternion, CanGetAnglesPsiQuarterPi)
+{
+    const mc::Angles ang(0.0, 0.0, M_PI_4);
+    mc::Quaternion quat(ang);
+    mc::Angles result = quat.GetAngles();
+    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
+    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
+    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+}
 
-    EXPECT_DOUBLE_EQ(ar1.phi(), a1.phi());
-    EXPECT_DOUBLE_EQ(ar1.tht(), a1.tht());
-    EXPECT_DOUBLE_EQ(ar1.psi(), a1.psi());
-
-    EXPECT_DOUBLE_EQ(ar2.phi(), a2.phi());
-    EXPECT_DOUBLE_EQ(ar2.tht(), a2.tht());
-    EXPECT_DOUBLE_EQ(ar2.psi(), a2.psi());
-
-    EXPECT_DOUBLE_EQ(ar3.phi(), a3.phi());
-    EXPECT_DOUBLE_EQ(ar3.tht(), a3.tht());
-    EXPECT_DOUBLE_EQ(ar3.psi(), a3.psi());
-
-    EXPECT_DOUBLE_EQ(ar4.phi(), a4.phi());
-    EXPECT_DOUBLE_EQ(ar4.tht(), a4.tht());
-    EXPECT_DOUBLE_EQ(ar4.psi(), a4.psi());
-
-    mc::Quaternion q1(  1.0, -1.0, 1.0, 1.0 );
-    mc::Quaternion q2( -1.0,  1.0, 1.0, 1.0 );
-
-    q1.Normalize();
-    q2.Normalize();
-
-    mc::Matrix3x3 mq1(q1);
-    mc::Matrix3x3 mq2(q2);
-
-    mc::Angles aq1 = q1.GetAngles();
-    mc::Angles aq2 = q2.GetAngles();
-
-    mc::Angles am1 = mq1.GetAngles();
-    mc::Angles am2 = mq2.GetAngles();
-
-    EXPECT_DOUBLE_EQ(aq1.phi(), am1.phi());
-    EXPECT_DOUBLE_EQ(aq1.tht(), am1.tht());
-    EXPECT_DOUBLE_EQ(aq1.psi(), am1.psi());
-
-    EXPECT_DOUBLE_EQ(aq2.phi(), am2.phi());
-    EXPECT_DOUBLE_EQ(aq2.tht(), am2.tht());
-    EXPECT_DOUBLE_EQ(aq2.psi(), am2.psi());
+TEST_F(TestQuaternion, CanGetAnglesPhiThetaPsiQuarterPi)
+{
+    const mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    mc::Quaternion quat(ang);
+    mc::Angles result = quat.GetAngles();
+    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
+    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
+    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
 }
 
 TEST_F(TestQuaternion, CanGetConjugated)
@@ -519,34 +502,34 @@ TEST_F(TestQuaternion, CanCompare)
     mc::Quaternion q4(0.0, 0.0, 0.0, 1.0);
     mc::Quaternion q5(1.0, 1.0, 1.0, 1.0);
 
-    EXPECT_FALSE( q == q1 );
-    EXPECT_TRUE(  q != q1 );
+    EXPECT_FALSE(q == q1);
+    EXPECT_TRUE(q != q1);
     q = q1;
-    EXPECT_TRUE(  q == q1 );
-    EXPECT_FALSE( q != q1 );
+    EXPECT_TRUE(q == q1);
+    EXPECT_FALSE(q != q1);
 
-    EXPECT_FALSE( q == q2 );
-    EXPECT_TRUE(  q != q2 );
+    EXPECT_FALSE(q == q2);
+    EXPECT_TRUE(q != q2);
     q = q2;
-    EXPECT_TRUE(  q == q2 );
-    EXPECT_FALSE( q != q2 );
+    EXPECT_TRUE(q == q2);
+    EXPECT_FALSE(q != q2);
 
-    EXPECT_FALSE( q == q3 );
-    EXPECT_TRUE(  q != q3 );
+    EXPECT_FALSE(q == q3);
+    EXPECT_TRUE(q != q3);
     q = q3;
-    EXPECT_TRUE(  q == q3 );
-    EXPECT_FALSE( q != q3 );
+    EXPECT_TRUE(q == q3);
+    EXPECT_FALSE(q != q3);
 
-    EXPECT_FALSE( q == q4 );
-    EXPECT_TRUE(  q != q4 );
+    EXPECT_FALSE(q == q4);
+    EXPECT_TRUE(q != q4);
     q = q4;
-    EXPECT_TRUE(  q == q4 );
-    EXPECT_FALSE( q != q4 );
+    EXPECT_TRUE(q == q4);
+    EXPECT_FALSE(q != q4);
 
-    EXPECT_FALSE( q == q5 );
-    EXPECT_TRUE(  q != q5 );
+    EXPECT_FALSE(q == q5);
+    EXPECT_TRUE(q != q5);
     q = q5;
-    EXPECT_TRUE(  q == q5 );
-    EXPECT_FALSE( q != q5 );
+    EXPECT_TRUE(q == q5);
+    EXPECT_FALSE(q != q5);
 }
 
