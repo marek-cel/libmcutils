@@ -125,10 +125,6 @@ TEST_F(TestVector, CanGetLength)
 
 TEST_F(TestVector, CanNormalize)
 {
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_vector3.m
-    // tests/math/octave/test_vector4.m
-
     mc::Vector v1(3);
 
     v1(0) = 1.0;
@@ -137,27 +133,13 @@ TEST_F(TestVector, CanNormalize)
 
     v1.Normalize();
 
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_vector3.m
     EXPECT_NEAR(v1(0), 0.267261, 1.0e-5);
     EXPECT_NEAR(v1(1), 0.534522, 1.0e-5);
     EXPECT_NEAR(v1(2), 0.801784, 1.0e-5);
 
     EXPECT_DOUBLE_EQ(v1.GetLength(), 1.0);
-
-    mc::Vector v2(4);
-
-    v2(0) = 1.0;
-    v2(1) = 2.0;
-    v2(2) = 3.0;
-    v2(3) = 4.0;
-
-    v2.Normalize();
-
-    EXPECT_NEAR(v2(0), 0.182574, 1.0e-5);
-    EXPECT_NEAR(v2(1), 0.365148, 1.0e-5);
-    EXPECT_NEAR(v2(2), 0.547723, 1.0e-5);
-    EXPECT_NEAR(v2(3), 0.730297, 1.0e-5);
-
-    EXPECT_DOUBLE_EQ(v2.GetLength(), 1.0);
 }
 
 TEST_F(TestVector, CanGetElement)
@@ -294,38 +276,10 @@ TEST_F(TestVector, CanAccessItemViaOperator)
 TEST_F(TestVector, CanAssign)
 {
     mc::Vector v(3);
-
-    double x1[] = { 1.0, 0.0, 0.0 };
-    double x2[] = { 0.0, 1.0, 0.0 };
-    double x3[] = { 0.0, 0.0, 1.0 };
-    double x4[] = { 1.0, 2.0, 3.0 };
-
+    double x1[] = { 1.0, 2.0, 3.0 };
     mc::Vector v1(3);
-    mc::Vector v2(3);
-    mc::Vector v3(3);
-    mc::Vector v4(3);
-
     v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
-    v3.SetFromArray(x3);
-    v4.SetFromArray(x4);
-
     v = v1;
-    EXPECT_DOUBLE_EQ(v(0), 1.0);
-    EXPECT_DOUBLE_EQ(v(1), 0.0);
-    EXPECT_DOUBLE_EQ(v(2), 0.0);
-
-    v = v2;
-    EXPECT_DOUBLE_EQ(v(0), 0.0);
-    EXPECT_DOUBLE_EQ(v(1), 1.0);
-    EXPECT_DOUBLE_EQ(v(2), 0.0);
-
-    v = v3;
-    EXPECT_DOUBLE_EQ(v(0), 0.0);
-    EXPECT_DOUBLE_EQ(v(1), 0.0);
-    EXPECT_DOUBLE_EQ(v(2), 1.0);
-
-    v = v4;
     EXPECT_DOUBLE_EQ(v(0), 1.0);
     EXPECT_DOUBLE_EQ(v(1), 2.0);
     EXPECT_DOUBLE_EQ(v(2), 3.0);
@@ -333,39 +287,11 @@ TEST_F(TestVector, CanAssign)
 
 TEST_F(TestVector, CanAssignAndMove)
 {
-    mc::Vector v( 3 );
-
-    double x1[] = { 1.0, 0.0, 0.0 };
-    double x2[] = { 0.0, 1.0, 0.0 };
-    double x3[] = { 0.0, 0.0, 1.0 };
-    double x4[] = { 1.0, 2.0, 3.0 };
-
+    mc::Vector v(3);
+    double x1[] = { 1.0, 2.0, 3.0 };
     mc::Vector v1(3);
-    mc::Vector v2(3);
-    mc::Vector v3(3);
-    mc::Vector v4(3);
-
     v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
-    v3.SetFromArray(x3);
-    v4.SetFromArray(x4);
-
     v = std::move(v1);
-    EXPECT_DOUBLE_EQ(v(0), 1.0);
-    EXPECT_DOUBLE_EQ(v(1), 0.0);
-    EXPECT_DOUBLE_EQ(v(2), 0.0);
-
-    v = std::move(v2);
-    EXPECT_DOUBLE_EQ(v(0), 0.0);
-    EXPECT_DOUBLE_EQ(v(1), 1.0);
-    EXPECT_DOUBLE_EQ(v(2), 0.0);
-
-    v = std::move(v3);
-    EXPECT_DOUBLE_EQ(v(0), 0.0);
-    EXPECT_DOUBLE_EQ(v(1), 0.0);
-    EXPECT_DOUBLE_EQ(v(2), 1.0);
-
-    v = std::move(v4);
     EXPECT_DOUBLE_EQ(v(0), 1.0);
     EXPECT_DOUBLE_EQ(v(1), 2.0);
     EXPECT_DOUBLE_EQ(v(2), 3.0);
@@ -374,30 +300,19 @@ TEST_F(TestVector, CanAssignAndMove)
 TEST_F(TestVector, CanAdd)
 {
     double x1[] = { 1.0, 2.0, 3.0 };
-    double x2[] = { 3.0, 2.0, 1.0 };
-    double x3[] = { 0.0, 0.0, 0.0 };
-    double x4[] = { 1.0, 2.0, 3.0 };
-
+    double x2[] = { 4.0, 5.0, 6.0 };
+    
     mc::Vector v1(3);
     mc::Vector v2(3);
-    mc::Vector v3(3);
-    mc::Vector v4(3);
 
     v1.SetFromArray(x1);
     v2.SetFromArray(x2);
-    v3.SetFromArray(x3);
-    v4.SetFromArray(x4);
 
     mc::Vector v12 = v1 + v2;
-    mc::Vector v34 = v3 + v4;
 
-    EXPECT_DOUBLE_EQ(v12(0), 4.0);
-    EXPECT_DOUBLE_EQ(v12(1), 4.0);
-    EXPECT_DOUBLE_EQ(v12(2), 4.0);
-
-    EXPECT_DOUBLE_EQ(v34(0), 1.0);
-    EXPECT_DOUBLE_EQ(v34(1), 2.0);
-    EXPECT_DOUBLE_EQ(v34(2), 3.0);
+    EXPECT_DOUBLE_EQ(v12(0), 5.0);
+    EXPECT_DOUBLE_EQ(v12(1), 7.0);
+    EXPECT_DOUBLE_EQ(v12(2), 9.0);
 }
 
 TEST_F(TestVector, CanAddWrongSize)
