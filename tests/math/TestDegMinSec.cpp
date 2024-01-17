@@ -77,9 +77,9 @@ TEST_F(TestDegMinSec, CanCompare)
 
     mc::DegMinSec dms1(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
 
-    EXPECT_FALSE( dms == dms1 );
-    EXPECT_TRUE(  dms != dms1 );
+    EXPECT_FALSE(dms == dms1);
+    EXPECT_TRUE(dms != dms1);
     dms = dms1;
-    EXPECT_TRUE(  dms == dms1 );
-    EXPECT_FALSE( dms != dms1 );
+    EXPECT_TRUE(dms == dms1);
+    EXPECT_FALSE(dms != dms1);
 }
