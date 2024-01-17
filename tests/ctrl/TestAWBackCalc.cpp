@@ -89,7 +89,7 @@ TEST_F(TestAWBackCalc, CanUpdate)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_pid.xcos
-    XcosBinFileReader::ReadData( "../tests/ctrl/data/test_pid_antiwindup_calculation.bin", &vals );
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_pid_antiwindup_calculation.bin", &vals);
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
