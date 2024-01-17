@@ -151,7 +151,7 @@ TEST_F(TestTable, CanGetKeyOfValueMinRanged)
 
     mc::Table tab(key_values, table_data);
 
-    EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(1.0, 2.0), 1.0);
+    EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(-2.0, 0.0), 0.0);
 }
 
 TEST_F(TestTable, CanGetKeyOfValueMax)
@@ -179,8 +179,8 @@ TEST_F(TestTable, CanGetKeyOfValueMaxRanged)
 TEST_F(TestTable, CanGetValue)
 {
     mc::Table tab0;
-    EXPECT_DOUBLE_EQ( tab0.GetValue(0.0), 0.0 );
-    EXPECT_DOUBLE_EQ( tab0.GetValue(1.7), 0.0 );
+    EXPECT_DOUBLE_EQ(tab0.GetValue(0.0), 0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(1.7), 0.0);
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
@@ -189,6 +189,15 @@ TEST_F(TestTable, CanGetValue)
     mc::Table tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValue(2.0), 3.0);
+}
+
+TEST_F(TestTable, CanGetValueFromEmptyTable)
+{
+    double key_values[] { 0.0 };
+    double table_data[] { 0.0 };
+    mc::Table tab(key_values, table_data, 0);
+    double x = tab.GetValue(0.0);
+    EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanGetValueAndInterpolate)
@@ -248,6 +257,15 @@ TEST_F(TestTable, CanGetFirstValue)
     EXPECT_DOUBLE_EQ(tab.GetFirstValue(), table_data[0]);
 }
 
+TEST_F(TestTable, CanGetFirstValueFromEmptyTable)
+{
+    double key_values[] { 0.0 };
+    double table_data[] { 0.0 };
+    mc::Table tab(key_values, table_data, 0);
+    double x = tab.GetFirstValue();
+    EXPECT_FALSE(x == x); // NaN
+}
+
 TEST_F(TestTable, CanGetLastValue)
 {
     mc::Table tab0;
@@ -260,6 +278,15 @@ TEST_F(TestTable, CanGetLastValue)
     mc::Table tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetLastValue(), table_data[5]);
+}
+
+TEST_F(TestTable, CanGetLastValueFromEmptyTable)
+{
+    double key_values[] { 0.0 };
+    double table_data[] { 0.0 };
+    mc::Table tab(key_values, table_data, 0);
+    double x = tab.GetLastValue();
+    EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanGetValueMin)
@@ -276,6 +303,15 @@ TEST_F(TestTable, CanGetValueMin)
     EXPECT_DOUBLE_EQ(tab.GetValueMin(), -1.0);
 }
 
+TEST_F(TestTable, CanGetValueMinFromEmptyTable)
+{
+    double key_values[] { 0.0 };
+    double table_data[] { 0.0 };
+    mc::Table tab(key_values, table_data, 0);
+    double x = tab.GetValueMin();
+    EXPECT_FALSE(x == x); // NaN
+}
+
 TEST_F(TestTable, CanGetValueMax)
 {
     mc::Table tab0;
@@ -288,6 +324,15 @@ TEST_F(TestTable, CanGetValueMax)
     mc::Table tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValueMax(), 8.0);
+}
+
+TEST_F(TestTable, CanGetValueMaxFromEmptyTable)
+{
+    double key_values[] { 0.0 };
+    double table_data[] { 0.0 };
+    mc::Table tab(key_values, table_data, 0);
+    double x = tab.GetValueMin();
+    EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanValidate)
