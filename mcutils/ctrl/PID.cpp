@@ -33,7 +33,6 @@ namespace mc {
 PID::PID(double kp, double ki, double kd,
          std::unique_ptr<IAntiWindup> anti_windup)
     : anti_windup_(std::move(anti_windup))
-
     , kp_(kp)
     , ki_(ki)
     , kd_(kd)
