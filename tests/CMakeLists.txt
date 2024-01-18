@@ -92,7 +92,6 @@ set(LIBS
     GTest::gtest
     GTest::gtest_main
     ${ARMADILLO_LIBRARIES}
-    ${CMAKE_THREAD_LIBS_INIT}
 )
 
 if (UNIX)
