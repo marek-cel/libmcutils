@@ -41,6 +41,7 @@ set(SOURCES
     ctrl/TestOscillator.cpp
     ctrl/TestPID.cpp
     ctrl/TestSystem2.cpp
+    ctrl/TestZeroOrderHold.cpp
 
     geo/TestECEF.cpp
     geo/TestMercator.cpp

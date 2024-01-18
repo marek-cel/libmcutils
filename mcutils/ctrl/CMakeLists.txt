@@ -18,6 +18,7 @@ set(HEADERS
     Oscillator.h
     PID.h
     System2.h
+    ZeroOrderHold.h
 )
 
 set(SOURCES
@@ -35,6 +36,7 @@ set(SOURCES
     Oscillator.cpp
     PID.cpp
     System2.cpp
+    ZeroOrderHold.cpp
 )
 
 ################################################################################
