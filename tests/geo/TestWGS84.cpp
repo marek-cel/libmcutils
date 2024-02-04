@@ -17,6 +17,19 @@ protected:
     void TearDown() override {}
 };
 
+TEST_F(TestWGS84, CanConstruct)
+{
+    mc::WGS84* wgs = nullptr;
+    EXPECT_NO_THROW(wgs = new mc::WGS84);
+    delete wgs;
+}
+
+TEST_F(TestWGS84, CanDestruct)
+{
+    mc::WGS84* wgs = new mc::WGS84;
+    EXPECT_NO_THROW(delete wgs);
+}
+
 TEST_F(TestWGS84, CanInstantiate)
 {
     mc::WGS84 wgs;

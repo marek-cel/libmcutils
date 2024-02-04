@@ -21,6 +21,19 @@ protected:
     void TearDown() override {}
 };
 
+TEST_F(TestECEF, CanConstruct)
+{
+    mc::ECEF* ecef = nullptr;
+    EXPECT_NO_THROW(ecef = new mc::ECEF());
+    delete ecef;
+}
+
+TEST_F(TestECEF, CanDestruct)
+{
+    mc::ECEF* ecef = new mc::ECEF();
+    EXPECT_NO_THROW(delete ecef);
+}
+
 TEST_F(TestECEF, CanInstantiate)
 {
     mc::ECEF ecef;
