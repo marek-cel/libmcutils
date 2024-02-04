@@ -10,6 +10,7 @@ RUN apt install -y \
     googletest-tools \
     lcov \
     libarmadillo-dev \
+    libeigen3-dev \
     libgmock-dev \
     libgtest-dev \
     python3-all
