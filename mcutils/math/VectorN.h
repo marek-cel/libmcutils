@@ -356,9 +356,10 @@ protected:
     /** @brief Divides by value. */
     void DivideByValue(double value)
     {
+        double value_inv = 1.0 / value;
         for ( unsigned int i = 0; i < size_; ++i )
         {
-            elements_[i] /= value;
+            elements_[i] *= value_inv;
         }
     }
 };
