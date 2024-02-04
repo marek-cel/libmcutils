@@ -49,19 +49,13 @@ public:
      */
     static double Normalize(double val, double min = 0.0);
 
-    /** Constructor. */
-    Angles() = default;
-
     /**
      * @brief Constructor.
      * @param phi [rad] angle of rotation about x-axis
      * @param tht [rad] angle of rotation about y-axis
      * @param psi [rad] angle of rotation about z-axis
      */
-    Angles(double phi, double tht, double psi);
-
-    /** @brief Destructor. */
-    ~Angles() = default;
+    Angles(double phi = 0.0, double tht = 0.0, double psi = 0.0);
 
     /** @return true if all items are valid */
     bool IsValid() const;

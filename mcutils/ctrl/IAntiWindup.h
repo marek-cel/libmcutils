@@ -30,15 +30,6 @@ class MCUTILSAPI IAntiWindup
 {
 public:
 
-    // LCOV_EXCL_START
-    IAntiWindup() = default;
-    IAntiWindup(const IAntiWindup&) = delete;
-    IAntiWindup(IAntiWindup&&) = default;
-    IAntiWindup& operator=(const IAntiWindup&) = delete;
-    IAntiWindup& operator=(IAntiWindup&&) = default;
-    virtual ~IAntiWindup() = default;
-    // LCOV_EXCL_STOP
-
     virtual void Update(double dt, double y_p, double y_i, double y_d,
                         double* value, double* error_i, const class PID* pid) = 0;
 };

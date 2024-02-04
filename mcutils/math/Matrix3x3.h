@@ -56,12 +56,10 @@ public:
     /** @brief Creates identity matrix. */
     static Matrix3x3 GetIdentityMatrix();
 
-    Matrix3x3() = default;
-
     /** @brief Constructor. */
-    Matrix3x3(double xx, double xy, double xz,
-              double yx, double yy, double yz,
-              double zx, double zy, double zz);
+    Matrix3x3(double xx = 0.0, double xy = 0.0, double xz = 0.0,
+              double yx = 0.0, double yy = 0.0, double yz = 0.0,
+              double zx = 0.0, double zy = 0.0, double zz = 0.0);
 
     /** @brief Creates passive (alias) rotation matrix. */
     explicit Matrix3x3(const Angles& angl);

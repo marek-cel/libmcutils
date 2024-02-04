@@ -35,17 +35,11 @@ class MCUTILSAPI DegMinSec
 {
 public:
 
-    /** @brief Constructor. */
-    DegMinSec() = default;
-
     /**
      * @brief Constructor.
      * @param angle [rad] angle
      */
-    explicit DegMinSec(double angle);
-
-    /** @brief Destructor. */
-    ~DegMinSec() = default;
+    explicit DegMinSec(double angle = 0.0);
 
     /** @return true if all items are valid */
     bool IsValid() const;
