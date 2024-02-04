@@ -14,19 +14,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestQuaternion, CanConstruct)
-{
-    mc::Quaternion *q = nullptr;
-    EXPECT_NO_THROW( q = new mc::Quaternion() );
-    delete q;
-}
-
-TEST_F(TestQuaternion, CanDestruct)
-{
-    mc::Quaternion *q = new mc::Quaternion();
-    EXPECT_NO_THROW( delete q );
-}
-
 TEST_F(TestQuaternion, CanInstantiate)
 {
     mc::Quaternion q0;

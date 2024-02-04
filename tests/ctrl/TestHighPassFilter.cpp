@@ -20,19 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestHighPassFilter, CanConstruct)
-{
-    mc::HighPassFilter* hpf = nullptr;
-    EXPECT_NO_THROW(hpf = new mc::HighPassFilter());
-    delete hpf;
-}
-
-TEST_F(TestHighPassFilter, CanDestruct)
-{
-    mc::HighPassFilter* hpf = new mc::HighPassFilter();
-    EXPECT_NO_THROW(delete hpf);
-}
-
 TEST_F(TestHighPassFilter, CanInstantiate)
 {
     mc::HighPassFilter hpf;

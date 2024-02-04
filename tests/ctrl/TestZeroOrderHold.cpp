@@ -20,19 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestZeroOrderHold, CanConstruct)
-{
-    mc::ZeroOrderHold* zho = nullptr;
-    EXPECT_NO_THROW(zho = new mc::ZeroOrderHold());
-    delete zho;
-}
-
-TEST_F(TestZeroOrderHold, CanDestruct)
-{
-    mc::ZeroOrderHold* zho = new mc::ZeroOrderHold();
-    EXPECT_NO_THROW(delete zho);
-}
-
 TEST_F(TestZeroOrderHold, CanInstantiate)
 {
     mc::ZeroOrderHold zho;

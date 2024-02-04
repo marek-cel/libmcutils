@@ -21,19 +21,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestOscillator, CanConstruct)
-{
-    mc::Oscillator* oscillator = nullptr;
-    EXPECT_NO_THROW(oscillator = new mc::Oscillator());
-    delete oscillator;
-}
-
-TEST_F(TestOscillator, CanDestruct)
-{
-    mc::Oscillator* oscillator = new mc::Oscillator();
-    EXPECT_NO_THROW(delete oscillator);
-}
-
 TEST_F(TestOscillator, CanInstantiate)
 {
     mc::Oscillator oscillator;

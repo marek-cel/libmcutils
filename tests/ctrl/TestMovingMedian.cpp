@@ -13,19 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestMovingMedian, CanConstruct)
-{
-    mc::MovingMedian* mm = nullptr;
-    EXPECT_NO_THROW(mm = new mc::MovingMedian());
-    delete mm;
-}
-
-TEST_F(TestMovingMedian, CanDestruct)
-{
-    mc::MovingMedian* mm = new mc::MovingMedian();
-    EXPECT_NO_THROW(delete mm);
-}
-
 TEST_F(TestMovingMedian, CanInstantiate)
 {
     mc::MovingMedian mm;

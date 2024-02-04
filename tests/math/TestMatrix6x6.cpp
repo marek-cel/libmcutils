@@ -1,12 +1,6 @@
 #include <gtest/gtest.h>
 
-#ifdef TEST_USING_ARMADILLO
-#   include <armadillo>
-#endif // TEST_USING_ARMADILLO
-
 #include <mcutils/math/Matrix6x6.h>
-
-#include <TestingUtils.h>
 
 class TestMatrix6x6 : public ::testing::Test
 {
@@ -17,19 +11,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-TEST_F(TestMatrix6x6, CanConstruct)
-{
-    mc::Matrix6x6* m = nullptr;
-    EXPECT_NO_THROW(m = new mc::Matrix6x6());
-    delete m;
-}
-
-TEST_F(TestMatrix6x6, CanDestruct)
-{
-    mc::Matrix6x6* m = new mc::Matrix6x6();
-    EXPECT_NO_THROW(delete m);
-}
 
 TEST_F(TestMatrix6x6, CanInstantiate)
 {
@@ -85,20 +66,12 @@ TEST_F(TestMatrix6x6, CanGetTransposed)
     mc::Matrix6x6 m1(m0);
     mc::Matrix6x6 mt = m1.GetTransposed();
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, size, size);
-    arma::mat mat = ma1.t();
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
             EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
             EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mt(r,c), mat(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }

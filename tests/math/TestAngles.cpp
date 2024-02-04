@@ -20,19 +20,6 @@ TEST_F(TestAngles, CanNormalizeAngle)
     EXPECT_DOUBLE_EQ(mc::Angles::Normalize(2.0 * M_PI - M_PI_4), 1.75 * M_PI);
 }
 
-TEST_F(TestAngles, CanConstruct)
-{
-    mc::Angles* angles = nullptr;
-    EXPECT_NO_THROW(angles = new mc::Angles());
-    delete angles;
-}
-
-TEST_F(TestAngles, CanDestruct)
-{
-    mc::Angles* angles = new mc::Angles();
-    EXPECT_NO_THROW(delete angles);
-}
-
 TEST_F(TestAngles, CanInstantiate)
 {
     mc::Angles angles;

@@ -1,12 +1,6 @@
 #include <gtest/gtest.h>
 
-#ifdef TEST_USING_ARMADILLO
-#   include <armadillo>
-#endif // TEST_USING_ARMADILLO
-
 #include <mcutils/math/Matrix3x3.h>
-
-#include <TestingUtils.h>
 
 class TestMatrix3x3 : public ::testing::Test
 {
@@ -709,20 +703,12 @@ TEST_F(TestMatrix3x3, CanGetTransposed)
     mc::Matrix3x3 m1(m0);
     mc::Matrix3x3 mt = m1.GetTransposed();
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, size, size);
-    arma::mat mat = ma1.t();
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
             EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
             EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mt(r,c), mat(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }

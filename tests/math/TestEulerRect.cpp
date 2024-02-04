@@ -15,19 +15,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestEulerRect, CanConstruct)
-{
-    mc::EulerRect<double>* er = nullptr;
-    EXPECT_NO_THROW(er = new mc::EulerRect<double>());
-    delete er;
-}
-
-TEST_F(TestEulerRect, CanDestruct)
-{
-    mc::EulerRect<double>* er = new mc::EulerRect<double>();
-    EXPECT_NO_THROW(delete er);
-}
-
 TEST_F(TestEulerRect, CanInstantiate)
 {
     mc::EulerRect<double> er;

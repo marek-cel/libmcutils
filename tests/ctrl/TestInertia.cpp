@@ -85,19 +85,6 @@ TEST_F(TestInertia, CanCalculate2)
     }
 }
 
-TEST_F(TestInertia, CanConstruct)
-{
-    mc::Inertia* inertia = nullptr;
-    EXPECT_NO_THROW(inertia = new mc::Inertia());
-    delete inertia;
-}
-
-TEST_F(TestInertia, CanDestruct)
-{
-    mc::Inertia* inertia = new mc::Inertia();
-    EXPECT_NO_THROW(delete inertia);
-}
-
 TEST_F(TestInertia, CanInstantiate)
 {
     mc::Inertia inertia;

@@ -11,19 +11,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestVector4, CanConstruct)
-{
-    mc::Vector4* v = nullptr;
-    EXPECT_NO_THROW(v = new mc::Vector4());
-    delete v;
-}
-
-TEST_F(TestVector4, CanDestruct)
-{
-    mc::Vector4* v = new mc::Vector4();
-    EXPECT_NO_THROW(delete v);
-}
-
 TEST_F(TestVector4, CanInstantiate)
 {
     mc::Vector4 v1;

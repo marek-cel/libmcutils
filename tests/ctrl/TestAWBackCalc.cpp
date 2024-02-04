@@ -28,19 +28,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestAWBackCalc, CanConstruct)
-{
-    mc::AWBackCalc* aw = nullptr;
-    EXPECT_NO_THROW(aw = new mc::AWBackCalc());
-    delete aw;
-}
-
-TEST_F(TestAWBackCalc, CanDestruct)
-{
-    mc::AWBackCalc* aw = new mc::AWBackCalc();
-    EXPECT_NO_THROW(delete aw);
-}
-
 TEST_F(TestAWBackCalc, CanInstantiate)
 {
     mc::AWBackCalc aw;

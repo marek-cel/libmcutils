@@ -18,19 +18,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestSystem2, CanConstruct)
-{
-    mc::System2* s = nullptr;
-    EXPECT_NO_THROW(s = new mc::System2());
-    delete s;
-}
-
-TEST_F(TestSystem2, CanDestruct)
-{
-    mc::System2* s = new mc::System2();
-    EXPECT_NO_THROW(delete s);
-}
-
 TEST_F(TestSystem2, CanInstantiate)
 {
     mc::System2 s;

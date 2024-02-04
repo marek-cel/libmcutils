@@ -13,19 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestRungeKutta4, CanConstruct)
-{
-    mc::RungeKutta4<double>* rk = nullptr;
-    EXPECT_NO_THROW(rk = new mc::RungeKutta4<double>());
-    delete rk;
-}
-
-TEST_F(TestRungeKutta4, CanDestruct)
-{
-    mc::RungeKutta4<double>* rk = new mc::RungeKutta4<double>();
-    EXPECT_NO_THROW(delete rk);
-}
-
 TEST_F(TestRungeKutta4, CanInstantiate)
 {
     mc::RungeKutta4<double> rk;

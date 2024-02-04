@@ -13,19 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestTable2, CanConstruct)
-{
-    mc::Table2* tab = nullptr;
-    EXPECT_NO_THROW(tab = new mc::Table2());
-    delete tab;
-}
-
-TEST_F(TestTable2, CanDestruct)
-{
-    mc::Table2* tab = new mc::Table2();
-    EXPECT_NO_THROW(delete tab);
-}
-
 TEST_F(TestTable2, CanInstantiate)
 {
     mc::Table2 tab;

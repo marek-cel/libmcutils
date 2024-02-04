@@ -19,19 +19,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestMercator, CanConstruct)
-{
-    mc::Mercator* merc = nullptr;
-    EXPECT_NO_THROW(merc = new mc::Mercator(mc::DataWGS84::a, mc::DataWGS84::e));
-    delete merc;
-}
-
-TEST_F(TestMercator, CanDestruct)
-{
-    mc::Mercator* merc = new mc::Mercator(mc::DataWGS84::a, mc::DataWGS84::e);
-    EXPECT_NO_THROW(delete merc);
-}
-
 TEST_F(TestMercator, CanInstantiate)
 {
     mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);

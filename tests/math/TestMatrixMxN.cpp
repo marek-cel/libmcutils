@@ -1,12 +1,6 @@
 #include <gtest/gtest.h>
 
-#ifdef TEST_USING_ARMADILLO
-#   include <armadillo>
-#endif // TEST_USING_ARMADILLO
-
 #include <mcutils/math/MatrixMxN.h>
-
-#include <TestingUtils.h>
 
 // To achieve full test coverage of MatrixNxN template class some tests have
 // to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixMxN has 
@@ -20,21 +14,6 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 };
-
-TEST_F(TestMatrixMxN, CanConstruct)
-{
-    constexpr int size = 3;
-    mc::MatrixMxN<size,size>* m = nullptr;
-    EXPECT_NO_THROW((m = new mc::MatrixMxN<size,size>()));
-    delete m;
-}
-
-TEST_F(TestMatrixMxN, CanDestruct)
-{
-    constexpr int size = 3;
-    mc::MatrixMxN<size,size>* m = new mc::MatrixMxN<size,size>();
-    EXPECT_NO_THROW(delete m);
-}
 
 TEST_F(TestMatrixMxN, CanInstantiate)
 {
@@ -893,23 +872,12 @@ TEST_F(TestMatrixMxN, CanAdd3x3)
     m2.Fill(val);
     mr = m1 + m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 + ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] + val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -933,23 +901,12 @@ TEST_F(TestMatrixMxN, CanAdd4x4)
     m2.Fill(val);
     mr = m1 + m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 + ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] + val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -975,23 +932,12 @@ TEST_F(TestMatrixMxN, CanAdd6x6)
     m2.Fill(val);
     mr = m1 + m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 + ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] + val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1093,23 +1039,12 @@ TEST_F(TestMatrixMxN, CanSubstract3x3)
     m2.Fill(val);
     mr = m1 - m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 - ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] - val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1133,23 +1068,12 @@ TEST_F(TestMatrixMxN, CanSubstract4x4)
     m2.Fill(val);
     mr = m1 - m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 - ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] - val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1175,23 +1099,12 @@ TEST_F(TestMatrixMxN, CanSubstract6x6)
     m2.Fill(val);
     mr = m1 - m2;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat ma2(rows, cols);
-    arma::mat mar;
-    ma2.fill(val);
-    mar = ma1 - ma2;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] - val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1212,21 +1125,12 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar3x3)
     m1.SetFromArray(x);
     mr = m1 * scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 * scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1248,21 +1152,12 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar4x4)
     m1.SetFromArray(x);
     mr = m1 * scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 * scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1286,21 +1181,12 @@ TEST_F(TestMatrixMxN, CanMultiplyByScalar6x6)
     m1.SetFromArray(x);
     mr = m1 * scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 * scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1416,21 +1302,6 @@ TEST_F(TestMatrixMxN, CanMultiplyRandomMatrixByVector3)
 
     mc::VectorN<rows> vr = m * v;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    arma::vec va;
-    va << 1.0 << arma::endr
-       << 2.0 << arma::endr
-       << 3.0 << arma::endr;
-    arma::vec var;
-    var = ma * va;
-
-    for ( int r = 0; r < rows; ++r )
-    {
-        EXPECT_DOUBLE_EQ(vr(r), var(r)) << "Error at row " << r;
-    }
-#   endif // TEST_USING_ARMADILLO
-
     // Following tests uses expected values calculated with GNU Octave
     // tests/math/octave/test_matrix.m
     EXPECT_DOUBLE_EQ(vr(0), 14.0);
@@ -1457,22 +1328,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector4)
     v(3) = 4.0;
 
     mc::VectorN<rows> vr = m * v;
-
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::vec va;
-    va << 1.0 << arma::endr
-       << 2.0 << arma::endr
-       << 3.0 << arma::endr
-       << 4.0 << arma::endr;
-    arma::vec var;
-    var = ma1 * va;
-
-    for ( int r = 0; r < rows; ++r )
-    {
-        EXPECT_DOUBLE_EQ(vr(r), var(r)) << "Error at row " << r;
-    }
-#   endif // TEST_USING_ARMADILLO
 
     // Following tests uses expected values calculated with GNU Octave
     // tests/math/octave/test_matrix.m
@@ -1506,24 +1361,6 @@ TEST_F(TestMatrixMxN, CanMultiplyByVector6)
 
     mc::VectorN<rows> vr = m * v;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::vec va;
-    va << 1.0 << arma::endr
-       << 2.0 << arma::endr
-       << 3.0 << arma::endr
-       << 4.0 << arma::endr
-       << 5.0 << arma::endr
-       << 6.0 << arma::endr;
-    arma::vec var;
-    var = ma1 * va;
-
-    for ( int r = 0; r < rows; ++r )
-    {
-        EXPECT_DOUBLE_EQ(vr(r), var(r)) << "Error at row " << r;
-    }
-#   endif // TEST_USING_ARMADILLO
-
     // Following tests uses expected values calculated with GNU Octave
     // tests/math/octave/test_matrix.m
     EXPECT_DOUBLE_EQ(vr(0),  91.0);
@@ -1550,21 +1387,12 @@ TEST_F(TestMatrixMxN, CanDivideByScalar3x3)
     m1.SetFromArray(x);
     mr = m1 / scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 / scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1586,21 +1414,12 @@ TEST_F(TestMatrixMxN, CanDivideByScalar4x4)
     m1.SetFromArray(x);
     mr = m1 / scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 / scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1624,21 +1443,12 @@ TEST_F(TestMatrixMxN, CanDivideByScalar6x6)
     m1.SetFromArray(x);
     mr = m1 / scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar;
-    mar = ma1 / scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1660,21 +1470,11 @@ TEST_F(TestMatrixMxN, CanUnaryAdd3x3)
     mr.Fill(val);
     mr += m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar += ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val + m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1697,21 +1497,11 @@ TEST_F(TestMatrixMxN, CanUnaryAdd4x4)
     mr.Fill(val);
     mr += m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar += ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val + m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1736,21 +1526,11 @@ TEST_F(TestMatrixMxN, CanUnaryAdd6x6)
     mr.Fill(val);
     mr += m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar += ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val + m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1772,21 +1552,11 @@ TEST_F(TestMatrixMxN, CanUnarySubstract3x3)
     mr.Fill(val);
     mr -= m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar -= ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val - m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1809,21 +1579,11 @@ TEST_F(TestMatrixMxN, CanUnarySubstract4x4)
     mr.Fill(val);
     mr -= m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar -= ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val - m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1848,21 +1608,11 @@ TEST_F(TestMatrixMxN, CanUnarySubstract6x6)
     mr.Fill(val);
     mr -= m1;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma1 = SetArmaMatFromArray(x, rows, cols);
-    arma::mat mar(rows, cols, arma::fill::zeros);
-    mar.fill(val);
-    mar -= ma1;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             EXPECT_DOUBLE_EQ(mr(r,c), val - m1(r,c)) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(mr(r,c), mar(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1882,20 +1632,12 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar3x3)
     m.SetFromArray(x);
     m *= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma *= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1916,20 +1658,12 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar4x4)
     m.SetFromArray(x);
     m *= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma *= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1952,20 +1686,12 @@ TEST_F(TestMatrixMxN, CanUnaryMultiplyByScalar6x6)
     m.SetFromArray(x);
     m *= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma *= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] * scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -1985,20 +1711,12 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar3x3)
     m.SetFromArray(x);
     m /= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma /= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -2019,20 +1737,12 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar4x4)
     m.SetFromArray(x);
     m /= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma /= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }
@@ -2055,20 +1765,12 @@ TEST_F(TestMatrixMxN, CanUnaryDivideByScalar6x6)
     m.SetFromArray(x);
     m /= scalar;
 
-#   ifdef TEST_USING_ARMADILLO
-    arma::mat ma = SetArmaMatFromArray(x, rows, cols);
-    ma /= scalar;
-#   endif // TEST_USING_ARMADILLO
-
     for ( int r = 0; r < rows; ++r )
     {
         for ( int c = 0; c < cols; ++c )
         {
             double ref_value = x[r*cols + c] / scalar;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-#           ifdef TEST_USING_ARMADILLO
-            EXPECT_DOUBLE_EQ(m(r,c), ma(r,c)) << "Error at row " << r << " and col " << c;
-#           endif // TEST_USING_ARMADILLO
         }
     }
 }

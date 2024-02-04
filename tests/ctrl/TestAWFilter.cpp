@@ -29,19 +29,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestAWFilter, CanConstruct)
-{
-    mc::AWFilter* aw = nullptr;
-    EXPECT_NO_THROW(aw = new mc::AWFilter());
-    delete aw;
-}
-
-TEST_F(TestAWFilter, CanDestruct)
-{
-    mc::AWFilter* aw = new mc::AWFilter();
-    EXPECT_NO_THROW(delete aw);
-}
-
 TEST_F(TestAWFilter, CanInstantiate)
 {
     mc::AWFilter aw;

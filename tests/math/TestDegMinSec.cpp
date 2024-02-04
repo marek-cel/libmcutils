@@ -12,19 +12,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestDegMinSec, CanConstruct)
-{
-    mc::DegMinSec* dms = nullptr;
-    EXPECT_NO_THROW(dms = new mc::DegMinSec());
-    delete dms;
-}
-
-TEST_F(TestDegMinSec, CanDestruct)
-{
-    mc::DegMinSec* dms = new mc::DegMinSec();
-    EXPECT_NO_THROW(delete dms);
-}
-
 TEST_F(TestDegMinSec, CanInstantiate)
 {
     mc::DegMinSec dms;

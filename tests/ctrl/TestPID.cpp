@@ -22,19 +22,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestPID, CanConstruct)
-{
-    mc::PID* pid = nullptr;
-    EXPECT_NO_THROW(pid = new mc::PID());
-    delete pid;
-}
-
-TEST_F(TestPID, CanDestruct)
-{
-    mc::PID* pid = new mc::PID();
-    EXPECT_NO_THROW(delete pid);
-}
-
 TEST_F(TestPID, CanInstantiate)
 {
     mc::PID pid;

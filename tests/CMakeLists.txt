@@ -53,10 +53,15 @@ set(SOURCES
     math/TestGaussJordan.cpp
     math/TestMath.cpp
     math/TestMatrix3x3.cpp
+    math/TestMatrix3x3_Armadillo.cpp
     math/TestMatrix4x4.cpp
+    math/TestMatrix4x4_Armadillo.cpp
     math/TestMatrix6x6.cpp
+    math/TestMatrix6x6_Armadillo.cpp
     math/TestMatrixMxN.cpp
+    math/TestMatrixMxN_Armadillo.cpp
     math/TestMatrixNxN.cpp
+    math/TestMatrixNxN_Armadillo.cpp
     math/TestQuaternion.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp

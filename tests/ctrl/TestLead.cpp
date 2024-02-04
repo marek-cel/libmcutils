@@ -20,19 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestLead, CanConstruct)
-{
-    mc::Lead* lead = nullptr;
-    EXPECT_NO_THROW(lead = new mc::Lead());
-    delete lead;
-}
-
-TEST_F(TestLead, CanDestruct)
-{
-    mc::Lead* lead = new mc::Lead();
-    EXPECT_NO_THROW(delete lead);
-}
-
 TEST_F(TestLead, CanInstantiate)
 {
     mc::Lead lead;

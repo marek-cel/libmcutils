@@ -13,19 +13,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestMovingAverage, CanConstruct)
-{
-    mc::MovingAverage* ma = nullptr;
-    EXPECT_NO_THROW(ma = new mc::MovingAverage());
-    delete ma;
-}
-
-TEST_F(TestMovingAverage, CanDestruct)
-{
-    mc::MovingAverage* ma = new mc::MovingAverage();
-    EXPECT_NO_THROW(delete ma);
-}
-
 TEST_F(TestMovingAverage, CanInstantiate)
 {
     mc::MovingAverage ma;

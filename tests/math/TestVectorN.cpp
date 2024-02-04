@@ -15,21 +15,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestVectorN, CanConstruct)
-{
-    constexpr int size = 3;
-    mc::VectorN<size>* v = nullptr;
-    EXPECT_NO_THROW((v = new mc::VectorN<size>()));
-    delete v;
-}
-
-TEST_F(TestVectorN, CanDestruct)
-{
-    constexpr int size = 3;
-    mc::VectorN<size>* v = new mc::VectorN<size>();
-    EXPECT_NO_THROW(delete v);
-}
-
 TEST_F(TestVectorN, CanInstantiate)
 {
     constexpr int size = 3;
