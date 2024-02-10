@@ -28,13 +28,13 @@ TEST_F(TestUnits, CanGetUnitConverter)
     EXPECT_EQ(&mc::Units::nmi2m , mc::Units::GetUnitConverter("nmi"));
 
     // area
-    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("sqm"));
-    EXPECT_EQ(&mc::Units::sqft2sqm , mc::Units::GetUnitConverter("sqft"));
+    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("sq_m"));
+    EXPECT_EQ(&mc::Units::sqft2sqm , mc::Units::GetUnitConverter("sq_ft"));
 
     // volume
-    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("cum"));
-    EXPECT_EQ(&mc::Units::cuft2cum , mc::Units::GetUnitConverter("cuft"));
-    EXPECT_EQ(&mc::Units::cuin2cum , mc::Units::GetUnitConverter("cuin"));
+    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("cu_m"));
+    EXPECT_EQ(&mc::Units::cuft2cum , mc::Units::GetUnitConverter("cu_ft"));
+    EXPECT_EQ(&mc::Units::cuin2cum , mc::Units::GetUnitConverter("cu_in"));
     EXPECT_EQ(&mc::Units::l2cum    , mc::Units::GetUnitConverter("l"));
 
     // velocity
@@ -72,8 +72,8 @@ TEST_F(TestUnits, CanGetUnitConverter)
 
     // temperature
     EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("K"));
-    EXPECT_EQ(&mc::Units::c2k   , mc::Units::GetUnitConverter("degC"));
-    EXPECT_EQ(&mc::Units::f2k   , mc::Units::GetUnitConverter("degF"));
+    EXPECT_EQ(&mc::Units::c2k   , mc::Units::GetUnitConverter("deg_C"));
+    EXPECT_EQ(&mc::Units::f2k   , mc::Units::GetUnitConverter("deg_F"));
 
     // specific fuel consumption
     EXPECT_EQ(&mc::Units::dummy         , mc::Units::GetUnitConverter("kg/Ws"));
