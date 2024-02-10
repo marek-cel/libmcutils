@@ -183,6 +183,4 @@ inline Vector operator*(double val, const Vector& vect)
 
 } // namespace mc
 
-////////////////////////////////////////////////////////////////////////////////
-
 #endif // MCUTILS_MATH_VECTOR_H_
