@@ -48,17 +48,17 @@ Units::Converter GetUnitConverter(const char* name)
         return &nmi2m;
 
     // area
-    else if ( 0 == String::Compare(name, "sqm") )
+    else if ( 0 == String::Compare(name, "sq_m") )
         return &dummy;
-    else if ( 0 == String::Compare(name, "sqft") )
+    else if ( 0 == String::Compare(name, "sq_ft") )
         return &sqft2sqm;
 
     // volume
-    else if ( 0 == String::Compare(name, "cum") )
+    else if ( 0 == String::Compare(name, "cu_m") )
         return &dummy;
-    else if ( 0 == String::Compare(name, "cuft") )
+    else if ( 0 == String::Compare(name, "cu_ft") )
         return &cuft2cum;
-    else if ( 0 == String::Compare(name, "cuin") )
+    else if ( 0 == String::Compare(name, "cu_in") )
         return &cuin2cum;
     else if ( 0 == String::Compare(name, "l") )
         return &l2cum;
@@ -120,9 +120,9 @@ Units::Converter GetUnitConverter(const char* name)
     // temperature
     else if ( 0 == String::Compare(name, "K") )
         return &dummy;
-    else if ( 0 == String::Compare(name, "degC") )
+    else if ( 0 == String::Compare(name, "deg_C") )
         return &c2k;
-    else if ( 0 == String::Compare(name, "degF") )
+    else if ( 0 == String::Compare(name, "deg_F") )
         return &f2k;
 
     // specific fuel consumption
