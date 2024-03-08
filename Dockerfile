@@ -15,7 +15,7 @@ RUN apt install -y \
     libgtest-dev \
     python3-all
 
-ARG USERNAME=dev
+ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
