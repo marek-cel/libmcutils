@@ -4,6 +4,13 @@ cmake_minimum_required(VERSION 3.22)
 
 project(mcutils)
 
+set(MCUTILS_VERSION_MAJOR 1)
+set(MCUTILS_VERSION_MINOR 0)
+set(MCUTILS_VERSION_PATCH 0)
+set(MCUTILS_VERSION_STRING
+    ${MCUTILS_VERSION_MAJOR}.${MCUTILS_VERSION_MINOR}.${MCUTILS_VERSION_PATCH}
+)
+
 ################################################################################
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
