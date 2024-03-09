@@ -31,13 +31,13 @@ Units::Converter GetUnitConverter(const char* name)
 {
     // angle
     if ( 0 == String::Compare(name, "rad") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "deg") )
         return &deg2rad;
 
     // length
     else if ( 0 == String::Compare(name, "m") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "ft") )
         return &ft2m;
     else if ( 0 == String::Compare(name, "in") )
@@ -49,13 +49,13 @@ Units::Converter GetUnitConverter(const char* name)
 
     // area
     else if ( 0 == String::Compare(name, "sq_m") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "sq_ft") )
         return &sqft2sqm;
 
     // volume
     else if ( 0 == String::Compare(name, "cu_m") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "cu_ft") )
         return &cuft2cum;
     else if ( 0 == String::Compare(name, "cu_in") )
@@ -65,7 +65,7 @@ Units::Converter GetUnitConverter(const char* name)
 
     // velocity
     else if ( 0 == String::Compare(name, "mps") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "fpm") )
         return &fpm2mps;
     else if ( 0 == String::Compare(name, "fps") )
@@ -77,7 +77,7 @@ Units::Converter GetUnitConverter(const char* name)
 
     // angular velocity
     else if ( 0 == String::Compare(name, "rad/s") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "deg/s") )
         return &deg2rad;
     else if ( 0 == String::Compare(name, "rpm") )
@@ -85,19 +85,19 @@ Units::Converter GetUnitConverter(const char* name)
 
     // mass
     else if ( 0 == String::Compare(name, "kg") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "lb") )
         return &lb2kg;
 
     // force
     else if ( 0 == String::Compare(name, "N") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "lbf") )
         return &lbf2n;
 
     // pressure
     else if ( 0 == String::Compare(name, "Pa") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "psf") )
         return &psf2pa;
     else if ( 0 == String::Compare(name, "psi") )
@@ -109,7 +109,7 @@ Units::Converter GetUnitConverter(const char* name)
 
     // power
     else if ( 0 == String::Compare(name, "W") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "PS") )
         return &ps2w;
     else if ( 0 == String::Compare(name, "hp") )
@@ -119,7 +119,7 @@ Units::Converter GetUnitConverter(const char* name)
 
     // temperature
     else if ( 0 == String::Compare(name, "K") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "deg_C") )
         return &c2k;
     else if ( 0 == String::Compare(name, "deg_F") )
@@ -127,13 +127,13 @@ Units::Converter GetUnitConverter(const char* name)
 
     // specific fuel consumption
     else if ( 0 == String::Compare(name, "kg/Ws") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "g/kWh") )
         return &g_kWh_2_kg_Ws;
 
     // thrust specific fuel consumption
     else if ( 0 == String::Compare(name, "kg/Ns") )
-        return &dummy;
+        return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "g/kNs") )
         return &g_kNs_2_kg_Ns;
 

@@ -23,6 +23,7 @@
 #define MCUTILS_MISC_UNITS_H_
 
 #include <cmath>
+#include <functional>
 #include <string>
 
 #include <mcutils/defs.h>
@@ -39,7 +40,7 @@ namespace mc {
  */
 namespace Units {
 
-using Converter = double (*)(double);
+using Converter = std::function<double(double)>;
 
 /**
  * @brief Returns converter function pointer.
@@ -75,20 +76,6 @@ using Converter = double (*)(double);
  * - Thrust Specific fuel consumption: g/kNs (grams per kilonewton-socond)
  */
 MCUTILSAPI Converter GetUnitConverter(const char* name);
-
-////////////////////////////////////////////////////////////////////////////////
-// DUMMY
-////////////////////////////////////////////////////////////////////////////////
-
-/**
- * @brief Dummy converter that always returns given value
- * @param val given value
- * @return given value
- */
-MCUTILSAPI inline double dummy(double val = 1.0)
-{
-    return val;
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // ANGLE
