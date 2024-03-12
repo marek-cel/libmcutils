@@ -24,9 +24,9 @@
 
 namespace mc {
 
-const Vector3 Vector3::ex_ = Vector3(1.0, 0.0, 0.0);
-const Vector3 Vector3::ey_ = Vector3(0.0, 1.0, 0.0);
-const Vector3 Vector3::ez_ = Vector3(0.0, 0.0, 1.0);
+const Vector3 Vector3::kEx = Vector3(1.0, 0.0, 0.0);
+const Vector3 Vector3::kEy = Vector3(0.0, 1.0, 0.0);
+const Vector3 Vector3::kEz = Vector3(0.0, 0.0, 1.0);
 
 Vector3::Vector3(double x, double y, double z)
 {

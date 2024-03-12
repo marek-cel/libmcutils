@@ -37,17 +37,17 @@ class MCUTILSAPI Vector3 : public VectorN<3>
 {
 public:
 
-    static const Vector3 ex_;   ///< standard basis x-axis unit vector
-    static const Vector3 ey_;   ///< standard basis y-axis unit vector
-    static const Vector3 ez_;   ///< standard basis z-axis unit vector
+    static const Vector3 kEx;   ///< standard basis x-axis unit vector
+    static const Vector3 kEy;   ///< standard basis y-axis unit vector
+    static const Vector3 kEz;   ///< standard basis z-axis unit vector
 
-    inline static const Vector3& ex() { return ex_; }
-    inline static const Vector3& ey() { return ey_; }
-    inline static const Vector3& ez() { return ez_; }
+    inline static const Vector3& ex() { return kEx; }
+    inline static const Vector3& ey() { return kEy; }
+    inline static const Vector3& ez() { return kEz; }
 
-    inline static const Vector3& i() { return ex_; }
-    inline static const Vector3& j() { return ey_; }
-    inline static const Vector3& k() { return ez_; }
+    inline static const Vector3& i() { return kEx; }
+    inline static const Vector3& j() { return kEy; }
+    inline static const Vector3& k() { return kEz; }
 
     /** @brief Constructor. */
     explicit Vector3(double x = 0.0, double y = 0.0, double z = 0.0);
