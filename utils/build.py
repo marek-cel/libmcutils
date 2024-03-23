@@ -46,10 +46,11 @@ def buildForLinux(with_tests):
 
 
 def buildForWindows():
+    libmcutils_dir = os.environ['LIBMCUTILS_DIR']
     cmake_cmd = [
         'cmake', '.',
         '-DCMAKE_BUILD_TYPE=Release',
-        '-DCMAKE_INSTALL_PREFIX=%LIBMCUTILS_DIR%',
+        '-DCMAKE_INSTALL_PREFIX=' + libmcutils_dir,
         '-B', build_dir
     ]
     if with_tests:
