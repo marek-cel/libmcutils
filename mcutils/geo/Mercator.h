@@ -93,17 +93,17 @@ public:
     double CalculateT_inv(double t, double max_error = 1.0e-9,
                           unsigned int max_iterations = 10);
 
-    double max_x() const { return max_x_; }
-    double max_y() const { return max_y_; }
+    double max_x() const { return _max_x; }
+    double max_y() const { return _max_y; }
 
 private:
 
-    double a_;          ///< [m] ellipsoid semi major axis
-    double e_;          ///< [-] ellipsoid first eccentricity
-    double e2_;         ///< [-] ellipsoid first eccentricity squared
+    double _a;          ///< [m] ellipsoid semi major axis
+    double _e;          ///< [-] ellipsoid first eccentricity
+    double _e2;         ///< [-] ellipsoid first eccentricity squared
 
-    double max_x_;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
-    double max_y_;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg
+    double _max_x;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
+    double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg
 };
 
 } // namespace mc

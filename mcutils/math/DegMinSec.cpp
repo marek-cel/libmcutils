@@ -38,23 +38,23 @@ DegMinSec::DegMinSec(double angle)
 
 bool DegMinSec::IsValid() const
 {
-    return mc::IsValid(angle_)
-        && mc::IsValid(deg_)
-        && mc::IsValid(min_)
-        && mc::IsValid(sec_);
+    return mc::IsValid(_angle)
+        && mc::IsValid(_deg)
+        && mc::IsValid(_min)
+        && mc::IsValid(_sec);
 }
 
 void DegMinSec::SetAngle(double angle)
 {
-    angle_ = angle;
+    _angle = angle;
 
     double deg_abs = fabs(Units::rad2deg(angle));
 
-    deg_ = static_cast<int>(floor(deg_abs));
-    min_ = static_cast<int>(floor((deg_abs - deg_) * 60));
-    sec_ = (deg_abs - deg_ - min_ / 60.0) * 3600.0;
+    _deg = static_cast<int>(floor(deg_abs));
+    _min = static_cast<int>(floor((deg_abs - _deg) * 60));
+    _sec = (deg_abs - _deg - _min / 60.0) * 3600.0;
 
-    if ( angle < 0.0 ) deg_ *= -1;
+    if ( angle < 0.0 ) _deg *= -1;
 }
 
 std::string DegMinSec::ToString() const
@@ -64,18 +64,18 @@ std::string DegMinSec::ToString() const
     ss.setf(std::ios_base::showpoint);
     ss.setf(std::ios_base::fixed);
 
-    ss << deg_ << " deg ";
-    ss << min_ << " min ";
-    ss << std::setprecision(2) << sec_ << " sec";
+    ss << _deg << " deg ";
+    ss << _min << " min ";
+    ss << std::setprecision(2) << _sec << " sec";
 
     return ss.str();
 }
 
 bool DegMinSec::operator==(const DegMinSec& dms) const
 {
-    return ((deg_ == dms.deg_)
-         && (min_ == dms.min_)
-         && (sec_ == dms.sec_));
+    return ((_deg == dms._deg)
+         && (_min == dms._min)
+         && (_sec == dms._sec));
 }
 
 bool DegMinSec::operator!=(const DegMinSec& dms) const

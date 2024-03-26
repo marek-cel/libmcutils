@@ -53,16 +53,16 @@ public:
     T Integrate(double dx, const T& yn)
     {
         // integration
-        return yn + fun_(yn) * dx;
+        return yn + _fun(yn) * dx;
     }
 
-    inline DerivFun fun() const { return fun_; }
+    inline DerivFun fun() const { return _fun; }
 
-    void set_fun(DerivFun fun) { fun_ = fun; }
+    void set_fun(DerivFun fun) { _fun = fun; }
 
 private:
 
-    DerivFun fun_;  ///< function which calculates vector derivative
+    DerivFun _fun;  ///< function which calculates vector derivative
 };
 
 } // namespace mc
