@@ -47,9 +47,9 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline double t_hold() const { return t_hold_; }
+    inline double t_hold() const { return _t_hold; }
 
     /**
      * @brief Sets output value
@@ -57,13 +57,13 @@ public:
      */
     void set_value(double value);
 
-    inline void set_t_hold(double t_hold) { t_hold_ = t_hold; }
+    inline void set_t_hold(double t_hold) { _t_hold = t_hold; }
 
 private:
 
-    double t_hold_ = 0.0;   ///< [s] hold time
-    double t_prev_ = 0.0;   ///< [s] time since last update
-    double value_ = 0.0;    ///< current value
+    double _t_hold = 0.0;   ///< [s] hold time
+    double _t_prev = 0.0;   ///< [s] time since last update
+    double _value = 0.0;    ///< current value
 };
 
 } // namespace mc

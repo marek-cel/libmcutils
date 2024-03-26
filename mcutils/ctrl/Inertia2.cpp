@@ -27,32 +27,32 @@
 namespace mc {
 
 Inertia2::Inertia2(double tc1, double tc2, double value)
-    : time_const_1_(tc1)
-    , time_const_2_(tc2)
-    , value_int_ (value)
-    , value_     (value)
+    : _time_const_1(tc1)
+    , _time_const_2(tc2)
+    , _value_int (value)
+    , _value     (value)
 {}
 
 void Inertia2::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        value_int_ = Inertia::Calculate(          u, value_int_, dt, time_const_1_ );
-        value_     = Inertia::Calculate( value_int_,     value_, dt, time_const_2_ );
+        _value_int = Inertia::Calculate(          u, _value_int , dt, _time_const_1 );
+        _value     = Inertia::Calculate( _value_int, _value     , dt, _time_const_2 );
     }
 }
 
 void Inertia2::set_value(double value)
 {
-    value_int_ = value;
-    value_     = value;
+    _value_int = value;
+    _value     = value;
 }
 
 void Inertia2::set_time_const_1(double tc1)
 {
     if ( tc1 > 0.0 )
     {
-        time_const_1_ = tc1;
+        _time_const_1 = tc1;
     }
 }
 
@@ -60,7 +60,7 @@ void Inertia2::set_time_const_2(double tc2)
 {
     if ( tc2 > 0.0 )
     {
-        time_const_2_ = tc2;
+        _time_const_2 = tc2;
     }
 }
 

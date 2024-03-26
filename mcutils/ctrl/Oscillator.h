@@ -59,9 +59,9 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
-    inline double omega() const { return omega_; }
-    inline double zeta()  const { return zeta_;  }
+    inline double value() const { return _value; }
+    inline double omega() const { return _omega; }
+    inline double zeta()  const { return _zeta;  }
 
     /**
      * @brief Sets undamped angular frequency.
@@ -83,19 +83,19 @@ public:
 
 private:
 
-    double omega_ = 0.0;    ///< [rad/s] undamped angular frequency
-    double zeta_  = 0.0;    ///< [-] <0.0;1.0> dampipng coefficient
+    double _omega = 0.0;    ///< [rad/s] undamped angular frequency
+    double _zeta  = 0.0;    ///< [-] <0.0;1.0> dampipng coefficient
 
-    double omega2_  = 0.0;  ///< [rad^2/s^2] undamped angular frequency squared
-    double zetomg2_ = 0.0;  ///< [rad/s] zeta*omega*2
+    double _omega2  = 0.0;  ///< [rad^2/s^2] undamped angular frequency squared
+    double _zetomg2 = 0.0;  ///< [rad/s] zeta*omega*2
 
-    double u_prev_1_ = 0.0; ///< input previous value
-    double u_prev_2_ = 0.0; ///< input value 2 steps before
+    double _u_prev_1 = 0.0; ///< input previous value
+    double _u_prev_2 = 0.0; ///< input value 2 steps before
 
-    double y_prev_1_ = 0.0; ///< previous value
-    double y_prev_2_ = 0.0; ///< value 2 steps before
+    double _y_prev_1 = 0.0; ///< previous value
+    double _y_prev_2 = 0.0; ///< value 2 steps before
 
-    double value_ = 0.0;    ///< current value
+    double _value = 0.0;    ///< current value
 };
 
 } // namespace mc

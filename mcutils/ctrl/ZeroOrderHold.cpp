@@ -28,23 +28,23 @@
 namespace mc {
 
 ZeroOrderHold::ZeroOrderHold(double t_hold, double value)
-    : t_hold_(t_hold)
-    , value_(value)
+    : _t_hold(t_hold)
+    , _value(value)
 {}
 
 void ZeroOrderHold::Update(double dt, double u)
 {
-    t_prev_ += dt;
-    if ( t_prev_ >= t_hold_ )
+    _t_prev += dt;
+    if ( _t_prev >= _t_hold )
     {
-        t_prev_ -= t_hold_;
-        value_ = u;
+        _t_prev -= _t_hold;
+        _value = u;
     }
 }
 
 void ZeroOrderHold::set_value(double value)
 {
-    value_ = value;
+    _value = value;
 }
 
 } // namespace mc

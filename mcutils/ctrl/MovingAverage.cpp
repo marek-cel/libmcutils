@@ -27,34 +27,34 @@
 namespace mc {
 
 MovingAverage::MovingAverage(unsigned int length , double value)
-    : length_(length)
-    , value_(value)
+    : _length(length)
+    , _value(value)
 {}
 
 
 void MovingAverage::Update(double, double u)
 {
-    fifo_.push_back(u);
+    _fifo.push_back(u);
 
-    while ( fifo_.size() > length_ )
+    while ( _fifo.size() > _length )
     {
-        fifo_.pop_front();
+        _fifo.pop_front();
     }
 
-    if ( fifo_.size() > 1 )
+    if ( _fifo.size() > 1 )
     {
         double sum = 0.0;
 
-        for ( double &val : fifo_ )
+        for ( double &val : _fifo )
         {
             sum += val;
         }
 
-        value_ = sum / static_cast<double>(fifo_.size());
+        _value = sum / static_cast<double>(_fifo.size());
     }
     else
     {
-        value_ = u;
+        _value = u;
     }
 }
 

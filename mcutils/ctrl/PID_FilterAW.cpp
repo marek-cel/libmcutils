@@ -20,27 +20,26 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/AWFilter.h>
+#include <mcutils/ctrl/PID_FilterAW.h>
 
 #include <mcutils/math/Math.h>
 
 namespace mc {
 
-AWFilter::AWFilter(double min, double max, double kaw)
-    : min_(min)
-    , max_(max)
-    , kaw_(kaw)
+PID_FilterAW::PID_FilterAW(double kp, double ki, double kd,
+                           double min, double max, double kaw)
+    : PID(kp, ki, kd)
+    , _min(min)
+    , _max(max)
+    , _kaw(kaw)
 {}
 
-void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
-                      double* value, double* error_i, const PID*)
+void PID_FilterAW::UpdateFinal(double dt, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
-    value_ = Math::Satur(min_, max_, y);
-    delta_ = y - value_;
-
-    *value = value_;
-    *error_i -= kaw_ * delta_ * dt;
+    _value = Math::Satur(_min, _max, y);
+    double delta = y - _value;
+    _error_i -= _kaw * delta * dt;
 }
 
 } // namespace mc

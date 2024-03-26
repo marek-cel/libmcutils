@@ -20,27 +20,30 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/AWCondCalc.h>
+#include <mcutils/ctrl/PID_BackCalc.h>
 
 #include <mcutils/math/Math.h>
 
 namespace mc {
 
-AWCondCalc::AWCondCalc(double min, double max)
-    : min_(min)
-    , max_(max)
+PID_BackCalc::PID_BackCalc(double kp, double ki, double kd,
+                           double min, double max)
+    : PID(kp, ki, kd)
+    , _min(min)
+    , _max(max)
 {}
 
-void AWCondCalc::Update(double, double y_p, double y_i, double y_d,
-                        double* value, double* error_i, const PID*)
+void PID_BackCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
 
-    *value = Math::Satur(min_, max_, y);
+    _value = Math::Satur(_min, _max, y);
 
-    if (y != *value) *error_i = error_i_prev_;
-
-    error_i_prev_ = *error_i;
+    if (fabs(_ki) > 0.0)
+    {
+        double y_pd = Math::Satur(_min, _max, y_p + y_d);
+        _error_i = (_value - y_pd) / _ki;
+    }
 }
 
 } // namespace mc

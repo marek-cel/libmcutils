@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,18 +19,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_AWFILTER_H_
-#define MCUTILS_CTRL_AWFILTER_H_
+#ifndef MCUTILS_CTRL_PID_FILTERAW_H_
+#define MCUTILS_CTRL_PID_FILTERAW_H_
 
 #include <cfloat>
-#include <limits>
 
-#include <mcutils/ctrl/IAntiWindup.h>
+#include <mcutils/ctrl/PID.h>
 
 namespace mc {
 
 /**
- * @brief Anti-windup filter for PID controller.
+ * @brief Proportional-Integral-Derivative controller with anti-windup filter.
  *
  * ### Refernces:
  * - Duzinkiewicz K., et al.: Zadania do cwiczen laboratoryjnych T10: Sterowanie predkoscia obrotowa silnika pradu stalego, 2016. [in Polish]
@@ -38,42 +37,41 @@ namespace mc {
  * - Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010
  * - [Integral windup - Wikipedia](https://en.wikipedia.org/wiki/Integral_windup)
  */
-class MCUTILSAPI AWFilter : public IAntiWindup
+class MCUTILSAPI PID_FilterAW : public PID
 {
 public:
 
     /**
-     * @brief AntiWindupFilter
+     * @brief Constructor.
+     * @param kp proportional gain
+     * @param ki integral gain
+     * @param kd derivative gain
      * @param min minimal value for saturation
      * @param max maximal value for saturation
-     * @param kaw filter gain
      */
-    explicit AWFilter(double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
+    PID_FilterAW(double kp = 1.0, double ki = 0.0, double kd = 0.0,
+                 double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
 
-    void Update(double dt, double y_p, double y_i, double y_d,
-                double* value, double* error_i, const class PID* pid) override;
+    double min() const { return _min; }
+    double max() const { return _max; }
 
-    double kaw() const { return kaw_; }
+    double kaw() const { return _kaw; }
 
-    double min() const { return min_; }
-    double max() const { return max_; }
+    inline void set_min(double min) { _min = min; }
+    inline void set_max(double max) { _max = max; }
 
-    inline void set_kaw(double kaw) { kaw_ = kaw; }
+    inline void set_kaw(double kaw) { _kaw = kaw; }
 
-    inline void set_min(double min) { min_ = min; }
-    inline void set_max(double max) { max_ = max; }
+protected:
 
-private:
+    double _min = DBL_MIN;      ///< minimum output value
+    double _max = DBL_MAX;      ///< maximum output value
 
-    double min_ = DBL_MIN;      ///< minimum output value
-    double max_ = DBL_MAX;      ///< maximum output value
+    double _kaw = 0.0;          ///< filter gain
 
-    double kaw_ = 0.0;          ///< filter gain
-
-    double delta_ = 0.0;        ///< difference between raw and saturated output values
-    double value_ = 0.0;        ///< PID output
+    void UpdateFinal(double dt, double y_p, double y_i, double y_d) override;
 };
 
 } // namespace mc
 
-#endif // MCUTILS_CTRL_AWFILTER_H_
+#endif // MCUTILS_CTRL_PID_FILTERAW_H_

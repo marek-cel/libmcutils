@@ -28,13 +28,13 @@
 namespace mc {
 
 Oscillator::Oscillator( double omega, double zeta, double value)
-    : omega_(omega)
-    , zeta_(zeta)
-    , omega2_(omega_ * omega_)
-    , zetomg2_(2.0 * zeta_ * omega_)
-    , y_prev_1_(value)
-    , y_prev_2_(value)
-    , value_(value)
+    : _omega(omega)
+    , _zeta(zeta)
+    , _omega2(_omega * _omega)
+    , _zetomg2(2.0 * _zeta * _omega)
+    , _y_prev_1(value)
+    , _y_prev_2(value)
+    , _value(value)
 {}
 
 void Oscillator::Update( double dt, double u )
@@ -43,45 +43,43 @@ void Oscillator::Update( double dt, double u )
     {
         double dt2 = dt * dt;
 
-        double den = 4.0 + 2.0 * zetomg2_*dt + omega2_ * dt2;
+        double den = 4.0 + 2.0 * _zetomg2*dt + _omega2*dt2;
         double den_inv = 1.0 / den;
 
-        double ca = omega2_ * dt2 * den_inv;
+        double ca = _omega2*dt2 * den_inv;
         double cb = 2.0 * ca;
         double cc = cb - 8.0 * den_inv;
-        double cd = ca + (4.0 - 2.0 * zetomg2_ * dt) * den_inv;
+        double cd = ca + (4.0 - 2.0 * _zetomg2 * dt) * den_inv;
 
-        value_ = u * ca + u_prev_1_ * cb + u_prev_2_ * ca
-                        - y_prev_1_ * cc - y_prev_2_ * cd;
+        _value = u * ca + _u_prev_1 * cb + _u_prev_2 * ca
+                        - _y_prev_1 * cc - _y_prev_2 * cd;
 
-        u_prev_2_ = u_prev_1_;
-        u_prev_1_ = u;
+        _u_prev_2 = _u_prev_1;
+        _u_prev_1 = u;
 
-        y_prev_2_ = y_prev_1_;
-        y_prev_1_ = value_;
+        _y_prev_2 = _y_prev_1;
+        _y_prev_1 = _value;
     }
 }
 
 void Oscillator::set_omega(double omega)
 {
-    omega_ = std::max(0.0, omega);
-
-    omega2_ = omega_ * omega_;
-    zetomg2_ = 2.0 * zeta_ * omega_;
+    _omega = std::max(0.0, omega);
+    _omega2 = _omega * _omega;
+    _zetomg2 = 2.0 * _zeta * _omega;
 }
 
 void Oscillator::set_zeta(double zeta)
 {
-    zeta_ = std::max(0.0, std::min(1.0, zeta));
-
-    zetomg2_ = 2.0 * zeta_ * omega_;
+    _zeta = std::max(0.0, std::min(1.0, zeta));
+    _zetomg2 = 2.0 * _zeta * _omega;
 }
 
 void Oscillator::set_value(double value)
 {
-    value_ = value;
-    y_prev_1_ = value;
-    y_prev_2_ = value;
+    _value = value;
+    _y_prev_1 = value;
+    _y_prev_2 = value;
 }
 
 } // namespace mc

@@ -2,13 +2,12 @@
 
 #include <gtest/gtest.h>
 
-#include <mcutils/ctrl/AWBackCalc.h>
 #include <mcutils/ctrl/Inertia.h>
-#include <mcutils/ctrl/PID.h>
+#include <mcutils/ctrl/PID_BackCalc.h>
 
 #include <XcosBinFileReader.h>
 
-class TestAWBackCalc : public ::testing::Test
+class TestPID_BackCalc : public ::testing::Test
 {
 protected:
 
@@ -22,55 +21,55 @@ protected:
     static constexpr double MIN { -0.5 };
     static constexpr double MAX {  0.5 };
 
-    TestAWBackCalc() {}
-    virtual ~TestAWBackCalc() {}
+    TestPID_BackCalc() {}
+    virtual ~TestPID_BackCalc() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
-TEST_F(TestAWBackCalc, CanInstantiate)
+TEST_F(TestPID_BackCalc, CanInstantiate)
 {
-    mc::AWBackCalc aw;
+    mc::PID_BackCalc pid;
 
-    EXPECT_DOUBLE_EQ(aw.min(), DBL_MIN);
-    EXPECT_DOUBLE_EQ(aw.max(), DBL_MAX);
+    EXPECT_DOUBLE_EQ(pid.min(), DBL_MIN);
+    EXPECT_DOUBLE_EQ(pid.max(), DBL_MAX);
 }
 
-TEST_F(TestAWBackCalc, CanInstantiateAndSetData)
+TEST_F(TestPID_BackCalc, CanInstantiateAndSetData)
 {
-    mc::AWBackCalc aw(MIN, MAX);
+    mc::PID_BackCalc pid(KP, KI, KD, MIN, MAX);
 
-    EXPECT_DOUBLE_EQ(aw.min(), MIN);
-    EXPECT_DOUBLE_EQ(aw.max(), MAX);
+    EXPECT_DOUBLE_EQ(pid.min(), MIN);
+    EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
 
-TEST_F(TestAWBackCalc, CanGetMin)
+TEST_F(TestPID_BackCalc, CanGetMin)
 {
-    mc::AWBackCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ(aw.min(), MIN);
+    mc::PID_BackCalc pid(KP, KI, KD, MIN, MAX);
+    EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
-TEST_F(TestAWBackCalc, CanGetMax)
+TEST_F(TestPID_BackCalc, CanGetMax)
 {
-    mc::AWBackCalc aw(MIN, MAX);
-    EXPECT_DOUBLE_EQ(aw.max(), MAX);
+    mc::PID_BackCalc pid(KP, KI, KD, MIN, MAX);
+    EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
 
-TEST_F(TestAWBackCalc, CanSetMin)
+TEST_F(TestPID_BackCalc, CanSetMin)
 {
-    mc::AWBackCalc aw;
-    aw.set_min(MIN);
-    EXPECT_DOUBLE_EQ(aw.min(), MIN);
+    mc::PID_BackCalc pid;
+    pid.set_min(MIN);
+    EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
-TEST_F(TestAWBackCalc, CanSetMax)
+TEST_F(TestPID_BackCalc, CanSetMax)
 {
-    mc::AWBackCalc aw;
-    aw.set_max(MAX);
-    EXPECT_DOUBLE_EQ(aw.max(), MAX);
+    mc::PID_BackCalc pid;
+    pid.set_max(MAX);
+    EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
 
-TEST_F(TestAWBackCalc, CanUpdate)
+TEST_F(TestPID_BackCalc, CanUpdate)
 {
     std::vector<double> vals;
 
@@ -83,7 +82,7 @@ TEST_F(TestAWBackCalc, CanUpdate)
     double t = 0.0;
     double y = 0.0;
 
-    mc::PID pid(KP, KI, KD, std::make_unique<mc::AWBackCalc>(MIN, MAX));
+    mc::PID_BackCalc pid(KP, KI, KD, MIN, MAX);
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {

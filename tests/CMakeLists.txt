@@ -27,9 +27,6 @@ set(SOURCES
     XcosBinFileReader.cpp
     main.cpp
 
-    ctrl/TestAWBackCalc.cpp
-    ctrl/TestAWCondCalc.cpp
-    ctrl/TestAWFilter.cpp
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
     ctrl/TestInertia2.cpp
@@ -40,6 +37,9 @@ set(SOURCES
     ctrl/TestMovingMedian.cpp
     ctrl/TestOscillator.cpp
     ctrl/TestPID.cpp
+    ctrl/TestPID_BackCalc.cpp
+    ctrl/TestPID_CondCalc.cpp
+    ctrl/TestPID_FilterAW.cpp
     ctrl/TestSystem2.cpp
     ctrl/TestZeroOrderHold.cpp
 

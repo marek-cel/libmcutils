@@ -22,12 +22,7 @@
 #ifndef MCUTILS_CTRL_PID_H_
 #define MCUTILS_CTRL_PID_H_
 
-#include <memory>
-#include <utility>
-
 #include <mcutils/defs.h>
-
-#include <mcutils/ctrl/IAntiWindup.h>
 
 namespace mc {
 
@@ -66,8 +61,7 @@ public:
      * @param ki integral gain
      * @param kd derivative gain
      */
-    PID(double kp = 1.0, double ki = 0.0, double kd = 0.0,
-        std::unique_ptr<IAntiWindup> anti_windup = nullptr);
+    PID(double kp = 1.0, double ki = 0.0, double kd = 0.0);
 
     /**
      * @brief Updates controller.
@@ -111,18 +105,18 @@ public:
      */
     void SetValueAndError(double value, double error, double dt);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline double kp() const { return kp_; }
-    inline double ki() const { return ki_; }
-    inline double kd() const { return kd_; }
+    inline double kp() const { return _kp; }
+    inline double ki() const { return _ki; }
+    inline double kd() const { return _kd; }
 
-    inline double error() const { return error_; }
+    inline double error() const { return _error; }
 
-    inline double error_i() const { return error_i_; }
-    inline double error_d() const { return error_d_; }
+    inline double error_i() const { return _error_i; }
+    inline double error_d() const { return _error_d; }
 
-    inline void set_error(double error) { error_ = error; }
+    inline void set_error(double error) { _error = error; }
 
     /**
      * @brief Sets controller output (resets error integral sum).
@@ -130,23 +124,26 @@ public:
      */
     void set_value(double value);
 
-    inline void set_kp(double kp) { kp_ = kp; }
-    inline void set_ki(double ki) { ki_ = ki; }
-    inline void set_kd(double kd) { kd_ = kd; }
+    inline void set_kp(double kp) { _kp = kp; }
+    inline void set_ki(double ki) { _ki = ki; }
+    inline void set_kd(double kd) { _kd = kd; }
 
-private:
+protected:
 
-    std::unique_ptr<IAntiWindup> anti_windup_;  ///< anti windup object
+    double _kp = 0.0;       ///< proportional gain
+    double _ki = 0.0;       ///< integral gain
+    double _kd = 0.0;       ///< derivative gain
 
-    double kp_ = 0.0;       ///< proportional gain
-    double ki_ = 0.0;       ///< integral gain
-    double kd_ = 0.0;       ///< derivative gain
+    double _error   = 0.0;  ///< error
+    double _error_i = 0.0;  ///< error integral sum
+    double _error_d = 0.0;  ///< error derivative
 
-    double error_   = 0.0;  ///< error
-    double error_i_ = 0.0;  ///< error integral sum
-    double error_d_ = 0.0;  ///< error derivative
+    double _value = 0.0;    ///< output value
 
-    double value_ = 0.0;    ///< output value
+    /**
+     * TODO
+     */
+    virtual void UpdateFinal(double dt, double y_p, double y_i, double y_d);
 };
 
 } // namespace mc

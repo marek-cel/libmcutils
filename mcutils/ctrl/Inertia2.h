@@ -51,10 +51,10 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline double time_const_1() const { return time_const_1_; }
-    inline double time_const_2() const { return time_const_2_; }
+    inline double time_const_1() const { return _time_const_1; }
+    inline double time_const_2() const { return _time_const_2; }
 
     /**
      * @brief Sets output value
@@ -76,10 +76,10 @@ public:
 
 private:
 
-    double time_const_1_ = 0.0; ///< time constant 1
-    double time_const_2_ = 0.0; ///< time constant 2
-    double value_int_ = 0.0;    ///< intermediate value
-    double value_     = 0.0;    ///< current value
+    double _time_const_1 = 0.0; ///< time constant 1
+    double _time_const_2 = 0.0; ///< time constant 2
+    double _value_int    = 0.0; ///< intermediate value
+    double _value        = 0.0; ///< current value
 };
 
 } // namespace mc

@@ -55,14 +55,14 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
-    inline double time_const() const { return time_const_; }
+    inline double value() const { return _value; }
+    inline double time_const() const { return _time_const; }
 
     /**
      * @brief Sets output value
      * @param value output value
      */
-    inline void set_value(double value) { value_ = value; }
+    inline void set_value(double value) { _value = value; }
 
     /**
      * @brief Sets time constant.
@@ -72,10 +72,10 @@ public:
 
 private:
 
-    double time_const_ = 0.0;   ///< time constant
+    double _time_const = 0.0;   ///< time constant
 
-    double u_prev_ = 0.0;       ///< previous input
-    double value_  = 0.0;       ///< current value
+    double _u_prev = 0.0;       ///< previous input
+    double _value  = 0.0;       ///< current value
 };
 
 } // namespace mc

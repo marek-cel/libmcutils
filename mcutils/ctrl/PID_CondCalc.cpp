@@ -19,21 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_IANTIWINDUP_H_
-#define MCUTILS_CTRL_IANTIWINDUP_H_
 
-#include <mcutils/defs.h>
+#include <mcutils/ctrl/PID_CondCalc.h>
+
+#include <mcutils/math/Math.h>
 
 namespace mc {
 
-class MCUTILSAPI IAntiWindup
-{
-public:
+PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
+                           double min, double max)
+    : PID(kp, ki, kd)
+    , _min(min)
+    , _max(max)
+{}
 
-    virtual void Update(double dt, double y_p, double y_i, double y_d,
-                        double* value, double* error_i, const class PID* pid) = 0;
-};
+void PID_CondCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
+{
+    double y = y_p + y_i + y_d;
+
+    _value = Math::Satur(_min, _max, y);
+
+    if (y != _value) _error_i = _error_i_prev;
+
+    _error_i_prev = _error_i;
+}
 
 } // namespace mc
-
-#endif // MCUTILS_CTRL_IANTIWINDUP_H_
