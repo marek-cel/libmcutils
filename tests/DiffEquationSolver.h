@@ -69,10 +69,8 @@
  *          +  e^( a * t ) * ( -C_1 * b * sin( b*t )  + C_2 * b * cos( b*t ) )
  * x'( 0 )  =  C_1 * a  +  C_2 * b
  *
- * Refernces:
- * <ul>
+ * ### Refernces:
  * - Krysicki W., Wlodarski L.: Analiza matematyczna w zadaniach, Tom II. PWN, Ed. XXVII, 2018 [in Polish], p.287
- * </ul>
  */
 template <class INTEGRATOR>
 class DiffEquationSolver
