@@ -196,7 +196,7 @@ public:
      */
     std::string ToString();
 
-    inline unsigned int size() const { return size_; }
+    inline unsigned int size() const { return _size; }
 
     /** @brief Addition operator. */
     Table operator+(const Table& table) const;
@@ -212,14 +212,14 @@ public:
 
 private:
 
-    unsigned int size_ = 0;         ///< number of table elements
-    unsigned int last_ = 0;         ///< last element index
+    unsigned int _size = 0;         ///< number of table elements
+    unsigned int _last = 0;         ///< last element index
 
-    double* key_values_ = nullptr;  ///< key values
-    double* table_data_ = nullptr;  ///< table data
-    double* inter_data_ = nullptr;  ///< interpolation data
+    double* _key_values = nullptr;  ///< key values
+    double* _table_data = nullptr;  ///< table data
+    double* _inter_data = nullptr;  ///< interpolation data
 
-    mutable unsigned int prev_ = 0; ///< previous index
+    mutable unsigned int _prev = 0; ///< previous index
 
     bool DoesIndexMatchKey(int index, double key_value) const;
 

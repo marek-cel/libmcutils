@@ -53,31 +53,31 @@ public:
         T y0 = yn;
 
         // k1 - derivatives calculation
-        T k1 = fun_(y0);
+        T k1 = _fun(y0);
 
         // k2 - derivatives calculation
         y0 = yn + k1 * (dx / 2.0);
-        T k2 = fun_(y0);
+        T k2 = _fun(y0);
 
         // k3 - derivatives calculation
         y0 = yn + k2 * (dx / 2.0);
-        T k3 = fun_(y0);
+        T k3 = _fun(y0);
 
         // k4 - derivatives calculation
         y0 = yn + k3 * dx;
-        T k4 = fun_(y0);
+        T k4 = _fun(y0);
 
         // integration
         return yn + (k1 + k2 * 2.0 + k3 * 2.0 + k4) * (dx / 6.0);
     }
 
-    inline DerivFun fun() const { return fun_; }
+    inline DerivFun fun() const { return _fun; }
 
-    void set_fun(DerivFun fun) { fun_ = fun; }
+    void set_fun(DerivFun fun) { _fun = fun; }
 
 private:
 
-    DerivFun fun_;  ///< function which calculates vector derivative
+    DerivFun _fun;  ///< function which calculates vector derivative
 };
 
 } // namespace mc

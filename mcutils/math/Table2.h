@@ -181,8 +181,8 @@ public:
      */
     std::string ToString();
 
-    inline unsigned int rows() const { return rows_; }
-    inline unsigned int cols() const { return cols_; }
+    inline unsigned int rows() const { return _rows; }
+    inline unsigned int cols() const { return _cols; }
 
     /** @brief Assignment operator. */
     Table2& operator=(const Table2& table);
@@ -192,14 +192,14 @@ public:
 
 private:
 
-    unsigned int rows_ = 0;         ///< number of rows
-    unsigned int cols_ = 0;         ///< number of columns
-    unsigned int size_ = 0;         ///< number of table elements
+    unsigned int _rows = 0;         ///< number of rows
+    unsigned int _cols = 0;         ///< number of columns
+    unsigned int _size = 0;         ///< number of table elements
 
-    double* row_values_ = nullptr;  ///< rows keys values
-    double* col_values_ = nullptr;  ///< columns keys values
-    double* table_data_ = nullptr;  ///< table data
-    double* inter_data_ = nullptr;  ///< interpolation data matrix
+    double* _row_values = nullptr;  ///< rows keys values
+    double* _col_values = nullptr;  ///< columns keys values
+    double* _table_data = nullptr;  ///< table data
+    double* _inter_data = nullptr;  ///< interpolation data matrix
 
     /** Creates data tables. */
     void CreateArrays();

@@ -42,9 +42,9 @@ Vector3 Vector3::GetNormalized() const
 
 void Vector3::Set(double x, double y, double z)
 {
-    elements_[0] = x;
-    elements_[1] = y;
-    elements_[2] = z;
+    _elements[0] = x;
+    _elements[1] = y;
+    _elements[2] = z;
 }
 
 Vector3 Vector3::operator+(const Vector3& vect) const

@@ -98,9 +98,9 @@ public:
 
 private:
 
-    std::mutex mutex_;  ///< mutex
-    int rand_ = 0;      ///< random value
-    unsigned int seed_; ///< seed
+    std::mutex _mutex;  ///< mutex
+    int _rand = 0;      ///< random value
+    unsigned int _seed; ///< seed
 
     /**
      * You should use static function instance() due to get refernce the class.

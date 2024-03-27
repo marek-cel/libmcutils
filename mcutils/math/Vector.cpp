@@ -33,15 +33,15 @@
 namespace mc {
 
 Vector::Vector(const Vector& vect)
-    : size_(vect.size_)
+    : _size(vect._size)
 {
-    elements_ = new double [size_];
-    SetFromArray(vect.elements_);
+    _elements = new double [_size];
+    SetFromArray(vect._elements);
 }
 
 Vector::Vector(Vector&& vect)
-    : size_(std::exchange(vect.size_, 0))
-    , elements_(std::exchange(vect.elements_, nullptr))
+    : _size(std::exchange(vect._size, 0))
+    , _elements(std::exchange(vect._elements, nullptr))
 {}
 
 Vector::~Vector()
@@ -50,23 +50,23 @@ Vector::~Vector()
 }
 
 Vector::Vector(unsigned int size)
-    : size_(size)
+    : _size(size)
 {
-    elements_ = new double [size_];
+    _elements = new double [_size];
     Zeroize();
 }
 
 bool Vector::IsValid() const
 {
-    return mc::IsValid(elements_, size_);
+    return mc::IsValid(_elements, _size);
 }
 
 double Vector::GetLength() const
 {
     double length2 = 0.0;
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        length2 += ( elements_[i] * elements_[i] );
+        length2 += ( _elements[i] * _elements[i] );
     }
     return sqrt(length2);
 }
@@ -79,18 +79,18 @@ void Vector::Normalize()
     {
         double length_inv = 1.0 / length;
 
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < _size; ++i )
         {
-            elements_[i] *= length_inv;
+            _elements[i] *= length_inv;
         }
     }
 }
 
 double Vector::GetElement(unsigned int index) const
 {
-    if ( index < size_ )
+    if ( index < _size )
     {
-        return elements_[index];
+        return _elements[index];
     }
 
     return std::numeric_limits<double>::quiet_NaN();
@@ -98,62 +98,62 @@ double Vector::GetElement(unsigned int index) const
 
 void Vector::PutIntoArray(double elements[]) const
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements[i] = elements_[i];
+        elements[i] = _elements[i];
     }
 }
 
 void Vector::SetElement(unsigned int index, double val)
 {
-    if ( index < size_ )
+    if ( index < _size )
     {
-        elements_[index] = val;
+        _elements[index] = val;
     }
 }
 
 void Vector::SetFromArray(const double elements[])
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements_[i] = elements[i];
+        _elements[i] = elements[i];
     }
 }
 
 std::string Vector::ToString() const
 {
     std::stringstream ss;
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
         if ( i != 0 ) ss << ",";
-        ss << elements_[i];
+        ss << _elements[i];
     }
     return ss.str();
 }
 
 void Vector::Resize(unsigned int size)
 {
-    if ( size_ != size )
+    if ( _size != size )
     {
         DeleteElementsArray();
 
-        size_ = size;
-        elements_ = new double [size_];
+        _size = size;
+        _elements = new double [_size];
     }
 }
 
 void Vector::Zeroize()
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements_[i] = 0.0;
+        _elements[i] = 0.0;
     }
 }
 
 Vector& Vector::operator=(const Vector& vect)
 {
-    Resize(vect.size_);
-    SetFromArray(vect.elements_);
+    Resize(vect._size);
+    SetFromArray(vect._elements);
     return *this;
 }
 
@@ -161,8 +161,8 @@ Vector& Vector::operator=(Vector&& vect)
 {
     DeleteElementsArray();
 
-    size_     = std::exchange(vect.size_, 0);
-    elements_ = std::exchange(vect.elements_, nullptr);
+    _size     = std::exchange(vect._size, 0);
+    _elements = std::exchange(vect._elements, nullptr);
 
     return *this;
 }
@@ -228,67 +228,67 @@ Vector& Vector::operator/=(double value)
 
 void Vector::Add(const Vector& vect)
 {
-    if ( size_ == vect.size_ )
+    if ( _size == vect._size )
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < _size; ++i )
         {
-            elements_[i] = elements_[i] + vect.elements_[i];
+            _elements[i] = _elements[i] + vect._elements[i];
         }
     }
     else
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < _size; ++i )
         {
-            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+            _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
     }
 }
 
 void Vector::Negate()
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements_[i] = -elements_[i];
+        _elements[i] = -_elements[i];
     }
 }
 
 void Vector::Substract(const Vector& vect)
 {
-    if ( size_ == vect.size_ )
+    if ( _size == vect._size )
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < _size; ++i )
         {
-            elements_[i] = elements_[i] - vect.elements_[i];
+            _elements[i] = _elements[i] - vect._elements[i];
         }
     }
     else
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < _size; ++i )
         {
-            elements_[i] = std::numeric_limits<double>::quiet_NaN();
+            _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
     }
 }
 
 void Vector::MultiplyByValue(double value)
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements_[i] *= value;
+        _elements[i] *= value;
     }
 }
 
 void Vector::DivideByValue( double value )
 {
-    for ( unsigned int i = 0; i < size_; ++i )
+    for ( unsigned int i = 0; i < _size; ++i )
     {
-        elements_[i] /= value;
+        _elements[i] /= value;
     }
 }
 
 void Vector::DeleteElementsArray()
 {
-    deletePtrArray(elements_);
+    deletePtrArray(_elements);
 }
 
 } // namespace mc

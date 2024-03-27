@@ -67,26 +67,26 @@ public:
     /** @brief Sets vector values. */
     void Set(double x, double y, double z);
 
-    inline double  x() const { return elements_[0]; }
-    inline double  y() const { return elements_[1]; }
-    inline double  z() const { return elements_[2]; }
-    inline double& x()       { return elements_[0]; }
-    inline double& y()       { return elements_[1]; }
-    inline double& z()       { return elements_[2]; }
+    inline double  x() const { return _elements[0]; }
+    inline double  y() const { return _elements[1]; }
+    inline double  z() const { return _elements[2]; }
+    inline double& x()       { return _elements[0]; }
+    inline double& y()       { return _elements[1]; }
+    inline double& z()       { return _elements[2]; }
 
-    inline double  p() const { return elements_[0]; }
-    inline double  q() const { return elements_[1]; }
-    inline double  r() const { return elements_[2]; }
-    inline double& p()       { return elements_[0]; }
-    inline double& q()       { return elements_[1]; }
-    inline double& r()       { return elements_[2]; }
+    inline double  p() const { return _elements[0]; }
+    inline double  q() const { return _elements[1]; }
+    inline double  r() const { return _elements[2]; }
+    inline double& p()       { return _elements[0]; }
+    inline double& q()       { return _elements[1]; }
+    inline double& r()       { return _elements[2]; }
 
-    inline double  u() const { return elements_[0]; }
-    inline double  v() const { return elements_[1]; }
-    inline double  w() const { return elements_[2]; }
-    inline double& u()       { return elements_[0]; }
-    inline double& v()       { return elements_[1]; }
-    inline double& w()       { return elements_[2]; }
+    inline double  u() const { return _elements[0]; }
+    inline double  v() const { return _elements[1]; }
+    inline double  w() const { return _elements[2]; }
+    inline double& u()       { return _elements[0]; }
+    inline double& v()       { return _elements[1]; }
+    inline double& w()       { return _elements[2]; }
 
     /** @brief Addition operator. */
     Vector3 operator+(const Vector3& vect) const;
