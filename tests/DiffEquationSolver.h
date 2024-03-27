@@ -92,11 +92,11 @@ public:
      */
     DiffEquationSolver(double m, double k, double c, INTEGRATOR* integrator)
     {
-        m_ = m;
-        k_ = k;
-        c_ = c;
+        _m = m;
+        _k = k;
+        _c = c;
 
-        integrator_ = integrator;
+        _integrator = integrator;
     }
 
     /**
@@ -116,7 +116,7 @@ public:
         s(0) = x_0;
         s(1) = x_1;
 
-        integrator_->set_fun(
+        _integrator->set_fun(
             [this](const mc::Vector &state)
             {
                 return GetStateDeriv(state);
@@ -127,7 +127,7 @@ public:
         double x = 0.0;
 
         // m * r^2  +  c * r  +  k  =  0
-        double delta = CalcDelta(m_, c_, k_);
+        double delta = CalcDelta(_m, _c, _k);
 
         //std::cout << "Delta= " << delta << std::endl;
 
@@ -137,8 +137,8 @@ public:
 
             // a  =  -c / ( 2 * m )
             // b  =  sqrt( 4 * m * k  -  c^2 ) / ( 2 * m )
-            double a = -c_ / (2.0 * m_);
-            double b = sqrt(4.0*m_*k_ - c_*c_) / (2.0 * m_);
+            double a = -_c / (2.0 * _m);
+            double b = sqrt(4.0*_m*_k - _c*_c) / (2.0 * _m);
 
             // x ( t )  =  e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
             // x'( t )  =  a * e^( a * t ) * (  C_1 * cos( b*t )  +  C_2 * sin( b*t )  )
@@ -165,7 +165,7 @@ public:
 
                 t += T_STEP;
 
-                s = integrator_->Integrate(T_STEP, s);
+                s = _integrator->Integrate(T_STEP, s);
             }
         }
         else if ( delta > ZERO ) // numerical zero
@@ -175,8 +175,8 @@ public:
             //  r_1  =  ( -c - sqrt( Delta ) ) / ( 2 * m )
             //  r_2  =  ( -c + sqrt( Delta ) ) / ( 2 * m )
             double sqrt_delta = sqrt(delta);
-            double r_1 = (-c_ - sqrt_delta) / (2.0 * m_);
-            double r_2 = (-c_ + sqrt_delta) / (2.0 * m_);
+            double r_1 = (-_c - sqrt_delta) / (2.0 * _m);
+            double r_2 = (-_c + sqrt_delta) / (2.0 * _m);
 
             // x ( t )  =  C_1 * e^( r_1 * t )  +  C_2 * e^( r_2 * t )
             // x'( t )  =  C_1 * r_1 * e^( r_1 * t )  +  C_2 * r_2 * e^( r_2 * t )
@@ -202,7 +202,7 @@ public:
 
                 t += T_STEP;
 
-                s = integrator_->Integrate(T_STEP, s);
+                s = _integrator->Integrate(T_STEP, s);
             }
         }
         else // delta == numerical zero
@@ -210,7 +210,7 @@ public:
             // x( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
 
             // r_1  =  -c / ( 2 * m )
-            double r_1 = -c_ / (2.0 * m_);
+            double r_1 = -_c / (2.0 * _m);
 
             // x ( t )  =  ( C_1 * t + C_2 ) * e^( r_1 * t )
             // x'( t )  =  C_1  * e^( r_1 * t ) + ( C_1 * t + C_2 ) * r_1 * e^( r_1 * t )
@@ -236,7 +236,7 @@ public:
 
                 t += T_STEP;
 
-                s = integrator_->Integrate(T_STEP, s);
+                s = _integrator->Integrate(T_STEP, s);
             }
         }
 
@@ -265,17 +265,17 @@ public:
         mc::Vector deriv;
         deriv.Resize(state.size());
         deriv(0) = state(1);
-        deriv(1) = -k_ * state(0) - c_ * state(1);
+        deriv(1) = -_k * state(0) - _c * state(1);
         return deriv;
     }
 
 private:
 
-    INTEGRATOR* integrator_;
+    INTEGRATOR* _integrator;
 
-    double m_;      ///< [kg]       mass
-    double k_;      ///< [N/m]      stiffness
-    double c_;      ///< [N/(m/s)]  damping
+    double _m;      ///< [kg]       mass
+    double _k;      ///< [N/m]      stiffness
+    double _c;      ///< [N/(m/s)]  damping
 };
 
 #endif // LIBMCUTILS_TESTS_DIFFEQUATIONSOLVER_H_
