@@ -102,10 +102,10 @@ public:
 
 private:
 
-    std::ostream* out_stream_ = &std::cout;         ///< output stream (default std::cout)
-    VerboseLevel  verb_level_ = VerboseLevel::Info; ///< verbose level (default Info)
+    std::ostream* _out_stream = &std::cout;         ///< output stream (default std::cout)
+    VerboseLevel  _verb_level = VerboseLevel::Info; ///< verbose level (default Info)
 
-    bool syslog_out_ = true;    ///< specifies if syslog is enabled (default true)
+    bool _syslog_out = true;    ///< specifies if syslog is enabled (default true)
 
     // LCOV_EXCL_START
     /**

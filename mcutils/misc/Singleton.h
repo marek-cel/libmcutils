@@ -43,20 +43,20 @@ public:
      */
     static TYPE* instance()
     {
-        if ( !instance_ )
+        if ( !_instance )
         {
-            instance_ = new TYPE();
+            _instance = new TYPE();
         }
 
-        return instance_;
+        return _instance;
     }
 
 private:
 
-    static TYPE* instance_;     ///< singleton object instance pointer
+    static TYPE* _instance;     ///< singleton object instance pointer
 };
 
-template <class TYPE> TYPE* Singleton<TYPE>::instance_ = nullptr;
+template <class TYPE> TYPE* Singleton<TYPE>::_instance = nullptr;
 
 } // namespace mc
 
