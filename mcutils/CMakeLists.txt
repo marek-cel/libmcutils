@@ -22,6 +22,7 @@ set(SOURCES
 
 ################################################################################
 
+add_subdirectory(astro)
 add_subdirectory(ctrl)
 add_subdirectory(geo)
 add_subdirectory(math)
@@ -32,6 +33,7 @@ add_subdirectory(time)
 ################################################################################
 
 add_library(${TARGET_NAME} ${SOURCES}
+    $<TARGET_OBJECTS:astro>
     $<TARGET_OBJECTS:ctrl>
     $<TARGET_OBJECTS:geo>
     $<TARGET_OBJECTS:math>
