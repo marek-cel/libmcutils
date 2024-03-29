@@ -19,50 +19,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_ASTRO_JULIANDATE_H_
-#define MCUTILS_ASTRO_JULIANDATE_H_
 
-#include <mcutils/time/DateTime.h>
+#include <mcutils/astro/Utils.h>
+
+#include <cmath>
 
 namespace mc {
 
-/**
- * @brief Julian date.
- *
- * ### Refernces:
- * - Meeus J.: Astronomical Algorithms, 1998
- * - [Julian day - Wikipedia](https://en.wikipedia.org/wiki/Julian_day)
- */
-class JulianDate
+AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst)
 {
-public:
+    double sinLat = sin(lat);
+    double cosLat = cos(lat);
 
-    static double GetJulianDate(const DateTime& gd);
+    return RaDec2AzEl(radec, sinLat, cosLat, lst);
+}
 
-    /**
-     * @param gd Gregorian date UTC
-    */
-    JulianDate(const DateTime& gd = DateTime());
+AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst)
+{
+    AzEl result;
 
-    /**
-     * @breif Sets Julian date from Gregorian date.
-     * @param dateTime Gregorian date UTC
-    */
-    void SetFromGregorianDate(const DateTime& gd);
+    double lha = lst - radec.ra;
+    while ( lha < -M_PI ) lha += 2.0 * M_PI;
+    while ( lha >  M_PI ) lha -= 2.0 * M_PI;
 
-    inline double jc() const { return _jc; }
-    inline double jd() const { return _jd; }
+    double cosLha = cos(lha);
 
-private:
+    double sinDelta = sin(radec.dec);
+    double cosDelta = cos(radec.dec);
 
-    DateTime _gd;       ///< Gregorian date
-    double _jd = 0.0;   ///< Juliand date
-    double _jc = 0.0;   ///< Julian century
+    double sinElev = sinDelta*sinLat + cosDelta*cosLha*cosLat;
 
+    if ( sinElev >  1.0 ) sinElev =  1.0;
+    if ( sinElev < -1.0 ) sinElev = -1.0;
 
-    void Update();
-};
+    result.el = asin(sinElev);
+
+    double cosElev = cos(result.el);
+
+    double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
+    cosAzim = fabs(cosAzim);
+
+    if ( cosAzim >  1.0 ) cosAzim =  1.0;
+    if ( cosAzim < -1.0 ) cosAzim = -1.0;
+
+    if ( lha < 0.0 )
+        result.az = M_PI - acos(cosAzim);
+    else
+        result.az = M_PI + acos(cosAzim);
+
+    return result;
+}
 
 } // namespace mc
-
-#endif // MCUTILS_ASTRO_JULIANDATE_H_

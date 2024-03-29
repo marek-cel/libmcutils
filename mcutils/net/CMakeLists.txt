@@ -1,21 +1,13 @@
-set(TARGET_NAME astro)
+set(TARGET_NAME net)
 
 ################################################################################
 
 set(HEADERS
-    AzEl.h
-    Ephemeris.h
-    GregorianCal.h
-    JulianDate.h
-    RaDec.h
-    Utils.h
+    Endianness.h
 )
 
 set(SOURCES
-    Ephemeris.cpp
-    GregorianCal.cpp
-    JulianDate.cpp
-    Utils.cpp
+    Endianness.cpp
 )
 
 ################################################################################
@@ -31,5 +23,5 @@ set_target_properties(${TARGET_NAME} PROPERTIES
 )
 
 install(TARGETS ${TARGET_NAME}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/astro
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils/net
 )

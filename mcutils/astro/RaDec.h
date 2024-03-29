@@ -19,18 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_ASTRO_J2000_H_
-#define MCUTILS_ASTRO_J2000_H_
-
-#include <mcutils/time/DateTime.h>
+#ifndef MCUTILS_ASTRO_RADEC_H_
+#define MCUTILS_ASTRO_RADEC_H_
 
 namespace mc {
 
-struct J2000
+/**
+ * Right ascetion and declination.
+ * ### Refernces:
+ * - [Equatorial coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Equatorial_coordinate_system)
+ */
+struct RaDec
 {
-    static double GetDaysSinceJ2000(const DateTime& gd);
+    double ra  = 0.0;   ///< [rad] right ascetion
+    double dec = 0.0;   ///< [rad] declination
 };
 
 } // namespace mc
 
-#endif // MCUTILS_ASTRO_J2000_H_
+#endif // MCUTILS_ASTRO_RADEC_H_

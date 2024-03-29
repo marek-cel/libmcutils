@@ -27,6 +27,10 @@ set(SOURCES
     XcosBinFileReader.cpp
     main.cpp
 
+    astro/TestEphemeris.cpp
+    astro/TestJulianDate.cpp
+    astro/TestRaDec2AzEl.cpp
+
     ctrl/TestHighPassFilter.cpp
     ctrl/TestInertia.cpp
     ctrl/TestInertia2.cpp
@@ -80,6 +84,8 @@ set(SOURCES
     misc/TestPtrUtils.cpp
     misc/TestString.cpp
     misc/TestUnits.cpp
+
+    net/TestEndianness.cpp
 
     physics/TestInertia.cpp
     physics/TestParallelAxis.cpp

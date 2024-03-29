@@ -28,44 +28,6 @@
 
 namespace mc {
 
-AzEl Ephemeris::ComputeAzimAndElev(double alpha, double delta,
-                                   double sinLat, double cosLat,
-                                   double lst)
-{
-    AzEl result;
-
-    double lha = lst - alpha;
-    while ( lha < -M_PI ) lha += 2.0 * M_PI;
-    while ( lha >  M_PI ) lha -= 2.0 * M_PI;
-
-    double cosLha = cos(lha);
-
-    double sinDelta = sin(delta);
-    double cosDelta = cos(delta);
-
-    double sinElev = sinDelta*sinLat + cosDelta*cosLha*cosLat;
-
-    if ( sinElev >  1.0 ) sinElev =  1.0;
-    if ( sinElev < -1.0 ) sinElev = -1.0;
-
-    result.el = asin(sinElev);
-
-    double cosElev = cos(result.el);
-
-    double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
-    cosAzim = fabs(cosAzim);
-
-    if ( cosAzim >  1.0 ) cosAzim =  1.0;
-    if ( cosAzim < -1.0 ) cosAzim = -1.0;
-
-    if ( lha < 0.0 )
-        result.az = M_PI - acos(cosAzim);
-    else
-        result.az = M_PI + acos(cosAzim);
-
-    return result;
-}
-
 void Ephemeris::Update(const DateTime& gd, double lat, double lon)
 {
     _jd.SetFromGregorianDate(gd);
@@ -118,11 +80,11 @@ void Ephemeris::Update(const DateTime& gd, double lat, double lon)
     double sinSunLambda = sin( sunLambda );
 
     // Sun right ascension
-    _sun_alpha = atan2( (double)(sinSunLambda * cosEpsilon), (double)cosSunLambda );
-    _sun_alpha = Angles::Normalize(_sun_alpha);
+    _sun.ra = atan2( (double)(sinSunLambda * cosEpsilon), (double)cosSunLambda );
+    _sun.ra = Angles::Normalize(_sun.ra);
 
     // Sun declination
-    _sun_delta = asin(sinSunLambda * sinEpsilon);
+    _sun.dec = asin(sinSunLambda * sinEpsilon);
 
     // Moon
     double l_p = 3.8104 + 8399.7091 * jc;
@@ -166,11 +128,11 @@ void Ephemeris::Update(const DateTime& gd, double lat, double lon)
     double tanMoonBeta = tan(moonBeta);
 
     // Moon right ascension
-    _moon_alpha = atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
-    _moon_alpha = Angles::Normalize(_moon_alpha);
+    _moon.ra = atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
+    _moon.ra = Angles::Normalize(_moon.ra);
 
     // Moon declination
-    _moon_delta = asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda);
+    _moon.dec = asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda);
 
 //    // Sun elevation and azimuth
 //    computeElevAndAzim( _sunAlpha, _sunDelta, _sunElev, _sunAzim,

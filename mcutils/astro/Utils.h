@@ -19,26 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_ASTRO_UTILS_H_
+#define MCUTILS_ASTRO_UTILS_H_
 
-#include <mcutils/astro/J2000.h>
+#include <mcutils/astro/AzEl.h>
+#include <mcutils/astro/RaDec.h>
 
 namespace mc {
 
-double J2000::GetDaysSinceJ2000(const DateTime& gd)
-{
-    double days = 0.0;
+/**
+ * @brief Converts from equatorial (right ascension, declination) to horizontal
+ * (azimuth, elevation) coordinate system.
+ * @param radec right ascension, declination
+ * @param lat [rad] geodetic latitude (positive north)
+ * @param lst [rad] Local Siderial Time
+ */
+AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst);
 
-    double y = gd.year;
-    double m = gd.month;
-    double d = gd.day;
-
-    days = 367.0 * y - 7.0 * (y + (m + 9.0) / 12.0) / 4.0 + 275.0 * m / 9.0 + d - 730530.0;
-
-    days += gd.hour   / 24.0;
-    days += gd.minute / 24.0 / 60.0;
-    days += gd.second / 24.0 / 60.0 / 60.0;
-
-    return days;
-}
+/**
+ * @brief Converts from equatorial (right ascension, declination) to horizontal
+ * (azimuth, elevation) coordinate system.
+ * @param radec right ascension, declination
+ * @param sinLat [-] latitude sine
+ * @param cosLat [-] latitude cosine
+ * @param lst [rad] Local Siderial Time
+ */
+AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst);
 
 } // namespace mc
+
+#endif // MCUTILS_ASTRO_UTILS_H_

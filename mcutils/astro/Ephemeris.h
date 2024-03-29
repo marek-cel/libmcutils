@@ -22,8 +22,8 @@
 #ifndef MCUTILS_ASTRO_EPHEMERIS_H_
 #define MCUTILS_ASTRO_EPHEMERIS_H_
 
-#include <mcutils/astro/AzEl.h>
 #include <mcutils/astro/JulianDate.h>
+#include <mcutils/astro/RaDec.h>
 #include <mcutils/time/DateTime.h>
 
 namespace mc {
@@ -38,37 +38,15 @@ class Ephemeris
 {
 public:
 
-    /**
-     * @brief Computes celestial object local azimuth and elevation.
-     * @param alpha [rad] right ascension
-     * @param delta [rad] declination
-     * @param sinLat [-] latitude sine
-     * @param cosLat [-] latitude cosine
-     * @param lst [rad] Local Siderial Time
-     * @return [rad] azimuth and elevation
-     */
-    static AzEl ComputeAzimAndElev(double alpha, double delta,
-                                   double sinLat, double cosLat,
-                                   double lst);
-
     void Update(const DateTime& gd, double lat, double lon);
 
-    //inline double getJD() const { return jd_; }
-    //inline double getJC() const { return jc_; }
     inline double ut() const { return _ut; }
 
     inline double gst() const { return _gst; }
     inline double lst() const { return _lst; }
 
-    inline double sun_alpha() const { return _sun_alpha; }
-    inline double sun_delta() const { return _sun_delta; }
-    inline double sun_elev()  const { return _sun_elev;  }
-    inline double sun_azim()  const { return _sun_azim;  }
-
-    inline double moon_alpha() const { return _moon_alpha; }
-    inline double moon_delta() const { return _moon_delta; }
-    inline double moon_elev()  const { return _moon_elev;  }
-    inline double moon_azim()  const { return _moon_azim;  }
+    inline RaDec sun()  const { return _sun;  }
+    inline RaDec moon() const { return _moon; }
 
 private:
 
@@ -78,6 +56,9 @@ private:
 
     double _gst;            ///< [rad] Greenwhich Siderial Time
     double _lst;            ///< [rad] Local Siderial Time
+
+    RaDec _sun;             ///< right ascesion and declination of the Sun
+    RaDec _moon;            ///< right ascesion and declination of the Moon
 
     double _sun_alpha;      ///< [rad] Sun right ascension
     double _sun_delta;      ///< [rad] Sun declination
