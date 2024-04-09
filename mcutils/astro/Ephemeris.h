@@ -22,8 +22,8 @@
 #ifndef MCUTILS_ASTRO_EPHEMERIS_H_
 #define MCUTILS_ASTRO_EPHEMERIS_H_
 
+#include <mcutils/astro/Coordinates.h>
 #include <mcutils/astro/JulianDate.h>
-#include <mcutils/astro/RaDec.h>
 #include <mcutils/time/DateTime.h>
 
 namespace mc {
@@ -39,14 +39,15 @@ class Ephemeris
 public:
 
     void Update(const DateTime& gd, double lat, double lon);
+    void Update(const DateTime& gd, double sinLat, double cosLat, double lon);
 
     inline double ut() const { return _ut; }
 
     inline double gst() const { return _gst; }
     inline double lst() const { return _lst; }
 
-    inline RaDec sun()  const { return _sun;  }
-    inline RaDec moon() const { return _moon; }
+    inline AzElRaDec sun()  const { return _sun;  }
+    inline AzElRaDec moon() const { return _moon; }
 
 private:
 
@@ -57,8 +58,8 @@ private:
     double _gst;            ///< [rad] Greenwhich Siderial Time
     double _lst;            ///< [rad] Local Siderial Time
 
-    RaDec _sun;             ///< right ascesion and declination of the Sun
-    RaDec _moon;            ///< right ascesion and declination of the Moon
+    AzElRaDec _sun;         ///< right ascesion and declination of the Sun
+    AzElRaDec _moon;        ///< right ascesion and declination of the Moon
 
     double _sun_alpha;      ///< [rad] Sun right ascension
     double _sun_delta;      ///< [rad] Sun declination
@@ -69,6 +70,28 @@ private:
     double _moon_delta;     ///< [rad] Moon declination
     double _moon_elev;      ///< [rad] Moon elevation
     double _moon_azim;      ///< [rad] Moon azimuth
+
+    /**
+     * Updates Sun coordinates.
+     * @param jc Julian century
+     * @param sinLat latitude sine
+     * @param cosLat latitude cosine
+     * @param sinEpsilon obliquity of the ecliptic sine
+     * @param cosEpsilon obliquity of the ecliptic cosine
+    */
+    void UpdateSun(double jc, double sinLat, double cosLat, 
+                   double sinEpsilon, double cosEpsilon);
+
+    /**
+     * Updates Moon coordinates.
+     * @param jc Julian century
+     * @param sinLat latitude sine
+     * @param cosLat latitude cosine
+     * @param sinEpsilon obliquity of the ecliptic sine
+     * @param cosEpsilon obliquity of the ecliptic cosine
+    */
+    void UpdateMoon(double jc, double sinLat, double cosLat, 
+                    double sinEpsilon, double cosEpsilon);
 };
 
 } // namespace mc

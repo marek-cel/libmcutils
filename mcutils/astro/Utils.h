@@ -22,8 +22,7 @@
 #ifndef MCUTILS_ASTRO_UTILS_H_
 #define MCUTILS_ASTRO_UTILS_H_
 
-#include <mcutils/astro/AzEl.h>
-#include <mcutils/astro/RaDec.h>
+#include <mcutils/astro/Coordinates.h>
 
 namespace mc {
 

@@ -3,7 +3,7 @@ set(TARGET_NAME astro)
 ################################################################################
 
 set(HEADERS
-    AzEl.h
+    Coordinates.h
     Ephemeris.h
     GregorianCal.h
     JulianDate.h

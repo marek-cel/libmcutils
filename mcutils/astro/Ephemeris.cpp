@@ -24,11 +24,17 @@
 
 #include <cmath>
 
+#include <mcutils/astro/Utils.h>
 #include <mcutils/math/Angles.h>
 
 namespace mc {
 
 void Ephemeris::Update(const DateTime& gd, double lat, double lon)
+{
+    Update(gd, sin(lat), cos(lat), lon);
+}
+
+void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, double lon)
 {
     _jd.SetFromGregorianDate(gd);
 
@@ -53,15 +59,19 @@ void Ephemeris::Update(const DateTime& gd, double lat, double lon)
     // local sidereal time angle
     _lst = _gst + lon;
 
-    const double sinLat = sin(lat);
-    const double cosLat = cos(lat);
-
     // obliquity of the ecliptic
     double epsilon = 0.409093 - 0.000227 * jc;
 
     double cosEpsilon = cos(epsilon);
     double sinEpsilon = sin(epsilon);
 
+    UpdateSun(jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
+    UpdateMoon(jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
+}
+
+void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat, 
+                          double sinEpsilon, double cosEpsilon)
+{
     // mean anomaly
     double M = 6.240041 + 628.302 * jc;
 
@@ -80,12 +90,19 @@ void Ephemeris::Update(const DateTime& gd, double lat, double lon)
     double sinSunLambda = sin( sunLambda );
 
     // Sun right ascension
-    _sun.ra = atan2( (double)(sinSunLambda * cosEpsilon), (double)cosSunLambda );
-    _sun.ra = Angles::Normalize(_sun.ra);
+    _sun.ra_dec.ra = atan2( (double)(sinSunLambda * cosEpsilon), (double)cosSunLambda );
+    _sun.ra_dec.ra = Angles::Normalize(_sun.ra_dec.ra);
 
     // Sun declination
-    _sun.dec = asin(sinSunLambda * sinEpsilon);
+    _sun.ra_dec.dec = asin(sinSunLambda * sinEpsilon);
 
+    // Sun horizontal coordinates
+    _sun.az_el = RaDec2AzEl(_sun.ra_dec, sinLat, cosLat, _lst);
+}
+
+void Ephemeris::UpdateMoon(double jc, double sinLat, double cosLat, 
+                           double sinEpsilon, double cosEpsilon)
+{
     // Moon
     double l_p = 3.8104 + 8399.7091 * jc;
     double m   = 6.2300 +  628.3019 * jc;
@@ -128,19 +145,14 @@ void Ephemeris::Update(const DateTime& gd, double lat, double lon)
     double tanMoonBeta = tan(moonBeta);
 
     // Moon right ascension
-    _moon.ra = atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
-    _moon.ra = Angles::Normalize(_moon.ra);
+    _moon.ra_dec.ra = atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
+    _moon.ra_dec.ra = Angles::Normalize(_moon.ra_dec.ra);
 
     // Moon declination
-    _moon.dec = asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda);
+    _moon.ra_dec.dec = asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda);
 
-//    // Sun elevation and azimuth
-//    computeElevAndAzim( _sunAlpha, _sunDelta, _sunElev, _sunAzim,
-//                        sinLat, cosLat, _lst );
-
-//    // Moon elevation and azimuth
-//    computeElevAndAzim( _moonAlpha, _moonDelta, _moonElev, _moonAzim,
-//                        sinLat, cosLat, _lst );
+    // Moon horizontal coordinates
+    _moon.az_el = RaDec2AzEl(_moon.ra_dec, sinLat, cosLat, _lst);
 }
 
 } // namespace mc

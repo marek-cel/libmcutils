@@ -19,13 +19,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_ASTRO_RADEC_H_
-#define MCUTILS_ASTRO_RADEC_H_
+#ifndef MCUTILS_ASTRO_COORDINATES_H_
+#define MCUTILS_ASTRO_COORDINATES_H_
 
 namespace mc {
 
 /**
- * Right ascetion and declination.
+ * Horizontal coordinates (azimuth and elevation).
+ * ### Refernces:
+ * - [Horizontal coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Horizontal_coordinate_system)
+ */
+struct AzEl
+{
+    double az = 0.0;    ///< [rad] azimuth
+    double el = 0.0;    ///< [rad] elevation
+};
+
+/**
+ * Equatorial coordinates (right ascetion and declination).
  * ### Refernces:
  * - [Equatorial coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Equatorial_coordinate_system)
  */
@@ -35,6 +46,18 @@ struct RaDec
     double dec = 0.0;   ///< [rad] declination
 };
 
+/**
+ * Combined horizontal and equatorial coordinates.
+ * ### Refernces:
+ * - [Horizontal coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Horizontal_coordinate_system)
+ * - [Equatorial coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Equatorial_coordinate_system)
+ */
+struct AzElRaDec
+{
+    AzEl  az_el;
+    RaDec ra_dec;
+};
+
 } // namespace mc
 
-#endif // MCUTILS_ASTRO_RADEC_H_
+#endif // MCUTILS_ASTRO_COORDINATES_H_
