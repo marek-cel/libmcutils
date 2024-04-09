@@ -7,7 +7,6 @@ set(HEADERS
     Ephemeris.h
     GregorianCal.h
     JulianDate.h
-    RaDec.h
     Utils.h
 )
 
