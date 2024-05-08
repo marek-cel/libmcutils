@@ -60,5 +60,11 @@ install(TARGETS ${TARGET_NAME}
 
 ################################################################################
 
-target_link_libraries(${TARGET_NAME})
+if(WIN32)
+    set(LIBS ${WS2_32_LIBRARY})
+endif()
+
+################################################################################
+
+target_link_libraries(${TARGET_NAME} ${LIBS})
 

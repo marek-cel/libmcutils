@@ -107,6 +107,8 @@ set(LIBS
 
 if (UNIX)
     set(LIBS ${LIBS} gcov)
+elseif(WIN32)
+    set(LIBS ${LIBS} ${WS2_32_LIBRARY})
 endif()
 
 target_link_libraries(${TARGET_NAME} ${LIBS})
