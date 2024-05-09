@@ -22,6 +22,7 @@
 #ifndef MCUTILS_ASTRO_EPHEMERIS_H_
 #define MCUTILS_ASTRO_EPHEMERIS_H_
 
+#include <mcutils/defs.h>
 #include <mcutils/astro/Coordinates.h>
 #include <mcutils/astro/JulianDate.h>
 #include <mcutils/time/DateTime.h>
@@ -34,7 +35,7 @@ namespace mc {
  * ### Refernces:
  * - Meeus J.: Astronomical Algorithms, 1998
  */
-class Ephemeris
+class MCUTILSAPI Ephemeris
 {
 public:
 

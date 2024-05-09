@@ -24,6 +24,7 @@
 
 #include <cstdint>
 
+#include <mcutils/defs.h>
 #include <mcutils/Types.h>
 
 namespace mc {
@@ -34,28 +35,28 @@ namespace Net {
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-UInt16 HostToNet(UInt16 val);
+MCUTILSAPI UInt16 HostToNet(UInt16 val);
 
 /**
  * @brief Converts values between host and network byte order.
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-UInt32 HostToNet(UInt32 val);
+MCUTILSAPI UInt32 HostToNet(UInt32 val);
 
 /**
  * @brief Converts values between host and network byte order.
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-float HostToNet(float val);
+MCUTILSAPI float HostToNet(float val);
 
 /**
  * @brief Converts values between host and network byte order.
  * @param val value expressed in host byte order
  * @return value expressed in network byte order
  */
-double HostToNet(double val);
+MCUTILSAPI double HostToNet(double val);
 
 } // namespace Net
 } // namespace mc

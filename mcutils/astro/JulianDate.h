@@ -22,6 +22,7 @@
 #ifndef MCUTILS_ASTRO_JULIANDATE_H_
 #define MCUTILS_ASTRO_JULIANDATE_H_
 
+#include <mcutils/defs.h>
 #include <mcutils/time/DateTime.h>
 
 namespace mc {
@@ -33,7 +34,7 @@ namespace mc {
  * - Meeus J.: Astronomical Algorithms, 1998
  * - [Julian day - Wikipedia](https://en.wikipedia.org/wiki/Julian_day)
  */
-class JulianDate
+class MCUTILSAPI JulianDate
 {
 public:
 
