@@ -9,7 +9,6 @@ endif()
 ################################################################################
 
 find_package(GTest REQUIRED)
-find_package(Threads REQUIRED)
 
 if (UNIX)
     find_package(Armadillo REQUIRED)
