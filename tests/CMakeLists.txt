@@ -28,6 +28,7 @@ set(SOURCES
     main.cpp
 
     astro/TestEphemeris.cpp
+    astro/TestGregorianCal.cpp
     astro/TestJulianDate.cpp
     astro/TestRaDec2AzEl.cpp
 
