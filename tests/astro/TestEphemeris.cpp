@@ -14,7 +14,7 @@ protected:
 
 TEST_F(TestEphemeris, CanComputeSun)
 {
-    // expected values calculated with PyEphen
+    // expected values calculated with PyEphem
     // tests/astro/python/test_ephemeris.py
 
     mc::DateTime dt;
