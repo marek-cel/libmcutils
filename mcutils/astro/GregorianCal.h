@@ -22,6 +22,7 @@
 #ifndef MCUTILS_ASTRO_GREGORIANCAL_H_
 #define MCUTILS_ASTRO_GREGORIANCAL_H_
 
+#include <mcutils/defs.h>
 #include <mcutils/time/DateTime.h>
 
 namespace mc {
@@ -32,7 +33,7 @@ namespace mc {
  * ### Refernces:
  * - [Gregorian calendar - Wikipedia](https://en.wikipedia.org/wiki/Gregorian_calendar)
  */
-class GregorianCal
+class MCUTILSAPI GregorianCal
 {
 public:
 

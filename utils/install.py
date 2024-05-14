@@ -41,3 +41,4 @@ if __name__ == "__main__":
     build()
     os.chdir("..")
     install()
+    input("Press Enter to continue...")

@@ -2,21 +2,21 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
-add_definitions(-DTEST_USING_ARMADILLO)
+if (UNIX)
+    add_definitions(-DTEST_USING_ARMADILLO)
+endif()
 
 ################################################################################
 
-find_package(Armadillo REQUIRED)
 find_package(GTest REQUIRED)
-find_package(Threads REQUIRED)
+
+if (UNIX)
+    find_package(Armadillo REQUIRED)
+endif()
 
 ################################################################################
 
 include_directories(.)
-
-if (WIN32)
-    include_directories("${ARMADILLO_INCLUDE_DIRS}/armadillo/include")
-endif()
 
 ################################################################################
 
@@ -102,11 +102,10 @@ set(LIBS
     mcutils
     GTest::gtest
     GTest::gtest_main
-    ${ARMADILLO_LIBRARIES}
 )
 
 if (UNIX)
-    set(LIBS ${LIBS} gcov)
+    set(LIBS ${LIBS} ${ARMADILLO_LIBRARIES} gcov)
 elseif(WIN32)
     set(LIBS ${LIBS} ws2_32)
 endif()

@@ -22,6 +22,7 @@
 #ifndef MCUTILS_ASTRO_UTILS_H_
 #define MCUTILS_ASTRO_UTILS_H_
 
+#include <mcutils/defs.h>
 #include <mcutils/astro/Coordinates.h>
 
 namespace mc {
@@ -33,7 +34,7 @@ namespace mc {
  * @param lat [rad] geodetic latitude (positive north)
  * @param lst [rad] Local Siderial Time
  */
-AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst);
+MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst);
 
 /**
  * @brief Converts from equatorial (right ascension, declination) to horizontal
@@ -43,7 +44,7 @@ AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst);
  * @param cosLat [-] latitude cosine
  * @param lst [rad] Local Siderial Time
  */
-AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst);
+MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst);
 
 } // namespace mc
 
