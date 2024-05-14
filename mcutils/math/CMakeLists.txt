@@ -7,7 +7,6 @@ set(HEADERS
     DegMinSec.h
     EulerRect.h
     GaussJordan.h
-    Integrator.h
     Math.h
     Matrix3x3.h
     Matrix4x4.h
@@ -30,13 +29,11 @@ set(HEADERS
 set(SOURCES
     Angles.cpp
     DegMinSec.cpp
-    EulerRect.cpp
     Matrix3x3.cpp
     Matrix4x4.cpp
     Matrix6x6.cpp
     Quaternion.cpp
     Random.cpp
-    RungeKutta4.cpp
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp

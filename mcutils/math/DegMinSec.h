@@ -35,30 +35,24 @@ class MCUTILSAPI DegMinSec
 {
 public:
 
-    /** @brief Constructor. */
-    DegMinSec() = default;
-
     /**
      * @brief Constructor.
      * @param angle [rad] angle
      */
-    explicit DegMinSec(double angle);
-
-    /** @brief Destructor. */
-    ~DegMinSec() = default;
+    explicit DegMinSec(double angle = 0.0);
 
     /** @return true if all items are valid */
     bool IsValid() const;
 
-    inline int    deg() const { return deg_; }
-    inline int    min() const { return min_; }
-    inline double sec() const { return sec_; }
+    inline int    deg() const { return _deg; }
+    inline int    min() const { return _min; }
+    inline double sec() const { return _sec; }
 
     /**
      * @brief Returns angle expressed in radians.
      * @return angle expressed in radians
      */
-    inline double GetAngle() const { return angle_; }
+    inline double GetAngle() const { return _angle; }
 
     /**
      * @brief Sets angle value.
@@ -77,11 +71,11 @@ public:
 
 private:
 
-    double angle_ = 0.0;    ///< [rad] angle
+    double _angle = 0.0;    ///< [rad] angle
 
-    int    deg_ = 0;        ///< degree part
-    int    min_ = 0;        ///< minute part (always greater than or equal to 0)
-    double sec_ = 0.0;      ///< second part (always greater than or equal to 0)
+    int    _deg = 0;        ///< degree part
+    int    _min = 0;        ///< minute part (always greater than or equal to 0)
+    double _sec = 0.0;      ///< second part (always greater than or equal to 0)
 };
 
 } // namespace mc

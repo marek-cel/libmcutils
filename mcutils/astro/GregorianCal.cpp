@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -20,27 +20,45 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/ctrl/AWFilter.h>
-
-#include <mcutils/math/Math.h>
+#include <mcutils/astro/GregorianCal.h>
 
 namespace mc {
 
-AWFilter::AWFilter(double min, double max, double kaw)
-    : min_(min)
-    , max_(max)
-    , kaw_(kaw)
-{}
-
-void AWFilter::Update(double dt, double y_p, double y_i, double y_d,
-                      double* value, double* error_i, const PID*)
+double GregorianCal::IsLeapYear(unsigned short year)
 {
-    double y = y_p + y_i + y_d;
-    value_ = Math::Satur(min_, max_, y);
-    delta_ = y - value_;
+    if ( year % 4 == 0 )
+    {
+        if ( year % 100 != 0 || year % 400 == 0 )
+        {
+            return true;
+        }
+    }
 
-    *value = value_;
-    *error_i -= kaw_ * delta_ * dt;
+    return false;
+}
+
+double GregorianCal::GetDayOfYear(const DateTime& dt)
+{
+    double doy = 0.0;
+
+    if ( dt.month >  1 ) doy += 31;
+    if ( dt.month >  2 ) doy += IsLeapYear(dt.year) ? 29 : 28;
+    if ( dt.month >  3 ) doy += 31;
+    if ( dt.month >  4 ) doy += 30;
+    if ( dt.month >  5 ) doy += 31;
+    if ( dt.month >  6 ) doy += 30;
+    if ( dt.month >  7 ) doy += 31;
+    if ( dt.month >  8 ) doy += 31;
+    if ( dt.month >  9 ) doy += 30;
+    if ( dt.month > 10 ) doy += 31;
+    if ( dt.month > 11 ) doy += 30;
+
+    doy += static_cast<double>(dt.day - 1);
+    doy += static_cast<double>(dt.hour)   / 24.0;
+    doy += static_cast<double>(dt.minute) / (24.0 * 60.0);
+    doy += static_cast<double>(dt.second) / (24.0 * 60.0 * 60.0);
+
+    return doy;
 }
 
 } // namespace mc

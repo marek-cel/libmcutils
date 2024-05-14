@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,31 +19,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_NET_ENDIANNESS_H_
+#define MCUTILS_NET_ENDIANNESS_H_
 
-#include <mcutils/ctrl/AWBackCalc.h>
+#include <cstdint>
 
-#include <mcutils/ctrl/PID.h>
-#include <mcutils/math/Math.h>
+#include <mcutils/defs.h>
+#include <mcutils/Types.h>
 
 namespace mc {
+namespace Net {
 
-AWBackCalc::AWBackCalc(double min, double max)
-    : min_(min)
-    , max_(max)
-{}
+/**
+ * @brief Converts values between host and network byte order.
+ * @param val value expressed in host byte order
+ * @return value expressed in network byte order
+ */
+MCUTILSAPI UInt16 HostToNet(UInt16 val);
 
-void AWBackCalc::Update(double, double y_p, double y_i, double y_d,
-                        double* value, double* error_i, const PID* pid)
-{
-    double y = y_p + y_i + y_d;
+/**
+ * @brief Converts values between host and network byte order.
+ * @param val value expressed in host byte order
+ * @return value expressed in network byte order
+ */
+MCUTILSAPI UInt32 HostToNet(UInt32 val);
 
-    *value = Math::Satur(min_, max_, y);
+/**
+ * @brief Converts values between host and network byte order.
+ * @param val value expressed in host byte order
+ * @return value expressed in network byte order
+ */
+MCUTILSAPI float HostToNet(float val);
 
-    if (fabs(pid->ki()) > 0.0)
-    {
-        double y_pd = Math::Satur(min_, max_, y_p + y_d);
-        *error_i = (*value - y_pd) / pid->ki();
-    }
-}
+/**
+ * @brief Converts values between host and network byte order.
+ * @param val value expressed in host byte order
+ * @return value expressed in network byte order
+ */
+MCUTILSAPI double HostToNet(double val);
 
+} // namespace Net
 } // namespace mc
+
+#endif // MCUTILS_NET_ENDIANNESS_H_

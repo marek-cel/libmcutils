@@ -49,19 +49,13 @@ public:
      */
     static double Normalize(double val, double min = 0.0);
 
-    /** Constructor. */
-    Angles() = default;
-
     /**
      * @brief Constructor.
      * @param phi [rad] angle of rotation about x-axis
      * @param tht [rad] angle of rotation about y-axis
      * @param psi [rad] angle of rotation about z-axis
      */
-    Angles(double phi, double tht, double psi);
-
-    /** @brief Destructor. */
-    ~Angles() = default;
+    Angles(double phi = 0.0, double tht = 0.0, double psi = 0.0);
 
     /** @return true if all items are valid */
     bool IsValid() const;
@@ -83,12 +77,12 @@ public:
     /** @brief Returns string represtation of the angles. */
     std::string ToString() const;
 
-    inline double  phi() const { return phi_; }
-    inline double  tht() const { return tht_; }
-    inline double  psi() const { return psi_; }
-    inline double& phi()       { return phi_; }
-    inline double& tht()       { return tht_; }
-    inline double& psi()       { return psi_; }
+    inline double  phi() const { return _phi; }
+    inline double  tht() const { return _tht; }
+    inline double  psi() const { return _psi; }
+    inline double& phi()       { return _phi; }
+    inline double& tht()       { return _tht; }
+    inline double& psi()       { return _psi; }
 
     /** @brief Equality operator. */
     bool operator==(const Angles& angl) const;
@@ -98,9 +92,9 @@ public:
 
 private:
 
-    double phi_ = 0.0;  ///< [rad] angle of rotation about x-axis
-    double tht_ = 0.0;  ///< [rad] angle of rotation about y-axis
-    double psi_ = 0.0;  ///< [rad] angle of rotation about z-axis
+    double _phi = 0.0;  ///< [rad] angle of rotation about x-axis
+    double _tht = 0.0;  ///< [rad] angle of rotation about y-axis
+    double _psi = 0.0;  ///< [rad] angle of rotation about z-axis
 };
 
 } // namespace mc

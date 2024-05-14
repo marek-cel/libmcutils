@@ -28,29 +28,29 @@
 namespace mc {
 
 LowPassFilter::LowPassFilter(double omega, double value)
-    : omega_(omega)
-    , time_const_(1.0 / omega)
-    , value_(value)
+    : _omega(omega)
+    , _time_const(1.0 / omega)
+    , _value(value)
 {}
 
 void LowPassFilter::SetCutoffFreq(double freq)
 {
-    omega_ = 2.0 * M_PI * std::max(0.0, freq);
-    time_const_ = 1.0 / omega_;
+    _omega = 2.0 * M_PI * std::max(0.0, freq);
+    _time_const = 1.0 / _omega;
 }
 
 void LowPassFilter::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        value_ += (1.0 - exp(-dt / time_const_)) * (u - value_);
+        _value += (1.0 - exp(-dt / _time_const)) * (u - _value);
     }
 }
 
 void LowPassFilter::set_omega(double omega)
 {
-    omega_ = std::max(0.0, omega);
-    time_const_ = 1.0 / omega_;
+    _omega = std::max(0.0, omega);
+    _time_const = 1.0 / _omega;
 }
 
 } // namespace mc

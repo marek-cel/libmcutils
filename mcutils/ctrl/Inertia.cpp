@@ -37,15 +37,15 @@ double Inertia::Calculate(double u, double y, double dt, double tc)
 }
 
 Inertia::Inertia(double tc, double value)
-    : time_const_(tc)
-    , value_(value)
+    : _time_const(tc)
+    , _value(value)
 {}
 
 void Inertia::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        value_ = Calculate(u, value_, dt, time_const_);
+        _value = Calculate(u, _value, dt, _time_const);
     }
 }
 
@@ -53,7 +53,7 @@ void Inertia::set_time_const(double time_const)
 {
     if ( time_const > 0.0 )
     {
-        time_const_ = time_const;
+        _time_const = time_const;
     }
 }
 

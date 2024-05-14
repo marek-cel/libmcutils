@@ -34,9 +34,9 @@
 namespace mc {
 
 Random::Random()
-    : seed_(static_cast<unsigned int>(time(nullptr)))
+    : _seed(static_cast<unsigned int>(time(nullptr)))
 {
-    srand(seed_);
+    srand(_seed);
 }
 
 int Random::GetRandom(int min, int max)
@@ -44,14 +44,15 @@ int Random::GetRandom(int min, int max)
     if ( max > min && max <= RAND_MAX )
     {
 #       ifdef _MSC_VER
-        rand_s(&rand_);
-        return min + rand_ % (max - min + 1);
-        //return min + rand() % (max - min + 1);
+        // TODO: switch to rand_s()
+        //rand_s(&_rand);
+        //return min + _rand % (max - min + 1);
+        return min + rand() % (max - min + 1);
 #       else
-        mutex_.lock();
-        rand_ = rand_r(&seed_);
-        mutex_.unlock();
-        return min + rand_ % (max - min + 1);
+        _mutex.lock();
+        _rand = rand_r(&_seed);
+        _mutex.unlock();
+        return min + _rand % (max - min + 1);
 #       endif
     }
 

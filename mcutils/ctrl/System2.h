@@ -57,14 +57,14 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline double c1() const { return c1_; }
-    inline double c2() const { return c2_; }
-    inline double c3() const { return c3_; }
-    inline double c4() const { return c4_; }
-    inline double c5() const { return c5_; }
-    inline double c6() const { return c6_; }
+    inline double c1() const { return _c1; }
+    inline double c2() const { return _c2; }
+    inline double c3() const { return _c3; }
+    inline double c4() const { return _c4; }
+    inline double c5() const { return _c5; }
+    inline double c6() const { return _c6; }
 
     /**
      * @brief Sets output value
@@ -72,29 +72,29 @@ public:
      */
     void set_value(double value);
 
-    inline void set_c1(double c1) { c1_ = c1; }
-    inline void set_c2(double c2) { c2_ = c2; }
-    inline void set_c3(double c3) { c3_ = c3; }
-    inline void set_c4(double c4) { c4_ = c4; }
-    inline void set_c5(double c5) { c5_ = c5; }
-    inline void set_c6(double c6) { c6_ = c6; }
+    inline void set_c1(double c1) { _c1 = c1; }
+    inline void set_c2(double c2) { _c2 = c2; }
+    inline void set_c3(double c3) { _c3 = c3; }
+    inline void set_c4(double c4) { _c4 = c4; }
+    inline void set_c5(double c5) { _c5 = c5; }
+    inline void set_c6(double c6) { _c6 = c6; }
 
 private:
 
-    double c1_ = 0.0;       ///< c1 coefficient
-    double c2_ = 0.0;       ///< c2 coefficient
-    double c3_ = 0.0;       ///< c3 coefficient
-    double c4_ = 0.0;       ///< c4 coefficient
-    double c5_ = 0.0;       ///< c5 coefficient
-    double c6_ = 0.0;       ///< c6 coefficient
+    double _c1 = 0.0;       ///< c1 coefficient
+    double _c2 = 0.0;       ///< c2 coefficient
+    double _c3 = 0.0;       ///< c3 coefficient
+    double _c4 = 0.0;       ///< c4 coefficient
+    double _c5 = 0.0;       ///< c5 coefficient
+    double _c6 = 0.0;       ///< c6 coefficient
 
-    double u_prev_1_ = 0.0; ///< input previous value
-    double u_prev_2_ = 0.0; ///< input value 2 steps before
+    double _u_prev_1 = 0.0; ///< input previous value
+    double _u_prev_2 = 0.0; ///< input value 2 steps before
 
-    double y_prev_1_ = 0.0; ///< previous value
-    double y_prev_2_ = 0.0; ///< value 2 steps before
+    double _y_prev_1 = 0.0; ///< previous value
+    double _y_prev_2 = 0.0; ///< value 2 steps before
 
-    double value_ = 0.0;    ///< current value
+    double _value = 0.0;    ///< current value
 };
 
 } // namespace mc

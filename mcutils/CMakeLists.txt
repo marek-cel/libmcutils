@@ -22,20 +22,24 @@ set(SOURCES
 
 ################################################################################
 
+add_subdirectory(astro)
 add_subdirectory(ctrl)
 add_subdirectory(geo)
 add_subdirectory(math)
 add_subdirectory(misc)
+add_subdirectory(net)
 add_subdirectory(physics)
 add_subdirectory(time)
 
 ################################################################################
 
 add_library(${TARGET_NAME} ${SOURCES}
+    $<TARGET_OBJECTS:astro>
     $<TARGET_OBJECTS:ctrl>
     $<TARGET_OBJECTS:geo>
     $<TARGET_OBJECTS:math>
     $<TARGET_OBJECTS:misc>
+    $<TARGET_OBJECTS:net>
     $<TARGET_OBJECTS:time>
 )
 
@@ -56,5 +60,11 @@ install(TARGETS ${TARGET_NAME}
 
 ################################################################################
 
-target_link_libraries(${TARGET_NAME})
+if(WIN32)
+    set(LIBS ws2_32)
+endif()
+
+################################################################################
+
+target_link_libraries(${TARGET_NAME} ${LIBS})
 

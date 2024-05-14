@@ -94,7 +94,7 @@ public:
     /** @brief Sets all vector elements to zero. */
     void Zeroize();
 
-    unsigned int size() const { return size_; }
+    unsigned int size() const { return _size; }
 
     /**
      * @brief Elements accessor.
@@ -104,7 +104,7 @@ public:
      */
     inline double operator()(unsigned int index) const
     {
-        return elements_[ index ];
+        return _elements[index];
     }
 
     /**
@@ -115,7 +115,7 @@ public:
      */
     inline double& operator()(unsigned int index)
     {
-        return elements_[index];
+        return _elements[index];
     }
 
     /** @brief Assignment operator. */
@@ -153,8 +153,8 @@ public:
 
 protected:
 
-    unsigned int size_ = 0;         ///< vector size
-    double* elements_ = nullptr;    ///< vector elements
+    unsigned int _size = 0;         ///< vector size
+    double* _elements = nullptr;    ///< vector elements
 
     /** @brief Adds vector. */
     void Add(const Vector& vect);
@@ -182,7 +182,5 @@ inline Vector operator*(double val, const Vector& vect)
 }
 
 } // namespace mc
-
-////////////////////////////////////////////////////////////////////////////////
 
 #endif // MCUTILS_MATH_VECTOR_H_

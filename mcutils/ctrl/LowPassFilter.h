@@ -58,8 +58,8 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
-    inline double omega() const { return omega_; }
+    inline double value() const { return _value; }
+    inline double omega() const { return _omega; }
 
     /**
      * @brief Sets cutoff angular frequency.
@@ -71,13 +71,13 @@ public:
      * @brief Sets output value
      * @param value output value
      */
-    inline void set_value(double value) { value_ = value; }
+    inline void set_value(double value) { _value = value; }
 
 private:
 
-    double omega_ = 0.0;        ///< [rad/s] cutoff angular frequency
-    double time_const_ = 0.0;   ///< time constant
-    double value_ = 0.0;        ///< current value
+    double _omega = 0.0;        ///< [rad/s] cutoff angular frequency
+    double _time_const = 0.0;   ///< time constant
+    double _value = 0.0;        ///< current value
 };
 
 } // namespace mc

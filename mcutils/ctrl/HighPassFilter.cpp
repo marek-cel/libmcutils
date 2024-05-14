@@ -28,31 +28,31 @@
 namespace mc {
 
 HighPassFilter::HighPassFilter(double omega, double value)
-    : omega_(omega)
-    , time_const_(1.0 / omega_)
-    , value_(value)
+    : _omega(omega)
+    , _time_const(1.0 / _omega)
+    , _value(value)
 {}
 
 void HighPassFilter::SetCutoffFreq(double freq)
 {
-    omega_ = 2.0 * M_PI * std::max(0.0, freq);
-    time_const_ = 1.0 / omega_;
+    _omega = 2.0 * M_PI * std::max(0.0, freq);
+    _time_const = 1.0 / _omega;
 }
 
 void HighPassFilter::Update(double dt, double u)
 {
     if (dt > 0.0)
     {
-        double u_dif = (dt > 0.0) ? (u - u_prev_) / dt : 0.0;
-        value_ += (1.0 - exp(-dt / time_const_)) * (time_const_ * u_dif - value_);
-        u_prev_ = u;
+        double u_dif = (dt > 0.0) ? (u - _u_prev) / dt : 0.0;
+        _value += (1.0 - exp(-dt / _time_const)) * (_time_const * u_dif - _value);
+        _u_prev = u;
     }
 }
 
 void HighPassFilter::set_omega(double omega)
 {
-    omega_ = std::max(0.0, omega);
-    time_const_ = 1.0 / omega_;
+    _omega = std::max(0.0, omega);
+    _time_const = 1.0 / _omega;
 }
 
 } // namespace mc

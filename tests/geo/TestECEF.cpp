@@ -106,10 +106,9 @@ TEST_F(TestECEF, CanInstantiateAndSetData)
     EXPECT_NEAR(ecef.ep()  , mc::DataMars::ep  , 1.0e-4);
 }
 
-TEST_F(TestECEF, CanConvertFromCartToGeo)
+TEST_F(TestECEF, CanConvertFromCartToGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
     mc::Vector3 pos_cart;
 
@@ -127,147 +126,13 @@ TEST_F(TestECEF, CanConvertFromCartToGeo)
     EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.lon, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_cart.x() = mc::DataWGS84::a + 100.0;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 100.0 , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 100.0 , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_cart.x() = 0.0;
-    pos_cart.y() = mc::DataWGS84::a;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_cart.x() = -mc::DataWGS84::a;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, 0.0  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0  , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, 0.0  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0  , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_cart.x() = 0.0;
-    pos_cart.y() = -mc::DataWGS84::a;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat,  0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,  0.0    , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat,  0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,  0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 90N 0E
-    pos_cart.x() = 0.0;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = mc::DataWGS84::b;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 90S 0E
-    pos_cart.x() = 0.0;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = -mc::DataWGS84::b;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon,  0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,  0.0    , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon,  0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,  0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 5523628.670817468;
-    pos_cart.y() = 3189068.4999999995;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI * 30.0 / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI * 30.0 / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 4510023.924036823;
-    pos_cart.y() = 4510023.924036822;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat,    0.0 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,    0.0 , LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat,    0.0 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt,    0.0 , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 3189068.500000001;
-    pos_cart.y() = 5523628.670817467;
-    pos_cart.z() = 0.0;
-
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI * 60.0 / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_geo = ecef.ConvertCart2Geo(pos_cart);
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI * 60.0 / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanConvertFromCartToGeoAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Vector3 pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
@@ -287,10 +152,9 @@ TEST_F(TestECEF, CanConvertFromCartToGeo)
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanConvertFromGeoToCart)
+TEST_F(TestECEF, CanConvertFromGeoToCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
     mc::Vector3 pos_cart;
 
@@ -308,147 +172,13 @@ TEST_F(TestECEF, CanConvertFromGeoToCart)
     EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_geo.lat = 0.0;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 100.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a + 100.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a + 100.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_2;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_geo.lat = 0.0;
-    pos_geo.lon = -M_PI_2;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo );
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 90N 0E
-    pos_geo.lat = M_PI_2;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 90S 0E
-    pos_geo.lat = -M_PI_2;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), -mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), -mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_2 / 3.0;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 5523628.670817468  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3189068.4999999995 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 5523628.670817468  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3189068.4999999995 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_4;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 4510023.924036823, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 4510023.924036822, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 4510023.924036823, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 4510023.924036822, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = 2.0 * M_PI_2 / 3.0;
-    pos_geo.alt = 0.0;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 3189068.500000001, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 5523628.670817467, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 3189068.500000001, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 5523628.670817467, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanConvertFromGeoToCartAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Vector3 pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
@@ -468,7 +198,7 @@ TEST_F(TestECEF, CanConvertFromGeoToCart)
     EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanGetGeoOffset)
+TEST_F(TestECEF, CanGetGeoOffsetHeading0)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
 
@@ -503,6 +233,26 @@ TEST_F(TestECEF, CanGetGeoOffset)
     pos_geo_off = ecef.GetGeoOffset(0.0, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon - arc_min, tolerance);
+}
+
+TEST_F(TestECEF, CanGetGeoOffsetHeading90)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+
+    constexpr double nautical_mile = 1852.0;
+    constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
+
+    // as one nautical mile is equal to one arc minute only on the great circle
+    // tolerance for those tests is higher than for typical lat/lon position
+    constexpr double tolerance = 1.0e-5;
+
+    mc::Geo pos_geo;
+    mc::Geo pos_geo_off;
+
+    pos_geo.lat = 0.0;
+    pos_geo.lon = 0.0;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = 90
     pos_geo_off = ecef.GetGeoOffset(M_PI_2, nautical_mile, 0.0);
@@ -520,6 +270,26 @@ TEST_F(TestECEF, CanGetGeoOffset)
     pos_geo_off = ecef.GetGeoOffset(M_PI_2, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
+}
+
+TEST_F(TestECEF, CanGetGeoOffsetHeadingMinus90)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+
+    constexpr double nautical_mile = 1852.0;
+    constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
+
+    // as one nautical mile is equal to one arc minute only on the great circle
+    // tolerance for those tests is higher than for typical lat/lon position
+    constexpr double tolerance = 1.0e-5;
+
+    mc::Geo pos_geo;
+    mc::Geo pos_geo_off;
+
+    pos_geo.lat = 0.0;
+    pos_geo.lon = 0.0;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = -90
     pos_geo_off = ecef.GetGeoOffset(-M_PI_2, nautical_mile, 0.0);
@@ -537,6 +307,26 @@ TEST_F(TestECEF, CanGetGeoOffset)
     pos_geo_off = ecef.GetGeoOffset(-M_PI_2, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
+}
+
+TEST_F(TestECEF, CanGetGeoOffsetHeading180)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+
+    constexpr double nautical_mile = 1852.0;
+    constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
+
+    // as one nautical mile is equal to one arc minute only on the great circle
+    // tolerance for those tests is higher than for typical lat/lon position
+    constexpr double tolerance = 1.0e-5;
+
+    mc::Geo pos_geo;
+    mc::Geo pos_geo_off;
+
+    pos_geo.lat = 0.0;
+    pos_geo.lon = 0.0;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = 180
     pos_geo_off = ecef.GetGeoOffset(M_PI, nautical_mile, 0.0);
@@ -556,12 +346,10 @@ TEST_F(TestECEF, CanGetGeoOffset)
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 }
 
-TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Angles angles_ecef;
     mc::Angles angles_ned;
 
@@ -577,6 +365,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), 0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), 0.0    , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -590,6 +386,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), -M_PI_2    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), 0.0        , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), 1.5 * M_PI , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -603,6 +407,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), 0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), M_PI_2 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -618,12 +430,10 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NED)
     EXPECT_NEAR(angles_ned.psi(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
+TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Angles angles_ecef;
     mc::Angles angles_ned;
 
@@ -639,6 +449,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
     EXPECT_NEAR(angles_ecef.phi(),  0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -652,6 +470,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -665,6 +491,14 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -680,15 +514,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEF)
     EXPECT_NEAR(angles_ecef.phi(),  M_PI   , ATTITUDE_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Angles angles_ecef;
     mc::Angles angles_ned;
-
     mc::Quaternion ned2bas;
 
     // 0N 0E
@@ -708,6 +539,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
+    mc::Quaternion ned2bas;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -726,6 +566,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
+    mc::Quaternion ned2bas;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -744,6 +593,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_ned;
+    mc::Quaternion ned2bas;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -764,10 +622,9 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NED)
     EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
     mc::Angles angles_ecef;
     mc::Quaternion ecef2bas;
@@ -785,6 +642,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     EXPECT_NEAR(angles_ecef.phi(),  0.0    , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Quaternion ecef2bas;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -799,6 +664,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Quaternion ecef2bas;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -813,6 +686,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     EXPECT_NEAR(angles_ecef.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Quaternion ecef2bas;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -829,18 +710,11 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEF)
     EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanUpdateAndGetPosGeo)
+TEST_F(TestECEF, CanUpdateAndGetPosGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
     mc::Vector3 pos_cart;
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
 
     // 0N 0E
     pos_cart.x() = mc::DataWGS84::a;
@@ -853,96 +727,13 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeo)
     EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.lon, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_cart.x() = mc::DataWGS84::a + 100.0;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 100.0 , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_cart.x() = 0.0;
-    pos_cart.y() = mc::DataWGS84::a;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_cart.x() = -mc::DataWGS84::a;
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0  , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_cart.x() = 0.0;
-    pos_cart.y() = -mc::DataWGS84::a;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0     , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0     , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 5523628.670817468;
-    pos_cart.y() = 3189068.4999999995;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 30.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 4510023.924036823;
-    pos_cart.y() = 4510023.924036822;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 45.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 3189068.500000001;
-    pos_cart.y() = 5523628.670817467;
-    pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 60.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanUpdateAndGetPosGeoAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Vector3 pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
@@ -959,17 +750,11 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeo)
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanUpdateAndGetPosCart)
+TEST_F(TestECEF, CanUpdateAndGetPosCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
     mc::Vector3 pos_cart;
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
 
     // 0N 0E
     pos_geo.lat = 0.0;
@@ -981,111 +766,13 @@ TEST_F(TestECEF, CanUpdateAndGetPosCart)
     EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_geo.lat = 0.0;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 100.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a + 100.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_2;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_geo.lat = 0.0;
-    pos_geo.lon = -M_PI_2;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 90N 0E
-    pos_geo.lat = M_PI_2;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 90S 0E
-    pos_geo.lat = -M_PI_2;
-    pos_geo.lon = 0.0;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), -mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_2 / 3.0;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 5523628.670817468  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3189068.4999999995 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = M_PI_4;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 4510023.924036823, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 4510023.924036822, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    // expected values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 0.0;
-    pos_geo.lon = 2.0 * M_PI_2 / 3.0;
-    pos_geo.alt = 0.0;
-
-    ecef.SetPositionFromGeo(pos_geo);
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 3189068.500000001, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 5523628.670817467, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Vector3 pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
@@ -1104,7 +791,6 @@ TEST_F(TestECEF, CanUpdateAndGetPosCart)
 TEST_F(TestECEF, CanGetENU2NED)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Matrix3x3 enu2ned = ecef.enu2ned();
 
     const mc::Vector3 v_enu(1.0, 2.0, 3.0);
@@ -1118,7 +804,6 @@ TEST_F(TestECEF, CanGetENU2NED)
 TEST_F(TestECEF, CanGetNED2ENU)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Matrix3x3 ned2enu = ecef.ned2enu();
 
     const mc::Vector3 v_ned(1.0, 2.0, 3.0);
@@ -1129,12 +814,10 @@ TEST_F(TestECEF, CanGetNED2ENU)
     EXPECT_DOUBLE_EQ(v_enu.z(), -3.0);
 }
 
-TEST_F(TestECEF, CanGetENU2ECEF)
+TEST_F(TestECEF, CanGetENU2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Matrix3x3 enu2ecef;
 
     const mc::Vector3 v_enu(1.0, 2.0, 3.0);
@@ -1152,6 +835,16 @@ TEST_F(TestECEF, CanGetENU2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(),  3.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(),  1.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  2.0);
+}
+
+TEST_F(TestECEF, CanGetENU2ECEFAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 enu2ecef;
+
+    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -1165,6 +858,16 @@ TEST_F(TestECEF, CanGetENU2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(), -1.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(),  3.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  2.0);
+}
+
+TEST_F(TestECEF, CanGetENU2ECEFAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 enu2ecef;
+
+    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -1178,6 +881,16 @@ TEST_F(TestECEF, CanGetENU2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(),  1.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(), -3.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  2.0);
+}
+
+TEST_F(TestECEF, CanGetENU2ECEFAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 enu2ecef;
+
+    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -1193,12 +906,10 @@ TEST_F(TestECEF, CanGetENU2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.z(),  2.0);
 }
 
-TEST_F(TestECEF, CanGetNED2ECEF)
+TEST_F(TestECEF, CanGetNED2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Matrix3x3 ned2ecef;
 
     const mc::Vector3 v_ned(1.0, 2.0, 3.0);
@@ -1216,6 +927,16 @@ TEST_F(TestECEF, CanGetNED2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(), -3.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(),  2.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  1.0);
+}
+
+TEST_F(TestECEF, CanGetNED2ECEFAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ned2ecef;
+
+    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -1229,6 +950,16 @@ TEST_F(TestECEF, CanGetNED2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(), -2.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(), -3.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  1.0);
+}
+
+TEST_F(TestECEF, CanGetNED2ECEFAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ned2ecef;
+
+    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -1242,6 +973,16 @@ TEST_F(TestECEF, CanGetNED2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.x(),  2.0);
     EXPECT_DOUBLE_EQ(v_ecef.y(),  3.0);
     EXPECT_DOUBLE_EQ(v_ecef.z(),  1.0);
+}
+
+TEST_F(TestECEF, CanGetNED2ECEFAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ned2ecef;
+
+    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
+    mc::Vector3 v_ecef;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -1257,12 +998,10 @@ TEST_F(TestECEF, CanGetNED2ECEF)
     EXPECT_DOUBLE_EQ(v_ecef.z(),  1.0);
 }
 
-TEST_F(TestECEF, CanGetECEF2ENU)
+TEST_F(TestECEF, CanGetECEF2ENUAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Matrix3x3 ecef2enu;
 
     const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
@@ -1280,6 +1019,16 @@ TEST_F(TestECEF, CanGetECEF2ENU)
     EXPECT_DOUBLE_EQ(v_enu.x(),  2.0);
     EXPECT_DOUBLE_EQ(v_enu.y(),  3.0);
     EXPECT_DOUBLE_EQ(v_enu.z(),  1.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2ENUAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2enu;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_enu;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -1293,6 +1042,16 @@ TEST_F(TestECEF, CanGetECEF2ENU)
     EXPECT_DOUBLE_EQ(v_enu.x(), -1.0);
     EXPECT_DOUBLE_EQ(v_enu.y(),  3.0);
     EXPECT_DOUBLE_EQ(v_enu.z(),  2.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2ENUAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2enu;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_enu;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -1306,6 +1065,16 @@ TEST_F(TestECEF, CanGetECEF2ENU)
     EXPECT_DOUBLE_EQ(v_enu.x(),  1.0);
     EXPECT_DOUBLE_EQ(v_enu.y(),  3.0);
     EXPECT_DOUBLE_EQ(v_enu.z(), -2.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2ENUAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2enu;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_enu;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -1321,12 +1090,10 @@ TEST_F(TestECEF, CanGetECEF2ENU)
     EXPECT_DOUBLE_EQ(v_enu.z(), -1.0);
 }
 
-TEST_F(TestECEF, CanGetECEF2NED)
+TEST_F(TestECEF, CanGetECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo;
-
     mc::Matrix3x3 ecef2ned;
 
     const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
@@ -1344,6 +1111,16 @@ TEST_F(TestECEF, CanGetECEF2NED)
     EXPECT_DOUBLE_EQ(v_ned.x(),  3.0);
     EXPECT_DOUBLE_EQ(v_ned.y(),  2.0);
     EXPECT_DOUBLE_EQ(v_ned.z(), -1.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2NEDAt0N90E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2ned;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_ned;
 
     // 0N 90E
     pos_geo.lat = 0.0;
@@ -1357,6 +1134,16 @@ TEST_F(TestECEF, CanGetECEF2NED)
     EXPECT_DOUBLE_EQ(v_ned.x(),  3.0);
     EXPECT_DOUBLE_EQ(v_ned.y(), -1.0);
     EXPECT_DOUBLE_EQ(v_ned.z(), -2.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2NEDAt0N90W)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2ned;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_ned;
 
     // 0N 90W
     pos_geo.lat = 0.0;
@@ -1370,6 +1157,16 @@ TEST_F(TestECEF, CanGetECEF2NED)
     EXPECT_DOUBLE_EQ(v_ned.x(),  3.0);
     EXPECT_DOUBLE_EQ(v_ned.y(),  1.0);
     EXPECT_DOUBLE_EQ(v_ned.z(),  2.0);
+}
+
+TEST_F(TestECEF, CanGetECEF2NEDAt0N180E)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo;
+    mc::Matrix3x3 ecef2ned;
+
+    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3 v_ned;
 
     // 0N 180E
     pos_geo.lat = 0.0;
@@ -1385,10 +1182,9 @@ TEST_F(TestECEF, CanGetECEF2NED)
     EXPECT_DOUBLE_EQ(v_ned.z(),  1.0);
 }
 
-TEST_F(TestECEF, CanSetPositionFromGeo)
+TEST_F(TestECEF, CanSetPositionFromGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Geo pos_geo_in;
     mc::Geo pos_geo;
 
@@ -1403,90 +1199,13 @@ TEST_F(TestECEF, CanSetPositionFromGeo)
     EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.lon, 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = 0.0;
-    pos_geo_in.alt = 100.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 0.0   , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 100.0 , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = M_PI_2;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0    , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0    , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = M_PI;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, M_PI , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0  , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = -M_PI_2;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0     , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, -M_PI_2 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0     , LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = 30.0 * M_PI / 180.0;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 30.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = 45.0 * M_PI / 180.0;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 45.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    pos_geo_in.lat = 0.0;
-    pos_geo_in.lon = 60.0 * M_PI / 180.0;
-    pos_geo_in.alt = 0.0;
-    ecef.SetPositionFromGeo(pos_geo_in);
-
-    pos_geo = ecef.pos_geo();
-
-    EXPECT_NEAR(pos_geo.lat, 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon, 60.0 * M_PI / 180.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt, 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanSetPositionFromGeoAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Geo pos_geo_in;
+    mc::Geo pos_geo;
 
     // 45N 45E H=100m
     pos_geo_in.lat =  M_PI_4;
@@ -1501,10 +1220,9 @@ TEST_F(TestECEF, CanSetPositionFromGeo)
     EXPECT_NEAR(pos_geo.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanSetPositionFromCart)
+TEST_F(TestECEF, CanSetPositionFromCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
-
     mc::Vector3 pos_cart_in;
     mc::Vector3 pos_cart;
 
@@ -1518,111 +1236,13 @@ TEST_F(TestECEF, CanSetPositionFromCart)
     EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+}
 
-    // 0N 0E H=100m
-    pos_cart_in.x() = mc::DataWGS84::a + 100.0;
-    pos_cart_in.y() = 0.0;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), mc::DataWGS84::a + 100.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90E
-    pos_cart_in.x() = 0.0;
-    pos_cart_in.y() = mc::DataWGS84::a;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 180E
-    pos_cart_in.x() = -mc::DataWGS84::a;
-    pos_cart_in.y() = 0.0;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 90W
-    pos_cart_in.x() = 0.0;
-    pos_cart_in.y() = -mc::DataWGS84::a;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), -mc::DataWGS84::a, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 90N 0E
-    pos_cart_in.x() = 0.0;
-    pos_cart_in.y() = 0.0;
-    pos_cart_in.z() = mc::DataWGS84::b;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 90S 0E
-    pos_cart_in.x() = 0.0;
-    pos_cart_in.y() = 0.0;
-    pos_cart_in.z() = -mc::DataWGS84::b;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), -mc::DataWGS84::b, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 30E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart_in.x() = 5523628.670817468;
-    pos_cart_in.y() = 3189068.4999999995;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 5523628.670817468  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3189068.4999999995 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 45E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart_in.x() = 4510023.924036823;
-    pos_cart_in.y() = 4510023.924036822;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 4510023.924036823, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 4510023.924036822, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    // 0N 60E
-    // values calculated with PROJ4
-    // tests/geo/python/test_geo_ecef.py
-    pos_cart_in.x() = 3189068.500000001;
-    pos_cart_in.y() = 5523628.670817467;
-    pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
-
-    pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 3189068.500000001, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 5523628.670817467, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+TEST_F(TestECEF, CanSetPositionFromCartAt45N45E100H)
+{
+    mc::ECEF ecef(mc::DataWGS84::a, mc::DataWGS84::f);
+    mc::Vector3 pos_cart_in;
+    mc::Vector3 pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4

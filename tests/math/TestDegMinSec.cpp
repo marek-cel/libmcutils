@@ -12,19 +12,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestDegMinSec, CanConstruct)
-{
-    mc::DegMinSec* dms = nullptr;
-    EXPECT_NO_THROW(dms = new mc::DegMinSec());
-    delete dms;
-}
-
-TEST_F(TestDegMinSec, CanDestruct)
-{
-    mc::DegMinSec* dms = new mc::DegMinSec();
-    EXPECT_NO_THROW(delete dms);
-}
-
 TEST_F(TestDegMinSec, CanInstantiate)
 {
     mc::DegMinSec dms;
@@ -77,9 +64,9 @@ TEST_F(TestDegMinSec, CanCompare)
 
     mc::DegMinSec dms1(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
 
-    EXPECT_FALSE( dms == dms1 );
-    EXPECT_TRUE(  dms != dms1 );
+    EXPECT_FALSE(dms == dms1);
+    EXPECT_TRUE(dms != dms1);
     dms = dms1;
-    EXPECT_TRUE(  dms == dms1 );
-    EXPECT_FALSE( dms != dms1 );
+    EXPECT_TRUE(dms == dms1);
+    EXPECT_FALSE(dms != dms1);
 }

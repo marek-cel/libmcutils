@@ -20,22 +20,28 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/EulerRect.h>
+#include <mcutils/ctrl/PID_CondCalc.h>
+
+#include <mcutils/math/Math.h>
 
 namespace mc {
 
-void EulerRect::Integrate(double step, Vector* vect)
+PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
+                           double min, double max)
+    : PID(kp, ki, kd)
+    , _min(min)
+    , _max(max)
+{}
+
+void PID_CondCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
 {
-    xt_ = *vect;
+    double y = y_p + y_i + y_d;
 
-    k0_.Resize(vect->size());
-    k0_.Zeroize();
+    _value = Math::Satur(_min, _max, y);
 
-    // derivatives calculation
-    deriv_fun_(xt_, &k0_);
+    if (y != _value) _error_i = _error_i_prev;
 
-    // integration
-    *vect += k0_ * step;
+    _error_i_prev = _error_i;
 }
 
 } // namespace mc

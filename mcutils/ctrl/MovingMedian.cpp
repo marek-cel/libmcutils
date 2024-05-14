@@ -28,24 +28,24 @@
 namespace mc {
 
 MovingMedian::MovingMedian(unsigned int length , double value)
-    : length_(length)
-    , value_(value)
+    : _length(length)
+    , _value(value)
 {}
 
 void MovingMedian::Update(double, double u)
 {
-    fifo_.push_back(u);
+    _fifo.push_back(u);
 
-    while ( fifo_.size() > length_ )
+    while ( _fifo.size() > _length )
     {
-        fifo_.pop_front();
+        _fifo.pop_front();
     }
 
-    if ( fifo_.size() > 1 )
+    if ( _fifo.size() > 1 )
     {
         std::vector<double> v;
 
-        for ( double &val : fifo_ )
+        for ( double &val : _fifo )
         {
             v.push_back(val);
         }
@@ -57,16 +57,16 @@ void MovingMedian::Update(double, double u)
             int i1 = static_cast<int>(v.size()) / 2;
             int i2 = i1 - 1;
 
-            value_ = (v[i1] + v[i2]) / 2.0;
+            _value = (v[i1] + v[i2]) / 2.0;
         }
         else
         {
-            value_ = v[v.size() / 2];
+            _value = v[v.size() / 2];
         }
     }
     else
     {
-        value_ = u;
+        _value = u;
     }
 }
 

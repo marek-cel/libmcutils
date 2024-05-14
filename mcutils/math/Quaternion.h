@@ -107,14 +107,14 @@ public:
     /** @brief Returns string representation of the quaternion. */
     std::string ToString() const;
 
-    inline double  e0() const { return e0_; }
-    inline double  ex() const { return ex_; }
-    inline double  ey() const { return ey_; }
-    inline double  ez() const { return ez_; }
-    inline double& e0()       { return e0_; }
-    inline double& ex()       { return ex_; }
-    inline double& ey()       { return ey_; }
-    inline double& ez()       { return ez_; }
+    inline double  e0() const { return _e0; }
+    inline double  ex() const { return _ex; }
+    inline double  ey() const { return _ey; }
+    inline double  ez() const { return _ez; }
+    inline double& e0()       { return _e0; }
+    inline double& ex()       { return _ex; }
+    inline double& ey()       { return _ey; }
+    inline double& ez()       { return _ez; }
 
     /** @brief Addition operator. */
     Quaternion operator+(const Quaternion& quat) const;
@@ -151,10 +151,10 @@ public:
 
 private:
 
-    double e0_ = 1.0;   ///< quaternion e0 (w) component
-    double ex_ = 0.0;   ///< quaternion ex (x) component
-    double ey_ = 0.0;   ///< quaternion ey (y) component
-    double ez_ = 0.0;   ///< quaternion ez (z) component
+    double _e0 = 1.0;   ///< quaternion e0 (w) component
+    double _ex = 0.0;   ///< quaternion ex (x) component
+    double _ey = 0.0;   ///< quaternion ey (y) component
+    double _ez = 0.0;   ///< quaternion ez (z) component
 };
 
 /** @brief Multiplication operator (by scalar). */

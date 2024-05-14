@@ -10,11 +10,12 @@ RUN apt install -y \
     googletest-tools \
     lcov \
     libarmadillo-dev \
+    libeigen3-dev \
     libgmock-dev \
     libgtest-dev \
     python3-all
 
-ARG USERNAME=dev
+ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 

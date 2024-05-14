@@ -52,22 +52,21 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline unsigned int length() const { return length_; }
+    inline unsigned int length() const { return _length; }
 
     /**
      * @brief Sets length of the sliding window
      * @param length length of the sliding window
      */
-    inline void set_length(unsigned int length) { length_ = length; }
+    inline void set_length(unsigned int length) { _length = length; }
 
 private:
 
-    std::deque<double> fifo_;   ///< previous value fifo queue
-
-    unsigned int length_ = 0;   ///< length of the sliding window
-    double value_ = 0.0;        ///< current value
+    std::deque<double> _fifo;   ///< previous value fifo queue
+    unsigned int _length = 0;   ///< length of the sliding window
+    double _value = 0.0;        ///< current value
 };
 
 } // namespace mc

@@ -27,17 +27,17 @@
 namespace mc {
 
 Lead::Lead(double tc, double value)
-    : time_const_(tc)
-    , value_(value)
+    : _time_const(tc)
+    , _value(value)
 {}
 
 void Lead::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        double du_dt = (u - u_prev_) / dt;
-        value_ = time_const_ * du_dt + u;
-        u_prev_ = u;
+        double du_dt = (u - _u_prev) / dt;
+        _value = _time_const * du_dt + u;
+        _u_prev = u;
     }
 }
 
@@ -45,7 +45,7 @@ void Lead::set_time_const(double tc)
 {
     if ( tc > 0.0 )
     {
-        time_const_ = tc;
+        _time_const = tc;
     }
 }
 

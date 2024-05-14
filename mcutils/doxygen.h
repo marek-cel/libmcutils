@@ -51,6 +51,18 @@
  *
  * @subsection time
  * This module contains time and date ralted utilities.
+ * 
+ * @section Coding Style
+ * 
+ * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
+ * is used as a base style guide although, with the following exceptions:
+ * - Filenames should be either upper camel case or snake_case
+ * - C++ files should end in .cpp and header files should end in .h
+ * - Data members of classes are named like ordinary nonmember variables, but with a leading underscore
+ * - The open curly brace is on the start of the next line, with exception of namespaces
+ * - The close curly brace is on the last line by itself
+ * - Empty curly braces should be on the end of the last line 
+ * - Other exceptions are allowed in justified cases
  *
  * @section Licensing
  *

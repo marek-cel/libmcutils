@@ -59,34 +59,33 @@ public:
      */
     void Update(double dt, double u);
 
-    inline double value() const { return value_; }
+    inline double value() const { return _value; }
 
-    inline double c1() const { return c1_; }
-    inline double c2() const { return c2_; }
-    inline double c3() const { return c3_; }
-    inline double c4() const { return c4_; }
+    inline double c1() const { return _c1; }
+    inline double c2() const { return _c2; }
+    inline double c3() const { return _c3; }
+    inline double c4() const { return _c4; }
 
     /**
      * @brief Sets output value
      * @param value output value
      */
-    inline void set_value(double value) { value_ = value; }
+    inline void set_value(double value) { _value = value; }
 
-    inline void set_c1(double c1) { c1_ = c1; }
-    inline void set_c2(double c2) { c2_ = c2; }
-    inline void set_c3(double c3) { c3_ = c3; }
-    inline void set_c4(double c4) { c4_ = c4; }
+    inline void set_c1(double c1) { _c1 = c1; }
+    inline void set_c2(double c2) { _c2 = c2; }
+    inline void set_c3(double c3) { _c3 = c3; }
+    inline void set_c4(double c4) { _c4 = c4; }
 
 private:
 
-    double c1_ = 0.0;       ///< c1 coefficient of the transfer function
-    double c2_ = 0.0;       ///< c2 coefficient of the transfer function
-    double c3_ = 0.0;       ///< c3 coefficient of the transfer function
-    double c4_ = 0.0;       ///< c4 coefficient of the transfer function
+    double _c1 = 0.0;       ///< c1 coefficient of the transfer function
+    double _c2 = 0.0;       ///< c2 coefficient of the transfer function
+    double _c3 = 0.0;       ///< c3 coefficient of the transfer function
+    double _c4 = 0.0;       ///< c4 coefficient of the transfer function
 
-    double u_prev_ = 0.0;   ///< previous input value
-
-    double value_ = 0.0;    ///< current value
+    double _u_prev = 0.0;   ///< previous input value
+    double _value = 0.0;    ///< current value
 };
 
 } // namespace mc

@@ -14,81 +14,74 @@ protected:
 
 TEST_F(TestUnits, CanGetUnitConverter)
 {
-    EXPECT_EQ( nullptr, mc::Units::GetUnitConverter("gibberish"));
+    EXPECT_EQ(nullptr, mc::Units::GetUnitConverter("gibberish"));
 
     // angle
-    EXPECT_EQ(&mc::Units::dummy   , mc::Units::GetUnitConverter("rad"));
-    EXPECT_EQ(&mc::Units::deg2rad , mc::Units::GetUnitConverter("deg"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("rad")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::deg2rad(1.0), mc::Units::GetUnitConverter("deg")(1.0));
 
     // length
-    EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("m"));
-    EXPECT_EQ(&mc::Units::ft2m  , mc::Units::GetUnitConverter("ft"));
-    EXPECT_EQ(&mc::Units::in2m  , mc::Units::GetUnitConverter("in"));
-    EXPECT_EQ(&mc::Units::km2m  , mc::Units::GetUnitConverter("km"));
-    EXPECT_EQ(&mc::Units::nmi2m , mc::Units::GetUnitConverter("nmi"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("m")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::ft2m(1.0)  , mc::Units::GetUnitConverter("ft")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::in2m(1.0)  , mc::Units::GetUnitConverter("in")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::km2m(1.0)  , mc::Units::GetUnitConverter("km")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::nmi2m(1.0) , mc::Units::GetUnitConverter("nmi")(1.0));
 
     // area
-    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("sqm"));
-    EXPECT_EQ(&mc::Units::sqft2sqm , mc::Units::GetUnitConverter("sqft"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("sq_m")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::sqft2sqm(1.0), mc::Units::GetUnitConverter("sq_ft")(1.0));
 
     // volume
-    EXPECT_EQ(&mc::Units::dummy    , mc::Units::GetUnitConverter("cum"));
-    EXPECT_EQ(&mc::Units::cuft2cum , mc::Units::GetUnitConverter("cuft"));
-    EXPECT_EQ(&mc::Units::cuin2cum , mc::Units::GetUnitConverter("cuin"));
-    EXPECT_EQ(&mc::Units::l2cum    , mc::Units::GetUnitConverter("l"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("cu_m")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::cuft2cum(1.0) , mc::Units::GetUnitConverter("cu_ft")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::cuin2cum(1.0) , mc::Units::GetUnitConverter("cu_in")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::l2cum(1.0)    , mc::Units::GetUnitConverter("l")(1.0));
 
     // velocity
-    EXPECT_EQ(&mc::Units::dummy   , mc::Units::GetUnitConverter("mps"));
-    EXPECT_EQ(&mc::Units::fpm2mps , mc::Units::GetUnitConverter("fpm"));
-    EXPECT_EQ(&mc::Units::fps2mps , mc::Units::GetUnitConverter("fps"));
-    EXPECT_EQ(&mc::Units::kmh2mps , mc::Units::GetUnitConverter("kmh"));
-    EXPECT_EQ(&mc::Units::kts2mps , mc::Units::GetUnitConverter("kts"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("mps")(1.0));
+    EXPECT_EQ(mc::Units::fpm2mps(1.0) , mc::Units::GetUnitConverter("fpm")(1.0));
+    EXPECT_EQ(mc::Units::fps2mps(1.0) , mc::Units::GetUnitConverter("fps")(1.0));
+    EXPECT_EQ(mc::Units::kmh2mps(1.0) , mc::Units::GetUnitConverter("kmh")(1.0));
+    EXPECT_EQ(mc::Units::kts2mps(1.0) , mc::Units::GetUnitConverter("kts")(1.0));
 
     // angular velocity
-    EXPECT_EQ(&mc::Units::dummy     , mc::Units::GetUnitConverter("rad/s"));
-    EXPECT_EQ(&mc::Units::deg2rad   , mc::Units::GetUnitConverter("deg/s"));
-    EXPECT_EQ(&mc::Units::rpm2rad_s , mc::Units::GetUnitConverter("rpm"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("rad/s")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::deg2rad(1.0)   , mc::Units::GetUnitConverter("deg/s")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::rpm2rad_s(1.0) , mc::Units::GetUnitConverter("rpm")(1.0));
 
     // mass
-    EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("kg"));
-    EXPECT_EQ(&mc::Units::lb2kg , mc::Units::GetUnitConverter("lb"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("kg")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::lb2kg(1.0), mc::Units::GetUnitConverter("lb")(1.0));
 
     // force
-    EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("N"));
-    EXPECT_EQ(&mc::Units::lbf2n , mc::Units::GetUnitConverter("lbf"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("N")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::lbf2n(1.0), mc::Units::GetUnitConverter("lbf")(1.0));
 
     // pressure
-    EXPECT_EQ(&mc::Units::dummy   , mc::Units::GetUnitConverter("Pa"));
-    EXPECT_EQ(&mc::Units::psf2pa  , mc::Units::GetUnitConverter("psf"));
-    EXPECT_EQ(&mc::Units::psi2pa  , mc::Units::GetUnitConverter("psi"));
-    EXPECT_EQ(&mc::Units::inhg2pa , mc::Units::GetUnitConverter("inHg"));
-    EXPECT_EQ(&mc::Units::mb2pa   , mc::Units::GetUnitConverter("mb"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("Pa")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::psf2pa(1.0)  , mc::Units::GetUnitConverter("psf")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::psi2pa(1.0)  , mc::Units::GetUnitConverter("psi")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::inhg2pa(1.0) , mc::Units::GetUnitConverter("inHg")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::mb2pa(1.0)   , mc::Units::GetUnitConverter("mb")(1.0));
 
     // power
-    EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("W"));
-    EXPECT_EQ(&mc::Units::ps2w  , mc::Units::GetUnitConverter("PS"));
-    EXPECT_EQ(&mc::Units::hp2w  , mc::Units::GetUnitConverter("hp"));
-    EXPECT_EQ(&mc::Units::kw2w  , mc::Units::GetUnitConverter("kW"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("W")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::ps2w(1.0), mc::Units::GetUnitConverter("PS")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::hp2w(1.0), mc::Units::GetUnitConverter("hp")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::kw2w(1.0), mc::Units::GetUnitConverter("kW")(1.0));
 
     // temperature
-    EXPECT_EQ(&mc::Units::dummy , mc::Units::GetUnitConverter("K"));
-    EXPECT_EQ(&mc::Units::c2k   , mc::Units::GetUnitConverter("degC"));
-    EXPECT_EQ(&mc::Units::f2k   , mc::Units::GetUnitConverter("degF"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("K")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::c2k(1.0), mc::Units::GetUnitConverter("deg_C")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::f2k(1.0), mc::Units::GetUnitConverter("deg_F")(1.0));
 
     // specific fuel consumption
-    EXPECT_EQ(&mc::Units::dummy         , mc::Units::GetUnitConverter("kg/Ws"));
-    EXPECT_EQ(&mc::Units::g_kWh_2_kg_Ws , mc::Units::GetUnitConverter("g/kWh"));
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("kg/Ws")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::g_kWh_2_kg_Ws(1.0), mc::Units::GetUnitConverter("g/kWh")(1.0));
 
     // thrust specific fuel consumption
-    EXPECT_EQ(&mc::Units::dummy         , mc::Units::GetUnitConverter("kg/Ns"));
-    EXPECT_EQ(&mc::Units::g_kNs_2_kg_Ns , mc::Units::GetUnitConverter("g/kNs"));
-}
-
-TEST_F(TestUnits, CanConvertDummy)
-{
-    EXPECT_NEAR(mc::Units::dummy(0.0), 0.0 , 1.0e-9);
-    EXPECT_NEAR(mc::Units::dummy(1.0), 1.0 , 1.0e-9);
-    EXPECT_NEAR(mc::Units::dummy(2.1), 2.1 , 1.0e-9);
+    EXPECT_DOUBLE_EQ(1.0, mc::Units::GetUnitConverter("kg/Ns")(1.0));
+    EXPECT_DOUBLE_EQ(mc::Units::g_kNs_2_kg_Ns(1.0), mc::Units::GetUnitConverter("g/kNs")(1.0));
 }
 
 TEST_F(TestUnits, CanConvertDeg2Rad)

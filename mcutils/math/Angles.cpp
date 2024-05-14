@@ -49,39 +49,39 @@ Angles::Angles(double phi, double tht, double psi)
 
 bool Angles::IsValid() const
 {
-    return mc::IsValid(phi_)
-        && mc::IsValid(tht_)
-        && mc::IsValid(psi_);
+    return mc::IsValid(_phi)
+        && mc::IsValid(_tht)
+        && mc::IsValid(_psi);
 }
 
 void Angles::Normalize()
 {
-    while ( tht_ >  M_PI_2 )
+    while ( _tht >  M_PI_2 )
     {
-        phi_ += M_PI;
-        tht_ =  M_PI_2 - ( tht_ - M_PI_2 );
-        psi_ += M_PI;
+        _phi += M_PI;
+        _tht =  M_PI_2 - ( _tht - M_PI_2 );
+        _psi += M_PI;
     }
 
-    while ( tht_ < -M_PI_2 )
+    while ( _tht < -M_PI_2 )
     {
-        phi_ += M_PI;
-        tht_ = -M_PI_2 - ( tht_ + M_PI_2 );
-        psi_ += M_PI;
+        _phi += M_PI;
+        _tht = -M_PI_2 - ( _tht + M_PI_2 );
+        _psi += M_PI;
     }
 
-    while ( phi_ >  M_PI ) phi_ -= 2.0 * M_PI;
-    while ( phi_ < -M_PI ) phi_ += 2.0 * M_PI;
+    while ( _phi >  M_PI ) _phi -= 2.0 * M_PI;
+    while ( _phi < -M_PI ) _phi += 2.0 * M_PI;
 
-    while ( psi_ >= 2.0 * M_PI ) psi_ -= 2.0 * M_PI;
-    while ( psi_ <  0.0        ) psi_ += 2.0 * M_PI;
+    while ( _psi >= 2.0 * M_PI ) _psi -= 2.0 * M_PI;
+    while ( _psi <  0.0        ) _psi += 2.0 * M_PI;
 }
 
 void Angles::Set(double phi, double tht, double psi)
 {
-    phi_ = phi;
-    tht_ = tht;
-    psi_ = psi;
+    _phi = phi;
+    _tht = tht;
+    _psi = psi;
 }
 
 std::string Angles::ToString() const
@@ -91,20 +91,20 @@ std::string Angles::ToString() const
     ss.setf(std::ios_base::showpoint);
     ss.setf(std::ios_base::fixed);
 
-    ss << std::setprecision(2) << Units::rad2deg(phi_);
+    ss << std::setprecision(2) << Units::rad2deg(_phi);
     ss << ",";
-    ss << std::setprecision(2) << Units::rad2deg(tht_);
+    ss << std::setprecision(2) << Units::rad2deg(_tht);
     ss << ",";
-    ss << std::setprecision(2) << Units::rad2deg(psi_);
+    ss << std::setprecision(2) << Units::rad2deg(_psi);
 
     return ss.str();
 }
 
 bool Angles::operator==(const Angles& angl) const
 {
-    return (phi_ == angl.phi_)
-        && (tht_ == angl.tht_)
-        && (psi_ == angl.psi_);
+    return (_phi == angl._phi)
+        && (_tht == angl._tht)
+        && (_psi == angl._psi);
 }
 
 bool Angles::operator!=(const Angles& angl) const

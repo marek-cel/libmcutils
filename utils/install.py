@@ -27,6 +27,7 @@ def installForLinux():
         "sudo cmake --build " + build_dir + " --config Release --target install",
         shell=True
     )
+    subprocess.run("sudo ldconfig", shell=True)
 
 
 def installForWindows():
@@ -40,3 +41,4 @@ if __name__ == "__main__":
     build()
     os.chdir("..")
     install()
+    input("Press Enter to continue...")

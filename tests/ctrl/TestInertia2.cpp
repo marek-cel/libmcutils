@@ -22,19 +22,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestInertia2, CanConstruct)
-{
-    mc::Inertia2* inertia = nullptr;
-    EXPECT_NO_THROW(inertia = new mc::Inertia2());
-    delete inertia;
-}
-
-TEST_F(TestInertia2, CanDestruct)
-{
-    mc::Inertia2* inertia = new mc::Inertia2();
-    EXPECT_NO_THROW(delete inertia);
-}
-
 TEST_F(TestInertia2, CanInstantiate)
 {
     mc::Inertia2 inertia;

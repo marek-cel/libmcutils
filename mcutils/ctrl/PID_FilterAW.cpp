@@ -19,30 +19,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_CTRL_IANTIWINDUP_H_
-#define MCUTILS_CTRL_IANTIWINDUP_H_
 
-#include <mcutils/defs.h>
+#include <mcutils/ctrl/PID_FilterAW.h>
+
+#include <mcutils/math/Math.h>
 
 namespace mc {
 
-class MCUTILSAPI IAntiWindup
+PID_FilterAW::PID_FilterAW(double kp, double ki, double kd,
+                           double min, double max, double kaw)
+    : PID(kp, ki, kd)
+    , _min(min)
+    , _max(max)
+    , _kaw(kaw)
+{}
+
+void PID_FilterAW::UpdateFinal(double dt, double y_p, double y_i, double y_d)
 {
-public:
-
-    // LCOV_EXCL_START
-    IAntiWindup() = default;
-    IAntiWindup(const IAntiWindup&) = delete;
-    IAntiWindup(IAntiWindup&&) = default;
-    IAntiWindup& operator=(const IAntiWindup&) = delete;
-    IAntiWindup& operator=(IAntiWindup&&) = default;
-    virtual ~IAntiWindup() = default;
-    // LCOV_EXCL_STOP
-
-    virtual void Update(double dt, double y_p, double y_i, double y_d,
-                        double* value, double* error_i, const class PID* pid) = 0;
-};
+    double y = y_p + y_i + y_d;
+    _value = Math::Satur(_min, _max, y);
+    double delta = y - _value;
+    _error_i -= _kaw * delta * dt;
+}
 
 } // namespace mc
-
-#endif // MCUTILS_CTRL_IANTIWINDUP_H_

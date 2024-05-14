@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,42 +19,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-
-#include <mcutils/math/RungeKutta4.h>
+#ifndef MCUTILS_ASTRO_COORDINATES_H_
+#define MCUTILS_ASTRO_COORDINATES_H_
 
 namespace mc {
 
-void RungeKutta4::Integrate(double step, Vector* vect)
+/**
+ * Horizontal coordinates (azimuth and elevation).
+ * ### Refernces:
+ * - [Horizontal coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Horizontal_coordinate_system)
+ */
+struct AzEl
 {
-    xt_ = *vect;
+    double az = 0.0;    ///< [rad] azimuth
+    double el = 0.0;    ///< [rad] elevation
+};
 
-    k1_.Resize(vect->size());
-    k2_.Resize(vect->size());
-    k3_.Resize(vect->size());
-    k4_.Resize(vect->size());
+/**
+ * Equatorial coordinates (right ascetion and declination).
+ * ### Refernces:
+ * - [Equatorial coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Equatorial_coordinate_system)
+ */
+struct RaDec
+{
+    double ra  = 0.0;   ///< [rad] right ascetion
+    double dec = 0.0;   ///< [rad] declination
+};
 
-    k1_.Zeroize();
-    k2_.Zeroize();
-    k3_.Zeroize();
-    k4_.Zeroize();
-
-    // k1 - derivatives calculation
-    deriv_fun_(xt_, &k1_);
-
-    // k2 - derivatives calculation
-    xt_ = *vect + k1_ * (step / 2.0);
-    deriv_fun_(xt_, &k2_);
-
-    // k3 - derivatives calculation
-    xt_ = *vect + k2_ * (step / 2.0);
-    deriv_fun_(xt_, &k3_);
-
-    // k4 - derivatives calculation
-    xt_ = *vect + k3_ * step;
-    deriv_fun_(xt_, &k4_);
-
-    // integration
-    *vect += (k1_ + k2_ * 2.0 + k3_ * 2.0 + k4_) * (step / 6.0);
-}
+/**
+ * Combined horizontal and equatorial coordinates.
+ * ### Refernces:
+ * - [Horizontal coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Horizontal_coordinate_system)
+ * - [Equatorial coordinate system - Wikipedia](https://en.wikipedia.org/wiki/Equatorial_coordinate_system)
+ */
+struct AzElRaDec
+{
+    AzEl  az_el;
+    RaDec ra_dec;
+};
 
 } // namespace mc
+
+#endif // MCUTILS_ASTRO_COORDINATES_H_

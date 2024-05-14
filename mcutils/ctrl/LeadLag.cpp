@@ -28,28 +28,27 @@
 namespace mc {
 
 LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
-    : c1_(c1)
-    , c2_(c2)
-    , c3_(c3)
-    , c4_(c4)
-    , value_(value)
+    : _c1(c1)
+    , _c2(c2)
+    , _c3(c3)
+    , _c4(c4)
+    , _value(value)
 {}
 
 void LeadLag::Update(double dt, double u)
 {
     if ( dt > 0.0 )
     {
-        double den = 2.0 * c3_ + dt * c4_;
+        double den = 2.0 * _c3 + dt * _c4;
         double den_inv = 1.0 / den;
 
-        double ca = (2.0 * c1_ + dt  * c2_) * den_inv;
-        double cb = (dt  * c2_ - 2.0 * c1_) * den_inv;
-        double cc = (2.0 * c3_ - dt  * c4_) * den_inv;
+        double ca = (2.0 * _c1 + dt  * _c2) * den_inv;
+        double cb = (dt  * _c2 - 2.0 * _c1) * den_inv;
+        double cc = (2.0 * _c3 - dt  * _c4) * den_inv;
 
-        double y_prev = value_;
-        value_ = u * ca + u_prev_ * cb + y_prev * cc;
-
-        u_prev_ = u;
+        double y_prev = _value;
+        _value = u * ca + _u_prev * cb + y_prev * cc;
+        _u_prev = u;
     }
 }
 

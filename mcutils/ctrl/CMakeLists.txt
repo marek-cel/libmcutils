@@ -3,11 +3,7 @@ set(TARGET_NAME ctrl)
 ################################################################################
 
 set(HEADERS
-    AWBackCalc.h
-    AWCondCalc.h
-    AWFilter.h
     HighPassFilter.h
-    IAntiWindup.h
     Inertia.h
     Inertia2.h
     Lead.h
@@ -17,13 +13,14 @@ set(HEADERS
     MovingMedian.h
     Oscillator.h
     PID.h
+    PID_BackCalc.h
+    PID_CondCalc.h
+    PID_FilterAW.h
     System2.h
+    ZeroOrderHold.h
 )
 
 set(SOURCES
-    AWBackCalc.cpp
-    AWCondCalc.cpp
-    AWFilter.cpp
     HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp
@@ -34,7 +31,11 @@ set(SOURCES
     MovingMedian.cpp
     Oscillator.cpp
     PID.cpp
+    PID_BackCalc.cpp
+    PID_CondCalc.cpp
+    PID_FilterAW.cpp
     System2.cpp
+    ZeroOrderHold.cpp
 )
 
 ################################################################################

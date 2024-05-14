@@ -20,19 +20,6 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestLowPassFilter, CanConstruct)
-{
-    mc::LowPassFilter* lpf = nullptr;
-    EXPECT_NO_THROW(lpf = new mc::LowPassFilter());
-    delete lpf;
-}
-
-TEST_F(TestLowPassFilter, CanDestruct)
-{
-    mc::LowPassFilter* lpf = new mc::LowPassFilter();
-    EXPECT_NO_THROW(delete lpf);
-}
-
 TEST_F(TestLowPassFilter, CanInstantiate)
 {
     mc::LowPassFilter lpf;
@@ -91,7 +78,7 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
 
     // expected values calculated with Scilab Xcos
     // tests/control/xcos/test_lowpassfilter.xcos
-    XcosBinFileReader::ReadData( "../tests/ctrl/data/test_lowpassfilter_sine.bin", &vals );
+    XcosBinFileReader::ReadData("../tests/ctrl/data/test_lowpassfilter_sine.bin", &vals);
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 

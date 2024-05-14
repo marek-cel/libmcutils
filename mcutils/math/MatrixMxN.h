@@ -46,9 +46,9 @@ class MatrixMxN
 {
 public:
 
-    static constexpr unsigned int rows_ = ROWS;        ///< number of rows
-    static constexpr unsigned int cols_ = COLS;        ///< number of columns
-    static constexpr unsigned int size_ = ROWS * COLS; ///< matrix size
+    static constexpr unsigned int kRows = ROWS;        ///< number of rows
+    static constexpr unsigned int kCols = COLS;        ///< number of columns
+    static constexpr unsigned int kSize = ROWS * COLS; ///< matrix size
 
     /**
      * @brief Fills all matrix elements with the given value.
@@ -56,16 +56,16 @@ public:
      */
     void Fill(double value)
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] = value;
+            _elements[i] = value;
         }
     }
 
     /** @return "true" if all elements are valid */
     bool IsValid() const
     {
-        return mc::IsValid(elements_, size_);
+        return mc::IsValid(_elements, kSize);
     }
 
     /**
@@ -78,9 +78,9 @@ public:
      */
     double GetElement(unsigned int row, unsigned int col) const
     {
-        if ( row < rows_ && col < cols_ )
+        if ( row < kRows && col < kCols )
         {
-            return elements_[row * cols_ + col];
+            return _elements[row * kCols + col];
         }
 
         return std::numeric_limits<double>::quiet_NaN();
@@ -99,7 +99,7 @@ public:
      */
     void PutIntoArray(double elements[])
     {
-        std::memcpy(elements, elements_, sizeof(elements_));
+        std::memcpy(elements, _elements, sizeof(_elements));
     }
 
     /**
@@ -111,9 +111,9 @@ public:
      */
     void SetElement(unsigned int row, unsigned int col, double value)
     {
-        if ( row < rows_ && col < cols_ )
+        if ( row < kRows && col < kCols )
         {
-            elements_[row * cols_ + col] = value;
+            _elements[row * kCols + col] = value;
         }
     }
 
@@ -130,7 +130,7 @@ public:
      */
     void SetFromArray(double elements[])
     {
-        std::memcpy(elements_, elements, sizeof(elements_));
+        std::memcpy(_elements, elements, sizeof(_elements));
     }
 
     /**
@@ -140,20 +140,20 @@ public:
      */
     void SetFromString(const char* str)
     {
-        if ( size_ > 0 )
+        if ( kSize > 0 )
         {
-            double* elements = new double [size_];
+            double* elements = new double [kSize];
 
-            for ( unsigned int i = 0; i < size_; ++i )
+            for ( unsigned int i = 0; i < kSize; ++i )
             {
-                elements [i] = std::numeric_limits<double>::quiet_NaN();
-                elements_[i] = std::numeric_limits<double>::quiet_NaN();
+                 elements[i] = std::numeric_limits<double>::quiet_NaN();
+                _elements[i] = std::numeric_limits<double>::quiet_NaN();
             }
 
             std::stringstream ss(String::StripSpaces(str));
             bool valid = true;
 
-            for ( unsigned int i = 0; i < size_; ++i )
+            for ( unsigned int i = 0; i < kSize; ++i )
             {
                 ss >> elements[i];
                 valid &= mc::IsValid(elements[i]);
@@ -168,11 +168,11 @@ public:
     /** @brief Swaps matrix rows. */
     void SwapRows(unsigned int row1, unsigned int row2)
     {
-        if ( row1 < rows_ && row2 < rows_ )
+        if ( row1 < kRows && row2 < kRows )
         {
-            for ( unsigned int c = 0; c < cols_; ++c )
+            for ( unsigned int c = 0; c < kCols; ++c )
             {
-                std::swap(elements_[row1 * cols_ + c], elements_[row2 * cols_ + c]);
+                std::swap(_elements[row1 * kCols + c], _elements[row2 * kCols + c]);
             }
         }
     }
@@ -182,14 +182,14 @@ public:
     {
         std::stringstream ss;
 
-        for ( unsigned int r = 0; r < rows_; ++r )
+        for ( unsigned int r = 0; r < kRows; ++r )
         {
-            for ( unsigned int c = 0; c < cols_; ++c )
+            for ( unsigned int c = 0; c < kCols; ++c )
             {
                 if ( r > 0 || c >  0 ) ss << "\t";
                 if ( r > 0 && c == 0 ) ss << std::endl;
 
-                ss << elements_[r * cols_ + c];
+                ss << _elements[r * kCols + c];
             }
         }
 
@@ -207,7 +207,7 @@ public:
      */
     inline double operator()(unsigned int row, unsigned int col) const
     {
-        return elements_[row * cols_ + col];
+        return _elements[row * kCols + col];
     }
 
     /**
@@ -220,7 +220,7 @@ public:
      */
     inline double& operator()(unsigned int row, unsigned int col)
     {
-        return elements_[row * cols_ + col];
+        return _elements[row * kCols + col];
     }
 
     /** @brief Addition operator. */
@@ -304,9 +304,9 @@ public:
     {
         bool result = true;
 
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            result = result && ( elements_[i] == matrix.elements_[i] );
+            result = result && (_elements[i] == matrix._elements[i]);
         }
 
         return result;
@@ -320,54 +320,54 @@ public:
 
 protected:
 
-    double elements_[size_] = { 0.0 }; ///< matrix elements
+    double _elements[kSize] = { 0.0 }; ///< matrix elements
 
     /** @brief Adds matrix. */
     void Add(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] += matrix.elements_[i];
+            _elements[i] += matrix._elements[i];
         }
     }
 
     /** @brief Negates matrix. */
     void Negate()
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] = -elements_[i];
+            _elements[i] = -_elements[i];
         }
     }
 
     /** @brief Substracts matrix. */
     void Substract(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] -= matrix.elements_[i];
+            _elements[i] -= matrix._elements[i];
         }
     }
 
     /** @brief Multiplies by value. */
     void MultiplyByValue(double value)
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] *= value;
+            _elements[i] *= value;
         }
     }
 
     /** @brief Multiplies by vector. */
     void MultiplyByVector(const VectorN<COLS>& vect, VectorN<ROWS>* result) const
     {
-        for ( unsigned int r = 0; r < rows_; ++r )
+        for ( unsigned int r = 0; r < kRows; ++r )
         {
             (*result)(r) = 0.0;
 
-            for ( unsigned int c = 0; c < cols_; ++c )
+            for ( unsigned int c = 0; c < kCols; ++c )
             {
-                (*result)(r) += ( elements_[r*cols_ + c] * vect(c) );
+                (*result)(r) += (_elements[r*kCols + c] * vect(c));
             }
         }
     }
@@ -375,9 +375,10 @@ protected:
     /** @brief Divides by value. */
     void DivideByValue(double value)
     {
-        for ( unsigned int i = 0; i < size_; ++i )
+        double value_inv = 1.0 / value;
+        for ( unsigned int i = 0; i < kSize; ++i )
         {
-            elements_[i] /= value;
+            _elements[i] *= value_inv;
         }
     }
 };

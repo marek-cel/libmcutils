@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,28 +19,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_ASTRO_GREGORIANCAL_H_
+#define MCUTILS_ASTRO_GREGORIANCAL_H_
 
-#include <mcutils/ctrl/AWCondCalc.h>
-
-#include <mcutils/math/Math.h>
+#include <mcutils/defs.h>
+#include <mcutils/time/DateTime.h>
 
 namespace mc {
 
-AWCondCalc::AWCondCalc(double min, double max)
-    : min_(min)
-    , max_(max)
-{}
-
-void AWCondCalc::Update(double, double y_p, double y_i, double y_d,
-                        double* value, double* error_i, const PID*)
+/**
+ * @brief Gregorian calendar utils.
+ *
+ * ### Refernces:
+ * - [Gregorian calendar - Wikipedia](https://en.wikipedia.org/wiki/Gregorian_calendar)
+ */
+class MCUTILSAPI GregorianCal
 {
-    double y = y_p + y_i + y_d;
+public:
 
-    *value = Math::Satur(min_, max_, y);
+    static double IsLeapYear(unsigned short year);
 
-    if (y != *value) *error_i = error_i_prev_;
+    inline static double GetDaysInYear(unsigned short year)
+    {
+        return IsLeapYear(year) ? 366.0 : 365.0;
+    }
 
-    error_i_prev_ = *error_i;
-}
+    static double GetDayOfYear(const DateTime& dt);
+};
 
 } // namespace mc
+
+#endif // MCUTILS_ASTRO_GREGORIANCAL_H_

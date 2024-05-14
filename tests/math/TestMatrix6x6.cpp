@@ -5,126 +5,52 @@
 class TestMatrix6x6 : public ::testing::Test
 {
 protected:
+    constexpr static int size = 6;
     TestMatrix6x6() {}
     virtual ~TestMatrix6x6() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
-TEST_F(TestMatrix6x6, CanConstruct)
-{
-    mc::Matrix6x6* m = nullptr;
-    EXPECT_NO_THROW(m = new mc::Matrix6x6());
-    delete m;
-}
-
-TEST_F(TestMatrix6x6, CanDestruct)
-{
-    mc::Matrix6x6* m = new mc::Matrix6x6();
-    EXPECT_NO_THROW(delete m);
-}
-
 TEST_F(TestMatrix6x6, CanInstantiate)
 {
     mc::Matrix6x6 m;
-
-    EXPECT_DOUBLE_EQ(m(0,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(0,5), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(1,5), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(2,5), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(3,5), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(4,5), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,0), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,1), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,2), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,3), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,4), 0.0);
-    EXPECT_DOUBLE_EQ(m(5,5), 0.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m(r,c), 0.0) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
-TEST_F(TestMatrix6x6, CanTranspose)
+TEST_F(TestMatrix6x6, CanInstantiateAndCopy)
 {
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix6x6.m
+    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
+                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
+                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
+                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
+                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
+                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
 
-    double x[] = {
-         1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
-         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
-        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
-        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
-        31.0, 32.0, 33.0, 34.0, 35.0, 36.0
-    };
+    mc::Matrix6x6 m0;
+    m0.SetFromArray(x);
 
-    mc::Matrix6x6 m;
-    m.SetFromArray(x);
+    mc::Matrix6x6 m1(m0);
 
-    m.Transpose();
-
-    EXPECT_DOUBLE_EQ(m(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m(0,1),  7.0);
-    EXPECT_DOUBLE_EQ(m(0,2), 13.0);
-    EXPECT_DOUBLE_EQ(m(0,3), 19.0);
-    EXPECT_DOUBLE_EQ(m(0,4), 25.0);
-    EXPECT_DOUBLE_EQ(m(0,5), 31.0);
-    EXPECT_DOUBLE_EQ(m(1,0),  2.0);
-    EXPECT_DOUBLE_EQ(m(1,1),  8.0);
-    EXPECT_DOUBLE_EQ(m(1,2), 14.0);
-    EXPECT_DOUBLE_EQ(m(1,3), 20.0);
-    EXPECT_DOUBLE_EQ(m(1,4), 26.0);
-    EXPECT_DOUBLE_EQ(m(1,5), 32.0);
-    EXPECT_DOUBLE_EQ(m(2,0),  3.0);
-    EXPECT_DOUBLE_EQ(m(2,1),  9.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 15.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 21.0);
-    EXPECT_DOUBLE_EQ(m(2,4), 27.0);
-    EXPECT_DOUBLE_EQ(m(2,5), 33.0);
-    EXPECT_DOUBLE_EQ(m(3,0),  4.0);
-    EXPECT_DOUBLE_EQ(m(3,1), 10.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 16.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 22.0);
-    EXPECT_DOUBLE_EQ(m(3,4), 28.0);
-    EXPECT_DOUBLE_EQ(m(3,5), 34.0);
-    EXPECT_DOUBLE_EQ(m(4,0),  5.0);
-    EXPECT_DOUBLE_EQ(m(4,1), 11.0);
-    EXPECT_DOUBLE_EQ(m(4,2), 17.0);
-    EXPECT_DOUBLE_EQ(m(4,3), 23.0);
-    EXPECT_DOUBLE_EQ(m(4,4), 29.0);
-    EXPECT_DOUBLE_EQ(m(4,5), 35.0);
-    EXPECT_DOUBLE_EQ(m(5,0),  6.0);
-    EXPECT_DOUBLE_EQ(m(5,1), 12.0);
-    EXPECT_DOUBLE_EQ(m(5,2), 18.0);
-    EXPECT_DOUBLE_EQ(m(5,3), 24.0);
-    EXPECT_DOUBLE_EQ(m(5,4), 30.0);
-    EXPECT_DOUBLE_EQ(m(5,5), 36.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrix6x6, CanGetTransposed)
 {
+    constexpr int size = 6;
+
     double x[] = {
          1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
          7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
@@ -134,84 +60,20 @@ TEST_F(TestMatrix6x6, CanGetTransposed)
         31.0, 32.0, 33.0, 34.0, 35.0, 36.0
     };
 
-    mc::Matrix6x6 m;
-    m.SetFromArray(x);
+    mc::Matrix6x6 m0;
+    m0.SetFromArray(x);
 
-    mc::Matrix6x6 m1 = m.GetTransposed();
+    mc::Matrix6x6 m1(m0);
+    mc::Matrix6x6 mt = m1.GetTransposed();
 
-    EXPECT_DOUBLE_EQ(m(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m(0,1),  2.0);
-    EXPECT_DOUBLE_EQ(m(0,2),  3.0);
-    EXPECT_DOUBLE_EQ(m(0,3),  4.0);
-    EXPECT_DOUBLE_EQ(m(0,4),  5.0);
-    EXPECT_DOUBLE_EQ(m(0,5),  6.0);
-    EXPECT_DOUBLE_EQ(m(1,0),  7.0);
-    EXPECT_DOUBLE_EQ(m(1,1),  8.0);
-    EXPECT_DOUBLE_EQ(m(1,2),  9.0);
-    EXPECT_DOUBLE_EQ(m(1,3), 10.0);
-    EXPECT_DOUBLE_EQ(m(1,4), 11.0);
-    EXPECT_DOUBLE_EQ(m(1,5), 12.0);
-    EXPECT_DOUBLE_EQ(m(2,0), 13.0);
-    EXPECT_DOUBLE_EQ(m(2,1), 14.0);
-    EXPECT_DOUBLE_EQ(m(2,2), 15.0);
-    EXPECT_DOUBLE_EQ(m(2,3), 16.0);
-    EXPECT_DOUBLE_EQ(m(2,4), 17.0);
-    EXPECT_DOUBLE_EQ(m(2,5), 18.0);
-    EXPECT_DOUBLE_EQ(m(3,0), 19.0);
-    EXPECT_DOUBLE_EQ(m(3,1), 20.0);
-    EXPECT_DOUBLE_EQ(m(3,2), 21.0);
-    EXPECT_DOUBLE_EQ(m(3,3), 22.0);
-    EXPECT_DOUBLE_EQ(m(3,4), 23.0);
-    EXPECT_DOUBLE_EQ(m(3,5), 24.0);
-    EXPECT_DOUBLE_EQ(m(4,0), 25.0);
-    EXPECT_DOUBLE_EQ(m(4,1), 26.0);
-    EXPECT_DOUBLE_EQ(m(4,2), 27.0);
-    EXPECT_DOUBLE_EQ(m(4,3), 28.0);
-    EXPECT_DOUBLE_EQ(m(4,4), 29.0);
-    EXPECT_DOUBLE_EQ(m(4,5), 30.0);
-    EXPECT_DOUBLE_EQ(m(5,0), 31.0);
-    EXPECT_DOUBLE_EQ(m(5,1), 32.0);
-    EXPECT_DOUBLE_EQ(m(5,2), 33.0);
-    EXPECT_DOUBLE_EQ(m(5,3), 34.0);
-    EXPECT_DOUBLE_EQ(m(5,4), 35.0);
-    EXPECT_DOUBLE_EQ(m(5,5), 36.0);
-
-    EXPECT_DOUBLE_EQ(m1(0,0),  1.0);
-    EXPECT_DOUBLE_EQ(m1(0,1),  7.0);
-    EXPECT_DOUBLE_EQ(m1(0,2), 13.0);
-    EXPECT_DOUBLE_EQ(m1(0,3), 19.0);
-    EXPECT_DOUBLE_EQ(m1(0,4), 25.0);
-    EXPECT_DOUBLE_EQ(m1(0,5), 31.0);
-    EXPECT_DOUBLE_EQ(m1(1,0),  2.0);
-    EXPECT_DOUBLE_EQ(m1(1,1),  8.0);
-    EXPECT_DOUBLE_EQ(m1(1,2), 14.0);
-    EXPECT_DOUBLE_EQ(m1(1,3), 20.0);
-    EXPECT_DOUBLE_EQ(m1(1,4), 26.0);
-    EXPECT_DOUBLE_EQ(m1(1,5), 32.0);
-    EXPECT_DOUBLE_EQ(m1(2,0),  3.0);
-    EXPECT_DOUBLE_EQ(m1(2,1),  9.0);
-    EXPECT_DOUBLE_EQ(m1(2,2), 15.0);
-    EXPECT_DOUBLE_EQ(m1(2,3), 21.0);
-    EXPECT_DOUBLE_EQ(m1(2,4), 27.0);
-    EXPECT_DOUBLE_EQ(m1(2,5), 33.0);
-    EXPECT_DOUBLE_EQ(m1(3,0),  4.0);
-    EXPECT_DOUBLE_EQ(m1(3,1), 10.0);
-    EXPECT_DOUBLE_EQ(m1(3,2), 16.0);
-    EXPECT_DOUBLE_EQ(m1(3,3), 22.0);
-    EXPECT_DOUBLE_EQ(m1(3,4), 28.0);
-    EXPECT_DOUBLE_EQ(m1(3,5), 34.0);
-    EXPECT_DOUBLE_EQ(m1(4,0),  5.0);
-    EXPECT_DOUBLE_EQ(m1(4,1), 11.0);
-    EXPECT_DOUBLE_EQ(m1(4,2), 17.0);
-    EXPECT_DOUBLE_EQ(m1(4,3), 23.0);
-    EXPECT_DOUBLE_EQ(m1(4,4), 29.0);
-    EXPECT_DOUBLE_EQ(m1(4,5), 35.0);
-    EXPECT_DOUBLE_EQ(m1(5,0),  6.0);
-    EXPECT_DOUBLE_EQ(m1(5,1), 12.0);
-    EXPECT_DOUBLE_EQ(m1(5,2), 18.0);
-    EXPECT_DOUBLE_EQ(m1(5,3), 24.0);
-    EXPECT_DOUBLE_EQ(m1(5,4), 30.0);
-    EXPECT_DOUBLE_EQ(m1(5,5), 36.0);
+    for ( int r = 0; r < size; ++r )
+    {
+        for ( int c = 0; c < size; ++c )
+        {
+            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
+            EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
+        }
+    }
 }
 
 TEST_F(TestMatrix6x6, CanAdd)

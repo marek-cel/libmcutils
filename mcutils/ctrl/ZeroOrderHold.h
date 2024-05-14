@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,56 +19,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_INTEGRATOR_H_
-#define MCUTILS_MATH_INTEGRATOR_H_
-
-#include <functional>
-#include <memory>
+#ifndef MCUTILS_CTRL_ZEROORDERHOLD_H_
+#define MCUTILS_CTRL_ZEROORDERHOLD_H_
 
 #include <mcutils/defs.h>
-
-#include <mcutils/math/Vector.h>
 
 namespace mc {
 
 /**
- * @brief Abstract numerical integration base class.
- *
- * Function should take current vector as first argument and resulting
- * vector derivative pointer as second argument.
+ * @brief Zero-Order Hold (ZOH) class.
  */
-class MCUTILSAPI Integrator
+class MCUTILSAPI ZeroOrderHold
 {
 public:
 
-    using DerivFun = std::function<void(const Vector&, Vector*)>;
-
-    // LCOV_EXCL_START
-    Integrator() = default;
-    Integrator(const Integrator&) = delete;
-    Integrator(Integrator&&) = default;
-    Integrator& operator=(const Integrator&) = delete;
-    Integrator& operator=(Integrator&&) = default;
-    virtual ~Integrator() = default;
-    // LCOV_EXCL_STOP
+    /**
+     * @brief Constructor.
+     * @param t_hold [s] hold time
+     * @param value initial output value
+     */
+    ZeroOrderHold(double t_hold = 0.0, double value = 0.0);
 
     /**
-     * @brief Integrates given vector.
-     * This is interface abstract method.
-     * @param step integration time step [s]
-     * @param vect integrating vector
+     * @brief Updates element due to time step and input value
+     * @param dt [s] time step
+     * @param u input value
      */
-    virtual void Integrate(double step, Vector* vect) = 0;
+    void Update(double dt, double u);
 
-    inline DerivFun deriv_fun() const { return deriv_fun_; }
+    inline double value() const { return _value; }
 
-    void set_deriv_fun(DerivFun deriv_fun) { deriv_fun_ = deriv_fun; }
+    inline double t_hold() const { return _t_hold; }
 
-protected:
+    /**
+     * @brief Sets output value
+     * @param value output value
+     */
+    void set_value(double value);
 
-    DerivFun deriv_fun_;    ///< function which calculates vector derivative
+    inline void set_t_hold(double t_hold) { _t_hold = t_hold; }
+
+private:
+
+    double _t_hold = 0.0;   ///< [s] hold time
+    double _t_prev = 0.0;   ///< [s] time since last update
+    double _value = 0.0;    ///< current value
 };
 
 } // namespace mc
 
-#endif // MCUTILS_MATH_INTEGRATOR_H_
+#endif // MCUTILS_CTRL_ZEROORDERHOLD_H_

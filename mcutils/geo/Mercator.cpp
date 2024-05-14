@@ -27,54 +27,54 @@
 namespace mc {
 
 Mercator::Mercator(double a, double e)
-    : a_(a)
-    , e_(e)
-    , e2_(e_*e_)
-    , max_x_(CalculateX(Units::deg2rad( 180.0 )))
-    , max_y_(CalculateY(Units::deg2rad(  85.0 )))
+    : _a(a)
+    , _e(e)
+    , _e2(_e*_e)
+    , _max_x(CalculateX(Units::deg2rad( 180.0 )))
+    , _max_y(CalculateY(Units::deg2rad(  85.0 )))
 {}
 
 double Mercator::CalculateLat(double y, double max_error, unsigned int max_iterations)
 {
     // for lat_ts=0 k0=a
-    return CalculateT_inv(exp(-y / a_), max_error, max_iterations);
+    return CalculateT_inv(exp(-y / _a), max_error, max_iterations);
 }
 
 double Mercator::CalculateLon(double x)
 {
     // for lat_ts=0 k0=a
-    return x / a_;
+    return x / _a;
 }
 
 double Mercator::CalculateX(double lon)
 {
     // for lat_ts=0 k0=a
-    return a_ * lon;
+    return _a * lon;
 }
 
 double Mercator::CalculateY(double lat)
 {
     // for lat_ts=0 k0=a
-    return a_ * log(CalculateT(lat));
+    return _a * log(CalculateT(lat));
 }
 
 double Mercator::CalculateT(double lat)
 {
-    double e_sinLat = e_ * sin(lat);
-    return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * e_);
+    double e_sinLat = _e * sin(lat);
+    return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * _e);
 }
 
 double Mercator::CalculateT_inv(double t, double max_error, unsigned int max_iterations)
 {
     double lat = M_PI_2 - 2.0 * atan(t);
-    double ex = 0.5 * e_;
+    double ex = 0.5 * _e;
     double er = 1.0e16;
 
     unsigned int iteration = 0;
 
     while ( er > max_error && iteration < max_iterations )
     {
-        double e_sinLat = e_ * sin(lat);
+        double e_sinLat = _e * sin(lat);
         double lat_new = M_PI_2
             - 2.0 * atan(t * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), ex));
 
