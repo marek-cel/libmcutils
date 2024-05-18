@@ -52,8 +52,8 @@ pipeline {
                 to: "${env.RECIPIENT_LIST}",
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>
-                <p>Check coverage report at <a href='http://${env.JENKINS_BASE_URL}/jenkins/coverage-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}'>http://${env.JENKINS_BASE_URL}/jenkins/coverage-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}</a></p>""",
+                <p><a href='${env.BUILD_URL}'>Console output</a></p>
+                <p><a href='http://${env.JENKINS_BASE_URL}/jenkins/coverage-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}'>Coverage report</a></p>""",
                 mimeType: 'text/html'
             )
         }
@@ -63,7 +63,7 @@ pipeline {
                 to: "${env.RECIPIENT_LIST}",
                 subject: "FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>FAILURE: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-                <p>Check console output at <a href='${env.BUILD_URL}'>${env.BUILD_URL}</a></p>""",
+                <p><a href='${env.BUILD_URL}'>Console output</a></p>""",
                 mimeType: 'text/html'
             )
         }
