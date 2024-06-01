@@ -29,75 +29,75 @@
 namespace mc {
 
 /**
- * @brief Variable length dynamic allocated vector class.
+ * \brief Variable length dynamic allocated vector class.
  */
 class MCUTILSAPI Vector
 {
 public:
 
-    /** @brief Copy constructor. */
+    /** \brief Copy constructor. */
     Vector(const Vector& vect);
 
-    /** @brief Move constructor. */
+    /** \brief Move constructor. */
     Vector(Vector&& vect);
 
-    /** @brief Destructor. */
+    /** \brief Destructor. */
     virtual ~Vector();
 
     /**
-     * @brief Constructor.
-     * @param size vector size
+     * \brief Constructor.
+     * \param size vector size
      */
     explicit Vector(unsigned int size = 0);
 
-    /** @return TRUE if all elements are valid */
+    /** \return TRUE if all elements are valid */
     bool IsValid() const;
 
-    /** @return vector length */
+    /** \return vector length */
     double GetLength() const;
 
-    /** @brief This function normalizes vector. */
+    /** \brief This function normalizes vector. */
     void Normalize();
 
     /**
-     * @brief Gets vector element of given indicies.
+     * \brief Gets vector element of given indicies.
      * This function is bound-checked which may affect performance.
      * Returns NaN if index is out of range.
-     * @return vector element of given indicies, NaN if index is out of range
+     * \return vector element of given indicies, NaN if index is out of range
      */
     double GetElement(unsigned int index) const;
 
     /**
-     * @brief Puts vector elements into given array.
-     * @param elements output array
+     * \brief Puts vector elements into given array.
+     * \param elements output array
      */
     void PutIntoArray(double elements[]) const;
 
     /**
-     * @brief Sets vector element of given indicies.
+     * \brief Sets vector element of given indicies.
      * This function is bound-checked which may affect performance.
      */
     void SetElement(unsigned int index, double val);
 
     /**
-     * @brief Sets vector elements from array.
-     * @param elements input array
+     * \brief Sets vector elements from array.
+     * \param elements input array
      */
     void SetFromArray(const double elements[]);
 
-    /** @brief Returns string representation of the vector. */
+    /** \brief Returns string representation of the vector. */
     std::string ToString() const;
 
-    /** @brief Resizes vector if needed. */
+    /** \brief Resizes vector if needed. */
     void Resize(unsigned int size);
 
-    /** @brief Sets all vector elements to zero. */
+    /** \brief Sets all vector elements to zero. */
     void Zeroize();
 
     unsigned int size() const { return _size; }
 
     /**
-     * @brief Elements accessor.
+     * \brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked elements accessor use GetElement(int) or
      * SetElement(int,double) functions.
@@ -108,7 +108,7 @@ public:
     }
 
     /**
-     * @brief Elements accessor.
+     * \brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked elements accessor use GetElement(int) or
      * SetElement(int,double) functions.
@@ -118,37 +118,37 @@ public:
         return _elements[index];
     }
 
-    /** @brief Assignment operator. */
+    /** \brief Assignment operator. */
     Vector& operator=(const Vector& vect);
 
-    /** @brief Move assignment operator. */
+    /** \brief Move assignment operator. */
     Vector& operator=(Vector&& vect);
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     Vector operator+(const Vector& vect) const;
 
-    /** @brief Negation operator. */
+    /** \brief Negation operator. */
     Vector operator-() const;
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     Vector operator-(const Vector& vect) const;
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     Vector operator*(double value) const;
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     Vector operator/(double value) const;
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     Vector& operator+=(const Vector& vect);
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     Vector& operator-=(const Vector& vect);
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     Vector& operator*=(double value);
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     Vector& operator/=(double value);
 
 protected:
@@ -156,26 +156,26 @@ protected:
     unsigned int _size = 0;         ///< vector size
     double* _elements = nullptr;    ///< vector elements
 
-    /** @brief Adds vector. */
+    /** \brief Adds vector. */
     void Add(const Vector& vect);
 
-    /** @brief Negates (inverts) vector. */
+    /** \brief Negates (inverts) vector. */
     void Negate();
 
-    /** @brief Substracts vector. */
+    /** \brief Substracts vector. */
     void Substract(const Vector& vect);
 
-    /** @brief Multiplies by value. */
+    /** \brief Multiplies by value. */
     void MultiplyByValue(double value);
 
-    /** @brief Divides by value. */
+    /** \brief Divides by value. */
     void DivideByValue(double value);
 
-    /** @brief Deletes elements array. */
+    /** \brief Deletes elements array. */
     void DeleteElementsArray();
 };
 
-/** @brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by scalar). */
 inline Vector operator*(double val, const Vector& vect)
 {
     return vect * val;

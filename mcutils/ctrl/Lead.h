@@ -27,10 +27,14 @@
 namespace mc {
 
 /**
- * @brief First-order lead class.
+ * \brief First-order lead class.
  *
  * Transfer function:
  * G(s)  =  Tc*s + 1
+ * 
+ * \f[
+ * G \left( s \right) = T_c \cdot s + 1
+ * \f]
  *
  * ### Refernces:
  * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.298
@@ -42,16 +46,16 @@ class MCUTILSAPI Lead
 public:
 
     /**
-     * @brief Constructor.
-     * @param tc time constant
-     * @param value initial output value
+     * \brief Constructor.
+     * \param tc time constant
+     * \param value initial output value
      */
     explicit Lead(double tc = 0.0, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -59,14 +63,14 @@ public:
     inline double time_const() const { return _time_const; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     inline void set_value(double value) { _value = value; }
 
     /**
-     * @brief Sets time constant.
-     * @param tc time constant
+     * \brief Sets time constant.
+     * \param tc time constant
      */
     void set_time_const(double tc);
 

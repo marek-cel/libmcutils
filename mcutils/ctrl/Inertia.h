@@ -27,10 +27,14 @@
 namespace mc {
 
 /**
- * @brief First-order inertia class.
+ * \brief First-order inertia class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )
+ * 
+ * \f[
+ * G\left(s\right) = {1 \over {T_c \cdot s + 1}}
+ * \f]
  *
  * ### Refernces:
  * - Oledzki A., et al.: Zarys dynamiki i automatyki ukladow, 1991, p.74. [in Polish]
@@ -45,26 +49,26 @@ class MCUTILSAPI Inertia
 public:
 
     /**
-     * @brief Calculates output value due to time constant, time step and input value
-     * @param u input
-     * @param y current valuye
-     * @param dt [s] time step
-     * @param tc [s] time constant
-     * @return
+     * \brief Calculates output value due to time constant, time step and input value
+     * \param u input
+     * \param y current valuye
+     * \param dt [s] time step
+     * \param tc [s] time constant
+     * \return
      */
     static double Calculate(double u, double y, double dt, double tc);
 
     /**
-     * @brief Constructor.
-     * @param tc time constant
-     * @param value initial output value
+     * \brief Constructor.
+     * \param tc time constant
+     * \param value initial output value
      */
     explicit Inertia(double tc = 0.0, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -72,14 +76,14 @@ public:
     inline double time_const() const { return _time_const; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     inline void set_value(double value) { _value = value; }
 
     /**
-     * @brief Sets time constant.
-     * @param tc time constant
+     * \brief Sets time constant.
+     * \param tc time constant
      */
     void set_time_const(double time_const);
 

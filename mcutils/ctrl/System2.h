@@ -27,33 +27,40 @@
 namespace mc {
 
 /**
- * @brief Second-order system class.
+ * \brief Second-order system class.
  *
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
+ * 
+ * \f[
+ * G \left( s \right) =
+ * {{ c_1 \cdot s^2 + c_2 \cdot s + c_3 }
+ * \over
+ * { c_4 \cdot s^2 + c_5 \cdot s + c_6 }}
+ * \f]
  */
 class MCUTILSAPI System2
 {
 public:
 
     /**
-     * @brief Constructor.
-     * @param c1 coefficient of the transfer function
-     * @param c2 coefficient of the transfer function
-     * @param c3 coefficient of the transfer function
-     * @param c4 coefficient of the transfer function
-     * @param c5 coefficient of the transfer function
-     * @param c6 coefficient of the transfer function
-     * @param value initial output value
+     * \brief Constructor.
+     * \param c1 coefficient of the transfer function
+     * \param c2 coefficient of the transfer function
+     * \param c3 coefficient of the transfer function
+     * \param c4 coefficient of the transfer function
+     * \param c5 coefficient of the transfer function
+     * \param c6 coefficient of the transfer function
+     * \param value initial output value
      */
     System2(double c1 = 0.0, double c2 = 0.0, double c3 = 1.0,
             double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
             double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -67,8 +74,8 @@ public:
     inline double c6() const { return _c6; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     void set_value(double value);
 

@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief Tait-Bryant angles class.
+ * \brief Tait-Bryant angles class.
  *
  * This class represents three angles of rotation about three axes in Z-Y-X
  * (yaw-pitch-roll) convention.
@@ -42,39 +42,39 @@ class MCUTILSAPI Angles
 public:
 
     /**
-     * @brief Normalizes angle within [min,min+2*pi] range.
-     * @param val angle to be normalized
-     * @param min minimum value
-     * @return normalized angle
+     * \brief Normalizes angle within [min,min+2*pi] range.
+     * \param val angle to be normalized
+     * \param min minimum value
+     * \return normalized angle
      */
     static double Normalize(double val, double min = 0.0);
 
     /**
-     * @brief Constructor.
-     * @param phi [rad] angle of rotation about x-axis
-     * @param tht [rad] angle of rotation about y-axis
-     * @param psi [rad] angle of rotation about z-axis
+     * \brief Constructor.
+     * \param phi [rad] angle of rotation about x-axis
+     * \param tht [rad] angle of rotation about y-axis
+     * \param psi [rad] angle of rotation about z-axis
      */
     Angles(double phi = 0.0, double tht = 0.0, double psi = 0.0);
 
-    /** @return true if all items are valid */
+    /** \return true if all items are valid */
     bool IsValid() const;
 
     /**
-     * @brief Normalizes angles.
+     * \brief Normalizes angles.
      * Limits phi to [-pi,pi] theta to [-pi/2,pi/2] and psi to [0,2*pi].
      */
     void Normalize();
 
     /**
-     * @brief Sets angles values.
-     * @param phi [rad] angle of rotation about x-axis
-     * @param tht [rad] angle of rotation about y-axis
-     * @param psi [rad] angle of rotation about z-axis
+     * \brief Sets angles values.
+     * \param phi [rad] angle of rotation about x-axis
+     * \param tht [rad] angle of rotation about y-axis
+     * \param psi [rad] angle of rotation about z-axis
      */
     void Set(double phi, double tht, double psi);
 
-    /** @brief Returns string represtation of the angles. */
+    /** \brief Returns string represtation of the angles. */
     std::string ToString() const;
 
     inline double  phi() const { return _phi; }
@@ -84,10 +84,10 @@ public:
     inline double& tht()       { return _tht; }
     inline double& psi()       { return _psi; }
 
-    /** @brief Equality operator. */
+    /** \brief Equality operator. */
     bool operator==(const Angles& angl) const;
 
-    /** @brief Inequality operator. */
+    /** \brief Inequality operator. */
     bool operator!=(const Angles& angl) const;
 
 private:

@@ -28,7 +28,7 @@
 namespace mc {
 
 /**
- * @brief Gregorian calendar utils.
+ * \brief Gregorian calendar utils.
  *
  * ### Refernces:
  * - [Gregorian calendar - Wikipedia](https://en.wikipedia.org/wiki/Gregorian_calendar)

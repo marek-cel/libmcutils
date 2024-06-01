@@ -31,47 +31,47 @@
 namespace mc {
 
 /**
- * @brief Converts time to the ISO-8601 date and time string.
- * @param year
- * @param mon
- * @param day
- * @param hour
- * @param min
- * @param sec
- * @param msec
- * @param show_msec specifies if millisecons should be shown
- * @return ISO-8601 date and time string
+ * \brief Converts time to the ISO-8601 date and time string.
+ * \param year
+ * \param mon
+ * \param day
+ * \param hour
+ * \param min
+ * \param sec
+ * \param msec
+ * \param show_msec specifies if millisecons should be shown
+ * \return ISO-8601 date and time string
  */
 MCUTILSAPI std::string ToISO8601(int year, int mon, int day,
                                  int hour, int min, int sec, int msec,
                                  bool show_msec = true);
 
 /**
- * @brief Converts time to the ISO-8601 date and time string.
- * @param year
- * @param mon
- * @param day
- * @return ISO-8601 date and time string
+ * \brief Converts time to the ISO-8601 date and time string.
+ * \param year
+ * \param mon
+ * \param day
+ * \return ISO-8601 date and time string
  */
 MCUTILSAPI std::string ToISO8601(int year, int mon, int day);
 
 /**
- * @brief Converts time to the ISO-8601 date and time string.
- * @param hour
- * @param min
- * @param sec
- * @param msec
- * @param show_msec specifies if millisecons should be shown
- * @return ISO-8601 date and time string
+ * \brief Converts time to the ISO-8601 date and time string.
+ * \param hour
+ * \param min
+ * \param sec
+ * \param msec
+ * \param show_msec specifies if millisecons should be shown
+ * \return ISO-8601 date and time string
  */
 MCUTILSAPI std::string ToISO8601(int hour, int min, int sec, int msec,
                                  bool show_msec = true);
 
 /**
- * @brief Converts time to the ISO-8601 date and time string.
- * @param dt Date/Time structur
- * @param show_msec specifies if millisecons should be shown
- * @return ISO-8601 date and time string
+ * \brief Converts time to the ISO-8601 date and time string.
+ * \param dt Date/Time structur
+ * \param show_msec specifies if millisecons should be shown
+ * \return ISO-8601 date and time string
  */
 MCUTILSAPI inline std::string ToISO8601(const DateTime& dt,
                                         bool show_msec = true)

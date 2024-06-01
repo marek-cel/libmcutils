@@ -32,38 +32,38 @@
 namespace mc {
 
 /**
- * @brief 2D table and bilinear interpolation class.
+ * \brief 2D table and bilinear interpolation class.
  */
 class MCUTILSAPI Table2
 {
 public:
 
-    /** @brief Copy constructor. */
+    /** \brief Copy constructor. */
     Table2(const Table2& table);
 
-    /** @brief Move constructor. */
+    /** \brief Move constructor. */
     Table2(Table2&& table) noexcept;
 
     /**
-     * @brief Constructor.
+     * \brief Constructor.
      * Creates table with only one record.
-     * @param val record value
-     * @param row_val row key value
-     * @param col_val col key value
+     * \param val record value
+     * \param row_val row key value
+     * \param col_val col key value
      */
     Table2(double val = 0.0,
            double row_val = 0.0,
            double col_val = 0.0);
 
     /**
-     * @brief Constructor.
+     * \brief Constructor.
      * This constructor is used to initialize table with data.
      * Table data index should match following scheme i = i_row * no_of_columns + i_col
-     * @param row_values rows key values ordered array
-     * @param col_values columns key values ordered array
-     * @param table_data table values ordered array
-     * @param rows number of rows
-     * @param cols number of columns
+     * \param row_values rows key values ordered array
+     * \param col_values columns key values ordered array
+     * \param table_data table values ordered array
+     * \param rows number of rows
+     * \param cols number of columns
      */
     Table2(const double row_values[],
            const double col_values[],
@@ -72,84 +72,84 @@ public:
            unsigned int cols);
 
     /**
-     * @brief Constructor.
+     * \brief Constructor.
      * This constructor is used to initialize table with data.
      * Table data index should match following scheme i = i_row * no_of_columns + i_col
-     * @param row_values rows key values ordered vector
-     * @param col_values columns key values ordered vector
-     * @param table_data table values ordered vector
+     * \param row_values rows key values ordered vector
+     * \param col_values columns key values ordered vector
+     * \param table_data table values ordered vector
      */
     Table2(const std::vector<double>& row_values,
            const std::vector<double>& col_values,
            const std::vector<double>& table_data);
 
-    /** @brief Destructor. */
+    /** \brief Destructor. */
     ~Table2();
 
     /**
-     * @brief Returns 1-dimensional table for the given col value.
-     * @param colValue column key value
-     * @return 1-dimensional table
+     * \brief Returns 1-dimensional table for the given col value.
+     * \param colValue column key value
+     * \return 1-dimensional table
      */
     Table GetTable(double col_value) const;
 
     /**
-     * @brief Returns table value for the given keys.
+     * \brief Returns table value for the given keys.
      * Returns table value for the given keys values using bilinear
      * interpolation algorithm.
-     * @param rowValue row key value
-     * @param colValue column key value
-     * @return interpolated value on success or NaN on failure
+     * \param rowValue row key value
+     * \param colValue column key value
+     * \return interpolated value on success or NaN on failure
      */
     double GetValue(double row_value, double col_value) const;
 
     /**
-     * @brief Returns table value for the given key index.
-     * @param rowIndex row index
-     * @param colIndex col index
-     * @return value on success or NaN on failure
+     * \brief Returns table value for the given key index.
+     * \param rowIndex row index
+     * \param colIndex col index
+     * \return value on success or NaN on failure
      */
     double GetValueByIndex(unsigned int row_index, unsigned int col_index) const;
 
     /**
-     * @brief Checks if table is valid.
-     * @return returns true if size is greater than 0 and all data is valid
+     * \brief Checks if table is valid.
+     * \return returns true if size is greater than 0 and all data is valid
      */
     bool IsValid() const;
 
     /**
-     * @brief Multiplies columns and rows values by the given factors.
-     * @param f_rows rows factor
-     * @param f_cols columns factor
+     * \brief Multiplies columns and rows values by the given factors.
+     * \param f_rows rows factor
+     * \param f_cols columns factor
      */
     void MultiplyRowsAndCols(double f_rows, double f_cols);
 
     /**
-     * @brief Multiplies rows values by the given factor.
-     * @param factor given factor
+     * \brief Multiplies rows values by the given factor.
+     * \param factor given factor
      */
     void MultiplyRows(double factor);
 
     /**
-     * @brief Multiplies columns values by the given factor.
-     * @param factor given factor
+     * \brief Multiplies columns values by the given factor.
+     * \param factor given factor
      */
     void MultiplyCols(double factor);
 
     /**
-     * @brief Multiplies values by the given factor.
-     * @param factor given factor
+     * \brief Multiplies values by the given factor.
+     * \param factor given factor
      */
     void MultiplyValues(double factor);
 
     /**
-     * @brief Sets table data.
+     * \brief Sets table data.
      * Table data index should match following scheme i = i_row * no_of_columns + i_col
-     * @param row_values rows key values ordered array
-     * @param col_values columns key values ordered array
-     * @param table_data table values ordered array
-     * @param rows number of rows
-     * @param cols number of columns
+     * \param row_values rows key values ordered array
+     * \param col_values columns key values ordered array
+     * \param table_data table values ordered array
+     * \param rows number of rows
+     * \param cols number of columns
      */
     void SetData(const double row_values[],
                  const double col_values[],
@@ -158,36 +158,36 @@ public:
                  unsigned int cols);
 
     /**
-     * @brief Sets table data.
+     * \brief Sets table data.
      * This constructor is used to initialize table with data.
      * Table data index should match following scheme i = i_row * no_of_columns + i_col
-     * @param row_values rows key values ordered vector
-     * @param col_values columns key values ordered vector
-     * @param table_data table values ordered vector
+     * \param row_values rows key values ordered vector
+     * \param col_values columns key values ordered vector
+     * \param table_data table values ordered vector
      */
     void SetData(const std::vector<double>& row_values,
                  const std::vector<double>& col_values,
                  const std::vector<double>& table_data);
 
     /**
-     * @brief Sets table data from string.
+     * \brief Sets table data from string.
      * Values in the given string should be separated with whitespaces.
-     * @param str given string
+     * \param str given string
      */
     void SetFromString(const char* str);
 
     /**
-     * @brief Returns string representation of the table.
+     * \brief Returns string representation of the table.
      */
     std::string ToString();
 
     inline unsigned int rows() const { return _rows; }
     inline unsigned int cols() const { return _cols; }
 
-    /** @brief Assignment operator. */
+    /** \brief Assignment operator. */
     Table2& operator=(const Table2& table);
 
-    /** @brief Move assignment operator. */
+    /** \brief Move assignment operator. */
     Table2& operator=(Table2&& table);
 
 private:
@@ -207,7 +207,7 @@ private:
     /** Deletes data tables. */
     void DeleteArrays();
 
-    /** @brief Updates interpolation data due to table data. */
+    /** \brief Updates interpolation data due to table data. */
     void UpdateInterpolationData();
 };
 

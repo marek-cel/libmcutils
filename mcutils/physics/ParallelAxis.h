@@ -28,11 +28,11 @@
 namespace mc {
 
 /**
- * @brief Gets matrix of inertia about parallel axis.
- * @param m [kg] mass
- * @param i [kg*m^2] inertia tensor
- * @param r [m] position
- * @return shifted inertia tensor [kg*m^2]
+ * \brief Gets matrix of inertia about parallel axis.
+ * \param m [kg] mass
+ * \param i [kg*m^2] inertia tensor
+ * \param r [m] position
+ * \return shifted inertia tensor [kg*m^2]
  *
  * ### Refernces:
  * - Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163

@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief Proportional-Integral-Derivative controller with back calculation
+ * \brief Proportional-Integral-Derivative controller with back calculation
  * anti-windup method.
  *
  * ### Refernces:
@@ -41,12 +41,12 @@ class MCUTILSAPI PID_BackCalc : public PID
 public:
 
     /**
-     * @brief Constructor.
-     * @param kp proportional gain
-     * @param ki integral gain
-     * @param kd derivative gain
-     * @param min minimal value for saturation
-     * @param max maximal value for saturation
+     * \brief Constructor.
+     * \param kp proportional gain
+     * \param ki integral gain
+     * \param kd derivative gain
+     * \param min minimal value for saturation
+     * \param max maximal value for saturation
      */
     PID_BackCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
                  double min = DBL_MIN, double max = DBL_MAX);

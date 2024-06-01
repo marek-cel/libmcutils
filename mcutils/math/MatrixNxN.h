@@ -29,15 +29,15 @@
 namespace mc {
 
 /**
- * @brief Square matrix class template.
- * @tparam N number of rows and columns
+ * \brief Square matrix class template.
+ * \tparam N number of rows and columns
  */
 template <unsigned int N>
 class MatrixNxN : public MatrixMxN<N,N>
 {
 public:
 
-    /** @brief Transposes matrix. */
+    /** \brief Transposes matrix. */
     void Transpose()
     {
         MatrixNxN<N> temp(*this);
@@ -51,7 +51,7 @@ public:
         }
     }
 
-    /** @brief Returns transposed matrix. */
+    /** \brief Returns transposed matrix. */
     MatrixNxN<N> GetTransposed() const
     {
         MatrixNxN<N> result(*this);
@@ -59,7 +59,7 @@ public:
         return result;
     }
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     MatrixNxN<N> operator+(const MatrixNxN<N>& matrix) const
     {
         MatrixNxN<N> result(*this);
@@ -67,7 +67,7 @@ public:
         return result;
     }
 
-    /** @brief Negation operator. */
+    /** \brief Negation operator. */
     MatrixNxN<N> operator-() const
     {
         MatrixNxN<N> result(*this);
@@ -75,7 +75,7 @@ public:
         return result;
     }
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     MatrixNxN<N> operator-(const MatrixNxN<N>& matrix) const
     {
         MatrixNxN<N> result(*this);
@@ -83,7 +83,7 @@ public:
         return result;
     }
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     MatrixNxN<N> operator*(double value) const
     {
         MatrixNxN<N> result(*this);
@@ -91,7 +91,7 @@ public:
         return result;
     }
 
-    /** @brief Multiplication operator (by matrix). */
+    /** \brief Multiplication operator (by matrix). */
     MatrixNxN<N> operator*(const MatrixNxN<N>& matrix) const
     {
         MatrixNxN<N> result( *this );
@@ -99,7 +99,7 @@ public:
         return result;
     }
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     MatrixNxN<N> operator/(double value) const
     {
         MatrixNxN<N> result(*this);
@@ -107,28 +107,28 @@ public:
         return result;
     }
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     MatrixNxN<N>& operator+=(const MatrixNxN<N>& matrix)
     {
         this->Add(matrix);
         return *this;
     }
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     MatrixNxN<N>& operator-=(const MatrixNxN<N>& matrix)
     {
         this->Substract(matrix);
         return *this;
     }
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     MatrixNxN<N>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     MatrixNxN<N>& operator/=(double value)
     {
         this->DivideByValue(value);
@@ -138,9 +138,9 @@ public:
 protected:
 
     /**
-     * @brief Multiplies matrix by matrix.
-     * @param matrix
-     * @param result
+     * \brief Multiplies matrix by matrix.
+     * \param matrix
+     * \param result
      */
     void MultiplyByMatrix(const MatrixNxN<N>& matrix, MatrixNxN<N>* result) const
     {

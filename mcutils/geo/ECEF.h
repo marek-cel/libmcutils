@@ -34,7 +34,7 @@
 namespace mc {
 
 /**
- * @brief Earth-centered, Earth-fixed (ECEF) coordinate system class.
+ * \brief Earth-centered, Earth-fixed (ECEF) coordinate system class.
  *
  * This class is used to store and calculate location expressed in
  * Earth-centered, Earth-fixed coordinate system. It also provides functions
@@ -57,107 +57,107 @@ public:
     static const Matrix3x3 _enu2ned;    ///< matrix of rotation from ENU to NED
     static const Matrix3x3 _ned2enu;    ///< matrix of rotation from NED to ENU
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     ECEF();
 
     /**
-     * @brief Copy constructor.
-     * @param ecef object to copy
+     * \brief Copy constructor.
+     * \param ecef object to copy
      */
     ECEF(const ECEF& ecef);
 
     /**
-     * @brief Moving constructor.
-     * @param ecef object to move
+     * \brief Moving constructor.
+     * \param ecef object to move
      */
     ECEF(ECEF&& ecef);
 
     /**
-     * @brief Constructor.
-     * @param a [m] equatorial radius
-     * @param f [-] ellipsoid flattening
+     * \brief Constructor.
+     * \param a [m] equatorial radius
+     * \param f [-] ellipsoid flattening
      */
     ECEF(double a, double f);
 
-    /** @brief Destructor. */
+    /** \brief Destructor. */
     virtual ~ECEF();
 
     /**
-     * @brief Converts geodetic coordinates into cartesian coordinates.
-     * @param lat [rad] geodetic latitude
-     * @param lon [rad] geodetic longitude
-     * @param alt [m] altitude above mean sea level
-     * @param x [m] resulting cartesian x-coordinate pointer
-     * @param y [m] resulting cartesian y-coordinate pointer
-     * @param z [m] resulting cartesian z-coordinate pointer
+     * \brief Converts geodetic coordinates into cartesian coordinates.
+     * \param lat [rad] geodetic latitude
+     * \param lon [rad] geodetic longitude
+     * \param alt [m] altitude above mean sea level
+     * \param x [m] resulting cartesian x-coordinate pointer
+     * \param y [m] resulting cartesian y-coordinate pointer
+     * \param z [m] resulting cartesian z-coordinate pointer
      */
     void ConvertGeo2Cart(double lat, double lon, double alt,
                          double* x, double* y, double* z) const;
 
     /**
-     * @brief Converts geodetic coordinates into cartesian coordinates.
-     * @param lat [rad] geodetic latitude
-     * @param lon [rad] geodetic longitude
-     * @param alt [m] altitude above mean sea level
-     * @return [m] resulting cartesian coordinates vector
+     * \brief Converts geodetic coordinates into cartesian coordinates.
+     * \param lat [rad] geodetic latitude
+     * \param lon [rad] geodetic longitude
+     * \param alt [m] altitude above mean sea level
+     * \return [m] resulting cartesian coordinates vector
      */
     Vector3 ConvertGeo2Cart(double lat, double lon, double alt) const;
 
     /**
-     * @brief Converts geodetic coordinates into cartesian coordinates.
-     * @param pos_geo [m] geodetic coordinates
-     * @return [m] resulting cartesian coordinates vector
+     * \brief Converts geodetic coordinates into cartesian coordinates.
+     * \param pos_geo [m] geodetic coordinates
+     * \return [m] resulting cartesian coordinates vector
      */
     Vector3 ConvertGeo2Cart(const Geo& pos_geo) const;
 
     /**
-     * @brief Converts geodetic coordinates into cartesian coordinates.
-     * @param pos_geo [m] geodetic coordinates
-     * @param pos_cart [m] resulting cartesian coordinates vector pointer
+     * \brief Converts geodetic coordinates into cartesian coordinates.
+     * \param pos_geo [m] geodetic coordinates
+     * \param pos_cart [m] resulting cartesian coordinates vector pointer
      */
     void ConvertGeo2Cart(const Geo& pos_geo, Vector3* pos_cart) const;
 
     /**
-     * @brief Converts cartesian coordinates into geodetic coordinates.
-     * @param x [m] cartesian x-coordinate
-     * @param y [m] cartesian y-coordinate
-     * @param z [m] cartesian z-coordinate
-     * @param lat [rad] resulting geodetic latitude pointer
-     * @param lon [rad] resulting geodetic longitude pointer
-     * @param alt [m] resulting altitude above mean sea level pointer
+     * \brief Converts cartesian coordinates into geodetic coordinates.
+     * \param x [m] cartesian x-coordinate
+     * \param y [m] cartesian y-coordinate
+     * \param z [m] cartesian z-coordinate
+     * \param lat [rad] resulting geodetic latitude pointer
+     * \param lon [rad] resulting geodetic longitude pointer
+     * \param alt [m] resulting altitude above mean sea level pointer
      */
     void ConvertCart2Geo(double x, double y, double z,
                          double* lat, double* lon, double* alt) const;
 
     /**
-     * @brief Converts cartesian coordinates into geodetic coordinates.
-     * @param x [m] cartesian x-coordinate
-     * @param y [m] cartesian y-coordinate
-     * @param z [m] cartesian z-coordinate
-     * @return resulting geodetic coordinates
+     * \brief Converts cartesian coordinates into geodetic coordinates.
+     * \param x [m] cartesian x-coordinate
+     * \param y [m] cartesian y-coordinate
+     * \param z [m] cartesian z-coordinate
+     * \return resulting geodetic coordinates
      */
     Geo ConvertCart2Geo(double x, double y, double z) const;
 
     /**
-     * @brief Converts cartesian coordinates into geodetic coordinates.
-     * @param pos_cart [m] cartesian coordinates vector
-     * @return resulting geodetic coordinates
+     * \brief Converts cartesian coordinates into geodetic coordinates.
+     * \param pos_cart [m] cartesian coordinates vector
+     * \return resulting geodetic coordinates
      */
     Geo ConvertCart2Geo(const Vector3& pos_cart) const;
 
     /**
-     * @brief Converts cartesian coordinates into geodetic coordinates.
-     * @param pos_cart [m] cartesian coordinates vector
-     * @param pos_geo resulting geodetic coordinates pointer
+     * \brief Converts cartesian coordinates into geodetic coordinates.
+     * \param pos_cart [m] cartesian coordinates vector
+     * \param pos_geo resulting geodetic coordinates pointer
      */
     void ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const;
 
     /**
-     * @brief Calculates coordinates moved by the given offset.
-     * @param heading [rad] heading
-     * @param offset_x [m] longitudinal offset
-     * @param offset_y [m] lateral offset
-     * @return resulting geodetic coordinates
+     * \brief Calculates coordinates moved by the given offset.
+     * \param heading [rad] heading
+     * \param offset_x [m] longitudinal offset
+     * \param offset_y [m] lateral offset
+     * \return resulting geodetic coordinates
      */
     Geo GetGeoOffset(double heading, double offset_x, double offset_y) const;
 
@@ -173,42 +173,42 @@ public:
     inline double ep  () const { return _ep;  }
 
     /**
-     * @brief Converts attitude angles expressed in NED.
-     * @param angles_ecef attitude angles expressed in ECEF
-     * @return attitude angles expressed in NED
+     * \brief Converts attitude angles expressed in NED.
+     * \param angles_ecef attitude angles expressed in ECEF
+     * \return attitude angles expressed in NED
      */
     Angles ConvertAttitudeECEF2NED(const Angles& angles_ecef) const;
 
     /**
-     * @brief Converts attitude angles expressed in ECEF.
-     * @param angles_ecef attitude angles expressed in NED
-     * @return attitude angles expressed in ECEF
+     * \brief Converts attitude angles expressed in ECEF.
+     * \param angles_ecef attitude angles expressed in NED
+     * \return attitude angles expressed in ECEF
      */
     Angles ConvertAttitudeNED2ECEF(const Angles& angles_ned) const;
 
     /**
-     * @brief Converts attitude quaternion expressed in NED.
-     * @param angles_ecef attitude quaternion expressed in ECEF
-     * @return attitude quaternion expressed in NED
+     * \brief Converts attitude quaternion expressed in NED.
+     * \param angles_ecef attitude quaternion expressed in ECEF
+     * \return attitude quaternion expressed in NED
      */
     Quaternion ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const;
 
     /**
-     * @brief Converts attitude quaternion expressed in ECEF.
-     * @param angles_ecef attitude quaternion expressed in NED
-     * @return attitude quaternion expressed in ECEF
+     * \brief Converts attitude quaternion expressed in ECEF.
+     * \param angles_ecef attitude quaternion expressed in NED
+     * \return attitude quaternion expressed in ECEF
      */
     Quaternion ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const;
 
     /**
-     * @brief Sets position from geodetic coordinates
-     * @param pos_geo position expressed in geodetic coordinates
+     * \brief Sets position from geodetic coordinates
+     * \param pos_geo position expressed in geodetic coordinates
      */
     void SetPositionFromGeo(const Geo& pos_geo);
 
     /**
-     * @brief Sets position from cartesian coordinates
-     * @param pos_geo position expressed in geodetic coordinates
+     * \brief Sets position from cartesian coordinates
+     * \param pos_geo position expressed in geodetic coordinates
      */
     void SetPositionFromCart(const Vector3& pos_cart);
 
@@ -224,10 +224,10 @@ public:
     inline const Matrix3x3& ecef2enu() const { return _ecef2enu; }
     inline const Matrix3x3& ecef2ned() const { return _ecef2ned; }
 
-    /** @brief Assignment operator. */
+    /** \brief Assignment operator. */
     ECEF& operator=(const ECEF& ecef);
 
-    /** @brief Moving assignment operator. */
+    /** \brief Moving assignment operator. */
     ECEF& operator=(ECEF&& ecef);
 
 protected:
@@ -260,7 +260,7 @@ private:
     void CopyState(const ECEF& ecef);
 
     /**
-     * @brief Updates rotation matrices due to position.
+     * \brief Updates rotation matrices due to position.
      * This function updates rotation matrices due to current ECEF coordinates.
      */
     void UpdateMatrices();

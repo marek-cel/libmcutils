@@ -31,13 +31,13 @@
 namespace mc {
 
 /**
- * @brief Solves system of linear equations using Gauss-Jordan method.
+ * \brief Solves system of linear equations using Gauss-Jordan method.
  *
- * @param mtr left hand side matrix
- * @param rhs right hand size vector
- * @param x result vector
- * @param eps minimum value treated as not-zero
- * @return mc::Result::Success on success and mc::Result::Failure on failure
+ * \param mtr left hand side matrix
+ * \param rhs right hand size vector
+ * \param x result vector
+ * \param eps minimum value treated as not-zero
+ * \return mc::Result::Success on success and mc::Result::Failure on failure
  *
  * ### Refernces:
  * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.41

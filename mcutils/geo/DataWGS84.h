@@ -27,7 +27,7 @@
 namespace mc {
 
 /**
- * @brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
+ * \brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
  * parameters and other physical data.
  *
  * ### Refernces:
