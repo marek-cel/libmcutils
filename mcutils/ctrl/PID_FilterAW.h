@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief Proportional-Integral-Derivative controller with anti-windup filter.
+ * \brief Proportional-Integral-Derivative controller with anti-windup filter.
  *
  * ### Refernces:
  * - Duzinkiewicz K., et al.: Zadania do cwiczen laboratoryjnych T10: Sterowanie predkoscia obrotowa silnika pradu stalego, 2016. [in Polish]
@@ -42,12 +42,12 @@ class MCUTILSAPI PID_FilterAW : public PID
 public:
 
     /**
-     * @brief Constructor.
-     * @param kp proportional gain
-     * @param ki integral gain
-     * @param kd derivative gain
-     * @param min minimal value for saturation
-     * @param max maximal value for saturation
+     * \brief Constructor.
+     * \param kp proportional gain
+     * \param ki integral gain
+     * \param kd derivative gain
+     * \param min minimal value for saturation
+     * \param max maximal value for saturation
      */
     PID_FilterAW(double kp = 1.0, double ki = 0.0, double kd = 0.0,
                  double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);

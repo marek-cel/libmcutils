@@ -25,8 +25,8 @@
 namespace mc {
 
 /**
- * @brief Deletes a pointer and sets it to 'nullptr'.
- * @param ptr pointer to delete
+ * \brief Deletes a pointer and sets it to 'nullptr'.
+ * \param ptr pointer to delete
  */
 template <typename T>
 void deletePtr(T*& ptr)
@@ -39,8 +39,8 @@ void deletePtr(T*& ptr)
 }
 
 /**
- * @brief Deletes a pointer to an array and sets it to 'nullptr'.
- * @param ptr pointer to delete
+ * \brief Deletes a pointer to an array and sets it to 'nullptr'.
+ * \param ptr pointer to delete
  */
 template <typename T>
 void deletePtrArray(T*& ptr)

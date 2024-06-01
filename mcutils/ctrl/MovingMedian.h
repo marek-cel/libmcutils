@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief Moving median filter class.
+ * \brief Moving median filter class.
  *
  * ### Refernces:
  * - [Median - Wikipedia](https://en.wikipedia.org/wiki/Median)
@@ -39,16 +39,16 @@ class MCUTILSAPI MovingMedian
 public:
 
     /**
-     * @brief Constructor.
-     * @param length length of the sliding window
-     * @param value initial output value
+     * \brief Constructor.
+     * \param length length of the sliding window
+     * \param value initial output value
      */
     explicit MovingMedian(unsigned int length = 1, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -57,8 +57,8 @@ public:
     inline unsigned int length() const { return _length; }
 
     /**
-     * @brief Sets length of the sliding window
-     * @param length length of the sliding window
+     * \brief Sets length of the sliding window
+     * \param length length of the sliding window
      */
     inline void set_length(unsigned int length) { _length = length; }
 

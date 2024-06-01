@@ -6,7 +6,7 @@
 #include <mcutils/math/Vector.h>
 
 /**
- * @brief The DiffEquationSolver class
+ * \brief The DiffEquationSolver class
  *
  *
  * Linear homogeneous ordinary differential (Cauchy–Euler) equation is used to
@@ -83,10 +83,10 @@ public:
     static constexpr double DELTA_MAX { 1.0e-2 };   ///< max error due to DIFFEQUATIONSOLVER_T_STEP for 1st order method ( 10^-2 )^1 = 10^-2
 
     /**
-     * @brief DiffEquationSolver
-     * @param m mass
-     * @param k stiffness
-     * @param c damping
+     * \brief DiffEquationSolver
+     * \param m mass
+     * \param k stiffness
+     * \param c damping
      */
     DiffEquationSolver(double m, double k, double c, INTEGRATOR* integrator)
     {
@@ -98,10 +98,10 @@ public:
     }
 
     /**
-     * @brief solve
-     * @param x_0 initial value
-     * @param x_1 initial value first derivative
-     * @return
+     * \brief solve
+     * \param x_0 initial value
+     * \param x_1 initial value first derivative
+     * \return
      */
     bool Solve(double x_0, double x_1)
     {
@@ -242,11 +242,11 @@ public:
     }
 
     /**
-     * @brief calcDelta
-     * @param a
-     * @param b
-     * @param c
-     * @return
+     * \brief calcDelta
+     * \param a
+     * \param b
+     * \param c
+     * \return
      */
     double CalcDelta(double a, double b, double c)
     {
@@ -254,9 +254,9 @@ public:
     }
 
     /**
-     * @brief computeStateDeriv
-     * @param state
-     * @param deriv
+     * \brief computeStateDeriv
+     * \param state
+     * \param deriv
      */
     mc::Vector GetStateDeriv(const mc::Vector& state)
     {

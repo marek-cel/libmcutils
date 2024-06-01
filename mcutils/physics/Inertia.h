@@ -27,12 +27,12 @@
 namespace mc {
 
 /**
- * @brief Firt order inertia.
- * @param u desired value
- * @param y current value
- * @param dt [s] time step
- * @param tc [s] time constant
- * @return firt order inertia output
+ * \brief Firt order inertia.
+ * \param u desired value
+ * \param y current value
+ * \param dt [s] time step
+ * \param tc [s] time constant
+ * \return firt order inertia output
  */
 inline double FirstOrderInertia(double u, double y, double dt, double tc)
 {

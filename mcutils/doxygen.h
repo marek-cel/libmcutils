@@ -23,36 +23,39 @@
 #define MCUTILS_DOXYGEN_H_
 
 /***************************************************************************//**
- * @author Marek M. Cel
+ * \author Marek M. Cel
  *
- * @mainpage libmcutil
+ * \mainpage libmcutil
  *
- * @section Introduction
+ * \section Introduction
  *
  * <tt>libmcutil</tt> is a various utilities library.
  *
- * @section Modules
+ * \section Modules
  *
- * @subsection ctrl
+ * \subsection astro
+ * This module contains utilities for various astronomical computations.
+ * 
+ * \subsection ctrl
  * This module contains classes representing common control elements.
  *
- * @subsection geo
+ * \subsection geo
  * This module contains utilities for various geographic and geodetic
  * computations.
  *
- * @subsection math
+ * \subsection math
  * This module contains utilities for various mathematical operations.
  *
- * @subsection misc
+ * \subsection misc
  * This module contains miscellaneous utilities.
  *
- * @subsection physics
+ * \subsection physics
  * This module contains utilities for various physical computations.
  *
- * @subsection time
+ * \subsection time
  * This module contains time and date ralted utilities.
  * 
- * @section Coding Style
+ * \section Coding Style
  * 
  * [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html)
  * is used as a base style guide although, with the following exceptions:
@@ -64,7 +67,7 @@
  * - Empty curly braces should be on the end of the last line 
  * - Other exceptions are allowed in justified cases
  *
- * @section Licensing
+ * \section Licensing
  *
  * <tt>libmcutil</tt> is distributed under the terms of the
  * [MIT License](https://opensource.org/license/mit/).

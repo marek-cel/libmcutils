@@ -31,44 +31,44 @@ template class MCUTILSAPI mc::VectorN<6>;
 namespace mc {
 
 /**
- * @brief 6 elements column vector class.
+ * \brief 6 elements column vector class.
  */
 class MCUTILSAPI Vector6 : public VectorN<6>
 {
 public:
 
-    /** @return normalized vector */
+    /** \return normalized vector */
     Vector6 GetNormalized() const;
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     Vector6 operator+(const Vector6& vect) const;
 
-    /** @brief Negation operator. */
+    /** \brief Negation operator. */
     Vector6 operator-() const;
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     Vector6 operator-(const Vector6& vect) const;
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     Vector6 operator*(double value) const;
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     Vector6 operator/(double value) const;
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     Vector6& operator+=(const Vector6& vect);
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     Vector6& operator-=(const Vector6& vect);
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     Vector6& operator*=(double value);
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     Vector6& operator/=(double value);
 };
 
-/** @brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by scalar). */
 inline Vector6 operator*(double value, const Vector6& vect)
 {
     return vect * value;

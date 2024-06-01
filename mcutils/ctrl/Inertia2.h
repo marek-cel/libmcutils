@@ -27,27 +27,32 @@
 namespace mc {
 
 /**
- * @brief Second-order inertia class.
+ * \brief Second-order inertia class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
+ * 
+ * \f[
+ * G \left( s \right) = 
+ * {1 \over { \left( T_{c1} \cdot s + 1 \right) \left( T_{c2} \cdot s + 1 \right) }}
+ * \f]
  */
 class MCUTILSAPI Inertia2
 {
 public:
 
     /**
-     * @brief Constructor.
-     * @param tc1 time constant 1
-     * @param tc2 time constant 2
-     * @param value initial output value
+     * \brief Constructor.
+     * \param tc1 time constant 1
+     * \param tc2 time constant 2
+     * \param value initial output value
      */
     explicit Inertia2(double tc1 = 0.0, double tc2 = 0.0, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -57,20 +62,20 @@ public:
     inline double time_const_2() const { return _time_const_2; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     void set_value(double y);
 
     /**
-     * @brief Sets time constant tc1.
-     * @param tc1 time constant tc1
+     * \brief Sets time constant tc1.
+     * \param tc1 time constant tc1
      */
     void set_time_const_1(double tc1);
 
     /**
-     * @brief Sets time constant tc2.
-     * @param tc2 time constant tc2
+     * \brief Sets time constant tc2.
+     * \param tc2 time constant tc2
      */
     void set_time_const_2(double tc2);
 

@@ -31,30 +31,30 @@ namespace mc {
 namespace Net {
 
 /**
- * @brief Converts values between host and network byte order.
- * @param val value expressed in host byte order
- * @return value expressed in network byte order
+ * \brief Converts values between host and network byte order.
+ * \param val value expressed in host byte order
+ * \return value expressed in network byte order
  */
 MCUTILSAPI UInt16 HostToNet(UInt16 val);
 
 /**
- * @brief Converts values between host and network byte order.
- * @param val value expressed in host byte order
- * @return value expressed in network byte order
+ * \brief Converts values between host and network byte order.
+ * \param val value expressed in host byte order
+ * \return value expressed in network byte order
  */
 MCUTILSAPI UInt32 HostToNet(UInt32 val);
 
 /**
- * @brief Converts values between host and network byte order.
- * @param val value expressed in host byte order
- * @return value expressed in network byte order
+ * \brief Converts values between host and network byte order.
+ * \param val value expressed in host byte order
+ * \return value expressed in network byte order
  */
 MCUTILSAPI float HostToNet(float val);
 
 /**
- * @brief Converts values between host and network byte order.
- * @param val value expressed in host byte order
- * @return value expressed in network byte order
+ * \brief Converts values between host and network byte order.
+ * \param val value expressed in host byte order
+ * \return value expressed in network byte order
  */
 MCUTILSAPI double HostToNet(double val);
 

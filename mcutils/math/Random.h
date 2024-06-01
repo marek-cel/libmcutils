@@ -31,7 +31,7 @@
 namespace mc {
 
 /**
- * @brief Random number generator.
+ * \brief Random number generator.
  */
 class MCUTILSAPI Random : public Singleton<Random>
 {
@@ -40,10 +40,10 @@ class MCUTILSAPI Random : public Singleton<Random>
 public:
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     inline static int Get(int min, int max)
     {
@@ -51,10 +51,10 @@ public:
     }
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     inline static float Get(float min, float max)
     {
@@ -62,10 +62,10 @@ public:
     }
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     inline static double Get(double min, double max)
     {
@@ -73,26 +73,26 @@ public:
     }
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     int GetRandom(int min, int max);
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     float GetRandom(float min, float max);
 
     /**
-     * @brief Gets random number from the given range.
-     * @param min minimum random number value
-     * @param max maximum random number value
-     * @return random value
+     * \brief Gets random number from the given range.
+     * \param min minimum random number value
+     * \param max maximum random number value
+     * \return random value
      */
     double GetRandom(double min, double max);
 

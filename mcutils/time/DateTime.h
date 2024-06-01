@@ -30,7 +30,7 @@
 namespace mc {
 
 /**
- * @brief The date and time struct
+ * \brief The date and time struct
  */
 struct MCUTILSAPI DateTime
 {

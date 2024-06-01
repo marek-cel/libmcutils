@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief Martian Coordinate System ellipsoid parameters according to the IAU
+ * \brief Martian Coordinate System ellipsoid parameters according to the IAU
  * WGCCRE Martian Coordinate System (MCS) and other physical data.
  *
  * Martian prime merdian goes through the Airy-0 crater.

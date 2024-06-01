@@ -93,37 +93,37 @@ Units::Converter GetUnitConverter(const char* name)
     else if ( 0 == String::Compare(name, "N") )
         return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "lbf") )
-        return &lbf2n;
+        return &lbf2N;
 
     // pressure
     else if ( 0 == String::Compare(name, "Pa") )
         return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "psf") )
-        return &psf2pa;
+        return &psf2Pa;
     else if ( 0 == String::Compare(name, "psi") )
-        return &psi2pa;
+        return &psi2Pa;
     else if ( 0 == String::Compare(name, "inHg") )
-        return &inhg2pa;
+        return &inHg2Pa;
     else if ( 0 == String::Compare(name, "mb") )
-        return &mb2pa;
+        return &mb2Pa;
 
     // power
     else if ( 0 == String::Compare(name, "W") )
         return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "PS") )
-        return &ps2w;
+        return &PS2W;
     else if ( 0 == String::Compare(name, "hp") )
-        return &hp2w;
+        return &hp2W;
     else if ( 0 == String::Compare(name, "kW") )
-        return &kw2w;
+        return &kW2W;
 
     // temperature
     else if ( 0 == String::Compare(name, "K") )
         return [](double val){ return val; };
     else if ( 0 == String::Compare(name, "deg_C") )
-        return &c2k;
+        return &C2K;
     else if ( 0 == String::Compare(name, "deg_F") )
-        return &f2k;
+        return &F2K;
 
     // specific fuel consumption
     else if ( 0 == String::Compare(name, "kg/Ws") )

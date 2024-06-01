@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * @brief World Geodetic System 1984 (WGS84) class.
+ * \brief World Geodetic System 1984 (WGS84) class.
  *
  * US Department of Defense World Geodetic System 1984 (WGS84) class.
  *
@@ -40,40 +40,40 @@ class MCUTILSAPI WGS84 : public ECEF
 {
 public:
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     WGS84();
 
     /**
-     * @brief Copy constructor.
-     * @param ecef object to copy
+     * \brief Copy constructor.
+     * \param ecef object to copy
      */
     WGS84(const WGS84& wgs);
 
     /**
-     * @brief Moving constructor.
-     * @param ecef object to move
+     * \brief Moving constructor.
+     * \param ecef object to move
      */
     WGS84(WGS84&& wgs);
 
     /**
-     * @brief Constructor.
-     * @param pos_geo geodetic coordinates
+     * \brief Constructor.
+     * \param pos_geo geodetic coordinates
      */
     explicit WGS84(const Geo& pos_geo);
 
     /**
-     * @brief Constructor.
-     * @param pos_wgs [m] coordinates vector expressed in ECEF
+     * \brief Constructor.
+     * \param pos_wgs [m] coordinates vector expressed in ECEF
      */
     explicit WGS84(const Vector3& pos_wgs);
 
-    /** @brief Destructor. */
+    /** \brief Destructor. */
     virtual ~WGS84() = default;
 
-    /** @brief Assignment operator. */
+    /** \brief Assignment operator. */
     WGS84& operator=(const WGS84& wgs);
 
-    /** @brief Moving assignment operator. */
+    /** \brief Moving assignment operator. */
     WGS84& operator=(WGS84&& wgs);
 };
 

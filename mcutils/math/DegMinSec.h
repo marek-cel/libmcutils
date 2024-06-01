@@ -29,19 +29,19 @@
 namespace mc {
 
 /**
- * @brief Degree-Minute-Second representation of angle class.
+ * \brief Degree-Minute-Second representation of angle class.
  */
 class MCUTILSAPI DegMinSec
 {
 public:
 
     /**
-     * @brief Constructor.
-     * @param angle [rad] angle
+     * \brief Constructor.
+     * \param angle [rad] angle
      */
     explicit DegMinSec(double angle = 0.0);
 
-    /** @return true if all items are valid */
+    /** \return true if all items are valid */
     bool IsValid() const;
 
     inline int    deg() const { return _deg; }
@@ -49,24 +49,24 @@ public:
     inline double sec() const { return _sec; }
 
     /**
-     * @brief Returns angle expressed in radians.
-     * @return angle expressed in radians
+     * \brief Returns angle expressed in radians.
+     * \return angle expressed in radians
      */
     inline double GetAngle() const { return _angle; }
 
     /**
-     * @brief Sets angle value.
-     * @param angle [rad] angle
+     * \brief Sets angle value.
+     * \param angle [rad] angle
      */
     void SetAngle(double angle);
 
-    /** @brief Returns string represtation of the angles. */
+    /** \brief Returns string represtation of the angles. */
     std::string ToString() const;
 
-    /** @brief Equality operator. */
+    /** \brief Equality operator. */
     bool operator==(const DegMinSec& dms) const;
 
-    /** @brief Inequality operator. */
+    /** \brief Inequality operator. */
     bool operator!=(const DegMinSec& dms) const;
 
 private:

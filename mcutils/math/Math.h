@@ -30,11 +30,11 @@ namespace mc {
 namespace Math {
 
 /**
- * @brief Checks if value is within the given range.
- * @param min minimum possible value
- * @param max maximum possible value
- * @param val variable to test
- * @return true if val greater than min and less than max, false otherwise
+ * \brief Checks if value is within the given range.
+ * \param min minimum possible value
+ * \param max maximum possible value
+ * \param val variable to test
+ * \return true if val greater than min and less than max, false otherwise
  */
 MCUTILSAPI inline bool IsInside(const double& min, const double& max, const double& val)
 {
@@ -42,11 +42,11 @@ MCUTILSAPI inline bool IsInside(const double& min, const double& max, const doub
 }
 
 /**
- * @brief Checks if value is outside the given range.
- * @param min minimum possible value
- * @param max maximum possible value
- * @param val variable to test
- * @return true if val greater than min and less than max, false otherwise
+ * \brief Checks if value is outside the given range.
+ * \param min minimum possible value
+ * \param max maximum possible value
+ * \param val variable to test
+ * \return true if val greater than min and less than max, false otherwise
  */
 MCUTILSAPI inline bool IsOutside(const double& min, const double& max, const double& val)
 {
@@ -54,9 +54,9 @@ MCUTILSAPI inline bool IsOutside(const double& min, const double& max, const dou
 }
 
 /**
- * @brief Power 2 (square) function.
- * @param val argument
- * @return power 2 (square)
+ * \brief Power 2 (square) function.
+ * \param val argument
+ * \return power 2 (square)
  */
 MCUTILSAPI inline double Pow2(const double& val)
 {
@@ -64,9 +64,9 @@ MCUTILSAPI inline double Pow2(const double& val)
 }
 
 /**
- * @brief Power 3 (cube) function.
- * @param val argument
- * @return power 3 (cube)
+ * \brief Power 3 (cube) function.
+ * \param val argument
+ * \return power 3 (cube)
  */
 MCUTILSAPI inline double Pow3(const double& val)
 {
@@ -74,9 +74,9 @@ MCUTILSAPI inline double Pow3(const double& val)
 }
 
 /**
- * @brief Power 4 function.
- * @param val argument
- * @return power 4
+ * \brief Power 4 function.
+ * \param val argument
+ * \return power 4
  */
 MCUTILSAPI inline double Pow4(const double& val)
 {
@@ -84,9 +84,9 @@ MCUTILSAPI inline double Pow4(const double& val)
 }
 
 /**
- * @brief Power 5 function.
- * @param val argument
- * @return power 5
+ * \brief Power 5 function.
+ * \param val argument
+ * \return power 5
  */
 MCUTILSAPI inline double Pow5(const double& val)
 {
@@ -94,11 +94,11 @@ MCUTILSAPI inline double Pow5(const double& val)
 }
 
 /**
- * @brief Saturation function. Returns value limited to the given range.
- * @param min minimum possible value
- * @param max maximum possible value
- * @param val variable to test
- * @return min if val less than min, max if val larger than max, val if val larger than min and less than max
+ * \brief Saturation function. Returns value limited to the given range.
+ * \param min minimum possible value
+ * \param max maximum possible value
+ * \param val variable to test
+ * \return min if val less than min, max if val larger than max, val if val larger than min and less than max
  */
 MCUTILSAPI inline double Satur(const double& min, const double& max, const double& val)
 {
@@ -109,9 +109,9 @@ MCUTILSAPI inline double Satur(const double& min, const double& max, const doubl
 }
 
 /**
- * @brief Signum function.
- * @param val input value
- * @return 1 if val is possitive, -1 when val is negative, 0 if val is zero
+ * \brief Signum function.
+ * \param val input value
+ * \return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
 MCUTILSAPI inline double Sign(const double& val)
 {
@@ -122,10 +122,10 @@ MCUTILSAPI inline double Sign(const double& val)
 }
 
 /**
- * @brief Period of 2.0 fast sine wave approximation.
+ * \brief Period of 2.0 fast sine wave approximation.
  * Valid range is -1.0 to 1.0.
- * @param x normalized input value <-1.0;1.0>
- * @return approximated sine wave
+ * \param x normalized input value <-1.0;1.0>
+ * \return approximated sine wave
  */
 MCUTILSAPI inline float SineWave(float x)
 {
@@ -134,11 +134,11 @@ MCUTILSAPI inline float SineWave(float x)
 }
 
 /**
- * @brief Smoothstep (sigmoid) 3rd order function.
- * @param xmin minimum argument value
- * @param xmax maximum argument value
- * @param x argument value
- * @return normalized smoothstep function value
+ * \brief Smoothstep (sigmoid) 3rd order function.
+ * \param xmin minimum argument value
+ * \param xmax maximum argument value
+ * \param x argument value
+ * \return normalized smoothstep function value
  *
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
@@ -151,9 +151,9 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
 }
 
 /**
- * @brief Smoothstep (sigmoid) 3rd order function.
- * @param x normalized argument value
- * @return normalized smoothstep function value
+ * \brief Smoothstep (sigmoid) 3rd order function.
+ * \param x normalized argument value
+ * \return normalized smoothstep function value
  *
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
@@ -164,13 +164,13 @@ MCUTILSAPI inline double Smoothstep(double x)
 }
 
 /**
- * @brief Smoothstep (sigmoid) 3rd order function.
- * @param xmin minimum argument value
- * @param xmax maximum argument value
- * @param ymin minimum output value
- * @param ymax maximum output value
- * @param x argument value
- * @return smoothstep function value within the given range
+ * \brief Smoothstep (sigmoid) 3rd order function.
+ * \param xmin minimum argument value
+ * \param xmax maximum argument value
+ * \param ymin minimum output value
+ * \param ymax maximum output value
+ * \param x argument value
+ * \return smoothstep function value within the given range
  *
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
@@ -183,11 +183,11 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
 }
 
 /**
- * @brief Estimates standard deviation based on a sample.
- * @param sum sum of samples values
- * @param sum_sq sum of samples values squared
- * @param n number of samples
- * @return standard deviation
+ * \brief Estimates standard deviation based on a sample.
+ * \param sum sum of samples values
+ * \param sum_sq sum of samples values squared
+ * \param n number of samples
+ * \return standard deviation
  *
  * ### Refernces:
  * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)
@@ -202,10 +202,10 @@ MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
 }
 
 /**
- * @brief Estimates standard deviation based on a sample.
- * @param x array of sample values
- * @param n number of samples
- * @return standard deviation
+ * \brief Estimates standard deviation based on a sample.
+ * \param x array of sample values
+ * \param n number of samples
+ * \return standard deviation
  *
  * ### Refernces:
  * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)

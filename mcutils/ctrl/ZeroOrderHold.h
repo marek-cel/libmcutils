@@ -27,23 +27,23 @@
 namespace mc {
 
 /**
- * @brief Zero-Order Hold (ZOH) class.
+ * \brief Zero-Order Hold (ZOH) class.
  */
 class MCUTILSAPI ZeroOrderHold
 {
 public:
 
     /**
-     * @brief Constructor.
-     * @param t_hold [s] hold time
-     * @param value initial output value
+     * \brief Constructor.
+     * \param t_hold [s] hold time
+     * \param value initial output value
      */
     ZeroOrderHold(double t_hold = 0.0, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -52,8 +52,8 @@ public:
     inline double t_hold() const { return _t_hold; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     void set_value(double value);
 

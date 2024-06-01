@@ -27,10 +27,20 @@
 namespace mc {
 
 /**
- * @brief Low-pass filter (LPF) class.
+ * \brief Low-pass filter (LPF) class.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )  =  omega / ( s + omega )  =  1 / ( s/omega + 1 )
+ * 
+ * \f[
+ * G \left( s \right)
+ * =
+ * { 1 \over { T_c \cdot s + 1 } }
+ * =
+ * { \omega \over { s + \omega } }
+ * =
+ * { 1 \over {{s \over \omega} + 1} }
+ * \f]
  *
  * Low-pass filter is based on a first-order lag element.
  */
@@ -39,22 +49,22 @@ class MCUTILSAPI LowPassFilter
 public:
 
     /**
-     * @brief Constructor.
-     * @param omega [rad/s] cutoff angular frequency
-     * @param value initial output value
+     * \brief Constructor.
+     * \param omega [rad/s] cutoff angular frequency
+     * \param value initial output value
      */
     explicit LowPassFilter(double omega = 1.0, double value = 0.0);
 
     /**
-     * @brief Sets cutoff frequency.
-     * @param freq [Hz] cutoff frequency
+     * \brief Sets cutoff frequency.
+     * \param freq [Hz] cutoff frequency
      */
     void SetCutoffFreq(double freq);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -62,14 +72,14 @@ public:
     inline double omega() const { return _omega; }
 
     /**
-     * @brief Sets cutoff angular frequency.
-     * @param omega [rad/s] cutoff angular frequency
+     * \brief Sets cutoff angular frequency.
+     * \param omega [rad/s] cutoff angular frequency
      */
     void set_omega(double omega);
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     inline void set_value(double value) { _value = value; }
 

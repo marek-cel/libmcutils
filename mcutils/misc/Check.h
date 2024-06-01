@@ -33,9 +33,9 @@
 namespace mc {
 
 /**
- * @brief Checks if given varaible is Infinite.
- * @param val double precision value to test
- * @return function returns TRUE if tested value is Infinite
+ * \brief Checks if given varaible is Infinite.
+ * \param val double precision value to test
+ * \return function returns TRUE if tested value is Infinite
  */
 MCUTILSAPI inline bool IsInf(const double& val)
 {
@@ -47,9 +47,9 @@ MCUTILSAPI inline bool IsInf(const double& val)
 }
 
 /**
- * @brief Checks if given varaible is NaN.
- * @param val double precision value to test
- * @return function returns TRUE if tested value is NaN
+ * \brief Checks if given varaible is NaN.
+ * \param val double precision value to test
+ * \return function returns TRUE if tested value is NaN
  */
 MCUTILSAPI inline bool IsNaN(const double& val)
 {
@@ -57,9 +57,9 @@ MCUTILSAPI inline bool IsNaN(const double& val)
 }
 
 /**
- * @brief Checks if given varaible is Infinite or NaN.
- * @param val double precision value to test
- * @return function returns FALSE if tested value is Infinite or NaN
+ * \brief Checks if given varaible is Infinite or NaN.
+ * \param val double precision value to test
+ * \return function returns FALSE if tested value is Infinite or NaN
  */
 MCUTILSAPI inline bool IsValid(const double& val)
 {
@@ -67,10 +67,10 @@ MCUTILSAPI inline bool IsValid(const double& val)
 }
 
 /**
- * @brief Checks if given array is Infinite or NaN.
- * @param array double precision array to test
- * @param size the size of given array
- * @return function returns FALSE if tested array is Infinite or NaN
+ * \brief Checks if given array is Infinite or NaN.
+ * \param array double precision array to test
+ * \param size the size of given array
+ * \return function returns FALSE if tested array is Infinite or NaN
  */
 MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
 {

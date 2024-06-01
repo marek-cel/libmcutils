@@ -32,7 +32,7 @@
 namespace mc {
 
 /**
- * @brief Logging class.
+ * \brief Logging class.
  */
 class MCUTILSAPI Log : private Singleton<Log>
 {
@@ -41,7 +41,7 @@ class MCUTILSAPI Log : private Singleton<Log>
 public:
 
     /**
-     * @brief The verbose level enum
+     * \brief The verbose level enum
      */
     enum class VerboseLevel
     {
@@ -52,51 +52,51 @@ public:
     };
 
     /**
-     * @brief Prints error log message.
-     * @param format message format
+     * \brief Prints error log message.
+     * \param format message format
      */
     static void Error(const char* format, ...);
 
     /**
-     * @brief Prints warning log message.
-     * @param format message format
+     * \brief Prints warning log message.
+     * \param format message format
      */
     static void Warning(const char* format, ...);
 
     /**
-     * @brief Prints info log message.
-     * @param format message format
+     * \brief Prints info log message.
+     * \param format message format
      */
     static void Info(const char* format, ...);
 
     /**
-     * @brief Prints debug log message.
-     * @param format message format
+     * \brief Prints debug log message.
+     * \param format message format
      */
     static void Debug(const char* format, ...);
 
     /**
-     * @brief Gets output stream.
+     * \brief Gets output stream.
      * If output stream is not set std::cout is returned.
-     * @return output stream
+     * \return output stream
      */
     static std::ostream& Out();
 
     /**
-     * @brief Sets output stream.
-     * @param outputStream output stream
+     * \brief Sets output stream.
+     * \param outputStream output stream
      */
     static void set_out_stream(std::ostream* out_stream);
 
     /**
-     * @brief Set syslog output status (unix only).
-     * @param syslog_out syslog output status (true enabled, false disabled)
+     * \brief Set syslog output status (unix only).
+     * \param syslog_out syslog output status (true enabled, false disabled)
      */
     static void set_syslog_out(bool syslog_out);
 
     /**
-     * @brief Sets verbose level.
-     * @param verboseLevel verbose level
+     * \brief Sets verbose level.
+     * \param verboseLevel verbose level
      */
     static void set_verb_level(VerboseLevel verb_level);
 
@@ -119,9 +119,9 @@ private:
     // LCOV_EXCL_STOP
 
     /**
-     * @brief Prints log message.
-     * @param level verbose level
-     * @param format message format
+     * \brief Prints log message.
+     * \param level verbose level
+     * \param format message format
      */
     void Print(VerboseLevel level, const char* format, va_list arg);
 
