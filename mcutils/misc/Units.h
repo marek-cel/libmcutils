@@ -756,7 +756,7 @@ MCUTILSAPI inline double lb2kg(double mass = 1.0)
  * \param force force expressed in newtons
  * \return force expressed in pounds
  */
-MCUTILSAPI inline double n2lbf(double force = 1.0)
+MCUTILSAPI inline double N2lbf(double force = 1.0)
 {
     return force * 0.224808943;
 }
@@ -766,7 +766,7 @@ MCUTILSAPI inline double n2lbf(double force = 1.0)
  * \param force force expressed in pounds
  * \return force expressed in newtons
  */
-MCUTILSAPI inline double lbf2n(double force = 1.0)
+MCUTILSAPI inline double lbf2N(double force = 1.0)
 {
     return force * 4.4482216152605;
 }
@@ -780,7 +780,7 @@ MCUTILSAPI inline double lbf2n(double force = 1.0)
  * \param press pressure expressed in pascals
  * \return pressure expressed in inches Hg
  */
-MCUTILSAPI inline double pa2inhg(double press = 1.0)
+MCUTILSAPI inline double Pa2inHg(double press = 1.0)
 {
     return press * 0.000295333727;
 }
@@ -790,7 +790,7 @@ MCUTILSAPI inline double pa2inhg(double press = 1.0)
  * \param press pressure expressed in pascals
  * \return pressure expressed in millibars
  */
-MCUTILSAPI inline double pa2mb(double press = 1.0)
+MCUTILSAPI inline double Pa2mb(double press = 1.0)
 {
     return press * 0.01;
 }
@@ -800,7 +800,7 @@ MCUTILSAPI inline double pa2mb(double press = 1.0)
  * \param press pressure expressed in pascals
  * \return pressure expressed in psf
  */
-MCUTILSAPI inline double pa2psf(double press = 1.0)
+MCUTILSAPI inline double Pa2psf(double press = 1.0)
 {
     return press * 0.224808943 / ( 3.2808399 * 3.2808399 );
 }
@@ -810,7 +810,7 @@ MCUTILSAPI inline double pa2psf(double press = 1.0)
  * \param press pressure expressed in pascals
  * \return pressure expressed in psi
  */
-MCUTILSAPI inline double pa2psi(double press = 1.0)
+MCUTILSAPI inline double Pa2psi(double press = 1.0)
 {
     return press * ( 0.224808943 * 0.0254 * 0.0254 );
 }
@@ -820,7 +820,7 @@ MCUTILSAPI inline double pa2psi(double press = 1.0)
  * \param press pressure expressed in psf
  * \return pressure expressed in pascals
  */
-MCUTILSAPI inline double psf2pa(double press = 1.0)
+MCUTILSAPI inline double psf2Pa(double press = 1.0)
 {
     return press * ( 3.2808399 * 3.2808399 ) / 0.224808943;
 }
@@ -830,7 +830,7 @@ MCUTILSAPI inline double psf2pa(double press = 1.0)
  * \param press pressure expressed in psi
  * \return pressure expressed in pascals
  */
-MCUTILSAPI inline double psi2pa(double press = 1.0)
+MCUTILSAPI inline double psi2Pa(double press = 1.0)
 {
     return press / ( 0.224808943 * 0.0254 * 0.0254 );
 }
@@ -840,7 +840,7 @@ MCUTILSAPI inline double psi2pa(double press = 1.0)
  * \param press pressure expressed in psi
  * \return pressure expressed in inches Hg
  */
-MCUTILSAPI inline double psi2inhg(double press = 1.0)
+MCUTILSAPI inline double psi2inHg(double press = 1.0)
 {
     return press * 2.03625437;
 }
@@ -860,7 +860,7 @@ MCUTILSAPI inline double psi2mb(double press = 1.0)
  * \param press pressure expressed in inches Hg
  * \return pressure expressed in pascals
  */
-MCUTILSAPI inline double inhg2pa(double press = 1.0)
+MCUTILSAPI inline double inHg2Pa(double press = 1.0)
 {
     return press * 3386.0;
 }
@@ -870,7 +870,7 @@ MCUTILSAPI inline double inhg2pa(double press = 1.0)
  * \param press pressure expressed in inches Hg
  * \return pressure expressed in psi
  */
-MCUTILSAPI inline double inhg2psi(double press = 1.0)
+MCUTILSAPI inline double inHg2psi(double press = 1.0)
 {
     return press * 0.49109778;
 }
@@ -880,7 +880,7 @@ MCUTILSAPI inline double inhg2psi(double press = 1.0)
  * \param press pressure expressed in inches Hg
  * \return pressure expressed in millibars
  */
-MCUTILSAPI inline double inhg2mb(double press = 1.0)
+MCUTILSAPI inline double inHg2mb(double press = 1.0)
 {
     return press * 33.86;
 }
@@ -890,7 +890,7 @@ MCUTILSAPI inline double inhg2mb(double press = 1.0)
  * \param press pressure expressed in millibars
  * \return pressure expressed in pascals
  */
-MCUTILSAPI inline double mb2pa(double press = 1.0)
+MCUTILSAPI inline double mb2Pa(double press = 1.0)
 {
     return press * 100.0;
 }
@@ -910,7 +910,7 @@ MCUTILSAPI inline double mb2psi(double press = 1.0)
  * \param press pressure expressed in millibars
  * \return pressure expressed in inches Hg
  */
-MCUTILSAPI inline double mb2inhg(double press = 1.0)
+MCUTILSAPI inline double mb2inHg(double press = 1.0)
 {
     return press * 0.0295333727;
 }
@@ -924,7 +924,7 @@ MCUTILSAPI inline double mb2inhg(double press = 1.0)
  * \param pwr power expressed in (metric) horsepower
  * \return power expressed in (mechanical) horsepower
  */
-MCUTILSAPI inline double ps2hp(double pwr = 1.0)
+MCUTILSAPI inline double PS2hp(double pwr = 1.0)
 {
     return pwr * 0.98632005756;
 }
@@ -934,7 +934,7 @@ MCUTILSAPI inline double ps2hp(double pwr = 1.0)
  * \param pwr power expressed in (metric) horsepower
  * \return power expressed in watts
  */
-MCUTILSAPI inline double ps2w(double pwr = 1.0)
+MCUTILSAPI inline double PS2W(double pwr = 1.0)
 {
     return pwr * 735.498749992;
 }
@@ -944,7 +944,7 @@ MCUTILSAPI inline double ps2w(double pwr = 1.0)
  * \param pwr power expressed in (metric) horsepower
  * \return power expressed in kilowatts
  */
-MCUTILSAPI inline double ps2kw(double pwr = 1.0)
+MCUTILSAPI inline double PS2kW(double pwr = 1.0)
 {
     return pwr * 0.735498749992;
 }
@@ -954,7 +954,7 @@ MCUTILSAPI inline double ps2kw(double pwr = 1.0)
  * \param pwr power expressed in (mechanical) horsepower
  * \return power expressed in (metric) horsepower
  */
-MCUTILSAPI inline double hp2ps(double pwr = 1.0)
+MCUTILSAPI inline double hp2PS(double pwr = 1.0)
 {
     return pwr * 1.01386967884;
 }
@@ -964,7 +964,7 @@ MCUTILSAPI inline double hp2ps(double pwr = 1.0)
  * \param pwr power expressed in (mechanical) horsepower
  * \return power expressed in watts
  */
-MCUTILSAPI inline double hp2w(double pwr = 1.0)
+MCUTILSAPI inline double hp2W(double pwr = 1.0)
 {
     return pwr * 745.699881448;
 }
@@ -974,7 +974,7 @@ MCUTILSAPI inline double hp2w(double pwr = 1.0)
  * \param pwr power expressed in (mechanical) horsepower
  * \return power expressed in kilowatts
  */
-MCUTILSAPI inline double hp2kw(double pwr = 1.0)
+MCUTILSAPI inline double hp2kW(double pwr = 1.0)
 {
     return pwr * 0.745699881448;
 }
@@ -984,7 +984,7 @@ MCUTILSAPI inline double hp2kw(double pwr = 1.0)
  * \param pwr power expressed in watts
  * \return power expressed in (metric) horsepower
  */
-MCUTILSAPI inline double w2ps(double pwr = 1.0)
+MCUTILSAPI inline double W2PS(double pwr = 1.0)
 {
     return pwr * 0.00135962161;
 }
@@ -994,7 +994,7 @@ MCUTILSAPI inline double w2ps(double pwr = 1.0)
  * \param pwr power expressed in watts
  * \return power expressed in (mechanical) horsepower
  */
-MCUTILSAPI inline double w2hp(double pwr = 1.0)
+MCUTILSAPI inline double W2hp(double pwr = 1.0)
 {
     return pwr * 0.00134102207;
 }
@@ -1004,7 +1004,7 @@ MCUTILSAPI inline double w2hp(double pwr = 1.0)
  * \param pwr power expressed in watts
  * \return power expressed in kilowatts
  */
-MCUTILSAPI inline double w2kw(double pwr = 1.0)
+MCUTILSAPI inline double W2kW(double pwr = 1.0)
 {
     return pwr * 0.001;
 }
@@ -1014,7 +1014,7 @@ MCUTILSAPI inline double w2kw(double pwr = 1.0)
  * \param pwr power expressed in kilowatts
  * \return power expressed in (metric) horsepower
  */
-MCUTILSAPI inline double kw2ps(double pwr = 1.0)
+MCUTILSAPI inline double kW2PS(double pwr = 1.0)
 {
     return pwr * 1.35962161732;
 }
@@ -1024,7 +1024,7 @@ MCUTILSAPI inline double kw2ps(double pwr = 1.0)
  * \param pwr power expressed in kilowatts
  * \return power expressed in (mechanical) horsepower
  */
-MCUTILSAPI inline double kw2hp(double pwr = 1.0)
+MCUTILSAPI inline double kW2hp(double pwr = 1.0)
 {
     return pwr * 1.34102207185;
 }
@@ -1034,7 +1034,7 @@ MCUTILSAPI inline double kw2hp(double pwr = 1.0)
  * \param pwr power expressed in kilowatts
  * \return power expressed in watts
  */
-MCUTILSAPI inline double kw2w(double pwr = 1.0)
+MCUTILSAPI inline double kW2W(double pwr = 1.0)
 {
     return pwr * 1000.0;
 }
@@ -1048,7 +1048,7 @@ MCUTILSAPI inline double kw2w(double pwr = 1.0)
  * \param temp temperature expressed in degrees Celsius
  * \return temperature expressed in degrees Fehrenheit
  */
-MCUTILSAPI inline double c2f(double temp)
+MCUTILSAPI inline double C2F(double temp)
 {
     return ( 9.0 * temp / 5.0 ) + 32.0;
 }
@@ -1058,7 +1058,7 @@ MCUTILSAPI inline double c2f(double temp)
  * \param temp temperature expressed in degrees Celsius
  * \return temperature expressed in Kelvins
  */
-MCUTILSAPI inline double c2k(double temp)
+MCUTILSAPI inline double C2K(double temp)
 {
     return temp + 273.15;
 }
@@ -1068,7 +1068,7 @@ MCUTILSAPI inline double c2k(double temp)
  * \param temp temperature expressed in degrees Fahrenheit
  * \return temperature expressed in degrees Celsius
  */
-MCUTILSAPI inline double f2c(double temp)
+MCUTILSAPI inline double F2C(double temp)
 {
     return 5.0 * ( temp - 32.0 ) / 9.0;
 }
@@ -1078,7 +1078,7 @@ MCUTILSAPI inline double f2c(double temp)
  * \param temp temperature expressed in degrees Fahrenheit
  * \return temperature expressed in Kelvins
  */
-MCUTILSAPI inline double f2k(double temp)
+MCUTILSAPI inline double F2K(double temp)
 {
     return ( 5.0 * ( temp - 32.0 ) / 9.0 ) + 273.15;
 }
@@ -1088,7 +1088,7 @@ MCUTILSAPI inline double f2k(double temp)
  * \param temp temperature expressed in Kelvins
  * \return temperature expressed in degrees Celsius
  */
-MCUTILSAPI inline double k2c(double temp)
+MCUTILSAPI inline double K2C(double temp)
 {
     return ( temp - 273.15 );
 }
@@ -1098,7 +1098,7 @@ MCUTILSAPI inline double k2c(double temp)
  * \param temp temperature expressed in Kelvins
  * \return temperature expressed in degrees Fahrenheit
  */
-MCUTILSAPI inline double k2f(double temp)
+MCUTILSAPI inline double K2F(double temp)
 {
     return ( 9.0 * ( temp - 273.15 ) / 5.0 ) + 32.0;
 }
