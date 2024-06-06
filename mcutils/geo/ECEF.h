@@ -60,9 +60,23 @@ public:
 
     /**
      * \brief Constructor.
-     * \param e datum ellipsoid
+     * \param ellipsoid datum ellipsoid
      */
-    ECEF(const Ellipsoid &e);
+    ECEF(const Ellipsoid &ellipsoid);
+
+    /**
+     * \brief Constructor.
+     * \param ellipsoid datum ellipsoid
+     * \param pos_cart [m] cartesian coordinates vector
+     */
+    ECEF(const Ellipsoid &ellipsoid, const Vector3 &pos_cart);
+
+    /**
+     * \brief Constructor.
+     * \param ellipsoid datum ellipsoid
+     * \param pos_geo [m] geodetic coordinates
+     */
+    ECEF(const Ellipsoid &ellipsoid, const Geo& pos_geo);
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
@@ -197,7 +211,7 @@ public:
 
 protected:
 
-    Ellipsoid _e;               ///< datum ellipsoid
+    Ellipsoid _ellipsoid;       ///< datum ellipsoid
 
     Geo     _pos_geo;           ///< geodetic coordinates (latitude, longitude, altitude)
     Vector3 _pos_cart;          ///< [m] cartesian coordinates vector (x, y, z)

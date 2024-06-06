@@ -34,16 +34,30 @@ namespace mc {
 const Matrix3x3 ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 const Matrix3x3 ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
-ECEF::ECEF(const Ellipsoid &e)
-    : _e(e)
+ECEF::ECEF(const Ellipsoid &ellipsoid)
+    : _ellipsoid(ellipsoid)
 {
     _pos_geo.lat = 0.0;
     _pos_geo.lon = 0.0;
     _pos_geo.alt = 0.0;
 
-    _pos_cart.x() = _e.a();
+    _pos_cart.x() = _ellipsoid.a();
     _pos_cart.y() = 0.0;
     _pos_cart.z() = 0.0;
+
+    UpdateMatrices();
+}
+
+ECEF::ECEF(const Ellipsoid &ellipsoid, const Vector3 &pos_cart)
+    : _ellipsoid(ellipsoid)
+{
+    SetPositionFromCart(pos_cart);
+}
+
+ECEF::ECEF(const Ellipsoid &ellipsoid, const Geo &pos_geo)
+    : _ellipsoid(ellipsoid)
+{
+    SetPositionFromGeo(pos_geo);
 }
 
 void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
@@ -54,11 +68,11 @@ void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
     double sinLon = sin(lon);
     double cosLon = cos(lon);
 
-    double n = _e.a() / sqrt(1.0 - _e.e2() * sinLat*sinLat);
+    double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2() * sinLat*sinLat);
 
     *x = (n + alt) * cosLat * cosLon;
     *y = (n + alt) * cosLat * sinLon;
-    *z = (n * (_e.b2() / _e.a2()) + alt) * sinLat;
+    *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt) * sinLat;
 }
 
 Vector3 ECEF::ConvertGeo2Cart(double lat, double lon, double alt) const
@@ -84,42 +98,46 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
     double p   = sqrt(x*x + y*y);
-    double tht = atan2(z*_e.a(), p*_e.b());
-    double ed2 = (_a2 - _b2) / _b2;
+    double tht = atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
+    double ed2 = (_ellipsoid.a2() - _ellipsoid.b2()) / _ellipsoid.b2();
 
     double sinTht = sin(tht);
     double cosTht = cos(tht);
 
-    *lat = atan((z + ed2*_e.b()*sinTht*sinTht*sinTht) / (p - _e.e2()*_e.a()*cosTht*cosTht*cosTht));
+    *lat = atan(
+        (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht) 
+        / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
+    );
     *lon = atan2(y, x);
 
-    double sinLat = sin(lat);
-    double n = _e.a() / sqrt(1.0 - _e.e2()*sinLat*sinLat);
+    double sinLat = sin(*lat);
+    double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
 
-    *alt = p / cos(lat) - n;
+    *alt = p / cos(*lat) - n;
 #   else
     double z2 = z*z;
     double r  = sqrt(x*x + y*y);
     double r2 = r*r;
-    double e2 = _e.a2() - _e.b2();
-    double f  = 54.0 * _e.b2() * z2;
-    double g  = r2 + (1.0 - _e.e2())*z2 - _e.e2()*e2;
-    double c  = _e.e2()*_e.e2() * f * r2 / Math::Pow3(g);
+    double e2 = _ellipsoid.a2() - _ellipsoid.b2();
+    double f  = 54.0 * _ellipsoid.b2() * z2;
+    double g  = r2 + (1.0 - _ellipsoid.e2())*z2 - _ellipsoid.e2()*e2;
+    double c  = _ellipsoid.e2()*_ellipsoid.e2() * f * r2 / Math::Pow3(g);
     double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
     double p0 = s + 1.0/s + 1.0;
     double p  = f / (3.0 * p0*p0 * g*g);
-    double q  = sqrt(1.0 + 2.0*(_e.e2()*_e.e2())*p);
-    double r0 = -(p * _e.e2() * r)/(1.0 + q)
+    double q  = sqrt(1.0 + 2.0*(_ellipsoid.e2()*_ellipsoid.e2())*p);
+    double r0 = -(p * _ellipsoid.e2() * r)/(1.0 + q)
                 + sqrt(
-                    0.5*_e.a2()*(1.0 + 1.0/q) - p*(1.0 - _e.e2())*z2/(q + q*q) - 0.5*p*r2
+                    0.5*_ellipsoid.a2()*(1.0 + 1.0/q) 
+                    - p*(1.0 - _ellipsoid.e2())*z2/(q + q*q) - 0.5*p*r2
                 );
-    double uv = r - _e.e2()*r0;
+    double uv = r - _ellipsoid.e2()*r0;
     double u  = sqrt(uv*uv + z2);
-    double v  = sqrt(uv*uv + (1.0 - _e.e2())*z2);
-    double z0 = _e.b2() * z / (_e.a() * v);
+    double v  = sqrt(uv*uv + (1.0 - _ellipsoid.e2())*z2);
+    double z0 = _ellipsoid.b2() * z / (_ellipsoid.a() * v);
 
-    *alt = u * (1.0 - _e.b2() / (_e.a() * v));
-    *lat = atan((z + _e.ep2()*z0)/r);
+    *alt = u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
+    *lat = atan((z + _ellipsoid.ep2()*z0)/r);
     *lon = atan2(y, x);
 #   endif
 }
