@@ -29,31 +29,44 @@
  *
  * \section Introduction
  *
- * <tt>libmcutil</tt> is a various utilities library.
+ * <tt>libmcutil</tt> is a vehicle simulation utilities library.
  *
  * \section Modules
  *
  * \subsection astro
- * This module contains utilities for various astronomical computations.
+ * This module contains utilities for astronomical computations, including 
+ * Julian date the Sun and the Moon position computations, converting between 
+ * equatorial and horizontal coordinate systems, etc.
  * 
  * \subsection ctrl
- * This module contains classes representing common control elements.
+ * This module contains classes representing common control elements, including 
+ * first and second order inertia, low-pass filter, high-pass filter, PID 
+ * controller with or without anti-windup, etc.
  *
  * \subsection geo
- * This module contains utilities for various geographic and geodetic
- * computations.
+ * This module contains utilities for various geographic and geodetic 
+ * computations, including Earth-centered Earth-fixed coordinate system or 
+ * Mercator projection.
  *
  * \subsection math
- * This module contains utilities for various mathematical operations.
+ * This module contains utilities for various mathematical operations, including 
+ * vectors, matrices and quaternions classes, numerical integration procedures,
+ * linear interpolation, etc.
  *
  * \subsection misc
- * This module contains miscellaneous utilities.
+ * This module contains miscellaneous utilities, including strings manipulation 
+ * or physical units convertion.
+ * 
+ * \subsection net
+ * This module contains network utilities, like endianess convertion functions.
  *
  * \subsection physics
- * This module contains utilities for various physical computations.
+ * This module contains utilities for various physical computations, like first 
+ * order inertia, parallel axis theorem computations or physical constants values.
  *
  * \subsection time
- * This module contains time and date ralted utilities.
+ * This module contains time and date ralted utilities, like date/time structures
+ * and function converting to ISO-8601 standard.
  * 
  * \section Coding Style
  * 
