@@ -43,50 +43,6 @@ TEST_F(TestECEF, CanInstantiate)
     EXPECT_NEAR(ecef.pos_cart().z(), 0.0, LINEAR_POSITION_TOLERANCE);
 }
 
-TEST_F(TestECEF, CanInstantiateAndSetPosGeo)
-{
-    mc::Geo pos_geo;
-
-    pos_geo.lat = M_PI_4;
-    pos_geo.lon = M_PI_4;
-    pos_geo.alt = 100.0;
-
-    mc::ECEF ecef(mc::WGS84::ellipsoid, pos_geo);
-
-    mc::Geo     pos_geo_out = ecef.pos_geo();
-    mc::Vector3 pos_wgs_out = ecef.pos_cart();
-
-    EXPECT_NEAR(pos_geo_out.lat, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo_out.lon, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo_out.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
-
-    EXPECT_NEAR(pos_wgs_out.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_wgs_out.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_wgs_out.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
-}
-
-TEST_F(TestECEF, CanInstantiateAndSetPosCart)
-{
-    mc::Vector3 pos_cart;
-
-    pos_cart.x() = 3194469.1450605746;
-    pos_cart.y() = 3194469.145060574;
-    pos_cart.z() = 4487419.119544039;
-
-    mc::ECEF ecef(mc::WGS84::ellipsoid, pos_cart);
-
-    mc::Geo     pos_geo_out  = ecef.pos_geo();
-    mc::Vector3 pos_cart_out = ecef.pos_cart();
-
-    EXPECT_NEAR( pos_geo_out.lat, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR( pos_geo_out.lon, M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR( pos_geo_out.alt, 100.0  , LINEAR_POSITION_TOLERANCE);
-
-    EXPECT_NEAR( pos_cart_out.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR( pos_cart_out.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR( pos_cart_out.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
-}
-
 TEST_F(TestECEF, CanConvertFromCartToGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);

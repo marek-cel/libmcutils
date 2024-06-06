@@ -65,20 +65,6 @@ public:
     ECEF(const Ellipsoid &ellipsoid);
 
     /**
-     * \brief Constructor.
-     * \param ellipsoid datum ellipsoid
-     * \param pos_cart [m] cartesian coordinates vector
-     */
-    ECEF(const Ellipsoid &ellipsoid, const Vector3 &pos_cart);
-
-    /**
-     * \brief Constructor.
-     * \param ellipsoid datum ellipsoid
-     * \param pos_geo [m] geodetic coordinates
-     */
-    ECEF(const Ellipsoid &ellipsoid, const Geo& pos_geo);
-
-    /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
      * \param lat [rad] geodetic latitude
      * \param lon [rad] geodetic longitude

@@ -48,18 +48,6 @@ ECEF::ECEF(const Ellipsoid &ellipsoid)
     UpdateMatrices();
 }
 
-ECEF::ECEF(const Ellipsoid &ellipsoid, const Vector3 &pos_cart)
-    : _ellipsoid(ellipsoid)
-{
-    SetPositionFromCart(pos_cart);
-}
-
-ECEF::ECEF(const Ellipsoid &ellipsoid, const Geo &pos_geo)
-    : _ellipsoid(ellipsoid)
-{
-    SetPositionFromGeo(pos_geo);
-}
-
 void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
                            double* x, double* y, double* z) const
 {
