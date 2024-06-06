@@ -2,9 +2,9 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
-if (UNIX)
-    add_definitions(-DTEST_USING_ARMADILLO)
-endif()
+# if (UNIX)
+#     add_definitions(-DTEST_USING_ARMADILLO)
+# endif()
 
 ################################################################################
 
@@ -49,8 +49,8 @@ set(SOURCES
     ctrl/TestZeroOrderHold.cpp
 
     geo/TestECEF.cpp
+    geo/TestEllipsoid.cpp
     geo/TestMercator.cpp
-    geo/TestWGS84.cpp
 
     math/TestAngles.cpp
     math/TestDegMinSec.cpp

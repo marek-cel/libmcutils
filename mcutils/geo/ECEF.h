@@ -24,6 +24,7 @@
 
 #include <mcutils/defs.h>
 
+#include <mcutils/geo/Ellipsoid.h>
 #include <mcutils/geo/Geo.h>
 
 #include <mcutils/math/Angles.h>
@@ -57,30 +58,11 @@ public:
     static const Matrix3x3 _enu2ned;    ///< matrix of rotation from ENU to NED
     static const Matrix3x3 _ned2enu;    ///< matrix of rotation from NED to ENU
 
-    /** \brief Constructor. */
-    ECEF();
-
-    /**
-     * \brief Copy constructor.
-     * \param ecef object to copy
-     */
-    ECEF(const ECEF& ecef);
-
-    /**
-     * \brief Moving constructor.
-     * \param ecef object to move
-     */
-    ECEF(ECEF&& ecef);
-
     /**
      * \brief Constructor.
-     * \param a [m] equatorial radius
-     * \param f [-] ellipsoid flattening
+     * \param e datum ellipsoid
      */
-    ECEF(double a, double f);
-
-    /** \brief Destructor. */
-    virtual ~ECEF();
+    ECEF(const Ellipsoid &e);
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
@@ -161,17 +143,6 @@ public:
      */
     Geo GetGeoOffset(double heading, double offset_x, double offset_y) const;
 
-    inline double a   () const { return _a;   }
-    inline double f   () const { return _f;   }
-    inline double b   () const { return _b;   }
-    inline double r1  () const { return _r1;  }
-    inline double a2  () const { return _a2;  }
-    inline double b2  () const { return _b2;  }
-    inline double e2  () const { return _e2;  }
-    inline double e   () const { return _e;   }
-    inline double ep2 () const { return _ep2; }
-    inline double ep  () const { return _ep;  }
-
     /**
      * \brief Converts attitude angles expressed in NED.
      * \param angles_ecef attitude angles expressed in ECEF
@@ -224,25 +195,9 @@ public:
     inline const Matrix3x3& ecef2enu() const { return _ecef2enu; }
     inline const Matrix3x3& ecef2ned() const { return _ecef2ned; }
 
-    /** \brief Assignment operator. */
-    ECEF& operator=(const ECEF& ecef);
-
-    /** \brief Moving assignment operator. */
-    ECEF& operator=(ECEF&& ecef);
-
 protected:
 
-    double _a = 0.0;            ///< [m] equatorial radius
-    double _f = 0.0;            ///< [-] ellipsoid flattening
-
-    double _b   = 0.0;          ///< [m] polar radius
-    double _r1  = 0.0;          ///< [m] mean radius
-    double _a2  = 0.0;          ///< [m^2] equatorial radius squared
-    double _b2  = 0.0;          ///< [m^2] polar radius squared
-    double _e2  = 0.0;          ///< [-] ellipsoid first eccentricity squared
-    double _e   = 0.0;          ///< [-] ellipsoid first eccentricity
-    double _ep2 = 0.0;          ///< [-] ellipsoid second eccentricity squared
-    double _ep  = 0.0;          ///< [-] ellipsoid second eccentricity
+    Ellipsoid _e;               ///< datum ellipsoid
 
     Geo     _pos_geo;           ///< geodetic coordinates (latitude, longitude, altitude)
     Vector3 _pos_cart;          ///< [m] cartesian coordinates vector (x, y, z)
@@ -251,13 +206,6 @@ protected:
     Matrix3x3 _ned2ecef;        ///< rotation matrix from NED to ECEF
     Matrix3x3 _ecef2enu;        ///< rotation matrix from ECEF to ENU
     Matrix3x3 _ecef2ned;        ///< rotation matrix from ECEF to NED
-
-    virtual void Update();
-
-private:
-
-    void CopyParams(const ECEF& ecef);
-    void CopyState(const ECEF& ecef);
 
     /**
      * \brief Updates rotation matrices due to position.

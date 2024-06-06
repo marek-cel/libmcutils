@@ -19,12 +19,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_GEO_DATAMARS_H_
-#define MCUTILS_GEO_DATAMARS_H_
+#ifndef MCUTILS_GEO_MARS2015_H_
+#define MCUTILS_GEO_MARS2015_H_
 
 #include <cmath>
 
 #include <mcutils/defs.h>
+
+#include <mcutils/geo/Ellipsoid.h>
 
 namespace mc {
 
@@ -40,25 +42,15 @@ namespace mc {
  * - [Mars - Wikipedia](https://en.wikipedia.org/wiki/Mars)
  * - [Airy-0 - Wikipedia](https://en.wikipedia.org/wiki/Airy-0)
  */
-namespace DataMars {
+namespace Mars2015 {
 
-static constexpr double a   = 3396190.0;                ///< [m] equatorial radius
-static constexpr double b   = 3376200.0;                ///< [m] polar radius
-static constexpr double f   = 0.005886007556;           ///< [-] ellipsoid flattening
-
-static constexpr double r1  = ( 2.0 * a + b ) / 3.0;    ///< [m] mean radius
-static constexpr double a2  = a * a;                    ///< [m^2] equatorial radius squared
-static constexpr double b2  = b * b;                    ///< [m^2] polar radius squared
-static constexpr double e2  = 1.0 - b2 / a2;            ///< [-] ellipsoid first eccentricity squared
-static constexpr double e   = 0.1083391435544291;       ///< [-] ellipsoid first eccentricity
-static constexpr double ep2 = a2 / b2 - 1.0;            ///< [-] ellipsoid second eccentricity squared
-static constexpr double ep  = 0.1089806042142403;       ///< [-] ellipsoid second eccentricity
+static const Ellipsoid ellipsoid(3396190.0, 1.0 / 169.894447223612);    ///< datum ellipsoid
 
 static constexpr double omega = 7.0900303093e-5;        ///< [rad/s] angular velocity of the Mars ( 360deg / 24:37:22.7 )
 static constexpr double gamma = 3.72076;                ///< [m/s^2] theoretical (normal) gravity mean value
 static constexpr double mm    = 6.4171e23;              ///< [kg] mass of the Mars
 
-} // namespace DataMars
+} // namespace Mars2015
 } // namespace mc
 
-#endif // MCUTILS_GEO_DATAMARS_H_
+#endif // MCUTILS_GEO_MARS2015_H_

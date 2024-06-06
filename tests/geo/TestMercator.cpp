@@ -3,7 +3,7 @@
 #include <cmath>
 
 #include <mcutils/geo/Mercator.h>
-#include <mcutils/geo/DataWGS84.h>
+#include <mcutils/geo/WGS84.h>
 
 // linear position tolerance (0.1 mm)
 #define LINEAR_POSITION_TOLERANCE 1.0e-4
@@ -21,12 +21,12 @@ protected:
 
 TEST_F(TestMercator, CanInstantiate)
 {
-    mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
+    mc::Mercator merc(mc::WGS84::ellipsoid);
 }
 
 TEST_F(TestMercator, CanCalculateLat)
 {
-    mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
+    mc::Mercator merc(mc::WGS84::ellipsoid);
 
     constexpr double nautical_mile = 1852.0;
     constexpr double arc_deg = 60.0 * nautical_mile;
@@ -54,7 +54,7 @@ TEST_F(TestMercator, CanCalculateLat)
 
 TEST_F(TestMercator, CanCalculateLon)
 {
-    mc::Mercator merc( mc::DataWGS84::a, mc::DataWGS84::e );
+    mc::Mercator merc(mc::WGS84::ellipsoid);
 
     constexpr double nautical_mile = 1852.0;
     constexpr double arc_deg = 60.0 * nautical_mile;
@@ -91,7 +91,7 @@ TEST_F(TestMercator, CanCalculateLon)
 
 TEST_F(TestMercator, CanCalculateX)
 {
-    mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
+    mc::Mercator merc(mc::WGS84::ellipsoid);
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
@@ -144,7 +144,7 @@ TEST_F(TestMercator, CanCalculateX)
 
 TEST_F(TestMercator, CanCalculateY)
 {
-    mc::Mercator merc(mc::DataWGS84::a, mc::DataWGS84::e);
+    mc::Mercator merc(mc::WGS84::ellipsoid);
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py

@@ -34,61 +34,17 @@ namespace mc {
 const Matrix3x3 ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 const Matrix3x3 ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
-ECEF::ECEF() : ECEF(0.0, 0.0) {}
-
-ECEF::ECEF(const ECEF& ecef)
+ECEF::ECEF(const Ellipsoid &e)
+    : _e(e)
 {
-    CopyParams(ecef);
-    CopyState(ecef);
-}
-
-ECEF::ECEF(ECEF&& ecef)
-{
-    _a = std::exchange(ecef._a, 0.0);
-    _f = std::exchange(ecef._f, 0.0);
-
-    _b   = std::exchange(ecef._b   , 0.0);
-    _r1  = std::exchange(ecef._r1  , 0.0);
-    _a2  = std::exchange(ecef._a2  , 0.0);
-    _b2  = std::exchange(ecef._b2  , 0.0);
-    _e2  = std::exchange(ecef._e2  , 0.0);
-    _e   = std::exchange(ecef._e   , 0.0);
-    _ep2 = std::exchange(ecef._ep2 , 0.0);
-    _ep  = std::exchange(ecef._ep  , 0.0);
-
-    _pos_geo  = std::move(ecef._pos_geo);
-    _pos_cart = std::move(ecef._pos_cart);
-
-    _enu2ecef = std::move(ecef._enu2ecef);
-    _ned2ecef = std::move(ecef._ned2ecef);
-    _ecef2enu = std::move(ecef._ecef2enu);
-    _ecef2ned = std::move(ecef._ecef2ned);
-}
-
-ECEF::ECEF(double a, double f)
-{
-    _a = a;
-    _f = f;
-
-    _b   = _a - _f*_a;
-    _r1  = (2.0 * _a + _b) / 3.0;
-    _a2  = _a * _a;
-    _b2  = _b * _b;
-    _e2  = 1.0 - _b2 / _a2;
-    _e   = sqrt(_e2);
-    _ep2 = _a2 / _b2 - 1.0;
-    _ep  = sqrt(_ep2);
-
     _pos_geo.lat = 0.0;
     _pos_geo.lon = 0.0;
     _pos_geo.alt = 0.0;
 
-    _pos_cart.x() = _a;
+    _pos_cart.x() = _e.a();
     _pos_cart.y() = 0.0;
     _pos_cart.z() = 0.0;
 }
-
-ECEF::~ECEF() {}
 
 void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
                            double* x, double* y, double* z) const
@@ -98,11 +54,11 @@ void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
     double sinLon = sin(lon);
     double cosLon = cos(lon);
 
-    double n = _a / sqrt(1.0 - _e2 * sinLat*sinLat);
+    double n = _e.a() / sqrt(1.0 - _e.e2() * sinLat*sinLat);
 
     *x = (n + alt) * cosLat * cosLon;
     *y = (n + alt) * cosLat * sinLon;
-    *z = (n * (_b2 / _a2) + alt) * sinLat;
+    *z = (n * (_e.b2() / _e.a2()) + alt) * sinLat;
 }
 
 Vector3 ECEF::ConvertGeo2Cart(double lat, double lon, double alt) const
@@ -128,42 +84,42 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
     double p   = sqrt(x*x + y*y);
-    double tht = atan2(z*_a, p*_b);
+    double tht = atan2(z*_e.a(), p*_e.b());
     double ed2 = (_a2 - _b2) / _b2;
 
     double sinTht = sin(tht);
     double cosTht = cos(tht);
 
-    *lat = atan((z + ed2*_b*sinTht*sinTht*sinTht) / (p - _e2*_a*cosTht*cosTht*cosTht));
+    *lat = atan((z + ed2*_e.b()*sinTht*sinTht*sinTht) / (p - _e.e2()*_e.a()*cosTht*cosTht*cosTht));
     *lon = atan2(y, x);
 
     double sinLat = sin(lat);
-    double n = _a / sqrt(1.0 - _e2*sinLat*sinLat);
+    double n = _e.a() / sqrt(1.0 - _e.e2()*sinLat*sinLat);
 
     *alt = p / cos(lat) - n;
 #   else
     double z2 = z*z;
     double r  = sqrt(x*x + y*y);
     double r2 = r*r;
-    double e2 = _a2 - _b2;
-    double f  = 54.0 * _b2 * z2;
-    double g  = r2 + (1.0 - _e2)*z2 - _e2*e2;
-    double c  = _e2*_e2 * f * r2 / Math::Pow3(g);
+    double e2 = _e.a2() - _e.b2();
+    double f  = 54.0 * _e.b2() * z2;
+    double g  = r2 + (1.0 - _e.e2())*z2 - _e.e2()*e2;
+    double c  = _e.e2()*_e.e2() * f * r2 / Math::Pow3(g);
     double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
     double p0 = s + 1.0/s + 1.0;
     double p  = f / (3.0 * p0*p0 * g*g);
-    double q  = sqrt(1.0 + 2.0*(_e2*_e2)*p);
-    double r0 = -(p * _e2 * r)/(1.0 + q)
+    double q  = sqrt(1.0 + 2.0*(_e.e2()*_e.e2())*p);
+    double r0 = -(p * _e.e2() * r)/(1.0 + q)
                 + sqrt(
-                    0.5*_a2*(1.0 + 1.0/q) - p*(1.0 - _e2)*z2/(q + q*q) - 0.5*p*r2
+                    0.5*_e.a2()*(1.0 + 1.0/q) - p*(1.0 - _e.e2())*z2/(q + q*q) - 0.5*p*r2
                 );
-    double uv = r - _e2*r0;
+    double uv = r - _e.e2()*r0;
     double u  = sqrt(uv*uv + z2);
-    double v  = sqrt(uv*uv + (1.0 - _e2)*z2);
-    double z0 = _b2 * z / (_a * v);
+    double v  = sqrt(uv*uv + (1.0 - _e.e2())*z2);
+    double z0 = _e.b2() * z / (_e.a() * v);
 
-    *alt = u * (1.0 - _b2 / (_a * v));
-    *lat = atan((z + _ep2*z0)/r);
+    *alt = u * (1.0 - _e.b2() / (_e.a() * v));
+    *lat = atan((z + _e.ep2()*z0)/r);
     *lon = atan2(y, x);
 #   endif
 }
@@ -227,77 +183,14 @@ void ECEF::SetPositionFromGeo(const Geo& pos_geo)
     _pos_geo.alt = pos_geo.alt;
 
     ConvertGeo2Cart(_pos_geo, &_pos_cart);
-    Update();
+    UpdateMatrices();
 }
 
 void ECEF::SetPositionFromCart(const Vector3& pos_cart)
 {
     _pos_cart = pos_cart;
     ConvertCart2Geo(_pos_cart, &_pos_geo);
-    Update();
-}
-
-ECEF& ECEF::operator=(const ECEF& ecef)
-{
-    CopyParams(ecef);
-    CopyState(ecef);
-    return *this;
-}
-
-ECEF& ECEF::operator=(ECEF&& ecef)
-{
-    _a = std::exchange(ecef._a, 0.0);
-    _f = std::exchange(ecef._f, 0.0);
-
-    _b   = std::exchange(ecef._b   , 0.0);
-    _r1  = std::exchange(ecef._r1  , 0.0);
-    _a2  = std::exchange(ecef._a2  , 0.0);
-    _b2  = std::exchange(ecef._b2  , 0.0);
-    _e2  = std::exchange(ecef._e2  , 0.0);
-    _e   = std::exchange(ecef._e   , 0.0);
-    _ep2 = std::exchange(ecef._ep2 , 0.0);
-    _ep  = std::exchange(ecef._ep  , 0.0);
-
-    _pos_geo  = std::move(ecef._pos_geo);
-    _pos_cart = std::move(ecef._pos_cart);
-
-    _enu2ecef = std::move(ecef._enu2ecef);
-    _ned2ecef = std::move(ecef._ned2ecef);
-    _ecef2enu = std::move(ecef._ecef2enu);
-    _ecef2ned = std::move(ecef._ecef2ned);
-
-    return *this;
-}
-
-void ECEF::Update()
-{
     UpdateMatrices();
-}
-
-void ECEF::CopyParams(const ECEF& ecef)
-{
-    _a = ecef._a;
-    _f = ecef._f;
-
-    _b   = ecef._b;
-    _r1  = ecef._r1;
-    _a2  = ecef._a2;
-    _b2  = ecef._b2;
-    _e2  = ecef._e2;
-    _e   = ecef._e;
-    _ep2 = ecef._ep2;
-    _ep  = ecef._ep;
-}
-
-void ECEF::CopyState(const ECEF& ecef)
-{
-    _pos_geo  = ecef._pos_geo;
-    _pos_cart = ecef._pos_cart;
-
-    _enu2ecef = ecef._enu2ecef;
-    _ned2ecef = ecef._ned2ecef;
-    _ecef2enu = ecef._ecef2enu;
-    _ecef2ned = ecef._ecef2ned;
 }
 
 void ECEF::UpdateMatrices()
