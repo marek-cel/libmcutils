@@ -23,15 +23,13 @@
 #define MCUTILS_GEO_WGS84_H_
 
 #include <mcutils/defs.h>
-
 #include <mcutils/geo/Ellipsoid.h>
 
 namespace mc {
 
 /**
- * \brief World Geodetic System 1984 (WGS84) class.
- *
- * US Department of Defense World Geodetic System 1984 (WGS84) class.
+ * \brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
+ * and other physical data.
  *
  * ### Refernces:
  * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)

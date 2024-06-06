@@ -25,14 +25,13 @@
 #include <cmath>
 
 #include <mcutils/defs.h>
-
 #include <mcutils/geo/Ellipsoid.h>
 
 namespace mc {
 
 /**
- * \brief Martian Coordinate System ellipsoid parameters according to the IAU
- * WGCCRE Martian Coordinate System (MCS) and other physical data.
+ * \brief Martian Coordinate System ellipsoid according to the IAU WGCCRE 
+ * Martian Coordinate System (MCS) and other physical data.
  *
  * Martian prime merdian goes through the Airy-0 crater.
  *
