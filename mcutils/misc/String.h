@@ -32,112 +32,112 @@ namespace mc {
 namespace String {
 
 /**
- * @brief Returns string first line;
- * @param str string to be processed
- * @return string first line
+ * \brief Returns string first line;
+ * \param str string to be processed
+ * \return string first line
  */
 MCUTILSAPI std::string GetFirstLine(const std::string& str);
 
 /**
- * @brief Compares strings.
- * @param str_1 1st string to compare
- * @param str_2 2nd string to compare
- * @param case_sensitive specifies if comparison is case sensitive
- * @return integer result of the comparison (returns 0 if strings are equal)
+ * \brief Compares strings.
+ * \param str_1 1st string to compare
+ * \param str_2 2nd string to compare
+ * \param case_sensitive specifies if comparison is case sensitive
+ * \return integer result of the comparison (returns 0 if strings are equal)
  */
 MCUTILSAPI int Compare(const std::string& str_1,
                        const std::string& str_2,
                        bool case_sensitive = false);
 
 /**
- * @brief Splits string with the given delimeter.
- * @param str string to be splitted
- * @param sep string separator
- * @return vector of strings
+ * \brief Splits string with the given delimeter.
+ * \param str string to be splitted
+ * \param sep string separator
+ * \return vector of strings
  */
 MCUTILSAPI std::vector<std::string> SplitString(const std::string& str,
                                                 const std::string& sep);
 
 /**
- * @brief Returns string with leading white spaces removed.
- * @param str string to be processed
- * @return string with leading white spaces removed
+ * \brief Returns string with leading white spaces removed.
+ * \param str string to be processed
+ * \return string with leading white spaces removed
  */
 MCUTILSAPI std::string StripLeadingSpaces(const std::string& str);
 
 /**
- * @brief Returns string with trailing white spaces removed.
- * @param str string to be processed
- * @return string with trailing white spaces removed
+ * \brief Returns string with trailing white spaces removed.
+ * \param str string to be processed
+ * \return string with trailing white spaces removed
  */
 MCUTILSAPI std::string StripTrailingSpaces(const std::string& str);
 
 /**
- * @brief Returns string with both leading and trailing white spaces removed.
- * @param str string to be processed
- * @return string with leading and trailing white spaces removed
+ * \brief Returns string with both leading and trailing white spaces removed.
+ * \param str string to be processed
+ * \return string with leading and trailing white spaces removed
  */
 MCUTILSAPI std::string StripSpaces(const std::string& str);
 
 /**
- * @brief Converts string into variable.
- * @param str string to be processed
- * @param def default value
- * @return result value
+ * \brief Converts string into variable.
+ * \param str string to be processed
+ * \param def default value
+ * \return result value
  */
 MCUTILSAPI bool ToBool(const std::string& str,
                        bool def = std::numeric_limits<bool>::quiet_NaN());
 
 /**
- * @brief Converts string into variable.
- * @param str string to be processed
- * @param def default value
- * @return result value
+ * \brief Converts string into variable.
+ * \param str string to be processed
+ * \param def default value
+ * \return result value
  */
 MCUTILSAPI int ToInt(const std::string& str,
                      int def = std::numeric_limits<int>::quiet_NaN());
 
 /**
- * @brief Converts string into variable.
- * @param str string to be processed
- * @param def default value
- * @return result value
+ * \brief Converts string into variable.
+ * \param str string to be processed
+ * \param def default value
+ * \return result value
  */
 MCUTILSAPI double ToDouble(const std::string& str,
                            double def = std::numeric_limits<double>::quiet_NaN());
 
 /**
- * @brief Converts variable into string.
- * @param val value to be processed
- * @return result string
+ * \brief Converts variable into string.
+ * \param val value to be processed
+ * \return result string
  */
 MCUTILSAPI std::string ToString(int val);
 
 /**
- * @brief Converts variable into string.
- * @param val value to be processed
- * @return result string
+ * \brief Converts variable into string.
+ * \param val value to be processed
+ * \return result string
  */
 MCUTILSAPI std::string ToString(float val);
 
 /**
- * @brief Converts variable into string.
- * @param val value to be processed
- * @return result string
+ * \brief Converts variable into string.
+ * \param val value to be processed
+ * \return result string
  */
 MCUTILSAPI std::string ToString(double val);
 
 /**
- * @brief Converts string to lower case.
- * @param str string to be processed
- * @return result string
+ * \brief Converts string to lower case.
+ * \param str string to be processed
+ * \return result string
  */
 MCUTILSAPI std::string ToLower(const std::string& str);
 
 /**
- * @brief Converts string to upper case.
- * @param str string to be processed
- * @return result string
+ * \brief Converts string to upper case.
+ * \param str string to be processed
+ * \return result string
  */
 MCUTILSAPI std::string ToUpper(const std::string& str);
 

@@ -27,13 +27,19 @@
 namespace mc {
 
 /**
- * @brief Harmonic oscillator element class.
+ * \brief Harmonic oscillator element class.
  *
  * Transfer function:
  * G(s)  =  omega^2 / ( s^2 + 2*zeta*omega*s + omega^2 )
+ * 
+ * \f[
+ * G \left( s \right)
+ * =
+ * { \omega^2 \over { s^2 + 2 \cdot \zeta \cdot \omega \cdot s + \omega^2 } }
+ * \f]
  * where:
- * omega [rad/s] undamped angular frequency
- * zeta  [-] <0.0;1.0> damping ratio
+ * - \f$ \omega \f$ [rad/s] undamped angular frequency
+ * - \f$ \zeta  \f$ [-] <0.0;1.0> damping ratio
  *
  * ### Refernces:
  * - [Harmonic oscillator - Wikipedia](https://en.wikipedia.org/wiki/Harmonic_oscillator)
@@ -45,17 +51,17 @@ class MCUTILSAPI Oscillator
 public:
 
     /**
-     * @brief Constructor.
-     * @param omega [rad/s] undamped angular frequency
-     * @param zeta [-] <0.0;1.0> dampipng ratio
-     * @param value initial output value
+     * \brief Constructor.
+     * \param omega [rad/s] undamped angular frequency
+     * \param zeta [-] <0.0;1.0> dampipng ratio
+     * \param value initial output value
      */
     explicit Oscillator(double omega = 1.0, double zeta = 1.0, double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -64,20 +70,20 @@ public:
     inline double zeta()  const { return _zeta;  }
 
     /**
-     * @brief Sets undamped angular frequency.
-     * @param omega [rad/s] undamped angular frequency
+     * \brief Sets undamped angular frequency.
+     * \param omega [rad/s] undamped angular frequency
      */
     void set_omega(double omega);
 
     /**
-     * @brief Sets damping ratio.
-     * @param zeta [-] <0.0;1.0> damping ratio
+     * \brief Sets damping ratio.
+     * \param zeta [-] <0.0;1.0> damping ratio
      */
     void set_zeta(double zeta);
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     void set_value(double value);
 

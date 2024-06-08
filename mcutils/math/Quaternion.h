@@ -32,7 +32,7 @@
 namespace mc {
 
 /**
- * @brief Quaternion class.
+ * \brief Quaternion class.
  *
  * Notice that rotations are considered to be passive (alias) rotations.
  *
@@ -53,58 +53,58 @@ class MCUTILSAPI Quaternion
 {
 public:
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     explicit Quaternion(double e0 = 1.0, double ex = 0.0,
                         double ey = 0.0, double ez = 0.0);
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     explicit Quaternion(const Angles& angl);
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     Quaternion(double angl, const Vector3& vect);
 
-    /** @return TRUE if all items are valid */
+    /** \return TRUE if all items are valid */
     bool IsValid() const;
 
-    /** @brief Conjugates quaternion. */
+    /** \brief Conjugates quaternion. */
     void Conjugate();
 
-    /** @brief Inverts quaternion. */
+    /** \brief Inverts quaternion. */
     void Invert();
 
-    /** @brief Normalizes quaternion. */
+    /** \brief Normalizes quaternion. */
     void Normalize();
 
-    /** @return vector length squared */
+    /** \return vector length squared */
     double GetLength2() const;
 
-    /** @return vector length */
+    /** \return vector length */
     double GetLength() const;
 
-    /** @brief Returns Bryant angles. */
+    /** \brief Returns Bryant angles. */
     Angles GetAngles() const;
 
-    /** @brief Returns conjugated quaternion. */
+    /** \brief Returns conjugated quaternion. */
     Quaternion GetConjugated() const;
 
     /**
-     * @brief Returns quaternion derivative due to given angular velocity.
-     * @param omega angular velocity vector
-     * @param lambda free parameter (usually set to a small multiple of the integration time step)
-     * @return quaternion derivative
+     * \brief Returns quaternion derivative due to given angular velocity.
+     * \param omega angular velocity vector
+     * \param lambda free parameter (usually set to a small multiple of the integration time step)
+     * \return quaternion derivative
      */
     Quaternion GetDerivative(const Vector3& omega, double lambda = 0.0) const;
 
-    /** @brief Returns inverted quaternion. */
+    /** \brief Returns inverted quaternion. */
     Quaternion GetInverted() const;
 
-    /** @brief Returns normalized quaternion. */
+    /** \brief Returns normalized quaternion. */
     Quaternion GetNormalized() const;
 
-    /** @brief Sets quaternion values. */
+    /** \brief Sets quaternion values. */
     void Set(double e0, double ex, double ey, double ez);
 
-    /** @brief Returns string representation of the quaternion. */
+    /** \brief Returns string representation of the quaternion. */
     std::string ToString() const;
 
     inline double  e0() const { return _e0; }
@@ -116,37 +116,37 @@ public:
     inline double& ey()       { return _ey; }
     inline double& ez()       { return _ez; }
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     Quaternion operator+(const Quaternion& quat) const;
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     Quaternion operator-(const Quaternion& quat) const;
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     Quaternion operator*(double val) const;
 
-    /** @brief Multiplication operator (by quaternion). */
+    /** \brief Multiplication operator (by quaternion). */
     Quaternion operator*(const Quaternion& quat) const;
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     Quaternion operator/(double val) const;
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     Quaternion& operator+=(const Quaternion& quat);
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     Quaternion& operator-=(const Quaternion& quat);
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     Quaternion& operator*=(double val);
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     Quaternion& operator/=(double val);
 
-    /** @brief Equality operator. */
+    /** \brief Equality operator. */
     bool operator==(const Quaternion& quat) const;
 
-    /** @brief Inequality operator. */
+    /** \brief Inequality operator. */
     bool operator!=(const Quaternion& quat) const;
 
 private:
@@ -157,7 +157,7 @@ private:
     double _ez = 0.0;   ///< quaternion ez (z) component
 };
 
-/** @brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by scalar). */
 inline Quaternion operator*(double val, const Quaternion& quat)
 {
     return quat * val;

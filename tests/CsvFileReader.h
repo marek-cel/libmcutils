@@ -4,10 +4,10 @@
 #include <vector>
 
 /**
- * @brief Reads data from CSV file
- * @param path file path
- * @param cols vector of pointers to vectors of doubles to store columns data
- * @return true on success false on failure
+ * \brief Reads data from CSV file
+ * \param path file path
+ * \param cols vector of pointers to vectors of doubles to store columns data
+ * \return true on success false on failure
  */
 bool ReadCsvColumnsDataFromFile(const char* path, std::vector<std::vector<double>*> cols);
 
@@ -22,11 +22,11 @@ void PackColumnsVectors(std::vector<std::vector<T>*>& cols, std::vector<T>* firs
 }
 
 /**
- * @brief Reads data from CSV file
- * @param path file path
- * @param first first column data vector
- * @param args subsequent columns data vectors
- * @return true on success false on failure
+ * \brief Reads data from CSV file
+ * \param path file path
+ * \param first first column data vector
+ * \param args subsequent columns data vectors
+ * \return true on success false on failure
  */
 template <typename T, typename... Args>
 bool ReadCsvDataFromFile(const char* path, std::vector<T>* first, Args... args)

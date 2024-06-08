@@ -31,10 +31,10 @@
 namespace mc {
 
 /**
- * @brief Adds item.
- * @param key
- * @param item
- * @return returns mc::Result::Success on success and mc::Result::Failure on failure
+ * \brief Adds item.
+ * \param key
+ * \param item
+ * \return returns mc::Result::Success on success and mc::Result::Failure on failure
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
 Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM item)
@@ -51,9 +51,9 @@ Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM it
 }
 
 /**
- * @brief Returns pinter of item by key value.
- * @param key
- * @return pinter of item or NULL
+ * \brief Returns pinter of item by key value.
+ * \param key
+ * \return pinter of item or NULL
  */
 template <typename TYPE_KEY, typename TYPE_ITEM>
 TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)

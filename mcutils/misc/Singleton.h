@@ -27,7 +27,7 @@
 namespace mc {
 
 /**
- * @brief Singleton base class template.
+ * \brief Singleton base class template.
  * 
  * ### References:
  * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.36-40
@@ -38,8 +38,8 @@ class Singleton
 public:
 
     /**
-     * @brief Returns singleton object instance pointer, creates it if necessary.
-     * @return singleton object instance pointer
+     * \brief Returns singleton object instance pointer, creates it if necessary.
+     * \return singleton object instance pointer
      */
     static TYPE* instance()
     {

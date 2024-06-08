@@ -27,22 +27,31 @@
 namespace mc {
 
 /**
- * @brief Proportional-Integral-Derivative controller.
+ * \brief Proportional-Integral-Derivative controller.
  *
- * <p>
- * Transfer function (parallel):<br/>
+ * Transfer function (parallel):
  * G(s)  =  kp + ki*( 1/s ) + kd*s
- * </p>
+ * 
+ * \f[
+ * G \left( s \right) = k_p + k_i \cdot { 1 \over s } + k_d \cdot s
+ * \f]
  *
- * <p>
- * Transfer function (series):<br/>
+ * Transfer function (series):
  * G(s)  =  k*( 1 + 1/( s*tau_i ) )*( 1 + s*tau_d )
- * </p>
+ * 
+ * \f[
+ * G \left( s \right) =
+ * k
+ * \cdot \left( 1 + { 1 \over { s \cdot \tau_i } } \right) 
+ * \cdot \left( 1 + s \cdot \tau_d \right)
+ * \f]
  *
- * <p>
- * Transfer function (standard/ideal):<br/>
+ * Transfer function (standard/ideal):
  * G(s)  =  Kp*( 1 + 1/( s*Ti ) + s*Td )
- * </p>
+ * 
+ * \f[
+ * G \left( s \right) = K_p \cdot \left( 1 + {1 \over { s \cdot T_i }} + s \cdot T_d \right)
+ * \f]
  *
  * ### Refernces:
  * - Skup Z.: Podstawy automatyki i sterowania, 2012, p.118. [in Polish]
@@ -56,52 +65,52 @@ class MCUTILSAPI PID
 public:
 
     /**
-     * @brief Constructor.
-     * @param kp proportional gain
-     * @param ki integral gain
-     * @param kd derivative gain
+     * \brief Constructor.
+     * \param kp proportional gain
+     * \param ki integral gain
+     * \param kd derivative gain
      */
     PID(double kp = 1.0, double ki = 0.0, double kd = 0.0);
 
     /**
-     * @brief Updates controller.
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates controller.
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
-    /** @brief Resets controller. */
+    /** \brief Resets controller. */
     void Reset();
 
     /**
-     * @brief Sets parameters of parallel form.
-     * @param kp proportional gain expressed in parallel form
-     * @param ki integral coefficient expressed in parallel form
-     * @param kd derivative coefficient expressed in parallel form
+     * \brief Sets parameters of parallel form.
+     * \param kp proportional gain expressed in parallel form
+     * \param ki integral coefficient expressed in parallel form
+     * \param kd derivative coefficient expressed in parallel form
      */
     void SetAsParallel(double kp, double ki, double kd);
 
     /**
-     * @brief Sets parameters of series form.
-     * @param k proportional gain expressed in series form
-     * @param tau_i integral time expressed in series form
-     * @param tau_d derivative time expressed in series form
+     * \brief Sets parameters of series form.
+     * \param k proportional gain expressed in series form
+     * \param tau_i integral time expressed in series form
+     * \param tau_d derivative time expressed in series form
      */
     void SetAsSeries(double k, double tau_i, double tau_d);
 
     /**
-     * @brief Sets parameters of standard (ideal) form.
-     * @param kp proportional gain expressed in standard (ideal) form
-     * @param ti integral time expressed in standard (ideal) form
-     * @param td derivative time expressed in standard (ideal) form
+     * \brief Sets parameters of standard (ideal) form.
+     * \param kp proportional gain expressed in standard (ideal) form
+     * \param ti integral time expressed in standard (ideal) form
+     * \param td derivative time expressed in standard (ideal) form
      */
     void SetAsStandard(double kp, double ti, double td);
 
     /**
-     * @brief Sets value and error according to value and time step.
-     * @param value new value
-     * @param error new error
-     * @param dt [s] time step
+     * \brief Sets value and error according to value and time step.
+     * \param value new value
+     * \param error new error
+     * \param dt [s] time step
      */
     void SetValueAndError(double value, double error, double dt);
 
@@ -119,8 +128,8 @@ public:
     inline void set_error(double error) { _error = error; }
 
     /**
-     * @brief Sets controller output (resets error integral sum).
-     * @param value output value
+     * \brief Sets controller output (resets error integral sum).
+     * \param value output value
      */
     void set_value(double value);
 

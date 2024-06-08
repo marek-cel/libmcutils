@@ -26,10 +26,8 @@
 
 namespace mc {
 
-Mercator::Mercator(double a, double e)
-    : _a(a)
-    , _e(e)
-    , _e2(_e*_e)
+Mercator::Mercator(const Ellipsoid &e)
+    : _e(e)
     , _max_x(CalculateX(Units::deg2rad( 180.0 )))
     , _max_y(CalculateY(Units::deg2rad(  85.0 )))
 {}
@@ -37,44 +35,44 @@ Mercator::Mercator(double a, double e)
 double Mercator::CalculateLat(double y, double max_error, unsigned int max_iterations)
 {
     // for lat_ts=0 k0=a
-    return CalculateT_inv(exp(-y / _a), max_error, max_iterations);
+    return CalculateT_inv(exp(-y / _e.a()), max_error, max_iterations);
 }
 
 double Mercator::CalculateLon(double x)
 {
     // for lat_ts=0 k0=a
-    return x / _a;
+    return x / _e.a();
 }
 
 double Mercator::CalculateX(double lon)
 {
     // for lat_ts=0 k0=a
-    return _a * lon;
+    return _e.a() * lon;
 }
 
 double Mercator::CalculateY(double lat)
 {
     // for lat_ts=0 k0=a
-    return _a * log(CalculateT(lat));
+    return _e.a() * log(CalculateT(lat));
 }
 
 double Mercator::CalculateT(double lat)
 {
-    double e_sinLat = _e * sin(lat);
-    return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * _e);
+    double e_sinLat = _e.e() * sin(lat);
+    return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * _e.e());
 }
 
 double Mercator::CalculateT_inv(double t, double max_error, unsigned int max_iterations)
 {
     double lat = M_PI_2 - 2.0 * atan(t);
-    double ex = 0.5 * _e;
+    double ex = 0.5 * _e.e();
     double er = 1.0e16;
 
     unsigned int iteration = 0;
 
     while ( er > max_error && iteration < max_iterations )
     {
-        double e_sinLat = _e * sin(lat);
+        double e_sinLat = _e.e() * sin(lat);
         double lat_new = M_PI_2
             - 2.0 * atan(t * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), ex));
 

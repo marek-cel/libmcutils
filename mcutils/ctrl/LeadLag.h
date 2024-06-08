@@ -27,10 +27,14 @@
 namespace mc {
 
 /**
- * @brief Lead-lag compensator class.
+ * \brief Lead-lag compensator class.
  *
  * Transfer function:
  * G(s)  =  ( c1*s + c2 ) / ( c3*s + c4 )
+ * 
+ * \f[
+ * G \left( s \right) = { \left( c_1 \cdot s + c_2 \right) \over \left( c_3 \cdot s + c_4 \right) }
+ * \f]
  *
  * ### Refernces:
  * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.300
@@ -41,21 +45,21 @@ class MCUTILSAPI LeadLag
 public:
 
     /**
-     * @brief Constructor.
-     * @param c1 coefficient of the transfer function
-     * @param c2 coefficient of the transfer function
-     * @param c3 coefficient of the transfer function
-     * @param c4 coefficient of the transfer function
-     * @param value initial output value
+     * \brief Constructor.
+     * \param c1 coefficient of the transfer function
+     * \param c2 coefficient of the transfer function
+     * \param c3 coefficient of the transfer function
+     * \param c4 coefficient of the transfer function
+     * \param value initial output value
      */
     LeadLag(double c1 = 0.0, double c2 = 1.0,
             double c3 = 0.0, double c4 = 1.0,
             double value = 0.0);
 
     /**
-     * @brief Updates element due to time step and input value
-     * @param dt [s] time step
-     * @param u input value
+     * \brief Updates element due to time step and input value
+     * \param dt [s] time step
+     * \param u input value
      */
     void Update(double dt, double u);
 
@@ -67,8 +71,8 @@ public:
     inline double c4() const { return _c4; }
 
     /**
-     * @brief Sets output value
-     * @param value output value
+     * \brief Sets output value
+     * \param value output value
      */
     inline void set_value(double value) { _value = value; }
 

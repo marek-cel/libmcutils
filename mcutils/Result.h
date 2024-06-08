@@ -25,7 +25,7 @@
 namespace mc {
 
 /**
- * @brief The Result enum
+ * \brief The Result enum
  */
 enum class Result : int
 {

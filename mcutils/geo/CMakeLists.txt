@@ -3,18 +3,18 @@ set(TARGET_NAME geo)
 ################################################################################
 
 set(HEADERS
-    DataMars.h
-    DataWGS84.h
     ECEF.h
+    Ellipsoid.h
     Geo.h
+    Mars2015.h
     Mercator.h
     WGS84.h
 )
 
 set(SOURCES
     ECEF.cpp
+    Ellipsoid.cpp
     Mercator.cpp
-    WGS84.cpp
 )
 
 ################################################################################

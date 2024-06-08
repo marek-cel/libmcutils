@@ -30,7 +30,7 @@
 namespace mc {
 
 /**
- * @brief Ephemeris model.
+ * \brief Ephemeris model.
  *
  * ### Refernces:
  * - Meeus J.: Astronomical Algorithms, 1998
@@ -74,22 +74,22 @@ private:
 
     /**
      * Updates Sun coordinates.
-     * @param jc Julian century
-     * @param sinLat latitude sine
-     * @param cosLat latitude cosine
-     * @param sinEpsilon obliquity of the ecliptic sine
-     * @param cosEpsilon obliquity of the ecliptic cosine
+     * \param jc Julian century
+     * \param sinLat latitude sine
+     * \param cosLat latitude cosine
+     * \param sinEpsilon obliquity of the ecliptic sine
+     * \param cosEpsilon obliquity of the ecliptic cosine
     */
     void UpdateSun(double jc, double sinLat, double cosLat, 
                    double sinEpsilon, double cosEpsilon);
 
     /**
      * Updates Moon coordinates.
-     * @param jc Julian century
-     * @param sinLat latitude sine
-     * @param cosLat latitude cosine
-     * @param sinEpsilon obliquity of the ecliptic sine
-     * @param cosEpsilon obliquity of the ecliptic cosine
+     * \param jc Julian century
+     * \param sinLat latitude sine
+     * \param cosLat latitude cosine
+     * \param sinEpsilon obliquity of the ecliptic sine
+     * \param cosEpsilon obliquity of the ecliptic cosine
     */
     void UpdateMoon(double jc, double sinLat, double cosLat, 
                     double sinEpsilon, double cosEpsilon);

@@ -28,7 +28,7 @@
 namespace mc {
 
 /**
- * @brief Julian date.
+ * \brief Julian date.
  *
  * ### Refernces:
  * - Meeus J.: Astronomical Algorithms, 1998
@@ -41,13 +41,13 @@ public:
     static double GetJulianDate(const DateTime& gd);
 
     /**
-     * @param gd Gregorian date UTC
+     * \param gd Gregorian date UTC
     */
     JulianDate(const DateTime& gd = DateTime());
 
     /**
-     * @breif Sets Julian date from Gregorian date.
-     * @param dateTime Gregorian date UTC
+     * \brief Sets Julian date from Gregorian date.
+     * \param dateTime Gregorian date UTC
     */
     void SetFromGregorianDate(const DateTime& gd);
 

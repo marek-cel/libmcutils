@@ -35,7 +35,7 @@ template class MCUTILSAPI mc::MatrixNxN<3>;
 namespace mc {
 
 /**
- * @brief 3 by 3 matrix class.
+ * \brief 3 by 3 matrix class.
  *
  * Notice that rotations are considered to be passive (alias) rotations.
  *
@@ -53,18 +53,18 @@ class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
 {
 public:
 
-    /** @brief Creates identity matrix. */
+    /** \brief Creates identity matrix. */
     static Matrix3x3 GetIdentityMatrix();
 
-    /** @brief Constructor. */
+    /** \brief Constructor. */
     Matrix3x3(double xx = 0.0, double xy = 0.0, double xz = 0.0,
               double yx = 0.0, double yy = 0.0, double yz = 0.0,
               double zx = 0.0, double zy = 0.0, double zz = 0.0);
 
-    /** @brief Creates passive (alias) rotation matrix. */
+    /** \brief Creates passive (alias) rotation matrix. */
     explicit Matrix3x3(const Angles& angl);
 
-    /** @brief Creates passive (alias) rotation matrix. */
+    /** \brief Creates passive (alias) rotation matrix. */
     explicit Matrix3x3(const Quaternion& qtrn);
 
     inline double xx() const { return _elements[0]; }
@@ -88,65 +88,65 @@ public:
     inline double& zz() { return _elements[8]; }
 
     /**
-     * @brief Sets items of the matrix.
-     * @param xx item at position xx
-     * @param xy item at position xy
-     * @param xz item at position xz
-     * @param yx item at position yx
-     * @param yy item at position yy
-     * @param yz item at position yz
-     * @param zx item at position zx
-     * @param zy item at position zy
-     * @param zz item at position zz
+     * \brief Sets items of the matrix.
+     * \param xx item at position xx
+     * \param xy item at position xy
+     * \param xz item at position xz
+     * \param yx item at position yx
+     * \param yy item at position yy
+     * \param yz item at position yz
+     * \param zx item at position zx
+     * \param zy item at position zy
+     * \param zz item at position zz
      */
     void Set(double xx, double xy, double xz,
              double yx, double yy, double yz,
              double zx, double zy, double zz);
 
-    /** @brief Returns Bryant angles of rotation matrix. */
+    /** \brief Returns Bryant angles of rotation matrix. */
     Angles GetAngles() const;
 
-    /** @brief Returns quaternion of rotation matrix. */
+    /** \brief Returns quaternion of rotation matrix. */
     Quaternion GetQuaternion() const;
 
-    /** @brief Returns transposed matrix. */
+    /** \brief Returns transposed matrix. */
     Matrix3x3 GetTransposed() const;
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     Matrix3x3 operator+(const Matrix3x3& matrix) const;
 
-    /** @brief Negation operator. */
+    /** \brief Negation operator. */
     Matrix3x3 operator-() const;
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     Matrix3x3 operator-(const Matrix3x3& matrix) const;
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     Matrix3x3 operator*(double value) const;
 
-    /** @brief Multiplication operator (by matrix). */
+    /** \brief Multiplication operator (by matrix). */
     Matrix3x3 operator*(const Matrix3x3& matrix) const;
 
-    /** @brief Multiplication operator (by vector). */
+    /** \brief Multiplication operator (by vector). */
     Vector3 operator*(const Vector3& vect) const;
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     Matrix3x3 operator/(double value) const;
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     Matrix3x3& operator+=(const Matrix3x3& matrix);
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     Matrix3x3& operator-=(const Matrix3x3& matrix);
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     Matrix3x3& operator*=(double value);
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     Matrix3x3& operator/=(double value);
 };
 
-/** @brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by scalar). */
 inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
 {
     return matrix * value;

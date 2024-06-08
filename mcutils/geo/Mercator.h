@@ -24,10 +24,12 @@
 
 #include <mcutils/defs.h>
 
+#include <mcutils/geo/Ellipsoid.h>
+
 namespace mc {
 
 /**
- * @brief Mercator map projection coordinates computation class.
+ * \brief Mercator map projection coordinates computation class.
  *
  * ### Refernces:
  * - Evenden G.: libproj4: A Comprehensive Library of Cartographic Projection Functions (Preliminary Draft), 2005, p.37
@@ -39,56 +41,55 @@ class MCUTILSAPI Mercator
 public:
 
     /**
-     * @brief Constructor
-     * @param a [m] ellipsoid semi major axis
-     * @param e [-] ellipsoid first eccentricity
+     * \brief Constructor
+     * \param e datum ellipsoid
      */
-    explicit Mercator(double a = 0.0, double e = 0.0);
+    Mercator(const Ellipsoid &e);
 
     /**
-     * @brief Calculates geodetic latitude.
-     * @param y [m] Mercator y-coordinate
-     * @param max_error maximum error (solve condition)
-     * @param max_iterations maximum number of iterations
-     * @return geodetic latitude [rad]
+     * \brief Calculates geodetic latitude.
+     * \param y [m] Mercator y-coordinate
+     * \param max_error maximum error (solve condition)
+     * \param max_iterations maximum number of iterations
+     * \return geodetic latitude [rad]
      */
     double CalculateLat(double y, double max_error = 1.0e-9,
                         unsigned int max_iterations = 10);
 
     /**
-     * @brief Calculates geodetic longitude.
-     * @param x [m] Mercator x-coordinate
-     * @return geodetic longitude [rad]
+     * \brief Calculates geodetic longitude.
+     * \param x [m] Mercator x-coordinate
+     * \return geodetic longitude [rad]
      */
     double CalculateLon(double x);
 
     /**
-     * @brief Calculates Mercator x-coordinate.
-     * @param lon [rad] geodetic longitude
-     * @return Mercator x-coordinate [m]
+     * \brief Calculates Mercator x-coordinate.
+     * \param lon [rad] geodetic longitude
+     * \return Mercator x-coordinate [m]
      */
     double CalculateX(double lon);
 
     /**
-     * @brief Calculates Mercator y-coordinate.
-     * @param lat [rad] geodetic latitude
-     * @return Mercator y-coordinate [m]
+     * \brief Calculates Mercator y-coordinate.
+     * \param lat [rad] geodetic latitude
+     * \return Mercator y-coordinate [m]
      */
     double CalculateY(double lat);
 
     /**
-     * @brief Calculates Isometric Latitude kernel.
-     * @param lat [rad] geodetic latitude
-     * @return Isometric Latitude kernel
+     * \brief Calculates Isometric Latitude kernel.
+     * \param lat [rad] geodetic latitude
+     * \return Isometric Latitude kernel
      */
     double CalculateT(double lat);
 
     /**
-     * @brief Calculates geodetic latitude from the isometric latitude.
-     * @param t isometric latitude
-     * @param max_error maximum error (solve condition)
-     * @param max_iterations maximum number of iterations
-     * @return geodetic latitude [rad]
+     * \brief Calculates geodetic latitude from the isometric latitude.
+     * \param t isometric latitude
+     * \param max_error maximum error (solve condition)
+     * \param max_iterations maximum number of iterations
+     * \return geodetic latitude [rad]
      */
     double CalculateT_inv(double t, double max_error = 1.0e-9,
                           unsigned int max_iterations = 10);
@@ -98,9 +99,7 @@ public:
 
 private:
 
-    double _a;          ///< [m] ellipsoid semi major axis
-    double _e;          ///< [-] ellipsoid first eccentricity
-    double _e2;         ///< [-] ellipsoid first eccentricity squared
+    Ellipsoid _e;       ///< datum ellipsoid
 
     double _max_x;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
     double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg

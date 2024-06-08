@@ -27,7 +27,7 @@
 namespace mc {
 
 /**
- * @brief Runge-Kutta 4th order numerical integration class template.
+ * \brief Runge-Kutta 4th order numerical integration class template.
  *
  * ### Refernces:
  * - Press W., et al.: Numerical Recipes: The Art of Scientific Computing, 2007, p.907
@@ -43,10 +43,10 @@ public:
     using DerivFun = std::function<T(const T&)>;
 
     /**
-     * @brief Integrates using Runge-Kutta 4th order integration algorithm.
-     * @param dx integration step
-     * @param yn current value to be integrated
-     * @return integration result
+     * \brief Integrates using Runge-Kutta 4th order integration algorithm.
+     * \param dx integration step
+     * \param yn current value to be integrated
+     * \return integration result
      */
     T Integrate(double dx, const T& yn)
     {

@@ -37,9 +37,9 @@
 namespace mc {
 
 /**
- * @brief Rectangular matrix class template.
- * @tparam ROWS matrix rows count
- * @tparam COLS matrix columns count
+ * \brief Rectangular matrix class template.
+ * \tparam ROWS matrix rows count
+ * \tparam COLS matrix columns count
  */
 template <unsigned int ROWS, unsigned int COLS>
 class MatrixMxN
@@ -51,8 +51,8 @@ public:
     static constexpr unsigned int kSize = ROWS * COLS; ///< matrix size
 
     /**
-     * @brief Fills all matrix elements with the given value.
-     * @param value given value to fill all matrix elements
+     * \brief Fills all matrix elements with the given value.
+     * \param value given value to fill all matrix elements
      */
     void Fill(double value)
     {
@@ -62,19 +62,19 @@ public:
         }
     }
 
-    /** @return "true" if all elements are valid */
+    /** \return "true" if all elements are valid */
     bool IsValid() const
     {
         return mc::IsValid(_elements, kSize);
     }
 
     /**
-     * @brief  Gets matrix element of given indicies.
+     * \brief  Gets matrix element of given indicies.
      * This function is bound-checked which may affect performance.
      * Returns NaN if row or column index is out of range.
-     * @param row element row number
-     * @param col element column number
-     * @return matrix element of given indicies, NaN if row or column index is out of range
+     * \param row element row number
+     * \param col element column number
+     * \return matrix element of given indicies, NaN if row or column index is out of range
      */
     double GetElement(unsigned int row, unsigned int col) const
     {
@@ -87,7 +87,7 @@ public:
     }
 
     /**
-     * @brief Puts matrix elements into given array.
+     * \brief Puts matrix elements into given array.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -95,7 +95,7 @@ public:
      * i_row - row index,
      * i_col - column index,
      * n_col - number of columns
-     * @param elements output array
+     * \param elements output array
      */
     void PutIntoArray(double elements[])
     {
@@ -103,10 +103,10 @@ public:
     }
 
     /**
-     * @brief Sets matrix element of given indicies.
-     * @param row element row number
-     * @param col element column number
-     * @param value element value
+     * \brief Sets matrix element of given indicies.
+     * \param row element row number
+     * \param col element column number
+     * \param value element value
      * This function is bound-checked which may affect performance.
      */
     void SetElement(unsigned int row, unsigned int col, double value)
@@ -118,7 +118,7 @@ public:
     }
 
     /**
-     * @brief Sets matrix elements from array.
+     * \brief Sets matrix elements from array.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -126,7 +126,7 @@ public:
      * i_row - row index,
      * i_col - column index,
      * n_col - number of columns
-     * @param elements input array
+     * \param elements input array
      */
     void SetFromArray(double elements[])
     {
@@ -134,9 +134,9 @@ public:
     }
 
     /**
-     * @brief Sets matrix elements from string.
+     * \brief Sets matrix elements from string.
      * Values in the given string should be separated with whitespaces.
-     * @param str given string
+     * \param str given string
      */
     void SetFromString(const char* str)
     {
@@ -165,7 +165,7 @@ public:
         }
     }
 
-    /** @brief Swaps matrix rows. */
+    /** \brief Swaps matrix rows. */
     void SwapRows(unsigned int row1, unsigned int row2)
     {
         if ( row1 < kRows && row2 < kRows )
@@ -177,7 +177,7 @@ public:
         }
     }
 
-    /** @brief Returns string representation of the matrix. */
+    /** \brief Returns string representation of the matrix. */
     std::string ToString() const
     {
         std::stringstream ss;
@@ -197,13 +197,13 @@ public:
     }
 
     /**
-     * @brief Elements accessor.
+     * \brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked elements accessor use GetElement(int,int) or
      * SetElement(int,int,double) functions.
-     * @param row element row number
-     * @param col element column number
-     * @return element value
+     * \param row element row number
+     * \param col element column number
+     * \return element value
      */
     inline double operator()(unsigned int row, unsigned int col) const
     {
@@ -211,19 +211,19 @@ public:
     }
 
     /**
-     * @brief Elements accessor.
+     * \brief Elements accessor.
      * Please notice that this operator is NOT bound-checked.
      * If you want bound-checked elements accessor use GetElement(int,int) or
      * SetElement(int,int,double) functions.
-     * @param row element row number
-     * @param col element column number
+     * \param row element row number
+     * \param col element column number
      */
     inline double& operator()(unsigned int row, unsigned int col)
     {
         return _elements[row * kCols + col];
     }
 
-    /** @brief Addition operator. */
+    /** \brief Addition operator. */
     MatrixMxN<ROWS, COLS> operator+(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         MatrixMxN<ROWS, COLS> result(*this);
@@ -231,7 +231,7 @@ public:
         return result;
     }
 
-    /** @brief Negation operator. */
+    /** \brief Negation operator. */
     MatrixMxN<ROWS, COLS> operator-() const
     {
         MatrixMxN<ROWS, COLS> result(*this);
@@ -239,7 +239,7 @@ public:
         return result;
     }
 
-    /** @brief Subtraction operator. */
+    /** \brief Subtraction operator. */
     MatrixMxN<ROWS, COLS> operator-(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         MatrixMxN<ROWS, COLS> result(*this);
@@ -247,7 +247,7 @@ public:
         return result;
     }
 
-    /** @brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
     MatrixMxN<ROWS, COLS> operator*(double value) const
     {
         MatrixMxN<ROWS, COLS> result(*this);
@@ -255,7 +255,7 @@ public:
         return result;
     }
 
-    /** @brief Multiplication operator (by vector). */
+    /** \brief Multiplication operator (by vector). */
     VectorN<ROWS> operator*(const VectorN<COLS>& vect) const
     {
         VectorN<ROWS> result;
@@ -263,7 +263,7 @@ public:
         return result;
     }
 
-    /** @brief Division operator (by scalar). */
+    /** \brief Division operator (by scalar). */
     MatrixMxN<ROWS, COLS> operator/(double value) const
     {
         MatrixMxN<ROWS, COLS> result(*this);
@@ -271,35 +271,35 @@ public:
         return result;
     }
 
-    /** @brief Unary addition operator. */
+    /** \brief Unary addition operator. */
     MatrixMxN<ROWS, COLS>& operator+=(const MatrixMxN<ROWS, COLS>& matrix)
     {
         Add(matrix);
         return *this;
     }
 
-    /** @brief Unary subtraction operator. */
+    /** \brief Unary subtraction operator. */
     MatrixMxN<ROWS, COLS>& operator-=(const MatrixMxN<ROWS, COLS>& matrix)
     {
         Substract(matrix);
         return *this;
     }
 
-    /** @brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by scalar). */
     MatrixMxN<ROWS, COLS>& operator*=(double value)
     {
         MultiplyByValue(value);
         return *this;
     }
 
-    /** @brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by scalar). */
     MatrixMxN<ROWS, COLS>& operator/=(double value)
     {
         DivideByValue(value);
         return *this;
     }
 
-    /** @brief Equality operator. */
+    /** \brief Equality operator. */
     bool operator==(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         bool result = true;
@@ -312,7 +312,7 @@ public:
         return result;
     }
 
-    /** @brief Inequality operator. */
+    /** \brief Inequality operator. */
     bool operator!=(const MatrixMxN<ROWS, COLS>& matrix) const
     {
         return !( *this == matrix );
@@ -322,7 +322,7 @@ protected:
 
     double _elements[kSize] = { 0.0 }; ///< matrix elements
 
-    /** @brief Adds matrix. */
+    /** \brief Adds matrix. */
     void Add(const MatrixMxN<ROWS, COLS>& matrix)
     {
         for ( unsigned int i = 0; i < kSize; ++i )
@@ -331,7 +331,7 @@ protected:
         }
     }
 
-    /** @brief Negates matrix. */
+    /** \brief Negates matrix. */
     void Negate()
     {
         for ( unsigned int i = 0; i < kSize; ++i )
@@ -340,7 +340,7 @@ protected:
         }
     }
 
-    /** @brief Substracts matrix. */
+    /** \brief Substracts matrix. */
     void Substract(const MatrixMxN<ROWS, COLS>& matrix)
     {
         for ( unsigned int i = 0; i < kSize; ++i )
@@ -349,7 +349,7 @@ protected:
         }
     }
 
-    /** @brief Multiplies by value. */
+    /** \brief Multiplies by value. */
     void MultiplyByValue(double value)
     {
         for ( unsigned int i = 0; i < kSize; ++i )
@@ -358,7 +358,7 @@ protected:
         }
     }
 
-    /** @brief Multiplies by vector. */
+    /** \brief Multiplies by vector. */
     void MultiplyByVector(const VectorN<COLS>& vect, VectorN<ROWS>* result) const
     {
         for ( unsigned int r = 0; r < kRows; ++r )
@@ -372,7 +372,7 @@ protected:
         }
     }
 
-    /** @brief Divides by value. */
+    /** \brief Divides by value. */
     void DivideByValue(double value)
     {
         double value_inv = 1.0 / value;

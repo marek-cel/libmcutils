@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -20,41 +20,25 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/geo/WGS84.h>
+#include <mcutils/geo/Ellipsoid.h>
 
-#include <mcutils/geo/DataWGS84.h>
+#include <cmath>
 
 namespace mc {
 
-WGS84::WGS84() : ECEF(DataWGS84::a, DataWGS84::f)
-{}
-
-WGS84::WGS84(const WGS84& wgs) : ECEF(wgs)
-{}
-
-WGS84::WGS84(WGS84&& wgs) : ECEF(wgs)
-{}
-
-WGS84::WGS84(const Geo& pos_geo) : WGS84()
+Ellipsoid::Ellipsoid(double a, double f)
 {
-    SetPositionFromGeo(pos_geo);
-}
+    _a = a;
+    _f = f;
 
-WGS84::WGS84(const Vector3& pos_wgs) : WGS84()
-{
-    SetPositionFromCart(pos_wgs);
-}
-
-WGS84& WGS84::operator=(const WGS84& wgs)
-{
-    ECEF::operator=(wgs);
-    return *this;
-}
-
-WGS84& WGS84::operator=(WGS84&& wgs)
-{
-    ECEF::operator=(wgs);
-    return *this;
+    _b   = _a - _f*_a;
+    _r1  = (2.0 * _a + _b) / 3.0;
+    _a2  = _a * _a;
+    _b2  = _b * _b;
+    _e2  = 1.0 - _b2 / _a2;
+    _e   = sqrt(_e2);
+    _ep2 = _a2 / _b2 - 1.0;
+    _ep  = sqrt(_ep2);
 }
 
 } // namespace mc

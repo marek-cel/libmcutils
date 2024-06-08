@@ -23,59 +23,31 @@
 #define MCUTILS_GEO_WGS84_H_
 
 #include <mcutils/defs.h>
-
-#include <mcutils/geo/ECEF.h>
+#include <mcutils/geo/Ellipsoid.h>
 
 namespace mc {
 
 /**
- * @brief World Geodetic System 1984 (WGS84) class.
- *
- * US Department of Defense World Geodetic System 1984 (WGS84) class.
+ * \brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
+ * and other physical data.
  *
  * ### Refernces:
  * - [Department of Defence World Geodetic System 1984, NIMA-TR-8350.2](https://apps.dtic.mil/sti/citations/ADA280358)
  */
-class MCUTILSAPI WGS84 : public ECEF
-{
-public:
+namespace WGS84 {
 
-    /** @brief Constructor. */
-    WGS84();
+static const Ellipsoid ellipsoid(6378137.0, 1.0 / 298.257223563);   ///< datum ellipsoid
 
-    /**
-     * @brief Copy constructor.
-     * @param ecef object to copy
-     */
-    WGS84(const WGS84& wgs);
+static constexpr double me      = 5.9733328e24;         ///< [kg] mass of the Earth (including atmosphere)
+static constexpr double gm      = 3986004.418e8;        ///< [m^3/s^2] Earth’s gravitational constant (mass of Earth’s atmosphere included)
+static constexpr double omega   = 7.2921151467e-5;      ///< [rad/s] angular velocity of the Earth ( 360deg / 23:56:04.091 )
+static constexpr double gamma   = 9.7976432222;         ///< [m/s^2] theoretical (normal) gravity mean value
+static constexpr double gamma_e = 9.7803253359;         ///< [m/s^2] theoretical (normal) gravity at the equator (on the ellipsoid)
+static constexpr double gamma_p = 9.8321849378;         ///< [m/s^2] theoretical (normal) gravity at the pole (on the ellipsoid)
+static constexpr double k       = 0.00193185265241;     ///< [-] theoretical (normal) gravity formula constant
+static constexpr double m       = 0.00344978650684;     ///< [-] m = omega^2 * a^2 * b / GM
 
-    /**
-     * @brief Moving constructor.
-     * @param ecef object to move
-     */
-    WGS84(WGS84&& wgs);
-
-    /**
-     * @brief Constructor.
-     * @param pos_geo geodetic coordinates
-     */
-    explicit WGS84(const Geo& pos_geo);
-
-    /**
-     * @brief Constructor.
-     * @param pos_wgs [m] coordinates vector expressed in ECEF
-     */
-    explicit WGS84(const Vector3& pos_wgs);
-
-    /** @brief Destructor. */
-    virtual ~WGS84() = default;
-
-    /** @brief Assignment operator. */
-    WGS84& operator=(const WGS84& wgs);
-
-    /** @brief Moving assignment operator. */
-    WGS84& operator=(WGS84&& wgs);
-};
+} // namespace DataWGS84
 
 } // namespace mc
 

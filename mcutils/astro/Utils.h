@@ -28,21 +28,21 @@
 namespace mc {
 
 /**
- * @brief Converts from equatorial (right ascension, declination) to horizontal
+ * \brief Converts from equatorial (right ascension, declination) to horizontal
  * (azimuth, elevation) coordinate system.
- * @param radec right ascension, declination
- * @param lat [rad] geodetic latitude (positive north)
- * @param lst [rad] Local Siderial Time
+ * \param radec right ascension, declination
+ * \param lat [rad] geodetic latitude (positive north)
+ * \param lst [rad] Local Siderial Time
  */
 MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst);
 
 /**
- * @brief Converts from equatorial (right ascension, declination) to horizontal
+ * \brief Converts from equatorial (right ascension, declination) to horizontal
  * (azimuth, elevation) coordinate system.
- * @param radec right ascension, declination
- * @param sinLat [-] latitude sine
- * @param cosLat [-] latitude cosine
- * @param lst [rad] Local Siderial Time
+ * \param radec right ascension, declination
+ * \param sinLat [-] latitude sine
+ * \param cosLat [-] latitude cosine
+ * \param lst [rad] Local Siderial Time
  */
 MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst);
 
