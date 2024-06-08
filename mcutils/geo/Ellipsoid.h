@@ -27,13 +27,12 @@
 namespace mc {
 
 /**
- * \brief US Department of Defense World Geodetic System 1984 (WGS84) ellipsoid
- * parameters and other physical data.
+ * \brief Ellipsoid parameters class.
  *
  * ### Refernces:
  * - [Ellipsoid - Wikipedia](https://en.wikipedia.org/wiki/Ellipsoid)
  */
-class Ellipsoid
+class MCUTILSAPI Ellipsoid
 {
 public:
 
