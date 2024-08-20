@@ -93,6 +93,7 @@ set(SOURCES
 
     time/TestClockTime.cpp
     time/TestISO8601.cpp
+    time/TestTimer.cpp
 )
 
 ################################################################################

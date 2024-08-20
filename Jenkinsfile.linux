@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        dockerfile { 
+        dockerfile {
             args '-v /var/www/html/jenkins/:/var/www/html/jenkins/'
         }
     }
@@ -27,6 +27,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'sleep 1'
                 sh 'cd build && ctest'
             }
         }
