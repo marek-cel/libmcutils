@@ -34,7 +34,7 @@ std::chrono::microseconds Timer::WaitForTimeout()
 {
     std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
     std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - _last_time);
-    if ( elapsed < _interval )
+    if (elapsed < _interval)
     {
         std::this_thread::sleep_for(_interval - elapsed);
     }
