@@ -33,7 +33,7 @@ Lead::Lead(double tc, double value)
 
 void Lead::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         double du_dt = (u - _u_prev) / dt;
         _value = _time_const * du_dt + u;
@@ -43,7 +43,7 @@ void Lead::Update(double dt, double u)
 
 void Lead::set_time_const(double tc)
 {
-    if ( tc > 0.0 )
+    if (tc > 0.0)
     {
         _time_const = tc;
     }

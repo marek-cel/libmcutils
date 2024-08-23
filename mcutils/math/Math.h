@@ -102,9 +102,8 @@ MCUTILSAPI inline double Pow5(const double& val)
  */
 MCUTILSAPI inline double Satur(const double& min, const double& max, const double& val)
 {
-    if      ( val < min ) return min;
-    else if ( val > max ) return max;
-
+    if      (val < min) return min;
+    else if (val > max) return max;
     return val;
 }
 
@@ -115,9 +114,8 @@ MCUTILSAPI inline double Satur(const double& min, const double& max, const doubl
  */
 MCUTILSAPI inline double Sign(const double& val)
 {
-    if      ( val < 0.0 ) return -1.0;
-    else if ( val > 0.0 ) return  1.0;
-
+    if      (val < 0.0) return -1.0;
+    else if (val > 0.0) return  1.0;
     return 0.0;
 }
 
@@ -130,7 +128,7 @@ MCUTILSAPI inline double Sign(const double& val)
 MCUTILSAPI inline float SineWave(float x)
 {
     float y = 4.0f * x - 4.0f * x * fabs(x);
-    return 0.225f * ( y * fabs(y) - y ) + y;
+    return 0.225f * (y * fabs(y) - y) + y;
 }
 
 /**
@@ -146,7 +144,7 @@ MCUTILSAPI inline float SineWave(float x)
 MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
                                     double x)
 {
-    x = Satur( 0.0, 1.0, (x - xmin) / (xmax - xmin) );
+    x = Satur(0.0, 1.0, (x - xmin) / (xmax - xmin));
     return x * x * (3.0 - 2.0 * x);
 }
 
@@ -195,9 +193,8 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
  */
 MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
 {
-    double coef = 1.0 / ( static_cast<double>(n) - 1.0 );
+    double coef = 1.0 / (static_cast<double>(n) - 1.0);
     double s2 = sum_sq * coef - Pow2(sum) * coef / static_cast<double>(n);
-
     return sqrt(s2);
 }
 
@@ -215,13 +212,11 @@ MCUTILSAPI inline double StdDev(const double x[], int n)
 {
     double sum = 0.0;
     double sum_sq = 0.0;
-
-    for ( int i = 0; i < n; ++i )
+    for (int i = 0; i < n; ++i)
     {
         sum += x[i];
         sum_sq += x[i] * x[i];
     }
-
     return StdDev(sum, sum_sq, n);
 }
 

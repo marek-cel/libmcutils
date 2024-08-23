@@ -28,7 +28,7 @@ namespace mc {
 
 /**
  * \brief Singleton base class template.
- * 
+ *
  * ### References:
  * - DeLoura M.: Game Programming Gems Vol. 1, 2000, p.36-40
  */
@@ -43,7 +43,7 @@ public:
      */
     static TYPE* instance()
     {
-        if ( !_instance )
+        if (!_instance)
         {
             _instance = new TYPE();
         }

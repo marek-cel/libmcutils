@@ -38,7 +38,7 @@ PID::PID(double kp, double ki, double kd)
 
 void PID::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         _error_i = _error_i + u*dt;
         _error_d = (dt > 0.0) ? (u - _error) / dt : 0.0;
@@ -56,7 +56,7 @@ void PID::Reset()
 {
     _error_i = 0.0;
     _error_d = 0.0;
-    
+
     _error = 0.0;
     _value = 0.0;
 }
@@ -68,21 +68,21 @@ void PID::SetAsParallel(double kp, double ki, double kd)
     _kd = kd;
 }
 
-void PID::SetAsSeries( double k, double tau_i, double tau_d )
+void PID::SetAsSeries(double k, double tau_i, double tau_d)
 {
     _kp = k * (1.0 + tau_d / tau_i);
     _ki = k / tau_i;
     _kd = k * tau_d;
 }
 
-void PID::SetAsStandard(double kp, double ti, double td )
+void PID::SetAsStandard(double kp, double ti, double td)
 {
     _kp = kp;
     _ki = kp / ti;
     _kd = kp * td;
 }
 
-void PID::SetValueAndError( double value, double error, double dt )
+void PID::SetValueAndError(double value, double error, double dt)
 {
     _error_d = (dt > 0.0) ? (error - _error) / dt : 0.0;
     _error_i = fabs(_ki) > 0.0

@@ -32,9 +32,9 @@ bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
 
     double u = 0.0;
 
-    if ( fabs(den) > 10e-14 ) u = num / den;
+    if (fabs(den) > 10e-14) u = num / den;
 
-    if ( 0.0 < u && u < 1.0 )
+    if (0.0 < u && u < 1.0)
     {
         return true;
     }
@@ -50,10 +50,10 @@ Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
     double num = n * (r - b);
     double den = n * (e - b);
 
-    if ( fabs(den) < 10e-15 )
+    if (fabs(den) < 10e-15)
     {
         // segment is parallel to the plane
-        if ( fabs(num) < 10e-15 )
+        if (fabs(num) < 10e-15)
         {
             // segment beginning is on the plane
             r_i = b;
@@ -63,7 +63,7 @@ Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
     {
         double u = num / den;
 
-        if ( 0.0 <= u && u <= 1.0 )
+        if (0.0 <= u && u <= 1.0)
         {
             r_i = b + u * (e - b);
         }

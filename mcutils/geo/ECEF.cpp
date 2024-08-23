@@ -34,7 +34,7 @@ namespace mc {
 const Matrix3x3 ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 const Matrix3x3 ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
-ECEF::ECEF(const Ellipsoid &ellipsoid)
+ECEF::ECEF(const Ellipsoid& ellipsoid)
     : _ellipsoid(ellipsoid)
 {
     _pos_geo.lat = 0.0;

@@ -39,8 +39,8 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst)
     AzEl result;
 
     double lha = lst - radec.ra;
-    while ( lha < -M_PI ) lha += 2.0 * M_PI;
-    while ( lha >  M_PI ) lha -= 2.0 * M_PI;
+    while (lha < -M_PI) lha += 2.0 * M_PI;
+    while (lha >  M_PI) lha -= 2.0 * M_PI;
 
     double cosLha = cos(lha);
 
@@ -49,8 +49,8 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst)
 
     double sinElev = sinDelta*sinLat + cosDelta*cosLha*cosLat;
 
-    if ( sinElev >  1.0 ) sinElev =  1.0;
-    if ( sinElev < -1.0 ) sinElev = -1.0;
+    if (sinElev >  1.0) sinElev =  1.0;
+    if (sinElev < -1.0) sinElev = -1.0;
 
     result.el = asin(sinElev);
 
@@ -59,10 +59,10 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst)
     double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
     cosAzim = fabs(cosAzim);
 
-    if ( cosAzim >  1.0 ) cosAzim =  1.0;
-    if ( cosAzim < -1.0 ) cosAzim = -1.0;
+    if (cosAzim >  1.0) cosAzim =  1.0;
+    if (cosAzim < -1.0) cosAzim = -1.0;
 
-    if ( lha < 0.0 )
+    if (lha < 0.0)
         result.az = M_PI - acos(cosAzim);
     else
         result.az = M_PI + acos(cosAzim);

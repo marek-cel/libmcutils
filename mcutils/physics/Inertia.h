@@ -36,11 +36,10 @@ namespace mc {
  */
 inline double FirstOrderInertia(double u, double y, double dt, double tc)
 {
-    if ( tc > 0.0 )
+    if (tc > 0.0)
     {
         return y + (1.0 - exp(-dt / tc)) * (u - y);
     }
-
     return u;
 }
 

@@ -51,10 +51,10 @@ Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
     MatrixNxN<SIZE> mtr_temp = mtr;
     VectorN<SIZE>   rhs_temp = rhs;
 
-    for ( unsigned int r = 0; r < SIZE; ++r )
+    for (unsigned int r = 0; r < SIZE; ++r)
     {
         // run along diagonal, swapping rows to move zeros (outside the diagonal) downwards
-        if ( fabs(mtr_temp(r,r)) < fabs(eps) )
+        if (fabs(mtr_temp(r,r)) < fabs(eps))
         {
             if ( r < SIZE - 1 )
             {
@@ -72,7 +72,7 @@ Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
         double a_rr_inv = 1.0 / a_rr;
 
         // deviding current row by value on diagonal
-        for ( unsigned int c = 0; c < SIZE; ++c )
+        for (unsigned int c = 0; c < SIZE; ++c)
         {
             mtr_temp(r,c) *= a_rr_inv;
         }
@@ -83,17 +83,15 @@ Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
         // for every row current row is multiplied by A(i,r)
         // where r stands for row that is substracted from other rows
         // and i stands for row that is substracting from
-        for ( unsigned int i = 0; i < SIZE; ++i )
+        for (unsigned int i = 0; i < SIZE; ++i)
         {
-            if ( i != r )
+            if (i != r)
             {
                 double a_ir = mtr_temp(i,r);
-
-                for ( unsigned int c = 0; c < SIZE; ++c )
+                for (unsigned int c = 0; c < SIZE; ++c)
                 {
                     mtr_temp(i,c) -= a_ir * mtr_temp(r,c);
                 }
-
                 rhs_temp(i) -= a_ir * rhs_temp(r);
             }
         }

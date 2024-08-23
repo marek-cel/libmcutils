@@ -33,7 +33,7 @@ double JulianDate::GetJulianDate(const DateTime& gd)
     double m = gd.month;
     double d = gd.day;
 
-    if ( m == 1 || m == 2 )
+    if (m == 1 || m == 2)
     {
         y = y - 1;
         m = 12 + m;
@@ -62,13 +62,13 @@ void JulianDate::SetFromGregorianDate(const DateTime& gd)
 {
     _gd = gd;
 
-    if ( _gd.month  <   1 ) _gd.month  = 1;
-    if ( _gd.month  >  12 ) _gd.month  = 12;
-    if ( _gd.day    >  31 ) _gd.day    = 31;
-    if ( _gd.hour   >  23 ) _gd.hour   = 23;
-    if ( _gd.minute >  59 ) _gd.minute = 59;
-    if ( _gd.second >  59 ) _gd.second = 59;
-    if ( _gd.msec   > 999 ) _gd.msec   = 999;
+    if (_gd.month  <   1) _gd.month  = 1;
+    if (_gd.month  >  12) _gd.month  = 12;
+    if (_gd.day    >  31) _gd.day    = 31;
+    if (_gd.hour   >  23) _gd.hour   = 23;
+    if (_gd.minute >  59) _gd.minute = 59;
+    if (_gd.second >  59) _gd.second = 59;
+    if (_gd.msec   > 999) _gd.msec   = 999;
 
     Update();
 }

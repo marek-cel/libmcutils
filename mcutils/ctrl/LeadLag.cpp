@@ -37,7 +37,7 @@ LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
 
 void LeadLag::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         double den = 2.0 * _c3 + dt * _c4;
         double den_inv = 1.0 / den;

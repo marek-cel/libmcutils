@@ -62,7 +62,7 @@ public:
      * \brief Constructor.
      * \param ellipsoid datum ellipsoid
      */
-    ECEF(const Ellipsoid &ellipsoid);
+    ECEF(const Ellipsoid& ellipsoid);
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.

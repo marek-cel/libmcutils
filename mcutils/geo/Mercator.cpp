@@ -26,7 +26,7 @@
 
 namespace mc {
 
-Mercator::Mercator(const Ellipsoid &e)
+Mercator::Mercator(const Ellipsoid& e)
     : _e(e)
     , _max_x(CalculateX(Units::deg2rad( 180.0 )))
     , _max_y(CalculateY(Units::deg2rad(  85.0 )))

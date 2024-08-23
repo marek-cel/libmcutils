@@ -132,7 +132,7 @@ MCUTILSAPI inline double m2in(double len = 1.0)
  */
 MCUTILSAPI inline double m2mi(double len = 1.0)
 {
-    return len * ( 1.0 / 1609.344 );
+    return len * (1.0 / 1609.344);
 }
 
 /**
@@ -142,7 +142,7 @@ MCUTILSAPI inline double m2mi(double len = 1.0)
  */
 MCUTILSAPI inline double m2nmi(double len = 1.0)
 {
-    return len * ( 1.0 / 1852.0 );
+    return len * (1.0 / 1852.0);
 }
 
 /**
@@ -172,7 +172,7 @@ MCUTILSAPI inline double ft2m(double len = 1.0)
  */
 MCUTILSAPI inline double ft2km(double len = 1.0)
 {
-    return len * ( 1.0 / 3280.8399 );
+    return len * (1.0 / 3280.8399);
 }
 
 /**
@@ -182,7 +182,7 @@ MCUTILSAPI inline double ft2km(double len = 1.0)
  */
 MCUTILSAPI inline double ft2mi(double len = 1.0)
 {
-    return len * ( 1.0 / 5280.0 );
+    return len * (1.0 / 5280.0);
 }
 
 /**
@@ -192,7 +192,7 @@ MCUTILSAPI inline double ft2mi(double len = 1.0)
  */
 MCUTILSAPI inline double ft2nmi(double len = 1.0)
 {
-    return len * ( 1.0 / 6076.11549 );
+    return len * (1.0 / 6076.11549);
 }
 
 /**
@@ -336,7 +336,7 @@ MCUTILSAPI inline double nmi2mi(double len = 1.0)
  */
 MCUTILSAPI inline double sqm2sqft(double area = 1.0)
 {
-    return area * ( 3.2808399 * 3.2808399 );
+    return area * (3.2808399 * 3.2808399);
 }
 
 /**
@@ -346,7 +346,7 @@ MCUTILSAPI inline double sqm2sqft(double area = 1.0)
  */
 MCUTILSAPI inline double sqft2sqm(double area = 1.0)
 {
-    return area * ( 0.3048 * 0.3048 );
+    return area * (0.3048 * 0.3048);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -360,7 +360,7 @@ MCUTILSAPI inline double sqft2sqm(double area = 1.0)
  */
 MCUTILSAPI inline double cuft2cum(double vol = 1.0)
 {
-    return vol * ( 0.3048 * 0.3048 * 0.3048 );
+    return vol * (0.3048 * 0.3048 * 0.3048);
 }
 
 
@@ -371,7 +371,7 @@ MCUTILSAPI inline double cuft2cum(double vol = 1.0)
  */
 MCUTILSAPI inline double cuin2cum(double vol = 1.0)
 {
-    return vol * ( 0.0254 * 0.0254 * 0.0254 );
+    return vol * (0.0254 * 0.0254 * 0.0254);
 }
 
 /**
@@ -381,7 +381,7 @@ MCUTILSAPI inline double cuin2cum(double vol = 1.0)
  */
 MCUTILSAPI inline double cum2cuft(double vol = 1.0)
 {
-    return vol * ( 3.2808399 * 3.2808399 * 3.2808399 );
+    return vol * (3.2808399 * 3.2808399 * 3.2808399);
 }
 
 /**
@@ -435,7 +435,7 @@ MCUTILSAPI inline double mps2kmh(double vel = 1.0)
  */
 MCUTILSAPI inline double mps2kts(double vel = 1.0)
 {
-    return vel * ( 3600.0 / 1852.0 );
+    return vel * (3600.0 / 1852.0);
 }
 
 /**
@@ -476,7 +476,7 @@ MCUTILSAPI inline double fpm2kmh(double vel = 1.0)
  */
 MCUTILSAPI inline double fpm2kts(double vel = 1.0)
 {
-    return vel * ( 0.000164578834 * 60.0 );
+    return vel * (0.000164578834 * 60.0);
 }
 
 /**
@@ -486,7 +486,7 @@ MCUTILSAPI inline double fpm2kts(double vel = 1.0)
  */
 MCUTILSAPI inline double fpm2mph(double vel = 1.0)
 {
-    return vel * ( 60.0 / 5280.0 );
+    return vel * (60.0 / 5280.0);
 }
 
 /**
@@ -596,7 +596,7 @@ MCUTILSAPI inline double kmh2mph(double vel = 1.0)
  */
 MCUTILSAPI inline double kmh2mps(double vel = 1.0)
 {
-    return vel * ( 1000.0 / 3600.0 );
+    return vel * (1000.0 / 3600.0);
 }
 
 /**
@@ -606,7 +606,7 @@ MCUTILSAPI inline double kmh2mps(double vel = 1.0)
  */
 MCUTILSAPI inline double kts2fpm(double vel = 1.0)
 {
-    return vel * ( 6076.11549 / 60.0 );
+    return vel * (6076.11549 / 60.0);
 }
 
 /**
@@ -616,7 +616,7 @@ MCUTILSAPI inline double kts2fpm(double vel = 1.0)
  */
 MCUTILSAPI inline double kts2fps(double vel = 1.0)
 {
-    return vel * ( 6076.11549 / 3600.0 );
+    return vel * (6076.11549 / 3600.0);
 }
 
 /**
@@ -646,7 +646,7 @@ MCUTILSAPI inline double kts2mph(double vel = 1.0)
  */
 MCUTILSAPI inline double kts2mps(double vel = 1.0)
 {
-    return vel * ( 1852.0 / 3600.0 );
+    return vel * (1852.0 / 3600.0);
 }
 
 /**
@@ -666,7 +666,7 @@ MCUTILSAPI inline double mph2fpm(double vel = 1.0)
  */
 MCUTILSAPI inline double mph2fps(double vel = 1.0)
 {
-    return vel * ( 5280.0 / 3600.0 );
+    return vel * (5280.0 / 3600.0);
 }
 
 /**
@@ -696,7 +696,7 @@ MCUTILSAPI inline double mph2kts(double vel = 1.0)
  */
 MCUTILSAPI inline double mph2mps(double vel = 1.0)
 {
-    return vel * ( 1609.344 / 3600.0 );
+    return vel * (1609.344 / 3600.0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -802,7 +802,7 @@ MCUTILSAPI inline double Pa2mb(double press = 1.0)
  */
 MCUTILSAPI inline double Pa2psf(double press = 1.0)
 {
-    return press * 0.224808943 / ( 3.2808399 * 3.2808399 );
+    return press * 0.224808943 / (3.2808399 * 3.2808399);
 }
 
 /**
@@ -822,7 +822,7 @@ MCUTILSAPI inline double Pa2psi(double press = 1.0)
  */
 MCUTILSAPI inline double psf2Pa(double press = 1.0)
 {
-    return press * ( 3.2808399 * 3.2808399 ) / 0.224808943;
+    return press * (3.2808399 * 3.2808399) / 0.224808943;
 }
 
 /**
@@ -832,7 +832,7 @@ MCUTILSAPI inline double psf2Pa(double press = 1.0)
  */
 MCUTILSAPI inline double psi2Pa(double press = 1.0)
 {
-    return press / ( 0.224808943 * 0.0254 * 0.0254 );
+    return press / (0.224808943 * 0.0254 * 0.0254);
 }
 
 /**
@@ -902,7 +902,7 @@ MCUTILSAPI inline double mb2Pa(double press = 1.0)
  */
 MCUTILSAPI inline double mb2psi(double press = 1.0)
 {
-    return press * ( 100.0 * 0.224808943 * 0.0254 * 0.0254 );
+    return press * (100.0 * 0.224808943 * 0.0254 * 0.0254);
 }
 
 /**
@@ -1050,7 +1050,7 @@ MCUTILSAPI inline double kW2W(double pwr = 1.0)
  */
 MCUTILSAPI inline double C2F(double temp)
 {
-    return ( 9.0 * temp / 5.0 ) + 32.0;
+    return (9.0 * temp / 5.0) + 32.0;
 }
 
 /**
@@ -1070,7 +1070,7 @@ MCUTILSAPI inline double C2K(double temp)
  */
 MCUTILSAPI inline double F2C(double temp)
 {
-    return 5.0 * ( temp - 32.0 ) / 9.0;
+    return 5.0 * (temp - 32.0) / 9.0;
 }
 
 /**
@@ -1080,7 +1080,7 @@ MCUTILSAPI inline double F2C(double temp)
  */
 MCUTILSAPI inline double F2K(double temp)
 {
-    return ( 5.0 * ( temp - 32.0 ) / 9.0 ) + 273.15;
+    return (5.0 * (temp - 32.0) / 9.0) + 273.15;
 }
 
 /**
@@ -1090,7 +1090,7 @@ MCUTILSAPI inline double F2K(double temp)
  */
 MCUTILSAPI inline double K2C(double temp)
 {
-    return ( temp - 273.15 );
+    return (temp - 273.15);
 }
 
 /**
@@ -1100,7 +1100,7 @@ MCUTILSAPI inline double K2C(double temp)
  */
 MCUTILSAPI inline double K2F(double temp)
 {
-    return ( 9.0 * ( temp - 273.15 ) / 5.0 ) + 32.0;
+    return (9.0 * (temp - 273.15) / 5.0) + 32.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1114,7 +1114,7 @@ MCUTILSAPI inline double K2F(double temp)
  */
 MCUTILSAPI inline double g_kWh_2_kg_Ws(double sfc = 1.0)
 {
-     return sfc / ( 3.6e9 );
+     return sfc / (3.6e9);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1128,7 +1128,7 @@ MCUTILSAPI inline double g_kWh_2_kg_Ws(double sfc = 1.0)
  */
 MCUTILSAPI inline double g_kNs_2_kg_Ns(double tsfc = 1.0)
 {
-    return tsfc * ( 1.0e-6 );
+    return tsfc * (1.0e-6);
 }
 
 } // namespace Units

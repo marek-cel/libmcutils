@@ -112,8 +112,7 @@ double Quaternion::GetLength() const
 void Quaternion::Normalize()
 {
     double length = GetLength();
-
-    if ( length > 0.0 )
+    if (length > 0.0)
     {
         _e0 = _e0 / length;
         _ex = _ex / length;
@@ -127,14 +126,13 @@ Angles Quaternion::GetAngles() const
     Angles result;
 
     double sin_tht_2 = _e0*_ey - _ex*_ez;
-
-    if( sin_tht_2 >= 0.5 )
+    if(sin_tht_2 >= 0.5)
     {
         result.phi() =  2.0 * asin(_ex / cos(M_PI_4));
         result.tht() =  M_PI_2;
         result.psi() =  0.0;
     }
-    else if ( sin_tht_2 <= -0.5 )
+    else if (sin_tht_2 <= -0.5)
     {
         result.phi() =  2.0 * asin(_ex / cos(M_PI_4));
         result.tht() = -M_PI_2;
@@ -146,7 +144,6 @@ Angles Quaternion::GetAngles() const
         result.tht() =  asin(2.0*sin_tht_2 );
         result.psi() = atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez));
     }
-
     result.Normalize();
 
     return result;
@@ -190,7 +187,7 @@ Quaternion Quaternion::GetDerivative(const Vector3& omega, double lambda) const
     // Pamadi - Performance Stability Dynamics and Control of Airplanes, 2004, p.348
     // Sibilski - Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34
     // Roziecki - Bifurkacyjna Analiza Dynamiki Lotu Samolotu z Wektorowaniem Ciagu, 2006, p.24
-    if ( lambda > 0.0 )
+    if (lambda > 0.0)
     {
         double epsilon = 1.0 - GetLength2();
         double lambda_epsilon = lambda * epsilon;

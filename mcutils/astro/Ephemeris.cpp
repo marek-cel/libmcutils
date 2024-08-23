@@ -50,8 +50,8 @@ void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, double 
               + 2.58622222e-5 * jc*jc
               - 1.72222222e-9 * jc*jc*jc
               + 1.00273790935 * _ut;
-    while ( T0 > 24.0 ) T0 -= 24.0;
-    while ( T0 <  0.0 ) T0 += 24.0;
+    while (T0 > 24.0) T0 -= 24.0;
+    while (T0 <  0.0) T0 += 24.0;
 
     // Greenwich sidereal time
     _gst = M_PI * T0 / 12.0;
@@ -65,32 +65,32 @@ void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, double 
     double cosEpsilon = cos(epsilon);
     double sinEpsilon = sin(epsilon);
 
-    UpdateSun(jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
-    UpdateMoon(jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
+    UpdateSun  (jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
+    UpdateMoon (jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
 }
 
-void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat, 
+void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
                           double sinEpsilon, double cosEpsilon)
 {
     // mean anomaly
     double M = 6.240041 + 628.302 * jc;
 
-    while ( M > 2.0*M_PI ) M -= 2.0 * M_PI;
-    while ( M <      0.0 ) M += 2.0 * M_PI;
+    while (M > 2.0*M_PI) M -= 2.0 * M_PI;
+    while (M <      0.0) M += 2.0 * M_PI;
 
     // Sun ecliptic longitude
     double sunLambda = 4.894968 + 628.331951 * jc
-                     + ( 0.033417 - 0.000084 * jc ) * sin(M)
-                     + 0.000351 * sin( 2.0*M );
+                     + (0.033417 - 0.000084 * jc) * sin(M)
+                     + 0.000351 * sin(2.0*M);
 
-    while ( sunLambda > 2.0*M_PI ) sunLambda -= 2.0 * M_PI;
-    while ( sunLambda <      0.0 ) sunLambda += 2.0 * M_PI;
+    while (sunLambda > 2.0*M_PI) sunLambda -= 2.0 * M_PI;
+    while (sunLambda <      0.0) sunLambda += 2.0 * M_PI;
 
-    double cosSunLambda = cos( sunLambda );
-    double sinSunLambda = sin( sunLambda );
+    double cosSunLambda = cos(sunLambda);
+    double sinSunLambda = sin(sunLambda);
 
     // Sun right ascension
-    _sun.ra_dec.ra = atan2( (double)(sinSunLambda * cosEpsilon), (double)cosSunLambda );
+    _sun.ra_dec.ra = atan2(sinSunLambda * cosEpsilon, cosSunLambda);
     _sun.ra_dec.ra = Angles::Normalize(_sun.ra_dec.ra);
 
     // Sun declination
@@ -100,7 +100,7 @@ void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
     _sun.az_el = RaDec2AzEl(_sun.ra_dec, sinLat, cosLat, _lst);
 }
 
-void Ephemeris::UpdateMoon(double jc, double sinLat, double cosLat, 
+void Ephemeris::UpdateMoon(double jc, double sinLat, double cosLat,
                            double sinEpsilon, double cosEpsilon)
 {
     // Moon

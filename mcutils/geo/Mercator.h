@@ -44,7 +44,7 @@ public:
      * \brief Constructor
      * \param e datum ellipsoid
      */
-    Mercator(const Ellipsoid &e);
+    Mercator(const Ellipsoid& e);
 
     /**
      * \brief Calculates geodetic latitude.

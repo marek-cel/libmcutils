@@ -43,7 +43,7 @@ System2::System2(double c1, double c2, double c3,
 
 void System2::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         double dt2 = dt * dt;
 

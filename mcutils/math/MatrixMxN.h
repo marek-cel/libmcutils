@@ -56,7 +56,7 @@ public:
      */
     void Fill(double value)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] = value;
         }
@@ -78,7 +78,7 @@ public:
      */
     double GetElement(unsigned int row, unsigned int col) const
     {
-        if ( row < kRows && col < kCols )
+        if (row < kRows && col < kCols)
         {
             return _elements[row * kCols + col];
         }
@@ -111,7 +111,7 @@ public:
      */
     void SetElement(unsigned int row, unsigned int col, double value)
     {
-        if ( row < kRows && col < kCols )
+        if (row < kRows && col < kCols)
         {
             _elements[row * kCols + col] = value;
         }
@@ -140,11 +140,11 @@ public:
      */
     void SetFromString(const char* str)
     {
-        if ( kSize > 0 )
+        if (kSize > 0)
         {
             double* elements = new double [kSize];
 
-            for ( unsigned int i = 0; i < kSize; ++i )
+            for (unsigned int i = 0; i < kSize; ++i)
             {
                  elements[i] = std::numeric_limits<double>::quiet_NaN();
                 _elements[i] = std::numeric_limits<double>::quiet_NaN();
@@ -153,7 +153,7 @@ public:
             std::stringstream ss(String::StripSpaces(str));
             bool valid = true;
 
-            for ( unsigned int i = 0; i < kSize; ++i )
+            for (unsigned int i = 0; i < kSize; ++i)
             {
                 ss >> elements[i];
                 valid &= mc::IsValid(elements[i]);
@@ -161,16 +161,16 @@ public:
 
             if ( valid ) SetFromArray(elements);
 
-            deletePtrArray(elements);
+            DeletePtrArray(elements);
         }
     }
 
     /** \brief Swaps matrix rows. */
     void SwapRows(unsigned int row1, unsigned int row2)
     {
-        if ( row1 < kRows && row2 < kRows )
+        if (row1 < kRows && row2 < kRows)
         {
-            for ( unsigned int c = 0; c < kCols; ++c )
+            for (unsigned int c = 0; c < kCols; ++c)
             {
                 std::swap(_elements[row1 * kCols + c], _elements[row2 * kCols + c]);
             }
@@ -182,12 +182,12 @@ public:
     {
         std::stringstream ss;
 
-        for ( unsigned int r = 0; r < kRows; ++r )
+        for (unsigned int r = 0; r < kRows; ++r)
         {
-            for ( unsigned int c = 0; c < kCols; ++c )
+            for (unsigned int c = 0; c < kCols; ++c)
             {
-                if ( r > 0 || c >  0 ) ss << "\t";
-                if ( r > 0 && c == 0 ) ss << std::endl;
+                if (r > 0 || c >  0) ss << "\t";
+                if (r > 0 && c == 0) ss << std::endl;
 
                 ss << _elements[r * kCols + c];
             }
@@ -304,7 +304,7 @@ public:
     {
         bool result = true;
 
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             result = result && (_elements[i] == matrix._elements[i]);
         }
@@ -325,7 +325,7 @@ protected:
     /** \brief Adds matrix. */
     void Add(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] += matrix._elements[i];
         }
@@ -334,7 +334,7 @@ protected:
     /** \brief Negates matrix. */
     void Negate()
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] = -_elements[i];
         }
@@ -343,7 +343,7 @@ protected:
     /** \brief Substracts matrix. */
     void Substract(const MatrixMxN<ROWS, COLS>& matrix)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] -= matrix._elements[i];
         }
@@ -352,7 +352,7 @@ protected:
     /** \brief Multiplies by value. */
     void MultiplyByValue(double value)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] *= value;
         }
@@ -361,11 +361,10 @@ protected:
     /** \brief Multiplies by vector. */
     void MultiplyByVector(const VectorN<COLS>& vect, VectorN<ROWS>* result) const
     {
-        for ( unsigned int r = 0; r < kRows; ++r )
+        for (unsigned int r = 0; r < kRows; ++r)
         {
             (*result)(r) = 0.0;
-
-            for ( unsigned int c = 0; c < kCols; ++c )
+            for (unsigned int c = 0; c < kCols; ++c)
             {
                 (*result)(r) += (_elements[r*kCols + c] * vect(c));
             }
@@ -376,7 +375,7 @@ protected:
     void DivideByValue(double value)
     {
         double value_inv = 1.0 / value;
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] *= value_inv;
         }

@@ -27,7 +27,7 @@
 
 namespace mc {
 
-Oscillator::Oscillator( double omega, double zeta, double value)
+Oscillator::Oscillator(double omega, double zeta, double value)
     : _omega(omega)
     , _zeta(zeta)
     , _omega2(_omega * _omega)
@@ -37,9 +37,9 @@ Oscillator::Oscillator( double omega, double zeta, double value)
     , _value(value)
 {}
 
-void Oscillator::Update( double dt, double u )
+void Oscillator::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         double dt2 = dt * dt;
 

@@ -36,9 +36,7 @@ PID_BackCalc::PID_BackCalc(double kp, double ki, double kd,
 void PID_BackCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
-
     _value = Math::Satur(_min, _max, y);
-
     if (fabs(_ki) > 0.0)
     {
         double y_pd = Math::Satur(_min, _max, y_p + y_d);

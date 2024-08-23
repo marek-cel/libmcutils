@@ -36,16 +36,16 @@ void MovingAverage::Update(double, double u)
 {
     _fifo.push_back(u);
 
-    while ( _fifo.size() > _length )
+    while (_fifo.size() > _length)
     {
         _fifo.pop_front();
     }
 
-    if ( _fifo.size() > 1 )
+    if (_fifo.size() > 1)
     {
         double sum = 0.0;
 
-        for ( double &val : _fifo )
+        for (double& val : _fifo)
         {
             sum += val;
         }
