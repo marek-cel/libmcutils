@@ -93,7 +93,7 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
     double cosTht = cos(tht);
 
     *lat = atan(
-        (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht) 
+        (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht)
         / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
     );
     *lon = atan2(y, x);
@@ -116,7 +116,7 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
     double q  = sqrt(1.0 + 2.0*(_ellipsoid.e2()*_ellipsoid.e2())*p);
     double r0 = -(p * _ellipsoid.e2() * r)/(1.0 + q)
                 + sqrt(
-                    0.5*_ellipsoid.a2()*(1.0 + 1.0/q) 
+                    0.5*_ellipsoid.a2()*(1.0 + 1.0/q)
                     - p*(1.0 - _ellipsoid.e2())*z2/(q + q*q) - 0.5*p*r2
                 );
     double uv = r - _ellipsoid.e2()*r0;
@@ -162,9 +162,19 @@ Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
     return ConvertCart2Geo(pos_cart);
 }
 
-Angles ECEF::ConvertAttitudeECEF2NED(const Angles& angles_ecef) const
+Angles ECEF::ConvertAttitudeECEF2ENU(const Angles &angles_ecef) const
+{
+    return ConvertAttitudeECEF2ENU(Quaternion(angles_ecef)).GetAngles();
+}
+
+Angles ECEF::ConvertAttitudeECEF2NED(const Angles &angles_ecef) const
 {
     return ConvertAttitudeECEF2NED(Quaternion(angles_ecef)).GetAngles();
+}
+
+Angles ECEF::ConvertAttitudeENU2ECEF(const Angles& angles_ned) const
+{
+    return ConvertAttitudeENU2ECEF(Quaternion(angles_ned)).GetAngles();
 }
 
 Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
@@ -172,9 +182,19 @@ Angles ECEF::ConvertAttitudeNED2ECEF(const Angles& angles_ned) const
     return ConvertAttitudeNED2ECEF(Quaternion(angles_ned)).GetAngles();
 }
 
+Quaternion ECEF::ConvertAttitudeECEF2ENU(const Quaternion &att_ecef) const
+{
+    return _enu2ecef.GetQuaternion() * att_ecef;
+}
+
 Quaternion ECEF::ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const
 {
     return _ned2ecef.GetQuaternion() * att_ecef;
+}
+
+Quaternion ECEF::ConvertAttitudeENU2ECEF(const Quaternion& att_enu) const
+{
+    return _ecef2enu.GetQuaternion() * att_enu;
 }
 
 Quaternion ECEF::ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const
@@ -206,7 +226,7 @@ void ECEF::UpdateMatrices()
     double sinLat = sin(_pos_geo.lat);
     double sinLon = sin(_pos_geo.lon);
 
-    // NED to ECF
+    // NED to ECEF
     _ned2ecef(0,0) = -cosLon*sinLat;
     _ned2ecef(0,1) = -sinLon;
     _ned2ecef(0,2) = -cosLon*cosLat;
@@ -221,7 +241,7 @@ void ECEF::UpdateMatrices()
 
     _enu2ecef = _ned2ecef * _enu2ned;
 
-    // ECF to NED
+    // ECEF to NED
     _ecef2ned(0,0) = -cosLon * sinLat;
     _ecef2ned(0,1) = -sinLon * sinLat;
     _ecef2ned(0,2) =  cosLat;

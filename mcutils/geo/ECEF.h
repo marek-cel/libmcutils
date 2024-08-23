@@ -144,6 +144,13 @@ public:
     Geo GetGeoOffset(double heading, double offset_x, double offset_y) const;
 
     /**
+     * \brief Converts attitude angles expressed in ENU.
+     * \param angles_ecef attitude angles expressed in ECEF
+     * \return attitude angles expressed in ENU
+     */
+    Angles ConvertAttitudeECEF2ENU(const Angles& angles_ecef) const;
+
+    /**
      * \brief Converts attitude angles expressed in NED.
      * \param angles_ecef attitude angles expressed in ECEF
      * \return attitude angles expressed in NED
@@ -152,21 +159,42 @@ public:
 
     /**
      * \brief Converts attitude angles expressed in ECEF.
-     * \param angles_ecef attitude angles expressed in NED
+     * \param angles_enu attitude angles expressed in ENU
+     * \return attitude angles expressed in ECEF
+     */
+    Angles ConvertAttitudeENU2ECEF(const Angles& angles_enu) const;
+
+    /**
+     * \brief Converts attitude angles expressed in ECEF.
+     * \param angles_ned attitude angles expressed in NED
      * \return attitude angles expressed in ECEF
      */
     Angles ConvertAttitudeNED2ECEF(const Angles& angles_ned) const;
 
     /**
+     * \brief Converts attitude quaternion expressed in ENU.
+     * \param att_ecef attitude quaternion expressed in ECEF
+     * \return attitude quaternion expressed in ENU
+     */
+    Quaternion ConvertAttitudeECEF2ENU(const Quaternion& att_ecef) const;
+
+    /**
      * \brief Converts attitude quaternion expressed in NED.
-     * \param angles_ecef attitude quaternion expressed in ECEF
+     * \param att_ecef attitude quaternion expressed in ECEF
      * \return attitude quaternion expressed in NED
      */
     Quaternion ConvertAttitudeECEF2NED(const Quaternion& att_ecef) const;
 
     /**
      * \brief Converts attitude quaternion expressed in ECEF.
-     * \param angles_ecef attitude quaternion expressed in NED
+     * \param att_enu attitude quaternion expressed in NED
+     * \return attitude quaternion expressed in ECEF
+     */
+    Quaternion ConvertAttitudeENU2ECEF(const Quaternion& att_enu) const;
+
+    /**
+     * \brief Converts attitude quaternion expressed in ECEF.
+     * \param att_ned attitude quaternion expressed in NED
      * \return attitude quaternion expressed in ECEF
      */
     Quaternion ConvertAttitudeNED2ECEF(const Quaternion& att_ned) const;

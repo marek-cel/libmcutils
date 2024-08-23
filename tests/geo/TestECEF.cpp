@@ -283,6 +283,174 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading180)
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 }
 
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N0E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 0E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = 0.0;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
+
+    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi(), 0.0     , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 90E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = M_PI_2;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
+
+    EXPECT_NEAR(angles_enu.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht(), 0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi(), M_PI   , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90W)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 90W
+    pos_geo.lat = 0.0;
+    pos_geo.lon = -M_PI_2;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
+
+    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht(), 0.0     , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi(), 0.0     , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N180E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 180E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = M_PI;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
+
+    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi(),     0.0 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N0E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 0E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = 0.0;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
+
+    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi(), M_PI_2 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 90E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = M_PI_2;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
+
+    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi(),   M_PI , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90W)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 90W
+    pos_geo.lat = 0.0;
+    pos_geo.lon = -M_PI_2;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
+
+    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi(),    0.0 , ATTITUDE_TOLERANCE);
+}
+
+TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N180E)
+{
+    mc::ECEF ecef(mc::WGS84::ellipsoid);
+    mc::Geo pos_geo;
+    mc::Angles angles_ecef;
+    mc::Angles angles_enu;
+
+    // 0N 180E
+    pos_geo.lat = 0.0;
+    pos_geo.lon = M_PI;
+    pos_geo.alt = 0.0;
+    ecef.SetPositionFromGeo(pos_geo);
+
+    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
+
+    EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht(),     0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi(), M_PI_2 + M_PI , ATTITUDE_TOLERANCE);
+}
+
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
