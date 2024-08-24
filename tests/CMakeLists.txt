@@ -2,17 +2,7 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
-# if (UNIX)
-#     add_definitions(-DTEST_USING_ARMADILLO)
-# endif()
-
-################################################################################
-
 find_package(GTest REQUIRED)
-
-if (UNIX)
-    find_package(Armadillo REQUIRED)
-endif()
 
 ################################################################################
 
