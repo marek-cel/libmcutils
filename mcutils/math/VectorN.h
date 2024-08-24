@@ -61,7 +61,7 @@ public:
     double GetLength2() const
     {
         double length2 = 0.0;
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             length2 += _elements[i] * _elements[i];
         }
@@ -78,10 +78,10 @@ public:
     void Normalize()
     {
         double length = GetLength();
-        if ( length > 0.0 )
+        if (length > 0.0)
         {
             double length_inv = 1.0 / length;
-            for ( unsigned int i = 0; i < kSize; ++i )
+            for (unsigned int i = 0; i < kSize; ++i)
             {
                 _elements[i] *= length_inv;
             }
@@ -97,7 +97,7 @@ public:
      */
     double GetElement(unsigned int index) const
     {
-        if ( index < kSize )
+        if (index < kSize)
         {
             return _elements[index];
         }
@@ -120,7 +120,7 @@ public:
      */
     void SetElement(unsigned int index, double val)
     {
-        if ( index < kSize )
+        if (index < kSize)
         {
             _elements[index] = val;
         }
@@ -144,7 +144,7 @@ public:
     {
         double elements[kSize];
 
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
              elements[i] = std::numeric_limits<double>::quiet_NaN();
             _elements[i] = std::numeric_limits<double>::quiet_NaN();
@@ -153,19 +153,19 @@ public:
         std::stringstream ss(String::StripSpaces(str));
         bool valid = true;
 
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             ss >> elements[i];
             valid &= mc::IsValid(elements[i]);
         }
 
-        if ( valid ) SetFromArray(elements);
+        if (valid) SetFromArray(elements);
     }
 
     /** \brief Swaps vector rows. */
     void SwapRows(unsigned int row1, unsigned int row2)
     {
-        if ( row1 < kSize && row2 < kSize )
+        if (row1 < kSize && row2 < kSize)
         {
             std::swap(_elements[row1], _elements[row2]);
         }
@@ -175,21 +175,18 @@ public:
     std::string ToString() const
     {
         std::stringstream ss;
-
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
-            if ( i != 0 ) ss << ",";
-
+            if (i != 0) ss << ",";
             ss << _elements[i];
         }
-
         return ss.str();
     }
 
     /** \brief Sets all vector items to zero. */
     void Zeroize()
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] = 0.0;
         }
@@ -253,7 +250,7 @@ public:
     double operator*(const VectorN<SIZE>& vect) const
     {
         double result = 0.0;
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             result += _elements[i] * vect._elements[i];
         }
@@ -300,9 +297,9 @@ public:
     bool operator==(const VectorN<SIZE>& vect) const
     {
         bool result = true;
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
-            result = result && ( _elements[i] == vect._elements[i] );
+            result = result && (_elements[i] == vect._elements[i]);
         }
         return result;
     }
@@ -310,7 +307,7 @@ public:
     /** \brief Inequality operator. */
     bool operator!=(const VectorN<SIZE>& vect) const
     {
-        return !( *this == vect );
+        return !(*this == vect);
     }
 
 protected:
@@ -320,7 +317,7 @@ protected:
     /** \brief Adds vector. */
     void Add(const VectorN<SIZE>& vect)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] += vect._elements[i];
         }
@@ -329,7 +326,7 @@ protected:
     /** \brief Negates (inverts) vector. */
     void Negate()
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] = -_elements[i];
         }
@@ -338,7 +335,7 @@ protected:
     /** \brief Substracts vector. */
     void Substract(const VectorN<SIZE>& vect)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] -= vect._elements[i];
         }
@@ -347,7 +344,7 @@ protected:
     /** \brief Multiplies by value. */
     void MultiplyByValue(double value)
     {
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] *= value;
         }
@@ -357,7 +354,7 @@ protected:
     void DivideByValue(double value)
     {
         double value_inv = 1.0 / value;
-        for ( unsigned int i = 0; i < kSize; ++i )
+        for (unsigned int i = 0; i < kSize; ++i)
         {
             _elements[i] *= value_inv;
         }

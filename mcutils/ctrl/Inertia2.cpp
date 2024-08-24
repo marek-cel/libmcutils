@@ -35,7 +35,7 @@ Inertia2::Inertia2(double tc1, double tc2, double value)
 
 void Inertia2::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         _value_int = Inertia::Calculate(          u, _value_int , dt, _time_const_1 );
         _value     = Inertia::Calculate( _value_int, _value     , dt, _time_const_2 );
@@ -50,7 +50,7 @@ void Inertia2::set_value(double value)
 
 void Inertia2::set_time_const_1(double tc1)
 {
-    if ( tc1 > 0.0 )
+    if (tc1 > 0.0)
     {
         _time_const_1 = tc1;
     }
@@ -58,7 +58,7 @@ void Inertia2::set_time_const_1(double tc1)
 
 void Inertia2::set_time_const_2(double tc2)
 {
-    if ( tc2 > 0.0 )
+    if (tc2 > 0.0)
     {
         _time_const_2 = tc2;
     }

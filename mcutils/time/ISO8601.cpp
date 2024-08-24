@@ -60,7 +60,7 @@ std::string ToISO8601(int hour, int min, int sec, int msec,
     ss << ":";
     ss << std::setfill('0') << std::setw(2) << sec;
 
-    if ( show_msec )
+    if (show_msec)
     {
         ss << ".";
         ss << std::setfill('0') << std::setw(3) << msec;

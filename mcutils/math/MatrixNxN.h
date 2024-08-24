@@ -41,10 +41,9 @@ public:
     void Transpose()
     {
         MatrixNxN<N> temp(*this);
-
-        for ( unsigned int r = 0; r < N; ++r )
+        for (unsigned int r = 0; r < N; ++r)
         {
-            for ( unsigned int c = 0; c < N; ++c )
+            for (unsigned int c = 0; c < N; ++c)
             {
                 this->_elements[c*N + r] = temp._elements[r*N + c];
             }
@@ -144,15 +143,14 @@ protected:
      */
     void MultiplyByMatrix(const MatrixNxN<N>& matrix, MatrixNxN<N>* result) const
     {
-        for ( unsigned int r = 0; r < N; ++r )
+        for (unsigned int r = 0; r < N; ++r)
         {
-            for ( unsigned int c = 0; c < N; ++c )
+            for (unsigned int c = 0; c < N; ++c)
             {
                 (*result)(r,c) = 0.0;
-
-                for ( unsigned int i = 0; i < N; ++i )
+                for (unsigned int i = 0; i < N; ++i)
                 {
-                    (*result)(r,c) += ( this->_elements[r*N + i] * matrix(i,c) );
+                    (*result)(r,c) += (this->_elements[r*N + i] * matrix(i,c));
                 }
             }
         }

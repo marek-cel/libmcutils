@@ -49,7 +49,7 @@ int Compare(const std::string& str_1, const std::string& str_2,
     std::string strTemp_1 = str_1;
     std::string strTemp_2 = str_2;
 
-    if ( !case_sensitive )
+    if (!case_sensitive)
     {
         strTemp_1 = String::ToLower(str_1);
         strTemp_2 = String::ToLower(str_2);
@@ -66,7 +66,7 @@ std::vector<std::string> SplitString(const std::string& str,
     std::string temp = str;
     size_t pos = 0;
     std::string token;
-    while ( ( pos = temp.find( sep ) ) != std::string::npos )
+    while ((pos = temp.find(sep)) != std::string::npos)
     {
         token = temp.substr(0, pos);
         result.push_back(token);
@@ -81,9 +81,9 @@ std::vector<std::string> SplitString(const std::string& str,
 std::string StripLeadingSpaces(const std::string& str)
 {
     std::string::size_type offset = 0;
-    for ( unsigned int i = 0; i < str.size(); ++i )
+    for (unsigned int i = 0; i < str.size(); ++i)
     {
-        if ( !isspace(str.c_str()[i]) )
+        if (!isspace(str.c_str()[i]))
         {
             break;
         }
@@ -96,9 +96,9 @@ std::string StripLeadingSpaces(const std::string& str)
 std::string StripTrailingSpaces(const std::string& str)
 {
     std::string::size_type offset = 0;
-    for ( unsigned int i = 0; i < str.size(); ++i )
+    for (unsigned int i = 0; i < str.size(); ++i)
     {
-        if ( !isspace(str.c_str()[i]) )
+        if (!isspace(str.c_str()[i]))
         {
             offset = static_cast<std::string::size_type>(i);
         }
@@ -114,16 +114,16 @@ std::string StripSpaces(const std::string& str)
 
     bool l_passed = false;
 
-    for ( unsigned int i = 0; i < str.size(); ++i )
+    for (unsigned int i = 0; i < str.size(); ++i)
     {
-        if ( !isspace( str.c_str()[i] ) )
+        if (!isspace(str.c_str()[i]))
         {
             offset_t = i;
             l_passed = true;
         }
         else
         {
-            if ( !l_passed ) offset_l++;
+            if (!l_passed) offset_l++;
         }
     }
 
@@ -138,7 +138,7 @@ bool ToBool(const std::string& str, bool def)
     std::stringstream ss(str);
     ss >> temp;
 
-    if ( IsValid(temp) )
+    if (IsValid(temp))
     {
         result = temp != 0;
     }
@@ -154,7 +154,7 @@ int ToInt(const std::string& str, int def)
     std::stringstream ss(str);
     ss >> temp;
 
-    if ( IsValid(temp) )
+    if (IsValid(temp))
     {
         result = temp;
     }
@@ -170,7 +170,7 @@ double ToDouble(const std::string& str, double def)
     std::stringstream ss(str);
     ss >> temp;
 
-    if ( IsValid(temp) )
+    if (IsValid(temp))
     {
         result = temp;
     }
@@ -205,7 +205,7 @@ std::string ToLower(const std::string& str)
     result.clear();
 
     unsigned int length = static_cast<unsigned int>(str.length());
-    for ( unsigned int i = 0; i < length; ++i )
+    for (unsigned int i = 0; i < length; ++i)
     {
         result += static_cast<char>( tolower(str.c_str()[i]) );
     }
@@ -219,7 +219,7 @@ std::string ToUpper(const std::string& str)
     result.clear();
 
     unsigned int length = static_cast<unsigned int>(str.length());
-    for ( unsigned int i = 0; i < length; ++i )
+    for (unsigned int i = 0; i < length; ++i)
     {
         result += static_cast<char>( toupper(str.c_str()[i]) );
     }

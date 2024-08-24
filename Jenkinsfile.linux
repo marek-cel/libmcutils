@@ -1,7 +1,6 @@
 pipeline {
     agent {
-        docker { 
-            image 'libmcutils-dev-env' 
+        dockerfile {
             args '-v /var/www/html/jenkins/:/var/www/html/jenkins/'
         }
     }
@@ -11,7 +10,7 @@ pipeline {
     }
 
     triggers {
-        cron('0 1 * * 5')
+        cron('0 1 * * 6')
         pollSCM('0 1 * * *')
     }
 
@@ -28,6 +27,7 @@ pipeline {
         }
         stage('Test') {
             steps {
+                sh 'sleep 1'
                 sh 'cd build && ctest'
             }
         }

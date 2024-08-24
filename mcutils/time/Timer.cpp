@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -20,41 +20,36 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/geo/WGS84.h>
+#include <mcutils/time/Timer.h>
 
-#include <mcutils/geo/DataWGS84.h>
+#include <thread>
+
+using namespace std::chrono_literals;
 
 namespace mc {
 
-WGS84::WGS84() : ECEF(DataWGS84::a, DataWGS84::f)
-{}
-
-WGS84::WGS84(const WGS84& wgs) : ECEF(wgs)
-{}
-
-WGS84::WGS84(WGS84&& wgs) : ECEF(wgs)
-{}
-
-WGS84::WGS84(const Geo& pos_geo) : WGS84()
+void Timer::Start(double interval)
 {
-    SetPositionFromGeo(pos_geo);
+    _interval = std::chrono::nanoseconds(static_cast<int>(interval * 1.0e9));
+    _last_time = std::chrono::steady_clock::now();
 }
 
-WGS84::WGS84(const Vector3& pos_wgs) : WGS84()
+double Timer::WaitForTimeout()
 {
-    SetPositionFromCart(pos_wgs);
-}
+    std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
+    std::chrono::nanoseconds elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
+    if (elapsed < _interval)
+    {
+        std::chrono::nanoseconds duration = _interval - elapsed;
+        std::this_thread::sleep_for(duration);
+    }
 
-WGS84& WGS84::operator=(const WGS84& wgs)
-{
-    ECEF::operator=(wgs);
-    return *this;
-}
+    now = std::chrono::steady_clock::now();
+    elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
 
-WGS84& WGS84::operator=(WGS84&& wgs)
-{
-    ECEF::operator=(wgs);
-    return *this;
+    _last_time = now;
+
+    return static_cast<double>(elapsed.count()) * 1.0e-9;
 }
 
 } // namespace mc

@@ -36,8 +36,8 @@ double Angles::Normalize(double val, double min)
     double tmp = val;
     double max = min + 2.0 * M_PI;
 
-    while ( tmp < min ) tmp += 2.0 * M_PI;
-    while ( tmp > max ) tmp -= 2.0 * M_PI;
+    while (tmp < min) tmp += 2.0 * M_PI;
+    while (tmp > max) tmp -= 2.0 * M_PI;
 
     return tmp;
 }
@@ -56,25 +56,25 @@ bool Angles::IsValid() const
 
 void Angles::Normalize()
 {
-    while ( _tht >  M_PI_2 )
+    while (_tht >  M_PI_2)
     {
         _phi += M_PI;
         _tht =  M_PI_2 - ( _tht - M_PI_2 );
         _psi += M_PI;
     }
 
-    while ( _tht < -M_PI_2 )
+    while (_tht < -M_PI_2)
     {
         _phi += M_PI;
         _tht = -M_PI_2 - ( _tht + M_PI_2 );
         _psi += M_PI;
     }
 
-    while ( _phi >  M_PI ) _phi -= 2.0 * M_PI;
-    while ( _phi < -M_PI ) _phi += 2.0 * M_PI;
+    while (_phi >  M_PI) _phi -= 2.0 * M_PI;
+    while (_phi < -M_PI) _phi += 2.0 * M_PI;
 
-    while ( _psi >= 2.0 * M_PI ) _psi -= 2.0 * M_PI;
-    while ( _psi <  0.0        ) _psi += 2.0 * M_PI;
+    while (_psi >= 2.0 * M_PI) _psi -= 2.0 * M_PI;
+    while (_psi <  0.0       ) _psi += 2.0 * M_PI;
 }
 
 void Angles::Set(double phi, double tht, double psi)
@@ -109,7 +109,7 @@ bool Angles::operator==(const Angles& angl) const
 
 bool Angles::operator!=(const Angles& angl) const
 {
-    return !( *this == angl );
+    return !(*this == angl);
 }
 
 } // namespace mc

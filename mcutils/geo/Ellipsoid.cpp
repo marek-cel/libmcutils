@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -20,56 +20,25 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/SegPlaneIsect.h>
+#include <mcutils/geo/Ellipsoid.h>
+
+#include <cmath>
 
 namespace mc {
 
-bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
-                     const Vector3& r, const Vector3& n)
+Ellipsoid::Ellipsoid(double a, double f)
 {
-    double num = n * (r - b);
-    double den = n * (e - b);
+    _a = a;
+    _f = f;
 
-    double u = 0.0;
-
-    if (fabs(den) > 10e-14) u = num / den;
-
-    if (0.0 < u && u < 1.0)
-    {
-        return true;
-    }
-
-    return false;
-}
-
-Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
-                         const Vector3& r, const Vector3& n)
-{
-    Vector3 r_i = e;
-
-    double num = n * (r - b);
-    double den = n * (e - b);
-
-    if (fabs(den) < 10e-15)
-    {
-        // segment is parallel to the plane
-        if (fabs(num) < 10e-15)
-        {
-            // segment beginning is on the plane
-            r_i = b;
-        }
-    }
-    else
-    {
-        double u = num / den;
-
-        if (0.0 <= u && u <= 1.0)
-        {
-            r_i = b + u * (e - b);
-        }
-    }
-
-    return r_i;
+    _b   = _a - _f*_a;
+    _r1  = (2.0 * _a + _b) / 3.0;
+    _a2  = _a * _a;
+    _b2  = _b * _b;
+    _e2  = 1.0 - _b2 / _a2;
+    _e   = sqrt(_e2);
+    _ep2 = _a2 / _b2 - 1.0;
+    _ep  = sqrt(_ep2);
 }
 
 } // namespace mc

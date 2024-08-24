@@ -74,9 +74,9 @@ MCUTILSAPI inline bool IsValid(const double& val)
  */
 MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
 {
-    for ( unsigned int i = 0; i < size; ++i )
+    for (unsigned int i = 0; i < size; ++i)
     {
-        if ( IsNaN(array[i]) || IsInf(array[i]) ) return false;
+        if (IsNaN(array[i]) || IsInf(array[i])) return false;
     }
 
     return true;

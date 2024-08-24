@@ -104,14 +104,14 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
 #   endif // _LINUX_
        )
     {
-        char *buf = nullptr;
+        char* buf = nullptr;
 
         va_list args2;
         va_copy(args2, args);
         int size = vsnprintf(nullptr, 0, format, args);
         va_end(args);
 
-        if ( size > 0 )
+        if (size > 0)
         {
             buf = new char[size+1];
             vsnprintf(buf, size+1, format, args2);
@@ -120,7 +120,7 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
         va_end(args2);
 
         std::string levelTag;
-        switch ( level )
+        switch (level)
         {
             case VerboseLevel::Error   : levelTag = "ERROR";   break;
             case VerboseLevel::Warning : levelTag = "WARNING"; break;
@@ -128,7 +128,7 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
             case VerboseLevel::Debug   : levelTag = "DEBUG";   break;
         }
 
-        if ( level <= _verb_level )
+        if (level <= _verb_level)
         {
             std::stringstream ss;
             ss << "[" << levelTag << "]";
@@ -142,10 +142,10 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
         }
 
 #       ifdef _LINUX_
-        if ( _syslog_out )
+        if (_syslog_out)
         {
             int priority = LOG_DEBUG;
-            switch ( level )
+            switch (level)
             {
                 case VerboseLevel::Error   : priority = LOG_ERR;     break;
                 case VerboseLevel::Warning : priority = LOG_WARNING; break;
@@ -157,7 +157,7 @@ void Log::Print(VerboseLevel level, const char* format, va_list args)
         }
 #       endif // _LINUX_
 
-        deletePtrArray(buf);
+        DeletePtrArray(buf);
     }
 }
 

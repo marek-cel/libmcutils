@@ -64,7 +64,7 @@ bool Vector::IsValid() const
 double Vector::GetLength() const
 {
     double length2 = 0.0;
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         length2 += ( _elements[i] * _elements[i] );
     }
@@ -74,12 +74,10 @@ double Vector::GetLength() const
 void Vector::Normalize()
 {
     double length = GetLength();
-
-    if ( length > 0.0 )
+    if (length > 0.0)
     {
         double length_inv = 1.0 / length;
-
-        for ( unsigned int i = 0; i < _size; ++i )
+        for (unsigned int i = 0; i < _size; ++i)
         {
             _elements[i] *= length_inv;
         }
@@ -88,7 +86,7 @@ void Vector::Normalize()
 
 double Vector::GetElement(unsigned int index) const
 {
-    if ( index < _size )
+    if (index < _size)
     {
         return _elements[index];
     }
@@ -98,7 +96,7 @@ double Vector::GetElement(unsigned int index) const
 
 void Vector::PutIntoArray(double elements[]) const
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         elements[i] = _elements[i];
     }
@@ -106,7 +104,7 @@ void Vector::PutIntoArray(double elements[]) const
 
 void Vector::SetElement(unsigned int index, double val)
 {
-    if ( index < _size )
+    if (index < _size)
     {
         _elements[index] = val;
     }
@@ -114,7 +112,7 @@ void Vector::SetElement(unsigned int index, double val)
 
 void Vector::SetFromArray(const double elements[])
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         _elements[i] = elements[i];
     }
@@ -123,7 +121,7 @@ void Vector::SetFromArray(const double elements[])
 std::string Vector::ToString() const
 {
     std::stringstream ss;
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         if ( i != 0 ) ss << ",";
         ss << _elements[i];
@@ -133,10 +131,9 @@ std::string Vector::ToString() const
 
 void Vector::Resize(unsigned int size)
 {
-    if ( _size != size )
+    if (_size != size)
     {
         DeleteElementsArray();
-
         _size = size;
         _elements = new double [_size];
     }
@@ -144,7 +141,7 @@ void Vector::Resize(unsigned int size)
 
 void Vector::Zeroize()
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         _elements[i] = 0.0;
     }
@@ -228,16 +225,16 @@ Vector& Vector::operator/=(double value)
 
 void Vector::Add(const Vector& vect)
 {
-    if ( _size == vect._size )
+    if (_size == vect._size)
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for (unsigned int i = 0; i < _size; ++i)
         {
             _elements[i] = _elements[i] + vect._elements[i];
         }
     }
     else
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for (unsigned int i = 0; i < _size; ++i)
         {
             _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
@@ -246,7 +243,7 @@ void Vector::Add(const Vector& vect)
 
 void Vector::Negate()
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         _elements[i] = -_elements[i];
     }
@@ -254,16 +251,16 @@ void Vector::Negate()
 
 void Vector::Substract(const Vector& vect)
 {
-    if ( _size == vect._size )
+    if (_size == vect._size)
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for (unsigned int i = 0; i < _size; ++i)
         {
             _elements[i] = _elements[i] - vect._elements[i];
         }
     }
     else
     {
-        for ( unsigned int i = 0; i < _size; ++i )
+        for (unsigned int i = 0; i < _size; ++i)
         {
             _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
@@ -272,7 +269,7 @@ void Vector::Substract(const Vector& vect)
 
 void Vector::MultiplyByValue(double value)
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         _elements[i] *= value;
     }
@@ -280,7 +277,7 @@ void Vector::MultiplyByValue(double value)
 
 void Vector::DivideByValue( double value )
 {
-    for ( unsigned int i = 0; i < _size; ++i )
+    for (unsigned int i = 0; i < _size; ++i)
     {
         _elements[i] /= value;
     }
@@ -288,7 +285,7 @@ void Vector::DivideByValue( double value )
 
 void Vector::DeleteElementsArray()
 {
-    deletePtrArray(_elements);
+    DeletePtrArray(_elements);
 }
 
 } // namespace mc

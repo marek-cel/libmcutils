@@ -2,17 +2,7 @@ set(TARGET_NAME tests)
 
 ################################################################################
 
-if (UNIX)
-    add_definitions(-DTEST_USING_ARMADILLO)
-endif()
-
-################################################################################
-
 find_package(GTest REQUIRED)
-
-if (UNIX)
-    find_package(Armadillo REQUIRED)
-endif()
 
 ################################################################################
 
@@ -49,8 +39,8 @@ set(SOURCES
     ctrl/TestZeroOrderHold.cpp
 
     geo/TestECEF.cpp
+    geo/TestEllipsoid.cpp
     geo/TestMercator.cpp
-    geo/TestWGS84.cpp
 
     math/TestAngles.cpp
     math/TestDegMinSec.cpp
@@ -93,6 +83,7 @@ set(SOURCES
 
     time/TestClockTime.cpp
     time/TestISO8601.cpp
+    time/TestTimer.cpp
 )
 
 ################################################################################

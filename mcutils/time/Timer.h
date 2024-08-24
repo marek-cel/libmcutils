@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -19,57 +19,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_TIME_TIMER_H_
+#define MCUTILS_TIME_TIMER_H_
 
-#include <mcutils/math/SegPlaneIsect.h>
+#include <chrono>
+
+#include <mcutils/defs.h>
 
 namespace mc {
 
-bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
-                     const Vector3& r, const Vector3& n)
+/**
+ * \brief Timer class.
+ */
+class MCUTILSAPI Timer
 {
-    double num = n * (r - b);
-    double den = n * (e - b);
+public:
 
-    double u = 0.0;
+    /**
+     * \brief Start the timer.
+     * \param interval timer interval expressed in seconds.
+     */
+    void Start(double interval);
 
-    if (fabs(den) > 10e-14) u = num / den;
+    /**
+     * \brief Wait for the timeout.
+     * \return elapsed time since the last timeout expressed in seconds.
+     */
+    double WaitForTimeout();
 
-    if (0.0 < u && u < 1.0)
-    {
-        return true;
-    }
+private:
 
-    return false;
-}
-
-Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
-                         const Vector3& r, const Vector3& n)
-{
-    Vector3 r_i = e;
-
-    double num = n * (r - b);
-    double den = n * (e - b);
-
-    if (fabs(den) < 10e-15)
-    {
-        // segment is parallel to the plane
-        if (fabs(num) < 10e-15)
-        {
-            // segment beginning is on the plane
-            r_i = b;
-        }
-    }
-    else
-    {
-        double u = num / den;
-
-        if (0.0 <= u && u <= 1.0)
-        {
-            r_i = b + u * (e - b);
-        }
-    }
-
-    return r_i;
-}
+    std::chrono::nanoseconds _interval;
+    std::chrono::time_point<std::chrono::steady_clock> _last_time;
+};
 
 } // namespace mc
+
+#endif // MCUTILS_TIME_TIMER_H_

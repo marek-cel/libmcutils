@@ -29,9 +29,9 @@ namespace mc {
  * \param ptr pointer to delete
  */
 template <typename T>
-void deletePtr(T*& ptr)
+void DeletePtr(T*& ptr)
 {
-    if ( ptr )
+    if (ptr)
     {
         delete ptr;
     }
@@ -43,9 +43,9 @@ void deletePtr(T*& ptr)
  * \param ptr pointer to delete
  */
 template <typename T>
-void deletePtrArray(T*& ptr)
+void DeletePtrArray(T*& ptr)
 {
-    if ( ptr )
+    if (ptr)
     {
         delete [] ptr;
     }

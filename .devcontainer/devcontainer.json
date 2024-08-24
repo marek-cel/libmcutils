@@ -1,6 +1,6 @@
 {
 	"name": "libmcutils-dev-env",
-	
+
 	"build": {
 		"context": "..",
 		"dockerfile": "../Dockerfile"
@@ -16,7 +16,8 @@
 				"ms-vscode.cmake-tools",
 				"ms-python.python",
 				"ms-azuretools.vscode-docker",
-				"twxs.cmake"
+				"twxs.cmake",
+				"github.copilot"
 			]
 		}
 	},

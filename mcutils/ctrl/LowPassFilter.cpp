@@ -41,7 +41,7 @@ void LowPassFilter::SetCutoffFreq(double freq)
 
 void LowPassFilter::Update(double dt, double u)
 {
-    if ( dt > 0.0 )
+    if (dt > 0.0)
     {
         _value += (1.0 - exp(-dt / _time_const)) * (u - _value);
     }

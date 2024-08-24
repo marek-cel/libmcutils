@@ -54,7 +54,7 @@ void DegMinSec::SetAngle(double angle)
     _min = static_cast<int>(floor((deg_abs - _deg) * 60));
     _sec = (deg_abs - _deg - _min / 60.0) * 3600.0;
 
-    if ( angle < 0.0 ) _deg *= -1;
+    if (angle < 0.0) _deg *= -1;
 }
 
 std::string DegMinSec::ToString() const

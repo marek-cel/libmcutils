@@ -24,6 +24,8 @@
 
 #include <mcutils/defs.h>
 
+#include <mcutils/geo/Ellipsoid.h>
+
 namespace mc {
 
 /**
@@ -40,10 +42,9 @@ public:
 
     /**
      * \brief Constructor
-     * \param a [m] ellipsoid semi major axis
-     * \param e [-] ellipsoid first eccentricity
+     * \param e datum ellipsoid
      */
-    explicit Mercator(double a = 0.0, double e = 0.0);
+    Mercator(const Ellipsoid& e);
 
     /**
      * \brief Calculates geodetic latitude.
@@ -98,9 +99,7 @@ public:
 
 private:
 
-    double _a;          ///< [m] ellipsoid semi major axis
-    double _e;          ///< [-] ellipsoid first eccentricity
-    double _e2;         ///< [-] ellipsoid first eccentricity squared
+    Ellipsoid _e;       ///< datum ellipsoid
 
     double _max_x;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
     double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg

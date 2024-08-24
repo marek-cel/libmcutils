@@ -42,7 +42,7 @@ Result AddMapItem(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key, TYPE_ITEM it
     std::pair<typename std::map<TYPE_KEY, TYPE_ITEM>::iterator, bool> temp =
             map->insert(std::pair<TYPE_KEY, TYPE_ITEM>(key, item));
 
-    if ( temp.second == true )
+    if (temp.second == true)
     {
         return Result::Success;
     }
@@ -60,7 +60,7 @@ TYPE_ITEM GetMapItemByKey(std::map<TYPE_KEY, TYPE_ITEM>* map, TYPE_KEY key)
 {
     typename std::map<TYPE_KEY, TYPE_ITEM>::iterator it = map->find(key);
 
-    if ( it != map->end() )
+    if (it != map->end())
     {
         return it->second;
     }

@@ -41,7 +41,7 @@ Random::Random()
 
 int Random::GetRandom(int min, int max)
 {
-    if ( max > min && max <= RAND_MAX )
+    if (max > min && max <= RAND_MAX)
     {
 #       ifdef _MSC_VER
         // TODO: switch to rand_s()

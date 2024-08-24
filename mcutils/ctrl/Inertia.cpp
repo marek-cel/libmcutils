@@ -28,7 +28,7 @@ namespace mc {
 
 double Inertia::Calculate(double u, double y, double dt, double tc)
 {
-    if ( tc > 0.0 )
+    if (tc > 0.0)
     {
         return y + (1.0 - exp(-dt / tc)) * (u - y);
     }
@@ -51,7 +51,7 @@ void Inertia::Update(double dt, double u)
 
 void Inertia::set_time_const(double time_const)
 {
-    if ( time_const > 0.0 )
+    if (time_const > 0.0)
     {
         _time_const = time_const;
     }

@@ -120,7 +120,7 @@ Angles Matrix3x3::GetAngles() const
 
     result.tht() = atan2(sin_tht, cos_tht);
 
-    if ( cos_tht > 0.0 )
+    if (cos_tht > 0.0)
     {
         result.phi() = atan2(yz(), zz());
         result.psi() = atan2(xy(), xx());
@@ -149,23 +149,23 @@ Quaternion Matrix3x3::GetQuaternion() const
     tr[3] = 1.0 - xx() - yy() + zz();
 
     int index = 0;
-    for ( int i = 1; i < 4; ++i ) index = ( tr[i] > tr[index] ) ? i : index;
+    for (int i = 1; i < 4; ++i) index = (tr[i] > tr[index]) ? i : index;
 
-    if ( index == 0 )
+    if (index == 0)
     {
         result.e0() = tr[0];
         result.ex() = yz() - zy();
         result.ey() = zx() - xz();
         result.ez() = xy() - yx();
     }
-    else if ( index == 1 )
+    else if (index == 1)
     {
         result.e0() = yz() - zy();
         result.ex() = tr[1];
         result.ey() = xy() + yx();
         result.ez() = zx() + xz();
     }
-    else if ( index == 2 )
+    else if (index == 2)
     {
         result.e0() = zx() - xz();
         result.ex() = xy() + yx();
