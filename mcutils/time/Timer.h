@@ -23,7 +23,6 @@
 #define MCUTILS_TIME_TIMER_H_
 
 #include <chrono>
-#include <thread>
 
 #include <mcutils/defs.h>
 
@@ -38,19 +37,19 @@ public:
 
     /**
      * \brief Start the timer.
-     * \param interval Timer interval expressed in milliseconds.
+     * \param interval timer interval expressed in seconds.
      */
-    void Start(std::chrono::milliseconds interval);
+    void Start(double interval);
 
     /**
      * \brief Wait for the timeout.
-     * \return Elapsed time since the last timeout expressed in microseconds.
+     * \return elapsed time since the last timeout expressed in seconds.
      */
-    std::chrono::microseconds WaitForTimeout();
+    double WaitForTimeout();
 
 private:
 
-    std::chrono::microseconds _interval;
+    std::chrono::nanoseconds _interval;
     std::chrono::time_point<std::chrono::steady_clock> _last_time;
 };
 

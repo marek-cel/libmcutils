@@ -28,12 +28,11 @@ TEST_F(TestTimer, CanWaitForTimeout)
     constexpr double time_step = 0.01;
     constexpr double precision = 0.001;
     mc::Timer timer;
-    timer.Start(std::chrono::milliseconds(static_cast<unsigned int>(time_step * 1000)));
+    timer.Start(time_step);
     for ( int i = 0; i < 10; ++i )
     {
-        std::chrono::microseconds step_us = timer.WaitForTimeout();
-        double step_sec = static_cast<double>(step_us.count()) / 1.0e6;
+        double step_real = timer.WaitForTimeout();
         dummyTimeConsumingOperations();
-        EXPECT_NEAR(time_step, step_sec, precision);
+        EXPECT_NEAR(time_step, step_real, precision);
     }
 }

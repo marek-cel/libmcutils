@@ -22,25 +22,58 @@
 
 #include <mcutils/time/Timer.h>
 
+#ifdef _LINUX_
+#   include <ctime>
+#endif // _LINUX_
+
+#ifdef _MSC_VER
+#   include <windows.h>
+#endif // _MSC_VER
+
+using namespace std::chrono_literals;
+
 namespace mc {
 
-void Timer::Start(std::chrono::milliseconds interval)
+void Timer::Start(double interval)
 {
-    _interval = interval;
+    _interval = std::chrono::nanoseconds(static_cast<int>(interval * 1.0e9));
     _last_time = std::chrono::steady_clock::now();
 }
 
-std::chrono::microseconds Timer::WaitForTimeout()
+double Timer::WaitForTimeout()
 {
     std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
-    std::chrono::microseconds elapsed = std::chrono::duration_cast<std::chrono::microseconds>(now - _last_time);
+    std::chrono::nanoseconds elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
     if (elapsed < _interval)
     {
-        std::this_thread::sleep_for(_interval - elapsed);
+        std::chrono::nanoseconds duration = _interval - elapsed;
+
+#       ifdef _LINUX_
+        timespec ts;
+        if ( duration > 1ns )
+        {
+            ts.tv_sec  = duration.count() / 1.0e9;
+            ts.tv_nsec = duration.count() % static_cast<long>(1.0e9);
+        }
+        else
+        {
+            ts.tv_sec  = 0;
+            ts.tv_nsec = duration.count();
+        }
+        nanosleep(&ts, nullptr);
+#       endif // _LINUX_
+
+#       ifdef _MSC_VER
+        Sleep(duration.count() / 1.0e6);
+#       endif // _MSC_VER
     }
-    elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - _last_time);
-    _last_time = std::chrono::steady_clock::now();
-    return elapsed;
+
+    now = std::chrono::steady_clock::now();
+    elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
+
+    _last_time = now;
+
+    return static_cast<double>(elapsed.count()) * 1.0e-9;
 }
 
 } // namespace mc
