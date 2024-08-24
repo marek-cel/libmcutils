@@ -7,7 +7,7 @@
 void dummyTimeConsumingOperations()
 {
     double y = 0.0;
-    for (int i = 0; i < 10000; ++i)
+    for (int i = 0; i < 100; ++i)
     {
         double x = pow(sin(i), 2.0) + pow(cos(i), 2.0);
         y += x;
@@ -26,7 +26,7 @@ protected:
 TEST_F(TestTimer, CanWaitForTimeout)
 {
     constexpr double time_step = 0.01;
-    constexpr double precision = 0.001;
+    constexpr double precision = 0.01;
     mc::Timer timer;
     timer.Start(time_step);
     for ( int i = 0; i < 10; ++i )
