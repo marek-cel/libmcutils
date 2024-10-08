@@ -17,7 +17,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="C:/libmcutils" -B build'
+                bat 'cmake . -DCMAKE_BUILD_TYPE=Release -B build'
                 bat 'cmake --build build --config Release -j 4'
             }
         }
