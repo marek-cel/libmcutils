@@ -2,7 +2,7 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "linux-base",
+            "name": "linux-common",
             "hidden": true,
             "binaryDir": "${sourceDir}/build",
             "generator": "Unix Makefiles",
@@ -14,16 +14,16 @@
         },
         {
             "name": "linux-debug",
-            "inherits": "linux-base",
+            "inherits": "linux-common",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
         },
         {
             "name": "linux-release",
-            "inherits": "linux-base",
+            "inherits": "linux-common",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
         },
         {
-            "name": "windows-base",
+            "name": "windows-common",
             "hidden": true,
             "binaryDir": "${sourceDir}/build",
             "generator": "Visual Studio 17 2022",
@@ -39,42 +39,45 @@
         },
         {
             "name": "windows-debug",
-            "inherits": "windows-base",
+            "inherits": "windows-common",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
         },
         {
             "name": "windows-release",
-            "inherits": "windows-base",
+            "inherits": "windows-common",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
         }
     ],
     "buildPresets": [
         {
-            "name" : "common",
-            "jobs": 4,
+            "name" : "linux-common",
             "targets": ["all"]
         },
         {
+            "name" : "windows-common",
+            "targets": ["ALL_BUILD"]
+        },
+        {
             "name": "linux-debug",
-            "inherits": "common",
+            "inherits": "linux-common",
             "configurePreset": "linux-debug",
             "configuration": "Debug"
         },
         {
             "name": "linux-release",
-            "inherits": "common",
+            "inherits": "linux-common",
             "configurePreset": "linux-release",
             "configuration": "Release"
         },
         {
             "name": "windows-debug",
-            "inherits": "common",
+            "inherits": "windows-common",
             "configurePreset": "windows-debug",
             "configuration": "Debug"
         },
         {
             "name": "windows-release",
-            "inherits": "common",
+            "inherits": "windows-common",
             "configurePreset": "windows-release",
             "configuration": "Release"
         }
