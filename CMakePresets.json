@@ -2,7 +2,7 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "linux-common",
+            "name": "linux-common-conf",
             "hidden": true,
             "binaryDir": "${sourceDir}/build",
             "generator": "Unix Makefiles",
@@ -13,17 +13,17 @@
             }
         },
         {
-            "name": "linux-debug",
-            "inherits": "linux-common",
+            "name": "linux-debug-conf",
+            "inherits": "linux-common-conf",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
         },
         {
-            "name": "linux-release",
-            "inherits": "linux-common",
+            "name": "linux-release-conf",
+            "inherits": "linux-common-conf",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
         },
         {
-            "name": "windows-common",
+            "name": "windows-common-conf",
             "hidden": true,
             "binaryDir": "${sourceDir}/build",
             "generator": "Visual Studio 17 2022",
@@ -38,47 +38,49 @@
             }
         },
         {
-            "name": "windows-debug",
-            "inherits": "windows-common",
+            "name": "windows-debug-conf",
+            "inherits": "windows-common-conf",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
         },
         {
-            "name": "windows-release",
-            "inherits": "windows-common",
+            "name": "windows-release-conf",
+            "inherits": "windows-common-conf",
             "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
         }
     ],
     "buildPresets": [
         {
-            "name" : "linux-common",
+            "name" : "linux-common-build",
+            "hidden": true,
             "targets": ["all"]
         },
         {
-            "name" : "windows-common",
-            "targets": ["ALL_BUILD"]
-        },
-        {
-            "name": "linux-debug",
-            "inherits": "linux-common",
-            "configurePreset": "linux-debug",
+            "name": "linux-debug-build",
+            "inherits": "linux-common-build",
+            "configurePreset": "linux-debug-conf",
             "configuration": "Debug"
         },
         {
-            "name": "linux-release",
-            "inherits": "linux-common",
-            "configurePreset": "linux-release",
+            "name": "linux-release-build",
+            "inherits": "linux-common-build",
+            "configurePreset": "linux-release-conf",
             "configuration": "Release"
         },
         {
-            "name": "windows-debug",
-            "inherits": "windows-common",
-            "configurePreset": "windows-debug",
+            "name" : "windows-common-build",
+            "hidden": true,
+            "targets": ["ALL_BUILD"]
+        },
+        {
+            "name": "windows-debug-build",
+            "inherits": "windows-common-build",
+            "configurePreset": "windows-debug-conf",
             "configuration": "Debug"
         },
         {
-            "name": "windows-release",
-            "inherits": "windows-common",
-            "configurePreset": "windows-release",
+            "name": "windows-release-build",
+            "inherits": "windows-common-build",
+            "configurePreset": "windows-release-conf",
             "configuration": "Release"
         }
     ]
