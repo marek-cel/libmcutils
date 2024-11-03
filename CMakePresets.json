@@ -52,7 +52,8 @@
         {
             "name" : "linux-common-build",
             "hidden": true,
-            "targets": ["all"]
+            "targets": ["all"],
+            "jobs": 4
         },
         {
             "name": "linux-debug-build",
@@ -69,7 +70,8 @@
         {
             "name" : "windows-common-build",
             "hidden": true,
-            "targets": ["ALL_BUILD"]
+            "targets": ["ALL_BUILD"],
+            "jobs": 4
         },
         {
             "name": "windows-debug-build",
