@@ -4,6 +4,8 @@ RUN apt update
 RUN apt install -y \
     build-essential \
     cmake \
+    cppcheck \
+    cpplint \
     gdb \
     git \
     googletest \

@@ -21,21 +21,35 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'echo ">>> Building..."'
                 sh 'cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-O0 -fno-elide-constructors -fno-default-inline -fprofile-arcs -ftest-coverage" -B build'
                 sh 'cmake --build build -j 4'
             }
         }
         stage('Test') {
             steps {
+                sh 'echo ">>> Testing..."'
                 sh 'sleep 1'
                 sh 'cd build && ctest'
             }
         }
-        stage('Generate coverage report') {
+        stage('Check') {
             steps {
+                sh 'echo ">>> Checking..."'
                 sh 'cd utils && python3 ./generate_coverage-report.py'
+                sh 'cppcheck --enable=style --std=c++17 -I ./ mcutils ./ mcutils 2> cppcheck-report.txt'
+                sh 'cpplint 2> cpplint-report.txt'
+            }
+        }
+        stage('Publish') {
+            steps {
+                sh 'echo ">>> Publishing..."'
                 sh "mkdir -p /var/www/html/jenkins/coverage-reports/${env.JOB_NAME}"
+                sh "mkdir -p /var/www/html/jenkins/cppcheck-reports/${env.JOB_NAME}"
+                sh "mkdir -p /var/www/html/jenkins/cpplint-reports/${env.JOB_NAME}"
                 sh "cp -r coverage-report /var/www/html/jenkins/coverage-reports/${env.JOB_NAME}/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}"
+                sh "cp cppcheck-report.txt /var/www/html/jenkins/cppcheck-reports/${env.JOB_NAME}/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}.txt"
+                sh "cp cpplint-report.txt /var/www/html/jenkins/cpplint-reports/${env.JOB_NAME}/\$(date +%Y-%m-%d)_build-${env.BUILD_NUMBER}.txt"
             }
         }
     }
@@ -53,7 +67,9 @@ pipeline {
                 subject: "SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
                 body: """<p>SUCCESS: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
                 <p><a href='${env.BUILD_URL}'>Summary</a></p>
-                <p><a href='http://${env.JENKINS_BASE_URL}/jenkins/coverage-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}'>Coverage report</a></p>""",
+                <p><a href='http://${env.JENKINS_BASE_URL}/jenkins/coverage-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}'>Coverage report</a></p>
+                <p><a href='http://${env.JENKINS_BASE_URL}/jenkins/cppcheck-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}.txt'>Cppcheck report</a></p>
+                <p><a href='http://${env.JENKINS_BASE_URL}/jenkins/cpplint-reports/${env.JOB_NAME}/${env.BUILD_DATE}_build-${env.BUILD_NUMBER}.txt'>Cpplint report</a></p>""",
                 mimeType: 'text/html'
             )
         }
