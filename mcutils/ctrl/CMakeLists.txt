@@ -1,4 +1,4 @@
-set(TARGET_NAME ctrl)
+set(TARGET_NAME mcutils-ctrl)
 
 ################################################################################
 
@@ -46,7 +46,7 @@ add_library(${TARGET_NAME} OBJECT ${SOURCES})
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

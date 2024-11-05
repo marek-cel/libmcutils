@@ -1,4 +1,4 @@
-set(TARGET_NAME net)
+set(TARGET_NAME mcutils-net)
 
 ################################################################################
 
@@ -18,7 +18,7 @@ add_library(${TARGET_NAME} OBJECT ${SOURCES})
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

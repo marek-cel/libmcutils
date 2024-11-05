@@ -34,13 +34,13 @@ add_subdirectory(time)
 ################################################################################
 
 add_library(${TARGET_NAME} ${SOURCES}
-    $<TARGET_OBJECTS:astro>
-    $<TARGET_OBJECTS:ctrl>
-    $<TARGET_OBJECTS:geo>
-    $<TARGET_OBJECTS:math>
-    $<TARGET_OBJECTS:misc>
-    $<TARGET_OBJECTS:net>
-    $<TARGET_OBJECTS:time>
+    $<TARGET_OBJECTS:mcutils-astro>
+    $<TARGET_OBJECTS:mcutils-ctrl>
+    $<TARGET_OBJECTS:mcutils-geo>
+    $<TARGET_OBJECTS:mcutils-math>
+    $<TARGET_OBJECTS:mcutils-misc>
+    $<TARGET_OBJECTS:mcutils-net>
+    $<TARGET_OBJECTS:mcutils-time>
 )
 
 ################################################################################
