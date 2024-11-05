@@ -19,7 +19,7 @@ def build(with_tests):
     if os_name == "Linux":
         buildForLinux(with_tests)
     elif os_name == "Windows":
-        buildForWindows()
+        buildForWindows(with_tests)
     misc.printGreen("Building done.")
 
 
@@ -45,14 +45,15 @@ def buildForLinux(with_tests):
         )
 
 
-def buildForWindows():
-    install_dir = os.getenv('LIBMCUTILS_DIR')
+def buildForWindows(with_tests):
     cmake_cmd = [
         'cmake', '.',
         '-DCMAKE_BUILD_TYPE=Release',
-        '-DCMAKE_INSTALL_PREFIX=' + install_dir,
         '-B', build_dir
     ]
+    if os.getenv('LIBMCUTILS_DIR') is not None:
+        install_dir = os.getenv('LIBMCUTILS_DIR')
+        cmake_cmd.append('-DCMAKE_PREFIX_PATH=' + install_dir)
     if with_tests:
         cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 \
                          -fno-elide-constructors \

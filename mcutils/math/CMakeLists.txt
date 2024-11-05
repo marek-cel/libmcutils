@@ -1,4 +1,4 @@
-set(TARGET_NAME math)
+set(TARGET_NAME mcutils-math)
 
 ################################################################################
 
@@ -51,7 +51,7 @@ add_library(${TARGET_NAME} OBJECT ${SOURCES})
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

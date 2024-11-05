@@ -1,4 +1,4 @@
-set(TARGET_NAME misc)
+set(TARGET_NAME mcutils-misc)
 
 ################################################################################
 
@@ -26,7 +26,7 @@ add_library(${TARGET_NAME} OBJECT ${SOURCES})
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

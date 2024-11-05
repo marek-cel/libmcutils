@@ -1,4 +1,4 @@
-set(TARGET_NAME physics)
+set(TARGET_NAME mcutils-physics)
 
 ################################################################################
 
@@ -16,7 +16,7 @@ add_library(${TARGET_NAME} INTERFACE)
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 
