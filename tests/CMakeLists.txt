@@ -1,4 +1,4 @@
-set(TARGET_NAME mcutils-tests)
+set(TARGET_NAME tests-mcutils)
 
 ################################################################################
 
