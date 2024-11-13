@@ -22,7 +22,7 @@
 		}
 	},
 
-	"remoteUser": "vscode",
-	"containerUser" : "vscode",
+	"remoteUser": "ubuntu",
+	"containerUser" : "ubuntu",
 	"updateRemoteUserUID": true
 }
