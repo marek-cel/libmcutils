@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.22)
 
 project(mcutils)
 
+include(CTest)
+include(FetchContent)
+include(GoogleTest)
+
 set(MCUTILS_VERSION_MAJOR 1)
 set(MCUTILS_VERSION_MINOR 0)
 set(MCUTILS_VERSION_PATCH 0)
@@ -14,13 +18,6 @@ set(MCUTILS_VERSION_STRING
 ################################################################################
 
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-
-################################################################################
-
-include(CTest)
-include(GoogleTest)
-
-enable_testing()
 
 ################################################################################
 
@@ -49,6 +46,20 @@ if (BUILD_TESTING)
     add_definitions(-D_GTEST_)
     add_definitions(-D_TESTS_)
 endif()
+
+################################################################################
+
+FetchContent_Declare(LIBUNITS
+    GIT_REPOSITORY https://github.com/nholthaus/units.git
+    GIT_TAG origin/master
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/units")
+    FetchContent_MakeAvailable(LIBUNITS)
+include_directories(${CMAKE_BINARY_DIR}/units/include)
+
+################################################################################
+
+set(BUILD_TESTING ON)
+enable_testing()
 
 ################################################################################
 
