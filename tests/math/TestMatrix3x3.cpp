@@ -95,7 +95,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetData)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAnglesZeros)
 {
-    mc::Angles ang(0.0, 0.0, 0.0);
+    mc::Angles ang(0.0_rad, 0.0_rad, 0.0_rad);
     mc::Matrix3x3 m(ang);
 
     EXPECT_NEAR(m.xx(), 1.0, 1.0e-9);
@@ -111,7 +111,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromAnglesZeros)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiPi)
 {
-    mc::Angles ang(M_PI, 0.0, 0.0);
+    mc::Angles ang(1.0_rad * M_PI, 0.0_rad, 0.0_rad);
     mc::Matrix3x3 m(ang);
 
     EXPECT_NEAR(m.xx(),  1.0, 1.0e-9);
@@ -127,7 +127,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromThetaPi)
 {
-    mc::Angles ang(0.0, M_PI, 0.0);
+    mc::Angles ang(0.0_rad, 1.0_rad * M_PI, 0.0_rad);
     mc::Matrix3x3 m(ang);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
@@ -143,7 +143,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromThetaPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPsiPi)
 {
-    mc::Angles ang(0.0, 0.0, M_PI);
+    mc::Angles ang(0.0_rad, 0.0_rad, 1.0_rad * M_PI);
     mc::Matrix3x3 m(ang);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
@@ -159,7 +159,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPsiPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
 {
-    mc::Angles ang(M_PI_2, M_PI_2, M_PI_2);
+    mc::Angles ang(1.0_rad * M_PI_2, 1.0_rad * M_PI_2, 1.0_rad * M_PI_2);
     mc::Matrix3x3 m(ang);
 
     EXPECT_NEAR(m.xx(),  0.0, 1.0e-9);
@@ -175,7 +175,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
 {
-    mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    mc::Angles ang(1.0_rad * M_PI_4, 1.0_rad * M_PI_4, 1.0_rad * M_PI_4);
     mc::Matrix3x3 m(ang);
 
     // expected values calculated with GNU Octave
@@ -193,9 +193,9 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromRandomAngles)
 {
-    mc::Angles a1(-M_PI_4,  M_PI_4,  M_PI_4);
-    mc::Angles a2( M_PI_4, -M_PI_4,  M_PI_4);
-    mc::Angles a3( M_PI_4,  M_PI_4, -M_PI_4);
+    mc::Angles a1(-1.0_rad * M_PI_4,  1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
+    mc::Angles a2( 1.0_rad * M_PI_4, -1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
+    mc::Angles a3( 1.0_rad * M_PI_4,  1.0_rad * M_PI_4, -1.0_rad * M_PI_4);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_matrix3x3.m
@@ -239,7 +239,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromRandomAngles)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionAngleZeros)
 {
-    mc::Angles ang(0.0, 0.0, 0.0);
+    mc::Angles ang(0.0_rad, 0.0_rad, 0.0_rad);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -256,7 +256,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionAngleZeros)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiPi)
 {
-    mc::Angles ang(M_PI, 0.0, 0.0);
+    mc::Angles ang(1.0_rad * M_PI, 0.0_rad, 0.0_rad);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -273,7 +273,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionThetaPi)
 {
-    mc::Angles ang(0.0, M_PI, 0.0);
+    mc::Angles ang(0.0_rad, 1.0_rad * M_PI, 0.0_rad);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -290,7 +290,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionThetaPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPsiPi)
 {
-    mc::Angles ang(0.0, 0.0, M_PI);
+    mc::Angles ang(0.0_rad, 0.0_rad, 1.0_rad * M_PI);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -307,7 +307,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPsiPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
 {
-    mc::Angles ang(M_PI_2, M_PI_2, M_PI_2);
+    mc::Angles ang(1.0_rad * M_PI_2, 1.0_rad * M_PI_2, 1.0_rad * M_PI_2);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -324,7 +324,7 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi)
 {
-    mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    mc::Angles ang(1.0_rad * M_PI_4, 1.0_rad * M_PI_4, 1.0_rad * M_PI_4);
     mc::Quaternion quat(ang);
     mc::Matrix3x3 m(quat);
 
@@ -343,9 +343,9 @@ TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi
 
 TEST_F(TestMatrix3x3, CanInstantiateAndSetDataFromQuaternionRandomAngle)
 {
-    mc::Angles a1(-M_PI_4,  M_PI_4,  M_PI_4);
-    mc::Angles a2( M_PI_4, -M_PI_4,  M_PI_4);
-    mc::Angles a3( M_PI_4,  M_PI_4, -M_PI_4);
+    mc::Angles a1(-1.0_rad * M_PI_4,  1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
+    mc::Angles a2( 1.0_rad * M_PI_4, -1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
+    mc::Angles a3( 1.0_rad * M_PI_4,  1.0_rad * M_PI_4, -1.0_rad * M_PI_4);
 
     mc::Quaternion q1(a1);
     mc::Quaternion q2(a2);
@@ -565,42 +565,42 @@ TEST_F(TestMatrix3x3, CanSetData)
 
 TEST_F(TestMatrix3x3, CanGetAnglesZeros)
 {
-    mc::Matrix3x3 m(mc::Angles(0.0, 0.0, 0.0));
+    mc::Matrix3x3 m(mc::Angles(0.0_rad, 0.0_rad, 0.0_rad));
     mc::Angles ang = m.GetAngles();
 
-    EXPECT_NEAR(ang.phi(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ang.psi(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.phi()(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.tht()(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi()(), 0.0, 1.0e-9);
 }
 
 TEST_F(TestMatrix3x3, CanGetAnglesPhiPi)
 {
-    mc::Matrix3x3 m(mc::Angles(M_PI, 0.0, 0.0));
+    mc::Matrix3x3 m(mc::Angles(1.0_rad * M_PI, 0.0_rad, 0.0_rad));
     mc::Angles ang = m.GetAngles();
 
-    EXPECT_NEAR(ang.phi(), M_PI, 1.0e-9);
-    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ang.psi(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.phi()(), M_PI, 1.0e-9);
+    EXPECT_NEAR(ang.tht()(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi()(), 0.0, 1.0e-9);
 }
 
 TEST_F(TestMatrix3x3, CanGetAnglesPsiPi)
 {
-    mc::Matrix3x3 m(mc::Angles(0.0, 0.0, M_PI));
+    mc::Matrix3x3 m(mc::Angles(0.0_rad, 0.0_rad, 1.0_rad * M_PI));
     mc::Angles ang = m.GetAngles();
 
-    EXPECT_NEAR(ang.phi(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ang.tht(), 0.0, 1.0e-9);
-    EXPECT_NEAR(ang.psi(), M_PI, 1.0e-9);
+    EXPECT_NEAR(ang.phi()(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.tht()(), 0.0, 1.0e-9);
+    EXPECT_NEAR(ang.psi()(), M_PI, 1.0e-9);
 }
 
 TEST_F(TestMatrix3x3, CanGetAnglesInGimbalLock)
 {
     // singularity - gimbal lock
-    mc::Matrix3x3 mas1(mc::Angles(    0.0, M_PI_2,    0.0 ));
-    mc::Matrix3x3 mas2(mc::Angles( M_PI_4, M_PI_2,    0.0 ));
-    mc::Matrix3x3 mas3(mc::Angles( M_PI_2, M_PI_2,    0.0 ));
-    mc::Matrix3x3 mas4(mc::Angles(   M_PI, M_PI_2,    0.0 ));
-    mc::Matrix3x3 mas5(mc::Angles(    0.0, M_PI_2, M_PI_2 ));
+    mc::Matrix3x3 mas1(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::Matrix3x3 mas2(mc::Angles( 1.0_rad * M_PI_4 , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::Matrix3x3 mas3(mc::Angles( 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::Matrix3x3 mas4(mc::Angles( 1.0_rad * M_PI   , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::Matrix3x3 mas5(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 ));
 
     mc::Angles as1 = mas1.GetAngles();
     mc::Angles as2 = mas2.GetAngles();
@@ -608,25 +608,25 @@ TEST_F(TestMatrix3x3, CanGetAnglesInGimbalLock)
     mc::Angles as4 = mas4.GetAngles();
     mc::Angles as5 = mas5.GetAngles();
 
-    EXPECT_NEAR(as1.phi(),     0.0, 1.0e-9);
-    EXPECT_NEAR(as1.tht(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as1.psi(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as1.phi()(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as1.tht()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as1.psi()(),     0.0, 1.0e-9);
 
-    EXPECT_NEAR(as2.phi(),  M_PI_4, 1.0e-9);
-    EXPECT_NEAR(as2.tht(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as2.psi(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as2.phi()(),  M_PI_4, 1.0e-9);
+    EXPECT_NEAR(as2.tht()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as2.psi()(),     0.0, 1.0e-9);
 
-    EXPECT_NEAR(as3.phi(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as3.tht(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as3.psi(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as3.phi()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as3.tht()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as3.psi()(),     0.0, 1.0e-9);
 
-    EXPECT_NEAR(as4.phi(),    M_PI, 1.0e-9);
-    EXPECT_NEAR(as4.tht(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as4.psi(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as4.phi()(),    M_PI, 1.0e-9);
+    EXPECT_NEAR(as4.tht()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as4.psi()(),     0.0, 1.0e-9);
 
-    EXPECT_NEAR(as5.phi(), -M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as5.tht(),  M_PI_2, 1.0e-9);
-    EXPECT_NEAR(as5.psi(),     0.0, 1.0e-9);
+    EXPECT_NEAR(as5.phi()(), -M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as5.tht()(),  M_PI_2, 1.0e-9);
+    EXPECT_NEAR(as5.psi()(),     0.0, 1.0e-9);
 }
 
 TEST_F(TestMatrix3x3, CanGetQuaternion)

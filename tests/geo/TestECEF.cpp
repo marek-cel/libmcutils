@@ -155,19 +155,19 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading0)
     ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = 0
-    pos_geo_off = ecef.GetGeoOffset(0.0, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(0.0_rad, nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(0.0_rad, -nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(0.0_rad, 0.0, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(0.0_rad, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon - arc_min, tolerance);
 }
@@ -192,19 +192,19 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading90)
     ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = 90
-    pos_geo_off = ecef.GetGeoOffset(M_PI_2, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(M_PI_2 * 1.0_rad, nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI_2, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(M_PI_2 * 1.0_rad, -nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI_2, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(M_PI_2 * 1.0_rad, 0.0, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI_2, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(M_PI_2 * 1.0_rad, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 }
@@ -229,19 +229,19 @@ TEST_F(TestECEF, CanGetGeoOffsetHeadingMinus90)
     ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = -90
-    pos_geo_off = ecef.GetGeoOffset(-M_PI_2, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(-M_PI_2 * 1.0_rad, nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-M_PI_2, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(-M_PI_2 * 1.0_rad, -nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-M_PI_2, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(-M_PI_2 * 1.0_rad, 0.0, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-M_PI_2, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(-M_PI_2 * 1.0_rad, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 }
@@ -266,19 +266,19 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading180)
     ecef.SetPositionFromGeo(pos_geo);
 
     // HDG = 180
-    pos_geo_off = ecef.GetGeoOffset(M_PI, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(M_PI * 1.0_rad, nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(M_PI * 1.0_rad, -nautical_mile, 0.0);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(M_PI * 1.0_rad, 0.0, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(M_PI, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(M_PI * 1.0_rad, 0.0, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat, pos_geo.lat, tolerance);
     EXPECT_NEAR(pos_geo_off.lon, pos_geo.lon + arc_min, tolerance);
 }
@@ -296,12 +296,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N0E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
-    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.psi(), 0.0     , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi()(), 0.0     , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90E)
@@ -317,12 +317,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
-    EXPECT_NEAR(angles_enu.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.tht(), 0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.psi(), M_PI   , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht()(), 0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi()(), M_PI   , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90W)
@@ -338,12 +338,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90W)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
-    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.tht(), 0.0     , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.psi(), 0.0     , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht()(), 0.0     , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi()(), 0.0     , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N180E)
@@ -359,12 +359,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N180E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
-    EXPECT_NEAR(angles_enu.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.tht(),  M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_enu.psi(),     0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.tht()(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_enu.psi()(),     0.0 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N0E)
@@ -380,12 +380,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N0E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_enu.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
-    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(), M_PI_2 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90E)
@@ -401,12 +401,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_enu.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
-    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),   M_PI , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),   M_PI , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90W)
@@ -422,12 +422,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90W)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_enu.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
-    EXPECT_NEAR(angles_ecef.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(),    0.0 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(),    0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),    0.0 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N180E)
@@ -443,12 +443,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N180E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_enu.Set(0.0, 0.0, 0.0);
+    angles_enu.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
-    EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(),     0.0 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(), M_PI_2 + M_PI , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(),     0.0 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(), M_PI_2 + M_PI , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
@@ -464,12 +464,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
-    EXPECT_NEAR(angles_ned.phi(), 0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), 0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90E)
@@ -485,12 +485,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
-    EXPECT_NEAR(angles_ned.phi(), -M_PI_2    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0        , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 1.5 * M_PI , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), -M_PI_2    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0        , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 1.5 * M_PI , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90W)
@@ -506,12 +506,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90W)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
-    EXPECT_NEAR(angles_ned.phi(), M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), M_PI_2 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N180E)
@@ -527,12 +527,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N180E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.Set(0.0, 0.0, 0.0);
+    angles_ecef.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
-    EXPECT_NEAR(angles_ned.phi(),  M_PI   , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(),  M_PI   , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N0E)
@@ -548,12 +548,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N0E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ned.Set(0.0, 0.0, 0.0);
+    angles_ned.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
-    EXPECT_NEAR(angles_ecef.phi(),  0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90E)
@@ -569,12 +569,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ned.Set(0.0, 0.0, 0.0);
+    angles_ned.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  M_PI_2 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90W)
@@ -590,12 +590,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90W)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ned.Set(0.0, 0.0, 0.0);
+    angles_ned.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N180E)
@@ -611,12 +611,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N180E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ned.Set(0.0, 0.0, 0.0);
+    angles_ned.Set(0.0_rad, 0.0_rad, 0.0_rad);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.phi(),  M_PI   , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  M_PI   , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N0E)
@@ -633,17 +633,17 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N0E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.phi() =  0.0;
-    angles_ecef.tht() = -M_PI_2;
-    angles_ecef.psi() =  0.0;
+    angles_ecef.phi() =  units::angle::radian_t(0.0);
+    angles_ecef.tht() = -units::angle::radian_t(M_PI_2);
+    angles_ecef.psi() =  units::angle::radian_t(0.0);
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
-    EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 0.0, ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90E)
@@ -660,17 +660,17 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.phi() =  0.0;
-    angles_ecef.tht() = -M_PI_2;
-    angles_ecef.psi() =  M_PI_2;
+    angles_ecef.phi() =  units::angle::radian_t(0.0);
+    angles_ecef.tht() = -units::angle::radian_t(M_PI_2);
+    angles_ecef.psi() =  units::angle::radian_t(M_PI_2);
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
-    EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 0.0, ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90W)
@@ -687,17 +687,17 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90W)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.phi() =  0.0;
-    angles_ecef.tht() = -M_PI_2;
-    angles_ecef.psi() = -M_PI_2;
+    angles_ecef.phi() =  units::angle::radian_t(0.0);
+    angles_ecef.tht() = -units::angle::radian_t(M_PI_2);
+    angles_ecef.psi() = -units::angle::radian_t(M_PI_2);
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
-    EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 0.0, ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N180E)
@@ -714,17 +714,17 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N180E)
     pos_geo.alt = 0.0;
     ecef.SetPositionFromGeo(pos_geo);
 
-    angles_ecef.phi() =  0.0;
-    angles_ecef.tht() = -M_PI_2;
-    angles_ecef.psi() =  M_PI;
+    angles_ecef.phi() =  units::angle::radian_t(0.0);
+    angles_ecef.tht() = -units::angle::radian_t(M_PI_2);
+    angles_ecef.psi() =  units::angle::radian_t(M_PI);
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
     angles_ned.Normalize();
 
-    EXPECT_NEAR(angles_ned.phi(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.tht(), 0.0, ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ned.psi(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.phi()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.tht()(), 0.0, ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ned.psi()(), 0.0, ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N0E)
@@ -738,15 +738,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N0E)
     pos_geo.lat = 0.0;
     pos_geo.lon = 0.0;
     pos_geo.alt = 0.0;
-    ecef.SetPositionFromGeo( pos_geo );
+    ecef.SetPositionFromGeo(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
-    EXPECT_NEAR(angles_ecef.phi(),  0.0    , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90E)
@@ -760,15 +760,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90E)
     pos_geo.lat = 0.0;
     pos_geo.lon = M_PI_2;
     pos_geo.alt = 0.0;
-    ecef.SetPositionFromGeo( pos_geo );
+    ecef.SetPositionFromGeo(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
-    EXPECT_NEAR(angles_ecef.phi(),  M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90W)
@@ -782,15 +782,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90W)
     pos_geo.lat = 0.0;
     pos_geo.lon = -M_PI_2;
     pos_geo.alt = 0.0;
-    ecef.SetPositionFromGeo( pos_geo );
+    ecef.SetPositionFromGeo(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
-    EXPECT_NEAR(angles_ecef.phi(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N180E)
@@ -804,15 +804,15 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N180E)
     pos_geo.lat = 0.0;
     pos_geo.lon = M_PI;
     pos_geo.alt = 0.0;
-    ecef.SetPositionFromGeo( pos_geo );
+    ecef.SetPositionFromGeo(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
     angles_ecef.Normalize();
 
-    EXPECT_NEAR(angles_ecef.phi(),  M_PI   , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.tht(), -M_PI_2 , ATTITUDE_TOLERANCE);
-    EXPECT_NEAR(angles_ecef.psi(),  0.0    , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.phi()(),  M_PI   , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.tht()(), -M_PI_2 , ATTITUDE_TOLERANCE);
+    EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanUpdateAndGetPosGeoAt0N0E0H)

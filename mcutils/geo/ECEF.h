@@ -22,6 +22,8 @@
 #ifndef MCUTILS_GEO_ECEF_H_
 #define MCUTILS_GEO_ECEF_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 #include <mcutils/geo/Ellipsoid.h>
@@ -141,7 +143,7 @@ public:
      * \param offset_y [m] lateral offset
      * \return resulting geodetic coordinates
      */
-    Geo GetGeoOffset(double heading, double offset_x, double offset_y) const;
+    Geo GetGeoOffset(units::angle::radian_t heading, double offset_x, double offset_y) const;
 
     /**
      * \brief Converts attitude angles expressed in ENU.

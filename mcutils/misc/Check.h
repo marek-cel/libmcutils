@@ -37,12 +37,13 @@ namespace mc {
  * \param val double precision value to test
  * \return function returns TRUE if tested value is Infinite
  */
-MCUTILSAPI inline bool IsInf(const double& val)
+template <typename T>
+bool IsInf(const T& val)
 {
 #   ifdef _MSC_VER
-    return !_finite(val);
+    return !_finite(static_cast<double>(val));
 #   else
-    return std::isinf(val);
+    return std::isinf(static_cast<double>(val));
 #   endif
 }
 
@@ -51,7 +52,8 @@ MCUTILSAPI inline bool IsInf(const double& val)
  * \param val double precision value to test
  * \return function returns TRUE if tested value is NaN
  */
-MCUTILSAPI inline bool IsNaN(const double& val)
+template <typename T>
+bool IsNaN(const T& val)
 {
     return val != val;
 }
@@ -61,7 +63,8 @@ MCUTILSAPI inline bool IsNaN(const double& val)
  * \param val double precision value to test
  * \return function returns FALSE if tested value is Infinite or NaN
  */
-MCUTILSAPI inline bool IsValid(const double& val)
+template <typename T>
+bool IsValid(const T& val)
 {
     return !( IsNaN(val) || IsInf(val) );
 }
@@ -72,7 +75,8 @@ MCUTILSAPI inline bool IsValid(const double& val)
  * \param size the size of given array
  * \return function returns FALSE if tested array is Infinite or NaN
  */
-MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
+template <typename T>
+bool IsValid(const T array[], unsigned int size)
 {
     for (unsigned int i = 0; i < size; ++i)
     {

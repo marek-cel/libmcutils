@@ -31,18 +31,21 @@
 
 namespace mc {
 
-double Angles::Normalize(double val, double min)
+units::angle::radian_t Angles::Normalize(units::angle::radian_t val,
+                                         units::angle::radian_t min)
 {
-    double tmp = val;
-    double max = min + 2.0 * M_PI;
+    units::angle::radian_t tmp = val;
+    units::angle::radian_t max = min + 2.0_rad * M_PI;
 
-    while (tmp < min) tmp += 2.0 * M_PI;
-    while (tmp > max) tmp -= 2.0 * M_PI;
+    while (tmp < min) tmp += 2._rad * M_PI;
+    while (tmp > max) tmp -= 2._rad * M_PI;
 
     return tmp;
 }
 
-Angles::Angles(double phi, double tht, double psi)
+Angles::Angles(units::angle::radian_t phi,
+               units::angle::radian_t tht,
+               units::angle::radian_t psi)
 {
     Set(phi, tht, psi);
 }
@@ -56,28 +59,30 @@ bool Angles::IsValid() const
 
 void Angles::Normalize()
 {
-    while (_tht >  M_PI_2)
+    while (_tht >  1.0_rad * M_PI_2)
     {
-        _phi += M_PI;
-        _tht =  M_PI_2 - ( _tht - M_PI_2 );
-        _psi += M_PI;
+        _phi += 1.0_rad * M_PI;
+        _tht =  1.0_rad * M_PI_2 - ( _tht - 1.0_rad * M_PI_2 );
+        _psi += 1.0_rad * M_PI;
     }
 
-    while (_tht < -M_PI_2)
+    while (_tht < -1.0_rad * M_PI_2)
     {
-        _phi += M_PI;
-        _tht = -M_PI_2 - ( _tht + M_PI_2 );
-        _psi += M_PI;
+        _phi += 1.0_rad * M_PI;
+        _tht = -1.0_rad * M_PI_2 - ( _tht + 1.0_rad * M_PI_2 );
+        _psi += 1.0_rad * M_PI;
     }
 
-    while (_phi >  M_PI) _phi -= 2.0 * M_PI;
-    while (_phi < -M_PI) _phi += 2.0 * M_PI;
+    while (_phi >  1.0_rad * M_PI) _phi -= 2.0_rad * M_PI;
+    while (_phi < -1.0_rad * M_PI) _phi += 2.0_rad * M_PI;
 
-    while (_psi >= 2.0 * M_PI) _psi -= 2.0 * M_PI;
-    while (_psi <  0.0       ) _psi += 2.0 * M_PI;
+    while (_psi >= 2.0_rad * M_PI) _psi -= 2.0_rad * M_PI;
+    while (_psi <  0.0_rad       ) _psi += 2.0_rad * M_PI;
 }
 
-void Angles::Set(double phi, double tht, double psi)
+void Angles::Set(units::angle::radian_t phi,
+                 units::angle::radian_t tht,
+                 units::angle::radian_t psi)
 {
     _phi = phi;
     _tht = tht;
@@ -91,11 +96,11 @@ std::string Angles::ToString() const
     ss.setf(std::ios_base::showpoint);
     ss.setf(std::ios_base::fixed);
 
-    ss << std::setprecision(2) << Units::rad2deg(_phi);
+    ss << std::setprecision(2) << units::angle::degree_t(_phi)();
     ss << ",";
-    ss << std::setprecision(2) << Units::rad2deg(_tht);
+    ss << std::setprecision(2) << units::angle::degree_t(_tht)();
     ss << ",";
-    ss << std::setprecision(2) << Units::rad2deg(_psi);
+    ss << std::setprecision(2) << units::angle::degree_t(_psi)();
 
     return ss.str();
 }

@@ -22,6 +22,10 @@
 #ifndef MCUTILS_ASTRO_COORDINATES_H_
 #define MCUTILS_ASTRO_COORDINATES_H_
 
+#include <units.h>
+
+using namespace units::literals;
+
 namespace mc {
 
 /**
@@ -31,8 +35,8 @@ namespace mc {
  */
 struct AzEl
 {
-    double az = 0.0;    ///< [rad] azimuth
-    double el = 0.0;    ///< [rad] elevation
+    units::angle::radian_t az = 0.0_rad;    ///< azimuth
+    units::angle::radian_t el = 0.0_rad;    ///< elevation
 };
 
 /**
@@ -42,8 +46,8 @@ struct AzEl
  */
 struct RaDec
 {
-    double ra  = 0.0;   ///< [rad] right ascetion
-    double dec = 0.0;   ///< [rad] declination
+    units::angle::radian_t ra  = 0.0_rad;   ///< right ascetion
+    units::angle::radian_t dec = 0.0_rad;   ///< declination
 };
 
 /**

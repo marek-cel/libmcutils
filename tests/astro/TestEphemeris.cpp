@@ -30,8 +30,8 @@ TEST_F(TestEphemeris, CanComputeSun)
     dt.second = 0;
     dt.msec   = 0;
     ephem.Update(dt, 0.0, 0.0);
-    EXPECT_NEAR(ephem.sun().ra_dec.ra, 4.899595716773554, tol_rad);
-    EXPECT_NEAR(ephem.sun().ra_dec.dec, -0.40266683881073745, tol_rad);
+    EXPECT_NEAR(ephem.sun().ra_dec.ra(), 4.899595716773554, tol_rad);
+    EXPECT_NEAR(ephem.sun().ra_dec.dec(), -0.40266683881073745, tol_rad);
 
     dt.year   = 2024;
     dt.month  = 4;
@@ -41,8 +41,8 @@ TEST_F(TestEphemeris, CanComputeSun)
     dt.second = 30;
     dt.msec   = 0;
     ephem.Update(dt, 0.0, 0.0);
-    EXPECT_NEAR(ephem.sun().ra_dec.ra, 0.571160439394054, tol_rad);
-    EXPECT_NEAR(ephem.sun().ra_dec.dec, 0.23021727848778714, tol_rad);
+    EXPECT_NEAR(ephem.sun().ra_dec.ra(), 0.571160439394054, tol_rad);
+    EXPECT_NEAR(ephem.sun().ra_dec.dec(), 0.23021727848778714, tol_rad);
 }
 
 TEST_F(TestEphemeris, CanComputeMoon)
@@ -63,8 +63,8 @@ TEST_F(TestEphemeris, CanComputeMoon)
     dt.second = 0;
     dt.msec   = 0;
     ephem.Update(dt, 0.0, 0.0);
-    EXPECT_NEAR(ephem.moon().ra_dec.ra, 3.7815961040162467, tol_rad);
-    EXPECT_NEAR(ephem.moon().ra_dec.dec, -0.1569823363895957, tol_rad);
+    EXPECT_NEAR(ephem.moon().ra_dec.ra(), 3.7815961040162467, tol_rad);
+    EXPECT_NEAR(ephem.moon().ra_dec.dec(), -0.1569823363895957, tol_rad);
 
     dt.year   = 2024;
     dt.month  = 4;
@@ -74,6 +74,6 @@ TEST_F(TestEphemeris, CanComputeMoon)
     dt.second = 30;
     dt.msec   = 0;
     ephem.Update(dt, 0.0, 0.0);
-    EXPECT_NEAR(ephem.moon().ra_dec.ra, 3.839393709858737, tol_rad);
-    EXPECT_NEAR(ephem.moon().ra_dec.dec, -0.31637240994389354, tol_rad);
+    EXPECT_NEAR(ephem.moon().ra_dec.ra(), 3.839393709858737, tol_rad);
+    EXPECT_NEAR(ephem.moon().ra_dec.dec(), -0.31637240994389354, tol_rad);
 }

@@ -27,7 +27,18 @@
 #include <mcutils/defs.h>
 
 namespace mc {
-namespace Math {
+
+/**
+ * \brief Absolute value function.
+ * \param val input value
+ * \return absolute value
+ */
+template <typename T>
+T Abs(const T& val)
+{
+    constexpr T zero = static_cast<T>(0);
+    return val < zero ? -val : val;
+}
 
 /**
  * \brief Checks if value is within the given range.
@@ -36,7 +47,8 @@ namespace Math {
  * \param val variable to test
  * \return true if val greater than min and less than max, false otherwise
  */
-MCUTILSAPI inline bool IsInside(const double& min, const double& max, const double& val)
+template <typename T>
+bool IsInside(const T& min, const T& max, const T& val)
 {
     return min <= val && val <= max;
 }
@@ -48,7 +60,8 @@ MCUTILSAPI inline bool IsInside(const double& min, const double& max, const doub
  * \param val variable to test
  * \return true if val greater than min and less than max, false otherwise
  */
-MCUTILSAPI inline bool IsOutside(const double& min, const double& max, const double& val)
+template <typename T>
+bool IsOutside(const T& min, const T& max, const T& val)
 {
     return min > val || val > max;
 }
@@ -58,7 +71,8 @@ MCUTILSAPI inline bool IsOutside(const double& min, const double& max, const dou
  * \param val argument
  * \return power 2 (square)
  */
-MCUTILSAPI inline double Pow2(const double& val)
+template <typename T>
+auto Pow2(const T& val)
 {
     return val * val;
 }
@@ -68,7 +82,8 @@ MCUTILSAPI inline double Pow2(const double& val)
  * \param val argument
  * \return power 3 (cube)
  */
-MCUTILSAPI inline double Pow3(const double& val)
+template <typename T>
+auto Pow3(const T& val)
 {
     return val * val * val;
 }
@@ -78,7 +93,8 @@ MCUTILSAPI inline double Pow3(const double& val)
  * \param val argument
  * \return power 4
  */
-MCUTILSAPI inline double Pow4(const double& val)
+template <typename T>
+auto Pow4(const T& val)
 {
     return val * val * val * val;
 }
@@ -88,9 +104,32 @@ MCUTILSAPI inline double Pow4(const double& val)
  * \param val argument
  * \return power 5
  */
-MCUTILSAPI inline double Pow5(const double& val)
+template <typename T>
+auto Pow5(const T& val)
 {
     return val * val * val * val * val;
+}
+
+/**
+ * \brief Sine function.
+ * \param val argument
+ * \return sine
+ */
+template <typename T>
+double Sin(const T& val)
+{
+    return sin(static_cast<double>(val));
+}
+
+/**
+ * \brief Cosine function.
+ * \param val argument
+ * \return cosine
+ */
+template <typename T>
+double Cos(const T& val)
+{
+    return cos(static_cast<double>(val));
 }
 
 /**
@@ -100,7 +139,8 @@ MCUTILSAPI inline double Pow5(const double& val)
  * \param val variable to test
  * \return min if val less than min, max if val larger than max, val if val larger than min and less than max
  */
-MCUTILSAPI inline double Satur(const double& min, const double& max, const double& val)
+template <typename T>
+T Satur(const T& min, const T& max, const T& val)
 {
     if      (val < min) return min;
     else if (val > max) return max;
@@ -112,11 +152,14 @@ MCUTILSAPI inline double Satur(const double& min, const double& max, const doubl
  * \param val input value
  * \return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
-MCUTILSAPI inline double Sign(const double& val)
+template <typename T>
+T Sign(const T& val)
 {
-    if      (val < 0.0) return -1.0;
-    else if (val > 0.0) return  1.0;
-    return 0.0;
+    constexpr T zero = static_cast<T>(0);
+    constexpr T one  = static_cast<T>(1);
+    if      (val < zero) return -one;
+    else if (val > zero) return  one;
+    return zero;
 }
 
 /**
@@ -125,7 +168,7 @@ MCUTILSAPI inline double Sign(const double& val)
  * \param x normalized input value <-1.0;1.0>
  * \return approximated sine wave
  */
-MCUTILSAPI inline float SineWave(float x)
+MCUTILSAPI inline float SineWave(const float& x)
 {
     float y = 4.0f * x - 4.0f * x * fabs(x);
     return 0.225f * (y * fabs(y) - y) + y;
@@ -220,7 +263,6 @@ MCUTILSAPI inline double StdDev(const double x[], int n)
     return StdDev(sum, sum_sq, n);
 }
 
-} // namespace Math
 } // namespace mc
 
 #endif // MCUTILS_MATH_MATH_H_

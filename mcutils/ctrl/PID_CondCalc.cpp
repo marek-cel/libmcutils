@@ -36,7 +36,7 @@ PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
 void PID_CondCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
-    _value = Math::Satur(_min, _max, y);
+    _value = Satur(_min, _max, y);
     if (y != _value) _error_i = _error_i_prev;
     _error_i_prev = _error_i;
 }

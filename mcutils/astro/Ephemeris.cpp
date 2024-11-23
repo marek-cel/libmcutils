@@ -90,11 +90,11 @@ void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
     double sinSunLambda = sin(sunLambda);
 
     // Sun right ascension
-    _sun.ra_dec.ra = atan2(sinSunLambda * cosEpsilon, cosSunLambda);
+    _sun.ra_dec.ra = units::angle::radian_t(atan2(sinSunLambda * cosEpsilon, cosSunLambda));
     _sun.ra_dec.ra = Angles::Normalize(_sun.ra_dec.ra);
 
     // Sun declination
-    _sun.ra_dec.dec = asin(sinSunLambda * sinEpsilon);
+    _sun.ra_dec.dec = units::angle::radian_t(asin(sinSunLambda * sinEpsilon));
 
     // Sun horizontal coordinates
     _sun.az_el = RaDec2AzEl(_sun.ra_dec, sinLat, cosLat, _lst);
@@ -145,11 +145,11 @@ void Ephemeris::UpdateMoon(double jc, double sinLat, double cosLat,
     double tanMoonBeta = tan(moonBeta);
 
     // Moon right ascension
-    _moon.ra_dec.ra = atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
+    _moon.ra_dec.ra = units::angle::radian_t(atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda));
     _moon.ra_dec.ra = Angles::Normalize(_moon.ra_dec.ra);
 
     // Moon declination
-    _moon.ra_dec.dec = asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda);
+    _moon.ra_dec.dec = units::angle::radian_t(asin(sinMoonBeta*cosEpsilon + cosMoonBeta*sinEpsilon*sinMoonLambda));
 
     // Moon horizontal coordinates
     _moon.az_el = RaDec2AzEl(_moon.ra_dec, sinLat, cosLat, _lst);

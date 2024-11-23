@@ -10,7 +10,7 @@ def runTestsOnLinux():
     setLibraryPathOnLinux()
     os.chdir("bin")
     subprocess.run(
-        "./tests --gtest_filter=* --gtest_break_on_failure",
+        "./tests-mcutils --gtest_filter=* --gtest_break_on_failure",
         shell=True
     )
 
@@ -19,7 +19,7 @@ def runTestsOnWindows():
     setLibraryPathOnWindows()
     os.chdir("bin")
     subprocess.run(
-        "tests.exe --gtest_filter=* --gtest_break_on_failure",
+        "tests-mcutils.exe --gtest_filter=* --gtest_break_on_failure",
         shell=True
     )
 

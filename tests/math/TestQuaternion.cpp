@@ -39,7 +39,7 @@ TEST_F(TestQuaternion, CanInstantiateAndSetDataFromAngles)
     // expected values calculated with GNU Octave
     // tests/math/octave/test_quaternion.m
 
-    mc::Quaternion q0(mc::Angles(M_PI_2/3.0, M_PI_4, 2.0*M_PI_2/3.0));
+    mc::Quaternion q0(mc::Angles(1.0_rad * M_PI_2/3.0, 1.0_rad * M_PI_4, 2.0_rad*M_PI_2/3.0));
 
     EXPECT_NEAR(q0.e0(), 0.82236, 1.0e-5);
     EXPECT_NEAR(q0.ex(), 0.02226, 1.0e-5);
@@ -209,42 +209,42 @@ TEST_F(TestQuaternion, CanGetLength)
 
 TEST_F(TestQuaternion, CanGetAnglesPhiQuarterPi)
 {
-    const mc::Angles ang(M_PI_4, 0.0, 0.0);
+    const mc::Angles ang(1.0_rad * M_PI_4, 0.0_rad, 0.0_rad);
     mc::Quaternion quat(ang);
     mc::Angles result = quat.GetAngles();
-    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
-    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
-    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+    EXPECT_DOUBLE_EQ(result.phi()(), ang.phi()());
+    EXPECT_DOUBLE_EQ(result.tht()(), ang.tht()());
+    EXPECT_DOUBLE_EQ(result.psi()(), ang.psi()());
 }
 
 TEST_F(TestQuaternion, CanGetAnglesThetaQuarterPi)
 {
-    const mc::Angles ang(0.0, M_PI_4, 0.0);
+    const mc::Angles ang(0.0_rad, 1.0_rad * M_PI_4, 0.0_rad);
     mc::Quaternion quat(ang);
     mc::Angles result = quat.GetAngles();
-    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
-    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
-    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+    EXPECT_DOUBLE_EQ(result.phi()(), ang.phi()());
+    EXPECT_DOUBLE_EQ(result.tht()(), ang.tht()());
+    EXPECT_DOUBLE_EQ(result.psi()(), ang.psi()());
 }
 
 TEST_F(TestQuaternion, CanGetAnglesPsiQuarterPi)
 {
-    const mc::Angles ang(0.0, 0.0, M_PI_4);
+    const mc::Angles ang(0.0_rad, 0.0_rad, 1.0_rad * M_PI_4);
     mc::Quaternion quat(ang);
     mc::Angles result = quat.GetAngles();
-    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
-    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
-    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+    EXPECT_DOUBLE_EQ(result.phi()(), ang.phi()());
+    EXPECT_DOUBLE_EQ(result.tht()(), ang.tht()());
+    EXPECT_DOUBLE_EQ(result.psi()(), ang.psi()());
 }
 
 TEST_F(TestQuaternion, CanGetAnglesPhiThetaPsiQuarterPi)
 {
-    const mc::Angles ang(M_PI_4, M_PI_4, M_PI_4);
+    const mc::Angles ang(1.0_rad * M_PI_4, 1.0_rad * M_PI_4, 1.0_rad * M_PI_4);
     mc::Quaternion quat(ang);
     mc::Angles result = quat.GetAngles();
-    EXPECT_DOUBLE_EQ(result.phi(), ang.phi());
-    EXPECT_DOUBLE_EQ(result.tht(), ang.tht());
-    EXPECT_DOUBLE_EQ(result.psi(), ang.psi());
+    EXPECT_DOUBLE_EQ(result.phi()(), ang.phi()());
+    EXPECT_DOUBLE_EQ(result.tht()(), ang.tht()());
+    EXPECT_DOUBLE_EQ(result.psi()(), ang.psi()());
 }
 
 TEST_F(TestQuaternion, CanGetConjugated)

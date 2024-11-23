@@ -26,6 +26,8 @@
 #   include <algorithm>
 #endif
 
+#include <mcutils/math/Math.h>
+
 namespace mc {
 
 Matrix3x3 Matrix3x3::GetIdentityMatrix()
@@ -44,14 +46,14 @@ Matrix3x3::Matrix3x3(double xx, double xy, double xz,
 
 Matrix3x3::Matrix3x3(const Angles& angl)
 {
-    double sin_phi = sin(angl.phi());
-    double cos_phi = cos(angl.phi());
+    double sin_phi = Sin(angl.phi());
+    double cos_phi = Cos(angl.phi());
 
-    double sin_tht = sin(angl.tht());
-    double cos_tht = cos(angl.tht());
+    double sin_tht = Sin(angl.tht());
+    double cos_tht = Cos(angl.tht());
 
-    double sin_psi = sin(angl.psi());
-    double cos_psi = cos(angl.psi());
+    double sin_psi = Sin(angl.psi());
+    double cos_psi = Cos(angl.psi());
 
     double sin_phi_sin_tht = sin_phi * sin_tht;
     double cos_phi_sin_tht = cos_phi * sin_tht;
@@ -118,17 +120,17 @@ Angles Matrix3x3::GetAngles() const
     double sin_tht = -xz();
     double cos_tht = sqrt(1.0 - std::min(1.0, sin_tht*sin_tht));
 
-    result.tht() = atan2(sin_tht, cos_tht);
+    result.tht() = units::angle::radian_t(atan2(sin_tht, cos_tht));
 
     if (cos_tht > 0.0)
     {
-        result.phi() = atan2(yz(), zz());
-        result.psi() = atan2(xy(), xx());
+        result.phi() = units::angle::radian_t(atan2(yz(), zz()));
+        result.psi() = units::angle::radian_t(atan2(xy(), xx()));
     }
     else
     {
-        result.phi() = atan2(yx(), zx());
-        result.psi() = 0.0;
+        result.phi() = units::angle::radian_t(atan2(yx(), zx()));
+        result.psi() = 0.0_rad;
     }
 
     result.Normalize();

@@ -37,7 +37,7 @@ PID_FilterAW::PID_FilterAW(double kp, double ki, double kd,
 void PID_FilterAW::UpdateFinal(double dt, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
-    _value = Math::Satur(_min, _max, y);
+    _value = Satur(_min, _max, y);
     double delta = y - _value;
     _error_i -= _kaw * delta * dt;
 }

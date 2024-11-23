@@ -109,7 +109,7 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
     double e2 = _ellipsoid.a2() - _ellipsoid.b2();
     double f  = 54.0 * _ellipsoid.b2() * z2;
     double g  = r2 + (1.0 - _ellipsoid.e2())*z2 - _ellipsoid.e2()*e2;
-    double c  = _ellipsoid.e2()*_ellipsoid.e2() * f * r2 / Math::Pow3(g);
+    double c  = _ellipsoid.e2()*_ellipsoid.e2() * f * r2 / Pow3(g);
     double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
     double p0 = s + 1.0/s + 1.0;
     double p  = f / (3.0 * p0*p0 * g*g);
@@ -149,9 +149,9 @@ void ECEF::ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const
     *pos_geo = ConvertCart2Geo(pos_cart);
 }
 
-Geo ECEF::GetGeoOffset(double heading, double offset_x, double offset_y) const
+Geo ECEF::GetGeoOffset(units::angle::radian_t heading, double offset_x, double offset_y) const
 {
-    Matrix3x3 ned2bas(Angles(0.0, 0.0, heading));
+    Matrix3x3 ned2bas(Angles(0.0_rad, 0.0_rad, heading));
     Matrix3x3 bas2ned = ned2bas.GetTransposed();
 
     Vector3 r_bas(offset_x, offset_y, 0.0);

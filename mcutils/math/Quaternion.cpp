@@ -39,18 +39,18 @@ Quaternion::Quaternion(double e0, double ex, double ey, double ez)
 
 Quaternion::Quaternion(const Angles& angl)
 {
-    double phi_2 = angl.phi() / 2.0;
-    double tht_2 = angl.tht() / 2.0;
-    double psi_2 = angl.psi() / 2.0;
+    units::angle::radian_t phi_2 = angl.phi() / 2.0;
+    units::angle::radian_t tht_2 = angl.tht() / 2.0;
+    units::angle::radian_t psi_2 = angl.psi() / 2.0;
 
-    double sin_phi_2 = sin(phi_2);
-    double cos_phi_2 = cos(phi_2);
+    double sin_phi_2 = sin(phi_2());
+    double cos_phi_2 = cos(phi_2());
 
-    double sin_tht_2 = sin(tht_2);
-    double cos_tht_2 = cos(tht_2);
+    double sin_tht_2 = sin(tht_2());
+    double cos_tht_2 = cos(tht_2());
 
-    double sin_psi_2 = sin(psi_2);
-    double cos_psi_2 = cos(psi_2);
+    double sin_psi_2 = sin(psi_2());
+    double cos_psi_2 = cos(psi_2());
 
     double cos_phi_2_cos_psi_2 = cos_phi_2 * cos_psi_2;
     double cos_phi_2_sin_psi_2 = cos_phi_2 * sin_psi_2;
@@ -128,21 +128,21 @@ Angles Quaternion::GetAngles() const
     double sin_tht_2 = _e0*_ey - _ex*_ez;
     if(sin_tht_2 >= 0.5)
     {
-        result.phi() =  2.0 * asin(_ex / cos(M_PI_4));
-        result.tht() =  M_PI_2;
-        result.psi() =  0.0;
+        result.phi() =  units::angle::radian_t(2.0 * asin(_ex / cos(M_PI_4)));
+        result.tht() =  units::angle::radian_t(M_PI_2);
+        result.psi() =  0.0_rad;
     }
     else if (sin_tht_2 <= -0.5)
     {
-        result.phi() =  2.0 * asin(_ex / cos(M_PI_4));
-        result.tht() = -M_PI_2;
-        result.psi() =  0.0;
+        result.phi() =  units::angle::radian_t(2.0 * asin(_ex / cos(M_PI_4)));
+        result.tht() = -units::angle::radian_t(M_PI_2);
+        result.psi() =  0.0_rad;
     }
     else
     {
-        result.phi() = atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey));
-        result.tht() =  asin(2.0*sin_tht_2 );
-        result.psi() = atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez));
+        result.phi() = units::angle::radian_t(atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey)));
+        result.tht() = units::angle::radian_t(asin(2.0*sin_tht_2));
+        result.psi() = units::angle::radian_t(atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez)));
     }
     result.Normalize();
 

@@ -24,7 +24,11 @@
 
 #include <string>
 
+#include <units.h>
+
 #include <mcutils/defs.h>
+
+using namespace units::literals;
 
 namespace mc {
 
@@ -47,15 +51,18 @@ public:
      * \param min minimum value
      * \return normalized angle
      */
-    static double Normalize(double val, double min = 0.0);
+    static units::angle::radian_t Normalize(units::angle::radian_t val,
+                                            units::angle::radian_t min = 0.0_rad);
 
     /**
      * \brief Constructor.
-     * \param phi [rad] angle of rotation about x-axis
-     * \param tht [rad] angle of rotation about y-axis
-     * \param psi [rad] angle of rotation about z-axis
+     * \param phi angle of rotation about x-axis
+     * \param tht angle of rotation about y-axis
+     * \param psi angle of rotation about z-axis
      */
-    Angles(double phi = 0.0, double tht = 0.0, double psi = 0.0);
+    Angles(units::angle::radian_t phi = 0.0_rad,
+           units::angle::radian_t tht = 0.0_rad,
+           units::angle::radian_t psi = 0.0_rad);
 
     /** \return true if all items are valid */
     bool IsValid() const;
@@ -68,21 +75,23 @@ public:
 
     /**
      * \brief Sets angles values.
-     * \param phi [rad] angle of rotation about x-axis
-     * \param tht [rad] angle of rotation about y-axis
-     * \param psi [rad] angle of rotation about z-axis
+     * \param phi angle of rotation about x-axis
+     * \param tht angle of rotation about y-axis
+     * \param psi angle of rotation about z-axis
      */
-    void Set(double phi, double tht, double psi);
+    void Set(units::angle::radian_t phi,
+             units::angle::radian_t tht,
+             units::angle::radian_t psi);
 
     /** \brief Returns string represtation of the angles. */
     std::string ToString() const;
 
-    inline double  phi() const { return _phi; }
-    inline double  tht() const { return _tht; }
-    inline double  psi() const { return _psi; }
-    inline double& phi()       { return _phi; }
-    inline double& tht()       { return _tht; }
-    inline double& psi()       { return _psi; }
+    inline units::angle::radian_t  phi() const { return _phi; }
+    inline units::angle::radian_t  tht() const { return _tht; }
+    inline units::angle::radian_t  psi() const { return _psi; }
+    inline units::angle::radian_t& phi()       { return _phi; }
+    inline units::angle::radian_t& tht()       { return _tht; }
+    inline units::angle::radian_t& psi()       { return _psi; }
 
     /** \brief Equality operator. */
     bool operator==(const Angles& angl) const;
@@ -92,9 +101,9 @@ public:
 
 private:
 
-    double _phi = 0.0;  ///< [rad] angle of rotation about x-axis
-    double _tht = 0.0;  ///< [rad] angle of rotation about y-axis
-    double _psi = 0.0;  ///< [rad] angle of rotation about z-axis
+    units::angle::radian_t _phi = 0.0_rad;  ///< angle of rotation about x-axis
+    units::angle::radian_t _tht = 0.0_rad;  ///< angle of rotation about y-axis
+    units::angle::radian_t _psi = 0.0_rad;  ///< angle of rotation about z-axis
 };
 
 } // namespace mc
