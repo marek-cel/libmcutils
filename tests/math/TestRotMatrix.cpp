@@ -179,7 +179,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
     mc::RotMatrix m(ang);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     EXPECT_NEAR(m.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m.xz(), -0.7071, 1.0e-3);
@@ -198,7 +198,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
     mc::Angles a3( 1.0_rad * M_PI_4,  1.0_rad * M_PI_4, -1.0_rad * M_PI_4);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m1(a1);
     EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
@@ -211,7 +211,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
     EXPECT_NEAR(m1.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m2(a2);
     EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
@@ -224,7 +224,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
     EXPECT_NEAR(m2.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m3(a3);
     EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
@@ -329,7 +329,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi
     mc::RotMatrix m(quat);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     EXPECT_NEAR(m.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m.xz(), -0.7071, 1.0e-3);
@@ -352,7 +352,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
     mc::Quaternion q3(a3);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m1(q1);
     EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
@@ -365,7 +365,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
     EXPECT_NEAR(m1.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m2(q2);
     EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
@@ -378,7 +378,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
     EXPECT_NEAR(m2.zz(),  0.5000, 1.0e-3);
 
     // expected values calculated with GNU Octave
-    // tests/math/octave/test_matrix3x3.m
+    // tests/math/octave/test_rot_matrix.m
     mc::RotMatrix m3(q3);
     EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
