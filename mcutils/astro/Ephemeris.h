@@ -42,7 +42,7 @@ public:
     void Update(const DateTime& gd, units::angle::radian_t lat, units::angle::radian_t lon);
     void Update(const DateTime& gd, double sinLat, double cosLat, units::angle::radian_t lon);
 
-    inline double ut() const { return _ut; }
+    inline units::time::hour_t ut() const { return _ut; }
 
     inline units::angle::radian_t gst() const { return _gst; }
     inline units::angle::radian_t lst() const { return _lst; }
@@ -52,25 +52,14 @@ public:
 
 private:
 
-    JulianDate _jd;         ///< Julian date
+    JulianDate _jd; ///< Julian date
 
-    double _ut;             ///< [h] universal time
-
+    units::time::hour_t    _ut  = 0.0_hr;   ///< universal time
     units::angle::radian_t _gst = 0.0_rad;  ///< Greenwhich Siderial Time
     units::angle::radian_t _lst = 0.0_rad;  ///< Local Siderial Time
 
-    AzElRaDec _sun;         ///< right ascesion and declination of the Sun
-    AzElRaDec _moon;        ///< right ascesion and declination of the Moon
-
-    double _sun_alpha;      ///< [rad] Sun right ascension
-    double _sun_delta;      ///< [rad] Sun declination
-    double _sun_elev;       ///< [rad] Sun elevation
-    double _sun_azim;       ///< [rad] Sun azimuth
-
-    double _moon_alpha;     ///< [rad] Moon right ascension
-    double _moon_delta;     ///< [rad] Moon declination
-    double _moon_elev;      ///< [rad] Moon elevation
-    double _moon_azim;      ///< [rad] Moon azimuth
+    AzElRaDec _sun;     ///< right ascesion and declination of the Sun
+    AzElRaDec _moon;    ///< right ascesion and declination of the Moon
 
     /**
      * Updates Sun coordinates.

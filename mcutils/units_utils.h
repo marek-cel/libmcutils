@@ -64,6 +64,16 @@ MCUTILSAPI inline double Cos(const units::angle::radian_t& val)
 }
 
 /**
+ * \brief Tangent function.
+ * \param val argument
+ * \return tangent
+ */
+MCUTILSAPI inline double Tan(const units::angle::radian_t& val)
+{
+    return tan(val());
+}
+
+/**
  * \brief Arcsine function.
  * \param val argument
  * \return angle
@@ -81,6 +91,16 @@ MCUTILSAPI inline units::angle::radian_t Asin(const double& val)
 MCUTILSAPI inline units::angle::radian_t Acos(const double& val)
 {
     return units::angle::radian_t(acos(val));
+}
+
+/**
+ * \brief Arctangent function.
+ * \param val argument
+ * \return angle
+ */
+MCUTILSAPI inline units::angle::radian_t Atan(const double& val)
+{
+    return units::angle::radian_t(atan(val));
 }
 
 /**
