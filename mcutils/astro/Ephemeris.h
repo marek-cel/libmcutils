@@ -39,13 +39,13 @@ class MCUTILSAPI Ephemeris
 {
 public:
 
-    void Update(const DateTime& gd, double lat, double lon);
-    void Update(const DateTime& gd, double sinLat, double cosLat, double lon);
+    void Update(const DateTime& gd, units::angle::radian_t lat, units::angle::radian_t lon);
+    void Update(const DateTime& gd, double sinLat, double cosLat, units::angle::radian_t lon);
 
     inline double ut() const { return _ut; }
 
-    inline double gst() const { return _gst; }
-    inline double lst() const { return _lst; }
+    inline units::angle::radian_t gst() const { return _gst; }
+    inline units::angle::radian_t lst() const { return _lst; }
 
     inline AzElRaDec sun()  const { return _sun;  }
     inline AzElRaDec moon() const { return _moon; }
@@ -56,8 +56,8 @@ private:
 
     double _ut;             ///< [h] universal time
 
-    double _gst;            ///< [rad] Greenwhich Siderial Time
-    double _lst;            ///< [rad] Local Siderial Time
+    units::angle::radian_t _gst = 0.0_rad;  ///< Greenwhich Siderial Time
+    units::angle::radian_t _lst = 0.0_rad;  ///< Local Siderial Time
 
     AzElRaDec _sun;         ///< right ascesion and declination of the Sun
     AzElRaDec _moon;        ///< right ascesion and declination of the Moon
@@ -80,7 +80,7 @@ private:
      * \param sinEpsilon obliquity of the ecliptic sine
      * \param cosEpsilon obliquity of the ecliptic cosine
     */
-    void UpdateSun(double jc, double sinLat, double cosLat, 
+    void UpdateSun(double jc, double sinLat, double cosLat,
                    double sinEpsilon, double cosEpsilon);
 
     /**
@@ -91,7 +91,7 @@ private:
      * \param sinEpsilon obliquity of the ecliptic sine
      * \param cosEpsilon obliquity of the ecliptic cosine
     */
-    void UpdateMoon(double jc, double sinLat, double cosLat, 
+    void UpdateMoon(double jc, double sinLat, double cosLat,
                     double sinEpsilon, double cosEpsilon);
 };
 

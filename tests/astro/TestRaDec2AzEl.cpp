@@ -25,8 +25,8 @@ TEST_F(TestRaDec2AzEl, CanComputeAzElFromRaDecLatAndLST1)
     radec.ra = 5.623280496934751_rad;
     radec.dec = -0.2513744984225895_rad;
 
-    double lat = mc::Units::deg2rad(52.2296756);
-    double lst = 5.956121595178459;
+    units::angle::radian_t lat = 52.2296756_deg;
+    units::angle::radian_t lst = 5.956121595178459_rad;
 
     azel = mc::RaDec2AzEl(radec, lat, lst);
 

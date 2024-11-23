@@ -19,37 +19,81 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_ASTRO_UTILS_H_
-#define MCUTILS_ASTRO_UTILS_H_
+#ifndef MCUTILS_UNITS_UTILS_H_
+#define MCUTILS_UNITS_UTILS_H_
 
 #include <units.h>
 
 #include <mcutils/defs.h>
-#include <mcutils/astro/Coordinates.h>
 
 namespace mc {
 
-/**
- * \brief Converts from equatorial (right ascension, declination) to horizontal
- * (azimuth, elevation) coordinate system.
- * \param radec right ascension, declination
- * \param lat [rad] geodetic latitude (positive north)
- * \param lst [rad] Local Siderial Time
- */
-MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, const units::angle::radian_t& lat,
-                           const units::angle::radian_t& lst);
+static constexpr units::angle::radian_t kPi = units::angle::radian_t(M_PI);
+static constexpr units::angle::radian_t kPi_2 = 0.5 * kPi;
 
 /**
- * \brief Converts from equatorial (right ascension, declination) to horizontal
- * (azimuth, elevation) coordinate system.
- * \param radec right ascension, declination
- * \param sinLat [-] latitude sine
- * \param cosLat [-] latitude cosine
- * \param lst [rad] Local Siderial Time
+ * \brief Absolute value function.
+ * \param val input value
+ * \return absolute value
  */
-MCUTILSAPI AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
-                           const units::angle::radian_t& lst);
+template <typename T>
+T Abs(const T& val)
+{
+    constexpr T zero = T(0);
+    return val < zero ? -val : val;
+}
+
+/**
+ * \brief Sine function.
+ * \param val argument
+ * \return sine
+ */
+MCUTILSAPI inline double Sin(const units::angle::radian_t& val)
+{
+    return sin(val());
+}
+
+/**
+ * \brief Cosine function.
+ * \param val argument
+ * \return cosine
+ */
+MCUTILSAPI inline double Cos(const units::angle::radian_t& val)
+{
+    return cos(val());
+}
+
+/**
+ * \brief Arcsine function.
+ * \param val argument
+ * \return angle
+ */
+MCUTILSAPI inline units::angle::radian_t Asin(const double& val)
+{
+    return units::angle::radian_t(asin(val));
+}
+
+/**
+ * \brief Arcsine function.
+ * \param val argument
+ * \return angle
+ */
+MCUTILSAPI inline units::angle::radian_t Acos(const double& val)
+{
+    return units::angle::radian_t(acos(val));
+}
+
+/**
+ * \brief Arctangent function.
+ * \param val argument
+ * \return angle
+ */
+MCUTILSAPI inline units::angle::radian_t Atan2(const double& x, const double& y)
+{
+    return units::angle::radian_t(atan2(x, y));
+}
 
 } // namespace mc
 
-#endif // MCUTILS_ASTRO_UTILS_H_
+#endif // MCUTILS_TYPES_H_
+

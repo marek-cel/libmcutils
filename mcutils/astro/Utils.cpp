@@ -24,48 +24,51 @@
 
 #include <cmath>
 
+#include <mcutils/units_utils.h>
+
 namespace mc {
 
-AzEl RaDec2AzEl(const RaDec& radec, double lat, double lst)
+AzEl RaDec2AzEl(const RaDec& radec, const units::angle::radian_t& lat,
+                const units::angle::radian_t& lst)
 {
-    double sinLat = sin(lat);
-    double cosLat = cos(lat);
-
+    double sinLat = Sin(lat);
+    double cosLat = Cos(lat);
     return RaDec2AzEl(radec, sinLat, cosLat, lst);
 }
 
-AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat, double lst)
+AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
+                const units::angle::radian_t& lst)
 {
     AzEl result;
 
-    double lha = lst - radec.ra();
-    while (lha < -M_PI) lha += 2.0 * M_PI;
-    while (lha >  M_PI) lha -= 2.0 * M_PI;
+    units::angle::radian_t lha = lst - radec.ra;
+    while (lha < -kPi) lha += 2.0 * kPi;
+    while (lha >  kPi) lha -= 2.0 * kPi;
 
-    double cosLha = cos(lha);
+    double cosLha = Cos(lha);
 
-    double sinDelta = sin(radec.dec());
-    double cosDelta = cos(radec.dec());
+    double sinDelta = Sin(radec.dec);
+    double cosDelta = Cos(radec.dec);
 
     double sinElev = sinDelta*sinLat + cosDelta*cosLha*cosLat;
 
     if (sinElev >  1.0) sinElev =  1.0;
     if (sinElev < -1.0) sinElev = -1.0;
 
-    result.el = units::angle::radian_t(asin(sinElev));
+    result.el = Asin(sinElev);
 
-    double cosElev = cos(result.el());
+    double cosElev = Cos(result.el);
 
     double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
     cosAzim = fabs(cosAzim);
 
-    if (cosAzim >  1.0) cosAzim =  1.0;
-    if (cosAzim < -1.0) cosAzim = -1.0;
+    if ( cosAzim >  1.0 ) cosAzim =  1.0;
+    if ( cosAzim < -1.0 ) cosAzim = -1.0;
 
-    if (lha < 0.0)
-        result.az = units::angle::radian_t(M_PI - acos(cosAzim));
+    if ( lha < 0.0_rad )
+        result.az = kPi - Acos(cosAzim);
     else
-        result.az = units::angle::radian_t(M_PI + acos(cosAzim));
+        result.az = kPi + Acos(cosAzim);
 
     return result;
 }

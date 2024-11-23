@@ -25,6 +25,8 @@
 #include <cmath>
 #include <string>
 
+#include <mcutils/units_utils.h>
+
 #include <mcutils/math/Matrix3x3.h>
 #include <mcutils/math/Vector3.h>
 
@@ -43,14 +45,14 @@ Quaternion::Quaternion(const Angles& angl)
     units::angle::radian_t tht_2 = angl.tht() / 2.0;
     units::angle::radian_t psi_2 = angl.psi() / 2.0;
 
-    double sin_phi_2 = sin(phi_2());
-    double cos_phi_2 = cos(phi_2());
+    double sin_phi_2 = Sin(phi_2);
+    double cos_phi_2 = Cos(phi_2);
 
-    double sin_tht_2 = sin(tht_2());
-    double cos_tht_2 = cos(tht_2());
+    double sin_tht_2 = Sin(tht_2);
+    double cos_tht_2 = Cos(tht_2);
 
-    double sin_psi_2 = sin(psi_2());
-    double cos_psi_2 = cos(psi_2());
+    double sin_psi_2 = Sin(psi_2);
+    double cos_psi_2 = Cos(psi_2);
 
     double cos_phi_2_cos_psi_2 = cos_phi_2 * cos_psi_2;
     double cos_phi_2_sin_psi_2 = cos_phi_2 * sin_psi_2;
@@ -128,21 +130,21 @@ Angles Quaternion::GetAngles() const
     double sin_tht_2 = _e0*_ey - _ex*_ez;
     if(sin_tht_2 >= 0.5)
     {
-        result.phi() =  units::angle::radian_t(2.0 * asin(_ex / cos(M_PI_4)));
-        result.tht() =  units::angle::radian_t(M_PI_2);
+        result.phi() =  2.0 * Asin(_ex / cos(M_PI_4));
+        result.tht() =  kPi_2;
         result.psi() =  0.0_rad;
     }
     else if (sin_tht_2 <= -0.5)
     {
-        result.phi() =  units::angle::radian_t(2.0 * asin(_ex / cos(M_PI_4)));
-        result.tht() = -units::angle::radian_t(M_PI_2);
+        result.phi() =  2.0 * Asin(_ex / cos(M_PI_4));
+        result.tht() = -kPi_2;
         result.psi() =  0.0_rad;
     }
     else
     {
-        result.phi() = units::angle::radian_t(atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey)));
-        result.tht() = units::angle::radian_t(asin(2.0*sin_tht_2));
-        result.psi() = units::angle::radian_t(atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez)));
+        result.phi() = Atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey));
+        result.tht() = Asin(2.0*sin_tht_2);
+        result.psi() = Atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez));
     }
     result.Normalize();
 

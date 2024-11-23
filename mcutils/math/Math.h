@@ -29,18 +29,6 @@
 namespace mc {
 
 /**
- * \brief Absolute value function.
- * \param val input value
- * \return absolute value
- */
-template <typename T>
-T Abs(const T& val)
-{
-    constexpr T zero = static_cast<T>(0);
-    return val < zero ? -val : val;
-}
-
-/**
  * \brief Checks if value is within the given range.
  * \param min minimum possible value
  * \param max maximum possible value
@@ -108,28 +96,6 @@ template <typename T>
 auto Pow5(const T& val)
 {
     return val * val * val * val * val;
-}
-
-/**
- * \brief Sine function.
- * \param val argument
- * \return sine
- */
-template <typename T>
-double Sin(const T& val)
-{
-    return sin(static_cast<double>(val));
-}
-
-/**
- * \brief Cosine function.
- * \param val argument
- * \return cosine
- */
-template <typename T>
-double Cos(const T& val)
-{
-    return cos(static_cast<double>(val));
 }
 
 /**

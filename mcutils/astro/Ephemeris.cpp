@@ -24,21 +24,21 @@
 
 #include <cmath>
 
+#include <mcutils/units_utils.h>
 #include <mcutils/astro/Utils.h>
 #include <mcutils/math/Angles.h>
 
 namespace mc {
 
-void Ephemeris::Update(const DateTime& gd, double lat, double lon)
+void Ephemeris::Update(const DateTime& gd, units::angle::radian_t lat, units::angle::radian_t lon)
 {
-    Update(gd, sin(lat), cos(lat), lon);
+    Update(gd, Sin(lat), Cos(lat), lon);
 }
 
-void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, double lon)
+void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, units::angle::radian_t lon)
 {
     _jd.SetFromGregorianDate(gd);
 
-    double jd = _jd.jd();
     double jc = _jd.jc();
 
     _ut = gd.hour
@@ -54,16 +54,16 @@ void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, double 
     while (T0 <  0.0) T0 += 24.0;
 
     // Greenwich sidereal time
-    _gst = M_PI * T0 / 12.0;
+    _gst = kPi * T0 / 12.0;
 
     // local sidereal time angle
     _lst = _gst + lon;
 
     // obliquity of the ecliptic
-    double epsilon = 0.409093 - 0.000227 * jc;
+    units::angle::radian_t epsilon = 0.409093_rad - 0.000227_rad * jc;
 
-    double cosEpsilon = cos(epsilon);
-    double sinEpsilon = sin(epsilon);
+    double cosEpsilon = Cos(epsilon);
+    double sinEpsilon = Sin(epsilon);
 
     UpdateSun  (jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
     UpdateMoon (jc, sinLat, cosLat, sinEpsilon, cosEpsilon);
@@ -79,15 +79,15 @@ void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
     while (M <      0.0) M += 2.0 * M_PI;
 
     // Sun ecliptic longitude
-    double sunLambda = 4.894968 + 628.331951 * jc
-                     + (0.033417 - 0.000084 * jc) * sin(M)
-                     + 0.000351 * sin(2.0*M);
+    units::angle::radian_t sunLambda = 4.894968_rad + 628.331951_rad * jc
+                                     + (0.033417_rad - 0.000084_rad * jc) * sin(M)
+                                     + 0.000351_rad * sin(2.0*M);
 
-    while (sunLambda > 2.0*M_PI) sunLambda -= 2.0 * M_PI;
-    while (sunLambda <      0.0) sunLambda += 2.0 * M_PI;
+    while ( sunLambda > 2.0 * kPi ) sunLambda -= 2.0 * kPi;
+    while ( sunLambda < 0.0_rad   ) sunLambda += 2.0 * kPi;
 
-    double cosSunLambda = cos(sunLambda);
-    double sinSunLambda = sin(sunLambda);
+    double cosSunLambda = Cos(sunLambda);
+    double sinSunLambda = Sin(sunLambda);
 
     // Sun right ascension
     _sun.ra_dec.ra = units::angle::radian_t(atan2(sinSunLambda * cosEpsilon, cosSunLambda));
