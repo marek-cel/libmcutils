@@ -24,6 +24,7 @@
 
 #include <utility>
 
+#include <mcutils/units_utils.h>
 #include <mcutils/math/Math.h>
 
 namespace mc {
@@ -37,9 +38,9 @@ const Matrix3x3 ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 ECEF::ECEF(const Ellipsoid& ellipsoid)
     : _ellipsoid(ellipsoid)
 {
-    _pos_geo.lat = 0.0;
-    _pos_geo.lon = 0.0;
-    _pos_geo.alt = 0.0;
+    _pos_geo.lat = 0.0_rad;
+    _pos_geo.lon = 0.0_rad;
+    _pos_geo.alt = 0.0_m;
 
     _pos_cart.x() = _ellipsoid.a();
     _pos_cart.y() = 0.0;
@@ -48,22 +49,26 @@ ECEF::ECEF(const Ellipsoid& ellipsoid)
     UpdateMatrices();
 }
 
-void ECEF::ConvertGeo2Cart(double lat, double lon, double alt,
+void ECEF::ConvertGeo2Cart(units::angle::radian_t lat,
+                           units::angle::radian_t lon,
+                           units::length::meter_t alt,
                            double* x, double* y, double* z) const
 {
-    double sinLat = sin(lat);
-    double cosLat = cos(lat);
-    double sinLon = sin(lon);
-    double cosLon = cos(lon);
+    double sinLat = units::math::sin(lat);
+    double cosLat = units::math::cos(lat);
+    double sinLon = units::math::sin(lon);
+    double cosLon = units::math::cos(lon);
 
     double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2() * sinLat*sinLat);
 
-    *x = (n + alt) * cosLat * cosLon;
-    *y = (n + alt) * cosLat * sinLon;
-    *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt) * sinLat;
+    *x = (n + alt()) * cosLat * cosLon;
+    *y = (n + alt()) * cosLat * sinLon;
+    *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt()) * sinLat;
 }
 
-Vector3 ECEF::ConvertGeo2Cart(double lat, double lon, double alt) const
+Vector3 ECEF::ConvertGeo2Cart(units::angle::radian_t lat,
+                              units::angle::radian_t lon,
+                              units::length::meter_t alt) const
 {
     Vector3 pos_cart;
     ConvertGeo2Cart(lat, lon, alt, &pos_cart.x(), &pos_cart.y(), &pos_cart.z());
@@ -81,7 +86,9 @@ void ECEF::ConvertGeo2Cart(const Geo& geo, Vector3* pos_cart) const
 }
 
 void ECEF::ConvertCart2Geo(double x, double y, double z,
-                           double* lat, double* lon, double* alt) const
+                           units::angle::radian_t* lat,
+                           units::angle::radian_t* lon,
+                           units::length::meter_t* alt) const
 {
 #   ifdef ECEF_SIMPLE_CONVERSION
     // This method provides 1cm accuracy for height less than 1000km
@@ -124,9 +131,9 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
     double v  = sqrt(uv*uv + (1.0 - _ellipsoid.e2())*z2);
     double z0 = _ellipsoid.b2() * z / (_ellipsoid.a() * v);
 
-    *alt = u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
-    *lat = atan((z + _ellipsoid.ep2()*z0)/r);
-    *lon = atan2(y, x);
+    *alt = 1.0_m * u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
+    *lat = units::math::atan((z + _ellipsoid.ep2()*z0)/r);
+    *lon = units::math::atan2(y, x);
 #   endif
 }
 
@@ -221,10 +228,10 @@ void ECEF::SetPositionFromCart(const Vector3& pos_cart)
 
 void ECEF::UpdateMatrices()
 {
-    double cosLat = cos(_pos_geo.lat);
-    double cosLon = cos(_pos_geo.lon);
-    double sinLat = sin(_pos_geo.lat);
-    double sinLon = sin(_pos_geo.lon);
+    double cosLat = units::math::cos(_pos_geo.lat);
+    double cosLon = units::math::cos(_pos_geo.lon);
+    double sinLat = units::math::sin(_pos_geo.lat);
+    double sinLon = units::math::sin(_pos_geo.lon);
 
     // NED to ECEF
     _ned2ecef(0,0) = -cosLon*sinLat;

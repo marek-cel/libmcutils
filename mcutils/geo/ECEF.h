@@ -75,7 +75,9 @@ public:
      * \param y [m] resulting cartesian y-coordinate pointer
      * \param z [m] resulting cartesian z-coordinate pointer
      */
-    void ConvertGeo2Cart(double lat, double lon, double alt,
+    void ConvertGeo2Cart(units::angle::radian_t lat,
+                         units::angle::radian_t lon,
+                         units::length::meter_t alt,
                          double* x, double* y, double* z) const;
 
     /**
@@ -85,7 +87,9 @@ public:
      * \param alt [m] altitude above mean sea level
      * \return [m] resulting cartesian coordinates vector
      */
-    Vector3 ConvertGeo2Cart(double lat, double lon, double alt) const;
+    Vector3 ConvertGeo2Cart(units::angle::radian_t lat,
+                            units::angle::radian_t lon,
+                            units::length::meter_t alt) const;
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
@@ -111,7 +115,9 @@ public:
      * \param alt [m] resulting altitude above mean sea level pointer
      */
     void ConvertCart2Geo(double x, double y, double z,
-                         double* lat, double* lon, double* alt) const;
+                         units::angle::radian_t* lat,
+                         units::angle::radian_t* lon,
+                         units::length::meter_t* alt) const;
 
     /**
      * \brief Converts cartesian coordinates into geodetic coordinates.
