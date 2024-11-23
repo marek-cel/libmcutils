@@ -35,8 +35,8 @@ namespace mc {
  */
 struct AzEl
 {
-    units::angle::radian_t az = 0.0_rad;    ///< azimuth
-    units::angle::radian_t el = 0.0_rad;    ///< elevation
+    units::angle::radian_t az = 0.0_rad;    ///< [rad] azimuth
+    units::angle::radian_t el = 0.0_rad;    ///< [rad] elevation
 };
 
 /**
@@ -46,8 +46,8 @@ struct AzEl
  */
 struct RaDec
 {
-    units::angle::radian_t ra  = 0.0_rad;   ///< right ascetion
-    units::angle::radian_t dec = 0.0_rad;   ///< declination
+    units::angle::radian_t ra  = 0.0_rad;   ///< [rad] right ascetion
+    units::angle::radian_t dec = 0.0_rad;   ///< [rad] declination
 };
 
 /**

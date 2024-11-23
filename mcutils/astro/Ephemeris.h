@@ -54,9 +54,9 @@ private:
 
     JulianDate _jd; ///< Julian date
 
-    units::time::hour_t    _ut  = 0.0_hr;   ///< universal time
-    units::angle::radian_t _gst = 0.0_rad;  ///< Greenwhich Siderial Time
-    units::angle::radian_t _lst = 0.0_rad;  ///< Local Siderial Time
+    units::time::hour_t    _ut  = 0.0_hr;   ///< [h] universal time
+    units::angle::radian_t _gst = 0.0_rad;  ///< [rad] Greenwhich Siderial Time
+    units::angle::radian_t _lst = 0.0_rad;  ///< [rad] Local Siderial Time
 
     AzElRaDec _sun;     ///< right ascesion and declination of the Sun
     AzElRaDec _moon;    ///< right ascesion and declination of the Moon
