@@ -24,9 +24,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Angles.h>
 #include <mcutils/math/MatrixNxN.h>
-#include <mcutils/math/Quaternion.h>
 #include <mcutils/math/Vector3.h>
 
 template class MCUTILSAPI mc::MatrixMxN<3,3>;
@@ -36,18 +34,6 @@ namespace mc {
 
 /**
  * \brief 3 by 3 matrix class.
- *
- * Notice that rotations are considered to be passive (alias) rotations.
- *
- * ### Refernces:
- * - Allerton D.: Principles of Flight Simulation, 2009, p.120
- * - Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373
- * - Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]
- * - Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]
- * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]
- * - [Rotation matrix - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
- * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
- * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
 class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
 {
@@ -60,12 +46,6 @@ public:
     Matrix3x3(double xx = 0.0, double xy = 0.0, double xz = 0.0,
               double yx = 0.0, double yy = 0.0, double yz = 0.0,
               double zx = 0.0, double zy = 0.0, double zz = 0.0);
-
-    /** \brief Creates passive (alias) rotation matrix. */
-    explicit Matrix3x3(const Angles& angl);
-
-    /** \brief Creates passive (alias) rotation matrix. */
-    explicit Matrix3x3(const Quaternion& qtrn);
 
     inline double xx() const { return _elements[0]; }
     inline double xy() const { return _elements[1]; }
@@ -102,12 +82,6 @@ public:
     void Set(double xx, double xy, double xz,
              double yx, double yy, double yz,
              double zx, double zy, double zz);
-
-    /** \brief Returns Bryant angles of rotation matrix. */
-    Angles GetAngles() const;
-
-    /** \brief Returns quaternion of rotation matrix. */
-    Quaternion GetQuaternion() const;
 
     /** \brief Returns transposed matrix. */
     Matrix3x3 GetTransposed() const;

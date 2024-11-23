@@ -58,6 +58,7 @@ set(SOURCES
     math/TestMatrixNxN.cpp
     math/TestMatrixNxN_Armadillo.cpp
     math/TestQuaternion.cpp
+    math/TestRotMatrix.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp
     math/TestSegPlaneIsect.cpp

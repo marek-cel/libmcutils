@@ -30,8 +30,8 @@
 #include <mcutils/geo/Geo.h>
 
 #include <mcutils/math/Angles.h>
-#include <mcutils/math/Matrix3x3.h>
 #include <mcutils/math/Quaternion.h>
+#include <mcutils/math/RotMatrix.h>
 #include <mcutils/math/Vector3.h>
 
 namespace mc {
@@ -57,8 +57,8 @@ class MCUTILSAPI ECEF
 {
 public:
 
-    static const Matrix3x3 _enu2ned;    ///< matrix of rotation from ENU to NED
-    static const Matrix3x3 _ned2enu;    ///< matrix of rotation from NED to ENU
+    static const RotMatrix _enu2ned;    ///< matrix of rotation from ENU to NED
+    static const RotMatrix _ned2enu;    ///< matrix of rotation from NED to ENU
 
     /**
      * \brief Constructor.
@@ -223,13 +223,13 @@ public:
 
     inline const Vector3& pos_cart() const { return _pos_cart; }
 
-    inline const Matrix3x3& enu2ned() const { return _enu2ned; }
-    inline const Matrix3x3& ned2enu() const { return _ned2enu; }
+    inline const RotMatrix& enu2ned() const { return _enu2ned; }
+    inline const RotMatrix& ned2enu() const { return _ned2enu; }
 
-    inline const Matrix3x3& enu2ecef() const { return _enu2ecef; }
-    inline const Matrix3x3& ned2ecef() const { return _ned2ecef; }
-    inline const Matrix3x3& ecef2enu() const { return _ecef2enu; }
-    inline const Matrix3x3& ecef2ned() const { return _ecef2ned; }
+    inline const RotMatrix& enu2ecef() const { return _enu2ecef; }
+    inline const RotMatrix& ned2ecef() const { return _ned2ecef; }
+    inline const RotMatrix& ecef2enu() const { return _ecef2enu; }
+    inline const RotMatrix& ecef2ned() const { return _ecef2ned; }
 
 protected:
 
@@ -238,10 +238,10 @@ protected:
     Geo     _pos_geo;           ///< geodetic coordinates (latitude, longitude, altitude)
     Vector3 _pos_cart;          ///< [m] cartesian coordinates vector (x, y, z)
 
-    Matrix3x3 _enu2ecef;        ///< rotation matrix from ENU to ECEF
-    Matrix3x3 _ned2ecef;        ///< rotation matrix from NED to ECEF
-    Matrix3x3 _ecef2enu;        ///< rotation matrix from ECEF to ENU
-    Matrix3x3 _ecef2ned;        ///< rotation matrix from ECEF to NED
+    RotMatrix _enu2ecef;        ///< rotation matrix from ENU to ECEF
+    RotMatrix _ned2ecef;        ///< rotation matrix from NED to ECEF
+    RotMatrix _ecef2enu;        ///< rotation matrix from ECEF to ENU
+    RotMatrix _ecef2ned;        ///< rotation matrix from ECEF to NED
 
     /**
      * \brief Updates rotation matrices due to position.

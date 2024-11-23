@@ -15,6 +15,7 @@ set(HEADERS
     MatrixNxN.h
     Quaternion.h
     Random.h
+    RotMatrix.h
     RungeKutta4.h
     SegPlaneIsect.h
     Table2.h
@@ -34,6 +35,7 @@ set(SOURCES
     Matrix6x6.cpp
     Quaternion.cpp
     Random.cpp
+    RotMatrix.cpp
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp
