@@ -19,30 +19,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_UNITS_UTILS_H_
-#define MCUTILS_UNITS_UTILS_H_
 
-#include <units.h>
-
-#include <mcutils/defs.h>
+#include <mcutils/units_utils.h>
 
 namespace units {
 namespace math {
 
 template <>
-angle::radian_t acos<double>(const double x) noexcept;
+angle::radian_t acos<double>(const double x) noexcept
+{
+    return units::angle::radian_t(std::acos(x));
+}
 
 template <>
-angle::radian_t asin<double>(const double x) noexcept;
+angle::radian_t asin<double>(const double x) noexcept
+{
+    return units::angle::radian_t(std::asin(x));
+}
 
 template <>
-angle::radian_t atan<double>(const double x) noexcept;
+angle::radian_t atan<double>(const double x) noexcept
+{
+    return units::angle::radian_t(std::atan(x));
+}
 
 template <>
-angle::radian_t atan2<double,double>(const double x, const double y) noexcept;
+angle::radian_t atan2<double,double>(const double x, const double y) noexcept
+{
+    return units::angle::radian_t(std::atan2(x, y));
+}
 
 } // namespace math
 } // namespace units
-
-#endif // MCUTILS_TYPES_H_
-

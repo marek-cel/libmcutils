@@ -31,8 +31,8 @@ namespace mc {
 AzEl RaDec2AzEl(const RaDec& radec, const units::angle::radian_t& lat,
                 const units::angle::radian_t& lst)
 {
-    double sinLat = Sin(lat);
-    double cosLat = Cos(lat);
+    double sinLat = units::math::sin(lat);
+    double cosLat = units::math::cos(lat);
     return RaDec2AzEl(radec, sinLat, cosLat, lst);
 }
 
@@ -42,22 +42,22 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
     AzEl result;
 
     units::angle::radian_t lha = lst - radec.ra;
-    while (lha < -kPi) lha += 2.0 * kPi;
-    while (lha >  kPi) lha -= 2.0 * kPi;
+    while (lha < -1.0_rad * M_PI) lha += 2.0_rad * M_PI;
+    while (lha >  1.0_rad * M_PI) lha -= 2.0_rad * M_PI;
 
-    double cosLha = Cos(lha);
+    double cosLha = units::math::cos(lha);
 
-    double sinDelta = Sin(radec.dec);
-    double cosDelta = Cos(radec.dec);
+    double sinDelta = units::math::sin(radec.dec);
+    double cosDelta = units::math::cos(radec.dec);
 
     double sinElev = sinDelta*sinLat + cosDelta*cosLha*cosLat;
 
     if (sinElev >  1.0) sinElev =  1.0;
     if (sinElev < -1.0) sinElev = -1.0;
 
-    result.el = Asin(sinElev);
+    result.el = units::math::asin(sinElev);
 
-    double cosElev = Cos(result.el);
+    double cosElev = units::math::cos(result.el);
 
     double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
     cosAzim = fabs(cosAzim);
@@ -66,9 +66,9 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
     if ( cosAzim < -1.0 ) cosAzim = -1.0;
 
     if ( lha < 0.0_rad )
-        result.az = kPi - Acos(cosAzim);
+        result.az = 1.0_rad * M_PI - units::math::acos(cosAzim);
     else
-        result.az = kPi + Acos(cosAzim);
+        result.az = 1.0_rad * M_PI + units::math::acos(cosAzim);
 
     return result;
 }

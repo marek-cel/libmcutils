@@ -46,14 +46,14 @@ Matrix3x3::Matrix3x3(double xx, double xy, double xz,
 
 Matrix3x3::Matrix3x3(const Angles& angl)
 {
-    double sin_phi = Sin(angl.phi());
-    double cos_phi = Cos(angl.phi());
+    double sin_phi = units::math::sin(angl.phi());
+    double cos_phi = units::math::cos(angl.phi());
 
-    double sin_tht = Sin(angl.tht());
-    double cos_tht = Cos(angl.tht());
+    double sin_tht = units::math::sin(angl.tht());
+    double cos_tht = units::math::cos(angl.tht());
 
-    double sin_psi = Sin(angl.psi());
-    double cos_psi = Cos(angl.psi());
+    double sin_psi = units::math::sin(angl.psi());
+    double cos_psi = units::math::cos(angl.psi());
 
     double sin_phi_sin_tht = sin_phi * sin_tht;
     double cos_phi_sin_tht = cos_phi * sin_tht;
@@ -120,16 +120,16 @@ Angles Matrix3x3::GetAngles() const
     double sin_tht = -xz();
     double cos_tht = sqrt(1.0 - std::min(1.0, sin_tht*sin_tht));
 
-    result.tht() = Atan2(sin_tht, cos_tht);
+    result.tht() = units::math::atan2(sin_tht, cos_tht);
 
     if (cos_tht > 0.0)
     {
-        result.phi() = Atan2(yz(), zz());
-        result.psi() = Atan2(xy(), xx());
+        result.phi() = units::math::atan2(yz(), zz());
+        result.psi() = units::math::atan2(xy(), xx());
     }
     else
     {
-        result.phi() = Atan2(yx(), zx());
+        result.phi() = units::math::atan2(yx(), zx());
         result.psi() = 0.0_rad;
     }
 
