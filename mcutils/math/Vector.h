@@ -24,8 +24,6 @@
 
 #include <sstream>
 
-#include <mcutils/defs.h>
-
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
 
@@ -345,7 +343,7 @@ inline VectorN<TYPE, SIZE> operator*(double value, const VectorN<TYPE, SIZE>& ve
  * \brief 3 elements column vector class.
  */
 template <typename TYPE>
-class MCUTILSAPI Vector3 : public VectorN<TYPE, 3>
+class Vector3 : public VectorN<TYPE, 3>
 {
 public:
 

@@ -515,7 +515,7 @@ inline MatrixNxN<TYPE, SIZE> operator*(double value, const MatrixNxN<TYPE, SIZE>
  * \brief 3 by 3 matrix class template.
  */
 template <typename TYPE>
-class MCUTILSAPI Matrix3x3 : public MatrixNxN<TYPE, 3>
+class Matrix3x3 : public MatrixNxN<TYPE, 3>
 {
 public:
 
