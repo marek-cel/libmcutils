@@ -158,7 +158,8 @@ Quaternion Quaternion::GetConjugated() const
     return result;
 }
 
-Quaternion Quaternion::GetDerivative(const Vector3d& omega, double lambda) const
+Quaternion Quaternion::GetDerivative(const Vector3<units::angular_velocity::radians_per_second_t>& omega,
+                                     double lambda) const
 {
     Quaternion result;
 
@@ -170,37 +171,21 @@ Quaternion Quaternion::GetDerivative(const Vector3d& omega, double lambda) const
     // | ey_dot | = -0.5 * | -Q  R  0 -P | | ey | = | -0.5 * ( ex*R - e0*Q - ez*P ) |
     // | ez_dot |          | -R -Q  P  0 | | ez |   | -0.5 * ( ey*P - e0*R - ex*Q ) |
 
-    // result._e0 = -0.5 * (_ez * omega.r()
-    //                    + _ey * omega.q()
-    //                    + _ex * omega.p());
+    result._e0 = -0.5 * (_ez * omega.r()()
+                       + _ey * omega.q()()
+                       + _ex * omega.p()());
 
-    // result._ex = -0.5 * (_ez * omega.q()
-    //                    - _ey * omega.r()
-    //                    - _e0 * omega.p());
+    result._ex = -0.5 * (_ez * omega.q()()
+                       - _ey * omega.r()()
+                       - _e0 * omega.p()());
 
-    // result._ey = -0.5 * (_ex * omega.r()
-    //                    - _e0 * omega.q()
-    //                    - _ez * omega.p());
+    result._ey = -0.5 * (_ex * omega.r()()
+                       - _e0 * omega.q()()
+                       - _ez * omega.p()());
 
-    // result._ez = -0.5 * (_ey * omega.p()
-    //                    - _e0 * omega.r()
-    //                    - _ex * omega.q());
-
-    result._e0 = -0.5 * (_ez * omega.z()
-                       + _ey * omega.y()
-                       + _ex * omega.x());
-
-    result._ex = -0.5 * (_ez * omega.y()
-                       - _ey * omega.z()
-                       - _e0 * omega.x());
-
-    result._ey = -0.5 * (_ex * omega.z()
-                       - _e0 * omega.y()
-                       - _ez * omega.x());
-
-    result._ez = -0.5 * (_ey * omega.x()
-                       - _e0 * omega.z()
-                       - _ex * omega.y());
+    result._ez = -0.5 * (_ey * omega.p()()
+                       - _e0 * omega.r()()
+                       - _ex * omega.q()());
 
     // Pamadi - Performance Stability Dynamics and Control of Airplanes, 2004, p.348
     // Sibilski - Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34

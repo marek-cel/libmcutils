@@ -532,6 +532,25 @@ public:
               TYPE yx = TYPE{0}, TYPE yy = TYPE{0}, TYPE yz = TYPE{0},
               TYPE zx = TYPE{0}, TYPE zy = TYPE{0}, TYPE zz = TYPE{0})
     {
+        Set(xx, xy, xz, yx, yy, yz, zx, zy, zz);
+    }
+
+    /**
+     * \brief Sets items of the matrix.
+     * \param xx item at position xx
+     * \param xy item at position xy
+     * \param xz item at position xz
+     * \param yx item at position yx
+     * \param yy item at position yy
+     * \param yz item at position yz
+     * \param zx item at position zx
+     * \param zy item at position zy
+     * \param zz item at position zz
+     */
+    void Set(TYPE xx, TYPE xy, TYPE xz,
+             TYPE yx, TYPE yy, TYPE yz,
+             TYPE zx, TYPE zy, TYPE zz)
+    {
         this->_elements[0] = xx;
         this->_elements[1] = xy;
         this->_elements[2] = xz;

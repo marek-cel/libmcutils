@@ -24,6 +24,8 @@
 
 #include <sstream>
 
+#include <units.h>
+
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
 
@@ -283,7 +285,7 @@ public:
 
 protected:
 
-    TYPE _elements[kSize] = { 0 };  ///< vector items
+    TYPE _elements[kSize] = { TYPE{0} };    ///< vector items
 
     /** \brief Adds vector. */
     void Add(const VectorN<TYPE, SIZE>& vect)
@@ -341,6 +343,7 @@ inline VectorN<TYPE, SIZE> operator*(double value, const VectorN<TYPE, SIZE>& ve
 
 /**
  * \brief 3 elements column vector class.
+ * \tparam TYPE vector item type
  */
 template <typename TYPE>
 class Vector3 : public VectorN<TYPE, 3>
@@ -375,7 +378,7 @@ public:
     }
 
     /** \brief Sets vector values. */
-    void Set(double x, double y, double z)
+    void Set(TYPE x, TYPE y, TYPE z)
     {
         this->_elements[0] = x;
         this->_elements[1] = y;
@@ -389,8 +392,22 @@ public:
     inline TYPE& y()       { return this->_elements[1]; }
     inline TYPE& z()       { return this->_elements[2]; }
 
+    inline TYPE  p() const { return this->_elements[0]; }
+    inline TYPE  q() const { return this->_elements[1]; }
+    inline TYPE  r() const { return this->_elements[2]; }
+    inline TYPE& p()       { return this->_elements[0]; }
+    inline TYPE& q()       { return this->_elements[1]; }
+    inline TYPE& r()       { return this->_elements[2]; }
+
+    inline TYPE  u() const { return this->_elements[0]; }
+    inline TYPE  v() const { return this->_elements[1]; }
+    inline TYPE  w() const { return this->_elements[2]; }
+    inline TYPE& u()       { return this->_elements[0]; }
+    inline TYPE& v()       { return this->_elements[1]; }
+    inline TYPE& w()       { return this->_elements[2]; }
+
     /** \brief Addition operator. */
-    Vector3<TYPE> operator+(const Vector3& vect) const
+    Vector3<TYPE> operator+(const Vector3<TYPE>& vect) const
     {
         Vector3<TYPE> result(*this);
         result.Add(vect);
@@ -486,6 +503,20 @@ template <typename TYPE>
 inline Vector3<TYPE> operator*(double value, const Vector3<TYPE>& vect)
 {
     return vect * value;
+}
+
+template<class UnitTypeLhs, class UnitTypeRhs,
+std::enable_if_t<units::traits::is_convertible_unit_t<UnitTypeLhs, UnitTypeRhs>::value && units::traits::has_linear_scale<UnitTypeLhs, UnitTypeRhs>::value, int> = 0>
+inline constexpr auto operator%(const Vector3<UnitTypeLhs>& lhs, const Vector3<UnitTypeRhs>& rhs) noexcept
+{
+    using UnitsLhs = typename units::traits::unit_t_traits<UnitTypeLhs>::unit_type;
+    using UnitsRhs = typename units::traits::unit_t_traits<UnitTypeRhs>::unit_type;
+
+    Vector3<units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>>> result;
+    result.x() = lhs.y() * rhs.z() - lhs.z() * rhs.y();
+    result.y() = lhs.z() * rhs.x() - lhs.x() * rhs.z();
+    result.z() = lhs.x() * rhs.y() - lhs.y() * rhs.x();
+    return result;
 }
 
 using Vector3d = Vector3<double>;

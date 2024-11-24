@@ -302,7 +302,7 @@ TEST_F(TestQuaternion, CanGetDerivative)
     v111.Normalize();
 
     mc::Quaternion q(M_PI_4, v111);
-    mc::Vector3 omega(1.0, 2.0, 3.0);
+    mc::Vector3<units::angular_velocity::radians_per_second_t> omega(1.0_rad_per_s, 2.0_rad_per_s, 3.0_rad_per_s);
 
     mc::Quaternion q0 = q.GetDerivative(omega);
 
@@ -321,7 +321,7 @@ TEST_F(TestQuaternion, CanGetDerivativeLambdaGreaterThanZero)
     v111.Normalize();
 
     mc::Quaternion q(M_PI_4, v111);
-    mc::Vector3 omega(1.0, 2.0, 3.0);
+    mc::Vector3<units::angular_velocity::radians_per_second_t> omega(1.0_rad_per_s, 2.0_rad_per_s, 3.0_rad_per_s);
 
     mc::Quaternion q0 = q.GetDerivative(omega, 0.1);
 

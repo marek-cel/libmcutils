@@ -89,11 +89,12 @@ public:
 
     /**
      * \brief Returns quaternion derivative due to given angular velocity.
-     * \param omega angular velocity vector
+     * \param omega [rad/s] angular velocity vector
      * \param lambda free parameter (usually set to a small multiple of the integration time step)
      * \return quaternion derivative
      */
-    Quaternion GetDerivative(const Vector3d& omega, double lambda = 0.0) const;
+    Quaternion GetDerivative(const Vector3<units::angular_velocity::radians_per_second_t>& omega,
+                             double lambda = 0.0) const;
 
     /** \brief Returns inverted quaternion. */
     Quaternion GetInverted() const;
