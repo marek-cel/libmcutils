@@ -6,6 +6,7 @@ set(HEADERS
     Constants.h
     Inertia.h
     ParallelAxis.h
+    Vector.h
 )
 
 ################################################################################
