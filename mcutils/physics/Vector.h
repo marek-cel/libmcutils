@@ -26,7 +26,36 @@
 
 namespace mc {
 
+template <typename TYPE>
+class DimensionalVector3 : public Vector3<TYPE>
+{
+};
 
+template <typename TYPE>
+class AngularVelocityVector3 : public DimensionalVector3<TYPE>
+{
+public:
+
+    inline TYPE  p() const { return this->_elements[0]; }
+    inline TYPE  q() const { return this->_elements[1]; }
+    inline TYPE  r() const { return this->_elements[2]; }
+    inline TYPE& p()       { return this->_elements[0]; }
+    inline TYPE& q()       { return this->_elements[1]; }
+    inline TYPE& r()       { return this->_elements[2]; }
+};
+
+template <typename TYPE>
+class LinearVelocityVector3 : public DimensionalVector3<TYPE>
+{
+public:
+
+    inline TYPE  u() const { return this->_elements[0]; }
+    inline TYPE  v() const { return this->_elements[1]; }
+    inline TYPE  w() const { return this->_elements[2]; }
+    inline TYPE& u()       { return this->_elements[0]; }
+    inline TYPE& v()       { return this->_elements[1]; }
+    inline TYPE& w()       { return this->_elements[2]; }
+};
 
 } // namespace mc
 
