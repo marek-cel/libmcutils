@@ -88,7 +88,7 @@ set(LIBS
 )
 
 if (UNIX)
-    set(LIBS ${LIBS} ${ARMADILLO_LIBRARIES} gcov)
+    set(LIBS ${LIBS} gcov)
 elseif(WIN32)
     set(LIBS ${LIBS} ws2_32)
 endif()
