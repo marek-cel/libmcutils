@@ -47,7 +47,7 @@ TEST_F(TestECEF, CanConvertFromCartToGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 0N 0E
     pos_cart.x() = mc::WGS84::ellipsoid.a();
@@ -69,7 +69,7 @@ TEST_F(TestECEF, CanConvertFromCartToGeoAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
@@ -93,7 +93,7 @@ TEST_F(TestECEF, CanConvertFromGeoToCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -115,7 +115,7 @@ TEST_F(TestECEF, CanConvertFromGeoToCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
@@ -819,7 +819,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 0N 0E
     pos_cart.x() = mc::WGS84::ellipsoid.a();
@@ -838,7 +838,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
@@ -859,7 +859,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -877,7 +877,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
@@ -896,10 +896,10 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
 TEST_F(TestECEF, CanGetENU2NED)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Matrix3x3 enu2ned = ecef.enu2ned();
+    mc::RotMatrix enu2ned = ecef.enu2ned();
 
-    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
-    mc::Vector3 v_ned = enu2ned * v_enu;
+    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    mc::Vector3d v_ned = enu2ned * v_enu;
 
     EXPECT_DOUBLE_EQ(v_ned.x(),  2.0);
     EXPECT_DOUBLE_EQ(v_ned.y(),  1.0);
@@ -909,10 +909,10 @@ TEST_F(TestECEF, CanGetENU2NED)
 TEST_F(TestECEF, CanGetNED2ENU)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Matrix3x3 ned2enu = ecef.ned2enu();
+    mc::RotMatrix ned2enu = ecef.ned2enu();
 
-    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
-    mc::Vector3 v_enu = ned2enu * v_ned;
+    const mc::Vector3d v_ned(1.0, 2.0, 3.0);
+    mc::Vector3d v_enu = ned2enu * v_ned;
 
     EXPECT_DOUBLE_EQ(v_enu.x(),  2.0);
     EXPECT_DOUBLE_EQ(v_enu.y(),  1.0);
@@ -923,10 +923,10 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 enu2ecef;
+    mc::RotMatrix enu2ecef;
 
-    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -946,10 +946,10 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 enu2ecef;
+    mc::RotMatrix enu2ecef;
 
-    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 90E
     pos_geo.lat = 0.0_deg;
@@ -969,10 +969,10 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 enu2ecef;
+    mc::RotMatrix enu2ecef;
 
-    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 90W
     pos_geo.lat =  0.0_deg;
@@ -992,10 +992,10 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 enu2ecef;
+    mc::RotMatrix enu2ecef;
 
-    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 180E
     pos_geo.lat = 0.0_deg;
@@ -1015,10 +1015,10 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ned2ecef;
+    mc::RotMatrix ned2ecef;
 
-    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_ned(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -1038,10 +1038,10 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ned2ecef;
+    mc::RotMatrix ned2ecef;
 
-    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_ned(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 90E
     pos_geo.lat = 0.0_deg;
@@ -1061,10 +1061,10 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ned2ecef;
+    mc::RotMatrix ned2ecef;
 
-    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_ned(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 90W
     pos_geo.lat =  0.0_deg;
@@ -1084,10 +1084,10 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ned2ecef;
+    mc::RotMatrix ned2ecef;
 
-    const mc::Vector3 v_ned(1.0, 2.0, 3.0);
-    mc::Vector3 v_ecef;
+    const mc::Vector3d v_ned(1.0, 2.0, 3.0);
+    mc::Vector3d v_ecef;
 
     // 0N 180E
     pos_geo.lat = 0.0_deg;
@@ -1107,10 +1107,10 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2enu;
+    mc::RotMatrix ecef2enu;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_enu;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_enu;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -1130,10 +1130,10 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2enu;
+    mc::RotMatrix ecef2enu;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_enu;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_enu;
 
     // 0N 90E
     pos_geo.lat = 0.0_deg;
@@ -1153,10 +1153,10 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2enu;
+    mc::RotMatrix ecef2enu;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_enu;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_enu;
 
     // 0N 90W
     pos_geo.lat =  0.0_deg;
@@ -1176,10 +1176,10 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2enu;
+    mc::RotMatrix ecef2enu;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_enu;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_enu;
 
     // 0N 180E
     pos_geo.lat = 0.0_deg;
@@ -1199,10 +1199,10 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2ned;
+    mc::RotMatrix ecef2ned;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_ned;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_ned;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -1222,10 +1222,10 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2ned;
+    mc::RotMatrix ecef2ned;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_ned;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_ned;
 
     // 0N 90E
     pos_geo.lat = 0.0_deg;
@@ -1245,10 +1245,10 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2ned;
+    mc::RotMatrix ecef2ned;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_ned;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_ned;
 
     // 0N 90W
     pos_geo.lat =  0.0_deg;
@@ -1268,10 +1268,10 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Matrix3x3 ecef2ned;
+    mc::RotMatrix ecef2ned;
 
-    const mc::Vector3 v_ecef(1.0, 2.0, 3.0);
-    mc::Vector3 v_ned;
+    const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
+    mc::Vector3d v_ned;
 
     // 0N 180E
     pos_geo.lat = 0.0_deg;
@@ -1328,8 +1328,8 @@ TEST_F(TestECEF, CanSetPositionFromGeoAt45N45E100H)
 TEST_F(TestECEF, CanSetPositionFromCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Vector3 pos_cart_in;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart_in;
+    mc::Vector3d pos_cart;
 
     // 0N 0E
     pos_cart_in.x() = mc::WGS84::ellipsoid.a();
@@ -1346,8 +1346,8 @@ TEST_F(TestECEF, CanSetPositionFromCartAt0N0E0H)
 TEST_F(TestECEF, CanSetPositionFromCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Vector3 pos_cart_in;
-    mc::Vector3 pos_cart;
+    mc::Vector3d pos_cart_in;
+    mc::Vector3d pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4

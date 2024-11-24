@@ -27,7 +27,7 @@
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Angles.h>
-#include <mcutils/math/Vector3.h>
+#include <mcutils/math/Vector.h>
 
 namespace mc {
 
@@ -61,7 +61,7 @@ public:
     explicit Quaternion(const Angles& angl);
 
     /** \brief Constructor. */
-    Quaternion(double angl, const Vector3& vect);
+    Quaternion(double angl, const Vector3d& vect);
 
     /** \return TRUE if all items are valid */
     bool IsValid() const;
@@ -93,7 +93,7 @@ public:
      * \param lambda free parameter (usually set to a small multiple of the integration time step)
      * \return quaternion derivative
      */
-    Quaternion GetDerivative(const Vector3& omega, double lambda = 0.0) const;
+    Quaternion GetDerivative(const Vector3d& omega, double lambda = 0.0) const;
 
     /** \brief Returns inverted quaternion. */
     Quaternion GetInverted() const;

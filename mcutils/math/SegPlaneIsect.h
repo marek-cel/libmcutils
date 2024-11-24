@@ -24,7 +24,7 @@
 
 #include <mcutils/defs.h>
 
-#include <mcutils/math/Vector3.h>
+#include <mcutils/math/Vector.h>
 
 namespace mc {
 
@@ -45,8 +45,8 @@ namespace mc {
  *
  * \return true if there is an intersection, false otherwise
  */
-MCUTILSAPI bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
-                                const Vector3& r, const Vector3& n);
+MCUTILSAPI bool IsSegPlaneIsect(const Vector3d& b, const Vector3d& e,
+                                const Vector3d& r, const Vector3d& n);
 
 /**
  * \brief Returns segment and plane intersection point.
@@ -65,8 +65,8 @@ MCUTILSAPI bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
  *
  * \return intersection point, or end point if there is no intersection, or beginning point if segment lies on the plane
  */
-MCUTILSAPI Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
-                                    const Vector3& r, const Vector3& n);
+MCUTILSAPI Vector3d GetSegPlaneIsect(const Vector3d& b, const Vector3d& e,
+                                     const Vector3d& r, const Vector3d& n);
 
 } // namespace mc
 

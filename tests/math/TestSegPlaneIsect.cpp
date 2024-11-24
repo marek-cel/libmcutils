@@ -13,10 +13,10 @@ protected:
 
 TEST_F(TestSegPlaneIsect, CanCheckIfThereIsSegPlaneIsect)
 {
-    mc::Vector3 b;
-    mc::Vector3 e;
-    mc::Vector3 r;
-    mc::Vector3 n;
+    mc::Vector3d b;
+    mc::Vector3d e;
+    mc::Vector3d r;
+    mc::Vector3d n;
 
     b.Set(0.0, 0.0,  1.0);
     e.Set(0.0, 0.0, -1.0);
@@ -33,11 +33,11 @@ TEST_F(TestSegPlaneIsect, CanCheckIfThereIsSegPlaneIsect)
 
 TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectWithPlaneAtZ0)
 {
-    mc::Vector3 b;
-    mc::Vector3 e;
-    mc::Vector3 r;
-    mc::Vector3 n;
-    mc::Vector3 i;
+    mc::Vector3d b;
+    mc::Vector3d e;
+    mc::Vector3d r;
+    mc::Vector3d n;
+    mc::Vector3d i;
 
     b.Set(0.0, 0.0,  1.0);
     e.Set(0.0, 0.0, -1.0);
@@ -60,11 +60,11 @@ TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectWithPlaneAtZ0)
 
 TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectWithPlaneAtZ05)
 {
-    mc::Vector3 b;
-    mc::Vector3 e;
-    mc::Vector3 r;
-    mc::Vector3 n;
-    mc::Vector3 i;
+    mc::Vector3d b;
+    mc::Vector3d e;
+    mc::Vector3d r;
+    mc::Vector3d n;
+    mc::Vector3d i;
 
     b.Set(0.0, 0.0,  1.0);
     e.Set(0.0, 0.0, -1.0);
@@ -87,11 +87,11 @@ TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectWithPlaneAtZ05)
 
 TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectNoIntersection)
 {
-    mc::Vector3 b;
-    mc::Vector3 e;
-    mc::Vector3 r;
-    mc::Vector3 n;
-    mc::Vector3 i;
+    mc::Vector3d b;
+    mc::Vector3d e;
+    mc::Vector3d r;
+    mc::Vector3d n;
+    mc::Vector3d i;
 
     // no intersection
     b.Set(0.0, 0.0,  1.0);
@@ -116,11 +116,11 @@ TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectNoIntersection)
 
 TEST_F(TestSegPlaneIsect, CanGetSegPlaneIsectOnThePlane)
 {
-    mc::Vector3 b;
-    mc::Vector3 e;
-    mc::Vector3 r;
-    mc::Vector3 n;
-    mc::Vector3 i;
+    mc::Vector3d b;
+    mc::Vector3d e;
+    mc::Vector3d r;
+    mc::Vector3d n;
+    mc::Vector3d i;
 
     // on the plane
     b.Set(1.0, 1.0,  0.0);

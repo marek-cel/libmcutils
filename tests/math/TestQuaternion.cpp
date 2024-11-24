@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include <mcutils/math/Matrix3x3.h>
+#include <mcutils/math/Matrix.h>
 #include <mcutils/math/Quaternion.h>
 
 class TestQuaternion : public ::testing::Test

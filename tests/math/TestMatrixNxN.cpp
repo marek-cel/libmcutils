@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include <mcutils/math/MatrixNxN.h>
+#include <mcutils/math/Matrix.h>
 
 // To achieve full test coverage of MatrixNxN template class some tests have
-// to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has 
+// to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has
 // derived classes which are not templates. (e.g. all operators)
 
 class TestMatrixNxN : public ::testing::Test
@@ -18,7 +18,7 @@ protected:
 TEST_F(TestMatrixNxN, CanInstantiate)
 {
     constexpr int size = 3;
-    mc::MatrixNxN<size> m;
+    mc::MatrixNxN<double,size> m;
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
@@ -36,10 +36,10 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m0;
+    mc::MatrixNxN<double,size> m0;
     m0.SetFromArray(x);
 
-    mc::MatrixNxN<size> m1(m0);
+    mc::MatrixNxN<double,size> m1(m0);
 
     for ( int r = 0; r < size; ++r )
     {
@@ -58,7 +58,7 @@ TEST_F(TestMatrixNxN, CanTranspose)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m;
+    mc::MatrixNxN<double,size> m;
     m.SetFromArray(x);
 
     m.Transpose();
@@ -74,7 +74,7 @@ TEST_F(TestMatrixNxN, CanTranspose)
     }
 }
 
-TEST_F(TestMatrixNxN, CanGetTransposed3x3)
+TEST_F(TestMatrixNxN, CanGetTransposed)
 {
     constexpr int size = 3;
 
@@ -82,67 +82,11 @@ TEST_F(TestMatrixNxN, CanGetTransposed3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m0;
+    mc::MatrixNxN<double,size> m0;
     m0.SetFromArray(x);
 
-    mc::MatrixNxN<size> m1(m0);
-    mc::MatrixNxN<size> mt = m1.GetTransposed();
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-            EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanGetTransposed4x4)
-{
-    constexpr int size = 4;
-
-    double x[] = {
-         1.0,  2.0,  3.0,  4.0,
-         5.0,  6.0,  7.0,  8.0,
-         9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0
-    };
-
-    mc::MatrixNxN<size> m0;
-    m0.SetFromArray(x);
-
-    mc::MatrixNxN<size> m1(m0);
-    mc::MatrixNxN<size> mt = m1.GetTransposed();
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(m0(r,c), m1(r,c)) << "Error at row " << r << " and col " << c;
-            EXPECT_DOUBLE_EQ(mt(r,c), m0(c,r)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanGetTransposed6x6)
-{
-    constexpr int size = 6;
-
-    double x[] = {
-         1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
-         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
-        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
-        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
-        31.0, 32.0, 33.0, 34.0, 35.0, 36.0
-    };
-
-    mc::MatrixNxN<size> m0;
-    m0.SetFromArray(x);
-
-    mc::MatrixNxN<size> m1(m0);
-    mc::MatrixNxN<size> mt = m1.GetTransposed();
+    mc::MatrixNxN<double,size> m1(m0);
+    mc::MatrixNxN<double,size> mt = m1.GetTransposed();
 
     for ( int r = 0; r < size; ++r )
     {
@@ -162,8 +106,8 @@ TEST_F(TestMatrixNxN, CanAssign)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m0;
-    mc::MatrixNxN<size> m1;
+    mc::MatrixNxN<double,size> m0;
+    mc::MatrixNxN<double,size> m1;
     m0.SetFromArray(x);
     m1 = m0;
 
@@ -176,7 +120,7 @@ TEST_F(TestMatrixNxN, CanAssign)
     }
 }
 
-TEST_F(TestMatrixNxN, CanAdd3x3)
+TEST_F(TestMatrixNxN, CanAdd)
 {
     constexpr int size = 3;
 
@@ -186,9 +130,9 @@ TEST_F(TestMatrixNxN, CanAdd3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> m2;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     m2.Fill(val);
     mr = m1 + m2;
@@ -203,65 +147,7 @@ TEST_F(TestMatrixNxN, CanAdd3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanAdd4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.Fill(val);
-    mr = m1 + m2;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] + val;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanAdd6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.Fill(val);
-    mr = m1 + m2;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] + val;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanNegate3x3)
+TEST_F(TestMatrixNxN, CanNegate)
 {
     constexpr int size = 3;
 
@@ -269,9 +155,9 @@ TEST_F(TestMatrixNxN, CanNegate3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> m2;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     m2.SetFromArray(x);
     mr = -m1;
@@ -285,59 +171,7 @@ TEST_F(TestMatrixNxN, CanNegate3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanNegate4x4)
-{
-    constexpr int size = 4;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.SetFromArray(x);
-    mr = -m1;
-
-        for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), -m2(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanNegate6x6)
-{
-    constexpr int size = 6;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.SetFromArray(x);
-    mr = -m1;
-
-        for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), -m2(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanSubstract3x3)
+TEST_F(TestMatrixNxN, CanSubstract)
 {
     constexpr int size = 3;
 
@@ -347,9 +181,9 @@ TEST_F(TestMatrixNxN, CanSubstract3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> m2;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     m2.Fill(val);
     mr = m1 - m2;
@@ -364,65 +198,7 @@ TEST_F(TestMatrixNxN, CanSubstract3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanSubstract4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.Fill(val);
-    mr = m1 - m2;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] - val;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanSubstract6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    m2.Fill(val);
-    mr = m1 - m2;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] - val;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanMultiplyByScalar3x3)
+TEST_F(TestMatrixNxN, CanMultiplyByScalar)
 {
     constexpr int size = 3;
 
@@ -432,8 +208,8 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     mr = m1 * scalar;
 
@@ -447,208 +223,34 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanMultiplyByScalar4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr = m1 * scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] * scalar;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanMultiplyByScalar6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr = m1 * scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] * scalar;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanMultiplyByMatrix3x3)
+TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
 {
     constexpr int size = 3;
 
     double x1[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
-    mc::MatrixNxN<size> m1;
+    mc::MatrixNxN<double,size> m1;
     m1.SetFromArray(x1);
 
     double x2[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
-    mc::MatrixNxN<size> m2;
+    mc::MatrixNxN<double,size> m2;
     m2.SetFromArray(x2);
 
-    mc::MatrixNxN<size> mr = m1 * m2;
+    mc::MatrixNxN<double,size> mr = m1 * m2;
 
     EXPECT_NEAR(mr(0,0),  33.0, 1.0e-9);
     EXPECT_NEAR(mr(0,1),  39.6, 1.0e-9);
     EXPECT_NEAR(mr(0,2),  46.2, 1.0e-9);
-    
+
     EXPECT_NEAR(mr(1,0),  72.6, 1.0e-9);
     EXPECT_NEAR(mr(1,1),  89.1, 1.0e-9);
     EXPECT_NEAR(mr(1,2), 105.6, 1.0e-9);
-    
+
     EXPECT_NEAR(mr(2,0), 112.2, 1.0e-9);
     EXPECT_NEAR(mr(2,1), 138.6, 1.0e-9);
     EXPECT_NEAR(mr(2,2), 165.0, 1.0e-9);
 }
 
-TEST_F(TestMatrixNxN, CanMultiplyByMatrix4x4)
-{
-    constexpr int size = 4;
-
-    double x1[] = {
-         1.0,  2.0,  3.0,  4.0,
-         5.0,  6.0,  7.0,  8.0,
-         9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0
-    };
-
-    double x2[] = {
-        2.0,  3.0,  4.0,  5.0,
-        6.0,  7.0,  8.0,  9.0,
-       10.0, 11.0, 12.0, 13.0,
-       14.0, 15.0, 16.0, 17.0
-    };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-
-    m1.SetFromArray(x1);
-    m2.SetFromArray(x2);
-
-    mc::MatrixNxN<size> mr = m1 * m2;
-
-    EXPECT_DOUBLE_EQ(mr(0,0), 100.0);
-    EXPECT_DOUBLE_EQ(mr(0,1), 110.0);
-    EXPECT_DOUBLE_EQ(mr(0,2), 120.0);
-    EXPECT_DOUBLE_EQ(mr(0,3), 130.0);
-
-    EXPECT_DOUBLE_EQ(mr(1,0), 228.0);
-    EXPECT_DOUBLE_EQ(mr(1,1), 254.0);
-    EXPECT_DOUBLE_EQ(mr(1,2), 280.0);
-    EXPECT_DOUBLE_EQ(mr(1,3), 306.0);
-    
-    EXPECT_DOUBLE_EQ(mr(2,0), 356.0);
-    EXPECT_DOUBLE_EQ(mr(2,1), 398.0);
-    EXPECT_DOUBLE_EQ(mr(2,2), 440.0);
-    EXPECT_DOUBLE_EQ(mr(2,3), 482.0);
-    
-    EXPECT_DOUBLE_EQ(mr(3,0), 484.0);
-    EXPECT_DOUBLE_EQ(mr(3,1), 542.0);
-    EXPECT_DOUBLE_EQ(mr(3,2), 600.0);
-    EXPECT_DOUBLE_EQ(mr(3,3), 658.0);
-}
-
-TEST_F(TestMatrixNxN, CanMultiplyByMatrix6x6)
-{
-    constexpr int size = 6;
-
-    double x1[] = {
-         1.0,  2.0,  3.0,  4.0,  5.0,  6.0,
-         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
-        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
-        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
-        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
-        31.0, 32.0, 33.0, 34.0, 35.0, 36.0
-    };
-
-    double x2[] = {
-        31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-        25.0, 26.0, 27.0, 28.0, 29.0, 30.0,
-        19.0, 20.0, 21.0, 22.0, 23.0, 24.0,
-        13.0, 14.0, 15.0, 16.0, 17.0, 18.0,
-         7.0,  8.0,  9.0, 10.0, 11.0, 12.0,
-         1.0,  2.0,  3.0,  4.0,  5.0,  6.0
-    };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> m2;
-
-    m1.SetFromArray(x1);
-    m2.SetFromArray(x2);
-
-    mc::MatrixNxN<size> mr = m1 * m2;
-
-    EXPECT_DOUBLE_EQ(mr(0,0),  231.0);
-    EXPECT_DOUBLE_EQ(mr(0,1),  252.0);
-    EXPECT_DOUBLE_EQ(mr(0,2),  273.0);
-    EXPECT_DOUBLE_EQ(mr(0,3),  294.0);
-    EXPECT_DOUBLE_EQ(mr(0,4),  315.0);
-    EXPECT_DOUBLE_EQ(mr(0,5),  336.0);
-
-    EXPECT_DOUBLE_EQ(mr(1,0),  807.0);
-    EXPECT_DOUBLE_EQ(mr(1,1),  864.0);
-    EXPECT_DOUBLE_EQ(mr(1,2),  921.0);
-    EXPECT_DOUBLE_EQ(mr(1,3),  978.0);
-    EXPECT_DOUBLE_EQ(mr(1,4), 1035.0);
-    EXPECT_DOUBLE_EQ(mr(1,5), 1092.0);
-
-    EXPECT_DOUBLE_EQ(mr(2,0), 1383.0);
-    EXPECT_DOUBLE_EQ(mr(2,1), 1476.0);
-    EXPECT_DOUBLE_EQ(mr(2,2), 1569.0);
-    EXPECT_DOUBLE_EQ(mr(2,3), 1662.0);
-    EXPECT_DOUBLE_EQ(mr(2,4), 1755.0);
-    EXPECT_DOUBLE_EQ(mr(2,5), 1848.0);
-
-    EXPECT_DOUBLE_EQ(mr(3,0), 1959.0);
-    EXPECT_DOUBLE_EQ(mr(3,1), 2088.0);
-    EXPECT_DOUBLE_EQ(mr(3,2), 2217.0);
-    EXPECT_DOUBLE_EQ(mr(3,3), 2346.0);
-    EXPECT_DOUBLE_EQ(mr(3,4), 2475.0);
-    EXPECT_DOUBLE_EQ(mr(3,5), 2604.0);
-
-    EXPECT_DOUBLE_EQ(mr(4,0), 2535.0);
-    EXPECT_DOUBLE_EQ(mr(4,1), 2700.0);
-    EXPECT_DOUBLE_EQ(mr(4,2), 2865.0);
-    EXPECT_DOUBLE_EQ(mr(4,3), 3030.0);
-    EXPECT_DOUBLE_EQ(mr(4,4), 3195.0);
-    EXPECT_DOUBLE_EQ(mr(4,5), 3360.0);
-
-    EXPECT_DOUBLE_EQ(mr(5,0), 3111.0);
-    EXPECT_DOUBLE_EQ(mr(5,1), 3312.0);
-    EXPECT_DOUBLE_EQ(mr(5,2), 3513.0);
-    EXPECT_DOUBLE_EQ(mr(5,3), 3714.0);
-    EXPECT_DOUBLE_EQ(mr(5,4), 3915.0);
-    EXPECT_DOUBLE_EQ(mr(5,5), 4116.0);
-}
-
-TEST_F(TestMatrixNxN, CanDivideByScalar3x3)
+TEST_F(TestMatrixNxN, CanDivideByScalar)
 {
     constexpr int size = 3;
 
@@ -658,8 +260,8 @@ TEST_F(TestMatrixNxN, CanDivideByScalar3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     mr = m1 / scalar;
 
@@ -673,61 +275,7 @@ TEST_F(TestMatrixNxN, CanDivideByScalar3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanDivideByScalar4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr = m1 / scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] / scalar;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanDivideByScalar6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr = m1 / scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] / scalar;
-            EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryAdd3x3)
+TEST_F(TestMatrixNxN, CanUnaryAdd)
 {
     constexpr int size = 3;
 
@@ -737,8 +285,8 @@ TEST_F(TestMatrixNxN, CanUnaryAdd3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     mr.Fill(val);
     mr += m1;
@@ -752,61 +300,7 @@ TEST_F(TestMatrixNxN, CanUnaryAdd3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanUnaryAdd4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr.Fill(val);
-    mr += m1;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), val + m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryAdd6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr.Fill(val);
-    mr += m1;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), val + m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnarySubstract3x3)
+TEST_F(TestMatrixNxN, CanUnarySubstract)
 {
     constexpr int size = 3;
 
@@ -816,8 +310,8 @@ TEST_F(TestMatrixNxN, CanUnarySubstract3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
+    mc::MatrixNxN<double,size> m1;
+    mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
     mr.Fill(val);
     mr -= m1;
@@ -831,61 +325,7 @@ TEST_F(TestMatrixNxN, CanUnarySubstract3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanUnarySubstract4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr.Fill(val);
-    mr -= m1;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), val - m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnarySubstract6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double val = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m1;
-    mc::MatrixNxN<size> mr;
-    m1.SetFromArray(x);
-    mr.Fill(val);
-    mr -= m1;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            EXPECT_DOUBLE_EQ(mr(r,c), val - m1(r,c)) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar3x3)
+TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar)
 {
     constexpr int size = 3;
 
@@ -895,7 +335,7 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m;
+    mc::MatrixNxN<double,size> m;
     m.SetFromArray(x);
     m *= scalar;
 
@@ -909,59 +349,7 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar3x3)
     }
 }
 
-TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m;
-    m.SetFromArray(x);
-    m *= scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] * scalar;
-            EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m;
-    m.SetFromArray(x);
-    m *= scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] * scalar;
-            EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryDivideByScalar3x3)
+TEST_F(TestMatrixNxN, CanUnaryDivideByScalar)
 {
     constexpr int size = 3;
 
@@ -971,59 +359,7 @@ TEST_F(TestMatrixNxN, CanUnaryDivideByScalar3x3)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::MatrixNxN<size> m;
-    m.SetFromArray(x);
-    m /= scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] / scalar;
-            EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryDivideByScalar4x4)
-{
-    constexpr int size = 4;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0,
-                   21.0, 22.0, 23.0, 24.0,
-                   31.0, 32.0, 33.0, 34.0,
-                   41.0, 42.0, 43.0, 44.0 };
-
-    mc::MatrixNxN<size> m;
-    m.SetFromArray(x);
-    m /= scalar;
-
-    for ( int r = 0; r < size; ++r )
-    {
-        for ( int c = 0; c < size; ++c )
-        {
-            double ref_value = x[r*size + c] / scalar;
-            EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
-        }
-    }
-}
-
-TEST_F(TestMatrixNxN, CanUnaryDivideByScalar6x6)
-{
-    constexpr int size = 6;
-
-    constexpr double scalar = 2.0;
-
-    double x[] = { 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
-                   21.0, 22.0, 23.0, 24.0, 25.0, 26.0,
-                   31.0, 32.0, 33.0, 34.0, 35.0, 36.0,
-                   41.0, 42.0, 43.0, 44.0, 45.0, 46.0,
-                   51.0, 52.0, 53.0, 54.0, 55.0, 56.0,
-                   61.0, 62.0, 63.0, 64.0, 65.0, 66.0 };
-
-    mc::MatrixNxN<size> m;
+    mc::MatrixNxN<double,size> m;
     m.SetFromArray(x);
     m /= scalar;
 

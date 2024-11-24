@@ -30,9 +30,9 @@
 #include <mcutils/geo/Geo.h>
 
 #include <mcutils/math/Angles.h>
+#include <mcutils/math/Matrix.h>
 #include <mcutils/math/Quaternion.h>
-#include <mcutils/math/RotMatrix.h>
-#include <mcutils/math/Vector3.h>
+#include <mcutils/math/Vector.h>
 
 namespace mc {
 
@@ -87,23 +87,23 @@ public:
      * \param alt [m] altitude above mean sea level
      * \return [m] resulting cartesian coordinates vector
      */
-    Vector3 ConvertGeo2Cart(units::angle::radian_t lat,
-                            units::angle::radian_t lon,
-                            units::length::meter_t alt) const;
+    Vector3d ConvertGeo2Cart(units::angle::radian_t lat,
+                             units::angle::radian_t lon,
+                             units::length::meter_t alt) const;
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
      * \param pos_geo [m] geodetic coordinates
      * \return [m] resulting cartesian coordinates vector
      */
-    Vector3 ConvertGeo2Cart(const Geo& pos_geo) const;
+    Vector3d ConvertGeo2Cart(const Geo& pos_geo) const;
 
     /**
      * \brief Converts geodetic coordinates into cartesian coordinates.
      * \param pos_geo [m] geodetic coordinates
      * \param pos_cart [m] resulting cartesian coordinates vector pointer
      */
-    void ConvertGeo2Cart(const Geo& pos_geo, Vector3* pos_cart) const;
+    void ConvertGeo2Cart(const Geo& pos_geo, Vector3d* pos_cart) const;
 
     /**
      * \brief Converts cartesian coordinates into geodetic coordinates.
@@ -133,14 +133,14 @@ public:
      * \param pos_cart [m] cartesian coordinates vector
      * \return resulting geodetic coordinates
      */
-    Geo ConvertCart2Geo(const Vector3& pos_cart) const;
+    Geo ConvertCart2Geo(const Vector3d& pos_cart) const;
 
     /**
      * \brief Converts cartesian coordinates into geodetic coordinates.
      * \param pos_cart [m] cartesian coordinates vector
      * \param pos_geo resulting geodetic coordinates pointer
      */
-    void ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const;
+    void ConvertCart2Geo(const Vector3d& pos_cart, Geo* pos_geo) const;
 
     /**
      * \brief Calculates coordinates moved by the given offset.
@@ -217,11 +217,11 @@ public:
      * \brief Sets position from cartesian coordinates
      * \param pos_geo position expressed in geodetic coordinates
      */
-    void SetPositionFromCart(const Vector3& pos_cart);
+    void SetPositionFromCart(const Vector3d& pos_cart);
 
     inline const Geo& pos_geo() const { return _pos_geo; }
 
-    inline const Vector3& pos_cart() const { return _pos_cart; }
+    inline const Vector3d& pos_cart() const { return _pos_cart; }
 
     inline const RotMatrix& enu2ned() const { return _enu2ned; }
     inline const RotMatrix& ned2enu() const { return _ned2enu; }
@@ -235,8 +235,8 @@ protected:
 
     Ellipsoid _ellipsoid;       ///< datum ellipsoid
 
-    Geo     _pos_geo;           ///< geodetic coordinates (latitude, longitude, altitude)
-    Vector3 _pos_cart;          ///< [m] cartesian coordinates vector (x, y, z)
+    Geo      _pos_geo;          ///< geodetic coordinates (latitude, longitude, altitude)
+    Vector3d _pos_cart;         ///< [m] cartesian coordinates vector (x, y, z)
 
     RotMatrix _enu2ecef;        ///< rotation matrix from ENU to ECEF
     RotMatrix _ned2ecef;        ///< rotation matrix from NED to ECEF

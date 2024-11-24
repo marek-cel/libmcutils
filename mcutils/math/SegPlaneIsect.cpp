@@ -22,10 +22,12 @@
 
 #include <mcutils/math/SegPlaneIsect.h>
 
+#include <cmath>
+
 namespace mc {
 
-bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
-                     const Vector3& r, const Vector3& n)
+bool IsSegPlaneIsect(const Vector3d& b, const Vector3d& e,
+                     const Vector3d& r, const Vector3d& n)
 {
     double num = n * (r - b);
     double den = n * (e - b);
@@ -42,10 +44,10 @@ bool IsSegPlaneIsect(const Vector3& b, const Vector3& e,
     return false;
 }
 
-Vector3 GetSegPlaneIsect(const Vector3& b, const Vector3& e,
-                         const Vector3& r, const Vector3& n)
+Vector3d GetSegPlaneIsect(const Vector3d& b, const Vector3d& e,
+                          const Vector3d& r, const Vector3d& n)
 {
-    Vector3 r_i = e;
+    Vector3d r_i = e;
 
     double num = n * (r - b);
     double den = n * (e - b);

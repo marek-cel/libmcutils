@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mcutils/math/RotMatrix.h>
+#include <mcutils/math/Matrix.h>
 
 class TestRotMatrix : public ::testing::Test
 {

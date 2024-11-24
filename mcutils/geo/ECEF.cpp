@@ -66,21 +66,21 @@ void ECEF::ConvertGeo2Cart(units::angle::radian_t lat,
     *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt()) * sinLat;
 }
 
-Vector3 ECEF::ConvertGeo2Cart(units::angle::radian_t lat,
-                              units::angle::radian_t lon,
-                              units::length::meter_t alt) const
+Vector3d ECEF::ConvertGeo2Cart(units::angle::radian_t lat,
+                               units::angle::radian_t lon,
+                               units::length::meter_t alt) const
 {
-    Vector3 pos_cart;
+    Vector3d pos_cart;
     ConvertGeo2Cart(lat, lon, alt, &pos_cart.x(), &pos_cart.y(), &pos_cart.z());
     return pos_cart;
 }
 
-Vector3 ECEF::ConvertGeo2Cart(const Geo& geo) const
+Vector3d ECEF::ConvertGeo2Cart(const Geo& geo) const
 {
     return ConvertGeo2Cart(geo.lat, geo.lon, geo.alt);
 }
 
-void ECEF::ConvertGeo2Cart(const Geo& geo, Vector3* pos_cart) const
+void ECEF::ConvertGeo2Cart(const Geo& geo, Vector3d* pos_cart) const
 {
     *pos_cart = ConvertGeo2Cart(geo);
 }
@@ -146,12 +146,12 @@ Geo ECEF::ConvertCart2Geo(double x, double y, double z) const
     return pos_geo;
 }
 
-Geo ECEF::ConvertCart2Geo(const Vector3& pos_cart) const
+Geo ECEF::ConvertCart2Geo(const Vector3d& pos_cart) const
 {
     return ConvertCart2Geo(pos_cart.x(), pos_cart.y(), pos_cart.z());
 }
 
-void ECEF::ConvertCart2Geo(const Vector3& pos_cart, Geo* pos_geo) const
+void ECEF::ConvertCart2Geo(const Vector3d& pos_cart, Geo* pos_geo) const
 {
     *pos_geo = ConvertCart2Geo(pos_cart);
 }
@@ -161,10 +161,10 @@ Geo ECEF::GetGeoOffset(units::angle::radian_t heading, double offset_x, double o
     RotMatrix ned2bas(Angles(0.0_rad, 0.0_rad, heading));
     RotMatrix bas2ned = ned2bas.GetTransposed();
 
-    Vector3 r_bas(offset_x, offset_y, 0.0);
-    Vector3 r_ned = bas2ned * r_bas;
+    Vector3d r_bas(offset_x, offset_y, 0.0);
+    Vector3d r_ned = bas2ned * r_bas;
 
-    Vector3 pos_cart = _pos_cart + _ned2ecef * r_ned;
+    Vector3d pos_cart = _pos_cart + _ned2ecef * r_ned;
 
     return ConvertCart2Geo(pos_cart);
 }
@@ -219,7 +219,7 @@ void ECEF::SetPositionFromGeo(const Geo& pos_geo)
     UpdateMatrices();
 }
 
-void ECEF::SetPositionFromCart(const Vector3& pos_cart)
+void ECEF::SetPositionFromCart(const Vector3d& pos_cart)
 {
     _pos_cart = pos_cart;
     ConvertCart2Geo(_pos_cart, &_pos_geo);
