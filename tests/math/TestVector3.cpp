@@ -2,6 +2,8 @@
 
 #include <mcutils/math/Vector.h>
 
+using namespace units::literals;
+
 class TestVector3 : public ::testing::Test
 {
 protected:
@@ -378,6 +380,14 @@ TEST_F(TestVector3, CanCalculateVectorCrossProduct)
     EXPECT_DOUBLE_EQ(v43.x(),  2.0);
     EXPECT_DOUBLE_EQ(v43.y(), -1.0);
     EXPECT_DOUBLE_EQ(v43.z(),  0.0);
+}
+
+TEST_F(TestVector3, CanCalculateVectorCrossProductWithUnits)
+{
+    mc::Vector3<units::length::meter_t> r(1.0_m, 0.0_m, 0.0_m);
+    mc::Vector3<units::force::newton_t> f(1.0_N, 2.0_N, 3.0_N);
+
+    //mc::Vector3<units::torque::newton_meter_t> t = f % r;
 }
 
 TEST_F(TestVector3, CanUnaryAdd)
