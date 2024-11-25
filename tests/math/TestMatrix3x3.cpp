@@ -246,24 +246,24 @@ TEST_F(TestMatrix3x3, CanAccessZZ)
     EXPECT_DOUBLE_EQ(m0.zz(), 1.0);
 }
 
-// TEST_F(TestMatrix3x3, CanSetData)
-// {
-//     mc::Matrix3x3d m0;
+TEST_F(TestMatrix3x3, CanSetData)
+{
+    mc::Matrix3x3d m0;
 
-//     m0.Set( 11.0, 12.0, 13.0,
-//             21.0, 22.0, 23.0,
-//             31.0, 32.0, 33.0 );
+    m0.Set( 11.0, 12.0, 13.0,
+            21.0, 22.0, 23.0,
+            31.0, 32.0, 33.0 );
 
-//     EXPECT_DOUBLE_EQ(m0.xx(), 11.0);
-//     EXPECT_DOUBLE_EQ(m0.xy(), 12.0);
-//     EXPECT_DOUBLE_EQ(m0.xz(), 13.0);
-//     EXPECT_DOUBLE_EQ(m0.yx(), 21.0);
-//     EXPECT_DOUBLE_EQ(m0.yy(), 22.0);
-//     EXPECT_DOUBLE_EQ(m0.yz(), 23.0);
-//     EXPECT_DOUBLE_EQ(m0.zx(), 31.0);
-//     EXPECT_DOUBLE_EQ(m0.zy(), 32.0);
-//     EXPECT_DOUBLE_EQ(m0.zz(), 33.0);
-// }
+    EXPECT_DOUBLE_EQ(m0.xx(), 11.0);
+    EXPECT_DOUBLE_EQ(m0.xy(), 12.0);
+    EXPECT_DOUBLE_EQ(m0.xz(), 13.0);
+    EXPECT_DOUBLE_EQ(m0.yx(), 21.0);
+    EXPECT_DOUBLE_EQ(m0.yy(), 22.0);
+    EXPECT_DOUBLE_EQ(m0.yz(), 23.0);
+    EXPECT_DOUBLE_EQ(m0.zx(), 31.0);
+    EXPECT_DOUBLE_EQ(m0.zy(), 32.0);
+    EXPECT_DOUBLE_EQ(m0.zz(), 33.0);
+}
 
 TEST_F(TestMatrix3x3, CanGetTransposed)
 {
