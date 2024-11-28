@@ -158,8 +158,7 @@ Quaternion Quaternion::GetConjugated() const
     return result;
 }
 
-Quaternion Quaternion::GetDerivative(const Vector3<units::angular_velocity::radians_per_second_t>& omega,
-                                     double lambda) const
+Quaternion Quaternion::GetDerivative(const Vector3_rad_per_s& omega, double lambda) const
 {
     Quaternion result;
 

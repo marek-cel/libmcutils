@@ -95,8 +95,7 @@ public:
      * \param lambda free parameter (usually set to a small multiple of the integration time step)
      * \return quaternion derivative
      */
-    Quaternion GetDerivative(const Vector3<units::angular_velocity::radians_per_second_t>& omega,
-                             double lambda = 0.0) const;
+    Quaternion GetDerivative(const Vector3_rad_per_s& omega, double lambda = 0.0) const;
 
     /** \brief Returns inverted quaternion. */
     Quaternion GetInverted() const;
