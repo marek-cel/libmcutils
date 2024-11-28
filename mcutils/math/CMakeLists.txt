@@ -17,6 +17,8 @@ set(HEADERS
     Table2.h
     Table.h
     Vector.h
+    Vector3.h
+    VectorN.h
 )
 
 set(SOURCES
