@@ -9,6 +9,9 @@ set(HEADERS
     GaussJordan.h
     Math.h
     Matrix.h
+    Matrix3x3.h
+    MatrixMxN.h
+    MatrixNxN.h
     Quaternion.h
     Random.h
     RotMatrix.h
@@ -24,9 +27,9 @@ set(HEADERS
 set(SOURCES
     Angles.cpp
     DegMinSec.cpp
-    Matrix.cpp
     Quaternion.cpp
     Random.cpp
+    RotMatrix.cpp
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp

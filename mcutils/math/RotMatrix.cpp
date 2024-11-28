@@ -20,7 +20,7 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/Matrix.h>
+#include <mcutils/math/RotMatrix.h>
 
 #include <mcutils/units_utils.h>
 
@@ -36,7 +36,7 @@ RotMatrix RotMatrix::GetIdentityMatrix()
 RotMatrix::RotMatrix(double xx, double xy, double xz,
                      double yx, double yy, double yz,
                      double zx, double zy, double zz)
-    : Matrix3x3d(xx, xy, xz, yx, yy, yz, zx, zy, zz)
+    : Matrix3x3<double>(xx, xy, xz, yx, yy, yz, zx, zy, zz)
 {}
 
 RotMatrix::RotMatrix(const Angles& angl)

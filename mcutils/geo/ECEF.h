@@ -30,8 +30,8 @@
 #include <mcutils/geo/Geo.h>
 
 #include <mcutils/math/Angles.h>
-#include <mcutils/math/Matrix.h>
 #include <mcutils/math/Quaternion.h>
+#include <mcutils/math/RotMatrix.h>
 #include <mcutils/math/Vector.h>
 
 namespace mc {
