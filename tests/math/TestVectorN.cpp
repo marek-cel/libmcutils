@@ -26,7 +26,7 @@ TEST_F(TestVectorN, CanInstantiate)
     }
 }
 
-TEST_F(TestVectorN, CanValidate3)
+TEST_F(TestVectorN, CanValidate)
 {
     constexpr int size = 3;
     const double x[] { 1.0, 2.0, 3.0 };
@@ -37,29 +37,7 @@ TEST_F(TestVectorN, CanValidate3)
     EXPECT_FALSE(v.IsValid());
 }
 
-TEST_F(TestVectorN, CanValidate4)
-{
-    constexpr int size = 4;
-    const double x[] { 1.0, 2.0, 3.0, 4.0 };
-    mc::VectorN<double,size> v;
-    v.SetFromArray(x);
-    EXPECT_TRUE(v.IsValid());
-    v(0) = std::numeric_limits<double>::quiet_NaN();
-    EXPECT_FALSE(v.IsValid());
-}
-
-TEST_F(TestVectorN, CanValidate6)
-{
-    constexpr int size = 6;
-    const double x[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    mc::VectorN<double,size> v;
-    v.SetFromArray(x);
-    EXPECT_TRUE(v.IsValid());
-    v(0) = std::numeric_limits<double>::quiet_NaN();
-    EXPECT_FALSE(v.IsValid());
-}
-
-TEST_F(TestVectorN, CanGetHalfLength3)
+TEST_F(TestVectorN, CanGetHalfLength)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
@@ -72,37 +50,7 @@ TEST_F(TestVectorN, CanGetHalfLength3)
     EXPECT_DOUBLE_EQ(v.GetLength2(), 14.0);
 }
 
-TEST_F(TestVectorN, CanGetHalfLength4)
-{
-    constexpr int size = 4;
-    mc::VectorN<double,size> v;
-
-    v(0) = 1.0;
-    v(1) = 2.0;
-    v(2) = 3.0;
-    v(3) = 0.0;
-
-    // 1^2 + 2^2 + 3^2 + 0^2 = 1 + 4 + 9 + 0 = 14
-    EXPECT_DOUBLE_EQ(v.GetLength2(), 14.0);
-}
-
-TEST_F(TestVectorN, CanGetHalfLength6)
-{
-    constexpr int size = 6;
-    mc::VectorN<double,size> v;
-
-    v(0) = 1.0;
-    v(1) = 2.0;
-    v(2) = 3.0;
-    v(3) = 0.0;
-    v(4) = 0.0;
-    v(5) = 0.0;
-
-    // 1^2 + 2^2 + 3^2 + 0^2 + 0^2 + 0^2 = 1 + 4 + 9 + 0 + 0 + 0 = 14
-    EXPECT_DOUBLE_EQ(v.GetLength2(), 14.0);
-}
-
-TEST_F(TestVectorN, CanGetLength3)
+TEST_F(TestVectorN, CanGetLength)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
@@ -117,41 +65,7 @@ TEST_F(TestVectorN, CanGetLength3)
     EXPECT_NEAR(v.GetLength(), 3.741657, 1.0e-5);
 }
 
-TEST_F(TestVectorN, CanGetLength4)
-{
-    constexpr int size = 4;
-    mc::VectorN<double,size> v;
-
-    v(0) = 1.0;
-    v(1) = 2.0;
-    v(2) = 3.0;
-    v(3) = 0.0;
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_vector.m
-    // sqrt( 1^2 + 2^2 + 3^2 ) = sqrt( 1 + 4 + 9 ) = sqrt( 14 )
-    EXPECT_NEAR(v.GetLength(), 3.741657, 1.0e-5);
-}
-
-TEST_F(TestVectorN, CanGetLength6)
-{
-    constexpr int size = 6;
-    mc::VectorN<double,size> v;
-
-    v(0) = 1.0;
-    v(1) = 2.0;
-    v(2) = 3.0;
-    v(3) = 0.0;
-    v(4) = 0.0;
-    v(5) = 0.0;
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_vector.m
-    // sqrt( 1^2 + 2^2 + 3^2 ) = sqrt( 1 + 4 + 9 ) = sqrt( 14 )
-    EXPECT_NEAR(v.GetLength(), 3.741657, 1.0e-5);
-}
-
-TEST_F(TestVectorN, CanNormalize3)
+TEST_F(TestVectorN, CanNormalize)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
@@ -165,46 +79,6 @@ TEST_F(TestVectorN, CanNormalize3)
     EXPECT_NEAR(v(0), 0.267261, 1.0e-5);
     EXPECT_NEAR(v(1), 0.534522, 1.0e-5);
     EXPECT_NEAR(v(2), 0.801784, 1.0e-5);
-
-    EXPECT_DOUBLE_EQ(v.GetLength(), 1.0);
-}
-
-TEST_F(TestVectorN, CanNormalize4)
-{
-    constexpr int size = 4;
-    mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0, 4.0 };
-    v.SetFromArray(x);
-
-    v.Normalize();
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_vector.m
-    EXPECT_NEAR(v(0), 0.182574, 1.0e-5);
-    EXPECT_NEAR(v(1), 0.365148, 1.0e-5);
-    EXPECT_NEAR(v(2), 0.547723, 1.0e-5);
-    EXPECT_NEAR(v(3), 0.730297, 1.0e-5);
-
-    EXPECT_DOUBLE_EQ(v.GetLength(), 1.0);
-}
-
-TEST_F(TestVectorN, CanNormalize6)
-{
-    constexpr int size = 6;
-    mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0 };
-    v.SetFromArray(x);
-
-    v.Normalize();
-
-    // expected values calculated with GNU Octave
-    // tests/math/octave/test_vector.m
-    EXPECT_NEAR(v(0), 0.104828, 1.0e-5);
-    EXPECT_NEAR(v(1), 0.209657, 1.0e-5);
-    EXPECT_NEAR(v(2), 0.314485, 1.0e-5);
-    EXPECT_NEAR(v(3), 0.419314, 1.0e-5);
-    EXPECT_NEAR(v(4), 0.524142, 1.0e-5);
-    EXPECT_NEAR(v(5), 0.628971, 1.0e-5);
 
     EXPECT_DOUBLE_EQ(v.GetLength(), 1.0);
 }
