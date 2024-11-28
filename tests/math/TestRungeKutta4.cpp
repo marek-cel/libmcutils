@@ -4,6 +4,9 @@
 
 #include <DiffEquationSolver.h>
 
+ // Use mc::Vector<double,3> instead of mc::Vector<double,2> in the following
+ // tests, to achieve full test coverage of mc::Vector template class.
+
 class TestRungeKutta4 : public ::testing::Test
 {
 protected:

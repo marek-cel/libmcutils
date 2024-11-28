@@ -2,10 +2,6 @@
 
 #include <mcutils/math/Matrix.h>
 
-// To achieve full test coverage of MatrixNxN template class some tests have
-// to be done for 3x3, 4x4 and 6x6 matrices, as template class MatrixNxN has
-// derived classes which are not templates. (e.g. all operators)
-
 class TestMatrixNxN : public ::testing::Test
 {
 protected:

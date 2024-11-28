@@ -2,10 +2,6 @@
 
 #include <mcutils/math/Vector.h>
 
-// To achieve full test coverage of VectorN template class some tests have
-// to be done for 3, 4, and 6 elements vectors, as template class VectorN has
-// derived classes which are not templates. (e.g. all operators)
-
 class TestVectorN : public ::testing::Test
 {
 protected:
