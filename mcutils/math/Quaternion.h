@@ -24,6 +24,8 @@
 
 #include <string>
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 #include <mcutils/math/Angles.h>
@@ -61,7 +63,7 @@ public:
     explicit Quaternion(const Angles& angl);
 
     /** \brief Constructor. */
-    Quaternion(double angl, const Vector3d& vect);
+    Quaternion(units::angle::radian_t angl, const Vector3d& vect);
 
     /** \return TRUE if all items are valid */
     bool IsValid() const;

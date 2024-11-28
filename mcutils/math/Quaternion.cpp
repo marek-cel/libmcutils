@@ -67,12 +67,12 @@ Quaternion::Quaternion(const Angles& angl)
     Normalize();
 }
 
-Quaternion::Quaternion(double angl, const Vector3d& vect)
+Quaternion::Quaternion(units::angle::radian_t angl, const Vector3d& vect)
 {
     double len_inv = 1.0 / vect.GetLength();
 
-    double cos_angl_2 = cos(0.5 * angl);
-    double sin_angl_2 = sin(0.5 * angl);
+    double cos_angl_2 = units::math::cos(0.5 * angl);
+    double sin_angl_2 = units::math::sin(0.5 * angl);
 
     _e0 = cos_angl_2;
     _ex = sin_angl_2 * vect.x() * len_inv;
