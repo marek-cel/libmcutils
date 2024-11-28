@@ -2,6 +2,8 @@
 
 #include <mcutils/math/Vector.h>
 
+using namespace units::literals;
+
 class TestDimensionalVector : public ::testing::Test
 {
 protected:
@@ -13,95 +15,83 @@ protected:
 
 TEST_F(TestDimensionalVector, CanCreateI)
 {
-    // mc::Vector3d v1 = mc::Vector3d::i();
+    mc::Vector3_m v1 = mc::Vector3_m::i();
 
-    // EXPECT_DOUBLE_EQ(v1.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v1.y(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.z(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v1.y()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
 TEST_F(TestDimensionalVector, CanCreateJ)
 {
-    // mc::Vector3d v1 = mc::Vector3d::j();
+    mc::Vector3_m v1 = mc::Vector3_m::j();
 
-    // EXPECT_DOUBLE_EQ(v1.x(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.y(), 1.0);
-    // EXPECT_DOUBLE_EQ(v1.z(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.x()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.y()(), 1.0);
+    EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
 TEST_F(TestDimensionalVector, CanCreateK)
 {
-    // mc::Vector3d v1 = mc::Vector3d::k();
+    mc::Vector3_m v1 = mc::Vector3_m::k();
 
-    // EXPECT_DOUBLE_EQ(v1.x(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.y(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.z(), 1.0);
+    EXPECT_DOUBLE_EQ(v1.x()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.y()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.z()(), 1.0);
 }
 
 TEST_F(TestDimensionalVector, CanInstantiate)
 {
-    // mc::Vector3d v1;
+    mc::Vector3_m v1;
 
-    // EXPECT_DOUBLE_EQ(v1.x(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.y(), 0.0);
-    // EXPECT_DOUBLE_EQ(v1.z(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.x()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.y()(), 0.0);
+    EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
 TEST_F(TestDimensionalVector, CanInstantiateAndSetData)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
-    // EXPECT_DOUBLE_EQ(v1.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v1.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v1.z(), 3.0);
+    EXPECT_DOUBLE_EQ(v1.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v1.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v1.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanGetLengthXY)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
-    // // 1^2 + 2^2 = 1 + 4 = 5
-    // EXPECT_DOUBLE_EQ(v1.GetLengthXY(), sqrt(5.0));
-
-    // mc::Vector3d v2(2.0, 3.0, 4.0);
-    // // 2^2 + 3^2 = 4 + 9 = 13
-    // EXPECT_DOUBLE_EQ(v2.GetLengthXY(), sqrt(13.0));
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    // 1^2 + 2^2 = 1 + 4 = 5
+    EXPECT_DOUBLE_EQ(v1.GetLengthXY()(), sqrt(5.0));
 }
 
 TEST_F(TestDimensionalVector, CanGetLengthXZ)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
-    // // 1^2 + 3^2 = 1 + 9 = 10
-    // EXPECT_DOUBLE_EQ(v1.GetLengthXZ(), sqrt(10.0));
-
-    // mc::Vector3d v2(2.0, 3.0, 4.0);
-    // // 2^2 + 4^2 = 4 + 16 = 20
-    // EXPECT_DOUBLE_EQ(v2.GetLengthXZ(), sqrt(20.0));
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    // 1^2 + 3^2 = 1 + 9 = 10
+    EXPECT_DOUBLE_EQ(v1.GetLengthXZ()(), sqrt(10.0));
 }
 
 TEST_F(TestDimensionalVector, CanGetLengthYZ)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
-    // // 2^2 + 3^2 = 4 + 9 = 13
-    // EXPECT_DOUBLE_EQ(v1.GetLengthYZ(), sqrt(13.0));
-
-    // mc::Vector3d v2(2.0, 3.0, 4.0);
-    // // 3^2 + 4^2 = 9 + 16 = 25
-    // EXPECT_DOUBLE_EQ(v2.GetLengthYZ(), sqrt(25.0));
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    // 2^2 + 3^2 = 4 + 9 = 13
+    EXPECT_DOUBLE_EQ(v1.GetLengthYZ()(), sqrt(13.0));
 }
 
 TEST_F(TestDimensionalVector, CanGetNormalized)
 {
-    // // expected values calculated with GNU Octave
-    // // tests/math/octave/test_vector3.m
+    // expected values calculated with GNU Octave
+    // tests/math/octave/test_vector3.m
 
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
-    // mc::Vector3d v1_n = v1.GetNormalized();
+    // mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    // mc::Vector3_m v1_n = v1.GetNormalized();
 
-    // EXPECT_NEAR(v1_n.x(), 0.267261, 1.0e-5);
-    // EXPECT_NEAR(v1_n.y(), 0.534522, 1.0e-5);
-    // EXPECT_NEAR(v1_n.z(), 0.801784, 1.0e-5);
+    // EXPECT_NEAR(v1_n.x()(), 0.267261, 1.0e-5);
+    // EXPECT_NEAR(v1_n.y()(), 0.534522, 1.0e-5);
+    // EXPECT_NEAR(v1_n.z()(), 0.801784, 1.0e-5);
 
-    // EXPECT_DOUBLE_EQ(v1_n.GetLength(), 1.0);
+    // EXPECT_DOUBLE_EQ(v1_n.GetLength()(), 1.0);
 }
 
 TEST_F(TestDimensionalVector, CanSetData)

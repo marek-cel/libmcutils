@@ -48,6 +48,23 @@ public:
         Set(x, y, z);
     }
 
+    /** \return vector length squared */
+    auto GetLength2() const
+    {
+        auto length2 = TYPE{0} * TYPE{0};
+        for (unsigned int i = 0; i < this->kSize; ++i)
+        {
+            length2 += this->_elements[i] * this->_elements[i];
+        }
+        return length2;
+    }
+
+    /** \return vector length */
+    TYPE GetLength() const
+    {
+        return units::math::sqrt(GetLength2());
+    }
+
     /** \return length of projection of vector on XY-plane */
     inline TYPE GetLengthXY() const { return units::math::sqrt( this->x()*this->x() + this->y()*this->y() ); }
 

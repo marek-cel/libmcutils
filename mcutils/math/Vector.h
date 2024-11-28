@@ -33,6 +33,8 @@ using Vector3d = Vector3<double>;
 using Vector4d = VectorN<double, 4>;
 using Vector6d = VectorN<double, 6>;
 
+using Vector3_m = DimensionalVector3<units::length::meter_t>;
+
 using Vector3_mps = DimensionalVector3<units::velocity::meters_per_second_t>;
 using Vector3_kmh = DimensionalVector3<units::velocity::kilometers_per_hour_t>;
 using Vector3_kts = DimensionalVector3<units::velocity::knot_t>;
