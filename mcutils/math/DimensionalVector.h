@@ -142,7 +142,7 @@ public:
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     DimensionalVector3<TYPE> operator*(double value) const
     {
         DimensionalVector3<TYPE> result(*this);
@@ -150,7 +150,30 @@ public:
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Multiplication operator (by scalar). */
+    template <class RHS_TYPE>
+    auto operator*(RHS_TYPE value) const
+    {
+        using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
+        using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
+
+        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
+
+        result.x() = this->x() * value;
+        result.y() = this->y() * value;
+        result.z() = this->z() * value;
+
+        return result;
+    }
+
+    /** \brief Dot product operator. */
+    template <class RHS_TYPE>
+    auto operator*(const DimensionalVector3<RHS_TYPE>& vect)
+    {
+        return this->x()*vect.x() + this->y()*vect.y() + this->z()*vect.z();
+    }
+
+    /** \brief Division operator (by number). */
     DimensionalVector3<TYPE> operator/(double value) const
     {
         DimensionalVector3<TYPE> result(*this);
@@ -158,11 +181,20 @@ public:
         return result;
     }
 
-    /** \brief Dot product operator. */
-    template <class RHSTYPE>
-    auto operator*(const DimensionalVector3<RHSTYPE>& vect)
+    /** \brief Division operator (by scalar). */
+    template <class RHS_TYPE>
+    auto operator/(RHS_TYPE value) const
     {
-        return this->x()*vect.x() + this->y()*vect.y() + this->z()*vect.z();
+        using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
+        using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
+
+        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, units::inverse<UnitsRhs>>> > result;
+
+        result.x() = this->x() / value;
+        result.y() = this->y() / value;
+        result.z() = this->z() / value;
+
+        return result;
     }
 
     /** \brief Cross product operator. */
@@ -193,14 +225,14 @@ public:
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     DimensionalVector3<TYPE>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     DimensionalVector3<TYPE>& operator/=(double value)
     {
         this->DivideByValue(value);
@@ -218,7 +250,7 @@ public:
     }
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 template <typename TYPE>
 inline DimensionalVector3<TYPE> operator*(double value, const DimensionalVector3<TYPE>& vect)
 {
