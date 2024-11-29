@@ -86,7 +86,7 @@ public:
      * \brief Puts vector elements into given array.
      * \param elements output array
      */
-    void PutIntoArray(double elements[]) const
+    void PutIntoArray(TYPE elements[]) const
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
@@ -98,7 +98,7 @@ public:
      * \brief Sets vector elements from array.
      * \param elements input array
      */
-    void SetFromArray(const double elements[])
+    void SetFromArray(const TYPE elements[])
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
@@ -118,7 +118,7 @@ public:
         for (unsigned int i = 0; i < kSize; ++i)
         {
              elements[i] = std::numeric_limits<double>::quiet_NaN();
-            _elements[i] = std::numeric_limits<double>::quiet_NaN();
+            _elements[i] = TYPE{elements[i]};
         }
 
         std::stringstream ss(String::StripSpaces(str));
@@ -130,7 +130,13 @@ public:
             valid &= mc::IsValid(elements[i]);
         }
 
-        if (valid) SetFromArray(elements);
+        if (valid)
+        {
+            for (unsigned int i = 0; i < kSize; ++i)
+            {
+                _elements[i] = TYPE{elements[i]};
+            }
+        }
     }
 
     /** \brief Swaps vector rows. */
@@ -159,7 +165,7 @@ public:
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
-            _elements[i] = 0.0;
+            _elements[i] = TYPE{0};
         }
     }
 
