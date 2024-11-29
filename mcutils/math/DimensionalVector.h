@@ -45,7 +45,7 @@ public:
     /** \brief Constructor. */
     DimensionalVector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
     {
-        Set(x, y, z);
+        this->Set(x, y, z);
     }
 
     /** \brief Casting constructor. */
@@ -90,28 +90,6 @@ public:
         result.Normalize();
         return result;
     }
-
-    /** \brief Sets vector values. */
-    void Set(TYPE x, TYPE y, TYPE z)
-    {
-        this->_elements[0] = x;
-        this->_elements[1] = y;
-        this->_elements[2] = z;
-    }
-
-    inline TYPE  p() const { return this->_elements[0]; }
-    inline TYPE  q() const { return this->_elements[1]; }
-    inline TYPE  r() const { return this->_elements[2]; }
-    inline TYPE& p()       { return this->_elements[0]; }
-    inline TYPE& q()       { return this->_elements[1]; }
-    inline TYPE& r()       { return this->_elements[2]; }
-
-    inline TYPE  u() const { return this->_elements[0]; }
-    inline TYPE  v() const { return this->_elements[1]; }
-    inline TYPE  w() const { return this->_elements[2]; }
-    inline TYPE& u()       { return this->_elements[0]; }
-    inline TYPE& v()       { return this->_elements[1]; }
-    inline TYPE& w()       { return this->_elements[2]; }
 
     operator Vector3<double>() const
     {
@@ -256,19 +234,6 @@ inline DimensionalVector3<TYPE> operator*(double value, const DimensionalVector3
 {
     return vect * value;
 }
-
-// /** \brief Dot product operator. */
-// template <class LHS, class RHS>
-// auto operator*(const DimensionalVector3<LHS>& lhs, const DimensionalVector3<RHS>& rhs)
-// {
-//     // using UnitsLhs = typename units::traits::unit_t_traits<LHS>::unit_type;
-//     // using UnitsRhs = typename units::traits::unit_t_traits<RHS>::unit_type;
-
-//     // units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> result;
-//     // result = lhs.x()*rhs.x() + lhs.y()*rhs.y() + lhs.z()*rhs.z();
-
-//     return lhs.x()*rhs.x() + lhs.y()*rhs.y() + lhs.z()*rhs.z();
-// }
 
 } // namespace mc
 
