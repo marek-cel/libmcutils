@@ -169,7 +169,7 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double operator()(unsigned int index) const
+    inline TYPE operator()(unsigned int index) const
     {
         return _elements[index];
     }
@@ -180,7 +180,7 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double& operator()(unsigned int index)
+    inline TYPE& operator()(unsigned int index)
     {
         return _elements[index];
     }

@@ -43,6 +43,10 @@ using Vector3_fps = DimensionalVector3<units::velocity::feet_per_second_t>;
 using Vector3_rad_per_s = DimensionalVector3<units::angular_velocity::radians_per_second_t>;
 using Vector3_deg_per_s = DimensionalVector3<units::angular_velocity::degrees_per_second_t>;
 
+using Vector3_N = DimensionalVector3<units::force::newton_t>;
+
+using Vector3_Nm = DimensionalVector3<units::torque::newton_meter_t>;
+
 } // namespace mc
 
 #endif // MCUTILS_MATH_VECTOR_H_

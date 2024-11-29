@@ -43,9 +43,18 @@ public:
     inline static const DimensionalVector3<TYPE> k() { return DimensionalVector3<TYPE>(TYPE{0}, TYPE{0}, TYPE{1}); }
 
     /** \brief Constructor. */
-    explicit DimensionalVector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
+    DimensionalVector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
     {
         Set(x, y, z);
+    }
+
+    /** \brief Casting constructor. */
+    template <class RHS_TYPE>
+    DimensionalVector3(const DimensionalVector3<RHS_TYPE> &vect)
+    {
+        this->x() = vect.x();
+        this->y() = vect.y();
+        this->z() = vect.z();
     }
 
     /** \return vector length squared */
@@ -150,15 +159,20 @@ public:
     }
 
     /** \brief Dot product operator. */
-    TYPE operator*(const DimensionalVector3<TYPE>& vect) const
+    template <class RHSTYPE>
+    auto operator*(const DimensionalVector3<RHSTYPE>& vect)
     {
         return this->x()*vect.x() + this->y()*vect.y() + this->z()*vect.z();
     }
 
     /** \brief Cross product operator. */
-    DimensionalVector3<TYPE> operator%(const DimensionalVector3<TYPE>& vect) const
+    template <class RHS_TYPE>
+    auto operator%(const DimensionalVector3<RHS_TYPE>& vect) const
     {
-        Vector3<TYPE> result;
+        using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
+        using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
+
+        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
         result.x() = this->y() * vect.z() - this->z() * vect.y();
         result.y() = this->z() * vect.x() - this->x() * vect.z();
         result.z() = this->x() * vect.y() - this->y() * vect.x();
@@ -193,10 +207,13 @@ public:
         return *this;
     }
 
-    /** \brief Unary cross product operator. */
-    DimensionalVector3<TYPE>& operator%=(const DimensionalVector3<TYPE>& vect)
+    /** @brief Assignment operator. */
+    template <class RHS_TYPE>
+    const DimensionalVector3<TYPE>& operator= (const DimensionalVector3<RHS_TYPE> &vect)
     {
-        *this = *this % vect;
+        this->x() = vect.x();
+        this->y() = vect.y();
+        this->z() = vect.z();
         return *this;
     }
 };
@@ -207,6 +224,19 @@ inline DimensionalVector3<TYPE> operator*(double value, const DimensionalVector3
 {
     return vect * value;
 }
+
+// /** \brief Dot product operator. */
+// template <class LHS, class RHS>
+// auto operator*(const DimensionalVector3<LHS>& lhs, const DimensionalVector3<RHS>& rhs)
+// {
+//     // using UnitsLhs = typename units::traits::unit_t_traits<LHS>::unit_type;
+//     // using UnitsRhs = typename units::traits::unit_t_traits<RHS>::unit_type;
+
+//     // units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> result;
+//     // result = lhs.x()*rhs.x() + lhs.y()*rhs.y() + lhs.z()*rhs.z();
+
+//     return lhs.x()*rhs.x() + lhs.y()*rhs.y() + lhs.z()*rhs.z();
+// }
 
 } // namespace mc
 

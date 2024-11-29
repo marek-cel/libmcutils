@@ -96,228 +96,216 @@ TEST_F(TestDimensionalVector, CanGetNormalized)
 
 TEST_F(TestDimensionalVector, CanSetData)
 {
-    // mc::Vector3d v;
+    mc::Vector3_m v;
 
-    // v.Set(1.0, 2.0, 3.0);
-    // EXPECT_DOUBLE_EQ(v.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v.z(), 3.0);
+    v.Set(1.0_m, 2.0_m, 3.0_m);
+    EXPECT_DOUBLE_EQ(v.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsXYZ)
 {
-    // mc::Vector3d v;
+    mc::Vector3_m v;
 
-    // v.x() = 1.0;
-    // v.y() = 2.0;
-    // v.z() = 3.0;
+    v.x() = 1.0_m;
+    v.y() = 2.0_m;
+    v.z() = 3.0_m;
 
-    // EXPECT_DOUBLE_EQ(v.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v.z(), 3.0);
-    // EXPECT_DOUBLE_EQ(v(0), 1.0);
-    // EXPECT_DOUBLE_EQ(v(1), 2.0);
-    // EXPECT_DOUBLE_EQ(v(2), 3.0);
+    EXPECT_DOUBLE_EQ(v.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v.z()(), 3.0);
+    EXPECT_DOUBLE_EQ(v(0)(), 1.0);
+    EXPECT_DOUBLE_EQ(v(1)(), 2.0);
+    EXPECT_DOUBLE_EQ(v(2)(), 3.0);
+}
+
+TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsPQR)
+{
+    mc::Vector3_m v;
+
+    v.p() = 1.0_m;
+    v.q() = 2.0_m;
+    v.r() = 3.0_m;
+
+    EXPECT_DOUBLE_EQ(v.p()(), 1.0);
+    EXPECT_DOUBLE_EQ(v.q()(), 2.0);
+    EXPECT_DOUBLE_EQ(v.r()(), 3.0);
+    EXPECT_DOUBLE_EQ(v(0)(), 1.0);
+    EXPECT_DOUBLE_EQ(v(1)(), 2.0);
+    EXPECT_DOUBLE_EQ(v(2)(), 3.0);
+}
+
+TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsUVW)
+{
+    mc::Vector3_m v;
+
+    v.u() = 1.0_m;
+    v.v() = 2.0_m;
+    v.w() = 3.0_m;
+
+    EXPECT_DOUBLE_EQ(v.u()(), 1.0);
+    EXPECT_DOUBLE_EQ(v.v()(), 2.0);
+    EXPECT_DOUBLE_EQ(v.w()(), 3.0);
+    EXPECT_DOUBLE_EQ(v(0)(), 1.0);
+    EXPECT_DOUBLE_EQ(v(1)(), 2.0);
+    EXPECT_DOUBLE_EQ(v(2)(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanAssign)
 {
-    // mc::Vector3d v;
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
+    mc::Vector3_m v;
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
-    // v = v1;
-    // EXPECT_DOUBLE_EQ(v.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v.z(), 3.0);
+    v = v1;
+    EXPECT_DOUBLE_EQ(v.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanAdd)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
-    // mc::Vector3d v2(4.0, 5.0, 6.0);
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_m v2(4.0_m, 5.0_m, 6.0_m);
 
-    // mc::Vector3d v12 = v1 + v2;
+    mc::Vector3_m v12 = v1 + v2;
 
-    // EXPECT_DOUBLE_EQ(v12.x(), 5.0);
-    // EXPECT_DOUBLE_EQ(v12.y(), 7.0);
-    // EXPECT_DOUBLE_EQ(v12.z(), 9.0);
+    EXPECT_DOUBLE_EQ(v12.x()(), 5.0);
+    EXPECT_DOUBLE_EQ(v12.y()(), 7.0);
+    EXPECT_DOUBLE_EQ(v12.z()(), 9.0);
 }
 
 TEST_F(TestDimensionalVector, CanNegate)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
-    // mc::Vector3d v1_n = -v1;
+    mc::Vector3_m v1_n = -v1;
 
-    // EXPECT_DOUBLE_EQ(v1_n.x(), -1.0);
-    // EXPECT_DOUBLE_EQ(v1_n.y(), -2.0);
-    // EXPECT_DOUBLE_EQ(v1_n.z(), -3.0);
+    EXPECT_DOUBLE_EQ(v1_n.x()(), -1.0);
+    EXPECT_DOUBLE_EQ(v1_n.y()(), -2.0);
+    EXPECT_DOUBLE_EQ(v1_n.z()(), -3.0);
 }
 
 TEST_F(TestDimensionalVector, CanSubstract)
 {
-    // mc::Vector3d v1(4.0, 5.0, 6.0);
-    // mc::Vector3d v2(3.0, 2.0, 1.0);
+    mc::Vector3_m v1(4.0_m, 5.0_m, 6.0_m);
+    mc::Vector3_m v2(3.0_m, 2.0_m, 1.0_m);
 
-    // mc::Vector3d v12 = v1 - v2;
+    mc::Vector3_m v12 = v1 - v2;
 
-    // EXPECT_DOUBLE_EQ(v12.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v12.y(), 3.0);
-    // EXPECT_DOUBLE_EQ(v12.z(), 5.0);
+    EXPECT_DOUBLE_EQ(v12.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v12.y()(), 3.0);
+    EXPECT_DOUBLE_EQ(v12.z()(), 5.0);
 }
 
 TEST_F(TestDimensionalVector, CanMultiplyByScalar)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
-    // mc::Vector3d v1_2 = v1 * 2.0;
+    mc::Vector3_m v1_2 = v1 * 2.0;
 
-    // EXPECT_DOUBLE_EQ(v1_2.x(), 2.0);
-    // EXPECT_DOUBLE_EQ(v1_2.y(), 4.0);
-    // EXPECT_DOUBLE_EQ(v1_2.z(), 6.0);
+    EXPECT_DOUBLE_EQ(v1_2.x()(), 2.0);
+    EXPECT_DOUBLE_EQ(v1_2.y()(), 4.0);
+    EXPECT_DOUBLE_EQ(v1_2.z()(), 6.0);
 }
 
 TEST_F(TestDimensionalVector, CanDivideByScalar)
 {
-    // mc::Vector3d v1(1.0, 2.0, 3.0);
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
-    // mc::Vector3d v1_2 = v1 / 2.0;
+    mc::Vector3_m v1_2 = v1 / 2.0;
 
-    // EXPECT_DOUBLE_EQ(v1_2.x(), 0.5);
-    // EXPECT_DOUBLE_EQ(v1_2.y(), 1.0);
-    // EXPECT_DOUBLE_EQ(v1_2.z(), 1.5);
+    EXPECT_DOUBLE_EQ(v1_2.x()(), 0.5);
+    EXPECT_DOUBLE_EQ(v1_2.y()(), 1.0);
+    EXPECT_DOUBLE_EQ(v1_2.z()(), 1.5);
 }
 
 TEST_F(TestDimensionalVector, CanCalculateVectorDotProduct)
 {
-    // mc::Vector3d v1(1.0, 0.0, 0.0);
-    // mc::Vector3d v2(0.0, 1.0, 0.0);
-    // mc::Vector3d v3(0.0, 0.0, 1.0);
-    // mc::Vector3d v4(1.0, 2.0, 3.0);
+    mc::Vector3_m v1(1.0_m, 0.0_m, 0.0_m);
+    mc::Vector3_m v2(0.0_m, 1.0_m, 0.0_m);
+    mc::Vector3_m v3(0.0_m, 0.0_m, 1.0_m);
+    mc::Vector3_m v4(1.0_m, 2.0_m, 3.0_m);
 
-    // double s41 = v4 * v1;
-    // double s42 = v4 * v2;
-    // double s43 = v4 * v3;
-    // double s44 = v4 * v4;
+    units::area::square_meter_t s41 = v4 * v1;
+    units::area::square_meter_t s42 = v4 * v2;
+    units::area::square_meter_t s43 = v4 * v3;
+    units::area::square_meter_t s44 = v4 * v4;
 
-    // // expected values calculated with wxMaxima
-    // // tests/math/octave/test_vector3_dot_product.m
-    // EXPECT_DOUBLE_EQ(s41,  1.0);
-    // EXPECT_DOUBLE_EQ(s42,  2.0);
-    // EXPECT_DOUBLE_EQ(s43,  3.0);
-    // EXPECT_DOUBLE_EQ(s44, 14.0);
+    // expected values calculated with wxMaxima
+    // tests/math/octave/test_vector3_dot_product.m
+    EXPECT_DOUBLE_EQ(s41(),  1.0);
+    EXPECT_DOUBLE_EQ(s42(),  2.0);
+    EXPECT_DOUBLE_EQ(s43(),  3.0);
+    EXPECT_DOUBLE_EQ(s44(), 14.0);
 }
 
 TEST_F(TestDimensionalVector, CanCalculateVectorCrossProduct)
 {
-    // mc::Vector3d v1(1.0, 0.0, 0.0);
-    // mc::Vector3d v2(0.0, 1.0, 0.0);
-    // mc::Vector3d v3(0.0, 0.0, 1.0);
-    // mc::Vector3d v4(1.0, 2.0, 3.0);
+    mc::Vector3_m r(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_N f(4.0_N, 5.0_N, 6.0_N);
 
-    // mc::Vector3d v41 = v4 % v1;
-    // mc::Vector3d v42 = v4 % v2;
-    // mc::Vector3d v43 = v4 % v3;
+    mc::Vector3_Nm t = r % f;
 
-    // // expected values calculated with wxMaxima
-    // // tests/math/octave/test_vector3_cross_product.m
-    // EXPECT_DOUBLE_EQ(v41.x(),  0.0);
-    // EXPECT_DOUBLE_EQ(v41.y(),  3.0);
-    // EXPECT_DOUBLE_EQ(v41.z(), -2.0);
-
-    // EXPECT_DOUBLE_EQ(v42.x(), -3.0);
-    // EXPECT_DOUBLE_EQ(v42.y(),  0.0);
-    // EXPECT_DOUBLE_EQ(v42.z(),  1.0);
-
-    // EXPECT_DOUBLE_EQ(v43.x(),  2.0);
-    // EXPECT_DOUBLE_EQ(v43.y(), -1.0);
-    // EXPECT_DOUBLE_EQ(v43.z(),  0.0);
+    // expected values calculated with wxMaxima
+    // tests/math/octave/test_vector3_cross_product.m
+    EXPECT_DOUBLE_EQ(t.x()(), -3.0);
+    EXPECT_DOUBLE_EQ(t.y()(),  6.0);
+    EXPECT_DOUBLE_EQ(t.z()(), -3.0);
 }
 
 TEST_F(TestDimensionalVector, CanUnaryAdd)
 {
-    // mc::Vector3d v0(1.0, 2.0, 3.0);
-    // mc::Vector3d v1(2.0, 3.0, 4.0);
+    mc::Vector3_m v0(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_m v1(2.0_m, 3.0_m, 4.0_m);
 
-    // v0 += v1;
+    v0 += v1;
 
-    // EXPECT_DOUBLE_EQ(v0.x(), 3.0);
-    // EXPECT_DOUBLE_EQ(v0.y(), 5.0);
-    // EXPECT_DOUBLE_EQ(v0.z(), 7.0);
+    EXPECT_DOUBLE_EQ(v0.x()(), 3.0);
+    EXPECT_DOUBLE_EQ(v0.y()(), 5.0);
+    EXPECT_DOUBLE_EQ(v0.z()(), 7.0);
 }
 
 TEST_F(TestDimensionalVector, CanUnarySubstract)
 {
-    // mc::Vector3d v0(3.0, 5.0, 7.0);
-    // mc::Vector3d v1(2.0, 3.0, 4.0);
+    mc::Vector3_m v0(3.0_m, 5.0_m, 7.0_m);
+    mc::Vector3_m v1(2.0_m, 3.0_m, 4.0_m);
 
-    // v0 -= v1;
+    v0 -= v1;
 
-    // EXPECT_DOUBLE_EQ(v0.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v0.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v0.z(), 3.0);
+    EXPECT_DOUBLE_EQ(v0.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v0.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanUnaryMultiplyByScalar)
 {
-    // mc::Vector3d v0(2.0, 4.0, 6.0);
+    mc::Vector3_m v0(2.0_m, 4.0_m, 6.0_m);
 
-    // v0 *= 0.5;
+    v0 *= 0.5;
 
-    // EXPECT_DOUBLE_EQ(v0.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v0.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v0.z(), 3.0);
+    EXPECT_DOUBLE_EQ(v0.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v0.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanUnaryDivideByScalar)
 {
-    // mc::Vector3d v0(2.0, 4.0, 6.0);
+    mc::Vector3_m v0(2.0_m, 4.0_m, 6.0_m);
 
-    // v0 /= 2.0;
+    v0 /= 2.0;
 
-    // EXPECT_DOUBLE_EQ(v0.x(), 1.0);
-    // EXPECT_DOUBLE_EQ(v0.y(), 2.0);
-    // EXPECT_DOUBLE_EQ(v0.z(), 3.0);
-}
-
-TEST_F(TestDimensionalVector, CanUnaryVectorCrossProduct)
-{
-    // mc::Vector3d v0(1.0, 2.0, 3.0);
-
-    // mc::Vector3d v1(1.0, 0.0, 0.0);
-    // mc::Vector3d v2(0.0, 1.0, 0.0);
-    // mc::Vector3d v3(0.0, 0.0, 1.0);
-
-    // mc::Vector3d vt;
-
-    // vt = v0;
-    // vt %= v1;
-
-    // EXPECT_DOUBLE_EQ(vt.x(),  0.0);
-    // EXPECT_DOUBLE_EQ(vt.y(),  3.0);
-    // EXPECT_DOUBLE_EQ(vt.z(), -2.0);
-
-    // vt = v0;
-    // vt %= v2;
-
-    // EXPECT_DOUBLE_EQ(vt.x(), -3.0);
-    // EXPECT_DOUBLE_EQ(vt.y(),  0.0);
-    // EXPECT_DOUBLE_EQ(vt.z(),  1.0);
-
-    // vt = v0;
-    // vt %= v3;
-
-    // EXPECT_DOUBLE_EQ(vt.x(),  2.0);
-    // EXPECT_DOUBLE_EQ(vt.y(), -1.0);
-    // EXPECT_DOUBLE_EQ(vt.z(),  0.0);
+    EXPECT_DOUBLE_EQ(v0.x()(), 1.0);
+    EXPECT_DOUBLE_EQ(v0.y()(), 2.0);
+    EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
 TEST_F(TestDimensionalVector, CanMultiplyScalarByVector)
 {
-    // mc::Vector3d v1(1.0, 0.0, 0.0);
-    // mc::Vector3d r = 2.0 * v1;
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_m r = 2.0 * v1;
 
-    // EXPECT_DOUBLE_EQ(r.x(), 2.0);
-    // EXPECT_DOUBLE_EQ(r.y(), 0.0);
-    // EXPECT_DOUBLE_EQ(r.z(), 0.0);
+    EXPECT_DOUBLE_EQ(r.x()(), 2.0);
+    EXPECT_DOUBLE_EQ(r.y()(), 4.0);
+    EXPECT_DOUBLE_EQ(r.z()(), 6.0);
 }
