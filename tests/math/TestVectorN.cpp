@@ -234,7 +234,7 @@ TEST_F(TestVectorN, CanSubstract)
     }
 }
 
-TEST_F(TestVectorN, CanMultiplyByScalar)
+TEST_F(TestVectorN, CanMultiplyByNumber)
 {
     constexpr int size = 3;
 
@@ -242,12 +242,12 @@ TEST_F(TestVectorN, CanMultiplyByScalar)
     mc::VectorN<double,size> v;
     v.SetFromArray(x);
 
-    constexpr double scalar = 2.0;
-    mc::VectorN<double,size> vr = v * scalar;
+    constexpr double val = 2.0;
+    mc::VectorN<double,size> vr = v * val;
 
     for ( int i = 0; i < size; ++i )
     {
-        EXPECT_DOUBLE_EQ(vr(i), x[i] * scalar) << "Error at index " << i;
+        EXPECT_DOUBLE_EQ(vr(i), x[i] * val) << "Error at index " << i;
     }
 }
 
@@ -281,7 +281,7 @@ TEST_F(TestVectorN, CanCalculateDotProduct)
     EXPECT_DOUBLE_EQ(s4, 14.0);
 }
 
-TEST_F(TestVectorN, CanDivideByScalar)
+TEST_F(TestVectorN, CanDivideByNumber)
 {
     constexpr int size = 3;
 
@@ -289,12 +289,12 @@ TEST_F(TestVectorN, CanDivideByScalar)
     mc::VectorN<double,size> v;
     v.SetFromArray(x);
 
-    constexpr double scalar = 2.0;
-    mc::VectorN<double,size> vr = v / scalar;
+    constexpr double val = 2.0;
+    mc::VectorN<double,size> vr = v / val;
 
     for ( int i = 0; i < size; ++i )
     {
-        EXPECT_DOUBLE_EQ(vr(i), x[i] / scalar) << "Error at index " << i;
+        EXPECT_DOUBLE_EQ(vr(i), x[i] / val) << "Error at index " << i;
     }
 }
 
@@ -340,7 +340,7 @@ TEST_F(TestVectorN, CanUnarySubstract)
     }
 }
 
-TEST_F(TestVectorN, CanUnaryMultiplyByScalar)
+TEST_F(TestVectorN, CanUnaryMultiplyByNumber)
 {
     constexpr int size = 3;
 
@@ -348,16 +348,16 @@ TEST_F(TestVectorN, CanUnaryMultiplyByScalar)
     mc::VectorN<double,size> v;
     v.SetFromArray(x);
 
-    constexpr double scalar = 2.0;
-    v *= scalar;
+    constexpr double val = 2.0;
+    v *= val;
 
     for ( int i = 0; i < size; ++i )
     {
-        EXPECT_DOUBLE_EQ(v(i), x[i] * scalar) << "Error at index " << i;
+        EXPECT_DOUBLE_EQ(v(i), x[i] * val) << "Error at index " << i;
     }
 }
 
-TEST_F(TestVectorN, CanUnaryDivideByScalar)
+TEST_F(TestVectorN, CanUnaryDivideByNumber)
 {
     constexpr int size = 3;
 
@@ -365,12 +365,12 @@ TEST_F(TestVectorN, CanUnaryDivideByScalar)
     mc::VectorN<double,size> v;
     v.SetFromArray(x);
 
-    constexpr double scalar = 2.0;
-    v /= scalar;
+    constexpr double val = 2.0;
+    v /= val;
 
     for ( int i = 0; i < size; ++i )
     {
-        EXPECT_DOUBLE_EQ(v(i), x[i] / scalar) << "Error at index " << i;
+        EXPECT_DOUBLE_EQ(v(i), x[i] / val) << "Error at index " << i;
     }
 }
 

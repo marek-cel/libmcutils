@@ -352,7 +352,7 @@ TEST_F(TestMatrix3x3, CanSubstract)
     EXPECT_DOUBLE_EQ(m0.zz(), 8.0);
 }
 
-TEST_F(TestMatrix3x3, CanMultiplyByScalar)
+TEST_F(TestMatrix3x3, CanMultiplyByNumber)
 {
     mc::Matrix3x3d m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -435,7 +435,7 @@ TEST_F(TestMatrix3x3, CanMultiplyByVector)
     EXPECT_NEAR(v4.z(), -2.0, 1.0e-9);
 }
 
-TEST_F(TestMatrix3x3, CanDivideByScalar)
+TEST_F(TestMatrix3x3, CanDivideByNumber)
 {
     mc::Matrix3x3d m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -499,7 +499,7 @@ TEST_F(TestMatrix3x3, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(m1.zz(), 8.0);
 }
 
-TEST_F(TestMatrix3x3, CanUnaryMultiplyByScalar)
+TEST_F(TestMatrix3x3, CanUnaryMultiplyByNumber)
 {
     mc::Matrix3x3d m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -518,7 +518,7 @@ TEST_F(TestMatrix3x3, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m1.zz(), 4.5);
 }
 
-TEST_F(TestMatrix3x3, CanUnaryDivideByScalar)
+TEST_F(TestMatrix3x3, CanUnaryDivideByNumber)
 {
     mc::Matrix3x3d m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,

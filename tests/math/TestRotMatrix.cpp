@@ -606,7 +606,7 @@ TEST_F(TestRotMatrix, CanSubstract)
     EXPECT_DOUBLE_EQ(m0.zz(), 8.0);
 }
 
-TEST_F(TestRotMatrix, CanMultiplyByScalar)
+TEST_F(TestRotMatrix, CanMultiplyByNumber)
 {
     mc::RotMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -689,7 +689,7 @@ TEST_F(TestRotMatrix, CanMultiplyByVector)
     EXPECT_NEAR(v4.z(), -2.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanDivideByScalar)
+TEST_F(TestRotMatrix, CanDivideByNumber)
 {
     mc::RotMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -753,7 +753,7 @@ TEST_F(TestRotMatrix, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(m1.zz(), 8.0);
 }
 
-TEST_F(TestRotMatrix, CanUnaryMultiplyByScalar)
+TEST_F(TestRotMatrix, CanUnaryMultiplyByNumber)
 {
     mc::RotMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -772,7 +772,7 @@ TEST_F(TestRotMatrix, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(m1.zz(), 4.5);
 }
 
-TEST_F(TestRotMatrix, CanUnaryDivideByScalar)
+TEST_F(TestRotMatrix, CanUnaryDivideByNumber)
 {
     mc::RotMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,

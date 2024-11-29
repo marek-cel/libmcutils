@@ -209,7 +209,7 @@ public:
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     VectorN<TYPE, SIZE> operator*(double value) const
     {
         VectorN<TYPE, SIZE> result(*this);
@@ -228,7 +228,7 @@ public:
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Division operator (by number). */
     VectorN<TYPE, SIZE> operator/(double val) const
     {
         VectorN<TYPE, SIZE> result(*this);
@@ -250,14 +250,14 @@ public:
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     VectorN<TYPE, SIZE>& operator*=(double value)
     {
         MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     VectorN<TYPE, SIZE>& operator/=(double value)
     {
         DivideByValue(value);
@@ -332,7 +332,7 @@ protected:
     }
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 template <typename TYPE, unsigned int SIZE>
 inline VectorN<TYPE, SIZE> operator*(double value, const VectorN<TYPE, SIZE>& vect)
 {

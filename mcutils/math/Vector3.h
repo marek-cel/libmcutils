@@ -115,7 +115,7 @@ public:
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     Vector3<TYPE> operator*(double value) const
     {
         Vector3<TYPE> result(*this);
@@ -123,7 +123,7 @@ public:
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Division operator (by number). */
     Vector3<TYPE> operator/(double value) const
     {
         Vector3<TYPE> result(*this);
@@ -161,14 +161,14 @@ public:
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     Vector3<TYPE>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     Vector3<TYPE>& operator/=(double value)
     {
         this->DivideByValue(value);
@@ -183,7 +183,7 @@ public:
     }
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 template <typename TYPE>
 inline Vector3<TYPE> operator*(double value, const Vector3<TYPE>& vect)
 {

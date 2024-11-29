@@ -124,13 +124,13 @@ public:
     /** \brief Subtraction operator. */
     Quaternion operator-(const Quaternion& quat) const;
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     Quaternion operator*(double val) const;
 
     /** \brief Multiplication operator (by quaternion). */
     Quaternion operator*(const Quaternion& quat) const;
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Division operator (by number). */
     Quaternion operator/(double val) const;
 
     /** \brief Unary addition operator. */
@@ -139,10 +139,10 @@ public:
     /** \brief Unary subtraction operator. */
     Quaternion& operator-=(const Quaternion& quat);
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     Quaternion& operator*=(double val);
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     Quaternion& operator/=(double val);
 
     /** \brief Equality operator. */
@@ -159,7 +159,7 @@ private:
     double _ez = 0.0;   ///< quaternion ez (z) component
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 inline Quaternion operator*(double val, const Quaternion& quat)
 {
     return quat * val;

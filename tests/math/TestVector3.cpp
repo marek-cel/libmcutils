@@ -176,7 +176,7 @@ TEST_F(TestVector3, CanSubstract)
     EXPECT_DOUBLE_EQ(v12.z(), 5.0);
 }
 
-TEST_F(TestVector3, CanMultiplyByScalar)
+TEST_F(TestVector3, CanMultiplyByNumber)
 {
     mc::Vector3d v1(1.0, 2.0, 3.0);
 
@@ -187,7 +187,7 @@ TEST_F(TestVector3, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v1_2.z(), 6.0);
 }
 
-TEST_F(TestVector3, CanDivideByScalar)
+TEST_F(TestVector3, CanDivideByNumber)
 {
     mc::Vector3d v1(1.0, 2.0, 3.0);
 
@@ -268,7 +268,7 @@ TEST_F(TestVector3, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(v0.z(), 3.0);
 }
 
-TEST_F(TestVector3, CanUnaryMultiplyByScalar)
+TEST_F(TestVector3, CanUnaryMultiplyByNumber)
 {
     mc::Vector3d v0(2.0, 4.0, 6.0);
 
@@ -279,7 +279,7 @@ TEST_F(TestVector3, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(v0.z(), 3.0);
 }
 
-TEST_F(TestVector3, CanUnaryDivideByScalar)
+TEST_F(TestVector3, CanUnaryDivideByNumber)
 {
     mc::Vector3d v0(2.0, 4.0, 6.0);
 
@@ -322,7 +322,7 @@ TEST_F(TestVector3, CanUnaryVectorCrossProduct)
     EXPECT_DOUBLE_EQ(vt.z(),  0.0);
 }
 
-TEST_F(TestVector3, CanMultiplyScalarByVector)
+TEST_F(TestVector3, CanMultiplyNumberByVector)
 {
     mc::Vector3d v1(1.0, 0.0, 0.0);
     mc::Vector3d r = 2.0 * v1;

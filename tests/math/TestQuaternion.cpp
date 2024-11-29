@@ -386,7 +386,7 @@ TEST_F(TestQuaternion, CanSubstract)
     EXPECT_DOUBLE_EQ(q2.ez(), 7.0);
 }
 
-TEST_F(TestQuaternion, CanMultiplyByScalar)
+TEST_F(TestQuaternion, CanMultiplyByNumber)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
     mc::Quaternion q1 = q0 * 2.0;
@@ -412,7 +412,7 @@ TEST_F(TestQuaternion, CanMultiplyByQuaternion)
     EXPECT_NEAR(q.ez(), 0.27060, 1.0e-5);
 }
 
-TEST_F(TestQuaternion, CanDivideByScalar)
+TEST_F(TestQuaternion, CanDivideByNumber)
 {
     mc::Quaternion q0(2.0, 4.0, 6.0, 8.0);
     mc::Quaternion q1 = q0 / 2.0;
@@ -449,7 +449,7 @@ TEST_F(TestQuaternion, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(q1.ez(), 7.0);
 }
 
-TEST_F(TestQuaternion, CanUnaryMultiplyByScalar)
+TEST_F(TestQuaternion, CanUnaryMultiplyByNumber)
 {
     mc::Quaternion q0(1.0, 2.0, 3.0, 4.0);
 
@@ -461,7 +461,7 @@ TEST_F(TestQuaternion, CanUnaryMultiplyByScalar)
     EXPECT_DOUBLE_EQ(q0.ez(), 8.0);
 }
 
-TEST_F(TestQuaternion, CanUnaryDivideByScalar)
+TEST_F(TestQuaternion, CanUnaryDivideByNumber)
 {
     mc::Quaternion q0(2.0, 4.0, 6.0, 8.0);
 

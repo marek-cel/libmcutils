@@ -92,7 +92,7 @@ public:
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     MatrixNxN<TYPE, SIZE> operator*(double value) const
     {
         MatrixNxN<TYPE, SIZE> result(*this);
@@ -108,7 +108,7 @@ public:
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Division operator (by number). */
     MatrixNxN<TYPE, SIZE> operator/(double value) const
     {
         MatrixNxN<TYPE, SIZE> result(*this);
@@ -130,14 +130,14 @@ public:
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     MatrixNxN<TYPE, SIZE>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     MatrixNxN<TYPE, SIZE>& operator/=(double value)
     {
         this->DivideByValue(value);
@@ -167,7 +167,7 @@ protected:
     }
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 template <typename TYPE, unsigned int SIZE>
 inline MatrixNxN<TYPE, SIZE> operator*(double value, const MatrixNxN<TYPE, SIZE>& matrix)
 {

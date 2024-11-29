@@ -81,7 +81,7 @@ public:
     /** \brief Subtraction operator. */
     RotMatrix operator-(const RotMatrix& matrix) const;
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     RotMatrix operator*(double value) const;
 
     /** \brief Multiplication operator (by matrix). */
@@ -90,7 +90,7 @@ public:
     /** \brief Multiplication operator (by vector). */
     Vector3d operator*(const Vector3d& vect) const;
 
-    /** \brief Division operator (by scalar). */
+    /** \brief Division operator (by number). */
     RotMatrix operator/(double value) const;
 
     /** \brief Unary addition operator. */
@@ -99,14 +99,14 @@ public:
     /** \brief Unary subtraction operator. */
     RotMatrix& operator-=(const RotMatrix& matrix);
 
-    /** \brief Unary multiplication operator (by scalar). */
+    /** \brief Unary multiplication operator (by number). */
     RotMatrix& operator*=(double value);
 
-    /** \brief Unary division operator (by scalar). */
+    /** \brief Unary division operator (by number). */
     RotMatrix& operator/=(double value);
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 inline RotMatrix operator*(double value, const RotMatrix& matrix)
 {
     return matrix * value;

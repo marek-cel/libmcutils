@@ -201,7 +201,7 @@ public:
     /** \brief Addition operator. */
     Table operator+(const Table& table) const;
 
-    /** \brief Multiplication operator (by scalar). */
+    /** \brief Multiplication operator (by number). */
     Table operator*(double va ) const;
 
     /** \brief Assignment operator. */
@@ -246,7 +246,7 @@ private:
     void UpdateInterpolationData();
 };
 
-/** \brief Multiplication operator (by scalar). */
+/** \brief Multiplication operator (by number). */
 inline Table operator*(double val, const Table& table)
 {
     return table * val;

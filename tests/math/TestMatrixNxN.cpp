@@ -194,11 +194,11 @@ TEST_F(TestMatrixNxN, CanSubstract)
     }
 }
 
-TEST_F(TestMatrixNxN, CanMultiplyByScalar)
+TEST_F(TestMatrixNxN, CanMultiplyByNumber)
 {
     constexpr int size = 3;
 
-    constexpr double scalar = 2.0;
+    constexpr double val = 2.0;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
@@ -207,13 +207,13 @@ TEST_F(TestMatrixNxN, CanMultiplyByScalar)
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
-    mr = m1 * scalar;
+    mr = m1 * val;
 
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
-            double ref_value = x[r*size + c] * scalar;
+            double ref_value = x[r*size + c] * val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
         }
     }
@@ -246,11 +246,11 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
     EXPECT_NEAR(mr(2,2), 165.0, 1.0e-9);
 }
 
-TEST_F(TestMatrixNxN, CanDivideByScalar)
+TEST_F(TestMatrixNxN, CanDivideByNumber)
 {
     constexpr int size = 3;
 
-    constexpr double scalar = 2.0;
+    constexpr double val = 2.0;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
@@ -259,13 +259,13 @@ TEST_F(TestMatrixNxN, CanDivideByScalar)
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
     m1.SetFromArray(x);
-    mr = m1 / scalar;
+    mr = m1 / val;
 
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
-            double ref_value = x[r*size + c] / scalar;
+            double ref_value = x[r*size + c] / val;
             EXPECT_DOUBLE_EQ(mr(r,c), ref_value) << "Error at row " << r << " and col " << c;
         }
     }
@@ -321,11 +321,11 @@ TEST_F(TestMatrixNxN, CanUnarySubstract)
     }
 }
 
-TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar)
+TEST_F(TestMatrixNxN, CanUnaryMultiplyByNumber)
 {
     constexpr int size = 3;
 
-    constexpr double scalar = 2.0;
+    constexpr double val = 2.0;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
@@ -333,23 +333,23 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByScalar)
 
     mc::MatrixNxN<double,size> m;
     m.SetFromArray(x);
-    m *= scalar;
+    m *= val;
 
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
-            double ref_value = x[r*size + c] * scalar;
+            double ref_value = x[r*size + c] * val;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
         }
     }
 }
 
-TEST_F(TestMatrixNxN, CanUnaryDivideByScalar)
+TEST_F(TestMatrixNxN, CanUnaryDivideByNumber)
 {
     constexpr int size = 3;
 
-    constexpr double scalar = 2.0;
+    constexpr double val = 2.0;
 
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
@@ -357,13 +357,13 @@ TEST_F(TestMatrixNxN, CanUnaryDivideByScalar)
 
     mc::MatrixNxN<double,size> m;
     m.SetFromArray(x);
-    m /= scalar;
+    m /= val;
 
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
         {
-            double ref_value = x[r*size + c] / scalar;
+            double ref_value = x[r*size + c] / val;
             EXPECT_DOUBLE_EQ(m(r,c), ref_value) << "Error at row " << r << " and col " << c;
         }
     }
