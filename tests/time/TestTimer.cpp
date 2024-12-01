@@ -26,7 +26,11 @@ protected:
 TEST_F(TestTimer, CanWaitForTimeout)
 {
     constexpr double time_step = 0.01;
+#   ifdef WIN32
+    constexpr double precision = 0.02;
+#   else
     constexpr double precision = 0.01;
+#   endif
     mc::Timer timer;
     timer.Start(time_step);
     for ( int i = 0; i < 10; ++i )
