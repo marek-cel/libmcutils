@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_ROTMATRIX_H_
-#define MCUTILS_MATH_ROTMATRIX_H_
+#ifndef MCUTILS_MATH_RMATRIX_H_
+#define MCUTILS_MATH_RMATRIX_H_
 
 #include <mcutils/defs.h>
 
@@ -45,23 +45,23 @@ namespace mc {
  * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
  * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
-class MCUTILSAPI RotMatrix : public Matrix3x3<double>
+class MCUTILSAPI RMatrix : public Matrix3x3<double>
 {
 public:
 
     /** \brief Creates identity matrix. */
-    static RotMatrix GetIdentityMatrix();
+    static RMatrix GetIdentityMatrix();
 
     /** \brief Constructor. */
-    RotMatrix(double xx = 0.0, double xy = 0.0, double xz = 0.0,
-              double yx = 0.0, double yy = 0.0, double yz = 0.0,
-              double zx = 0.0, double zy = 0.0, double zz = 0.0);
+    RMatrix(double xx = 0.0, double xy = 0.0, double xz = 0.0,
+            double yx = 0.0, double yy = 0.0, double yz = 0.0,
+            double zx = 0.0, double zy = 0.0, double zz = 0.0);
 
     /** \brief Creates passive (alias) rotation matrix. */
-    explicit RotMatrix(const Angles& angl);
+    explicit RMatrix(const Angles& angl);
 
     /** \brief Creates passive (alias) rotation matrix. */
-    explicit RotMatrix(const Quaternion& qtrn);
+    explicit RMatrix(const Quaternion& qtrn);
 
     /** \brief Returns Bryant angles of rotation matrix. */
     Angles GetAngles() const;
@@ -70,48 +70,48 @@ public:
     Quaternion GetQuaternion() const;
 
     /** \brief Returns transposed matrix. */
-    RotMatrix GetTransposed() const;
+    RMatrix GetTransposed() const;
 
     /** \brief Addition operator. */
-    RotMatrix operator+(const RotMatrix& matrix) const;
+    RMatrix operator+(const RMatrix& matrix) const;
 
     /** \brief Negation operator. */
-    RotMatrix operator-() const;
+    RMatrix operator-() const;
 
     /** \brief Subtraction operator. */
-    RotMatrix operator-(const RotMatrix& matrix) const;
+    RMatrix operator-(const RMatrix& matrix) const;
 
     /** \brief Multiplication operator (by number). */
-    RotMatrix operator*(double value) const;
+    RMatrix operator*(double value) const;
 
     /** \brief Multiplication operator (by matrix). */
-    RotMatrix operator*(const RotMatrix& matrix) const;
+    RMatrix operator*(const RMatrix& matrix) const;
 
     /** \brief Multiplication operator (by vector). */
     Vector3d operator*(const Vector3d& vect) const;
 
     /** \brief Division operator (by number). */
-    RotMatrix operator/(double value) const;
+    RMatrix operator/(double value) const;
 
     /** \brief Unary addition operator. */
-    RotMatrix& operator+=(const RotMatrix& matrix);
+    RMatrix& operator+=(const RMatrix& matrix);
 
     /** \brief Unary subtraction operator. */
-    RotMatrix& operator-=(const RotMatrix& matrix);
+    RMatrix& operator-=(const RMatrix& matrix);
 
     /** \brief Unary multiplication operator (by number). */
-    RotMatrix& operator*=(double value);
+    RMatrix& operator*=(double value);
 
     /** \brief Unary division operator (by number). */
-    RotMatrix& operator/=(double value);
+    RMatrix& operator/=(double value);
 };
 
 /** \brief Multiplication operator (by number). */
-inline RotMatrix operator*(double value, const RotMatrix& matrix)
+inline RMatrix operator*(double value, const RMatrix& matrix)
 {
     return matrix * value;
 }
 
 } // namespace mc
 
-#endif // MCUTILS_MATH_ROTMATRIX_H_
+#endif // MCUTILS_MATH_RMATRIX_H_

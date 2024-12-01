@@ -32,8 +32,8 @@ namespace mc {
 //0.0,  1.0,  0.0
 //1.0,  0.0,  0.0
 //0.0,  0.0, -1.0
-const RotMatrix ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
-const RotMatrix ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
+const RMatrix ECEF::_enu2ned( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
+const RMatrix ECEF::_ned2enu( 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, -1.0 );
 
 ECEF::ECEF(const Ellipsoid& ellipsoid)
     : _ellipsoid(ellipsoid)
@@ -158,8 +158,8 @@ void ECEF::ConvertCart2Geo(const Vector3d& pos_cart, Geo* pos_geo) const
 
 Geo ECEF::GetGeoOffset(units::angle::radian_t heading, double offset_x, double offset_y) const
 {
-    RotMatrix ned2bas(Angles(0.0_rad, 0.0_rad, heading));
-    RotMatrix bas2ned = ned2bas.GetTransposed();
+    RMatrix ned2bas(Angles(0.0_rad, 0.0_rad, heading));
+    RMatrix bas2ned = ned2bas.GetTransposed();
 
     Vector3d r_bas(offset_x, offset_y, 0.0);
     Vector3d r_ned = bas2ned * r_bas;

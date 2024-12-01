@@ -52,7 +52,7 @@ set(SOURCES
     math/TestMatrixMxN.cpp
     math/TestMatrixNxN.cpp
     math/TestQuaternion.cpp
-    math/TestRotMatrix.cpp
+    math/TestRMatrix.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp
     math/TestSegPlaneIsect.cpp

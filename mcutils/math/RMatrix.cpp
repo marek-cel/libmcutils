@@ -20,26 +20,26 @@
  * IN THE SOFTWARE.
  ******************************************************************************/
 
-#include <mcutils/math/RotMatrix.h>
+#include <mcutils/math/RMatrix.h>
 
 #include <mcutils/units_utils.h>
 
 namespace mc {
 
-RotMatrix RotMatrix::GetIdentityMatrix()
+RMatrix RMatrix::GetIdentityMatrix()
 {
-    return RotMatrix(1.0, 0.0, 0.0,
-                     0.0, 1.0, 0.0,
-                     0.0, 0.0, 1.0);
+    return RMatrix(1.0, 0.0, 0.0,
+                   0.0, 1.0, 0.0,
+                   0.0, 0.0, 1.0);
 }
 
-RotMatrix::RotMatrix(double xx, double xy, double xz,
-                     double yx, double yy, double yz,
-                     double zx, double zy, double zz)
+RMatrix::RMatrix(double xx, double xy, double xz,
+                 double yx, double yy, double yz,
+                 double zx, double zy, double zz)
     : Matrix3x3<double>(xx, xy, xz, yx, yy, yz, zx, zy, zz)
 {}
 
-RotMatrix::RotMatrix(const Angles& angl)
+RMatrix::RMatrix(const Angles& angl)
 {
     double sin_phi = units::math::sin(angl.phi());
     double cos_phi = units::math::cos(angl.phi());
@@ -66,7 +66,7 @@ RotMatrix::RotMatrix(const Angles& angl)
     zz() =  (cos_phi * cos_tht);
 }
 
-RotMatrix::RotMatrix(const Quaternion& qtrn)
+RMatrix::RMatrix(const Quaternion& qtrn)
 {
     double e0 = qtrn.e0();
     double ex = qtrn.ex();
@@ -91,7 +91,7 @@ RotMatrix::RotMatrix(const Quaternion& qtrn)
     zz() = e02 - ex2 - ey2 + ez2;
 }
 
-Angles RotMatrix::GetAngles() const
+Angles RMatrix::GetAngles() const
 {
     Angles result;
 
@@ -116,7 +116,7 @@ Angles RotMatrix::GetAngles() const
     return result;
 }
 
-Quaternion RotMatrix::GetQuaternion() const
+Quaternion RMatrix::GetQuaternion() const
 {
     Quaternion result;
 
@@ -167,81 +167,81 @@ Quaternion RotMatrix::GetQuaternion() const
     return result;
 }
 
-RotMatrix RotMatrix::GetTransposed() const
+RMatrix RMatrix::GetTransposed() const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.Transpose();
     return result;
 }
 
-RotMatrix RotMatrix::operator+(const RotMatrix& mtrx) const
+RMatrix RMatrix::operator+(const RMatrix& mtrx) const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.Add(mtrx);
     return result;
 }
 
-RotMatrix RotMatrix::operator-() const
+RMatrix RMatrix::operator-() const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.Negate();
     return result;
 }
 
-RotMatrix RotMatrix::operator-(const RotMatrix& mtrx) const
+RMatrix RMatrix::operator-(const RMatrix& mtrx) const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.Substract(mtrx);
     return result;
 }
 
-RotMatrix RotMatrix::operator*(double value) const
+RMatrix RMatrix::operator*(double value) const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.MultiplyByValue(value);
     return result;
 }
 
-RotMatrix RotMatrix::operator*(const RotMatrix& matrix) const
+RMatrix RMatrix::operator*(const RMatrix& matrix) const
 {
-    RotMatrix result;
+    RMatrix result;
     MultiplyByMatrix(matrix, &result);
     return result;
 }
 
-Vector3d RotMatrix::operator*(const Vector3d& vect) const
+Vector3d RMatrix::operator*(const Vector3d& vect) const
 {
     Vector3d result;
     MultiplyByVector(vect, &result);
     return result;
 }
 
-RotMatrix RotMatrix::operator/(double value) const
+RMatrix RMatrix::operator/(double value) const
 {
-    RotMatrix result(*this);
+    RMatrix result(*this);
     result.DivideByValue(value);
     return result;
 }
 
-RotMatrix& RotMatrix::operator+=(const RotMatrix& matrix)
+RMatrix& RMatrix::operator+=(const RMatrix& matrix)
 {
     Add(matrix);
     return *this;
 }
 
-RotMatrix& RotMatrix::operator-=(const RotMatrix& matrix)
+RMatrix& RMatrix::operator-=(const RMatrix& matrix)
 {
     Substract(matrix);
     return *this;
 }
 
-RotMatrix& RotMatrix::operator*=(double value)
+RMatrix& RMatrix::operator*=(double value)
 {
     MultiplyByValue(value);
     return *this;
 }
 
-RotMatrix& RotMatrix::operator/=(double value)
+RMatrix& RMatrix::operator/=(double value)
 {
     DivideByValue(value);
     return *this;

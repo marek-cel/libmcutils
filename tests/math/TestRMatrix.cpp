@@ -2,19 +2,19 @@
 
 #include <mcutils/math/Matrix.h>
 
-class TestRotMatrix : public ::testing::Test
+class TestRMatrix : public ::testing::Test
 {
 protected:
     constexpr static int size = 3;
-    TestRotMatrix() {}
-    virtual ~TestRotMatrix() {}
+    TestRMatrix() {}
+    virtual ~TestRMatrix() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
-TEST_F(TestRotMatrix, CanGetIdentityMatrix)
+TEST_F(TestRMatrix, CanGetIdentityMatrix)
 {
-    mc::RotMatrix m = mc::RotMatrix::GetIdentityMatrix();
+    mc::RMatrix m = mc::RMatrix::GetIdentityMatrix();
 
     EXPECT_DOUBLE_EQ(m(0,0), 1.0);
     EXPECT_DOUBLE_EQ(m(0,1), 0.0);
@@ -29,22 +29,22 @@ TEST_F(TestRotMatrix, CanGetIdentityMatrix)
     EXPECT_DOUBLE_EQ(m(2,2), 1.0);
 }
 
-TEST_F(TestRotMatrix, CanConstruct)
+TEST_F(TestRMatrix, CanConstruct)
 {
-    mc::RotMatrix* m = nullptr;
-    EXPECT_NO_THROW(m = new mc::RotMatrix());
+    mc::RMatrix* m = nullptr;
+    EXPECT_NO_THROW(m = new mc::RMatrix());
     delete m;
 }
 
-TEST_F(TestRotMatrix, CanDestruct)
+TEST_F(TestRMatrix, CanDestruct)
 {
-    mc::RotMatrix* m = new mc::RotMatrix();
+    mc::RMatrix* m = new mc::RMatrix();
     EXPECT_NO_THROW(delete m);
 }
 
-TEST_F(TestRotMatrix, CanInstantiate)
+TEST_F(TestRMatrix, CanInstantiate)
 {
-    mc::RotMatrix m;
+    mc::RMatrix m;
     for ( int r = 0; r < size; ++r )
     {
         for ( int c = 0; c < size; ++c )
@@ -54,7 +54,7 @@ TEST_F(TestRotMatrix, CanInstantiate)
     }
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndCopy)
+TEST_F(TestRMatrix, CanInstantiateAndCopy)
 {
     constexpr int size = 3;
 
@@ -62,10 +62,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndCopy)
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::RotMatrix m0;
+    mc::RMatrix m0;
     m0.SetFromArray(x);
 
-    mc::RotMatrix m1(m0);
+    mc::RMatrix m1(m0);
 
     for ( int r = 0; r < size; ++r )
     {
@@ -76,7 +76,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndCopy)
     }
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetData)
+TEST_F(TestRMatrix, CanInstantiateAndSetData)
 {
     mc::Matrix3x3 m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
@@ -93,10 +93,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(m1(2,2), 9.0);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromAnglesZeros)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromAnglesZeros)
 {
     mc::Angles ang(0.0_rad, 0.0_rad, 0.0_rad);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     EXPECT_NEAR(m.xx(), 1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(), 0.0, 1.0e-9);
@@ -109,10 +109,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromAnglesZeros)
     EXPECT_NEAR(m.zz(), 1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromPhiPi)
 {
     mc::Angles ang(1.0_rad * M_PI, 0.0_rad, 0.0_rad);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     EXPECT_NEAR(m.xx(),  1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -125,10 +125,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiPi)
     EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromThetaPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromThetaPi)
 {
     mc::Angles ang(0.0_rad, 1.0_rad * M_PI, 0.0_rad);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -141,10 +141,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromThetaPi)
     EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPsiPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromPsiPi)
 {
     mc::Angles ang(0.0_rad, 0.0_rad, 1.0_rad * M_PI);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -157,10 +157,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPsiPi)
     EXPECT_NEAR(m.zz(),  1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
 {
     mc::Angles ang(1.0_rad * M_PI_2, 1.0_rad * M_PI_2, 1.0_rad * M_PI_2);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     EXPECT_NEAR(m.xx(),  0.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -173,10 +173,10 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiThetaPsiHalfPi)
     EXPECT_NEAR(m.zz(),  0.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
 {
     mc::Angles ang(1.0_rad * M_PI_4, 1.0_rad * M_PI_4, 1.0_rad * M_PI_4);
-    mc::RotMatrix m(ang);
+    mc::RMatrix m(ang);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
@@ -191,7 +191,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromPhiThetaPsiQuarterPi)
     EXPECT_NEAR(m.zz(),  0.5000, 1.0e-3);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromRandomAngles)
 {
     mc::Angles a1(-1.0_rad * M_PI_4,  1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
     mc::Angles a2( 1.0_rad * M_PI_4, -1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
@@ -199,7 +199,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m1(a1);
+    mc::RMatrix m1(a1);
     EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xz(), -0.7071, 1.0e-3);
@@ -212,7 +212,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m2(a2);
+    mc::RMatrix m2(a2);
     EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xz(),  0.7071, 1.0e-3);
@@ -225,7 +225,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m3(a3);
+    mc::RMatrix m3(a3);
     EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xz(), -0.7071, 1.0e-3);
@@ -237,11 +237,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromRandomAngles)
     EXPECT_NEAR(m3.zz(),  0.5000, 1.0e-3);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionAngleZeros)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionAngleZeros)
 {
     mc::Angles ang(0.0_rad, 0.0_rad, 0.0_rad);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     EXPECT_NEAR(m.xx(), 1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(), 0.0, 1.0e-9);
@@ -254,11 +254,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionAngleZeros)
     EXPECT_NEAR(m.zz(), 1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionPhiPi)
 {
     mc::Angles ang(1.0_rad * M_PI, 0.0_rad, 0.0_rad);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     EXPECT_NEAR(m.xx(),  1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -271,11 +271,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiPi)
     EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionThetaPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionThetaPi)
 {
     mc::Angles ang(0.0_rad, 1.0_rad * M_PI, 0.0_rad);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -288,11 +288,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionThetaPi)
     EXPECT_NEAR(m.zz(), -1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPsiPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionPsiPi)
 {
     mc::Angles ang(0.0_rad, 0.0_rad, 1.0_rad * M_PI);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     EXPECT_NEAR(m.xx(), -1.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -305,11 +305,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPsiPi)
     EXPECT_NEAR(m.zz(),  1.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
 {
     mc::Angles ang(1.0_rad * M_PI_2, 1.0_rad * M_PI_2, 1.0_rad * M_PI_2);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     EXPECT_NEAR(m.xx(),  0.0, 1.0e-9);
     EXPECT_NEAR(m.xy(),  0.0, 1.0e-9);
@@ -322,11 +322,11 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiHalfPi)
     EXPECT_NEAR(m.zz(),  0.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi)
 {
     mc::Angles ang(1.0_rad * M_PI_4, 1.0_rad * M_PI_4, 1.0_rad * M_PI_4);
     mc::Quaternion quat(ang);
-    mc::RotMatrix m(quat);
+    mc::RMatrix m(quat);
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
@@ -341,7 +341,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionPhiThetaPsiQuarterPi
     EXPECT_NEAR(m.zz(),  0.5000, 1.0e-3);
 }
 
-TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
+TEST_F(TestRMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
 {
     mc::Angles a1(-1.0_rad * M_PI_4,  1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
     mc::Angles a2( 1.0_rad * M_PI_4, -1.0_rad * M_PI_4,  1.0_rad * M_PI_4);
@@ -353,7 +353,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m1(q1);
+    mc::RMatrix m1(q1);
     EXPECT_NEAR(m1.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m1.xz(), -0.7071, 1.0e-3);
@@ -366,7 +366,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m2(q2);
+    mc::RMatrix m2(q2);
     EXPECT_NEAR(m2.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xy(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m2.xz(),  0.7071, 1.0e-3);
@@ -379,7 +379,7 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
 
     // expected values calculated with GNU Octave
     // tests/math/octave/test_rot_matrix.m
-    mc::RotMatrix m3(q3);
+    mc::RMatrix m3(q3);
     EXPECT_NEAR(m3.xx(),  0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xy(), -0.5000, 1.0e-3);
     EXPECT_NEAR(m3.xz(), -0.7071, 1.0e-3);
@@ -391,9 +391,9 @@ TEST_F(TestRotMatrix, CanInstantiateAndSetDataFromQuaternionRandomAngle)
     EXPECT_NEAR(m3.zz(),  0.5000, 1.0e-3);
 }
 
-TEST_F(TestRotMatrix, CanGetAnglesZeros)
+TEST_F(TestRMatrix, CanGetAnglesZeros)
 {
-    mc::RotMatrix m(mc::Angles(0.0_rad, 0.0_rad, 0.0_rad));
+    mc::RMatrix m(mc::Angles(0.0_rad, 0.0_rad, 0.0_rad));
     mc::Angles ang = m.GetAngles();
 
     EXPECT_NEAR(ang.phi()(), 0.0, 1.0e-9);
@@ -401,9 +401,9 @@ TEST_F(TestRotMatrix, CanGetAnglesZeros)
     EXPECT_NEAR(ang.psi()(), 0.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetAnglesPhiPi)
+TEST_F(TestRMatrix, CanGetAnglesPhiPi)
 {
-    mc::RotMatrix m(mc::Angles(1.0_rad * M_PI, 0.0_rad, 0.0_rad));
+    mc::RMatrix m(mc::Angles(1.0_rad * M_PI, 0.0_rad, 0.0_rad));
     mc::Angles ang = m.GetAngles();
 
     EXPECT_NEAR(ang.phi()(), M_PI, 1.0e-9);
@@ -411,9 +411,9 @@ TEST_F(TestRotMatrix, CanGetAnglesPhiPi)
     EXPECT_NEAR(ang.psi()(), 0.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetAnglesPsiPi)
+TEST_F(TestRMatrix, CanGetAnglesPsiPi)
 {
-    mc::RotMatrix m(mc::Angles(0.0_rad, 0.0_rad, 1.0_rad * M_PI));
+    mc::RMatrix m(mc::Angles(0.0_rad, 0.0_rad, 1.0_rad * M_PI));
     mc::Angles ang = m.GetAngles();
 
     EXPECT_NEAR(ang.phi()(), 0.0, 1.0e-9);
@@ -421,14 +421,14 @@ TEST_F(TestRotMatrix, CanGetAnglesPsiPi)
     EXPECT_NEAR(ang.psi()(), M_PI, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetAnglesInGimbalLock)
+TEST_F(TestRMatrix, CanGetAnglesInGimbalLock)
 {
     // singularity - gimbal lock
-    mc::RotMatrix mas1(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 0.0_rad          ));
-    mc::RotMatrix mas2(mc::Angles( 1.0_rad * M_PI_4 , 1.0_rad * M_PI_2 , 0.0_rad          ));
-    mc::RotMatrix mas3(mc::Angles( 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 , 0.0_rad          ));
-    mc::RotMatrix mas4(mc::Angles( 1.0_rad * M_PI   , 1.0_rad * M_PI_2 , 0.0_rad          ));
-    mc::RotMatrix mas5(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 ));
+    mc::RMatrix mas1(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::RMatrix mas2(mc::Angles( 1.0_rad * M_PI_4 , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::RMatrix mas3(mc::Angles( 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::RMatrix mas4(mc::Angles( 1.0_rad * M_PI   , 1.0_rad * M_PI_2 , 0.0_rad          ));
+    mc::RMatrix mas5(mc::Angles( 0.0_rad          , 1.0_rad * M_PI_2 , 1.0_rad * M_PI_2 ));
 
     mc::Angles as1 = mas1.GetAngles();
     mc::Angles as2 = mas2.GetAngles();
@@ -457,9 +457,9 @@ TEST_F(TestRotMatrix, CanGetAnglesInGimbalLock)
     EXPECT_NEAR(as5.psi()(),     0.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetQuaternion)
+TEST_F(TestRMatrix, CanGetQuaternion)
 {
-    mc::RotMatrix m(mc::Quaternion(0.6, 0.0, 0.0, 0.8));
+    mc::RMatrix m(mc::Quaternion(0.6, 0.0, 0.0, 0.8));
     mc::Quaternion q = m.GetQuaternion();
 
     EXPECT_NEAR(q.e0(), 0.6, 1.0e-9);
@@ -468,18 +468,18 @@ TEST_F(TestRotMatrix, CanGetQuaternion)
     EXPECT_NEAR(q.ez(), 0.8, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetQuaternionWhichMatchesAngles)
+TEST_F(TestRMatrix, CanGetQuaternionWhichMatchesAngles)
 {
-    mc::RotMatrix m1(  1.0,  0.0,  0.0,
+    mc::RMatrix m1(  1.0,  0.0,  0.0,
                        0.0,  1.0,  0.0,
                        0.0,  0.0,  1.0 );
-    mc::RotMatrix m2( -1.0,  0.0,  0.0,
+    mc::RMatrix m2( -1.0,  0.0,  0.0,
                        0.0, -1.0,  0.0,
                        0.0,  0.0,  1.0 );
-    mc::RotMatrix m3( -1.0,  0.0,  0.0,
+    mc::RMatrix m3( -1.0,  0.0,  0.0,
                        0.0,  1.0,  0.0,
                        0.0,  0.0, -1.0 );
-    mc::RotMatrix m4(  1.0,  0.0,  0.0,
+    mc::RMatrix m4(  1.0,  0.0,  0.0,
                        0.0, -1.0,  0.0,
                        0.0,  0.0, -1.0 );
 
@@ -519,17 +519,17 @@ TEST_F(TestRotMatrix, CanGetQuaternionWhichMatchesAngles)
     EXPECT_NEAR(qa4.ez(), qm4.ez(), 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanGetTransposed)
+TEST_F(TestRMatrix, CanGetTransposed)
 {
     double x[] { 1.0, 2.0, 3.0,
                  4.0, 5.0, 6.0,
                  7.0, 8.0, 9.0 };
 
-    mc::RotMatrix m0;
+    mc::RMatrix m0;
     m0.SetFromArray(x);
 
-    mc::RotMatrix m1(m0);
-    mc::RotMatrix mt = m1.GetTransposed();
+    mc::RMatrix m1(m0);
+    mc::RMatrix mt = m1.GetTransposed();
 
     for ( int r = 0; r < size; ++r )
     {
@@ -541,17 +541,17 @@ TEST_F(TestRotMatrix, CanGetTransposed)
     }
 }
 
-TEST_F(TestRotMatrix, CanAdd)
+TEST_F(TestRMatrix, CanAdd)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m2( 1.0, 1.0, 1.0,
+    mc::RMatrix m2( 1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0 );
 
-    mc::RotMatrix m0 = m1 + m2;
+    mc::RMatrix m0 = m1 + m2;
 
     EXPECT_DOUBLE_EQ(m0.xx(),  2.0);
     EXPECT_DOUBLE_EQ(m0.xy(),  3.0);
@@ -564,13 +564,13 @@ TEST_F(TestRotMatrix, CanAdd)
     EXPECT_DOUBLE_EQ(m0.zz(), 10.0);
 }
 
-TEST_F(TestRotMatrix, CanNegate)
+TEST_F(TestRMatrix, CanNegate)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m0 = -m1;
+    mc::RMatrix m0 = -m1;
 
     EXPECT_DOUBLE_EQ(m0.xx(), -1.0);
     EXPECT_DOUBLE_EQ(m0.xy(), -2.0);
@@ -583,17 +583,17 @@ TEST_F(TestRotMatrix, CanNegate)
     EXPECT_DOUBLE_EQ(m0.zz(), -9.0);
 }
 
-TEST_F(TestRotMatrix, CanSubstract)
+TEST_F(TestRMatrix, CanSubstract)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m2( 1.0, 1.0, 1.0,
+    mc::RMatrix m2( 1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0 );
 
-    mc::RotMatrix m0 = m1 - m2;
+    mc::RMatrix m0 = m1 - m2;
 
     EXPECT_DOUBLE_EQ(m0.xx(), 0.0);
     EXPECT_DOUBLE_EQ(m0.xy(), 1.0);
@@ -606,13 +606,13 @@ TEST_F(TestRotMatrix, CanSubstract)
     EXPECT_DOUBLE_EQ(m0.zz(), 8.0);
 }
 
-TEST_F(TestRotMatrix, CanMultiplyByNumber)
+TEST_F(TestRMatrix, CanMultiplyByNumber)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m0 = m1 * 0.5;
+    mc::RMatrix m0 = m1 * 0.5;
 
     EXPECT_DOUBLE_EQ(m0.xx(), 0.5);
     EXPECT_DOUBLE_EQ(m0.xy(), 1.0);
@@ -625,17 +625,17 @@ TEST_F(TestRotMatrix, CanMultiplyByNumber)
     EXPECT_DOUBLE_EQ(m0.zz(), 4.5);
 }
 
-TEST_F(TestRotMatrix, CanMultiplyByMatrix)
+TEST_F(TestRMatrix, CanMultiplyByMatrix)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m2( 1.1, 2.2, 3.3,
+    mc::RMatrix m2( 1.1, 2.2, 3.3,
                       4.4, 5.5, 6.6,
                       7.7, 8.8, 9.9 );
 
-    mc::RotMatrix m0 = m1 * m2;
+    mc::RMatrix m0 = m1 * m2;
 
     EXPECT_NEAR(m0.xx(),  33.0, 1.0e-9);
     EXPECT_NEAR(m0.xy(),  39.6, 1.0e-9);
@@ -648,21 +648,21 @@ TEST_F(TestRotMatrix, CanMultiplyByMatrix)
     EXPECT_NEAR(m0.zz(), 165.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanMultiplyByVector)
+TEST_F(TestRMatrix, CanMultiplyByVector)
 {
-    mc::RotMatrix m1( 1.0, 0.0, 0.0,
+    mc::RMatrix m1( 1.0, 0.0, 0.0,
                       0.0, 1.0, 0.0,
                       0.0, 0.0, 1.0 );
 
-    mc::RotMatrix m2( -1.0,  0.0,  0.0,
+    mc::RMatrix m2( -1.0,  0.0,  0.0,
                        0.0, -1.0,  0.0,
                        0.0,  0.0, -1.0 );
 
-    mc::RotMatrix m3( 0.0, 1.0, 0.0,
+    mc::RMatrix m3( 0.0, 1.0, 0.0,
                       1.0, 0.0, 0.0,
                       0.0, 0.0, 1.0 );
 
-    mc::RotMatrix m4( 1.0,  0.0,  0.0,
+    mc::RMatrix m4( 1.0,  0.0,  0.0,
                       0.0,  0.0, -1.0,
                       0.0, -1.0,  0.0 );
 
@@ -689,12 +689,12 @@ TEST_F(TestRotMatrix, CanMultiplyByVector)
     EXPECT_NEAR(v4.z(), -2.0, 1.0e-9);
 }
 
-TEST_F(TestRotMatrix, CanDivideByNumber)
+TEST_F(TestRMatrix, CanDivideByNumber)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
-    mc::RotMatrix m0 = m1 / 2.0;
+    mc::RMatrix m0 = m1 / 2.0;
 
     EXPECT_DOUBLE_EQ(m0.xx(), 0.5);
     EXPECT_DOUBLE_EQ(m0.xy(), 1.0);
@@ -707,13 +707,13 @@ TEST_F(TestRotMatrix, CanDivideByNumber)
     EXPECT_DOUBLE_EQ(m0.zz(), 4.5);
 }
 
-TEST_F(TestRotMatrix, CanUnaryAdd)
+TEST_F(TestRMatrix, CanUnaryAdd)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m2( 1.0, 1.0, 1.0,
+    mc::RMatrix m2( 1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0 );
 
@@ -730,13 +730,13 @@ TEST_F(TestRotMatrix, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(m1.zz(), 10.0);
 }
 
-TEST_F(TestRotMatrix, CanUnarySubstract)
+TEST_F(TestRMatrix, CanUnarySubstract)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
-    mc::RotMatrix m2( 1.0, 1.0, 1.0,
+    mc::RMatrix m2( 1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0,
                       1.0, 1.0, 1.0 );
 
@@ -753,9 +753,9 @@ TEST_F(TestRotMatrix, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(m1.zz(), 8.0);
 }
 
-TEST_F(TestRotMatrix, CanUnaryMultiplyByNumber)
+TEST_F(TestRMatrix, CanUnaryMultiplyByNumber)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 
@@ -772,9 +772,9 @@ TEST_F(TestRotMatrix, CanUnaryMultiplyByNumber)
     EXPECT_DOUBLE_EQ(m1.zz(), 4.5);
 }
 
-TEST_F(TestRotMatrix, CanUnaryDivideByNumber)
+TEST_F(TestRMatrix, CanUnaryDivideByNumber)
 {
-    mc::RotMatrix m1( 1.0, 2.0, 3.0,
+    mc::RMatrix m1( 1.0, 2.0, 3.0,
                       4.0, 5.0, 6.0,
                       7.0, 8.0, 9.0 );
 

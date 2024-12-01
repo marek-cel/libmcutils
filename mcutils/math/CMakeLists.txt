@@ -15,7 +15,7 @@ set(HEADERS
     MatrixNxN.h
     Quaternion.h
     Random.h
-    RotMatrix.h
+    RMatrix.h
     RungeKutta4.h
     SegPlaneIsect.h
     Table2.h
@@ -30,7 +30,7 @@ set(SOURCES
     DegMinSec.cpp
     Quaternion.cpp
     Random.cpp
-    RotMatrix.cpp
+    RMatrix.cpp
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp

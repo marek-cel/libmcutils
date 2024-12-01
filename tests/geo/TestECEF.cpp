@@ -896,7 +896,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
 TEST_F(TestECEF, CanGetENU2NED)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::RotMatrix enu2ned = ecef.enu2ned();
+    mc::RMatrix enu2ned = ecef.enu2ned();
 
     const mc::Vector3d v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ned = enu2ned * v_enu;
@@ -909,7 +909,7 @@ TEST_F(TestECEF, CanGetENU2NED)
 TEST_F(TestECEF, CanGetNED2ENU)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::RotMatrix ned2enu = ecef.ned2enu();
+    mc::RMatrix ned2enu = ecef.ned2enu();
 
     const mc::Vector3d v_ned(1.0, 2.0, 3.0);
     mc::Vector3d v_enu = ned2enu * v_ned;
@@ -923,7 +923,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix enu2ecef;
+    mc::RMatrix enu2ecef;
 
     const mc::Vector3d v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -946,7 +946,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix enu2ecef;
+    mc::RMatrix enu2ecef;
 
     const mc::Vector3d v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -969,7 +969,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix enu2ecef;
+    mc::RMatrix enu2ecef;
 
     const mc::Vector3d v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -992,7 +992,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix enu2ecef;
+    mc::RMatrix enu2ecef;
 
     const mc::Vector3d v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -1015,7 +1015,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ned2ecef;
+    mc::RMatrix ned2ecef;
 
     const mc::Vector3d v_ned(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -1038,7 +1038,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ned2ecef;
+    mc::RMatrix ned2ecef;
 
     const mc::Vector3d v_ned(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -1061,7 +1061,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ned2ecef;
+    mc::RMatrix ned2ecef;
 
     const mc::Vector3d v_ned(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -1084,7 +1084,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ned2ecef;
+    mc::RMatrix ned2ecef;
 
     const mc::Vector3d v_ned(1.0, 2.0, 3.0);
     mc::Vector3d v_ecef;
@@ -1107,7 +1107,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2enu;
+    mc::RMatrix ecef2enu;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_enu;
@@ -1130,7 +1130,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2enu;
+    mc::RMatrix ecef2enu;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_enu;
@@ -1153,7 +1153,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2enu;
+    mc::RMatrix ecef2enu;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_enu;
@@ -1176,7 +1176,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2enu;
+    mc::RMatrix ecef2enu;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_enu;
@@ -1199,7 +1199,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N0E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2ned;
+    mc::RMatrix ecef2ned;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_ned;
@@ -1222,7 +1222,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2ned;
+    mc::RMatrix ecef2ned;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_ned;
@@ -1245,7 +1245,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90W)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2ned;
+    mc::RMatrix ecef2ned;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_ned;
@@ -1268,7 +1268,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N180E)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::RotMatrix ecef2ned;
+    mc::RMatrix ecef2ned;
 
     const mc::Vector3d v_ecef(1.0, 2.0, 3.0);
     mc::Vector3d v_ned;
