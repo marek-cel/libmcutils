@@ -4,16 +4,16 @@
 
 using namespace units::literals;
 
-class TestDimensionalVector : public ::testing::Test
+class TestUVector3 : public ::testing::Test
 {
 protected:
-    TestDimensionalVector() {}
-    virtual ~TestDimensionalVector() {}
+    TestUVector3() {}
+    virtual ~TestUVector3() {}
     void SetUp() override {}
     void TearDown() override {}
 };
 
-TEST_F(TestDimensionalVector, CanCreateI)
+TEST_F(TestUVector3, CanCreateI)
 {
     mc::Vector3_m v1 = mc::Vector3_m::i();
 
@@ -22,7 +22,7 @@ TEST_F(TestDimensionalVector, CanCreateI)
     EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
-TEST_F(TestDimensionalVector, CanCreateJ)
+TEST_F(TestUVector3, CanCreateJ)
 {
     mc::Vector3_m v1 = mc::Vector3_m::j();
 
@@ -31,7 +31,7 @@ TEST_F(TestDimensionalVector, CanCreateJ)
     EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
-TEST_F(TestDimensionalVector, CanCreateK)
+TEST_F(TestUVector3, CanCreateK)
 {
     mc::Vector3_m v1 = mc::Vector3_m::k();
 
@@ -40,7 +40,7 @@ TEST_F(TestDimensionalVector, CanCreateK)
     EXPECT_DOUBLE_EQ(v1.z()(), 1.0);
 }
 
-TEST_F(TestDimensionalVector, CanInstantiate)
+TEST_F(TestUVector3, CanInstantiate)
 {
     mc::Vector3_m v1;
 
@@ -49,7 +49,7 @@ TEST_F(TestDimensionalVector, CanInstantiate)
     EXPECT_DOUBLE_EQ(v1.z()(), 0.0);
 }
 
-TEST_F(TestDimensionalVector, CanInstantiateAndSetData)
+TEST_F(TestUVector3, CanInstantiateAndSetData)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
@@ -58,28 +58,28 @@ TEST_F(TestDimensionalVector, CanInstantiateAndSetData)
     EXPECT_DOUBLE_EQ(v1.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanGetLengthXY)
+TEST_F(TestUVector3, CanGetLengthXY)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
     // 1^2 + 2^2 = 1 + 4 = 5
     EXPECT_DOUBLE_EQ(v1.GetLengthXY()(), sqrt(5.0));
 }
 
-TEST_F(TestDimensionalVector, CanGetLengthXZ)
+TEST_F(TestUVector3, CanGetLengthXZ)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
     // 1^2 + 3^2 = 1 + 9 = 10
     EXPECT_DOUBLE_EQ(v1.GetLengthXZ()(), sqrt(10.0));
 }
 
-TEST_F(TestDimensionalVector, CanGetLengthYZ)
+TEST_F(TestUVector3, CanGetLengthYZ)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
     // 2^2 + 3^2 = 4 + 9 = 13
     EXPECT_DOUBLE_EQ(v1.GetLengthYZ()(), sqrt(13.0));
 }
 
-TEST_F(TestDimensionalVector, CanGetNormalized)
+TEST_F(TestUVector3, CanGetNormalized)
 {
     // expected values calculated with GNU Octave
     // tests/math/octave/test_vector3.m
@@ -94,7 +94,7 @@ TEST_F(TestDimensionalVector, CanGetNormalized)
     // EXPECT_DOUBLE_EQ(v1_n.GetLength()(), 1.0);
 }
 
-TEST_F(TestDimensionalVector, CanSetData)
+TEST_F(TestUVector3, CanSetData)
 {
     mc::Vector3_m v;
 
@@ -104,7 +104,7 @@ TEST_F(TestDimensionalVector, CanSetData)
     EXPECT_DOUBLE_EQ(v.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsXYZ)
+TEST_F(TestUVector3, CanAccessElementsViaFunctionsXYZ)
 {
     mc::Vector3_m v;
 
@@ -120,7 +120,7 @@ TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsXYZ)
     EXPECT_DOUBLE_EQ(v(2)(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsPQR)
+TEST_F(TestUVector3, CanAccessElementsViaFunctionsPQR)
 {
     mc::Vector3_m v;
 
@@ -136,7 +136,7 @@ TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsPQR)
     EXPECT_DOUBLE_EQ(v(2)(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsUVW)
+TEST_F(TestUVector3, CanAccessElementsViaFunctionsUVW)
 {
     mc::Vector3_m v;
 
@@ -152,7 +152,7 @@ TEST_F(TestDimensionalVector, CanAccessElementsViaFunctionsUVW)
     EXPECT_DOUBLE_EQ(v(2)(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanAssign)
+TEST_F(TestUVector3, CanAssign)
 {
     mc::Vector3_m v;
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
@@ -163,7 +163,7 @@ TEST_F(TestDimensionalVector, CanAssign)
     EXPECT_DOUBLE_EQ(v.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanAdd)
+TEST_F(TestUVector3, CanAdd)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
     mc::Vector3_m v2(4.0_m, 5.0_m, 6.0_m);
@@ -175,7 +175,7 @@ TEST_F(TestDimensionalVector, CanAdd)
     EXPECT_DOUBLE_EQ(v12.z()(), 9.0);
 }
 
-TEST_F(TestDimensionalVector, CanNegate)
+TEST_F(TestUVector3, CanNegate)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
@@ -186,7 +186,7 @@ TEST_F(TestDimensionalVector, CanNegate)
     EXPECT_DOUBLE_EQ(v1_n.z()(), -3.0);
 }
 
-TEST_F(TestDimensionalVector, CanSubstract)
+TEST_F(TestUVector3, CanSubstract)
 {
     mc::Vector3_m v1(4.0_m, 5.0_m, 6.0_m);
     mc::Vector3_m v2(3.0_m, 2.0_m, 1.0_m);
@@ -198,7 +198,7 @@ TEST_F(TestDimensionalVector, CanSubstract)
     EXPECT_DOUBLE_EQ(v12.z()(), 5.0);
 }
 
-TEST_F(TestDimensionalVector, CanMultiplyByNumber)
+TEST_F(TestUVector3, CanMultiplyByNumber)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
@@ -209,7 +209,7 @@ TEST_F(TestDimensionalVector, CanMultiplyByNumber)
     EXPECT_DOUBLE_EQ(v1_2.z()(), 6.0);
 }
 
-TEST_F(TestDimensionalVector, CanMultiplyByScalar)
+TEST_F(TestUVector3, CanMultiplyByScalar)
 {
     mc::Vector3_m r(1.0_m, 2.0_m, 3.0_m);
     mc::Vector3_Nm t = r * 2.0_N;
@@ -219,7 +219,7 @@ TEST_F(TestDimensionalVector, CanMultiplyByScalar)
     EXPECT_DOUBLE_EQ(t.z()(), 6.0);
 }
 
-TEST_F(TestDimensionalVector, CanDivideByNumber)
+TEST_F(TestUVector3, CanDivideByNumber)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
 
@@ -230,7 +230,7 @@ TEST_F(TestDimensionalVector, CanDivideByNumber)
     EXPECT_DOUBLE_EQ(v1_2.z()(), 1.5);
 }
 
-TEST_F(TestDimensionalVector, CanDivideByScalar)
+TEST_F(TestUVector3, CanDivideByScalar)
 {
     mc::Vector3_Nm t(2.0_Nm, 4.0_Nm, 6.0_Nm);
     mc::Vector3_m r = t / 2.0_N;
@@ -240,7 +240,7 @@ TEST_F(TestDimensionalVector, CanDivideByScalar)
     EXPECT_DOUBLE_EQ(r.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanCalculateVectorDotProduct)
+TEST_F(TestUVector3, CanCalculateVectorDotProduct)
 {
     mc::Vector3_m v1(1.0_m, 0.0_m, 0.0_m);
     mc::Vector3_m v2(0.0_m, 1.0_m, 0.0_m);
@@ -260,7 +260,7 @@ TEST_F(TestDimensionalVector, CanCalculateVectorDotProduct)
     EXPECT_DOUBLE_EQ(s44(), 14.0);
 }
 
-TEST_F(TestDimensionalVector, CanCalculateVectorCrossProduct)
+TEST_F(TestUVector3, CanCalculateVectorCrossProduct)
 {
     mc::Vector3_m r(1.0_m, 2.0_m, 3.0_m);
     mc::Vector3_N f(4.0_N, 5.0_N, 6.0_N);
@@ -274,7 +274,7 @@ TEST_F(TestDimensionalVector, CanCalculateVectorCrossProduct)
     EXPECT_DOUBLE_EQ(t.z()(), -3.0);
 }
 
-TEST_F(TestDimensionalVector, CanCalculateVectorCrossProduct_AngularVelocity)
+TEST_F(TestUVector3, CanCalculateVectorCrossProduct_AngularVelocity)
 {
     mc::Vector3_rad_per_s omega(1.0_rad_per_s, 2.0_rad_per_s, 3.0_rad_per_s);
     mc::Vector3_m r(4.0_m, 5.0_m, 6.0_m);
@@ -288,7 +288,7 @@ TEST_F(TestDimensionalVector, CanCalculateVectorCrossProduct_AngularVelocity)
     // EXPECT_DOUBLE_EQ(t.z()(), -3.0);
 }
 
-TEST_F(TestDimensionalVector, CanUnaryAdd)
+TEST_F(TestUVector3, CanUnaryAdd)
 {
     mc::Vector3_m v0(1.0_m, 2.0_m, 3.0_m);
     mc::Vector3_m v1(2.0_m, 3.0_m, 4.0_m);
@@ -300,7 +300,7 @@ TEST_F(TestDimensionalVector, CanUnaryAdd)
     EXPECT_DOUBLE_EQ(v0.z()(), 7.0);
 }
 
-TEST_F(TestDimensionalVector, CanUnarySubstract)
+TEST_F(TestUVector3, CanUnarySubstract)
 {
     mc::Vector3_m v0(3.0_m, 5.0_m, 7.0_m);
     mc::Vector3_m v1(2.0_m, 3.0_m, 4.0_m);
@@ -312,7 +312,7 @@ TEST_F(TestDimensionalVector, CanUnarySubstract)
     EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanUnaryMultiplyByNumber)
+TEST_F(TestUVector3, CanUnaryMultiplyByNumber)
 {
     mc::Vector3_m v0(2.0_m, 4.0_m, 6.0_m);
 
@@ -323,7 +323,7 @@ TEST_F(TestDimensionalVector, CanUnaryMultiplyByNumber)
     EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanUnaryDivideByNumber)
+TEST_F(TestUVector3, CanUnaryDivideByNumber)
 {
     mc::Vector3_m v0(2.0_m, 4.0_m, 6.0_m);
 
@@ -334,7 +334,7 @@ TEST_F(TestDimensionalVector, CanUnaryDivideByNumber)
     EXPECT_DOUBLE_EQ(v0.z()(), 3.0);
 }
 
-TEST_F(TestDimensionalVector, CanMultiplyNumberByVector)
+TEST_F(TestUVector3, CanMultiplyNumberByVector)
 {
     mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
     mc::Vector3_m r = 2.0 * v1;

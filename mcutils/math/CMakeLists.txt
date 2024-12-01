@@ -5,7 +5,6 @@ set(TARGET_NAME mcutils-math)
 set(HEADERS
     Angles.h
     DegMinSec.h
-    DimensionalVector.h
     EulerRect.h
     GaussJordan.h
     Math.h
@@ -20,6 +19,7 @@ set(HEADERS
     SegPlaneIsect.h
     Table2.h
     Table.h
+    UVector3.h
     Vector.h
     Vector3.h
     VectorN.h

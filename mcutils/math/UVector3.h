@@ -19,8 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
-#ifndef MCUTILS_MATH_DIMENSIONALVECTOR_H_
-#define MCUTILS_MATH_DIMENSIONALVECTOR_H_
+#ifndef MCUTILS_MATH_UVECTOR3_H_
+#define MCUTILS_MATH_UVECTOR3_H_
 
 #include <units.h>
 
@@ -30,27 +30,27 @@
 namespace mc {
 
 /**
- * \brief 3 elements column vector class.
+ * \brief 3 elements column dimensional (with unit) vector class.
  * \tparam TYPE vector item type
  */
-template <typename TYPE>
-class DimensionalVector3 : public Vector3<TYPE>
+template <class TYPE>
+class UVector3 : public Vector3<TYPE>
 {
 public:
 
-    inline static const DimensionalVector3<TYPE> i() { return DimensionalVector3<TYPE>(TYPE{1}, TYPE{0}, TYPE{0}); }
-    inline static const DimensionalVector3<TYPE> j() { return DimensionalVector3<TYPE>(TYPE{0}, TYPE{1}, TYPE{0}); }
-    inline static const DimensionalVector3<TYPE> k() { return DimensionalVector3<TYPE>(TYPE{0}, TYPE{0}, TYPE{1}); }
+    inline static const UVector3<TYPE> i() { return UVector3<TYPE>(TYPE{1}, TYPE{0}, TYPE{0}); }
+    inline static const UVector3<TYPE> j() { return UVector3<TYPE>(TYPE{0}, TYPE{1}, TYPE{0}); }
+    inline static const UVector3<TYPE> k() { return UVector3<TYPE>(TYPE{0}, TYPE{0}, TYPE{1}); }
 
     /** \brief Constructor. */
-    DimensionalVector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
+    UVector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
     {
         this->Set(x, y, z);
     }
 
     /** \brief Casting constructor. */
     template <class RHS_TYPE>
-    DimensionalVector3(const DimensionalVector3<RHS_TYPE> &vect)
+    UVector3(const UVector3<RHS_TYPE> &vect)
     {
         this->x() = vect.x();
         this->y() = vect.y();
@@ -75,18 +75,18 @@ public:
     }
 
     /** \return length of projection of vector on XY-plane */
-    inline TYPE GetLengthXY() const { return units::math::sqrt( this->x()*this->x() + this->y()*this->y() ); }
+    inline TYPE GetLengthXY() const { return units::math::sqrt(this->x()*this->x() + this->y()*this->y()); }
 
     /** \return length of projection of vector on XZ-plane */
-    inline TYPE GetLengthXZ() const { return units::math::sqrt( this->x()*this->x() + this->z()*this->z() ); }
+    inline TYPE GetLengthXZ() const { return units::math::sqrt(this->x()*this->x() + this->z()*this->z()); }
 
     /** \return length of projection of vector on YZ-plane */
-    inline TYPE GetLengthYZ() const { return units::math::sqrt( this->y()*this->y() + this->z()*this->z() ); }
+    inline TYPE GetLengthYZ() const { return units::math::sqrt(this->y()*this->y() + this->z()*this->z()); }
 
     /** \return normalized vector */
-    DimensionalVector3<TYPE> GetNormalized() const
+    UVector3<TYPE> GetNormalized() const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.Normalize();
         return result;
     }
@@ -97,33 +97,33 @@ public:
     }
 
     /** \brief Addition operator. */
-    DimensionalVector3<TYPE> operator+(const DimensionalVector3<TYPE>& vect) const
+    UVector3<TYPE> operator+(const UVector3<TYPE>& vect) const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.Add(vect);
         return result;
     }
 
     /** \brief Negation operator. */
-    DimensionalVector3<TYPE> operator-() const
+    UVector3<TYPE> operator-() const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.Negate();
         return result;
     }
 
     /** \brief Subtraction operator. */
-    DimensionalVector3<TYPE> operator-(const DimensionalVector3<TYPE>& vect) const
+    UVector3<TYPE> operator-(const UVector3<TYPE>& vect) const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.Substract(vect);
         return result;
     }
 
     /** \brief Multiplication operator (by number). */
-    DimensionalVector3<TYPE> operator*(double value) const
+    UVector3<TYPE> operator*(double value) const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.MultiplyByValue(value);
         return result;
     }
@@ -135,7 +135,7 @@ public:
         using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
         using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
 
-        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
+        UVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
 
         result.x() = this->x() * value;
         result.y() = this->y() * value;
@@ -146,15 +146,15 @@ public:
 
     /** \brief Dot product operator. */
     template <class RHS_TYPE>
-    auto operator*(const DimensionalVector3<RHS_TYPE>& vect)
+    auto operator*(const UVector3<RHS_TYPE>& vect)
     {
         return this->x()*vect.x() + this->y()*vect.y() + this->z()*vect.z();
     }
 
     /** \brief Division operator (by number). */
-    DimensionalVector3<TYPE> operator/(double value) const
+    UVector3<TYPE> operator/(double value) const
     {
-        DimensionalVector3<TYPE> result(*this);
+        UVector3<TYPE> result(*this);
         result.DivideByValue(value);
         return result;
     }
@@ -166,7 +166,7 @@ public:
         using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
         using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
 
-        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, units::inverse<UnitsRhs>>> > result;
+        UVector3< units::unit_t<units::compound_unit<UnitsLhs, units::inverse<UnitsRhs>>> > result;
 
         result.x() = this->x() / value;
         result.y() = this->y() / value;
@@ -177,12 +177,12 @@ public:
 
     /** \brief Cross product operator. */
     template <class RHS_TYPE>
-    auto operator%(const DimensionalVector3<RHS_TYPE>& vect) const
+    auto operator%(const UVector3<RHS_TYPE>& vect) const
     {
         using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
         using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
 
-        DimensionalVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
+        UVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
         result.x() = this->y() * vect.z() - this->z() * vect.y();
         result.y() = this->z() * vect.x() - this->x() * vect.z();
         result.z() = this->x() * vect.y() - this->y() * vect.x();
@@ -190,28 +190,28 @@ public:
     }
 
     /** \brief Unary addition operator. */
-    DimensionalVector3<TYPE>& operator+=(const DimensionalVector3<TYPE>& vect)
+    UVector3<TYPE>& operator+=(const UVector3<TYPE>& vect)
     {
         this->Add(vect);
         return *this;
     }
 
     /** \brief Unary subtraction operator. */
-    DimensionalVector3<TYPE>& operator-=(const DimensionalVector3<TYPE>& vect)
+    UVector3<TYPE>& operator-=(const UVector3<TYPE>& vect)
     {
         this->Substract(vect);
         return *this;
     }
 
     /** \brief Unary multiplication operator (by number). */
-    DimensionalVector3<TYPE>& operator*=(double value)
+    UVector3<TYPE>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
     /** \brief Unary division operator (by number). */
-    DimensionalVector3<TYPE>& operator/=(double value)
+    UVector3<TYPE>& operator/=(double value)
     {
         this->DivideByValue(value);
         return *this;
@@ -219,7 +219,7 @@ public:
 
     /** @brief Assignment operator. */
     template <class RHS_TYPE>
-    const DimensionalVector3<TYPE>& operator= (const DimensionalVector3<RHS_TYPE> &vect)
+    const UVector3<TYPE>& operator= (const UVector3<RHS_TYPE> &vect)
     {
         this->x() = vect.x();
         this->y() = vect.y();
@@ -230,11 +230,11 @@ public:
 
 /** \brief Multiplication operator (by number). */
 template <typename TYPE>
-inline DimensionalVector3<TYPE> operator*(double value, const DimensionalVector3<TYPE>& vect)
+inline UVector3<TYPE> operator*(double value, const UVector3<TYPE>& vect)
 {
     return vect * value;
 }
 
 } // namespace mc
 
-#endif // MCUTILS_MATH_DIMENSIONALVECTOR_H_
+#endif // MCUTILS_MATH_UVECTOR3_H_

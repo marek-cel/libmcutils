@@ -44,7 +44,6 @@ set(SOURCES
 
     math/TestAngles.cpp
     math/TestDegMinSec.cpp
-    math/TestDimensionalVector.cpp
     math/TestEulerRect.cpp
     math/TestGaussJordan.cpp
     math/TestMath.cpp
@@ -58,6 +57,7 @@ set(SOURCES
     math/TestSegPlaneIsect.cpp
     math/TestTable.cpp
     math/TestTable2.cpp
+    math/TestUVector3.cpp
     math/TestVector3.cpp
     math/TestVectorN.cpp
 
