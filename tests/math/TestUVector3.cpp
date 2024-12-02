@@ -353,3 +353,13 @@ TEST_F(TestUVector3, CanMultiplyNumberByVector)
     EXPECT_DOUBLE_EQ(r.y()(), 4.0);
     EXPECT_DOUBLE_EQ(r.z()(), 6.0);
 }
+
+TEST_F(TestUVector3, CanMultiplyScalarByVector)
+{
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_Nm r = 2.0_N * v1;
+
+    EXPECT_DOUBLE_EQ(r.x()(), 2.0);
+    EXPECT_DOUBLE_EQ(r.y()(), 4.0);
+    EXPECT_DOUBLE_EQ(r.z()(), 6.0);
+}

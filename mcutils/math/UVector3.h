@@ -145,7 +145,7 @@ public:
 
     /** \brief Multiplication operator (by scalar). */
     template <class RHS_TYPE>
-    auto operator*(RHS_TYPE value) const
+    auto operator*(const RHS_TYPE& value) const
     {
         using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
         using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
@@ -232,6 +232,13 @@ public:
 /** \brief Multiplication operator (by number). */
 template <typename TYPE>
 inline UVector3<TYPE> operator*(double value, const UVector3<TYPE>& vect)
+{
+    return vect * value;
+}
+
+/** \brief Multiplication operator (by scalar). */
+template <class LHS_TYPE, class RHS_TYPE>
+inline auto operator*(const LHS_TYPE& value, const UVector3<RHS_TYPE>& vect)
 {
     return vect * value;
 }
