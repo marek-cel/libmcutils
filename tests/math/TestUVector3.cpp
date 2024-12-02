@@ -84,14 +84,14 @@ TEST_F(TestUVector3, CanGetNormalized)
     // expected values calculated with GNU Octave
     // tests/math/octave/test_vector3.m
 
-    // mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
-    // mc::Vector3_m v1_n = v1.GetNormalized();
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3_m v1_n = v1.GetNormalized();
 
-    // EXPECT_NEAR(v1_n.x()(), 0.267261, 1.0e-5);
-    // EXPECT_NEAR(v1_n.y()(), 0.534522, 1.0e-5);
-    // EXPECT_NEAR(v1_n.z()(), 0.801784, 1.0e-5);
+    EXPECT_NEAR(v1_n.x()(), 0.267261, 1.0e-5);
+    EXPECT_NEAR(v1_n.y()(), 0.534522, 1.0e-5);
+    EXPECT_NEAR(v1_n.z()(), 0.801784, 1.0e-5);
 
-    // EXPECT_DOUBLE_EQ(v1_n.GetLength()(), 1.0);
+    EXPECT_DOUBLE_EQ(v1_n.GetLength()(), 1.0);
 }
 
 TEST_F(TestUVector3, CanSetData)

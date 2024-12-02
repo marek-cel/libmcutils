@@ -91,6 +91,20 @@ public:
         return result;
     }
 
+    /** \brief Normalizes vector. */
+    void Normalize()
+    {
+        double length = GetLength()();
+        if (length > 0.0)
+        {
+            double length_inv = 1.0 / length;
+            for (unsigned int i = 0; i < this->kSize; ++i)
+            {
+                this->_elements[i] *= length_inv;
+            }
+        }
+    }
+
     /** \brief Normalize vector. */
     operator Vector3<double>() const
     {
