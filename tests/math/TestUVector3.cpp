@@ -279,13 +279,13 @@ TEST_F(TestUVector3, CanCalculateVectorCrossProduct_AngularVelocity)
     mc::Vector3_rad_per_s omega(1.0_rad_per_s, 2.0_rad_per_s, 3.0_rad_per_s);
     mc::Vector3_m r(4.0_m, 5.0_m, 6.0_m);
 
-    // mc::Vector3_mps t = omega % r;
+    mc::Vector3_mps t = omega % r;
 
-    // // expected values calculated with wxMaxima
-    // // tests/math/octave/test_vector3_cross_product.m
-    // EXPECT_DOUBLE_EQ(t.x()(), -3.0);
-    // EXPECT_DOUBLE_EQ(t.y()(),  6.0);
-    // EXPECT_DOUBLE_EQ(t.z()(), -3.0);
+    // expected values calculated with wxMaxima
+    // tests/math/octave/test_vector3_cross_product.m
+    EXPECT_DOUBLE_EQ(t.x()(), -3.0);
+    EXPECT_DOUBLE_EQ(t.y()(),  6.0);
+    EXPECT_DOUBLE_EQ(t.z()(), -3.0);
 }
 
 TEST_F(TestUVector3, CanUnaryAdd)

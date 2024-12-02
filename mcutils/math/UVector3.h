@@ -175,20 +175,6 @@ public:
         return result;
     }
 
-    /** \brief Cross product operator. */
-    template <class RHS_TYPE>
-    auto operator%(const UVector3<RHS_TYPE>& vect) const
-    {
-        using UnitsLhs = typename units::traits::unit_t_traits<TYPE>::unit_type;
-        using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
-
-        UVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
-        result.x() = this->y() * vect.z() - this->z() * vect.y();
-        result.y() = this->z() * vect.x() - this->x() * vect.z();
-        result.z() = this->x() * vect.y() - this->y() * vect.x();
-        return result;
-    }
-
     /** \brief Unary addition operator. */
     UVector3<TYPE>& operator+=(const UVector3<TYPE>& vect)
     {
@@ -233,6 +219,42 @@ template <typename TYPE>
 inline UVector3<TYPE> operator*(double value, const UVector3<TYPE>& vect)
 {
     return vect * value;
+}
+
+/**
+ * \brief Cross product operator specialized template.
+ * Specialization for angular velocity vector.
+ * \tparam RHS_TYPE right hand side vector type
+ */
+template <class RHS_TYPE>
+auto operator%(const UVector3<units::angular_velocity::radians_per_second_t>& lhs, const UVector3<RHS_TYPE>& rhs)
+{
+    using UnitsSec = typename units::traits::unit_t_traits<units::time::second_t>::unit_type;
+    using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
+
+    auto lhs_x{lhs.x()() / units::time::second_t{1.0}};
+    auto lhs_y{lhs.y()() / units::time::second_t{1.0}};
+    auto lhs_z{lhs.z()() / units::time::second_t{1.0}};
+
+    UVector3< units::unit_t<units::compound_unit<UnitsRhs,units::inverse<UnitsSec>>> > result;
+    result.x() = lhs_y * rhs.z() - lhs_z * rhs.y();
+    result.y() = lhs_z * rhs.x() - lhs_x * rhs.z();
+    result.z() = lhs_x * rhs.y() - lhs_y * rhs.x();
+    return result;
+}
+
+/** \brief Cross product operator template. */
+template <class LHS_TYPE, class RHS_TYPE>
+auto operator%(const UVector3<LHS_TYPE>& lhs, const UVector3<RHS_TYPE>& rhs)
+{
+    using UnitsLhs = typename units::traits::unit_t_traits<LHS_TYPE>::unit_type;
+    using UnitsRhs = typename units::traits::unit_t_traits<RHS_TYPE>::unit_type;
+
+    UVector3< units::unit_t<units::compound_unit<UnitsLhs, UnitsRhs>> > result;
+    result.x() = lhs.y() * rhs.z() - lhs.z() * rhs.y();
+    result.y() = lhs.z() * rhs.x() - lhs.x() * rhs.z();
+    result.z() = lhs.x() * rhs.y() - lhs.y() * rhs.x();
+    return result;
 }
 
 } // namespace mc
