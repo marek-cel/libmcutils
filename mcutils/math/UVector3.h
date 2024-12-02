@@ -242,6 +242,39 @@ auto operator%(const UVector3<units::angular_velocity::radians_per_second_t>& lh
     return result;
 }
 
+/**
+ * \brief Cross product operator template.
+ * \tparam RHS_TYPE right hand side vector type
+ */
+template <class RHS_TYPE>
+auto operator%(const UVector3<units::angular_velocity::degrees_per_second_t>& lhs, const UVector3<RHS_TYPE>& rhs)
+{
+    UVector3<units::angular_velocity::radians_per_second_t> temp(lhs);
+    return temp % rhs;
+}
+
+/**
+ * \brief Cross product operator template.
+ * \tparam RHS_TYPE right hand side vector type
+ */
+template <class RHS_TYPE>
+auto operator%(const UVector3<units::angular_velocity::revolutions_per_minute_t>& lhs, const UVector3<RHS_TYPE>& rhs)
+{
+    UVector3<units::angular_velocity::radians_per_second_t> temp(lhs);
+    return temp % rhs;
+}
+
+/**
+ * \brief Cross product operator template.
+ * \tparam RHS_TYPE right hand side vector type
+ */
+template <class RHS_TYPE>
+auto operator%(const UVector3<units::angular_velocity::milliarcseconds_per_year_t>& lhs, const UVector3<RHS_TYPE>& rhs)
+{
+    UVector3<units::angular_velocity::radians_per_second_t> temp(lhs);
+    return temp % rhs;
+}
+
 /** \brief Cross product operator template. */
 template <class LHS_TYPE, class RHS_TYPE>
 auto operator%(const UVector3<LHS_TYPE>& lhs, const UVector3<RHS_TYPE>& rhs)
