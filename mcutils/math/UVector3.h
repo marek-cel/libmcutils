@@ -222,8 +222,7 @@ inline UVector3<TYPE> operator*(double value, const UVector3<TYPE>& vect)
 }
 
 /**
- * \brief Cross product operator specialized template.
- * Specialization for angular velocity vector.
+ * \brief Cross product operator template.
  * \tparam RHS_TYPE right hand side vector type
  */
 template <class RHS_TYPE>
