@@ -91,6 +91,7 @@ public:
         return result;
     }
 
+    /** \brief Normalize vector. */
     operator Vector3<double>() const
     {
         return Vector3<double>(this->x()(), this->y()(), this->z()());

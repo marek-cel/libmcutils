@@ -152,6 +152,16 @@ TEST_F(TestUVector3, CanAccessElementsViaFunctionsUVW)
     EXPECT_DOUBLE_EQ(v(2)(), 3.0);
 }
 
+TEST_F(TestUVector3, CanCastToVector3d)
+{
+    mc::Vector3_m v1(1.0_m, 2.0_m, 3.0_m);
+    mc::Vector3d v2 = v1;
+
+    EXPECT_DOUBLE_EQ(v2.x(), 1.0);
+    EXPECT_DOUBLE_EQ(v2.y(), 2.0);
+    EXPECT_DOUBLE_EQ(v2.z(), 3.0);
+}
+
 TEST_F(TestUVector3, CanAssign)
 {
     mc::Vector3_m v;
