@@ -44,12 +44,7 @@ void MovingMedian::Update(double, double u)
     if (_fifo.size() > 1)
     {
         std::vector<double> v;
-
-        for (double& val : _fifo)
-        {
-            v.push_back(val);
-        }
-
+        std::copy(_fifo.begin(), _fifo.end(), std::back_inserter(v));
         std::sort(v.begin(), v.end());
 
         if (v.size() % 2 == 0)

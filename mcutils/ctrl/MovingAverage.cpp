@@ -22,7 +22,7 @@
 
 #include <mcutils/ctrl/MovingAverage.h>
 
-#include <algorithm>
+#include <numeric>
 
 namespace mc {
 
@@ -43,13 +43,7 @@ void MovingAverage::Update(double, double u)
 
     if (_fifo.size() > 1)
     {
-        double sum = 0.0;
-
-        for (double& val : _fifo)
-        {
-            sum += val;
-        }
-
+        double sum = std::accumulate(_fifo.begin(), _fifo.end(), 0.0);
         _value = sum / static_cast<double>(_fifo.size());
     }
     else

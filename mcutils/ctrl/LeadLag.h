@@ -31,7 +31,7 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  ( c1*s + c2 ) / ( c3*s + c4 )
- * 
+ *
  * \f[
  * G \left( s \right) = { \left( c_1 \cdot s + c_2 \right) \over \left( c_3 \cdot s + c_4 \right) }
  * \f]
@@ -52,9 +52,9 @@ public:
      * \param c4 coefficient of the transfer function
      * \param value initial output value
      */
-    LeadLag(double c1 = 0.0, double c2 = 1.0,
-            double c3 = 0.0, double c4 = 1.0,
-            double value = 0.0);
+    explicit LeadLag(double c1 = 0.0, double c2 = 1.0,
+                     double c3 = 0.0, double c4 = 1.0,
+                     double value = 0.0);
 
     /**
      * \brief Updates element due to time step and input value

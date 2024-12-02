@@ -60,9 +60,9 @@ public:
      * \param tht angle of rotation about y-axis
      * \param psi angle of rotation about z-axis
      */
-    Angles(units::angle::radian_t phi = 0.0_rad,
-           units::angle::radian_t tht = 0.0_rad,
-           units::angle::radian_t psi = 0.0_rad);
+    explicit Angles(units::angle::radian_t phi = 0.0_rad,
+                    units::angle::radian_t tht = 0.0_rad,
+                    units::angle::radian_t psi = 0.0_rad);
 
     /** \return true if all items are valid */
     bool IsValid() const;

@@ -38,7 +38,7 @@ public:
      * \param t_hold [s] hold time
      * \param value initial output value
      */
-    ZeroOrderHold(double t_hold = 0.0, double value = 0.0);
+    explicit ZeroOrderHold(double t_hold = 0.0, double value = 0.0);
 
     /**
      * \brief Updates element due to time step and input value

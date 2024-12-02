@@ -48,8 +48,8 @@ public:
      * \param min minimal value for saturation
      * \param max maximal value for saturation
      */
-    PID_BackCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
-                 double min = DBL_MIN, double max = DBL_MAX);
+    explicit PID_BackCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
+                          double min = DBL_MIN, double max = DBL_MAX);
 
     double min() const { return _min; }
     double max() const { return _max; }

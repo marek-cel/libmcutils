@@ -43,7 +43,7 @@ public:
     /**
      * \param gd Gregorian date UTC
     */
-    JulianDate(const DateTime& gd = DateTime());
+    explicit JulianDate(const DateTime& gd = DateTime());
 
     /**
      * \brief Sets Julian date from Gregorian date.

@@ -29,7 +29,7 @@
 namespace mc {
 
 /**
- * \brief Proportional-Integral-Derivative controller with conditional 
+ * \brief Proportional-Integral-Derivative controller with conditional
  * calculation anti-windup method.
  *
  * ### Refernces:
@@ -48,8 +48,8 @@ public:
      * \param min minimal value for saturation
      * \param max maximal value for saturation
      */
-    PID_CondCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
-                 double min = DBL_MIN, double max = DBL_MAX);
+    explicit PID_CondCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
+                          double min = DBL_MIN, double max = DBL_MAX);
 
     double min() const { return _min; }
     double max() const { return _max; }

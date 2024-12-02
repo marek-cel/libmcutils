@@ -31,24 +31,24 @@ namespace mc {
  *
  * Transfer function (parallel):
  * G(s)  =  kp + ki*( 1/s ) + kd*s
- * 
+ *
  * \f[
  * G \left( s \right) = k_p + k_i \cdot { 1 \over s } + k_d \cdot s
  * \f]
  *
  * Transfer function (series):
  * G(s)  =  k*( 1 + 1/( s*tau_i ) )*( 1 + s*tau_d )
- * 
+ *
  * \f[
  * G \left( s \right) =
  * k
- * \cdot \left( 1 + { 1 \over { s \cdot \tau_i } } \right) 
+ * \cdot \left( 1 + { 1 \over { s \cdot \tau_i } } \right)
  * \cdot \left( 1 + s \cdot \tau_d \right)
  * \f]
  *
  * Transfer function (standard/ideal):
  * G(s)  =  Kp*( 1 + 1/( s*Ti ) + s*Td )
- * 
+ *
  * \f[
  * G \left( s \right) = K_p \cdot \left( 1 + {1 \over { s \cdot T_i }} + s \cdot T_d \right)
  * \f]
@@ -70,7 +70,7 @@ public:
      * \param ki integral gain
      * \param kd derivative gain
      */
-    PID(double kp = 1.0, double ki = 0.0, double kd = 0.0);
+    explicit PID(double kp = 1.0, double ki = 0.0, double kd = 0.0);
 
     /**
      * \brief Updates controller.
