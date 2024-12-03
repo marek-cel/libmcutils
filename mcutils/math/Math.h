@@ -97,8 +97,8 @@ T Satur(const T& min, const T& max, const T& val)
 template <typename T>
 T Sign(const T& val)
 {
-    constexpr T zero = static_cast<T>(0);
-    constexpr T one  = static_cast<T>(1);
+    constexpr T zero {0};
+    constexpr T one  {1};
     if      (val < zero) return -one;
     else if (val > zero) return  one;
     return zero;
