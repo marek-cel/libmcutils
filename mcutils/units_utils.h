@@ -27,21 +27,31 @@
 #include <mcutils/defs.h>
 
 namespace units {
-namespace math {
 
-template <>
-angle::radian_t acos<double>(const double x) noexcept;
+    namespace math {
 
-template <>
-angle::radian_t asin<double>(const double x) noexcept;
+        template <>
+        angle::radian_t acos<double>(const double x) noexcept;
 
-template <>
-angle::radian_t atan<double>(const double x) noexcept;
+        template <>
+        angle::radian_t asin<double>(const double x) noexcept;
 
-template <>
-angle::radian_t atan2<double,double>(const double x, const double y) noexcept;
+        template <>
+        angle::radian_t atan<double>(const double x) noexcept;
 
-} // namespace math
+        template <>
+        angle::radian_t atan2<double,double>(const double x, const double y) noexcept;
+
+    } // namespace math
+
+
+	//------------------------------
+	//	VELOCITY UNITS
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_VELOCITY_UNITS)
+	UNIT_ADD(velocity, feet_per_minute, feet_per_minute, fpm, compound_unit<length::feet, inverse<time::minutes>>)
+#   endif
+
 } // namespace units
 
 #endif // MCUTILS_TYPES_H_
