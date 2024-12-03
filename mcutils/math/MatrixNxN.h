@@ -50,12 +50,11 @@ public:
     /** \brief Transposes matrix. */
     void Transpose()
     {
-        MatrixNxN<TYPE, SIZE> temp(*this);
         for (unsigned int r = 0; r < SIZE; ++r)
         {
-            for (unsigned int c = 0; c < SIZE; ++c)
+            for (unsigned int c = r + 1; c < SIZE; ++c)
             {
-                this->_elements[c*SIZE + r] = temp._elements[r*SIZE + c];
+                std::swap(this->_elements[c*SIZE + r], this->_elements[r*SIZE + c]);
             }
         }
     }
