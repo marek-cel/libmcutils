@@ -43,14 +43,14 @@ void MovingMedian::Update(double, double u)
 
     if (_fifo.size() > 1)
     {
-        std::vector<double> v;
-        std::copy(_fifo.begin(), _fifo.end(), std::back_inserter(v));
+        std::vector<double> v(_fifo.size());
+        std::copy(_fifo.begin(), _fifo.end(), v.begin());
         std::sort(v.begin(), v.end());
 
         if (v.size() % 2 == 0)
         {
-            int i1 = static_cast<int>(v.size()) / 2;
-            int i2 = i1 - 1;
+            unsigned int i1 = v.size() / 2;
+            unsigned int i2 = i1 - 1;
 
             _value = (v[i1] + v[i2]) / 2.0;
         }
