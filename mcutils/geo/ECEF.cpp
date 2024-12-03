@@ -90,26 +90,6 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
                            units::angle::radian_t* lon,
                            units::length::meter_t* alt) const
 {
-#   ifdef ECEF_SIMPLE_CONVERSION
-    // This method provides 1cm accuracy for height less than 1000km
-    double p   = sqrt(x*x + y*y);
-    double tht = atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
-    double ed2 = (_ellipsoid.a2() - _ellipsoid.b2()) / _ellipsoid.b2();
-
-    double sinTht = sin(tht);
-    double cosTht = cos(tht);
-
-    *lat = atan(
-        (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht)
-        / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
-    );
-    *lon = atan2(y, x);
-
-    double sinLat = sin(*lat);
-    double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
-
-    *alt = p / cos(*lat) - n;
-#   else
     double z2 = z*z;
     double r  = sqrt(x*x + y*y);
     double r2 = r*r;
@@ -134,7 +114,30 @@ void ECEF::ConvertCart2Geo(double x, double y, double z,
     *alt = 1.0_m * u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
     *lat = units::math::atan((z + _ellipsoid.ep2()*z0)/r);
     *lon = units::math::atan2(y, x);
-#   endif
+}
+
+void ECEF::ConvertCart2GeoFast(double x, double y, double z,
+                               units::angle::radian_t* lat,
+                               units::angle::radian_t* lon,
+                               units::length::meter_t* alt) const
+{
+    double p   = sqrt(x*x + y*y);
+    double tht = atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
+    double ed2 = (_ellipsoid.a2() - _ellipsoid.b2()) / _ellipsoid.b2();
+
+    double sinTht = sin(tht);
+    double cosTht = cos(tht);
+
+    *lat = units::math::atan(
+          (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht)
+        / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
+    );
+    *lon = units::math::atan2(y, x);
+
+    double sinLat = sin((*lat)());
+    double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
+
+    *alt = units::length::meter_t(p / cos((*lat)()) - n);
 }
 
 Geo ECEF::ConvertCart2Geo(double x, double y, double z) const

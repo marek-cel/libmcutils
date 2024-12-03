@@ -121,6 +121,21 @@ public:
 
     /**
      * \brief Converts cartesian coordinates into geodetic coordinates.
+     * This method is fast but less precise, it provides 1cm accuracy for height less than 1000km
+     * \param x [m] cartesian x-coordinate
+     * \param y [m] cartesian y-coordinate
+     * \param z [m] cartesian z-coordinate
+     * \param lat [rad] resulting geodetic latitude pointer
+     * \param lon [rad] resulting geodetic longitude pointer
+     * \param alt [m] resulting altitude above mean sea level pointer
+     */
+    void ConvertCart2GeoFast(double x, double y, double z,
+                             units::angle::radian_t* lat,
+                             units::angle::radian_t* lon,
+                             units::length::meter_t* alt) const;
+
+    /**
+     * \brief Converts cartesian coordinates into geodetic coordinates.
      * \param x [m] cartesian x-coordinate
      * \param y [m] cartesian y-coordinate
      * \param z [m] cartesian z-coordinate
