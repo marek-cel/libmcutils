@@ -36,7 +36,7 @@ namespace mc {
  * \return true if val greater than min and less than max, false otherwise
  */
 template <typename T>
-bool IsInside(const T& min, const T& max, const T& val)
+inline bool IsInside(const T& min, const T& max, const T& val)
 {
     return min <= val && val <= max;
 }
@@ -49,7 +49,7 @@ bool IsInside(const T& min, const T& max, const T& val)
  * \return true if val greater than min and less than max, false otherwise
  */
 template <typename T>
-bool IsOutside(const T& min, const T& max, const T& val)
+inline bool IsOutside(const T& min, const T& max, const T& val)
 {
     return min > val || val > max;
 }
@@ -82,7 +82,7 @@ inline auto Pow(const T& base)
  * \return min if val less than min, max if val larger than max, val if val larger than min and less than max
  */
 template <typename T>
-T Satur(const T& min, const T& max, const T& val)
+inline T Satur(const T& min, const T& max, const T& val)
 {
     if      (val < min) return min;
     else if (val > max) return max;
@@ -95,7 +95,7 @@ T Satur(const T& min, const T& max, const T& val)
  * \return 1 if val is possitive, -1 when val is negative, 0 if val is zero
  */
 template <typename T>
-T Sign(const T& val)
+inline T Sign(const T& val)
 {
     constexpr T zero {0};
     constexpr T one  {1};

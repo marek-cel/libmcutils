@@ -38,7 +38,7 @@ namespace mc {
  * \return function returns TRUE if tested value is Infinite
  */
 template <typename T>
-bool IsInf(const T& val)
+inline bool IsInf(const T& val)
 {
 #   ifdef _MSC_VER
     return !_finite(static_cast<double>(val));
@@ -53,7 +53,7 @@ bool IsInf(const T& val)
  * \return function returns TRUE if tested value is NaN
  */
 template <typename T>
-bool IsNaN(const T& val)
+inline bool IsNaN(const T& val)
 {
     return val != val;
 }
@@ -64,7 +64,7 @@ bool IsNaN(const T& val)
  * \return function returns FALSE if tested value is Infinite or NaN
  */
 template <typename T>
-bool IsValid(const T& val)
+inline bool IsValid(const T& val)
 {
     return !( IsNaN(val) || IsInf(val) );
 }
@@ -76,7 +76,7 @@ bool IsValid(const T& val)
  * \return function returns FALSE if tested array is Infinite or NaN
  */
 template <typename T>
-bool IsValid(const T array[], unsigned int size)
+inline bool IsValid(const T array[], unsigned int size)
 {
     for (unsigned int i = 0; i < size; ++i)
     {
