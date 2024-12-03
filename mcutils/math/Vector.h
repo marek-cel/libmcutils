@@ -22,6 +22,8 @@
 #ifndef MCUTILS_MATH_VECTOR_H_
 #define MCUTILS_MATH_VECTOR_H_
 
+#include <mcutils/units_utils.h>
+
 #include <mcutils/math/VectorN.h>
 #include <mcutils/math/Vector3.h>
 
@@ -33,19 +35,25 @@ using Vector3d = Vector3<double>;
 using Vector4d = VectorN<double, 4>;
 using Vector6d = VectorN<double, 6>;
 
-using Vector3_m = UVector3<units::length::meter_t>;
+using Vector3_m  = UVector3<units::length::meter_t>;
+using Vector3_ft = UVector3<units::length::foot_t>;
+using Vector3_in = UVector3<units::length::inch_t>;
+using Vector3_cm = UVector3<units::length::centimeter_t>;
 
 using Vector3_mps = UVector3<units::velocity::meters_per_second_t>;
 using Vector3_kmh = UVector3<units::velocity::kilometers_per_hour_t>;
 using Vector3_kts = UVector3<units::velocity::knot_t>;
 using Vector3_fps = UVector3<units::velocity::feet_per_second_t>;
+using Vector3_fpm = UVector3<units::velocity::feet_per_minute_t>;
 
 using Vector3_rad_per_s = UVector3<units::angular_velocity::radians_per_second_t>;
 using Vector3_deg_per_s = UVector3<units::angular_velocity::degrees_per_second_t>;
 
-using Vector3_N = UVector3<units::force::newton_t>;
+using Vector3_N   = UVector3<units::force::newton_t>;
+using Vector3_lbf = UVector3<units::force::pound_t>;
 
-using Vector3_Nm = UVector3<units::torque::newton_meter_t>;
+using Vector3_Nm   = UVector3<units::torque::newton_meter_t>;
+using Vector3_ftlb = UVector3<units::torque::foot_pound_t>;
 
 } // namespace mc
 
