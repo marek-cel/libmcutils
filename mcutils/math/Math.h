@@ -55,47 +55,23 @@ bool IsOutside(const T& min, const T& max, const T& val)
 }
 
 /**
- * \brief Power 2 (square) function.
- * \param val argument
- * \return power 2 (square)
+ * \brief Power function template.
+ * \tparam EXPONENT power exponent
+ * \tparam T power base type
+ * \param base power base
+ * \return returns base to the power of the given EXPONENT
  */
-template <typename T>
-auto Pow2(const T& val)
+template <unsigned int EXPONENT, typename T>
+inline auto Pow(const T& base)
 {
-    return val * val;
-}
-
-/**
- * \brief Power 3 (cube) function.
- * \param val argument
- * \return power 3 (cube)
- */
-template <typename T>
-auto Pow3(const T& val)
-{
-    return val * val * val;
-}
-
-/**
- * \brief Power 4 function.
- * \param val argument
- * \return power 4
- */
-template <typename T>
-auto Pow4(const T& val)
-{
-    return val * val * val * val;
-}
-
-/**
- * \brief Power 5 function.
- * \param val argument
- * \return power 5
- */
-template <typename T>
-auto Pow5(const T& val)
-{
-    return val * val * val * val * val;
+    if constexpr (EXPONENT == 0)
+    {
+        return 1.0;
+    }
+    else
+    {
+        return base * Pow<EXPONENT - 1, T>(base);
+    }
 }
 
 /**
@@ -203,7 +179,7 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
 MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
 {
     double coef = 1.0 / (static_cast<double>(n) - 1.0);
-    double s2 = sum_sq * coef - Pow2(sum) * coef / static_cast<double>(n);
+    double s2 = sum_sq * coef - Pow<2>(sum) * coef / static_cast<double>(n);
     return sqrt(s2);
 }
 

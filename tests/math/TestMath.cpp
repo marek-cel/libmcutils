@@ -1,6 +1,10 @@
 #include <gtest/gtest.h>
 
+#include <units.h>
+
 #include <mcutils/math/Math.h>
+
+using namespace units::literals;
 
 class TestMath : public ::testing::Test
 {
@@ -11,36 +15,50 @@ protected:
     void TearDown() override {}
 };
 
-TEST_F(TestMath, CanCalculatePow2)
+TEST_F(TestMath, CanCalculatePow)
 {
-    EXPECT_DOUBLE_EQ(mc::Pow2(0.0), 0.0);
-    EXPECT_DOUBLE_EQ(mc::Pow2(1.0), 1.0);
-    EXPECT_DOUBLE_EQ(mc::Pow2(2.0), 4.0);
-    EXPECT_DOUBLE_EQ(mc::Pow2(3.0), 9.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(0.0), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(1.0), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(2.0), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(3.0), 1.0);
+
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(0.0), 0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(1.0), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(2.0), 4.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(3.0), 9.0);
+
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(0.0),  0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(1.0),  1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(2.0),  8.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(3.0), 27.0);
+
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(0.0),  0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(1.0),  1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(2.0), 16.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(3.0), 81.0);
 }
 
-TEST_F(TestMath, CanCalculatePow3)
+TEST_F(TestMath, CanCalculatePowWithUnits)
 {
-    EXPECT_DOUBLE_EQ(mc::Pow3(0.0),  0.0);
-    EXPECT_DOUBLE_EQ(mc::Pow3(1.0),  1.0);
-    EXPECT_DOUBLE_EQ(mc::Pow3(2.0),  8.0);
-    EXPECT_DOUBLE_EQ(mc::Pow3(3.0), 27.0);
-}
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(0.0_m), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(1.0_m), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(2.0_m), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<0>(3.0_m), 1.0);
 
-TEST_F(TestMath, CanCalculatePow4)
-{
-    EXPECT_DOUBLE_EQ(mc::Pow4(0.0),  0.0);
-    EXPECT_DOUBLE_EQ(mc::Pow4(1.0),  1.0);
-    EXPECT_DOUBLE_EQ(mc::Pow4(2.0), 16.0);
-    EXPECT_DOUBLE_EQ(mc::Pow4(3.0), 81.0);
-}
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(0.0_m)(), 0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(1.0_m)(), 1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(2.0_m)(), 4.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<2>(3.0_m)(), 9.0);
 
-TEST_F(TestMath, CanCalculatePow5)
-{
-    EXPECT_DOUBLE_EQ(mc::Pow5(0.0),   0.0);
-    EXPECT_DOUBLE_EQ(mc::Pow5(1.0),   1.0);
-    EXPECT_DOUBLE_EQ(mc::Pow5(2.0),  32.0);
-    EXPECT_DOUBLE_EQ(mc::Pow5(3.0), 243.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(0.0_m)(),  0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(1.0_m)(),  1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(2.0_m)(),  8.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<3>(3.0_m)(), 27.0);
+
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(0.0_m)(),  0.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(1.0_m)(),  1.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(2.0_m)(), 16.0);
+    EXPECT_DOUBLE_EQ(mc::Pow<4>(3.0_m)(), 81.0);
 }
 
 TEST_F(TestMath, CanDetermineIfIsInside)

@@ -49,8 +49,8 @@ void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, units::
 
     units::time::hour_t T0 = 6.69737455833333_hr
                            + 2400.05133690722_hr * jc
-                           + 2.58622222e-5_hr * Pow2(jc)
-                           - 1.72222222e-9_hr * Pow3(jc)
+                           + 2.58622222e-5_hr * Pow<2>(jc)
+                           - 1.72222222e-9_hr * Pow<3>(jc)
                            + 1.00273790935 * _ut;
     while (T0 > 24.0_hr) T0 -= 24.0_hr;
     while (T0 <  0.0_hr) T0 += 24.0_hr;
