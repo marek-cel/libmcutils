@@ -82,8 +82,8 @@ void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
 
     // Sun ecliptic longitude
     units::angle::radian_t sunLambda = 4.894968_rad + 628.331951_rad * jc
-                                     + (0.033417_rad - 0.000084_rad * jc) * units::math::sin(M)
-                                     + 0.000351_rad * units::math::sin(2.0*M);
+                                     + (0.033417_rad - 0.000084_rad * jc) * sin(M())
+                                     + 0.000351_rad * sin(2.0*M());
 
     while ( sunLambda > 2.0_rad * M_PI ) sunLambda -= 2.0_rad * M_PI;
     while ( sunLambda < 0.0_rad        ) sunLambda += 2.0_rad * M_PI;
