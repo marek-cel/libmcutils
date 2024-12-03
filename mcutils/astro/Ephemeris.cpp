@@ -34,7 +34,7 @@ namespace mc {
 
 void Ephemeris::Update(const DateTime& gd, units::angle::radian_t lat, units::angle::radian_t lon)
 {
-    Update(gd, units::math::sin(lat), units::math::cos(lat), lon);
+    Update(gd, sin(lat()), cos(lat()), lon);
 }
 
 void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, units::angle::radian_t lon)
@@ -64,8 +64,8 @@ void Ephemeris::Update(const DateTime& gd, double sinLat, double cosLat, units::
     // obliquity of the ecliptic
     units::angle::radian_t epsilon = 0.409093_rad - 0.000227_rad * jc;
 
-    double cosEpsilon = units::math::cos(epsilon);
-    double sinEpsilon = units::math::sin(epsilon);
+    double cosEpsilon = cos(epsilon());
+    double sinEpsilon = sin(epsilon());
 
     UpdateSun  ( jc, sinLat, cosLat, sinEpsilon, cosEpsilon );
     UpdateMoon ( jc, sinLat, cosLat, sinEpsilon, cosEpsilon );
@@ -88,8 +88,8 @@ void Ephemeris::UpdateSun(double jc, double sinLat, double cosLat,
     while ( sunLambda > 2.0_rad * M_PI ) sunLambda -= 2.0_rad * M_PI;
     while ( sunLambda < 0.0_rad        ) sunLambda += 2.0_rad * M_PI;
 
-    double cosSunLambda = units::math::cos(sunLambda);
-    double sinSunLambda = units::math::sin(sunLambda);
+    double cosSunLambda = cos(sunLambda());
+    double sinSunLambda = sin(sunLambda());
 
     // Sun right ascension
     _sun.ra_dec.ra = units::math::atan2(sinSunLambda * cosEpsilon, cosSunLambda);
@@ -115,36 +115,36 @@ void Ephemeris::UpdateMoon(double jc, double sinLat, double cosLat,
     // Moon ecliptic longitude
     units::angle::radian_t moonLambda
             = l_p
-            + 0.1098_rad * units::math::sin(m_p)
-            + 0.0222_rad * units::math::sin(2.0*d - m_p)
-            + 0.0115_rad * units::math::sin(2.0*d)
-            + 0.0037_rad * units::math::sin(2.0*m_p)
-            - 0.0032_rad * units::math::sin(m)
-            - 0.0020_rad * units::math::sin(2.0*f)
-            + 0.0010_rad * units::math::sin(2.0*d - 2*m_p)
-            + 0.0010_rad * units::math::sin(2.0*d - m - m_p)
-            + 0.0009_rad * units::math::sin(2.0*d + m_p)
-            + 0.0008_rad * units::math::sin(2.0*d - m)
-            + 0.0007_rad * units::math::sin(m_p - m)
-            - 0.0006_rad * units::math::sin(d)
-            - 0.0005_rad * units::math::sin(m + m_p);
+            + 0.1098_rad * sin(m_p())
+            + 0.0222_rad * sin(2.0*d() - m_p())
+            + 0.0115_rad * sin(2.0*d())
+            + 0.0037_rad * sin(2.0*m_p())
+            - 0.0032_rad * sin(m())
+            - 0.0020_rad * sin(2.0*f())
+            + 0.0010_rad * sin(2.0*d() - 2*m_p())
+            + 0.0010_rad * sin(2.0*d() - m() - m_p())
+            + 0.0009_rad * sin(2.0*d() + m_p())
+            + 0.0008_rad * sin(2.0*d() - m())
+            + 0.0007_rad * sin(m_p() - m())
+            - 0.0006_rad * sin(d())
+            - 0.0005_rad * sin(m() + m_p());
 
-    double sinMoonLambda = units::math::sin(moonLambda);
-    double cosMoonLambda = units::math::cos(moonLambda);
+    double sinMoonLambda = sin(moonLambda());
+    double cosMoonLambda = cos(moonLambda());
 
     // Moon ecliptic latitude
     units::angle::radian_t moonBeta
-            = 0.0895_rad * units::math::sin(f)
-            + 0.0049_rad * units::math::sin(m_p + f)
-            + 0.0048_rad * units::math::sin(m_p - f)
-            + 0.0030_rad * units::math::sin(2.0*d - f)
-            + 0.0010_rad * units::math::sin(2.0*d + f - m_p)
-            + 0.0008_rad * units::math::sin(2.0*d - f - m_p)
-            + 0.0006_rad * units::math::sin(2.0*d + f);
+            = 0.0895_rad * sin(f())
+            + 0.0049_rad * sin(m_p() + f())
+            + 0.0048_rad * sin(m_p() - f())
+            + 0.0030_rad * sin(2.0*d() - f())
+            + 0.0010_rad * sin(2.0*d() + f() - m_p())
+            + 0.0008_rad * sin(2.0*d() - f() - m_p())
+            + 0.0006_rad * sin(2.0*d() + f());
 
-    double sinMoonBeta = units::math::sin(moonBeta);
-    double cosMoonBeta = units::math::cos(moonBeta);
-    double tanMoonBeta = units::math::tan(moonBeta);
+    double sinMoonBeta = sin(moonBeta());
+    double cosMoonBeta = cos(moonBeta());
+    double tanMoonBeta = tan(moonBeta());
 
     // Moon right ascension
     _moon.ra_dec.ra =  units::math::atan2(sinMoonLambda*cosEpsilon - tanMoonBeta*sinEpsilon, cosMoonLambda);
