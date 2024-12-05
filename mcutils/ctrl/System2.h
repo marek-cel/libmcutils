@@ -24,12 +24,14 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+#include <mcutils/math/Math.h>
+
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Second-order system class.
+ * \brief Second-order system class template.
  *
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
@@ -41,7 +43,8 @@ namespace mc {
  * { c_4 \cdot s^2 + c_5 \cdot s + c_6 }}
  * \f]
  */
-class MCUTILSAPI System2
+template <typename T>
+class System2
 {
 public:
 
@@ -57,16 +60,50 @@ public:
      */
     System2(double c1 = 0.0, double c2 = 0.0, double c3 = 1.0,
             double c4 = 0.0, double c5 = 0.0, double c6 = 1.0,
-            double value = 0.0);
+            T value = T{0})
+        : _c1(c1)
+        , _c2(c2)
+        , _c3(c3)
+        , _c4(c4)
+        , _c5(c5)
+        , _c6(c6)
+        , _y_prev_1(value)
+        , _y_prev_2(value)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if (dt > 0.0_s)
+        {
+            double dt2 = Pow<2>(dt());
 
-    inline double value() const { return _value; }
+            double den = 4.0 * _c4 + 2.0 * _c5 * dt() + _c6 * dt2;
+            double den_inv = 1.0 / den;
+
+            double ca = (4.0 * _c1       + 2.0 * _c2 * dt() + _c3 * dt2) * den_inv;
+            double cb = (2.0 * _c3 * dt2 - 8.0 * _c1                   ) * den_inv;
+            double cc = (4.0 * _c1       - 2.0 * _c2 * dt() + _c3 * dt2) * den_inv;
+            double cd = (2.0 * _c6 * dt2 - 8.0 * _c4                   ) * den_inv;
+            double ce = (4.0 * _c4       - 2.0 * _c5 * dt() + _c6 * dt2) * den_inv;
+
+            _value = u * ca + _u_prev_1 * cb + _u_prev_2 * cc
+                            - _y_prev_1 * cd - _y_prev_2 * ce;
+
+            _u_prev_2 = _u_prev_1;
+            _u_prev_1 = u;
+
+            _y_prev_2 = _y_prev_1;
+            _y_prev_1 = _value;
+        }
+    }
+
+    inline T value() const { return _value; }
 
     inline double c1() const { return _c1; }
     inline double c2() const { return _c2; }
@@ -79,7 +116,12 @@ public:
      * \brief Sets output value
      * \param value output value
      */
-    void set_value(double value);
+    void set_value(T value)
+    {
+        _value    = value;
+        _y_prev_1 = value;
+        _y_prev_2 = value;
+    }
 
     inline void set_c1(double c1) { _c1 = c1; }
     inline void set_c2(double c2) { _c2 = c2; }
@@ -97,13 +139,13 @@ private:
     double _c5 = 0.0;       ///< c5 coefficient
     double _c6 = 0.0;       ///< c6 coefficient
 
-    double _u_prev_1 = 0.0; ///< input previous value
-    double _u_prev_2 = 0.0; ///< input value 2 steps before
+    T _u_prev_1 = T{0};     ///< input previous value
+    T _u_prev_2 = T{0};     ///< input value 2 steps before
 
-    double _y_prev_1 = 0.0; ///< previous value
-    double _y_prev_2 = 0.0; ///< value 2 steps before
+    T _y_prev_1 = T{0};     ///< previous value
+    T _y_prev_2 = T{0};     ///< value 2 steps before
 
-    double _value = 0.0;    ///< current value
+    T _value = T{0};        ///< current value
 };
 
 } // namespace mc

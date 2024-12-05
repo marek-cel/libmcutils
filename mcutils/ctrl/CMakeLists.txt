@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    System2.cpp
     ZeroOrderHold.cpp
 )
 
