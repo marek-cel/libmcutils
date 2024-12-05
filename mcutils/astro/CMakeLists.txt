@@ -11,7 +11,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    JulianDate.cpp
     Utils.cpp
 )
 
