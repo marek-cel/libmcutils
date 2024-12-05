@@ -20,7 +20,7 @@ TEST_F(TestGaussJordan, CanSolve)
     // 2x +  y + z = 5
     // 2x + 2y + z = 6
 
-    // mc::MatrixNxN<3> m;
+    // mc::MatrixNxN<double, 3> m;
     // m(0,0) = 1.0;
     // m(0,1) = 1.0;
     // m(0,2) = 1.0;
@@ -33,12 +33,12 @@ TEST_F(TestGaussJordan, CanSolve)
     // m(2,1) = 2.0;
     // m(2,2) = 1.0;
 
-    // mc::VectorN<3> rhs;
+    // mc::VectorN<double, 3> rhs;
     // rhs(0) = 4.0;
     // rhs(1) = 5.0;
     // rhs(2) = 6.0;
 
-    // mc::VectorN<3> x;
+    // mc::VectorN<double, 3> x;
     // mc::SolveGaussJordan(m, rhs, &x);
 
     // EXPECT_NEAR(x(0), 1.0, 1.0e-9);

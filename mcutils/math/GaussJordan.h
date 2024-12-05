@@ -44,64 +44,64 @@ namespace mc {
  * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]
  * - [Gaussian elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
  */
-// template <unsigned int SIZE>
-// Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
-//                         VectorN<SIZE>* x, double eps = 1.0e-9)
-// {
-//     MatrixNxN<SIZE> mtr_temp = mtr;
-//     VectorN<SIZE>   rhs_temp = rhs;
+template <typename TYPE, unsigned int SIZE>
+Result SolveGaussJordan(const MatrixNxN<TYPE, SIZE>& mtr, const VectorN<TYPE, SIZE>& rhs,
+                        VectorN<TYPE, SIZE>* x, double eps = 1.0e-9)
+{
+    MatrixNxN<TYPE, SIZE> mtr_temp = mtr;
+    VectorN<TYPE, SIZE>   rhs_temp = rhs;
 
-//     for (unsigned int r = 0; r < SIZE; ++r)
-//     {
-//         // run along diagonal, swapping rows to move zeros (outside the diagonal) downwards
-//         if (fabs(mtr_temp(r,r)) < fabs(eps))
-//         {
-//             if ( r < SIZE - 1 )
-//             {
-//                 mtr_temp.SwapRows(r, r+1);
-//                 rhs_temp.SwapRows(r, r+1);
-//             }
-//             else
-//             {
-//                 return Result::Failure;
-//             }
-//         }
+    for (unsigned int r = 0; r < SIZE; ++r)
+    {
+        // run along diagonal, swapping rows to move zeros (outside the diagonal) downwards
+        if (fabs(mtr_temp(r,r)) < fabs(eps))
+        {
+            if ( r < SIZE - 1 )
+            {
+                mtr_temp.SwapRows(r, r+1);
+                rhs_temp.SwapRows(r, r+1);
+            }
+            else
+            {
+                return Result::Failure;
+            }
+        }
 
-//         // value on diagonal A(r,r)
-//         double a_rr = mtr_temp(r,r);
-//         double a_rr_inv = 1.0 / a_rr;
+        // value on diagonal A(r,r)
+        double a_rr = mtr_temp(r,r);
+        double a_rr_inv = 1.0 / a_rr;
 
-//         // deviding current row by value on diagonal
-//         for (unsigned int c = 0; c < SIZE; ++c)
-//         {
-//             mtr_temp(r,c) *= a_rr_inv;
-//         }
+        // deviding current row by value on diagonal
+        for (unsigned int c = 0; c < SIZE; ++c)
+        {
+            mtr_temp(r,c) *= a_rr_inv;
+        }
 
-//         rhs_temp(r) *= a_rr_inv;
+        rhs_temp(r) *= a_rr_inv;
 
-//         // substracting current row from others rows
-//         // for every row current row is multiplied by A(i,r)
-//         // where r stands for row that is substracted from other rows
-//         // and i stands for row that is substracting from
-//         for (unsigned int i = 0; i < SIZE; ++i)
-//         {
-//             if (i != r)
-//             {
-//                 double a_ir = mtr_temp(i,r);
-//                 for (unsigned int c = 0; c < SIZE; ++c)
-//                 {
-//                     mtr_temp(i,c) -= a_ir * mtr_temp(r,c);
-//                 }
-//                 rhs_temp(i) -= a_ir * rhs_temp(r);
-//             }
-//         }
-//     }
+        // substracting current row from others rows
+        // for every row current row is multiplied by A(i,r)
+        // where r stands for row that is substracted from other rows
+        // and i stands for row that is substracting from
+        for (unsigned int i = 0; i < SIZE; ++i)
+        {
+            if (i != r)
+            {
+                double a_ir = mtr_temp(i,r);
+                for (unsigned int c = 0; c < SIZE; ++c)
+                {
+                    mtr_temp(i,c) -= a_ir * mtr_temp(r,c);
+                }
+                rhs_temp(i) -= a_ir * rhs_temp(r);
+            }
+        }
+    }
 
-//     // rewritting results
-//     *x = rhs_temp;
+    // rewritting results
+    *x = rhs_temp;
 
-//     return Result::Success;
-// }
+    return Result::Success;
+}
 
 } // namespace mc
 
