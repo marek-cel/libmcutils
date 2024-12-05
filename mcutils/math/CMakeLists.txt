@@ -26,7 +26,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp
 )
