@@ -22,11 +22,11 @@
 #ifndef MCUTILS_MATH_MATRIXMXN_H_
 #define MCUTILS_MATH_MATRIXMXN_H_
 
-#include <cstring>
 #include <limits>
 #include <sstream>
 #include <string>
 #include <utility>
+#include <vector>
 
 #include <mcutils/math/Vector.h>
 #include <mcutils/misc/Check.h>
@@ -68,7 +68,7 @@ public:
     }
 
     /**
-     * \brief Gets a vector of matrix elements.
+     * \brief Gets a std::vector of matrix elements.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -86,7 +86,7 @@ public:
     }
 
     /**
-     * \brief Sets matrix elements from a vector.
+     * \brief Sets matrix elements from a std::vector.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -94,7 +94,7 @@ public:
      * i_row - row index,
      * i_col - column index,
      * n_col - number of columns
-     * \param elements input vector of matrix elements
+     * \param elements input std::vector of matrix elements
      */
     void SetFromVector(const std::vector<TYPE> elements)
     {
