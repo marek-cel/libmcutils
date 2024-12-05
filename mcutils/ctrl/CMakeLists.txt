@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    HighPassFilter.cpp
     Inertia.cpp
     Inertia2.cpp
     Lead.cpp
