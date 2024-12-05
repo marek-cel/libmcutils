@@ -24,40 +24,40 @@ protected:
 
 TEST_F(TestZeroOrderHold, CanInstantiate)
 {
-    mc::ZeroOrderHold zho;
+    mc::ZeroOrderHold<double> zho;
     EXPECT_DOUBLE_EQ(zho.t_hold()(), 0.0);
     EXPECT_DOUBLE_EQ(zho.value(), 0.0);
 }
 
 TEST_F(TestZeroOrderHold, CanInstantiateAndSetData)
 {
-    mc::ZeroOrderHold zho(2.0_s, 3.0);
+    mc::ZeroOrderHold<double> zho(2.0_s, 3.0);
     EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
     EXPECT_DOUBLE_EQ(zho.value(), 3.0);
 }
 
 TEST_F(TestZeroOrderHold, CanGetValue)
 {
-    mc::ZeroOrderHold zho(2.0_s, 3.0);
+    mc::ZeroOrderHold<double> zho(2.0_s, 3.0);
     EXPECT_DOUBLE_EQ(zho.value(), 3.0);
 }
 
 TEST_F(TestZeroOrderHold, CanSetValue)
 {
-    mc::ZeroOrderHold zho;
+    mc::ZeroOrderHold<double> zho;
     zho.set_value(1.0);
     EXPECT_DOUBLE_EQ(zho.value(), 1.0);
 }
 
 TEST_F(TestZeroOrderHold, CanGetTimeHold)
 {
-    mc::ZeroOrderHold zho(2.0_s);
+    mc::ZeroOrderHold<double> zho(2.0_s);
     EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
 }
 
 TEST_F(TestZeroOrderHold, CanSetTimeHold)
 {
-    mc::ZeroOrderHold zho;
+    mc::ZeroOrderHold<double> zho;
 
     zho.set_t_hold(2.0_s);
     EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
@@ -73,7 +73,7 @@ TEST_F(TestZeroOrderHold, CanUpdate)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::ZeroOrderHold zho(TIME_HOLD);
+    mc::ZeroOrderHold<double> zho(TIME_HOLD);
 
     units::time::second_t t = 0.0_s;
     double y = 0.0;

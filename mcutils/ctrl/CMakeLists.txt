@@ -20,13 +20,9 @@ set(HEADERS
     ZeroOrderHold.h
 )
 
-set(SOURCES
-    ZeroOrderHold.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 

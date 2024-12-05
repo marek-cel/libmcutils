@@ -24,14 +24,15 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
  * \brief Zero-Order Hold (ZOH) class.
  */
-class MCUTILSAPI ZeroOrderHold
+template <typename T>
+class ZeroOrderHold
 {
 public:
 
@@ -40,17 +41,27 @@ public:
      * \param t_hold [s] hold time
      * \param value initial output value
      */
-    explicit ZeroOrderHold(units::time::second_t t_hold = units::time::second_t{0.0},
-                           double value = 0.0);
+    explicit ZeroOrderHold(units::time::second_t t_hold = 0.0_s, T value = T{0})
+        : _t_hold(t_hold)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        _t_prev += dt;
+        if ( _t_prev >= _t_hold )
+        {
+            _t_prev -= _t_hold;
+            _value = u;
+        }
+    }
 
-    inline double value() const { return _value; }
+    inline T value() const { return _value; }
 
     inline units::time::second_t t_hold() const { return _t_hold; }
 
@@ -58,15 +69,21 @@ public:
      * \brief Sets output value
      * \param value output value
      */
-    void set_value(double value);
+    void set_value(T value)
+    {
+        _value = value;
+    }
 
-    inline void set_t_hold(units::time::second_t t_hold) { _t_hold = t_hold; }
+    inline void set_t_hold(units::time::second_t t_hold)
+    {
+        _t_hold = t_hold;
+    }
 
 private:
 
-    units::time::second_t _t_hold{0.0}; ///< [s] hold time
-    units::time::second_t _t_prev{0.0}; ///< [s] time since last update
-    double _value = 0.0;                ///< current value
+    units::time::second_t _t_hold = 0_s;    ///< [s] hold time
+    units::time::second_t _t_prev = 0_s;    ///< [s] time since last update
+    T _value = T{0};                        ///< current value
 };
 
 } // namespace mc
