@@ -65,7 +65,7 @@ public:
      */
     void SetCutoffFreq(units::frequency::hertz_t freq)
     {
-        _omega = 360_deg_per_s * std::max(0.0, freq());
+        _omega = 360_deg * units::math::max(0.0_Hz, freq);
         _time_const = 1.0_rad / _omega;
     }
 
@@ -89,12 +89,6 @@ public:
     inline units::angular_velocity::radians_per_second_t omega() const { return _omega; }
 
     /**
-     * \brief Sets output value
-     * \param value output value
-     */
-    inline void set_value(T value) { _value = value; }
-
-    /**
      * \brief Sets cutoff angular frequency.
      * \param omega [rad/s] cutoff angular frequency
      */
@@ -103,6 +97,12 @@ public:
         _omega = units::math::max(0.0_rad_per_s, omega);
         _time_const = 1.0_rad / _omega;
     }
+
+    /**
+     * \brief Sets output value
+     * \param value output value
+     */
+    inline void set_value(T value) { _value = value; }
 
 private:
 
