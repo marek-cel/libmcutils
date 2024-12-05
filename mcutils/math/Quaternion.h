@@ -26,8 +26,6 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
-
 #include <mcutils/math/Angles.h>
 #include <mcutils/math/Vector.h>
 
@@ -53,7 +51,7 @@ namespace mc {
  * - [Conversion between quaternions and Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles)
  * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
  */
-class MCUTILSAPI Quaternion
+class Quaternion
 {
 public:
 
