@@ -125,16 +125,16 @@ public:
         double sin_tht = -xz();
         double cos_tht = sqrt(1.0 - std::min(1.0, sin_tht*sin_tht));
 
-        result.tht() = units::math::atan2(sin_tht, cos_tht);
+        result.tht() = units::angle::radian_t(atan2(sin_tht, cos_tht));
 
         if (cos_tht > 0.0)
         {
-            result.phi() = units::math::atan2(yz(), zz());
-            result.psi() = units::math::atan2(xy(), xx());
+            result.phi() = units::angle::radian_t(atan2(yz(), zz()));
+            result.psi() = units::angle::radian_t(atan2(xy(), xx()));
         }
         else
         {
-            result.phi() = units::math::atan2(yx(), zx());
+            result.phi() = units::angle::radian_t(atan2(yx(), zx()));
             result.psi() = 0.0_rad;
         }
 

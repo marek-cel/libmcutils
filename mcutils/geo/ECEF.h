@@ -169,8 +169,8 @@ public:
         double z0 = _ellipsoid.b2() * z / (_ellipsoid.a() * v);
 
         *alt = 1.0_m * u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
-        *lat = units::math::atan((z + _ellipsoid.ep2()*z0)/r);
-        *lon = units::math::atan2(y, x);
+        *lat = units::angle::radian_t(atan((z + _ellipsoid.ep2()*z0)/r));
+        *lon = units::angle::radian_t(atan2(y, x));
     }
 
     /**
@@ -195,11 +195,11 @@ public:
         double sinTht = sin(tht);
         double cosTht = cos(tht);
 
-        *lat = units::math::atan(
+        *lat = units::angle::radian_t(atan(
             (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht)
             / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
-        );
-        *lon = units::math::atan2(y, x);
+        ));
+        *lon = units::angle::radian_t(atan2(y, x));
 
         double sinLat = sin((*lat)());
         double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);

@@ -28,23 +28,6 @@
 
 namespace units {
 
-    namespace math {
-
-        template <>
-        angle::radian_t acos<double>(const double x) noexcept;
-
-        template <>
-        angle::radian_t asin<double>(const double x) noexcept;
-
-        template <>
-        angle::radian_t atan<double>(const double x) noexcept;
-
-        template <>
-        angle::radian_t atan2<double,double>(const double x, const double y) noexcept;
-
-    } // namespace math
-
-
 	//------------------------------
 	//	VELOCITY UNITS
 	//------------------------------

@@ -162,21 +162,21 @@ public:
         double sin_tht_2 = _e0*_ey - _ex*_ez;
         if(sin_tht_2 >= 0.5)
         {
-            result.phi() =  2.0 * units::math::asin(_ex / cos(M_PI_4));
+            result.phi() =  2.0 * units::angle::radian_t(asin(_ex / cos(M_PI_4)));
             result.tht() =  0.5_rad * M_PI;
             result.psi() =  0.0_rad;
         }
         else if (sin_tht_2 <= -0.5)
         {
-            result.phi() =  2.0 * units::math::asin(_ex / cos(M_PI_4));
+            result.phi() =  2.0 * units::angle::radian_t(asin(_ex / cos(M_PI_4)));
             result.tht() = -0.5_rad * M_PI;
             result.psi() =  0.0_rad;
         }
         else
         {
-            result.phi() = units::math::atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey));
-            result.tht() = units::math::asin(2.0*sin_tht_2);
-            result.psi() = units::math::atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez));
+            result.phi() = units::angle::radian_t(atan2(2.0*(_e0*_ex + _ey*_ez), 1.0 - 2.0*(_ex*_ex + _ey*_ey)));
+            result.tht() = units::angle::radian_t(asin(2.0*sin_tht_2));
+            result.psi() = units::angle::radian_t(atan2(2.0*(_e0*_ez + _ex*_ey), 1.0 - 2.0*(_ey*_ey + _ez*_ez)));
         }
         result.Normalize();
 

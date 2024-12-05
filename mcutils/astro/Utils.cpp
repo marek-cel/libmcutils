@@ -55,9 +55,9 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
     if (sinElev >  1.0) sinElev =  1.0;
     if (sinElev < -1.0) sinElev = -1.0;
 
-    result.el = units::math::asin(sinElev);
+    result.el = units::angle::radian_t(asin(sinElev));
 
-    double cosElev = units::math::cos(result.el);
+    double cosElev = cos(result.el());
 
     double cosAzim = (sinDelta*cosLat - cosLha*cosDelta*sinLat) / cosElev;
     cosAzim = fabs(cosAzim);
@@ -66,9 +66,9 @@ AzEl RaDec2AzEl(const RaDec& radec, double sinLat, double cosLat,
     if ( cosAzim < -1.0 ) cosAzim = -1.0;
 
     if ( lha < 0.0_rad )
-        result.az = 1.0_rad * M_PI - units::math::acos(cosAzim);
+        result.az = 1.0_rad * M_PI - units::angle::radian_t(acos(cosAzim));
     else
-        result.az = 1.0_rad * M_PI + units::math::acos(cosAzim);
+        result.az = 1.0_rad * M_PI + units::angle::radian_t(acos(cosAzim));
 
     return result;
 }
