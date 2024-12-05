@@ -26,7 +26,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    Quaternion.cpp
     Random.cpp
     RMatrix.cpp
     SegPlaneIsect.cpp
