@@ -23,24 +23,3 @@
 #include <mcutils/ctrl/PID_CondCalc.h>
 
 #include <mcutils/math/Math.h>
-
-using namespace units::literals;
-
-namespace mc {
-
-PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
-                           double min, double max)
-    : PID(kp, ki, kd)
-    , _min(min)
-    , _max(max)
-{}
-
-void PID_CondCalc::UpdateFinal(units::time::second_t, double y_p, double y_i, double y_d)
-{
-    double y = y_p + y_i + y_d;
-    _value = Satur(_min, _max, y);
-    if (y != _value) _error_i = _error_i_prev;
-    _error_i_prev = _error_i;
-}
-
-} // namespace mc

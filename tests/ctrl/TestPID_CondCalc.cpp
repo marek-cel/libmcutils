@@ -29,7 +29,7 @@ protected:
 
 TEST_F(TestPID_CondCalc, CanInstantiate)
 {
-    mc::PID_CondCalc pid;
+    mc::PID_CondCalc<double> pid;
 
     EXPECT_DOUBLE_EQ(pid.min(), DBL_MIN);
     EXPECT_DOUBLE_EQ(pid.max(), DBL_MAX);
@@ -37,7 +37,7 @@ TEST_F(TestPID_CondCalc, CanInstantiate)
 
 TEST_F(TestPID_CondCalc, CanInstantiateAndSetData)
 {
-    mc::PID_CondCalc pid(KP, KI, KD, MIN, MAX);
+    mc::PID_CondCalc<double> pid(KP, KI, KD, MIN, MAX);
 
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
     EXPECT_DOUBLE_EQ(pid.max(), MAX);
@@ -45,26 +45,26 @@ TEST_F(TestPID_CondCalc, CanInstantiateAndSetData)
 
 TEST_F(TestPID_CondCalc, CanGetMin)
 {
-    mc::PID_CondCalc pid(KP, KI, KD, MIN, MAX);
+    mc::PID_CondCalc<double> pid(KP, KI, KD, MIN, MAX);
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
 TEST_F(TestPID_CondCalc, CanGetMax)
 {
-    mc::PID_CondCalc pid(KP, KI, KD, MIN, MAX);
+    mc::PID_CondCalc<double> pid(KP, KI, KD, MIN, MAX);
     EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
 
 TEST_F(TestPID_CondCalc, CanSetMin)
 {
-    mc::PID_CondCalc pid;
+    mc::PID_CondCalc<double> pid;
     pid.set_min(MIN);
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
 TEST_F(TestPID_CondCalc, CanSetMax)
 {
-    mc::PID_CondCalc pid;
+    mc::PID_CondCalc<double> pid;
     pid.set_max(MAX);
     EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
@@ -82,7 +82,7 @@ TEST_F(TestPID_CondCalc, CanUpdate)
     units::time::second_t t = 0.0_s;
     double y = 0.0;
 
-    mc::PID_CondCalc pid(KP, KI, KD, MIN, MAX);
+    mc::PID_CondCalc<double> pid(KP, KI, KD, MIN, MAX);
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {

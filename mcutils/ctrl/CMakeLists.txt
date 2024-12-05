@@ -21,10 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    PID.cpp
-    PID_BackCalc.cpp
-    PID_CondCalc.cpp
-    PID_FilterAW.cpp
     System2.cpp
     ZeroOrderHold.cpp
 )

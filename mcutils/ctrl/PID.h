@@ -24,12 +24,12 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Proportional-Integral-Derivative controller.
+ * \brief Proportional-Integral-Derivative controller class template.
  *
  * Transfer function (parallel):
  * G(s)  =  kp + ki*( 1/s ) + kd*s
@@ -62,7 +62,8 @@ namespace mc {
  * - [PID controller - Wikipedia](https://en.wikipedia.org/wiki/PID_controller)
  * - [Ziegler–Nichols method - Wikipedia](https://en.wikipedia.org/wiki/Ziegler%E2%80%93Nichols_method)
  */
-class MCUTILSAPI PID
+template <typename T>
+class PID
 {
 public:
 
@@ -72,17 +73,42 @@ public:
      * \param ki integral gain
      * \param kd derivative gain
      */
-    explicit PID(double kp = 1.0, double ki = 0.0, double kd = 0.0);
+    explicit PID(double kp = 1.0, double ki = 0.0, double kd = 0.0)
+        : _kp(kp)
+        , _ki(ki)
+        , _kd(kd)
+    {}
 
     /**
      * \brief Updates controller.
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if (dt > 0.0_s)
+        {
+            _error_i = _error_i + u*dt();
+            _error_d = (u - _error) / dt();
+            _error = u;
+
+            T y_p = _kp * _error;
+            T y_i = _ki * _error_i;
+            T y_d = _kd * _error_d;
+
+            UpdateFinal(dt, y_p, y_i, y_d);
+        }
+    }
 
     /** \brief Resets controller. */
-    void Reset();
+    void Reset()
+    {
+        _error_i = T{0};
+        _error_d = T{0};
+
+        _error = T{0};
+        _value = T{0};
+    }
 
     /**
      * \brief Sets parameters of parallel form.
@@ -90,7 +116,12 @@ public:
      * \param ki integral coefficient expressed in parallel form
      * \param kd derivative coefficient expressed in parallel form
      */
-    void SetAsParallel(double kp, double ki, double kd);
+    void SetAsParallel(double kp, double ki, double kd)
+    {
+        _kp = kp;
+        _ki = ki;
+        _kd = kd;
+    }
 
     /**
      * \brief Sets parameters of series form.
@@ -98,7 +129,12 @@ public:
      * \param tau_i integral time expressed in series form
      * \param tau_d derivative time expressed in series form
      */
-    void SetAsSeries(double k, double tau_i, double tau_d);
+    void SetAsSeries(double k, double tau_i, double tau_d)
+    {
+        _kp = k * (1.0 + tau_d / tau_i);
+        _ki = k / tau_i;
+        _kd = k * tau_d;
+    }
 
     /**
      * \brief Sets parameters of standard (ideal) form.
@@ -106,7 +142,12 @@ public:
      * \param ti integral time expressed in standard (ideal) form
      * \param td derivative time expressed in standard (ideal) form
      */
-    void SetAsStandard(double kp, double ti, double td);
+    void SetAsStandard(double kp, double ti, double td)
+    {
+        _kp = kp;
+        _ki = kp / ti;
+        _kd = kp * td;
+    }
 
     /**
      * \brief Sets value and error according to value and time step.
@@ -114,26 +155,42 @@ public:
      * \param error new error
      * \param dt [s] time step
      */
-    void SetValueAndError(double value, double error, units::time::second_t dt);
+    void SetValueAndError(T value, T error, units::time::second_t dt)
+    {
+        _error_d = (dt > 0.0_s) ? (error - _error) / dt() : T{0};
+        _error_i = fabs(_ki) > 0.0
+                ? ((value  - _kp * error - _kd * _error_d) / _ki)
+                : T{0};
 
-    inline double value() const { return _value; }
+        _error = error;
+        _value = value;
+    }
+
+    inline T value() const { return _value; }
 
     inline double kp() const { return _kp; }
     inline double ki() const { return _ki; }
     inline double kd() const { return _kd; }
 
-    inline double error() const { return _error; }
+    inline T error() const { return _error; }
 
-    inline double error_i() const { return _error_i; }
-    inline double error_d() const { return _error_d; }
+    inline T error_i() const { return _error_i; }
+    inline T error_d() const { return _error_d; }
 
-    inline void set_error(double error) { _error = error; }
+    inline void set_error(T error) { _error = error; }
 
     /**
      * \brief Sets controller output (resets error integral sum).
      * \param value output value
      */
-    void set_value(double value);
+    void set_value(T value)
+    {
+        _error_i = fabs(_ki) > 0.0 ? value / _ki : T{0};
+        _error_d = T{0};
+
+        _error = T{0};
+        _value = value;
+    }
 
     inline void set_kp(double kp) { _kp = kp; }
     inline void set_ki(double ki) { _ki = ki; }
@@ -145,16 +202,19 @@ protected:
     double _ki = 0.0;       ///< integral gain
     double _kd = 0.0;       ///< derivative gain
 
-    double _error   = 0.0;  ///< error
-    double _error_i = 0.0;  ///< error integral sum
-    double _error_d = 0.0;  ///< error derivative
+    T _error   = T{0};      ///< error
+    T _error_i = T{0};      ///< error integral sum
+    T _error_d = T{0};      ///< error derivative
 
-    double _value = 0.0;    ///< output value
+    T _value = T{0};        ///< output value
 
     /**
      * TODO
      */
-    virtual void UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d);
+    virtual void UpdateFinal(units::time::second_t dt, T y_p, T y_i, T y_d)
+    {
+        _value = y_p + y_d + y_i;
+    }
 };
 
 } // namespace mc

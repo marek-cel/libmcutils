@@ -30,7 +30,7 @@ protected:
 
 TEST_F(TestPID_FilterAW, CanInstantiate)
 {
-    mc::PID_FilterAW pid;
+    mc::PID_FilterAW<double> pid;
 
     EXPECT_DOUBLE_EQ(pid.kaw(), 0.0);
     EXPECT_DOUBLE_EQ(pid.min(), DBL_MIN);
@@ -39,7 +39,7 @@ TEST_F(TestPID_FilterAW, CanInstantiate)
 
 TEST_F(TestPID_FilterAW, CanInstantiateAndSetData)
 {
-    mc::PID_FilterAW pid(KP, KI, KD, MIN, MAX, KAW);
+    mc::PID_FilterAW<double> pid(KP, KI, KD, MIN, MAX, KAW);
 
     EXPECT_DOUBLE_EQ(pid.kaw(), KAW);
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
@@ -48,39 +48,39 @@ TEST_F(TestPID_FilterAW, CanInstantiateAndSetData)
 
 TEST_F(TestPID_FilterAW, CanGetKaw)
 {
-    mc::PID_FilterAW pid(KP, KI, KD, MIN, MAX, KAW);
+    mc::PID_FilterAW<double> pid(KP, KI, KD, MIN, MAX, KAW);
     EXPECT_DOUBLE_EQ(pid.kaw(), KAW);
 }
 
 TEST_F(TestPID_FilterAW, CanGetMin)
 {
-    mc::PID_FilterAW pid(KP, KI, KD, MIN, MAX, KAW);
+    mc::PID_FilterAW<double> pid(KP, KI, KD, MIN, MAX, KAW);
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
 TEST_F(TestPID_FilterAW, CanGetMax)
 {
-    mc::PID_FilterAW pid(KP, KI, KD, MIN, MAX, KAW);
+    mc::PID_FilterAW<double> pid(KP, KI, KD, MIN, MAX, KAW);
     EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
 
 TEST_F(TestPID_FilterAW, CanSetKaw)
 {
-    mc::PID_FilterAW pid;
+    mc::PID_FilterAW<double> pid;
     pid.set_kaw(KAW);
     EXPECT_DOUBLE_EQ(pid.kaw(), KAW);
 }
 
 TEST_F(TestPID_FilterAW, CanSetMin)
 {
-    mc::PID_FilterAW pid;
+    mc::PID_FilterAW<double> pid;
     pid.set_min(MIN);
     EXPECT_DOUBLE_EQ(pid.min(), MIN);
 }
 
 TEST_F(TestPID_FilterAW, CanSetMax)
 {
-    mc::PID_FilterAW pid;
+    mc::PID_FilterAW<double> pid;
     pid.set_max(MAX);
     EXPECT_DOUBLE_EQ(pid.max(), MAX);
 }
@@ -98,7 +98,7 @@ TEST_F(TestPID_FilterAW, CanUpdate)
     units::time::second_t t = 0.0_s;
     double y = 0.0;
 
-    mc::PID_FilterAW pid(KP, KI, KD, MIN, MAX, KAW);
+    mc::PID_FilterAW<double> pid(KP, KI, KD, MIN, MAX, KAW);
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {

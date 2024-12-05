@@ -23,27 +23,3 @@
 #include <mcutils/ctrl/PID_BackCalc.h>
 
 #include <mcutils/math/Math.h>
-
-using namespace units::literals;
-
-namespace mc {
-
-PID_BackCalc::PID_BackCalc(double kp, double ki, double kd,
-                           double min, double max)
-    : PID(kp, ki, kd)
-    , _min(min)
-    , _max(max)
-{}
-
-void PID_BackCalc::UpdateFinal(units::time::second_t, double y_p, double y_i, double y_d)
-{
-    double y = y_p + y_i + y_d;
-    _value = Satur(_min, _max, y);
-    if (fabs(_ki) > 0.0)
-    {
-        double y_pd = Satur(_min, _max, y_p + y_d);
-        _error_i = (_value - y_pd) / _ki;
-    }
-}
-
-} // namespace mc

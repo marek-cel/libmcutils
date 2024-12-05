@@ -27,6 +27,7 @@
 #include <units.h>
 
 #include <mcutils/ctrl/PID.h>
+#include <mcutils/math/Math.h>
 
 namespace mc {
 
@@ -39,7 +40,8 @@ namespace mc {
  * - Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010
  * - [Integral windup - Wikipedia](https://en.wikipedia.org/wiki/Integral_windup)
  */
-class MCUTILSAPI PID_FilterAW : public PID
+template <typename T>
+class PID_FilterAW : public PID<T>
 {
 public:
 
@@ -52,26 +54,37 @@ public:
      * \param max maximal value for saturation
      */
     explicit PID_FilterAW(double kp = 1.0, double ki = 0.0, double kd = 0.0,
-                          double min = DBL_MIN, double max = DBL_MAX, double kaw = 0.0);
+                          T min = T{DBL_MIN}, T max = {DBL_MAX}, double kaw = 0.0)
+        : PID<T>(kp, ki, kd)
+        , _min(min)
+        , _max(max)
+        , _kaw(kaw)
+    {}
 
-    double min() const { return _min; }
-    double max() const { return _max; }
+    T min() const { return _min; }
+    T max() const { return _max; }
 
     double kaw() const { return _kaw; }
 
-    inline void set_min(double min) { _min = min; }
-    inline void set_max(double max) { _max = max; }
+    inline void set_min(T min) { _min = min; }
+    inline void set_max(T max) { _max = max; }
 
     inline void set_kaw(double kaw) { _kaw = kaw; }
 
 protected:
 
-    double _min = DBL_MIN;      ///< minimum output value
-    double _max = DBL_MAX;      ///< maximum output value
+    T _min = T{DBL_MIN};    ///< minimum output value
+    T _max = T{DBL_MAX};    ///< maximum output value
 
     double _kaw = 0.0;          ///< filter gain
 
-    void UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d) override;
+    void UpdateFinal(units::time::second_t dt, T y_p, T y_i, T y_d) override
+    {
+        T y = y_p + y_i + y_d;
+        this->_value = Satur(_min, _max, y);
+        double delta = y - this->_value;
+        this->_error_i -= _kaw * delta * dt();
+    }
 };
 
 } // namespace mc
