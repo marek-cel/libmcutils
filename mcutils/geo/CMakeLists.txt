@@ -11,13 +11,9 @@ set(HEADERS
     WGS84.h
 )
 
-set(SOURCES
-    Mercator.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
