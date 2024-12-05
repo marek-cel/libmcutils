@@ -10,13 +10,9 @@ set(HEADERS
     Utils.h
 )
 
-set(SOURCES
-    Utils.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
