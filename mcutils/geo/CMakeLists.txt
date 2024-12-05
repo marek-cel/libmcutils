@@ -13,7 +13,6 @@ set(HEADERS
 
 set(SOURCES
     ECEF.cpp
-    Ellipsoid.cpp
     Mercator.cpp
 )
 
