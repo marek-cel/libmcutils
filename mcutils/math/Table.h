@@ -469,8 +469,8 @@ public:
 
             valid &= mc::IsValid(key) && mc::IsValid(val);
 
-            key_values_temp.push_back(key);
-            table_data_temp.push_back(val);
+            key_values_temp.push_back(KEY_TYPE{key});
+            table_data_temp.push_back(VAL_TYPE{val});
         }
 
         std::vector<KEY_TYPE> key_values { KEY_TYPE{ std::numeric_limits<double>::quiet_NaN() } };

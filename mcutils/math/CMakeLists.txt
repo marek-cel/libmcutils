@@ -25,13 +25,9 @@ set(HEADERS
     VectorN.h
 )
 
-set(SOURCES
-    Table2.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
