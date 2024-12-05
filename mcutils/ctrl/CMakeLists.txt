@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    Oscillator.cpp
     PID.cpp
     PID_BackCalc.cpp
     PID_CondCalc.cpp

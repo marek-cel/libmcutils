@@ -24,12 +24,14 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+#include <mcutils/math/Math.h>
+
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Harmonic oscillator element class.
+ * \brief Harmonic oscillator element class template.
  *
  * Transfer function:
  * G(s)  =  omega^2 / ( s^2 + 2*zeta*omega*s + omega^2 )
@@ -48,7 +50,8 @@ namespace mc {
  * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.88. [in Polish]
  * - Kaczorek T.: Podstawy teorii sterowania, 2006, p.120. [in Polish]
  */
-class MCUTILSAPI Oscillator
+template <typename T>
+class Oscillator
 {
 public:
 
@@ -58,52 +61,98 @@ public:
      * \param zeta [-] <0.0;1.0> dampipng ratio
      * \param value initial output value
      */
-    explicit Oscillator(double omega = 1.0, double zeta = 1.0, double value = 0.0);
+    explicit Oscillator(units::angular_velocity::radians_per_second_t omega = 360_deg_per_s,
+                        double zeta = 1.0, T value = 0.0)
+        : _omega(omega)
+        , _zeta(std::max(0.0, std::min(1.0, zeta)))
+        , _omega2(_omega * _omega)
+        , _zetomg2(2.0 * _zeta * _omega)
+        , _y_prev_1(value)
+        , _y_prev_2(value)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+{
+    if (dt > 0.0_s)
+    {
+        double dt2 = Pow<2>(dt());
 
-    inline double value() const { return _value; }
-    inline double omega() const { return _omega; }
+        double den = 4.0 + 2.0 * _zetomg2*dt() + _omega2*dt2;
+        double den_inv = 1.0 / den;
+
+        double ca = _omega2*dt2 * den_inv;
+        double cb = 2.0 * ca;
+        double cc = cb - 8.0 * den_inv;
+        double cd = ca + (4.0 - 2.0 * _zetomg2 * dt()) * den_inv;
+
+        _value = u * ca + _u_prev_1 * cb + _u_prev_2 * ca
+                        - _y_prev_1 * cc - _y_prev_2 * cd;
+
+        _u_prev_2 = _u_prev_1;
+        _u_prev_1 = u;
+
+        _y_prev_2 = _y_prev_1;
+        _y_prev_1 = _value;
+    }
+}
+
+    inline T value() const { return _value; }
+    inline units::angular_velocity::radians_per_second_t omega() const { return _omega; }
     inline double zeta()  const { return _zeta;  }
 
     /**
      * \brief Sets undamped angular frequency.
      * \param omega [rad/s] undamped angular frequency
      */
-    void set_omega(double omega);
+    void set_omega(units::angular_velocity::radians_per_second_t omega)
+    {
+        _omega = units::math::max(0.0_rad_per_s, omega);
+        _omega2  = Pow<2>(_omega());
+        _zetomg2 = 2.0 * _zeta * _omega();
+    }
 
     /**
      * \brief Sets damping ratio.
      * \param zeta [-] <0.0;1.0> damping ratio
      */
-    void set_zeta(double zeta);
+    void set_zeta(double zeta)
+    {
+        _zeta = std::max(0.0, std::min(1.0, zeta));
+        _zetomg2 = 2.0 * _zeta * _omega();
+    }
 
     /**
      * \brief Sets output value
      * \param value output value
      */
-    void set_value(double value);
+    void set_value(T value)
+    {
+        _value = value;
+        _y_prev_1 = value;
+        _y_prev_2 = value;
+    }
 
 private:
 
-    double _omega = 0.0;    ///< [rad/s] undamped angular frequency
+    units::angular_velocity::radians_per_second_t _omega = 0.0_rad_per_s;   ///< [rad/s] undamped angular frequency
     double _zeta  = 0.0;    ///< [-] <0.0;1.0> dampipng coefficient
 
     double _omega2  = 0.0;  ///< [rad^2/s^2] undamped angular frequency squared
     double _zetomg2 = 0.0;  ///< [rad/s] zeta*omega*2
 
-    double _u_prev_1 = 0.0; ///< input previous value
-    double _u_prev_2 = 0.0; ///< input value 2 steps before
+    T _u_prev_1 = T{0};     ///< input previous value
+    T _u_prev_2 = T{0};     ///< input value 2 steps before
 
-    double _y_prev_1 = 0.0; ///< previous value
-    double _y_prev_2 = 0.0; ///< value 2 steps before
+    T _y_prev_1 = T{0};     ///< previous value
+    T _y_prev_2 = T{0};     ///< value 2 steps before
 
-    double _value = 0.0;    ///< current value
+    T _value = T{0};        ///< current value
 };
 
 } // namespace mc
