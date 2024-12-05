@@ -12,7 +12,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    ECEF.cpp
     Mercator.cpp
 )
 

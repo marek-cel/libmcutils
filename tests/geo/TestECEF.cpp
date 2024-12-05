@@ -54,11 +54,6 @@ TEST_F(TestECEF, CanConvertFromCartToGeoAt0N0E0H)
     pos_cart.y() = 0.0;
     pos_cart.z() = 0.0;
 
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat(), 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon(), 0.0, LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt(), 0.0, LINEAR_POSITION_TOLERANCE);
-
     pos_geo = ecef.ConvertCart2Geo(pos_cart);
     EXPECT_NEAR(pos_geo.lat(), 0.0, LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.lon(), 0.0, LAT_LON_TOLERANCE);
@@ -78,11 +73,6 @@ TEST_F(TestECEF, CanConvertFromCartToGeoAt45N45E100H)
     pos_cart.y() = 3194469.145060574;
     pos_cart.z() = 4487419.119544039;
 
-    ecef.ConvertCart2Geo(pos_cart, &pos_geo);
-    EXPECT_NEAR(pos_geo.lat(), M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.lon(), M_PI_4 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(pos_geo.alt(), 100.0  , LINEAR_POSITION_TOLERANCE);
-
     pos_geo = ecef.ConvertCart2Geo(pos_cart);
     EXPECT_NEAR(pos_geo.lat(), M_PI_4 , LAT_LON_TOLERANCE);
     EXPECT_NEAR(pos_geo.lon(), M_PI_4 , LAT_LON_TOLERANCE);
@@ -99,11 +89,6 @@ TEST_F(TestECEF, CanConvertFromGeoToCartAt0N0E0H)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
 
     pos_cart = ecef.ConvertGeo2Cart(pos_geo);
     EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
@@ -123,11 +108,6 @@ TEST_F(TestECEF, CanConvertFromGeoToCartAt45N45E100H)
     pos_geo.lat = 45.0_deg;
     pos_geo.lon = 45.0_deg;
     pos_geo.alt = 100.0_m;
-
-    ecef.ConvertGeo2Cart(pos_geo, &pos_cart);
-    EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 
     pos_cart = ecef.ConvertGeo2Cart(pos_geo);
     EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
@@ -152,7 +132,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading0)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     // HDG = 0
     pos_geo_off = ecef.GetGeoOffset(0.0_deg, nautical_mile, 0.0);
@@ -189,7 +169,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading90)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     // HDG = 90
     pos_geo_off = ecef.GetGeoOffset(90.0_deg, nautical_mile, 0.0);
@@ -226,7 +206,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeadingMinus90)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     // HDG = -90
     pos_geo_off = ecef.GetGeoOffset(-90.0_deg, nautical_mile, 0.0);
@@ -263,7 +243,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading180)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     // HDG = 180
     pos_geo_off = ecef.GetGeoOffset(180.0_deg, nautical_mile, 0.0);
@@ -294,7 +274,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
@@ -315,7 +295,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
@@ -336,7 +316,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
@@ -357,7 +337,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
@@ -378,7 +358,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
@@ -399,7 +379,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
@@ -420,7 +400,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
@@ -441,7 +421,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
@@ -462,7 +442,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
@@ -483,7 +463,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
@@ -504,7 +484,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
@@ -525,7 +505,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
@@ -546,7 +526,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
@@ -567,7 +547,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90E)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
@@ -588,7 +568,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90W)
     pos_geo.lat =   0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =   0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
@@ -609,7 +589,7 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N180E)
     pos_geo.lat =   0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt =   0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
@@ -631,7 +611,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.phi() =   0.0_deg;
     angles_ecef.tht() = -90.0_deg;
@@ -658,7 +638,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.phi() =   0.0_deg;
     angles_ecef.tht() = -90.0_deg;
@@ -685,7 +665,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.phi() =   0.0_deg;
     angles_ecef.tht() = -90.0_deg;
@@ -712,7 +692,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     angles_ecef.phi() =   0.0_deg;
     angles_ecef.tht() = -90.0_deg;
@@ -738,7 +718,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
@@ -760,7 +740,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
@@ -782,7 +762,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
@@ -804,7 +784,7 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
     angles_ecef = ecef2bas.GetAngles();
@@ -825,7 +805,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt0N0E0H)
     pos_cart.x() = mc::WGS84::ellipsoid.a();
     pos_cart.y() = 0.0;
     pos_cart.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart);
+    ecef.SetPosition(pos_cart);
 
     pos_geo = ecef.pos_geo();
 
@@ -846,7 +826,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt45N45E100H)
     pos_cart.x() = 3194469.1450605746;
     pos_cart.y() = 3194469.145060574;
     pos_cart.z() = 4487419.119544039;
-    ecef.SetPositionFromCart(pos_cart);
+    ecef.SetPosition(pos_cart);
 
     pos_geo = ecef.pos_geo();
 
@@ -866,7 +846,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt0N0E0H)
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
 
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
     pos_cart = ecef.pos_cart();
     EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
@@ -886,7 +866,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
     pos_geo.lon = 45.0_deg;
     pos_geo.alt = 100.0_m;
 
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
     pos_cart = ecef.pos_cart();
     EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
     EXPECT_NEAR(pos_cart.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
@@ -932,7 +912,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     enu2ecef = ecef.enu2ecef();
     v_ecef = enu2ecef * v_enu;
@@ -955,7 +935,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     enu2ecef = ecef.enu2ecef();
     v_ecef = enu2ecef * v_enu;
@@ -978,7 +958,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     enu2ecef = ecef.enu2ecef();
     v_ecef = enu2ecef * v_enu;
@@ -1001,7 +981,7 @@ TEST_F(TestECEF, CanGetENU2ECEFAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     enu2ecef = ecef.enu2ecef();
     v_ecef = enu2ecef * v_enu;
@@ -1024,7 +1004,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ned2ecef = ecef.ned2ecef();
     v_ecef = ned2ecef * v_ned;
@@ -1047,7 +1027,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ned2ecef = ecef.ned2ecef();
     v_ecef = ned2ecef * v_ned;
@@ -1070,7 +1050,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ned2ecef = ecef.ned2ecef();
     v_ecef = ned2ecef * v_ned;
@@ -1093,7 +1073,7 @@ TEST_F(TestECEF, CanGetNED2ECEFAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ned2ecef = ecef.ned2ecef();
     v_ecef = ned2ecef * v_ned;
@@ -1116,7 +1096,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2enu = ecef.ecef2enu();
     v_enu = ecef2enu * v_ecef;
@@ -1139,7 +1119,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2enu = ecef.ecef2enu();
     v_enu = ecef2enu * v_ecef;
@@ -1162,7 +1142,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2enu = ecef.ecef2enu();
     v_enu = ecef2enu * v_ecef;
@@ -1185,7 +1165,7 @@ TEST_F(TestECEF, CanGetECEF2ENUAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2enu = ecef.ecef2enu();
     v_enu = ecef2enu * v_ecef;
@@ -1208,7 +1188,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N0E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 0.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2ned = ecef.ecef2ned();
     v_ned = ecef2ned * v_ecef;
@@ -1231,7 +1211,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 90.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2ned = ecef.ecef2ned();
     v_ned = ecef2ned * v_ecef;
@@ -1254,7 +1234,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N90W)
     pos_geo.lat =  0.0_deg;
     pos_geo.lon = -90.0_deg;
     pos_geo.alt =  0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2ned = ecef.ecef2ned();
     v_ned = ecef2ned * v_ecef;
@@ -1277,7 +1257,7 @@ TEST_F(TestECEF, CanGetECEF2NEDAt0N180E)
     pos_geo.lat = 0.0_deg;
     pos_geo.lon = 180.0_deg;
     pos_geo.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo);
+    ecef.SetPosition(pos_geo);
 
     ecef2ned = ecef.ecef2ned();
     v_ned = ecef2ned * v_ecef;
@@ -1297,7 +1277,7 @@ TEST_F(TestECEF, CanSetPositionFromGeoAt0N0E0H)
     pos_geo_in.lat = 0.0_deg;
     pos_geo_in.lon = 0.0_deg;
     pos_geo_in.alt = 0.0_m;
-    ecef.SetPositionFromGeo(pos_geo_in);
+    ecef.SetPosition(pos_geo_in);
 
     pos_geo = ecef.pos_geo();
 
@@ -1316,7 +1296,7 @@ TEST_F(TestECEF, CanSetPositionFromGeoAt45N45E100H)
     pos_geo_in.lat = 45.0_deg;
     pos_geo_in.lon = 45.0_deg;
     pos_geo_in.alt = 100.0_m;
-    ecef.SetPositionFromGeo(pos_geo_in);
+    ecef.SetPosition(pos_geo_in);
 
     pos_geo = ecef.pos_geo();
 
@@ -1335,7 +1315,7 @@ TEST_F(TestECEF, CanSetPositionFromCartAt0N0E0H)
     pos_cart_in.x() = mc::WGS84::ellipsoid.a();
     pos_cart_in.y() = 0.0;
     pos_cart_in.z() = 0.0;
-    ecef.SetPositionFromCart(pos_cart_in);
+    ecef.SetPosition(pos_cart_in);
 
     pos_cart = ecef.pos_cart();
     EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
@@ -1355,7 +1335,7 @@ TEST_F(TestECEF, CanSetPositionFromCartAt45N45E100H)
     pos_cart_in.x() = 3194469.1450605746;
     pos_cart_in.y() = 3194469.145060574;
     pos_cart_in.z() = 4487419.119544039;
-    ecef.SetPositionFromCart(pos_cart_in);
+    ecef.SetPosition(pos_cart_in);
 
     pos_cart = ecef.pos_cart();
     EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
