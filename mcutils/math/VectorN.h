@@ -22,7 +22,9 @@
 #ifndef MCUTILS_MATH_VECTORN_H_
 #define MCUTILS_MATH_VECTORN_H_
 
+#include <limits>
 #include <sstream>
+#include <vector>
 
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
@@ -83,27 +85,24 @@ public:
     }
 
     /**
-     * \brief Puts vector elements into given array.
-     * \param elements output array
+     * \brief Gets std::vector of vector elements.
+     * \return vector of vector elements
      */
-    void PutIntoArray(TYPE elements[]) const
+    std::vector<TYPE> GetVector() const
     {
-        for (unsigned int i = 0; i < kSize; ++i)
-        {
-            elements[i] = _elements[i];
-        }
+        std::vector<TYPE> elements(kSize);
+        std::copy(_elements, _elements + kSize, elements.begin());
+        return elements;
     }
 
     /**
-     * \brief Sets vector elements from array.
-     * \param elements input array
+     * \brief Sets vector elements from std::vector.
+     * \param elements input std::vector of vector elements
      */
-    void SetFromArray(const TYPE elements[])
+    void SetFromVector(const std::vector<TYPE>& elements)
     {
-        for (unsigned int i = 0; i < kSize; ++i)
-        {
-            _elements[i] = elements[i];
-        }
+        assert(elements.size() == kSize);
+        std::copy(elements.begin(), elements.end(), _elements);
     }
 
     /**
@@ -113,29 +112,26 @@ public:
      */
     void SetFromString(const char* str)
     {
-        double elements[kSize];
+        std::vector<TYPE> elements(kSize);
 
         for (unsigned int i = 0; i < kSize; ++i)
         {
-             elements[i] = std::numeric_limits<double>::quiet_NaN();
-            _elements[i] = TYPE{elements[i]};
+            _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
         std::stringstream ss(String::StripSpaces(str));
         bool valid = true;
-
-        for (unsigned int i = 0; i < kSize; ++i)
+        for (unsigned int i = 0; i < kSize && valid; ++i)
         {
-            ss >> elements[i];
-            valid &= mc::IsValid(elements[i]);
+            double temp = std::numeric_limits<double>::quiet_NaN();
+            ss >> temp;
+            valid &= mc::IsValid(temp);
+            elements[i] = TYPE{temp};
         }
 
         if (valid)
         {
-            for (unsigned int i = 0; i < kSize; ++i)
-            {
-                _elements[i] = TYPE{elements[i]};
-            }
+            SetFromVector(elements);
         }
     }
 

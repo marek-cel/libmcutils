@@ -25,9 +25,9 @@ TEST_F(TestVectorN, CanInstantiate)
 TEST_F(TestVectorN, CanValidate)
 {
     constexpr int size = 3;
-    const double x[] { 1.0, 2.0, 3.0 };
+    std::vector<double> x { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v;
-    v.SetFromArray(x);
+    v.SetFromVector(x);
     EXPECT_TRUE(v.IsValid());
     v(0) = std::numeric_limits<double>::quiet_NaN();
     EXPECT_FALSE(v.IsValid());
@@ -65,8 +65,8 @@ TEST_F(TestVectorN, CanNormalize)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
 
     v.Normalize();
 
@@ -83,10 +83,10 @@ TEST_F(TestVectorN, CanPutIntoArray)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
-    double result[size];
-    v.PutIntoArray(result);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
+    std::vector<double> result;
+    result = v.GetVector();
 
     for ( int i = 0; i < size; ++i )
     {
@@ -98,8 +98,8 @@ TEST_F(TestVectorN, CanSetFromArray)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
 
     for ( int i = 0; i < size; ++i )
     {
@@ -132,8 +132,8 @@ TEST_F(TestVectorN, CanSwapRows)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
 
     v.SwapRows(0, 1);
     EXPECT_DOUBLE_EQ(v(0), 2.0);
@@ -145,8 +145,8 @@ TEST_F(TestVectorN, CanConvertToString)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
     EXPECT_STREQ(v.ToString().c_str(), "1,2,3");
 }
 
@@ -154,8 +154,8 @@ TEST_F(TestVectorN, CanZeroize)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
     v.Zeroize();
 
     for ( int i = 0; i < size; ++i )
@@ -168,8 +168,8 @@ TEST_F(TestVectorN, CanAccessItemViaOperator)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
 
     for ( int i = 0; i < size; ++i )
     {
@@ -181,14 +181,14 @@ TEST_F(TestVectorN, CanAdd)
 {
     constexpr int size = 3;
 
-    double x1[] { 1.0, 2.0, 3.0 };
-    double x2[] { 4.0, 5.0, 6.0 };
+    std::vector<double> x1 { 1.0, 2.0, 3.0 };
+    std::vector<double> x2 { 4.0, 5.0, 6.0 };
 
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
 
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
 
     mc::VectorN<double,size> vr = v1 + v2;
 
@@ -202,8 +202,8 @@ TEST_F(TestVectorN, CanNegate)
 {
     constexpr int size = 3;
     mc::VectorN<double,size> v;
-    const double x[] { 1.0, 2.0, 3.0 };
-    v.SetFromArray(x);
+    std::vector<double> x { 1.0, 2.0, 3.0 };
+    v.SetFromVector(x);
 
     mc::VectorN<double,size> vr = -v;
 
@@ -217,14 +217,14 @@ TEST_F(TestVectorN, CanSubstract)
 {
     constexpr int size = 3;
 
-    double x1[] { 1.0, 2.0, 3.0 };
-    double x2[] { 4.0, 5.0, 6.0 };
+    std::vector<double> x1 { 1.0, 2.0, 3.0 };
+    std::vector<double> x2 { 4.0, 5.0, 6.0 };
 
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
 
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
 
     mc::VectorN<double,size> vr = v1 - v2;
 
@@ -238,9 +238,9 @@ TEST_F(TestVectorN, CanMultiplyByNumber)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0 };
+    std::vector<double> x { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v;
-    v.SetFromArray(x);
+    v.SetFromVector(x);
 
     constexpr double val = 2.0;
     mc::VectorN<double,size> vr = v * val;
@@ -255,20 +255,20 @@ TEST_F(TestVectorN, CanCalculateDotProduct)
 {
     constexpr int size = 3;
 
-    double x1[] = { 1.0, 0.0, 0.0 };
-    double x2[] = { 0.0, 1.0, 0.0 };
-    double x3[] = { 0.0, 0.0, 1.0 };
-    double x4[] = { 1.0, 2.0, 3.0 };
+    std::vector<double> x1 { 1.0, 0.0, 0.0 };
+    std::vector<double> x2 { 0.0, 1.0, 0.0 };
+    std::vector<double> x3 { 0.0, 0.0, 1.0 };
+    std::vector<double> x4 { 1.0, 2.0, 3.0 };
 
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
     mc::VectorN<double,size> v3;
     mc::VectorN<double,size> v4;
 
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
-    v3.SetFromArray(x3);
-    v4.SetFromArray(x4);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
+    v3.SetFromVector(x3);
+    v4.SetFromVector(x4);
 
     double s1 = v4 * v1;
     double s2 = v4 * v2;
@@ -285,9 +285,9 @@ TEST_F(TestVectorN, CanDivideByNumber)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0 };
+    std::vector<double> x { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v;
-    v.SetFromArray(x);
+    v.SetFromVector(x);
 
     constexpr double val = 2.0;
     mc::VectorN<double,size> vr = v / val;
@@ -302,14 +302,14 @@ TEST_F(TestVectorN, CanUnaryAdd)
 {
     constexpr int size = 3;
 
-    double x1[] { 1.0, 2.0, 3.0 };
-    double x2[] { 4.0, 5.0, 6.0 };
+    std::vector<double> x1 { 1.0, 2.0, 3.0 };
+    std::vector<double> x2 { 4.0, 5.0, 6.0 };
 
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
 
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
 
     v1 += v2;
 
@@ -323,14 +323,14 @@ TEST_F(TestVectorN, CanUnarySubstract)
 {
     constexpr int size = 3;
 
-    double x1[] { 1.0, 2.0, 3.0 };
-    double x2[] { 4.0, 5.0, 6.0 };
+    std::vector<double> x1 { 1.0, 2.0, 3.0 };
+    std::vector<double> x2 { 4.0, 5.0, 6.0 };
 
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
 
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
 
     v1 -= v2;
 
@@ -344,9 +344,9 @@ TEST_F(TestVectorN, CanUnaryMultiplyByNumber)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0 };
+    std::vector<double> x { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v;
-    v.SetFromArray(x);
+    v.SetFromVector(x);
 
     constexpr double val = 2.0;
     v *= val;
@@ -361,9 +361,9 @@ TEST_F(TestVectorN, CanUnaryDivideByNumber)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0 };
+    std::vector<double> x { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v;
-    v.SetFromArray(x);
+    v.SetFromVector(x);
 
     constexpr double val = 2.0;
     v /= val;
@@ -378,14 +378,14 @@ TEST_F(TestVectorN, CanCompare)
 {
     constexpr int size = 3;
 
-    double x1[] = { 2.0, 4.0, 6.0 };
-    double x2[] = { 1.0, 2.0, 3.0 };
+    std::vector<double> x1 { 2.0, 4.0, 6.0 };
+    std::vector<double> x2 { 1.0, 2.0, 3.0 };
     mc::VectorN<double,size> v1;
     mc::VectorN<double,size> v2;
     mc::VectorN<double,size> v3;
-    v1.SetFromArray(x1);
-    v2.SetFromArray(x2);
-    v3.SetFromArray(x1);
+    v1.SetFromVector(x1);
+    v2.SetFromVector(x2);
+    v3.SetFromVector(x1);
 
     EXPECT_FALSE(v1 == v2);
     EXPECT_FALSE(v3 == v2);
