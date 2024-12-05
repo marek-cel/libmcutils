@@ -22,11 +22,13 @@
 #ifndef MCUTILS_MATH_ANGLES_H_
 #define MCUTILS_MATH_ANGLES_H_
 
+#include <iomanip>
+#include <sstream>
 #include <string>
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+#include <mcutils/misc/Check.h>
 
 using namespace units::literals;
 
@@ -41,7 +43,7 @@ namespace mc {
  * ### Refernces:
  * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
  */
-class MCUTILSAPI Angles
+class Angles
 {
 public:
 
@@ -52,7 +54,16 @@ public:
      * \return normalized angle
      */
     static units::angle::radian_t Normalize(units::angle::radian_t val,
-                                            units::angle::radian_t min = 0.0_rad);
+                                            units::angle::radian_t min = 0.0_rad)
+    {
+        units::angle::radian_t tmp = val;
+        units::angle::radian_t max = min + 360_deg;
+
+        while (tmp < min) tmp += 360_deg;
+        while (tmp > max) tmp -= 360_deg;
+
+        return tmp;
+    }
 
     /**
      * \brief Constructor.
@@ -62,16 +73,45 @@ public:
      */
     explicit Angles(units::angle::radian_t phi = 0.0_rad,
                     units::angle::radian_t tht = 0.0_rad,
-                    units::angle::radian_t psi = 0.0_rad);
+                    units::angle::radian_t psi = 0.0_rad)
+    {
+        Set(phi, tht, psi);
+    }
 
     /** \return true if all items are valid */
-    bool IsValid() const;
+    bool IsValid() const
+    {
+        return mc::IsValid(_phi)
+            && mc::IsValid(_tht)
+            && mc::IsValid(_psi);
+    }
 
     /**
      * \brief Normalizes angles.
      * Limits phi to [-pi,pi] theta to [-pi/2,pi/2] and psi to [0,2*pi].
      */
-    void Normalize();
+    void Normalize()
+    {
+        while (_tht >  90_deg)
+        {
+            _phi += 180_deg;
+            _tht =  90_deg - ( _tht - 90_deg );
+            _psi += 180_deg;
+        }
+
+        while (_tht < -90_deg)
+        {
+            _phi += 180_deg;
+            _tht = -90_deg - ( _tht + 90_deg );
+            _psi += 180_deg;
+        }
+
+        while (_phi >  180_deg) _phi -= 360_deg;
+        while (_phi < -180_deg) _phi += 360_deg;
+
+        while (_psi >= 360_deg) _psi -= 360_deg;
+        while (_psi <    0_deg) _psi += 360_deg;
+    }
 
     /**
      * \brief Sets angles values.
@@ -81,10 +121,29 @@ public:
      */
     void Set(units::angle::radian_t phi,
              units::angle::radian_t tht,
-             units::angle::radian_t psi);
+             units::angle::radian_t psi)
+    {
+        _phi = phi;
+        _tht = tht;
+        _psi = psi;
+    }
 
     /** \brief Returns string represtation of the angles. */
-    std::string ToString() const;
+    std::string ToString() const
+    {
+        std::stringstream ss;
+
+        ss.setf(std::ios_base::showpoint);
+        ss.setf(std::ios_base::fixed);
+
+        ss << std::setprecision(2) << units::angle::degree_t(_phi)();
+        ss << ",";
+        ss << std::setprecision(2) << units::angle::degree_t(_tht)();
+        ss << ",";
+        ss << std::setprecision(2) << units::angle::degree_t(_psi)();
+
+        return ss.str();
+    }
 
     inline units::angle::radian_t  phi() const { return _phi; }
     inline units::angle::radian_t  tht() const { return _tht; }
@@ -94,10 +153,18 @@ public:
     inline units::angle::radian_t& psi()       { return _psi; }
 
     /** \brief Equality operator. */
-    bool operator==(const Angles& angl) const;
+    bool operator==(const Angles& angl) const
+    {
+        return (_phi == angl._phi)
+            && (_tht == angl._tht)
+            && (_psi == angl._psi);
+    }
 
     /** \brief Inequality operator. */
-    bool operator!=(const Angles& angl) const;
+    bool operator!=(const Angles& angl) const
+    {
+        return !(*this == angl);
+    }
 
 private:
 

@@ -26,7 +26,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    Angles.cpp
     DegMinSec.cpp
     Quaternion.cpp
     Random.cpp
