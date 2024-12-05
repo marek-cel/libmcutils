@@ -30,29 +30,15 @@ using namespace units::literals;
 namespace mc {
 
 LowPassFilter::LowPassFilter(double omega, double value)
-    : _omega(omega)
-    , _time_const(1.0 / omega)
-    , _value(value)
-{}
+
 
 void LowPassFilter::SetCutoffFreq(double freq)
-{
-    _omega = 2.0 * M_PI * std::max(0.0, freq);
-    _time_const = 1.0 / _omega;
-}
+
 
 void LowPassFilter::Update(units::time::second_t dt, double u)
-{
-    if (dt > 0.0_s)
-    {
-        _value += (1.0 - exp(-dt() / _time_const)) * (u - _value);
-    }
-}
+
 
 void LowPassFilter::set_omega(double omega)
-{
-    _omega = std::max(0.0, omega);
-    _time_const = 1.0 / _omega;
-}
+
 
 } // namespace mc

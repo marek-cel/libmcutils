@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    LowPassFilter.cpp
     MovingAverage.cpp
     MovingMedian.cpp
     Oscillator.cpp
