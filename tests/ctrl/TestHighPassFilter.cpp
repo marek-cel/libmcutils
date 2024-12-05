@@ -6,8 +6,6 @@
 
 #include <XcosBinFileReader.h>
 
-using namespace units::literals;
-
 class TestHighPassFilter : public ::testing::Test
 {
 protected:

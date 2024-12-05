@@ -7,16 +7,14 @@
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
-using namespace units::literals;
-
 class TestInertia2 : public ::testing::Test
 {
 protected:
 
     static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
-    static constexpr double TIME_CONSTANT_1 { 2.0 };
-    static constexpr double TIME_CONSTANT_2 { 3.0 };
+    static constexpr units::time::second_t TIME_CONSTANT_1 = 2.0_s;
+    static constexpr units::time::second_t TIME_CONSTANT_2 = 3.0_s;
 
     TestInertia2() {}
     virtual ~TestInertia2() {}
@@ -26,19 +24,19 @@ protected:
 
 TEST_F(TestInertia2, CanInstantiate)
 {
-    mc::Inertia2 inertia;
+    mc::Inertia2<double> inertia;
 
-    EXPECT_DOUBLE_EQ(inertia.time_const_1(), 0.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_2(), 0.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_1()(), 0.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_2()(), 0.0);
     EXPECT_DOUBLE_EQ(inertia.value(), 0.0);
 }
 
 TEST_F(TestInertia2, CanInstantiateAndSetData)
 {
-    mc::Inertia2 inertia(2.0, 3.0, 4.0);
+    mc::Inertia2<double> inertia(2.0_s, 3.0_s, 4.0);
 
-    EXPECT_DOUBLE_EQ(inertia.time_const_1(), 2.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_2(), 3.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_1()(), 2.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_2()(), 3.0);
     EXPECT_DOUBLE_EQ(inertia.value(), 4.0);
 }
 
@@ -52,7 +50,7 @@ TEST_F(TestInertia2, CanUpdateStep)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
+    mc::Inertia2<double> inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
     units::time::second_t t = 0.0_s;
     double y = 0.0;
@@ -84,7 +82,7 @@ TEST_F(TestInertia2, CanUpdateStep2)
     EXPECT_GT(y_ref.size(), 0) << "No reference data.";
     EXPECT_EQ(t_ref.size(), y_ref.size()) << "Reference data corrupted.";
 
-    mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
+    mc::Inertia2<double> inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
     units::time::second_t t = 0.0_s;
     double y = 0.0;
@@ -110,7 +108,7 @@ TEST_F(TestInertia2, CanUpdateSine)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
+    mc::Inertia2<double> inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
     units::time::second_t t = 0.0_s;
     double y = 0.0;
@@ -131,39 +129,39 @@ TEST_F(TestInertia2, CanUpdateSine)
 
 TEST_F(TestInertia2, CanGetTimeConst1)
 {
-    mc::Inertia2 inertia(2.0, 3.0, 4.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_1(), 2.0);
+    mc::Inertia2<double> inertia(2.0_s, 3.0_s, 4.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_1()(), 2.0);
 }
 
 TEST_F(TestInertia2, CanGetTimeConst2)
 {
-    mc::Inertia2 inertia(2.0, 3.0, 4.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_2(), 3.0);
+    mc::Inertia2<double> inertia(2.0_s, 3.0_s, 4.0);
+    EXPECT_DOUBLE_EQ(inertia.time_const_2()(), 3.0);
 }
 
 TEST_F(TestInertia2, CanGetValue)
 {
-    mc::Inertia2 inertia(2.0, 3.0, 4.0);
+    mc::Inertia2<double> inertia(2.0_s, 3.0_s, 4.0);
     EXPECT_DOUBLE_EQ(inertia.value(), 4.0);
 }
 
 TEST_F(TestInertia2, CanSetTimeConst1)
 {
-    mc::Inertia2 inertia;
-    inertia.set_time_const_1(2.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_1(), 2.0);
+    mc::Inertia2<double> inertia;
+    inertia.set_time_const_1(2.0_s);
+    EXPECT_DOUBLE_EQ(inertia.time_const_1()(), 2.0);
 }
 
 TEST_F(TestInertia2, CanSetTimeConst2)
 {
-    mc::Inertia2 inertia;
-    inertia.set_time_const_2(3.0);
-    EXPECT_DOUBLE_EQ(inertia.time_const_2(), 3.0);
+    mc::Inertia2<double> inertia;
+    inertia.set_time_const_2(3.0_s);
+    EXPECT_DOUBLE_EQ(inertia.time_const_2()(), 3.0);
 }
 
 TEST_F(TestInertia2, CanSetValue)
 {
-    mc::Inertia2 inertia;
+    mc::Inertia2<double> inertia;
     inertia.set_value(4.0);
     EXPECT_DOUBLE_EQ(inertia.value(), 4.0);
 }

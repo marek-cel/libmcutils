@@ -24,12 +24,12 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief First-order inertia class.
+ * \brief First-order inertia class template.
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )
@@ -46,53 +46,77 @@ namespace mc {
  * - [Implement first-order filter - Simulink](https://www.mathworks.com/help/physmod/sps/powersys/ref/firstorderfilter.html)
  * - [Typical Transfer Functions and their corresponding Frequency Domain Plots](https://pages.mtu.edu/~tbco/cm416/TFBODE.html)
  */
-class MCUTILSAPI Inertia
+template <typename T>
+class Inertia
 {
 public:
 
     /**
      * \brief Calculates output value due to time constant, time step and input value
      * \param dt [s] time step
-     * \param tc time constant
+     * \param tc [s] time constant
      * \param u input
      * \param y current valuye
      * \return
      */
-    static double Calculate(units::time::second_t dt, double tc, double u, double y);
+    static T Calculate(units::time::second_t dt, units::time::second_t tc, T u, T y)
+    {
+        if (tc > 0.0_s)
+        {
+            return y + (1.0 - exp(-dt() / tc())) * (u - y);
+        }
+
+        return u;
+    }
 
     /**
      * \brief Constructor.
      * \param tc time constant
      * \param value initial output value
      */
-    explicit Inertia(double tc = 0.0, double value = 0.0);
+    explicit Inertia(units::time::second_t tc = 0.0_s, T value = T{0})
+        : _time_const(tc)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if ( dt > 0.0_s )
+        {
+            _value = Calculate(dt, _time_const, u, _value);
+        }
+    }
 
-    inline double value() const { return _value; }
-    inline double time_const() const { return _time_const; }
+    inline T value() const { return _value; }
+    inline units::time::second_t time_const() const { return _time_const; }
 
     /**
      * \brief Sets output value
      * \param value output value
      */
-    inline void set_value(double value) { _value = value; }
+    inline void set_value(T value) { _value = value; }
 
     /**
      * \brief Sets time constant.
-     * \param tc time constant
+     * \param tc [s] time constant
      */
-    void set_time_const(double time_const);
+    void set_time_const(units::time::second_t time_const)
+    {
+        if ( time_const > 0.0_s )
+        {
+            _time_const = time_const;
+        }
+    }
 
 private:
 
-    double _time_const = 0.0;   ///< time constant
-    double _value = 0.0;        ///< current value
+    units::time::second_t _time_const = 0.0_s;  ///< [s] time constant
+    T _value = T{0};                            ///< current value
 };
 
 } // namespace mc

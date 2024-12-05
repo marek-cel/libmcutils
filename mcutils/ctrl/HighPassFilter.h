@@ -24,8 +24,6 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
-
 using namespace units::literals;
 
 namespace mc {
@@ -45,7 +43,7 @@ namespace mc {
  * \f]
  */
 template <typename T>
-class MCUTILSAPI HighPassFilter
+class HighPassFilter
 {
 public:
 
