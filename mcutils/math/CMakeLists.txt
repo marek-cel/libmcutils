@@ -27,7 +27,6 @@ set(HEADERS
 
 set(SOURCES
     Random.cpp
-    RMatrix.cpp
     SegPlaneIsect.cpp
     Table2.cpp
     Table.cpp
