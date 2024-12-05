@@ -28,12 +28,15 @@ TEST_F(TestMatrixNxN, CanInstantiateAndCopy)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m0;
-    m0.SetFromArray(x);
+    m0.SetFromVector(x);
 
     mc::MatrixNxN<double,size> m1(m0);
 
@@ -50,12 +53,15 @@ TEST_F(TestMatrixNxN, CanTranspose)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m;
-    m.SetFromArray(x);
+    m.SetFromVector(x);
 
     m.Transpose();
 
@@ -74,12 +80,15 @@ TEST_F(TestMatrixNxN, CanGetTransposed)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m0;
-    m0.SetFromArray(x);
+    m0.SetFromVector(x);
 
     mc::MatrixNxN<double,size> m1(m0);
     mc::MatrixNxN<double,size> mt = m1.GetTransposed();
@@ -98,13 +107,16 @@ TEST_F(TestMatrixNxN, CanAssign)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m0;
     mc::MatrixNxN<double,size> m1;
-    m0.SetFromArray(x);
+    m0.SetFromVector(x);
     m1 = m0;
 
         for ( int r = 0; r < size; ++r )
@@ -122,14 +134,17 @@ TEST_F(TestMatrixNxN, CanAdd)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> m2;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     m2.Fill(val);
     mr = m1 + m2;
 
@@ -147,15 +162,18 @@ TEST_F(TestMatrixNxN, CanNegate)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> m2;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
-    m2.SetFromArray(x);
+    m1.SetFromVector(x);
+    m2.SetFromVector(x);
     mr = -m1;
 
         for ( int r = 0; r < size; ++r )
@@ -173,14 +191,17 @@ TEST_F(TestMatrixNxN, CanSubstract)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> m2;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     m2.Fill(val);
     mr = m1 - m2;
 
@@ -200,13 +221,16 @@ TEST_F(TestMatrixNxN, CanMultiplyByNumber)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     mr = m1 * val;
 
     for ( int r = 0; r < size; ++r )
@@ -223,13 +247,13 @@ TEST_F(TestMatrixNxN, CanMultiplyByMatrix)
 {
     constexpr int size = 3;
 
-    double x1[] { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+    std::vector<double> x1 { 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
     mc::MatrixNxN<double,size> m1;
-    m1.SetFromArray(x1);
+    m1.SetFromVector(x1);
 
-    double x2[] { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
+    std::vector<double> x2 { 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9 };
     mc::MatrixNxN<double,size> m2;
-    m2.SetFromArray(x2);
+    m2.SetFromVector(x2);
 
     mc::MatrixNxN<double,size> mr = m1 * m2;
 
@@ -252,13 +276,16 @@ TEST_F(TestMatrixNxN, CanDivideByNumber)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     mr = m1 / val;
 
     for ( int r = 0; r < size; ++r )
@@ -277,13 +304,16 @@ TEST_F(TestMatrixNxN, CanUnaryAdd)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     mr.Fill(val);
     mr += m1;
 
@@ -302,13 +332,16 @@ TEST_F(TestMatrixNxN, CanUnarySubstract)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m1;
     mc::MatrixNxN<double,size> mr;
-    m1.SetFromArray(x);
+    m1.SetFromVector(x);
     mr.Fill(val);
     mr -= m1;
 
@@ -327,12 +360,15 @@ TEST_F(TestMatrixNxN, CanUnaryMultiplyByNumber)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m;
-    m.SetFromArray(x);
+    m.SetFromVector(x);
     m *= val;
 
     for ( int r = 0; r < size; ++r )
@@ -351,12 +387,15 @@ TEST_F(TestMatrixNxN, CanUnaryDivideByNumber)
 
     constexpr double val = 2.0;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::MatrixNxN<double,size> m;
-    m.SetFromArray(x);
+    m.SetFromVector(x);
     m /= val;
 
     for ( int r = 0; r < size; ++r )

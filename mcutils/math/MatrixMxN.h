@@ -68,7 +68,7 @@ public:
     }
 
     /**
-     * \brief Puts matrix elements into given array.
+     * \brief Gets a vector of matrix elements.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -76,18 +76,17 @@ public:
      * i_row - row index,
      * i_col - column index,
      * n_col - number of columns
-     * \param elements output array
+     * \return vector of matrix elements
      */
-    void PutIntoArray(double elements[])
+    std::vector<TYPE> GetVector() const
     {
-        for (unsigned int i = 0; i < kSize; ++i)
-        {
-            elements[i] = _elements[i];
-        }
+        std::vector<TYPE> elements(kSize);
+        std::copy(_elements, _elements + kSize, elements.begin());
+        return elements;
     }
 
     /**
-     * \brief Sets matrix elements from array.
+     * \brief Sets matrix elements from a vector.
      * Elements index should match following scheme:
      * i = i_row * n_col + i_col
      * where:
@@ -95,14 +94,12 @@ public:
      * i_row - row index,
      * i_col - column index,
      * n_col - number of columns
-     * \param elements input array
+     * \param elements input vector of matrix elements
      */
-    void SetFromArray(double elements[])
+    void SetFromVector(const std::vector<TYPE> elements)
     {
-        for (unsigned int i = 0; i < kSize; ++i)
-        {
-            _elements[i] = elements[i];
-        }
+        assert(elements.size() == kSize);
+        std::copy(elements.begin(), elements.end(), _elements);
     }
 
     /**
@@ -114,24 +111,24 @@ public:
     {
         if (kSize > 0)
         {
-            double elements[kSize];
+            std::vector<TYPE> elements(kSize);
 
             for (unsigned int i = 0; i < kSize; ++i)
             {
-                 elements[i] = std::numeric_limits<double>::quiet_NaN();
-                _elements[i] = std::numeric_limits<double>::quiet_NaN();
+                _elements[i] = TYPE{std::numeric_limits<double>::quiet_NaN()};
             }
 
             std::stringstream ss(String::StripSpaces(str));
             bool valid = true;
-
-            for (unsigned int i = 0; i < kSize; ++i)
+            for (unsigned int i = 0; i < kSize && valid; ++i)
             {
-                ss >> elements[i];
-                valid &= mc::IsValid(elements[i]);
+                double temp = std::numeric_limits<double>::quiet_NaN();
+                ss >> temp;
+                valid &= mc::IsValid(temp);
+                elements[i] = TYPE{temp};
             }
 
-            if ( valid ) SetFromArray(elements);
+            if ( valid ) SetFromVector(elements);
         }
     }
 

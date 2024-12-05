@@ -58,12 +58,15 @@ TEST_F(TestRMatrix, CanInstantiateAndCopy)
 {
     constexpr int size = 3;
 
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::RMatrix m0;
-    m0.SetFromArray(x);
+    m0.SetFromVector(x);
 
     mc::RMatrix m1(m0);
 
@@ -521,12 +524,15 @@ TEST_F(TestRMatrix, CanGetQuaternionWhichMatchesAngles)
 
 TEST_F(TestRMatrix, CanGetTransposed)
 {
-    double x[] { 1.0, 2.0, 3.0,
-                 4.0, 5.0, 6.0,
-                 7.0, 8.0, 9.0 };
+    std::vector<double> x
+    {
+        1.0, 2.0, 3.0,
+        4.0, 5.0, 6.0,
+        7.0, 8.0, 9.0
+    };
 
     mc::RMatrix m0;
-    m0.SetFromArray(x);
+    m0.SetFromVector(x);
 
     mc::RMatrix m1(m0);
     mc::RMatrix mt = m1.GetTransposed();
