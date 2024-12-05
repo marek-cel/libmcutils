@@ -13,8 +13,7 @@ class TestLead : public ::testing::Test
 protected:
 
     static constexpr units::time::second_t TIME_STEP = 0.01_s;
-
-    static constexpr double TIME_CONSTANT { 0.3 };
+    static constexpr units::time::second_t TIME_CONSTANT = 0.3_s;
 
     TestLead() {}
     virtual ~TestLead() {}
@@ -24,17 +23,17 @@ protected:
 
 TEST_F(TestLead, CanInstantiate)
 {
-    mc::Lead lead;
+    mc::Lead<double> lead;
 
-    EXPECT_DOUBLE_EQ(lead.time_const(), 0.0);
+    EXPECT_DOUBLE_EQ(lead.time_const()(), 0.0);
     EXPECT_DOUBLE_EQ(lead.value(), 0.0);
 }
 
 TEST_F(TestLead, CanInstantiateAndSetData)
 {
-    mc::Lead lead(2.0, 3.0);
+    mc::Lead<double> lead(2.0_s, 3.0);
 
-    EXPECT_DOUBLE_EQ(lead.time_const(), 2.0);
+    EXPECT_DOUBLE_EQ(lead.time_const()(), 2.0);
     EXPECT_DOUBLE_EQ(lead.value(), 3.0);
 }
 
@@ -48,7 +47,7 @@ TEST_F(TestLead, CanUpdateSine)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::Lead lead(TIME_CONSTANT);
+    mc::Lead<double> lead(TIME_CONSTANT);
 
     units::time::second_t t = 0.0_s;
     double y = 0.0;
@@ -70,14 +69,14 @@ TEST_F(TestLead, CanUpdateSine)
 
 TEST_F(TestLead, CanGetValue)
 {
-    mc::Lead lead(2.0, 3.0);
+    mc::Lead<double> lead(2.0_s, 3.0);
 
     EXPECT_DOUBLE_EQ(lead.value(), 3.0);
 }
 
 TEST_F(TestLead, CanSetValue)
 {
-    mc::Lead lead;
+    mc::Lead<double> lead;
 
     lead.set_value(1.0);
     EXPECT_DOUBLE_EQ(lead.value(), 1.0);
@@ -85,15 +84,15 @@ TEST_F(TestLead, CanSetValue)
 
 TEST_F(TestLead, CanGetTimeConst)
 {
-    mc::Lead lead(2.0, 3.0);
+    mc::Lead<double> lead(2.0_s, 3.0);
 
-    EXPECT_DOUBLE_EQ(lead.time_const(), 2.0);
+    EXPECT_DOUBLE_EQ(lead.time_const()(), 2.0);
 }
 
 TEST_F(TestLead, CanSetTimeConst)
 {
-    mc::Lead lead;
+    mc::Lead<double> lead;
 
-    lead.set_time_const(2.0);
-    EXPECT_DOUBLE_EQ(lead.time_const(), 2.0);
+    lead.set_time_const(2.0_s);
+    EXPECT_DOUBLE_EQ(lead.time_const()(), 2.0);
 }

@@ -24,12 +24,12 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief First-order lead class.
+ * \brief First-order lead class template.
  *
  * Transfer function:
  * G(s)  =  Tc*s + 1
@@ -43,7 +43,8 @@ namespace mc {
  * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.224. [in Polish]
  * - [Typical Transfer Functions and their corresponding Frequency Domain Plots](https://pages.mtu.edu/~tbco/cm416/TFBODE.html)
  */
-class MCUTILSAPI Lead
+template <typename T>
+class Lead
 {
 public:
 
@@ -52,36 +53,53 @@ public:
      * \param tc time constant
      * \param value initial output value
      */
-    explicit Lead(double tc = 0.0, double value = 0.0);
+    explicit Lead(units::time::second_t tc = 0.0_s, T value = T{0})
+        : _time_const(tc)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if (dt > 0.0_s)
+        {
+            auto du_dt = (u - _u_prev) / dt;
+            _value = _time_const * du_dt + u;
+            _u_prev = u;
+        }
+    }
 
-    inline double value() const { return _value; }
-    inline double time_const() const { return _time_const; }
+    inline T value() const { return _value; }
+    inline units::time::second_t time_const() const { return _time_const; }
 
     /**
      * \brief Sets output value
      * \param value output value
      */
-    inline void set_value(double value) { _value = value; }
+    inline void set_value(T value) { _value = value; }
 
     /**
      * \brief Sets time constant.
      * \param tc time constant
      */
-    void set_time_const(double tc);
+    void set_time_const(units::time::second_t tc)
+    {
+        if (tc > 0.0_s)
+        {
+            _time_const = tc;
+        }
+    }
 
 private:
 
-    double _time_const = 0.0;   ///< time constant
+    units::time::second_t _time_const = 0.0_s;  ///< [s] time constant
 
-    double _u_prev = 0.0;       ///< previous input
-    double _value  = 0.0;       ///< current value
+    T _u_prev = T{0};   ///< previous input
+    T _value  = T{0};   ///< current value
 };
 
 } // namespace mc
