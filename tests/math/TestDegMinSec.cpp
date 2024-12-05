@@ -23,7 +23,7 @@ TEST_F(TestDegMinSec, CanInstantiate)
 
 TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 {
-    mc::DegMinSec dms(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
+    mc::DegMinSec dms(1.0_deg + 2.0_deg / 60.0 + 3.0_deg / 3600.0);
 
     EXPECT_EQ(dms.deg(), 1);
     EXPECT_EQ(dms.min(), 2);
@@ -32,29 +32,30 @@ TEST_F(TestDegMinSec, CanInstantiateAndSetData)
 
 TEST_F(TestDegMinSec, CanValidate)
 {
-    mc::DegMinSec dms1(M_PI_4);
+    mc::DegMinSec dms1(45_deg);
     EXPECT_TRUE(dms1.IsValid());
 
-    mc::DegMinSec dms2(std::numeric_limits<double>::quiet_NaN());
+    units::angle::degree_t deg_nan { std::numeric_limits<double>::quiet_NaN() };
+    mc::DegMinSec dms2(deg_nan);
     EXPECT_FALSE(dms2.IsValid());
 }
 
 TEST_F(TestDegMinSec, CanGetAngle)
 {
-    mc::DegMinSec dms(M_PI_4);
-    EXPECT_DOUBLE_EQ(dms.GetAngle(), M_PI_4);
+    mc::DegMinSec dms(45_deg);
+    EXPECT_DOUBLE_EQ(dms.GetAngle()(), 45.0);
 }
 
 TEST_F(TestDegMinSec, CanSetAngle)
 {
     mc::DegMinSec dms;
-    dms.SetAngle(M_PI_4);
-    EXPECT_DOUBLE_EQ(dms.GetAngle(), M_PI_4);
+    dms.SetAngle(45_deg);
+    EXPECT_DOUBLE_EQ(dms.GetAngle()(), 45.0);
 }
 
 TEST_F(TestDegMinSec, CanConvertToString)
 {
-    mc::DegMinSec dms(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
+    mc::DegMinSec dms(1.0_deg + 2.0_deg / 60.0 + 3.0_deg / 3600.0);
     EXPECT_STREQ(dms.ToString().c_str(), "1 deg 2 min 3.00 sec");
 }
 
@@ -62,7 +63,7 @@ TEST_F(TestDegMinSec, CanCompare)
 {
     mc::DegMinSec dms;
 
-    mc::DegMinSec dms1(mc::Units::deg2rad(1.0 + 2.0 / 60.0 + 3.0 / 3600.0));
+    mc::DegMinSec dms1(1.0_deg + 2.0_deg / 60.0 + 3.0_deg / 3600.0);
 
     EXPECT_FALSE(dms == dms1);
     EXPECT_TRUE(dms != dms1);

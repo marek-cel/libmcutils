@@ -26,7 +26,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    DegMinSec.cpp
     Quaternion.cpp
     Random.cpp
     RMatrix.cpp
