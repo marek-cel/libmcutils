@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_INERTIA_H_
 #define MCUTILS_CTRL_INERTIA_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,7 +33,7 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc*s + 1 )
- * 
+ *
  * \f[
  * G\left(s\right) = {1 \over {T_c \cdot s + 1}}
  * \f]
@@ -50,13 +52,13 @@ public:
 
     /**
      * \brief Calculates output value due to time constant, time step and input value
+     * \param dt [s] time step
+     * \param tc time constant
      * \param u input
      * \param y current valuye
-     * \param dt [s] time step
-     * \param tc [s] time constant
      * \return
      */
-    static double Calculate(double u, double y, double dt, double tc);
+    static double Calculate(units::time::second_t dt, double tc, double u, double y);
 
     /**
      * \brief Constructor.
@@ -70,7 +72,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
     inline double time_const() const { return _time_const; }

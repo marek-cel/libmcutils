@@ -25,6 +25,8 @@
 #include <algorithm>
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
 LowPassFilter::LowPassFilter(double omega, double value)
@@ -39,11 +41,11 @@ void LowPassFilter::SetCutoffFreq(double freq)
     _time_const = 1.0 / _omega;
 }
 
-void LowPassFilter::Update(double dt, double u)
+void LowPassFilter::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        _value += (1.0 - exp(-dt / _time_const)) * (u - _value);
+        _value += (1.0 - exp(-dt() / _time_const)) * (u - _value);
     }
 }
 

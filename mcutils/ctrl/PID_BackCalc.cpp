@@ -24,6 +24,8 @@
 
 #include <mcutils/math/Math.h>
 
+using namespace units::literals;
+
 namespace mc {
 
 PID_BackCalc::PID_BackCalc(double kp, double ki, double kd,
@@ -33,7 +35,7 @@ PID_BackCalc::PID_BackCalc(double kp, double ki, double kd,
     , _max(max)
 {}
 
-void PID_BackCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
+void PID_BackCalc::UpdateFinal(units::time::second_t, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
     _value = Satur(_min, _max, y);

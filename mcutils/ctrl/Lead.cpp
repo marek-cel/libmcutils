@@ -24,6 +24,8 @@
 
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
 Lead::Lead(double tc, double value)
@@ -31,11 +33,11 @@ Lead::Lead(double tc, double value)
     , _value(value)
 {}
 
-void Lead::Update(double dt, double u)
+void Lead::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        double du_dt = (u - _u_prev) / dt;
+        double du_dt = (u - _u_prev) / dt();
         _value = _time_const * du_dt + u;
         _u_prev = u;
     }

@@ -3,6 +3,8 @@
 #include <mcutils/ctrl/MovingMedian.h>
 #include <mcutils/math/Random.h>
 
+using namespace units::literals;
+
 class TestMovingMedian : public ::testing::Test
 {
 protected:
@@ -31,45 +33,45 @@ TEST_F(TestMovingMedian, CanUpdate)
 
     double u[] = { 44.0, 64.0, 18.0, 65.0, 81.0, 28.0, 1.0, 25.0, 41.0, 39.0 };
 
-    mm.Update(1.0, u[0]);
+    mm.Update(1.0_s, u[0]);
     // [44]
     EXPECT_DOUBLE_EQ(mm.value(), 44.0);
 
-    mm.Update(1.0, u[1]);
+    mm.Update(1.0_s, u[1]);
     // [44, 64]
     // ( 44 + 64 ) / 2 = 54
     EXPECT_DOUBLE_EQ(mm.value(), 54.0);
 
-    mm.Update(1.0, u[2]);
+    mm.Update(1.0_s, u[2]);
     // 18, [44], 64
     EXPECT_DOUBLE_EQ(mm.value(), 44.0);
 
-    mm.Update(1.0, u[3]);
+    mm.Update(1.0_s, u[3]);
     // 18, [44, 64], 65
     // ( 44 + 64 ) / 2 = 54
     EXPECT_DOUBLE_EQ(mm.value(), 54.0);
 
-    mm.Update(1.0, u[4]);
+    mm.Update(1.0_s, u[4]);
     // 18, 44, [64], 65, 81
     EXPECT_DOUBLE_EQ(mm.value(), 64.0);
 
-    mm.Update(1.0, u[5]);
+    mm.Update(1.0_s, u[5]);
     // 18, 28, [64], 65, 81
     EXPECT_DOUBLE_EQ(mm.value(), 64.0);
 
-    mm.Update(1.0, u[6]);
+    mm.Update(1.0_s, u[6]);
     // 1, 18, [28], 65, 81
     EXPECT_DOUBLE_EQ(mm.value(), 28.0);
 
-    mm.Update(1.0, u[7]);
+    mm.Update(1.0_s, u[7]);
     // 1, 25, [28], 65, 81
     EXPECT_DOUBLE_EQ(mm.value(), 28.0);
 
-    mm.Update(1.0, u[8]);
+    mm.Update(1.0_s, u[8]);
     // 1, 25, [28], 41, 81
     EXPECT_DOUBLE_EQ(mm.value(), 28.0);
 
-    mm.Update(1.0, u[9]);
+    mm.Update(1.0_s, u[9]);
     // 1, 25, [28], 39, 41
     EXPECT_DOUBLE_EQ(mm.value(), 28.0);
 }

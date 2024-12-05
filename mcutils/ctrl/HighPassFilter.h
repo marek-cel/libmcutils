@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_HIGHPASSFILTER_H_
 #define MCUTILS_CTRL_HIGHPASSFILTER_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,12 +33,12 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )
- * 
+ *
  * \f[
  * G\left(s\right)
- * = 
+ * =
  * {s \over {s + \omega}}
- * = 
+ * =
  * {{s \over \omega} \over {\left({s \over \omega} + 1\right)}}
  * \f]
  */
@@ -62,7 +64,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
     inline double omega() const { return _omega; }

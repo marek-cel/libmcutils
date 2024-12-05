@@ -24,6 +24,8 @@
 
 #include <mcutils/ctrl/Inertia.h>
 
+using namespace units::literals;
+
 namespace mc {
 
 Inertia2::Inertia2(double tc1, double tc2, double value)
@@ -33,12 +35,12 @@ Inertia2::Inertia2(double tc1, double tc2, double value)
     , _value     (value)
 {}
 
-void Inertia2::Update(double dt, double u)
+void Inertia2::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        _value_int = Inertia::Calculate(          u, _value_int , dt, _time_const_1 );
-        _value     = Inertia::Calculate( _value_int, _value     , dt, _time_const_2 );
+        _value_int = Inertia::Calculate( dt, _time_const_1,          u, _value_int );
+        _value     = Inertia::Calculate( dt, _time_const_2, _value_int, _value     );
     }
 }
 

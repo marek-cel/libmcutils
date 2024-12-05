@@ -6,11 +6,13 @@
 
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestSystem2 : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
     TestSystem2() {}
     virtual ~TestSystem2() {}
@@ -61,7 +63,7 @@ TEST_F(TestSystem2, CanUpdateOscillatorStep)
     // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
     mc::System2 s(0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
@@ -93,12 +95,12 @@ TEST_F(TestSystem2, CanUpdateOscillatorSine)
     // G(s) = 2^2 / [ s^2 + 2*(1/50)*2*s + 2^2 ]
     mc::System2 s(0.0, 0.0, 4.0, 1.0, 2.0*(1.0/50)*2.0, 4.0);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = sin(t);
+        double u = sin(t());
 
         s.Update(TIME_STEP, u);
         y = s.value();

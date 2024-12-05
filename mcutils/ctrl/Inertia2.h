@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_INERTIA2_H_
 #define MCUTILS_CTRL_INERTIA2_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,9 +33,9 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  1 / ( Tc1*s + 1 )( Tc2*s + 1 )
- * 
+ *
  * \f[
- * G \left( s \right) = 
+ * G \left( s \right) =
  * {1 \over { \left( T_{c1} \cdot s + 1 \right) \left( T_{c2} \cdot s + 1 \right) }}
  * \f]
  */
@@ -54,7 +56,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
 

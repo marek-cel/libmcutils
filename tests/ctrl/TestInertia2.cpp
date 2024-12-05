@@ -7,11 +7,13 @@
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestInertia2 : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
     static constexpr double TIME_CONSTANT_1 { 2.0 };
     static constexpr double TIME_CONSTANT_2 { 3.0 };
@@ -52,7 +54,7 @@ TEST_F(TestInertia2, CanUpdateStep)
 
     mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
@@ -84,7 +86,7 @@ TEST_F(TestInertia2, CanUpdateStep2)
 
     mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < y_ref.size(); i++ )
@@ -110,12 +112,12 @@ TEST_F(TestInertia2, CanUpdateSine)
 
     mc::Inertia2 inertia(TIME_CONSTANT_1, TIME_CONSTANT_2);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = sin( t + TIME_STEP );
+        double u = sin(t() + TIME_STEP());
 
         inertia.Update(TIME_STEP, u);
         y = inertia.value();

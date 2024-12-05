@@ -25,6 +25,8 @@
 #include <algorithm>
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
 LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
@@ -35,16 +37,16 @@ LeadLag::LeadLag(double c1, double c2, double c3, double c4, double value)
     , _value(value)
 {}
 
-void LeadLag::Update(double dt, double u)
+void LeadLag::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        double den = 2.0 * _c3 + dt * _c4;
+        double den = 2.0 * _c3 + dt() * _c4;
         double den_inv = 1.0 / den;
 
-        double ca = (2.0 * _c1 + dt  * _c2) * den_inv;
-        double cb = (dt  * _c2 - 2.0 * _c1) * den_inv;
-        double cc = (2.0 * _c3 - dt  * _c4) * den_inv;
+        double ca = (2.0  * _c1 + dt() * _c2) * den_inv;
+        double cb = (dt() * _c2 - 2.0  * _c1) * den_inv;
+        double cc = (2.0  * _c3 - dt() * _c4) * den_inv;
 
         double y_prev = _value;
         _value = u * ca + _u_prev * cb + y_prev * cc;

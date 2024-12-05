@@ -25,14 +25,16 @@
 #include <algorithm>
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
-ZeroOrderHold::ZeroOrderHold(double t_hold, double value)
+ZeroOrderHold::ZeroOrderHold(units::time::second_t t_hold, double value)
     : _t_hold(t_hold)
     , _value(value)
 {}
 
-void ZeroOrderHold::Update(double dt, double u)
+void ZeroOrderHold::Update(units::time::second_t dt, double u)
 {
     _t_prev += dt;
     if ( _t_prev >= _t_hold )

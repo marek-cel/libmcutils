@@ -6,11 +6,13 @@
 
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestLead : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
     static constexpr double TIME_CONSTANT { 0.3 };
 
@@ -48,12 +50,12 @@ TEST_F(TestLead, CanUpdateSine)
 
     mc::Lead lead(TIME_CONSTANT);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = sin(t);
+        double u = sin(t());
 
         lead.Update(TIME_STEP, u);
         y = lead.value();

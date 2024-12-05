@@ -7,11 +7,13 @@
 
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestPID_BackCalc : public ::testing::Test
 {
 protected:
 
-    static constexpr double DT { 0.01 };
+    static constexpr units::time::second_t DT = 0.01_s;
 
     static constexpr double TC { 5.0 };
     static constexpr double KP { 5.0 };
@@ -79,7 +81,7 @@ TEST_F(TestPID_BackCalc, CanUpdate)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     mc::PID_BackCalc pid(KP, KI, KD, MIN, MAX);
@@ -89,7 +91,7 @@ TEST_F(TestPID_BackCalc, CanUpdate)
         double u = (i < 500) ? 0.0 : 1.0;
         double e = u - y;
         pid.Update(DT, e);
-        y = mc::Inertia::Calculate(pid.value(), y, DT, TC);
+        y = mc::Inertia::Calculate(DT, TC, pid.value(), y);
 
         EXPECT_NEAR(y, vals.at(i), 1.0e-1);
 

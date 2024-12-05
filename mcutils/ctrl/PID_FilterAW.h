@@ -24,6 +24,8 @@
 
 #include <cfloat>
 
+#include <units.h>
+
 #include <mcutils/ctrl/PID.h>
 
 namespace mc {
@@ -69,7 +71,7 @@ protected:
 
     double _kaw = 0.0;          ///< filter gain
 
-    void UpdateFinal(double dt, double y_p, double y_i, double y_d) override;
+    void UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d) override;
 };
 
 } // namespace mc

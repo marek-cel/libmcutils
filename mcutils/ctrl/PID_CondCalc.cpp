@@ -24,6 +24,8 @@
 
 #include <mcutils/math/Math.h>
 
+using namespace units::literals;
+
 namespace mc {
 
 PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
@@ -33,7 +35,7 @@ PID_CondCalc::PID_CondCalc(double kp, double ki, double kd,
     , _max(max)
 {}
 
-void PID_CondCalc::UpdateFinal(double, double y_p, double y_i, double y_d)
+void PID_CondCalc::UpdateFinal(units::time::second_t, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
     _value = Satur(_min, _max, y);

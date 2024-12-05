@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_SYSTEM2_H_
 #define MCUTILS_CTRL_SYSTEM2_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,7 +33,7 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  ( c1*s^2 + c2*s + c3 ) / ( c4*s^2 + c5*s + c6 )
- * 
+ *
  * \f[
  * G \left( s \right) =
  * {{ c_1 \cdot s^2 + c_2 \cdot s + c_3 }
@@ -62,7 +64,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
 

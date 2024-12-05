@@ -24,13 +24,15 @@
 
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
-double Inertia::Calculate(double u, double y, double dt, double tc)
+double Inertia::Calculate(units::time::second_t dt, double tc, double u, double y)
 {
     if (tc > 0.0)
     {
-        return y + (1.0 - exp(-dt / tc)) * (u - y);
+        return y + (1.0 - exp(-dt() / tc)) * (u - y);
     }
 
     return u;
@@ -41,11 +43,11 @@ Inertia::Inertia(double tc, double value)
     , _value(value)
 {}
 
-void Inertia::Update(double dt, double u)
+void Inertia::Update(units::time::second_t dt, double u)
 {
-    if ( dt > 0.0 )
+    if ( dt > 0.0_s )
     {
-        _value = Calculate(u, _value, dt, _time_const);
+        _value = Calculate(dt, _time_const, u, _value);
     }
 }
 

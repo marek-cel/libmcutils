@@ -25,6 +25,10 @@
 #include <algorithm>
 #include <cmath>
 
+#include <mcutils/math/Math.h>
+
+using namespace units::literals;
+
 namespace mc {
 
 Oscillator::Oscillator(double omega, double zeta, double value)
@@ -37,19 +41,19 @@ Oscillator::Oscillator(double omega, double zeta, double value)
     , _value(value)
 {}
 
-void Oscillator::Update(double dt, double u)
+void Oscillator::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        double dt2 = dt * dt;
+        double dt2 = Pow<2>(dt());
 
-        double den = 4.0 + 2.0 * _zetomg2*dt + _omega2*dt2;
+        double den = 4.0 + 2.0 * _zetomg2*dt() + _omega2*dt2;
         double den_inv = 1.0 / den;
 
         double ca = _omega2*dt2 * den_inv;
         double cb = 2.0 * ca;
         double cc = cb - 8.0 * den_inv;
-        double cd = ca + (4.0 - 2.0 * _zetomg2 * dt) * den_inv;
+        double cd = ca + (4.0 - 2.0 * _zetomg2 * dt()) * den_inv;
 
         _value = u * ca + _u_prev_1 * cb + _u_prev_2 * ca
                         - _y_prev_1 * cc - _y_prev_2 * cd;

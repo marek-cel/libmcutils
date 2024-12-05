@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_ZEROORDERHOLD_H_
 #define MCUTILS_CTRL_ZEROORDERHOLD_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -38,18 +40,19 @@ public:
      * \param t_hold [s] hold time
      * \param value initial output value
      */
-    explicit ZeroOrderHold(double t_hold = 0.0, double value = 0.0);
+    explicit ZeroOrderHold(units::time::second_t t_hold = units::time::second_t{0.0},
+                           double value = 0.0);
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
 
-    inline double t_hold() const { return _t_hold; }
+    inline units::time::second_t t_hold() const { return _t_hold; }
 
     /**
      * \brief Sets output value
@@ -57,13 +60,13 @@ public:
      */
     void set_value(double value);
 
-    inline void set_t_hold(double t_hold) { _t_hold = t_hold; }
+    inline void set_t_hold(units::time::second_t t_hold) { _t_hold = t_hold; }
 
 private:
 
-    double _t_hold = 0.0;   ///< [s] hold time
-    double _t_prev = 0.0;   ///< [s] time since last update
-    double _value = 0.0;    ///< current value
+    units::time::second_t _t_hold{0.0}; ///< [s] hold time
+    units::time::second_t _t_prev{0.0}; ///< [s] time since last update
+    double _value = 0.0;                ///< current value
 };
 
 } // namespace mc

@@ -7,12 +7,14 @@
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestZeroOrderHold : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
-    static constexpr double TIME_HOLD { 0.5 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
+    static constexpr units::time::second_t TIME_HOLD = 0.5_s;
 
     TestZeroOrderHold() {}
     virtual ~TestZeroOrderHold() {}
@@ -23,20 +25,20 @@ protected:
 TEST_F(TestZeroOrderHold, CanInstantiate)
 {
     mc::ZeroOrderHold zho;
-    EXPECT_DOUBLE_EQ(zho.t_hold(), 0.0);
+    EXPECT_DOUBLE_EQ(zho.t_hold()(), 0.0);
     EXPECT_DOUBLE_EQ(zho.value(), 0.0);
 }
 
 TEST_F(TestZeroOrderHold, CanInstantiateAndSetData)
 {
-    mc::ZeroOrderHold zho(2.0, 3.0);
-    EXPECT_DOUBLE_EQ(zho.t_hold(), 2.0);
+    mc::ZeroOrderHold zho(2.0_s, 3.0);
+    EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
     EXPECT_DOUBLE_EQ(zho.value(), 3.0);
 }
 
 TEST_F(TestZeroOrderHold, CanGetValue)
 {
-    mc::ZeroOrderHold zho(2.0, 3.0);
+    mc::ZeroOrderHold zho(2.0_s, 3.0);
     EXPECT_DOUBLE_EQ(zho.value(), 3.0);
 }
 
@@ -49,16 +51,16 @@ TEST_F(TestZeroOrderHold, CanSetValue)
 
 TEST_F(TestZeroOrderHold, CanGetTimeHold)
 {
-    mc::ZeroOrderHold zho(2.0);
-    EXPECT_DOUBLE_EQ(zho.t_hold(), 2.0);
+    mc::ZeroOrderHold zho(2.0_s);
+    EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
 }
 
 TEST_F(TestZeroOrderHold, CanSetTimeHold)
 {
     mc::ZeroOrderHold zho;
 
-    zho.set_t_hold(2.0);
-    EXPECT_DOUBLE_EQ(zho.t_hold(), 2.0);
+    zho.set_t_hold(2.0_s);
+    EXPECT_DOUBLE_EQ(zho.t_hold()(), 2.0);
 }
 
 TEST_F(TestZeroOrderHold, CanUpdate)
@@ -73,12 +75,12 @@ TEST_F(TestZeroOrderHold, CanUpdate)
 
     mc::ZeroOrderHold zho(TIME_HOLD);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size() - 1; i++ )
     {
-        double u = sin(t + TIME_STEP);
+        double u = sin(t() + TIME_STEP());
 
         zho.Update(TIME_STEP, u);
         y = zho.value();

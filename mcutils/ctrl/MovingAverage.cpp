@@ -32,7 +32,7 @@ MovingAverage::MovingAverage(unsigned int length , double value)
 {}
 
 
-void MovingAverage::Update(double, double u)
+void MovingAverage::Update(units::time::second_t, double u)
 {
     _fifo.push_back(u);
 

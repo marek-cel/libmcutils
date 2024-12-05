@@ -24,6 +24,8 @@
 
 #include <mcutils/math/Math.h>
 
+using namespace units::literals;
+
 namespace mc {
 
 PID_FilterAW::PID_FilterAW(double kp, double ki, double kd,
@@ -34,12 +36,12 @@ PID_FilterAW::PID_FilterAW(double kp, double ki, double kd,
     , _kaw(kaw)
 {}
 
-void PID_FilterAW::UpdateFinal(double dt, double y_p, double y_i, double y_d)
+void PID_FilterAW::UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d)
 {
     double y = y_p + y_i + y_d;
     _value = Satur(_min, _max, y);
     double delta = y - _value;
-    _error_i -= _kaw * delta * dt;
+    _error_i -= _kaw * delta * dt();
 }
 
 } // namespace mc

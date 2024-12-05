@@ -25,6 +25,8 @@
 #include <algorithm>
 #include <cmath>
 
+using namespace units::literals;
+
 namespace mc {
 
 HighPassFilter::HighPassFilter(double omega, double value)
@@ -39,12 +41,12 @@ void HighPassFilter::SetCutoffFreq(double freq)
     _time_const = 1.0 / _omega;
 }
 
-void HighPassFilter::Update(double dt, double u)
+void HighPassFilter::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        double u_dif = (dt > 0.0) ? (u - _u_prev) / dt : 0.0;
-        _value += (1.0 - exp(-dt / _time_const)) * (_time_const * u_dif - _value);
+        double u_dif = (u - _u_prev) / dt();
+        _value += (1.0 - exp(-dt() / _time_const)) * (_time_const * u_dif - _value);
         _u_prev = u;
     }
 }

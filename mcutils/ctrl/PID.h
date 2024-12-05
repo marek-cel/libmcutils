@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_PID_H_
 #define MCUTILS_CTRL_PID_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -77,7 +79,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     /** \brief Resets controller. */
     void Reset();
@@ -112,7 +114,7 @@ public:
      * \param error new error
      * \param dt [s] time step
      */
-    void SetValueAndError(double value, double error, double dt);
+    void SetValueAndError(double value, double error, units::time::second_t dt);
 
     inline double value() const { return _value; }
 
@@ -152,7 +154,7 @@ protected:
     /**
      * TODO
      */
-    virtual void UpdateFinal(double dt, double y_p, double y_i, double y_d);
+    virtual void UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d);
 };
 
 } // namespace mc

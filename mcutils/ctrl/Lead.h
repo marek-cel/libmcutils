@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_LEAD_H_
 #define MCUTILS_CTRL_LEAD_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,7 +33,7 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  Tc*s + 1
- * 
+ *
  * \f[
  * G \left( s \right) = T_c \cdot s + 1
  * \f]
@@ -57,7 +59,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
     inline double time_const() const { return _time_const; }

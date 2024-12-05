@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_OSCILLATOR_H_
 #define MCUTILS_CTRL_OSCILLATOR_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -31,7 +33,7 @@ namespace mc {
  *
  * Transfer function:
  * G(s)  =  omega^2 / ( s^2 + 2*zeta*omega*s + omega^2 )
- * 
+ *
  * \f[
  * G \left( s \right)
  * =
@@ -63,7 +65,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
     inline double omega() const { return _omega; }

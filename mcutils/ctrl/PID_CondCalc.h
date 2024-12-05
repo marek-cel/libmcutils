@@ -24,6 +24,8 @@
 
 #include <cfloat>
 
+#include <units.h>
+
 #include <mcutils/ctrl/PID.h>
 
 namespace mc {
@@ -64,7 +66,7 @@ protected:
 
     double _error_i_prev = 0.0; ///< error integral sum previous value
 
-    void UpdateFinal(double dt, double y_p, double y_i, double y_d) override;
+    void UpdateFinal(units::time::second_t dt, double y_p, double y_i, double y_d) override;
 };
 
 } // namespace mc

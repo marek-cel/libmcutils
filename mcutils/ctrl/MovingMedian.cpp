@@ -32,7 +32,7 @@ MovingMedian::MovingMedian(unsigned int length , double value)
     , _value(value)
 {}
 
-void MovingMedian::Update(double, double u)
+void MovingMedian::Update(units::time::second_t, double u)
 {
     _fifo.push_back(u);
 

@@ -28,6 +28,8 @@
 
 #include <mcutils/math/Math.h>
 
+using namespace units::literals;
+
 namespace mc {
 
 PID::PID(double kp, double ki, double kd)
@@ -36,12 +38,12 @@ PID::PID(double kp, double ki, double kd)
     , _kd(kd)
 {}
 
-void PID::Update(double dt, double u)
+void PID::Update(units::time::second_t dt, double u)
 {
-    if (dt > 0.0)
+    if (dt > 0.0_s)
     {
-        _error_i = _error_i + u*dt;
-        _error_d = (dt > 0.0) ? (u - _error) / dt : 0.0;
+        _error_i = _error_i + u*dt();
+        _error_d = (u - _error) / dt();
         _error = u;
 
         double y_p = _kp * _error;
@@ -82,9 +84,9 @@ void PID::SetAsStandard(double kp, double ti, double td)
     _kd = kp * td;
 }
 
-void PID::SetValueAndError(double value, double error, double dt)
+void PID::SetValueAndError(double value, double error, units::time::second_t dt)
 {
-    _error_d = (dt > 0.0) ? (error - _error) / dt : 0.0;
+    _error_d = (dt > 0.0_s) ? (error - _error) / dt() : 0.0;
     _error_i = fabs(_ki) > 0.0
             ? ((value  - _kp * error - _kd * _error_d) / _ki)
             : 0.0;
@@ -102,7 +104,7 @@ void PID::set_value(double value)
     _value = value;
 }
 
-void PID::UpdateFinal(double, double y_p, double y_i, double y_d)
+void PID::UpdateFinal(units::time::second_t, double y_p, double y_i, double y_d)
 {
     _value = y_p + y_d + y_i;
 }

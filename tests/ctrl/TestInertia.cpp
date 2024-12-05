@@ -7,11 +7,13 @@
 #include <CsvFileReader.h>
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestInertia : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
     static constexpr double TIME_CONSTANT { 2.0 };
 
@@ -31,13 +33,13 @@ TEST_F(TestInertia, CanCalculate)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
         double u = (i < 101) ? 0.0 : 1.0;
-        y = mc::Inertia::Calculate(u, y, TIME_STEP, TIME_CONSTANT);
+        y = mc::Inertia::Calculate(TIME_STEP, TIME_CONSTANT, u, y);
 
         double tolerance = std::max(1.0e-3, 1.0e-3 * vals.at(i));
         EXPECT_NEAR(y, vals.at(i), tolerance) << "Error at index " << i;
@@ -53,7 +55,7 @@ TEST_F(TestInertia, CanCalculateWithZeroTimeConst)
     for ( unsigned int i = 0; i < 200; i++ )
     {
         double u = (i < 101) ? 0.0 : 1.0;
-        y = mc::Inertia::Calculate(u, y, TIME_STEP, 0.0);
+        y = mc::Inertia::Calculate(TIME_STEP, 0.0, u, y);
         EXPECT_NEAR(y, u, 1.0e-3) << "Error at index " << i;
     }
 }
@@ -71,13 +73,13 @@ TEST_F(TestInertia, CanCalculate2)
     EXPECT_GT(y_ref.size(), 0) << "No reference data.";
     EXPECT_EQ(t_ref.size(), y_ref.size()) << "Reference data corrupted.";
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < t_ref.size(); i++ )
     {
         double u = (i == 0) ? 0.0 : 1.0;
-        y = mc::Inertia::Calculate(u, y, TIME_STEP, TIME_CONSTANT);
+        y = mc::Inertia::Calculate(TIME_STEP, TIME_CONSTANT, u, y);
 
         EXPECT_NEAR(y, y_ref.at(i), 1.0e-6) << "Mismatch at time= " << t;
 
@@ -143,7 +145,7 @@ TEST_F(TestInertia, CanUpdateStep)
 
     mc::Inertia inertia(TIME_CONSTANT);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
@@ -175,7 +177,7 @@ TEST_F(TestInertia, CanUpdateStep2)
 
     mc::Inertia inertia(TIME_CONSTANT);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for (unsigned int i = 0; i < t_ref.size(); i++)
@@ -203,12 +205,12 @@ TEST_F(TestInertia, CanUpdateSine)
 
     mc::Inertia inertia(TIME_CONSTANT);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for (unsigned int i = 0; i < vals.size(); i++)
     {
-        double u = sin(t + TIME_STEP);
+        double u = sin(t() + TIME_STEP());
 
         inertia.Update(TIME_STEP, u);
         y = inertia.value();

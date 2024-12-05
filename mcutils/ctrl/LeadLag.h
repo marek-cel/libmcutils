@@ -22,6 +22,8 @@
 #ifndef MCUTILS_CTRL_LEADLAG_H_
 #define MCUTILS_CTRL_LEADLAG_H_
 
+#include <units.h>
+
 #include <mcutils/defs.h>
 
 namespace mc {
@@ -61,7 +63,7 @@ public:
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, double u);
 
     inline double value() const { return _value; }
 
