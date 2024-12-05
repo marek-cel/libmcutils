@@ -88,7 +88,10 @@ public:
      * \brief Sets length of the sliding window
      * \param length length of the sliding window
      */
-    inline void set_length(unsigned int length) { _length = length; }
+    inline void set_length(unsigned int length)
+    {
+        _length = length;
+    }
 
 private:
 

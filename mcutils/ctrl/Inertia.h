@@ -99,7 +99,10 @@ public:
      * \brief Sets output value
      * \param value output value
      */
-    inline void set_value(T value) { _value = value; }
+    inline void set_value(T value)
+    {
+        _value = value;
+    }
 
     /**
      * \brief Sets time constant.

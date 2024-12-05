@@ -98,7 +98,10 @@ public:
      * \brief Sets output value
      * \param value output value
      */
-    inline void set_value(T value) { _value = value; }
+    inline void set_value(T value)
+    {
+        _value = value;
+    }
 
     inline void set_c1(double c1) { _c1 = c1; }
     inline void set_c2(double c2) { _c2 = c2; }

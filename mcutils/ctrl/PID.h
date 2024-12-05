@@ -177,7 +177,10 @@ public:
     inline T error_i() const { return _error_i; }
     inline T error_d() const { return _error_d; }
 
-    inline void set_error(T error) { _error = error; }
+    inline void set_error(T error)
+    {
+        _error = error;
+    }
 
     /**
      * \brief Sets controller output (resets error integral sum).
