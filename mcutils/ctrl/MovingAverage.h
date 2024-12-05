@@ -26,17 +26,18 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Moving average filter class.
+ * \brief Moving average filter class template.
  *
  * ### Refernces:
  * - [Moving average - Wikipedia](https://en.wikipedia.org/wiki/Moving_average)
  */
-class MCUTILSAPI MovingAverage
+template <typename T>
+class MovingAverage
 {
 public:
 
@@ -45,16 +46,41 @@ public:
      * \param length length of the sliding window
      * \param value initial output value
      */
-    explicit MovingAverage(unsigned int length = 1, double value = 0.0);
+    explicit MovingAverage(unsigned int length = 1, T value = T{0})
+        : _length(length)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        _fifo.push_back(u);
 
-    inline double value() const { return _value; }
+        while (_fifo.size() > _length)
+        {
+            _fifo.pop_front();
+        }
+
+        if (_fifo.size() > 1)
+        {
+            T sum = T{0};
+            for ( auto &i : _fifo )
+            {
+                sum += i;
+            }
+            _value = sum / static_cast<double>(_fifo.size());
+        }
+        else
+        {
+            _value = u;
+        }
+    }
+
+    inline T value() const { return _value; }
 
     inline unsigned int length() const { return _length; }
 
@@ -66,9 +92,9 @@ public:
 
 private:
 
-    std::deque<double> _fifo;   ///< previous value fifo queue
+    std::deque<T> _fifo;        ///< previous value fifo queue
     unsigned int _length = 0;   ///< length of the sliding window
-    double _value = 0.0;        ///< current value
+    T _value = T{0};            ///< current value
 };
 
 } // namespace mc

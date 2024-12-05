@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    MovingAverage.cpp
     MovingMedian.cpp
     Oscillator.cpp
     PID.cpp

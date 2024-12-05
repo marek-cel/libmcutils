@@ -3,8 +3,6 @@
 #include <mcutils/ctrl/MovingAverage.h>
 #include <mcutils/math/Random.h>
 
-using namespace units::literals;
-
 class TestMovingAverage : public ::testing::Test
 {
 protected:
@@ -17,21 +15,21 @@ protected:
 
 TEST_F(TestMovingAverage, CanInstantiate)
 {
-    mc::MovingAverage ma;
+    mc::MovingAverage<double> ma;
     EXPECT_EQ(ma.length(), 1);
     EXPECT_NEAR(ma.value(), 0.0, 1.0e-9);
 }
 
 TEST_F(TestMovingAverage, CanInstantiateAndSetData)
 {
-    mc::MovingAverage ma(5, 1.0);
+    mc::MovingAverage<double> ma(5, 1.0);
     EXPECT_EQ(ma.length(), 5);
     EXPECT_NEAR(ma.value(), 1.0, 1.0e-9);
 }
 
 TEST_F(TestMovingAverage, CanUpdate)
 {
-    mc::MovingAverage ma(5);
+    mc::MovingAverage<double> ma(5);
 
     double u[] = { 44.0, 64.0, 18.0, 65.0, 81.0, 28.0, 1.0, 25.0, 41.0, 39.0 };
 
@@ -78,13 +76,13 @@ TEST_F(TestMovingAverage, CanUpdate)
 
 TEST_F(TestMovingAverage, CanSetLenght)
 {
-    mc::MovingAverage ma;
+    mc::MovingAverage<double> ma;
     EXPECT_NO_THROW(ma.set_length(5));
     EXPECT_EQ(ma.length(), 5);
 }
 
 TEST_F(TestMovingAverage, CanGetLenght)
 {
-    mc::MovingAverage ma(7);
+    mc::MovingAverage<double> ma(7);
     EXPECT_EQ(ma.length(), 7);
 }
