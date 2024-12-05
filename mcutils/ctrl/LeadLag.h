@@ -24,12 +24,12 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Lead-lag compensator class.
+ * \brief Lead-lag compensator class template.
  *
  * Transfer function:
  * G(s)  =  ( c1*s + c2 ) / ( c3*s + c4 )
@@ -42,7 +42,8 @@ namespace mc {
  * - Boulet B.: Fundamentals of Signals and Systems, 2006, p.300
  * - Kaczorek T.: Teoria ukladow regulacji automatycznej, 1970, p.228. [in Polish]
  */
-class MCUTILSAPI LeadLag
+template <typename T>
+class LeadLag
 {
 public:
 
@@ -56,16 +57,37 @@ public:
      */
     explicit LeadLag(double c1 = 0.0, double c2 = 1.0,
                      double c3 = 0.0, double c4 = 1.0,
-                     double value = 0.0);
+                     T value = T{0})
+        : _c1(c1)
+        , _c2(c2)
+        , _c3(c3)
+        , _c4(c4)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(units::time::second_t dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if (dt > 0.0_s)
+        {
+            double den = 2.0 * _c3 + dt() * _c4;
+            double den_inv = 1.0 / den;
 
-    inline double value() const { return _value; }
+            double ca = (2.0  * _c1 + dt() * _c2) * den_inv;
+            double cb = (dt() * _c2 - 2.0  * _c1) * den_inv;
+            double cc = (2.0  * _c3 - dt() * _c4) * den_inv;
+
+            double y_prev = _value;
+            _value = u * ca + _u_prev * cb + y_prev * cc;
+            _u_prev = u;
+        }
+    }
+
+    inline T value() const { return _value; }
 
     inline double c1() const { return _c1; }
     inline double c2() const { return _c2; }
@@ -76,7 +98,7 @@ public:
      * \brief Sets output value
      * \param value output value
      */
-    inline void set_value(double value) { _value = value; }
+    inline void set_value(T value) { _value = value; }
 
     inline void set_c1(double c1) { _c1 = c1; }
     inline void set_c2(double c2) { _c2 = c2; }
@@ -90,8 +112,8 @@ private:
     double _c3 = 0.0;       ///< c3 coefficient of the transfer function
     double _c4 = 0.0;       ///< c4 coefficient of the transfer function
 
-    double _u_prev = 0.0;   ///< previous input value
-    double _value = 0.0;    ///< current value
+    T _u_prev = T{0};       ///< previous input value
+    T _value  = T{0};       ///< current value
 };
 
 } // namespace mc

@@ -21,7 +21,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    LeadLag.cpp
     LowPassFilter.cpp
     MovingAverage.cpp
     MovingMedian.cpp
