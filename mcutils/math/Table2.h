@@ -91,7 +91,7 @@ public:
      * \param colValue column key value
      * \return 1-dimensional table
      */
-    Table GetTable(double col_value) const;
+    Table<double,double> GetTable(double col_value) const;
 
     /**
      * \brief Returns table value for the given keys.

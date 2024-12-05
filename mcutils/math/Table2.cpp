@@ -102,7 +102,7 @@ Table2::~Table2()
     DeleteArrays();
 }
 
-Table Table2::GetTable(double col_value) const
+Table<double,double> Table2::GetTable(double col_value) const
 {
     std::vector<double> keyValues;
     std::vector<double> tableData;
@@ -113,7 +113,7 @@ Table Table2::GetTable(double col_value) const
         tableData.push_back(GetValue(_row_values[i], col_value));
     }
 
-    return Table(keyValues, tableData);
+    return Table<double,double>(keyValues, tableData);
 }
 
 double Table2::GetValue(double row_value, double col_value) const
