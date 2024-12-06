@@ -6,13 +6,13 @@ project(mcutils)
 
 ################################################################################
 
-set(BUILD_TESTING OFF CACHE BOOL "Enable testing")
+set(BUILD_LIBMCUTILS_TESTS OFF CACHE BOOL "Build libmcutils tests")
 
 ################################################################################
 
 include(FetchContent)
 
-if (BUILD_TESTING)
+if (BUILD_LIBMCUTILS_TESTS)
     include(CTest)
     include(GoogleTest)
 endif()
@@ -55,7 +55,7 @@ elseif(WIN32)
     add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
-if (BUILD_TESTING)
+if (BUILD_LIBMCUTILS_TESTS)
     add_definitions(-D_GTEST_)
     add_definitions(-D_TESTS_)
 endif()
@@ -71,7 +71,7 @@ include_directories(${CMAKE_BINARY_DIR}/units/include)
 
 ################################################################################
 
-if (BUILD_TESTING)
+if (BUILD_LIBMCUTILS_TESTS)
     enable_testing()
 endif()
 
@@ -109,6 +109,6 @@ add_subdirectory(mcutils)
 
 ################################################################################
 
-if (BUILD_TESTING)
+if (BUILD_LIBMCUTILS_TESTS)
     add_subdirectory(tests)
 endif()
