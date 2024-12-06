@@ -9,13 +9,9 @@ set(HEADERS
     Timer.h
 )
 
-set(SOURCES
-    Timer.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 

@@ -35,7 +35,6 @@ add_subdirectory(time)
 
 add_library(${TARGET_NAME} ${SOURCES}
     $<TARGET_OBJECTS:mcutils-misc>
-    $<TARGET_OBJECTS:mcutils-time>
 )
 
 ################################################################################
