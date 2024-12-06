@@ -24,23 +24,20 @@
 
 #include <cstdint>
 
-#include <mcutils/defs.h>
-#include <mcutils/Types.h>
-
 namespace mc {
 
 /**
  * \brief The date and time struct
  */
-struct MCUTILSAPI DateTime
+struct DateTime
 {
-    UInt16 year   = 0;  ///< year
-    UInt8  month  = 0;  ///< month
-    UInt8  day    = 0;  ///< day
-    UInt8  hour   = 0;  ///< hour
-    UInt8  minute = 0;  ///< minute
-    UInt8  second = 0;  ///< second
-    UInt16 msec   = 0;  ///< millisecond
+    uint16_t year   = 0;    ///< year
+    uint8_t  month  = 0;    ///< month
+    uint8_t  day    = 0;    ///< day
+    uint8_t  hour   = 0;    ///< hour
+    uint8_t  minute = 0;    ///< minute
+    uint8_t  second = 0;    ///< second
+    uint16_t msec   = 0;    ///< millisecond
 };
 
 } // namespace mc
