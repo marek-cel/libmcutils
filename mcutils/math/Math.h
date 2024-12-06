@@ -24,8 +24,6 @@
 
 #include <cmath>
 
-#include <mcutils/defs.h>
-
 namespace mc {
 
 /**
@@ -110,7 +108,7 @@ inline T Sign(const T& val)
  * \param x normalized input value <-1.0;1.0>
  * \return approximated sine wave
  */
-MCUTILSAPI inline float SineWave(const float& x)
+inline float SineWave(const float& x)
 {
     float y = 4.0f * x - 4.0f * x * fabs(x);
     return 0.225f * (y * fabs(y) - y) + y;
@@ -126,8 +124,7 @@ MCUTILSAPI inline float SineWave(const float& x)
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
-MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
-                                    double x)
+inline double Smoothstep(const double& xmin, const double& xmax, double x)
 {
     x = Satur(0.0, 1.0, (x - xmin) / (xmax - xmin));
     return x * x * (3.0 - 2.0 * x);
@@ -141,7 +138,7 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
-MCUTILSAPI inline double Smoothstep(double x)
+inline double Smoothstep(double x)
 {
     return Smoothstep(0.0, 1.0, x);
 }
@@ -158,9 +155,9 @@ MCUTILSAPI inline double Smoothstep(double x)
  * ### Refernces:
  * - [Smoothstep - Wikipedia](https://en.wikipedia.org/wiki/Smoothstep)
  */
-MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
-                                    const double& ymin, const double& ymax,
-                                    double x)
+inline double Smoothstep(const double& xmin, const double& xmax,
+                         const double& ymin, const double& ymax,
+                         double x)
 {
     return Smoothstep(xmin, xmax, x) * (ymax - ymin) + ymin;
 }
@@ -176,7 +173,7 @@ MCUTILSAPI inline double Smoothstep(const double& xmin, const double& xmax,
  * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)
  * - [Algorithms for calculating variance - Wikipedia](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance)
  */
-MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
+inline double StdDev(double sum, double sum_sq, int n)
 {
     double coef = 1.0 / (static_cast<double>(n) - 1.0);
     double s2 = sum_sq * coef - Pow<2>(sum) * coef / static_cast<double>(n);
@@ -193,7 +190,7 @@ MCUTILSAPI inline double StdDev(double sum, double sum_sq, int n)
  * - [Standard deviation - Wikipedia](https://en.wikipedia.org/wiki/Standard_deviation)
  * - [Algorithms for calculating variance - Wikipedia](https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance)
  */
-MCUTILSAPI inline double StdDev(const double x[], int n)
+inline double StdDev(const double x[], int n)
 {
     double sum = 0.0;
     double sum_sq = 0.0;

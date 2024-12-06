@@ -22,6 +22,7 @@
 #ifndef MCUTILS_CTRL_MOVINGMEDIAN_H_
 #define MCUTILS_CTRL_MOVINGMEDIAN_H_
 
+#include <algorithm>
 #include <deque>
 
 #include <units.h>
@@ -73,7 +74,7 @@ public:
 
             if (v.size() % 2 == 0)
             {
-                unsigned int i1 = v.size() / 2;
+                unsigned int i1 = static_cast<unsigned int>(v.size() / 2);
                 unsigned int i2 = i1 - 1;
 
                 _value = (v[i1] + v[i2]) / 2.0;

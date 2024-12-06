@@ -24,14 +24,12 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
-
 using namespace units::literals;
 
 namespace mc {
 
 /** Geodetic coordinates. */
-struct MCUTILSAPI Geo
+struct Geo
 {
     units::angle::radian_t lat = 0.0_rad;   ///< [rad] geodetic latitude (positive north)
     units::angle::radian_t lon = 0.0_rad;   ///< [rad] geodetic longitude (positive east)
