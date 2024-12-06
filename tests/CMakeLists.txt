@@ -83,7 +83,6 @@ set(SOURCES
 add_executable(${TARGET_NAME} ${SOURCES})
 
 set(LIBS
-    mcutils
     GTest::gtest
     GTest::gtest_main
 )

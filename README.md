@@ -1,5 +1,5 @@
 # libmcutil
-**libmcutil** is a vehicle simulation utilities library.
+**libmcutil** is a headers only vehicle simulation utilities library.
 
 ## Modules
 
