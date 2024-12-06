@@ -4,9 +4,20 @@ cmake_minimum_required(VERSION 3.22)
 
 project(mcutils)
 
-include(CTest)
+################################################################################
+
+set(BUILD_TESTING OFF CACHE BOOL "Enable testing")
+
+################################################################################
+
 include(FetchContent)
-include(GoogleTest)
+
+if (BUILD_TESTING)
+    include(CTest)
+    include(GoogleTest)
+endif()
+
+################################################################################
 
 set(MCUTILS_VERSION_MAJOR 1)
 set(MCUTILS_VERSION_MINOR 0)
@@ -60,8 +71,9 @@ include_directories(${CMAKE_BINARY_DIR}/units/include)
 
 ################################################################################
 
-set(BUILD_TESTING ON)
-enable_testing()
+if (BUILD_TESTING)
+    enable_testing()
+endif()
 
 ################################################################################
 

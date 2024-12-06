@@ -15,12 +15,19 @@
         {
             "name": "linux-debug-conf",
             "inherits": "linux-common-conf",
-            "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_TESTING": "ON"
+            }
         },
         {
             "name": "linux-release-conf",
             "inherits": "linux-common-conf",
-            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_TESTING": "ON"
+            }
         },
         {
             "name": "windows-common-conf",
@@ -40,12 +47,18 @@
         {
             "name": "windows-debug-conf",
             "inherits": "windows-common-conf",
-            "cacheVariables": { "CMAKE_BUILD_TYPE": "Debug" }
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_TESTING": "ON"
+            }
         },
         {
             "name": "windows-release-conf",
             "inherits": "windows-common-conf",
-            "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_TESTING": "ON"
+            }
         }
     ],
     "buildPresets": [
