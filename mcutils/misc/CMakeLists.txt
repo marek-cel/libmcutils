@@ -14,7 +14,6 @@ set(HEADERS
 
 set(SOURCES
     Log.cpp
-    String.cpp
     Units.cpp
 )
 
