@@ -13,7 +13,6 @@ endif()
 set(HEADERS
     defs.h
     Result.h
-    Types.h
 )
 
 set(SOURCES
