@@ -13,7 +13,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    Log.cpp
     Units.cpp
 )
 
