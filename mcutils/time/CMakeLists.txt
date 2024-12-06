@@ -10,7 +10,6 @@ set(HEADERS
 )
 
 set(SOURCES
-    ISO8601.cpp
     Timer.cpp
 )
 
