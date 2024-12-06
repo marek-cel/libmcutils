@@ -6,13 +6,9 @@ set(HEADERS
     Endianness.h
 )
 
-set(SOURCES
-    Endianness.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 

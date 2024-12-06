@@ -24,8 +24,14 @@
 
 #include <cstdint>
 
-#include <mcutils/defs.h>
-#include <mcutils/Types.h>
+#ifdef _LINUX_
+#   include <arpa/inet.h>
+#   include <netinet/in.h>
+#endif
+
+#ifdef WIN32
+#   include <winsock2.h>
+#endif
 
 namespace mc {
 namespace Net {
@@ -35,28 +41,51 @@ namespace Net {
  * \param val value expressed in host byte order
  * \return value expressed in network byte order
  */
-MCUTILSAPI UInt16 HostToNet(UInt16 val);
+inline uint16_t HostToNet(uint16_t val)
+{
+    return htons(val);
+}
 
 /**
  * \brief Converts values between host and network byte order.
  * \param val value expressed in host byte order
  * \return value expressed in network byte order
  */
-MCUTILSAPI UInt32 HostToNet(UInt32 val);
+inline uint32_t HostToNet(uint32_t val)
+{
+    return htonl(val);
+}
 
 /**
  * \brief Converts values between host and network byte order.
  * \param val value expressed in host byte order
  * \return value expressed in network byte order
  */
-MCUTILSAPI float HostToNet(float val);
+inline float HostToNet(float val)
+{
+    unsigned int* val_ptr = reinterpret_cast<unsigned int*>(&val);
+    unsigned int temp = val_ptr[0];
+
+    val_ptr[0] = htonl(temp);
+
+    return val;
+}
 
 /**
  * \brief Converts values between host and network byte order.
  * \param val value expressed in host byte order
  * \return value expressed in network byte order
  */
-MCUTILSAPI double HostToNet(double val);
+inline double HostToNet(double val)
+{
+    unsigned int* val_ptr = reinterpret_cast<unsigned int*>(&val);
+    unsigned int temp = val_ptr[0];
+
+    val_ptr[0] = htonl(val_ptr[1]);
+    val_ptr[1] = htonl(temp);
+
+    return val;
+}
 
 } // namespace Net
 } // namespace mc
