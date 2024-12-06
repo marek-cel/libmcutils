@@ -25,8 +25,8 @@
 #include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
-#include <mcutils/math/MatrixNxN.h>
-#include <mcutils/math/VectorN.h>
+#include <mcutils/math/Matrix.h>
+#include <mcutils/math/Vector.h>
 
 namespace mc {
 
@@ -44,12 +44,12 @@ namespace mc {
  * - Baron B., Piatek L.: Metody numeryczne w C++ Builder, 2004, p.34. [in Polish]
  * - [Gaussian elimination - Wikipedia](https://en.wikipedia.org/wiki/Gaussian_elimination)
  */
-template <unsigned int SIZE>
-Result SolveGaussJordan(const MatrixNxN<SIZE>& mtr, const VectorN<SIZE>& rhs,
-                        VectorN<SIZE>* x, double eps = 1.0e-9)
+template <typename TYPE, unsigned int SIZE>
+Result SolveGaussJordan(const MatrixNxN<TYPE, SIZE>& mtr, const VectorN<TYPE, SIZE>& rhs,
+                        VectorN<TYPE, SIZE>* x, double eps = 1.0e-9)
 {
-    MatrixNxN<SIZE> mtr_temp = mtr;
-    VectorN<SIZE>   rhs_temp = rhs;
+    MatrixNxN<TYPE, SIZE> mtr_temp = mtr;
+    VectorN<TYPE, SIZE>   rhs_temp = rhs;
 
     for (unsigned int r = 0; r < SIZE; ++r)
     {

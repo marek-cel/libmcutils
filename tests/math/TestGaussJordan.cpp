@@ -20,7 +20,7 @@ TEST_F(TestGaussJordan, CanSolve)
     // 2x +  y + z = 5
     // 2x + 2y + z = 6
 
-    mc::MatrixNxN<3> m;
+    mc::MatrixNxN<double, 3> m;
     m(0,0) = 1.0;
     m(0,1) = 1.0;
     m(0,2) = 1.0;
@@ -33,12 +33,12 @@ TEST_F(TestGaussJordan, CanSolve)
     m(2,1) = 2.0;
     m(2,2) = 1.0;
 
-    mc::VectorN<3> rhs;
+    mc::VectorN<double, 3> rhs;
     rhs(0) = 4.0;
     rhs(1) = 5.0;
     rhs(2) = 6.0;
 
-    mc::VectorN<3> x;
+    mc::VectorN<double, 3> x;
     mc::SolveGaussJordan(m, rhs, &x);
 
     EXPECT_NEAR(x(0), 1.0, 1.0e-9);
@@ -55,7 +55,7 @@ TEST_F(TestGaussJordan, CanSolveNotInOrder)
     //  x +  y + z = 4
     // 2x +  y + z = 5
 
-    mc::MatrixNxN<3> m;
+    mc::MatrixNxN<double, 3> m;
     m(0,0) = 2.0;
     m(0,1) = 2.0;
     m(0,2) = 1.0;
@@ -68,12 +68,12 @@ TEST_F(TestGaussJordan, CanSolveNotInOrder)
     m(2,1) = 1.0;
     m(2,2) = 1.0;
 
-    mc::VectorN<3> rhs;
+    mc::VectorN<double, 3> rhs;
     rhs(0) = 6.0;
     rhs(1) = 5.0;
     rhs(2) = 4.0;
 
-    mc::VectorN<3> x;
+    mc::VectorN<double, 3> x;
     mc::SolveGaussJordan(m, rhs, &x);
 
     EXPECT_NEAR(x(0), 1.0, 1.0e-9);
@@ -90,7 +90,7 @@ TEST_F(TestGaussJordan, CanSolveWithZerosAtDiagonal)
     //  x     + z = 3
     //  x + y     = 2
 
-    mc::MatrixNxN<3> m;
+    mc::MatrixNxN<double, 3> m;
     m(0,0) = 0.0;
     m(0,1) = 1.0;
     m(0,2) = 1.0;
@@ -103,12 +103,12 @@ TEST_F(TestGaussJordan, CanSolveWithZerosAtDiagonal)
     m(2,1) = 1.0;
     m(2,2) = 0.0;
 
-    mc::VectorN<3> rhs;
+    mc::VectorN<double, 3> rhs;
     rhs(0) = 3.0;
     rhs(1) = 3.0;
     rhs(2) = 2.0;
 
-    mc::VectorN<3> x;
+    mc::VectorN<double, 3> x;
     mc::SolveGaussJordan(m, rhs, &x);
 
     EXPECT_NEAR(x(0), 1.0, 1.0e-9);

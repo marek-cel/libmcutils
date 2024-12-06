@@ -1,4 +1,4 @@
-set(TARGET_NAME misc)
+set(TARGET_NAME mcutils-misc)
 
 ################################################################################
 
@@ -12,21 +12,15 @@ set(HEADERS
     Units.h
 )
 
-set(SOURCES
-    Log.cpp
-    String.cpp
-    Units.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

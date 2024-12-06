@@ -15,12 +15,12 @@ protected:
 
 TEST_F(TestTable, CanInstantiate)
 {
-    mc::Table tab1;
+    mc::Table<double,double> tab1;
     EXPECT_EQ(tab1.size(), 1);
     EXPECT_DOUBLE_EQ(tab1.GetValue(0.0), 0.0);
     EXPECT_DOUBLE_EQ(tab1.GetValue(1.7), 0.0);
 
-    mc::Table tab2(2.2, 1.7);
+    mc::Table<double,double> tab2(2.2, 1.7);
     EXPECT_EQ(tab2.size(), 1);
     EXPECT_DOUBLE_EQ(tab2.GetValue(0.0), 2.2);
     EXPECT_DOUBLE_EQ(tab2.GetValue(1.7), 2.2);
@@ -29,10 +29,10 @@ TEST_F(TestTable, CanInstantiate)
 TEST_F(TestTable, CanInstantiateAndSetDataFromArray)
 {
     // y = x^2 - 1
-    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+    std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data, 6);
+    mc::Table<double,double> tab(key_values, table_data);
 
     for ( unsigned int i = 0; i < tab.size(); ++i )
     {
@@ -46,7 +46,7 @@ TEST_F(TestTable, CanInstantiateAndSetDataFromVector)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     for ( unsigned int i = 0; i < key_values.size(); ++i )
     {
@@ -60,8 +60,8 @@ TEST_F(TestTable, CanInstantiateAndCopy)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
-    mc::Table tab1(tab);
+    mc::Table<double,double> tab(key_values, table_data);
+    mc::Table<double,double> tab1(tab);
 
     for ( unsigned int i = 0; i < key_values.size(); ++i )
     {
@@ -72,10 +72,10 @@ TEST_F(TestTable, CanInstantiateAndCopy)
 TEST_F(TestTable, CanInstantiateAndMove)
 {
     // y = x^2 - 1
-    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+    std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(std::move(mc::Table(key_values, table_data, 6)));
+    mc::Table<double,double> tab(std::move(mc::Table<double,double>(key_values, table_data)));
 
     for ( unsigned int i = 0; i < tab.size(); ++i )
     {
@@ -85,14 +85,14 @@ TEST_F(TestTable, CanInstantiateAndMove)
 
 TEST_F(TestTable, CanGetKeyByIndex)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ(tab0.GetKeyByIndex(0), 0.0);
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetKeyByIndex(0), -2.0);
     EXPECT_DOUBLE_EQ(tab.GetKeyByIndex(1), -1.0);
@@ -104,7 +104,7 @@ TEST_F(TestTable, CanGetKeyByIndex)
 
 TEST_F(TestTable, CanGetKeyByIndexNotInited)
 {
-    mc::Table tab;
+    mc::Table<double,double> tab;
     EXPECT_TRUE(std::isnan(tab.GetKeyByIndex(1)));
 }
 
@@ -114,7 +114,7 @@ TEST_F(TestTable, CanGetSize)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_EQ(tab.size(), 6);
 }
@@ -125,7 +125,7 @@ TEST_F(TestTable, CanGetKeyOfValueMin)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(), 0.0);
 }
@@ -136,7 +136,7 @@ TEST_F(TestTable, CanGetKeyOfValueMinRanged)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMin(-2.0, 0.0), 0.0);
 }
@@ -147,7 +147,7 @@ TEST_F(TestTable, CanGetKeyOfValueMax)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMax(), 3.0);
 }
@@ -158,14 +158,14 @@ TEST_F(TestTable, CanGetKeyOfValueMaxRanged)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetKeyOfValueMax(1.0, 2.0), 2.0);
 }
 
 TEST_F(TestTable, CanGetValue)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ(tab0.GetValue(0.0), 0.0);
     EXPECT_DOUBLE_EQ(tab0.GetValue(1.7), 0.0);
 
@@ -173,16 +173,16 @@ TEST_F(TestTable, CanGetValue)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValue(2.0), 3.0);
 }
 
 TEST_F(TestTable, CanGetValueFromEmptyTable)
 {
-    double key_values[] { 0.0 };
-    double table_data[] { 0.0 };
-    mc::Table tab(key_values, table_data, 0);
+    std::vector<double> key_values;
+    std::vector<double> table_data;
+    mc::Table<double,double> tab(key_values, table_data);
     double x = tab.GetValue(0.0);
     EXPECT_FALSE(x == x); // NaN
 }
@@ -193,7 +193,7 @@ TEST_F(TestTable, CanGetValueAndInterpolate)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValue(2.5), 5.5);
 }
@@ -204,7 +204,7 @@ TEST_F(TestTable, CanGetValueOutOfRange)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValue( -9.0 ), 1.0);
     EXPECT_DOUBLE_EQ(tab.GetValue(  9.0 ), 8.0);
@@ -212,7 +212,7 @@ TEST_F(TestTable, CanGetValueOutOfRange)
 
 TEST_F(TestTable, CanGetValueByIndex)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ(tab0.GetValueByIndex(0), 0.0);
     EXPECT_TRUE(std::isnan(tab0.GetValueByIndex(1)));
 
@@ -220,7 +220,7 @@ TEST_F(TestTable, CanGetValueByIndex)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValueByIndex(0), table_data[0]);
     EXPECT_DOUBLE_EQ(tab.GetValueByIndex(1), table_data[1]);
@@ -232,92 +232,92 @@ TEST_F(TestTable, CanGetValueByIndex)
 
 TEST_F(TestTable, CanGetFirstValue)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ(tab0.GetFirstValue(), 0.0);
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetFirstValue(), table_data[0]);
 }
 
 TEST_F(TestTable, CanGetFirstValueFromEmptyTable)
 {
-    double key_values[] { 0.0 };
-    double table_data[] { 0.0 };
-    mc::Table tab(key_values, table_data, 0);
+    std::vector<double> key_values;
+    std::vector<double> table_data;
+    mc::Table<double,double> tab(key_values, table_data);
     double x = tab.GetFirstValue();
     EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanGetLastValue)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ( tab0.GetLastValue(), 0.0 );
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetLastValue(), table_data[5]);
 }
 
 TEST_F(TestTable, CanGetLastValueFromEmptyTable)
 {
-    double key_values[] { 0.0 };
-    double table_data[] { 0.0 };
-    mc::Table tab(key_values, table_data, 0);
+    std::vector<double> key_values;
+    std::vector<double> table_data;
+    mc::Table<double,double> tab(key_values, table_data);
     double x = tab.GetLastValue();
     EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanGetValueMin)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_DOUBLE_EQ(tab0.GetValueMin(), 0.0);
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValueMin(), -1.0);
 }
 
 TEST_F(TestTable, CanGetValueMinFromEmptyTable)
 {
-    double key_values[] { 0.0 };
-    double table_data[] { 0.0 };
-    mc::Table tab(key_values, table_data, 0);
+    std::vector<double> key_values;
+    std::vector<double> table_data;
+    mc::Table<double,double> tab(key_values, table_data);
     double x = tab.GetValueMin();
     EXPECT_FALSE(x == x); // NaN
 }
 
 TEST_F(TestTable, CanGetValueMax)
 {
-    mc::Table tab0;
+    mc::Table<double,double> tab0;
     EXPECT_NEAR(tab0.GetValueMax(), 0.0, 1.0e-16);
 
     // y = x^2 - 1
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_DOUBLE_EQ(tab.GetValueMax(), 8.0);
 }
 
 TEST_F(TestTable, CanGetValueMaxFromEmptyTable)
 {
-    double key_values[] { 0.0 };
-    double table_data[] { 0.0 };
-    mc::Table tab(key_values, table_data, 0);
+    std::vector<double> key_values;
+    std::vector<double> table_data;
+    mc::Table<double,double> tab(key_values, table_data);
     double x = tab.GetValueMin();
     EXPECT_FALSE(x == x); // NaN
 }
@@ -326,17 +326,17 @@ TEST_F(TestTable, CanValidate)
 {
     std::vector<double> k1 { 0.0,  1.0,  2.0 };
     std::vector<double> v1 { 0.0,  1.0,  2.0 };
-    mc::Table t1(k1, v1);
+    mc::Table<double,double> t1(k1, v1);
     EXPECT_TRUE(t1.IsValid());
 
     std::vector<double> k2 { std::numeric_limits<double>::quiet_NaN(), 1.0, 2.0 };
     std::vector<double> v2 { 0.0, 1.0, 2.0 };
-    mc::Table t2(k2, v2);
+    mc::Table<double,double> t2(k2, v2);
     EXPECT_FALSE(t2.IsValid());
 
     std::vector<double> k3 { 0.0, 1.0, 2.0 };
     std::vector<double> v3 { std::numeric_limits<double>::quiet_NaN(), 1.0, 2.0 };
-    mc::Table t3(k3, v3);
+    mc::Table<double,double> t3(k3, v3);
     EXPECT_FALSE(t3.IsValid());
 }
 
@@ -348,7 +348,7 @@ TEST_F(TestTable, CanMultiplyKeys)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     tab.MultiplyKeys(coef);
 
@@ -369,7 +369,7 @@ TEST_F(TestTable, CanMultiplyValues)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     tab.MultiplyValues(coef);
 
@@ -387,24 +387,9 @@ TEST_F(TestTable, CanConvertToString)
     std::vector<double> key_values { 0.0,  1.0,  2.0 };
     std::vector<double> table_data { 0.0,  2.0,  4.0 };
 
-    mc::Table tab(key_values, table_data);
+    mc::Table<double,double> tab(key_values, table_data);
 
     EXPECT_STREQ(tab.ToString().c_str(), "0\t0\n1\t2\n2\t4\n");
-}
-
-TEST_F(TestTable, CanSetDataFromArray)
-{
-    // y = x^2 - 1
-    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
-
-    mc::Table tab;
-    tab.SetData(key_values, table_data, 6);
-
-    for ( unsigned int i = 0; i < tab.size(); ++i )
-    {
-        EXPECT_DOUBLE_EQ(tab.GetValue(key_values[i]), table_data[i]);
-    }
 }
 
 TEST_F(TestTable, CanSetDataFromVector)
@@ -413,7 +398,7 @@ TEST_F(TestTable, CanSetDataFromVector)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab;
+    mc::Table<double,double> tab;
     tab.SetData(key_values, table_data);
 
     for ( unsigned int i = 0; i < key_values.size(); ++i )
@@ -433,7 +418,7 @@ TEST_F(TestTable, CanSetFromString)
        2.0  4.0
        3.0  9.0
     )##" };
-    mc::Table tab;
+    mc::Table<double,double> tab;
     tab.SetFromString(str);
 
     EXPECT_TRUE(tab.IsValid());
@@ -448,21 +433,21 @@ TEST_F(TestTable, CanSetFromString)
     }
 
     char str2[] = { "lorem ipsum" };
-    mc::Table tab2;
+    mc::Table<double,double> tab2;
     tab2.SetFromString(str2);
     EXPECT_FALSE(tab2.IsValid());
 }
 
 TEST_F(TestTable, CanAdd)
 {
-    mc::Table tab;
+    mc::Table<double,double> tab;
 
-    double k0[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double t1[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 }; // y = x^2 - 1
-    double t2[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 }; // y = x
+    std::vector<double> k0 { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<double> t1 {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 }; // y = x^2 - 1
+    std::vector<double> t2 { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 }; // y = x
 
-    mc::Table tab1(k0, t1, 6);
-    mc::Table tab2(k0, t2, 6);
+    mc::Table<double,double> tab1(k0, t1);
+    mc::Table<double,double> tab2(k0, t2);
 
     tab = tab1 + tab2;
 
@@ -475,7 +460,7 @@ TEST_F(TestTable, CanAdd)
 
 TEST_F(TestTable, CanMultiply)
 {
-    mc::Table tab;
+    mc::Table<double,double> tab;
 
     const double coef = 2.0;
 
@@ -483,7 +468,7 @@ TEST_F(TestTable, CanMultiply)
     std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
     std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table t1(key_values, table_data);
+    mc::Table<double,double> t1(key_values, table_data);
 
     tab = t1 * coef;
 
@@ -499,11 +484,11 @@ TEST_F(TestTable, CanMultiply)
 TEST_F(TestTable, CanAssign)
 {
     // y = x^2 - 1
-    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+    std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab1(key_values, table_data, 6);
-    mc::Table tab;
+    mc::Table<double,double> tab1(key_values, table_data);
+    mc::Table<double,double> tab;
 
     tab = tab1;
 
@@ -516,11 +501,11 @@ TEST_F(TestTable, CanAssign)
 TEST_F(TestTable, CanAssignAndMove)
 {
     // y = x^2 - 1
-    double key_values[] { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    double table_data[] {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+    std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
 
-    mc::Table tab;
-    tab = std::move(mc::Table(key_values, table_data, 6));
+    mc::Table<double,double> tab;
+    tab = std::move(mc::Table<double,double>(key_values, table_data));
 
     for ( unsigned int i = 0; i < tab.size(); ++i )
     {

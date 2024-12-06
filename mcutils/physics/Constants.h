@@ -29,7 +29,6 @@ namespace mc {
  * - The International System of Units (SI) 9th edition, Bureau International des Poids et Mesures, 2019
  * - [The International System of Units: Physical Constants and Conversion Factors, NASA-SP-7012](https://ntrs.nasa.gov/citations/19730018242)
  */
-
 static constexpr double kSpeedOfLight        = 299'792'458.0;   ///< [m/s] speed of light in vacuum
 static constexpr double kGravitationalConst  = 6.6732e-11;      ///< [N*m^2/kg^2] gravitational constant
 static constexpr double kAvogadroConst       = 6.02214076e23;   ///< [1/kmol] Avogadro constant

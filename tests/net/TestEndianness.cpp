@@ -13,8 +13,8 @@ protected:
 
 TEST_F(TestEndianness, CanConvertHostToNetUInt16)
 {
-    mc::UInt16 val_inp = static_cast<unsigned short>(123456U);
-    mc::UInt16 val_out = mc::Net::HostToNet(val_inp);
+    uint16_t val_inp = static_cast<unsigned short>(123456U);
+    uint16_t val_out = mc::Net::HostToNet(val_inp);
 
     char* val_raw_inp = reinterpret_cast<char*>(&val_inp);
     char* val_raw_out = reinterpret_cast<char*>(&val_out);
@@ -25,8 +25,8 @@ TEST_F(TestEndianness, CanConvertHostToNetUInt16)
 
 TEST_F(TestEndianness, CanConvertHostToNetUInt32)
 {
-    mc::UInt32 val_inp = 123456789;
-    mc::UInt32 val_out =  mc::Net::HostToNet(val_inp);
+    uint32_t val_inp = 123456789;
+    uint32_t val_out =  mc::Net::HostToNet(val_inp);
 
     char* val_raw_inp = reinterpret_cast<char*>(&val_inp);
     char* val_raw_out = reinterpret_cast<char*>(&val_out);

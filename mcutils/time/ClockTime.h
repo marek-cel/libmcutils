@@ -24,11 +24,9 @@
 
 #include <ctime>
 
-#include <mcutils/defs.h>
-
 namespace mc {
 
-MCUTILSAPI inline double GetClockTime()
+inline double GetClockTime()
 {
 #   ifdef _LINUX_
     timespec ts;

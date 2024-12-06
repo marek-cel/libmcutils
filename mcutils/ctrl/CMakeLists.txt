@@ -1,4 +1,4 @@
-set(TARGET_NAME ctrl)
+set(TARGET_NAME mcutils-ctrl)
 
 ################################################################################
 
@@ -20,33 +20,15 @@ set(HEADERS
     ZeroOrderHold.h
 )
 
-set(SOURCES
-    HighPassFilter.cpp
-    Inertia.cpp
-    Inertia2.cpp
-    Lead.cpp
-    LeadLag.cpp
-    LowPassFilter.cpp
-    MovingAverage.cpp
-    MovingMedian.cpp
-    Oscillator.cpp
-    PID.cpp
-    PID_BackCalc.cpp
-    PID_CondCalc.cpp
-    PID_FilterAW.cpp
-    System2.cpp
-    ZeroOrderHold.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

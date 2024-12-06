@@ -108,14 +108,14 @@ public:
         // state vector
         // index 0: x
         // index 1: dx/dt
-        mc::Vector s(2);
+        mc::Vector3d s;
 
         // initial conditions
         s(0) = x_0;
         s(1) = x_1;
 
         _integrator->set_fun(
-            [this](const mc::Vector &state)
+            [this](const mc::Vector3d& state)
             {
                 return GetStateDeriv(state);
             }
@@ -258,10 +258,9 @@ public:
      * \param state
      * \param deriv
      */
-    mc::Vector GetStateDeriv(const mc::Vector& state)
+    mc::Vector3d GetStateDeriv(const mc::Vector3d& state)
     {
-        mc::Vector deriv;
-        deriv.Resize(state.size());
+        mc::Vector3d deriv;
         deriv(0) = state(1);
         deriv(1) = -_k * state(0) - _c * state(1);
         return deriv;

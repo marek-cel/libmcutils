@@ -22,19 +22,23 @@
 #ifndef MCUTILS_CTRL_MOVINGMEDIAN_H_
 #define MCUTILS_CTRL_MOVINGMEDIAN_H_
 
+#include <algorithm>
 #include <deque>
 
-#include <mcutils/defs.h>
+#include <units.h>
+
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief Moving median filter class.
+ * \brief Moving median filter class template.
  *
  * ### Refernces:
  * - [Median - Wikipedia](https://en.wikipedia.org/wiki/Median)
  */
-class MCUTILSAPI MovingMedian
+template <typename T>
+class MovingMedian
 {
 public:
 
@@ -43,16 +47,50 @@ public:
      * \param length length of the sliding window
      * \param value initial output value
      */
-    explicit MovingMedian(unsigned int length = 1, double value = 0.0);
+    explicit MovingMedian(unsigned int length = 1, T value = T{0})
+        : _length(length)
+        , _value(value)
+    {}
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        _fifo.push_back(u);
 
-    inline double value() const { return _value; }
+        while (_fifo.size() > _length)
+        {
+            _fifo.pop_front();
+        }
+
+        if (_fifo.size() > 1)
+        {
+            std::vector<T> v(_fifo.size());
+            std::copy(_fifo.begin(), _fifo.end(), v.begin());
+            std::sort(v.begin(), v.end());
+
+            if (v.size() % 2 == 0)
+            {
+                unsigned int i1 = static_cast<unsigned int>(v.size() / 2);
+                unsigned int i2 = i1 - 1;
+
+                _value = (v[i1] + v[i2]) / 2.0;
+            }
+            else
+            {
+                _value = v[v.size() / 2];
+            }
+        }
+        else
+        {
+            _value = u;
+        }
+    }
+
+    inline T value() const { return _value; }
 
     inline unsigned int length() const { return _length; }
 
@@ -60,13 +98,16 @@ public:
      * \brief Sets length of the sliding window
      * \param length length of the sliding window
      */
-    inline void set_length(unsigned int length) { _length = length; }
+    inline void set_length(unsigned int length)
+    {
+        _length = length;
+    }
 
 private:
 
-    std::deque<double> _fifo;   ///< previous value fifo queue
+    std::deque<T> _fifo;        ///< previous value fifo queue
     unsigned int _length = 0;   ///< length of the sliding window
-    double _value = 0.0;        ///< current value
+    T _value = T{0};            ///< current value
 };
 
 } // namespace mc

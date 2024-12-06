@@ -22,27 +22,42 @@
 #ifndef MCUTILS_MATH_DEGMINSEC_H_
 #define MCUTILS_MATH_DEGMINSEC_H_
 
+#include <iomanip>
+#include <sstream>
 #include <string>
 
-#include <mcutils/defs.h>
+#include <units.h>
+
+#include <mcutils/misc/Check.h>
+
+using namespace units::literals;
 
 namespace mc {
 
 /**
  * \brief Degree-Minute-Second representation of angle class.
  */
-class MCUTILSAPI DegMinSec
+class DegMinSec
 {
 public:
 
     /**
      * \brief Constructor.
-     * \param angle [rad] angle
+     * \param angle [deg] angle
      */
-    explicit DegMinSec(double angle = 0.0);
+    explicit DegMinSec(units::angle::degree_t angle = 0_deg)
+    {
+        SetAngle(angle);
+    }
 
     /** \return true if all items are valid */
-    bool IsValid() const;
+    bool IsValid() const
+    {
+        return mc::IsValid(_angle)
+            && mc::IsValid(_deg)
+            && mc::IsValid(_min)
+            && mc::IsValid(_sec);
+    }
 
     inline int    deg() const { return _deg; }
     inline int    min() const { return _min; }
@@ -50,28 +65,59 @@ public:
 
     /**
      * \brief Returns angle expressed in radians.
-     * \return angle expressed in radians
+     * \return angle expressed in degrees
      */
-    inline double GetAngle() const { return _angle; }
+    inline units::angle::degree_t GetAngle() const { return _angle; }
 
     /**
      * \brief Sets angle value.
-     * \param angle [rad] angle
+     * \param angle [deg] angle
      */
-    void SetAngle(double angle);
+    void SetAngle(units::angle::degree_t angle)
+    {
+        _angle = angle;
+
+        double deg_abs = fabs(angle());
+
+        _deg = static_cast<int>(floor(deg_abs));
+        _min = static_cast<int>(floor((deg_abs - _deg) * 60));
+        _sec = (deg_abs - _deg - _min / 60.0) * 3600.0;
+
+        if (angle < 0_deg) _deg *= -1;
+    }
 
     /** \brief Returns string represtation of the angles. */
-    std::string ToString() const;
+    std::string ToString() const
+    {
+        std::stringstream ss;
+
+        ss.setf(std::ios_base::showpoint);
+        ss.setf(std::ios_base::fixed);
+
+        ss << _deg << " deg ";
+        ss << _min << " min ";
+        ss << std::setprecision(2) << _sec << " sec";
+
+        return ss.str();
+    }
 
     /** \brief Equality operator. */
-    bool operator==(const DegMinSec& dms) const;
+    bool operator==(const DegMinSec& dms) const
+    {
+        return ((_deg == dms._deg)
+            && (_min == dms._min)
+            && (_sec == dms._sec));
+    }
 
     /** \brief Inequality operator. */
-    bool operator!=(const DegMinSec& dms) const;
+    bool operator!=(const DegMinSec& dms) const
+    {
+        return !(*this == dms);
+    }
 
 private:
 
-    double _angle = 0.0;    ///< [rad] angle
+    units::angle::degree_t _angle = 0_deg;  ///< [deg] angle
 
     int    _deg = 0;        ///< degree part
     int    _min = 0;        ///< minute part (always greater than or equal to 0)

@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,70 +22,33 @@
 #ifndef MCUTILS_MATH_MATRIX3X3_H_
 #define MCUTILS_MATH_MATRIX3X3_H_
 
-#include <mcutils/defs.h>
-
-#include <mcutils/math/Angles.h>
 #include <mcutils/math/MatrixNxN.h>
-#include <mcutils/math/Quaternion.h>
-#include <mcutils/math/Vector3.h>
-
-template class MCUTILSAPI mc::MatrixMxN<3,3>;
-template class MCUTILSAPI mc::MatrixNxN<3>;
 
 namespace mc {
 
 /**
- * \brief 3 by 3 matrix class.
- *
- * Notice that rotations are considered to be passive (alias) rotations.
- *
- * ### Refernces:
- * - Allerton D.: Principles of Flight Simulation, 2009, p.120
- * - Zipfel P.: Modeling and Simulation of Aerospace Vehicle Dynamics, 2007, p.373
- * - Bociek S., Gruszecki J.: Uklady sterowania automatycznego samolotem, 1999, p.23. [in Polish]
- * - Sibilski K.: Modelowanie i symulacja dynamiki ruchu obiektow latajacych, 2004, p.34. [in Polish]
- * - Matulewski J., et. al.: Grafika fizyka metody numeryczne, 2010, p.529. [in Polish]
- * - [Rotation matrix - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix)
- * - [Euler angles - Wikipedia](https://en.wikipedia.org/wiki/Euler_angles)
- * - [Active and passive transformation - Wikipedia](https://en.wikipedia.org/wiki/Active_and_passive_transformation)
+ * \brief 3 by 3 matrix class template.
  */
-class MCUTILSAPI Matrix3x3 : public MatrixNxN<3>
+template <typename TYPE>
+class Matrix3x3 : public MatrixNxN<TYPE, 3>
 {
 public:
 
     /** \brief Creates identity matrix. */
-    static Matrix3x3 GetIdentityMatrix();
+    static Matrix3x3<TYPE> GetIdentityMatrix()
+    {
+        return Matrix3x3<TYPE>(TYPE{1}, TYPE{0}, TYPE{0},
+                               TYPE{0}, TYPE{1}, TYPE{0},
+                               TYPE{0}, TYPE{0}, TYPE{1});
+    }
 
     /** \brief Constructor. */
-    Matrix3x3(double xx = 0.0, double xy = 0.0, double xz = 0.0,
-              double yx = 0.0, double yy = 0.0, double yz = 0.0,
-              double zx = 0.0, double zy = 0.0, double zz = 0.0);
-
-    /** \brief Creates passive (alias) rotation matrix. */
-    explicit Matrix3x3(const Angles& angl);
-
-    /** \brief Creates passive (alias) rotation matrix. */
-    explicit Matrix3x3(const Quaternion& qtrn);
-
-    inline double xx() const { return _elements[0]; }
-    inline double xy() const { return _elements[1]; }
-    inline double xz() const { return _elements[2]; }
-    inline double yx() const { return _elements[3]; }
-    inline double yy() const { return _elements[4]; }
-    inline double yz() const { return _elements[5]; }
-    inline double zx() const { return _elements[6]; }
-    inline double zy() const { return _elements[7]; }
-    inline double zz() const { return _elements[8]; }
-
-    inline double& xx() { return _elements[0]; }
-    inline double& xy() { return _elements[1]; }
-    inline double& xz() { return _elements[2]; }
-    inline double& yx() { return _elements[3]; }
-    inline double& yy() { return _elements[4]; }
-    inline double& yz() { return _elements[5]; }
-    inline double& zx() { return _elements[6]; }
-    inline double& zy() { return _elements[7]; }
-    inline double& zz() { return _elements[8]; }
+    Matrix3x3(TYPE xx = TYPE{0}, TYPE xy = TYPE{0}, TYPE xz = TYPE{0},
+              TYPE yx = TYPE{0}, TYPE yy = TYPE{0}, TYPE yz = TYPE{0},
+              TYPE zx = TYPE{0}, TYPE zy = TYPE{0}, TYPE zz = TYPE{0})
+    {
+        Set(xx, xy, xz, yx, yy, yz, zx, zy, zz);
+    }
 
     /**
      * \brief Sets items of the matrix.
@@ -99,55 +62,137 @@ public:
      * \param zy item at position zy
      * \param zz item at position zz
      */
-    void Set(double xx, double xy, double xz,
-             double yx, double yy, double yz,
-             double zx, double zy, double zz);
+    void Set(TYPE xx, TYPE xy, TYPE xz,
+             TYPE yx, TYPE yy, TYPE yz,
+             TYPE zx, TYPE zy, TYPE zz)
+    {
+        this->_elements[0] = xx;
+        this->_elements[1] = xy;
+        this->_elements[2] = xz;
+        this->_elements[3] = yx;
+        this->_elements[4] = yy;
+        this->_elements[5] = yz;
+        this->_elements[6] = zx;
+        this->_elements[7] = zy;
+        this->_elements[8] = zz;
+    }
 
-    /** \brief Returns Bryant angles of rotation matrix. */
-    Angles GetAngles() const;
+    inline TYPE xx() const { return this->_elements[0]; }
+    inline TYPE xy() const { return this->_elements[1]; }
+    inline TYPE xz() const { return this->_elements[2]; }
+    inline TYPE yx() const { return this->_elements[3]; }
+    inline TYPE yy() const { return this->_elements[4]; }
+    inline TYPE yz() const { return this->_elements[5]; }
+    inline TYPE zx() const { return this->_elements[6]; }
+    inline TYPE zy() const { return this->_elements[7]; }
+    inline TYPE zz() const { return this->_elements[8]; }
 
-    /** \brief Returns quaternion of rotation matrix. */
-    Quaternion GetQuaternion() const;
+    inline TYPE& xx() { return this->_elements[0]; }
+    inline TYPE& xy() { return this->_elements[1]; }
+    inline TYPE& xz() { return this->_elements[2]; }
+    inline TYPE& yx() { return this->_elements[3]; }
+    inline TYPE& yy() { return this->_elements[4]; }
+    inline TYPE& yz() { return this->_elements[5]; }
+    inline TYPE& zx() { return this->_elements[6]; }
+    inline TYPE& zy() { return this->_elements[7]; }
+    inline TYPE& zz() { return this->_elements[8]; }
 
     /** \brief Returns transposed matrix. */
-    Matrix3x3 GetTransposed() const;
+    Matrix3x3<TYPE> GetTransposed() const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.Transpose();
+        return result;
+    }
 
     /** \brief Addition operator. */
-    Matrix3x3 operator+(const Matrix3x3& matrix) const;
+    Matrix3x3<TYPE> operator+(const Matrix3x3<TYPE>& matrix) const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.Add(matrix);
+        return result;
+    }
 
     /** \brief Negation operator. */
-    Matrix3x3 operator-() const;
+    Matrix3x3<TYPE> operator-() const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.Negate();
+        return result;
+    }
 
     /** \brief Subtraction operator. */
-    Matrix3x3 operator-(const Matrix3x3& matrix) const;
+    Matrix3x3<TYPE> operator-(const Matrix3x3<TYPE>& matrix) const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.Substract(matrix);
+        return result;
+    }
 
-    /** \brief Multiplication operator (by scalar). */
-    Matrix3x3 operator*(double value) const;
+    /** \brief Multiplication operator (by number). */
+    Matrix3x3<TYPE> operator*(double value) const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.MultiplyByValue(value);
+        return result;
+    }
 
     /** \brief Multiplication operator (by matrix). */
-    Matrix3x3 operator*(const Matrix3x3& matrix) const;
+    Matrix3x3<TYPE> operator*(const Matrix3x3<TYPE>& matrix) const
+    {
+        Matrix3x3<TYPE> result;
+        this->MultiplyByMatrix(matrix, &result);
+        return result;
+    }
 
     /** \brief Multiplication operator (by vector). */
-    Vector3 operator*(const Vector3& vect) const;
+    Vector3<TYPE> operator*(const Vector3<TYPE>& vect) const
+    {
+        Vector3<TYPE> result;
+        this->MultiplyByVector(vect, &result);
+        return result;
+    }
 
-    /** \brief Division operator (by scalar). */
-    Matrix3x3 operator/(double value) const;
+    /** \brief Division operator (by number). */
+    Matrix3x3<TYPE> operator/(double value) const
+    {
+        Matrix3x3<TYPE> result(*this);
+        result.DivideByValue(value);
+        return result;
+    }
 
     /** \brief Unary addition operator. */
-    Matrix3x3& operator+=(const Matrix3x3& matrix);
+    Matrix3x3<TYPE>& operator+=(const Matrix3x3<TYPE>& matrix)
+    {
+        this->Add(matrix);
+        return *this;
+    }
 
     /** \brief Unary subtraction operator. */
-    Matrix3x3& operator-=(const Matrix3x3& matrix);
+    Matrix3x3<TYPE>& operator-=(const Matrix3x3<TYPE>& matrix)
+    {
+        this->Substract(matrix);
+        return *this;
+    }
 
-    /** \brief Unary multiplication operator (by scalar). */
-    Matrix3x3& operator*=(double value);
+    /** \brief Unary multiplication operator (by number). */
+    Matrix3x3<TYPE>& operator*=(double value)
+    {
+        this->MultiplyByValue(value);
+        return *this;
+    }
 
-    /** \brief Unary division operator (by scalar). */
-    Matrix3x3& operator/=(double value);
+    /** \brief Unary division operator (by number). */
+    Matrix3x3<TYPE>& operator/=(double value)
+    {
+        this->DivideByValue(value);
+        return *this;
+    }
 };
 
-/** \brief Multiplication operator (by scalar). */
-inline Matrix3x3 operator*(double value, const Matrix3x3& matrix)
+/** \brief Multiplication operator (by number). */
+template <typename TYPE>
+inline Matrix3x3<TYPE> operator*(double value, const Matrix3x3<TYPE>& matrix)
 {
     return matrix * value;
 }

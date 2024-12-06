@@ -1,4 +1,4 @@
-set(TARGET_NAME geo)
+set(TARGET_NAME mcutils-geo)
 
 ################################################################################
 
@@ -11,21 +11,15 @@ set(HEADERS
     WGS84.h
 )
 
-set(SOURCES
-    ECEF.cpp
-    Ellipsoid.cpp
-    Mercator.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

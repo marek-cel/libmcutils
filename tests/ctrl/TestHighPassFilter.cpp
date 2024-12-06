@@ -10,9 +10,8 @@ class TestHighPassFilter : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
-
-    static constexpr double OMEGA { 2.0 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
+    static constexpr units::angular_velocity::radians_per_second_t OMEGA = 2.0_rad_per_s;
 
     TestHighPassFilter() {}
     virtual ~TestHighPassFilter() {}
@@ -22,23 +21,23 @@ protected:
 
 TEST_F(TestHighPassFilter, CanInstantiate)
 {
-    mc::HighPassFilter hpf;
-    EXPECT_DOUBLE_EQ(hpf.omega(), 1.0);
+    mc::HighPassFilter<double> hpf;
+    EXPECT_DOUBLE_EQ(hpf.omega()(), 2.0 * M_PI);
     EXPECT_DOUBLE_EQ(hpf.value(), 0.0);
 }
 
 TEST_F(TestHighPassFilter, CanInstantiateAndSetData)
 {
-    mc::HighPassFilter hpf(2.0, 3.0);
-    EXPECT_DOUBLE_EQ(hpf.omega(), 2.0);
+    mc::HighPassFilter<double> hpf(2.0_rad_per_s, 3.0);
+    EXPECT_DOUBLE_EQ(hpf.omega()(), 2.0);
     EXPECT_DOUBLE_EQ(hpf.value(), 3.0);
 }
 
 TEST_F(TestHighPassFilter, CanSetCutoffFreq)
 {
-    mc::HighPassFilter hpf;
-    hpf.SetCutoffFreq(1.0);
-    EXPECT_DOUBLE_EQ(hpf.omega(), 2.0 * M_PI);
+    mc::HighPassFilter<double> hpf;
+    hpf.SetCutoffFreq(2.0_Hz);
+    EXPECT_DOUBLE_EQ(hpf.omega()(), 4.0 * M_PI);
 }
 
 TEST_F(TestHighPassFilter, CanUpdateStep)
@@ -51,9 +50,9 @@ TEST_F(TestHighPassFilter, CanUpdateStep)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::HighPassFilter hpf(OMEGA);
+    mc::HighPassFilter<double> hpf(OMEGA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for (unsigned int i = 0; i < vals.size(); i++)
@@ -80,14 +79,14 @@ TEST_F(TestHighPassFilter, CanUpdateSine)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::HighPassFilter hpf(OMEGA);
+    mc::HighPassFilter<double> hpf(OMEGA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = sin(t);
+        double u = sin(t());
 
         hpf.Update(TIME_STEP, u);
         y = hpf.value();
@@ -101,26 +100,26 @@ TEST_F(TestHighPassFilter, CanUpdateSine)
 
 TEST_F(TestHighPassFilter, CanGetOmega)
 {
-    mc::HighPassFilter hpf(2.0, 3.0);
-    EXPECT_DOUBLE_EQ(hpf.omega(), 2.0);
+    mc::HighPassFilter<double> hpf(2.0_rad_per_s, 3.0);
+    EXPECT_DOUBLE_EQ(hpf.omega()(), 2.0);
 }
 
 TEST_F(TestHighPassFilter, CanGetValue)
 {
-    mc::HighPassFilter hpf(2.0, 3.0);
+    mc::HighPassFilter<double> hpf(2.0_rad_per_s, 3.0);
     EXPECT_DOUBLE_EQ(hpf.value(), 3.0);
 }
 
 TEST_F(TestHighPassFilter, CanSetOmega)
 {
-    mc::HighPassFilter hpf;
-    hpf.set_omega(2.0);
-    EXPECT_DOUBLE_EQ(hpf.omega(), 2.0);
+    mc::HighPassFilter<double> hpf;
+    hpf.set_omega(2.0_rad_per_s);
+    EXPECT_DOUBLE_EQ(hpf.omega()(), 2.0);
 }
 
 TEST_F(TestHighPassFilter, CanSetValue)
 {
-    mc::HighPassFilter hpf;
+    mc::HighPassFilter<double> hpf;
     hpf.set_value(3.0);
     EXPECT_DOUBLE_EQ(hpf.value(), 3.0);
 }

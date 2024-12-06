@@ -22,7 +22,6 @@
 #ifndef MCUTILS_ASTRO_GREGORIANCAL_H_
 #define MCUTILS_ASTRO_GREGORIANCAL_H_
 
-#include <mcutils/defs.h>
 #include <mcutils/time/DateTime.h>
 
 namespace mc {
@@ -33,18 +32,51 @@ namespace mc {
  * ### Refernces:
  * - [Gregorian calendar - Wikipedia](https://en.wikipedia.org/wiki/Gregorian_calendar)
  */
-class MCUTILSAPI GregorianCal
+class GregorianCal
 {
 public:
 
-    static double IsLeapYear(unsigned short year);
+    static double IsLeapYear(unsigned short year)
+    {
+        if ( year % 4 == 0 )
+        {
+            if ( year % 100 != 0 || year % 400 == 0 )
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     inline static double GetDaysInYear(unsigned short year)
     {
         return IsLeapYear(year) ? 366.0 : 365.0;
     }
 
-    static double GetDayOfYear(const DateTime& dt);
+    static double GetDayOfYear(const DateTime& dt)
+    {
+        double doy = 0.0;
+
+        if ( dt.month >  1 ) doy += 31;
+        if ( dt.month >  2 ) doy += IsLeapYear(dt.year) ? 29 : 28;
+        if ( dt.month >  3 ) doy += 31;
+        if ( dt.month >  4 ) doy += 30;
+        if ( dt.month >  5 ) doy += 31;
+        if ( dt.month >  6 ) doy += 30;
+        if ( dt.month >  7 ) doy += 31;
+        if ( dt.month >  8 ) doy += 31;
+        if ( dt.month >  9 ) doy += 30;
+        if ( dt.month > 10 ) doy += 31;
+        if ( dt.month > 11 ) doy += 30;
+
+        doy += static_cast<double>(dt.day - 1);
+        doy += static_cast<double>(dt.hour)   / 24.0;
+        doy += static_cast<double>(dt.minute) / (24.0 * 60.0);
+        doy += static_cast<double>(dt.second) / (24.0 * 60.0 * 60.0);
+
+        return doy;
+    }
 };
 
 } // namespace mc

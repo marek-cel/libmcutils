@@ -6,13 +6,14 @@
 
 #include <XcosBinFileReader.h>
 
+using namespace units::literals;
+
 class TestLowPassFilter : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
-
-    static constexpr double OMEGA { 0.5 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
+    static constexpr units::angular_velocity::radians_per_second_t OMEGA = 0.5_rad_per_s;
 
     TestLowPassFilter() {}
     virtual ~TestLowPassFilter() {}
@@ -22,25 +23,25 @@ protected:
 
 TEST_F(TestLowPassFilter, CanInstantiate)
 {
-    mc::LowPassFilter lpf;
+    mc::LowPassFilter<double> lpf;
 
-    EXPECT_DOUBLE_EQ(lpf.omega(), 1.0);
+    EXPECT_DOUBLE_EQ(lpf.omega()(), 2.0 * M_PI);
     EXPECT_DOUBLE_EQ(lpf.value(), 0.0);
 }
 
 TEST_F(TestLowPassFilter, CanInstantiateAndSetData)
 {
-    mc::LowPassFilter lpf(2.0, 3.0);
+    mc::LowPassFilter<double> lpf(2.0_rad_per_s, 3.0);
 
-    EXPECT_DOUBLE_EQ(lpf.omega(), 2.0);
+    EXPECT_DOUBLE_EQ(lpf.omega()(), 2.0);
     EXPECT_DOUBLE_EQ(lpf.value(), 3.0);
 }
 
 TEST_F(TestLowPassFilter, CanSetCutoffFreq)
 {
-    mc::LowPassFilter lpf;
-    lpf.SetCutoffFreq(1.0);
-    EXPECT_DOUBLE_EQ(lpf.omega(), 2.0 * M_PI);
+    mc::LowPassFilter<double> lpf;
+    lpf.SetCutoffFreq(1.0_Hz);
+    EXPECT_DOUBLE_EQ(lpf.omega()(), 2.0 * M_PI);
 }
 
 TEST_F(TestLowPassFilter, CanUpdateStep)
@@ -53,9 +54,9 @@ TEST_F(TestLowPassFilter, CanUpdateStep)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::LowPassFilter lpf(OMEGA);
+    mc::LowPassFilter<double> lpf(OMEGA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
@@ -82,14 +83,14 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::LowPassFilter lpf(OMEGA);
+    mc::LowPassFilter<double> lpf(OMEGA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
     {
-        double u = sin(t);
+        double u = sin(t());
 
         lpf.Update(TIME_STEP, u);
         y = lpf.value();
@@ -103,26 +104,26 @@ TEST_F(TestLowPassFilter, CanUpdateSine)
 
 TEST_F(TestLowPassFilter, CanGetOmega)
 {
-    mc::LowPassFilter lpf(2.0, 3.0);
-    EXPECT_DOUBLE_EQ(lpf.omega(), 2.0);
+    mc::LowPassFilter<double> lpf(2.0_rad_per_s, 3.0);
+    EXPECT_DOUBLE_EQ(lpf.omega()(), 2.0);
 }
 
 TEST_F(TestLowPassFilter, CanGetValue)
 {
-    mc::LowPassFilter lpf(2.0, 3.0);
+    mc::LowPassFilter<double> lpf(2.0_rad_per_s, 3.0);
     EXPECT_DOUBLE_EQ(lpf.value(), 3.0);
 }
 
 TEST_F(TestLowPassFilter, CanSetOmega)
 {
-    mc::LowPassFilter lpf;
-    lpf.set_omega(2.0);
-    EXPECT_DOUBLE_EQ(lpf.omega(), 2.0);
+    mc::LowPassFilter<double> lpf;
+    lpf.set_omega(2.0_rad_per_s);
+    EXPECT_DOUBLE_EQ(lpf.omega()(), 2.0);
 }
 
 TEST_F(TestLowPassFilter, CanSetValue)
 {
-    mc::LowPassFilter lpf;
+    mc::LowPassFilter<double> lpf;
     lpf.set_value(3.0);
     EXPECT_DOUBLE_EQ(lpf.value(), 3.0);
 }

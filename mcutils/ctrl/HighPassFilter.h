@@ -22,25 +22,28 @@
 #ifndef MCUTILS_CTRL_HIGHPASSFILTER_H_
 #define MCUTILS_CTRL_HIGHPASSFILTER_H_
 
-#include <mcutils/defs.h>
+#include <units.h>
+
+using namespace units::literals;
 
 namespace mc {
 
 /**
- * \brief High-pass filter (HPF) or washout filter class.
+ * \brief High-pass filter (HPF) or washout filter class template.
  *
  * Transfer function:
  * G(s)  =  s / ( s + omega )  =  ( s / omega ) / ( s/omega + 1 )
- * 
+ *
  * \f[
  * G\left(s\right)
- * = 
+ * =
  * {s \over {s + \omega}}
- * = 
+ * =
  * {{s \over \omega} \over {\left({s \over \omega} + 1\right)}}
  * \f]
  */
-class MCUTILSAPI HighPassFilter
+template <typename T>
+class HighPassFilter
 {
 public:
 
@@ -49,44 +52,68 @@ public:
      * \param omega [rad/s] cutoff angular frequency
      * \param value initial output value
      */
-    explicit HighPassFilter(double omega = 1.0, double value = 0.0 );
+    explicit HighPassFilter(units::angular_velocity::radians_per_second_t omega = 360_deg_per_s,
+                            T value = T{0})
+        : _omega(omega)
+        , _time_const(1.0_rad / _omega)
+        , _value(value)
+    {}
 
     /**
      * \brief Sets cutoff frequency.
      * \param freq [Hz] cutoff frequency
      */
-    void SetCutoffFreq(double freq);
+    void SetCutoffFreq(units::frequency::hertz_t freq)
+    {
+        _omega = 360_deg * units::math::max(0.0_Hz, freq);
+        _time_const = 1.0_rad / _omega;
+    }
 
     /**
      * \brief Updates element due to time step and input value
      * \param dt [s] time step
      * \param u input value
      */
-    void Update(double dt, double u);
+    void Update(units::time::second_t dt, T u)
+    {
+        if (dt > 0.0_s)
+        {
+            auto u_dif = (u - _u_prev) / dt;
+            auto delta = (1.0 - exp(-dt() / _time_const())) * (_time_const * u_dif - _value);
+            _value += static_cast<T>(delta);
+            _u_prev = u;
+        }
+    }
 
-    inline double value() const { return _value; }
-    inline double omega() const { return _omega; }
-
-    /**
-     * \brief Sets output value
-     * \param value output value
-     */
-    inline void set_value(double value) { _value = value; }
+    inline T value() const { return _value; }
+    inline units::angular_velocity::radians_per_second_t omega() const { return _omega; }
 
     /**
      * \brief Sets cutoff angular frequency.
      * \param omega [rad/s] cutoff angular frequency
      */
-    void set_omega(double omega);
+    void set_omega(units::angular_velocity::radians_per_second_t omega)
+    {
+        _omega = units::math::max(0.0_rad_per_s, omega);
+        _time_const = 1.0_rad / _omega;
+    }
+
+    /**
+     * \brief Sets output value
+     * \param value output value
+     */
+    inline void set_value(T value)
+    {
+        _value = value;
+    }
 
 private:
 
-    double _omega = 1.0;        ///< [rad/s] cutoff angular frequency
-    double _time_const = 1.0;   ///< time constant
+    units::angular_velocity::radians_per_second_t _omega = 1.0_rad_per_s;   ///< [rad/s] cutoff angular frequency
+    units::time::second_t _time_const = 1.0_s;  ///< time constant
 
-    double _u_prev = 0.0;       ///< previous input value
-
-    double _value = 0.0;        ///< current value
+    T _u_prev = T{0};           ///< previous input value
+    T _value  = T{0};           ///< current value
 };
 
 } // namespace mc

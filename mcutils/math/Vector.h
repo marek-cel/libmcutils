@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,164 +22,38 @@
 #ifndef MCUTILS_MATH_VECTOR_H_
 #define MCUTILS_MATH_VECTOR_H_
 
-#include <mcutils/defs.h>
+#include <mcutils/units_utils.h>
 
-#include <string>
+#include <mcutils/math/VectorN.h>
+#include <mcutils/math/Vector3.h>
+
+#include <mcutils/math/UVector3.h>
 
 namespace mc {
 
-/**
- * \brief Variable length dynamic allocated vector class.
- */
-class MCUTILSAPI Vector
-{
-public:
+using Vector3d = Vector3<double>;
+using Vector4d = VectorN<double, 4>;
+using Vector6d = VectorN<double, 6>;
 
-    /** \brief Copy constructor. */
-    Vector(const Vector& vect);
+using Vector3_m  = UVector3<units::length::meter_t>;
+using Vector3_ft = UVector3<units::length::foot_t>;
+using Vector3_in = UVector3<units::length::inch_t>;
+using Vector3_cm = UVector3<units::length::centimeter_t>;
 
-    /** \brief Move constructor. */
-    Vector(Vector&& vect);
+using Vector3_mps = UVector3<units::velocity::meters_per_second_t>;
+using Vector3_kmh = UVector3<units::velocity::kilometers_per_hour_t>;
+using Vector3_kts = UVector3<units::velocity::knot_t>;
+using Vector3_fps = UVector3<units::velocity::feet_per_second_t>;
+using Vector3_fpm = UVector3<units::velocity::feet_per_minute_t>;
 
-    /** \brief Destructor. */
-    virtual ~Vector();
+using Vector3_rad_per_s = UVector3<units::angular_velocity::radians_per_second_t>;
+using Vector3_deg_per_s = UVector3<units::angular_velocity::degrees_per_second_t>;
 
-    /**
-     * \brief Constructor.
-     * \param size vector size
-     */
-    explicit Vector(unsigned int size = 0);
+using Vector3_N   = UVector3<units::force::newton_t>;
+using Vector3_lbf = UVector3<units::force::pound_t>;
 
-    /** \return TRUE if all elements are valid */
-    bool IsValid() const;
-
-    /** \return vector length */
-    double GetLength() const;
-
-    /** \brief This function normalizes vector. */
-    void Normalize();
-
-    /**
-     * \brief Gets vector element of given indicies.
-     * This function is bound-checked which may affect performance.
-     * Returns NaN if index is out of range.
-     * \return vector element of given indicies, NaN if index is out of range
-     */
-    double GetElement(unsigned int index) const;
-
-    /**
-     * \brief Puts vector elements into given array.
-     * \param elements output array
-     */
-    void PutIntoArray(double elements[]) const;
-
-    /**
-     * \brief Sets vector element of given indicies.
-     * This function is bound-checked which may affect performance.
-     */
-    void SetElement(unsigned int index, double val);
-
-    /**
-     * \brief Sets vector elements from array.
-     * \param elements input array
-     */
-    void SetFromArray(const double elements[]);
-
-    /** \brief Returns string representation of the vector. */
-    std::string ToString() const;
-
-    /** \brief Resizes vector if needed. */
-    void Resize(unsigned int size);
-
-    /** \brief Sets all vector elements to zero. */
-    void Zeroize();
-
-    unsigned int size() const { return _size; }
-
-    /**
-     * \brief Elements accessor.
-     * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked elements accessor use GetElement(int) or
-     * SetElement(int,double) functions.
-     */
-    inline double operator()(unsigned int index) const
-    {
-        return _elements[index];
-    }
-
-    /**
-     * \brief Elements accessor.
-     * Please notice that this operator is NOT bound-checked.
-     * If you want bound-checked elements accessor use GetElement(int) or
-     * SetElement(int,double) functions.
-     */
-    inline double& operator()(unsigned int index)
-    {
-        return _elements[index];
-    }
-
-    /** \brief Assignment operator. */
-    Vector& operator=(const Vector& vect);
-
-    /** \brief Move assignment operator. */
-    Vector& operator=(Vector&& vect);
-
-    /** \brief Addition operator. */
-    Vector operator+(const Vector& vect) const;
-
-    /** \brief Negation operator. */
-    Vector operator-() const;
-
-    /** \brief Subtraction operator. */
-    Vector operator-(const Vector& vect) const;
-
-    /** \brief Multiplication operator (by scalar). */
-    Vector operator*(double value) const;
-
-    /** \brief Division operator (by scalar). */
-    Vector operator/(double value) const;
-
-    /** \brief Unary addition operator. */
-    Vector& operator+=(const Vector& vect);
-
-    /** \brief Unary subtraction operator. */
-    Vector& operator-=(const Vector& vect);
-
-    /** \brief Unary multiplication operator (by scalar). */
-    Vector& operator*=(double value);
-
-    /** \brief Unary division operator (by scalar). */
-    Vector& operator/=(double value);
-
-protected:
-
-    unsigned int _size = 0;         ///< vector size
-    double* _elements = nullptr;    ///< vector elements
-
-    /** \brief Adds vector. */
-    void Add(const Vector& vect);
-
-    /** \brief Negates (inverts) vector. */
-    void Negate();
-
-    /** \brief Substracts vector. */
-    void Substract(const Vector& vect);
-
-    /** \brief Multiplies by value. */
-    void MultiplyByValue(double value);
-
-    /** \brief Divides by value. */
-    void DivideByValue(double value);
-
-    /** \brief Deletes elements array. */
-    void DeleteElementsArray();
-};
-
-/** \brief Multiplication operator (by scalar). */
-inline Vector operator*(double val, const Vector& vect)
-{
-    return vect * val;
-}
+using Vector3_Nm   = UVector3<units::torque::newton_meter_t>;
+using Vector3_ftlb = UVector3<units::torque::foot_pound_t>;
 
 } // namespace mc
 

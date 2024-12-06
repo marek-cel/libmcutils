@@ -1,4 +1,4 @@
-set(TARGET_NAME net)
+set(TARGET_NAME mcutils-net)
 
 ################################################################################
 
@@ -6,19 +6,15 @@ set(HEADERS
     Endianness.h
 )
 
-set(SOURCES
-    Endianness.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

@@ -19,37 +19,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  ******************************************************************************/
+#ifndef MCUTILS_UNITS_UTILS_H_
+#define MCUTILS_UNITS_UTILS_H_
 
-#include <mcutils/time/Timer.h>
+#include <units.h>
 
-#include <thread>
+#include <mcutils/defs.h>
 
-using namespace std::chrono_literals;
+namespace units {
 
-namespace mc {
+	//------------------------------
+	//	VELOCITY UNITS
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_VELOCITY_UNITS)
+	UNIT_ADD(velocity, feet_per_minute, feet_per_minute, fpm, compound_unit<length::feet, inverse<time::minutes>>)
+#   endif
 
-void Timer::Start(double interval)
-{
-    _interval = std::chrono::nanoseconds(static_cast<int>(interval * 1.0e9));
-    _last_time = std::chrono::steady_clock::now();
-}
+} // namespace units
 
-double Timer::WaitForTimeout()
-{
-    std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
-    std::chrono::nanoseconds elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
-    if (elapsed < _interval)
-    {
-        std::chrono::nanoseconds duration = _interval - elapsed;
-        std::this_thread::sleep_for(duration);
-    }
+#endif // MCUTILS_TYPES_H_
 
-    now = std::chrono::steady_clock::now();
-    elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
-
-    _last_time = now;
-
-    return static_cast<double>(elapsed.count()) * 1.0e-9;
-}
-
-} // namespace mc

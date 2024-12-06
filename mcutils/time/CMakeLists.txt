@@ -1,4 +1,4 @@
-set(TARGET_NAME time)
+set(TARGET_NAME mcutils-time)
 
 ################################################################################
 
@@ -9,14 +9,9 @@ set(HEADERS
     Timer.h
 )
 
-set(SOURCES
-    ISO8601.cpp
-    Timer.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 

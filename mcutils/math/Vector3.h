@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,111 +22,170 @@
 #ifndef MCUTILS_MATH_VECTOR3_H_
 #define MCUTILS_MATH_VECTOR3_H_
 
-#include <mcutils/defs.h>
-
 #include <mcutils/math/VectorN.h>
-
-template class MCUTILSAPI mc::VectorN<3>;
 
 namespace mc {
 
 /**
  * \brief 3 elements column vector class.
+ * \tparam TYPE vector item type
  */
-class MCUTILSAPI Vector3 : public VectorN<3>
+template <typename TYPE>
+class Vector3 : public VectorN<TYPE, 3>
 {
 public:
 
-    static const Vector3 kEx;   ///< standard basis x-axis unit vector
-    static const Vector3 kEy;   ///< standard basis y-axis unit vector
-    static const Vector3 kEz;   ///< standard basis z-axis unit vector
-
-    inline static const Vector3& ex() { return kEx; }
-    inline static const Vector3& ey() { return kEy; }
-    inline static const Vector3& ez() { return kEz; }
-
-    inline static const Vector3& i() { return kEx; }
-    inline static const Vector3& j() { return kEy; }
-    inline static const Vector3& k() { return kEz; }
+    inline static const Vector3<TYPE> i() { return Vector3<TYPE>(TYPE{1}, TYPE{0}, TYPE{0}); }
+    inline static const Vector3<TYPE> j() { return Vector3<TYPE>(TYPE{0}, TYPE{1}, TYPE{0}); }
+    inline static const Vector3<TYPE> k() { return Vector3<TYPE>(TYPE{0}, TYPE{0}, TYPE{1}); }
 
     /** \brief Constructor. */
-    explicit Vector3(double x = 0.0, double y = 0.0, double z = 0.0);
+    explicit Vector3(TYPE x = TYPE{0}, TYPE y = TYPE{0}, TYPE z = TYPE{0})
+    {
+        Set(x, y, z);
+    }
 
     /** \return length of projection of vector on XY-plane */
-    inline double GetLengthXY() const { return sqrt( x()*x() + y()*y() ); }
+    inline TYPE GetLengthXY() const { return sqrt( x()*x() + y()*y() ); }
 
     /** \return length of projection of vector on XZ-plane */
-    inline double GetLengthXZ() const { return sqrt( x()*x() + z()*z() ); }
+    inline TYPE GetLengthXZ() const { return sqrt( x()*x() + z()*z() ); }
 
     /** \return length of projection of vector on YZ-plane */
-    inline double GetLengthYZ() const { return sqrt( y()*y() + z()*z() ); }
+    inline TYPE GetLengthYZ() const { return sqrt( y()*y() + z()*z() ); }
 
     /** \return normalized vector */
-    Vector3 GetNormalized() const;
+    Vector3<TYPE> GetNormalized() const
+    {
+        Vector3<TYPE> result(*this);
+        result.Normalize();
+        return result;
+    }
 
     /** \brief Sets vector values. */
-    void Set(double x, double y, double z);
+    void Set(TYPE x, TYPE y, TYPE z)
+    {
+        this->_elements[0] = x;
+        this->_elements[1] = y;
+        this->_elements[2] = z;
+    }
 
-    inline double  x() const { return _elements[0]; }
-    inline double  y() const { return _elements[1]; }
-    inline double  z() const { return _elements[2]; }
-    inline double& x()       { return _elements[0]; }
-    inline double& y()       { return _elements[1]; }
-    inline double& z()       { return _elements[2]; }
+    inline TYPE  x() const { return this->_elements[0]; }
+    inline TYPE  y() const { return this->_elements[1]; }
+    inline TYPE  z() const { return this->_elements[2]; }
+    inline TYPE& x()       { return this->_elements[0]; }
+    inline TYPE& y()       { return this->_elements[1]; }
+    inline TYPE& z()       { return this->_elements[2]; }
 
-    inline double  p() const { return _elements[0]; }
-    inline double  q() const { return _elements[1]; }
-    inline double  r() const { return _elements[2]; }
-    inline double& p()       { return _elements[0]; }
-    inline double& q()       { return _elements[1]; }
-    inline double& r()       { return _elements[2]; }
+    inline TYPE  p() const { return this->_elements[0]; }
+    inline TYPE  q() const { return this->_elements[1]; }
+    inline TYPE  r() const { return this->_elements[2]; }
+    inline TYPE& p()       { return this->_elements[0]; }
+    inline TYPE& q()       { return this->_elements[1]; }
+    inline TYPE& r()       { return this->_elements[2]; }
 
-    inline double  u() const { return _elements[0]; }
-    inline double  v() const { return _elements[1]; }
-    inline double  w() const { return _elements[2]; }
-    inline double& u()       { return _elements[0]; }
-    inline double& v()       { return _elements[1]; }
-    inline double& w()       { return _elements[2]; }
+    inline TYPE  u() const { return this->_elements[0]; }
+    inline TYPE  v() const { return this->_elements[1]; }
+    inline TYPE  w() const { return this->_elements[2]; }
+    inline TYPE& u()       { return this->_elements[0]; }
+    inline TYPE& v()       { return this->_elements[1]; }
+    inline TYPE& w()       { return this->_elements[2]; }
 
     /** \brief Addition operator. */
-    Vector3 operator+(const Vector3& vect) const;
+    Vector3<TYPE> operator+(const Vector3<TYPE>& vect) const
+    {
+        Vector3<TYPE> result(*this);
+        result.Add(vect);
+        return result;
+    }
 
     /** \brief Negation operator. */
-    Vector3 operator-() const;
+    Vector3<TYPE> operator-() const
+    {
+        Vector3<TYPE> result(*this);
+        result.Negate();
+        return result;
+    }
 
     /** \brief Subtraction operator. */
-    Vector3 operator-(const Vector3& vect) const;
+    Vector3<TYPE> operator-(const Vector3<TYPE>& vect) const
+    {
+        Vector3<TYPE> result(*this);
+        result.Substract(vect);
+        return result;
+    }
 
-    /** \brief Multiplication operator (by scalar). */
-    Vector3 operator*(double value) const;
+    /** \brief Multiplication operator (by number). */
+    Vector3<TYPE> operator*(double value) const
+    {
+        Vector3<TYPE> result(*this);
+        result.MultiplyByValue(value);
+        return result;
+    }
 
-    /** \brief Division operator (by scalar). */
-    Vector3 operator/(double value) const;
+    /** \brief Division operator (by number). */
+    Vector3<TYPE> operator/(double value) const
+    {
+        Vector3<TYPE> result(*this);
+        result.DivideByValue(value);
+        return result;
+    }
 
     /** \brief Dot product operator. */
-    double operator*(const Vector3& vect) const;
+    TYPE operator*(const Vector3<TYPE>& vect) const
+    {
+        return x()*vect.x() + y()*vect.y() + z()*vect.z();
+    }
 
     /** \brief Cross product operator. */
-    Vector3 operator%(const Vector3& vect) const;
+    Vector3<TYPE> operator%(const Vector3<TYPE>& vect) const
+    {
+        Vector3<TYPE> result;
+        result.x() = y() * vect.z() - z() * vect.y();
+        result.y() = z() * vect.x() - x() * vect.z();
+        result.z() = x() * vect.y() - y() * vect.x();
+        return result;
+    }
 
     /** \brief Unary addition operator. */
-    Vector3& operator+=(const Vector3& vect);
+    Vector3<TYPE>& operator+=(const Vector3<TYPE>& vect)
+    {
+        this->Add(vect);
+        return *this;
+    }
 
     /** \brief Unary subtraction operator. */
-    Vector3& operator-=(const Vector3& vect);
+    Vector3<TYPE>& operator-=(const Vector3<TYPE>& vect)
+    {
+        this->Substract(vect);
+        return *this;
+    }
 
-    /** \brief Unary multiplication operator (by scalar). */
-    Vector3& operator*=(double value);
+    /** \brief Unary multiplication operator (by number). */
+    Vector3<TYPE>& operator*=(double value)
+    {
+        this->MultiplyByValue(value);
+        return *this;
+    }
 
-    /** \brief Unary division operator (by scalar). */
-    Vector3& operator/=(double value);
+    /** \brief Unary division operator (by number). */
+    Vector3<TYPE>& operator/=(double value)
+    {
+        this->DivideByValue(value);
+        return *this;
+    }
 
     /** \brief Unary cross product operator. */
-    Vector3& operator%=(const Vector3& vect);
+    Vector3<TYPE>& operator%=(const Vector3<TYPE>& vect)
+    {
+        *this = *this % vect;
+        return *this;
+    }
 };
 
-/** \brief Multiplication operator (by scalar). */
-inline Vector3 operator*(double value, const Vector3& vect)
+/** \brief Multiplication operator (by number). */
+template <typename TYPE>
+inline Vector3<TYPE> operator*(double value, const Vector3<TYPE>& vect)
 {
     return vect * value;
 }

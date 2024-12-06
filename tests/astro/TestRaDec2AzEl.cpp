@@ -22,14 +22,14 @@ TEST_F(TestRaDec2AzEl, CanComputeAzElFromRaDecLatAndLST1)
     mc::AzEl azel;
     mc::RaDec radec;
 
-    radec.ra = 5.623280496934751;
-    radec.dec = -0.2513744984225895;
+    radec.ra = 5.623280496934751_rad;
+    radec.dec = -0.2513744984225895_rad;
 
-    double lat = mc::Units::deg2rad(52.2296756);
-    double lst = 5.956121595178459;
+    units::angle::radian_t lat = 52.2296756_deg;
+    units::angle::radian_t lst = 5.956121595178459_rad;
 
     azel = mc::RaDec2AzEl(radec, lat, lst);
 
-    EXPECT_NEAR(azel.az, 3.4882750511169434, 1.0e-3);
-    EXPECT_NEAR(azel.el, 0.3733336627483368, 1.0e-3);
+    EXPECT_NEAR(azel.az(), 3.4882750511169434, 1.0e-3);
+    EXPECT_NEAR(azel.el(), 0.3733336627483368, 1.0e-3);
 }

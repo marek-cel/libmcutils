@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,14 +22,9 @@
 #ifndef MCUTILS_MATH_VECTORN_H_
 #define MCUTILS_MATH_VECTORN_H_
 
-#include <cmath>
-#include <cstring>
 #include <limits>
 #include <sstream>
-#include <string>
-#include <utility>
-
-#include <mcutils/defs.h>
+#include <vector>
 
 #include <mcutils/misc/Check.h>
 #include <mcutils/misc/String.h>
@@ -42,9 +37,10 @@ namespace mc {
  * to specify vector size. Such an approach does not allow to perform
  * mathematical operation between vectors which sizes do not match each other
  * as they are of different types.
+ * \tparam TYPE vector item type
  * \tparam SIZE vector size
  */
-template <unsigned int SIZE>
+template <typename TYPE, unsigned int SIZE>
 class VectorN
 {
 public:
@@ -58,9 +54,9 @@ public:
     }
 
     /** \return vector length squared */
-    double GetLength2() const
+    TYPE GetLength2() const
     {
-        double length2 = 0.0;
+        TYPE length2 = 0.0;
         for (unsigned int i = 0; i < kSize; ++i)
         {
             length2 += _elements[i] * _elements[i];
@@ -69,7 +65,7 @@ public:
     }
 
     /** \return vector length */
-    double GetLength() const
+    TYPE GetLength() const
     {
         return sqrt(GetLength2());
     }
@@ -89,50 +85,24 @@ public:
     }
 
     /**
-     * \brief Gets vector item of given indicies.
-     * This function is bound-checked which may affect performance.
-     * Returns NaN if index is out of range.
-     * \param index item index
-     * \return vector item of given indicies.
+     * \brief Gets std::vector of vector elements.
+     * \return vector of vector elements
      */
-    double GetElement(unsigned int index) const
+    std::vector<TYPE> GetVector() const
     {
-        if (index < kSize)
-        {
-            return _elements[index];
-        }
-
-        return std::numeric_limits<double>::quiet_NaN();
+        std::vector<TYPE> elements(kSize);
+        std::copy(_elements, _elements + kSize, elements.begin());
+        return elements;
     }
 
     /**
-     * \brief Puts vector elements into given array.
-     * \param elements output array
+     * \brief Sets vector elements from std::vector.
+     * \param elements input std::vector of vector elements
      */
-    void PutIntoArray(double elements[]) const
+    void SetFromVector(const std::vector<TYPE>& elements)
     {
-        std::memcpy(elements, _elements, sizeof(_elements));
-    }
-
-    /**
-     * \brief Sets vector element of given indicies.
-     * This function is bound-checked which may affect performance.
-     */
-    void SetElement(unsigned int index, double val)
-    {
-        if (index < kSize)
-        {
-            _elements[index] = val;
-        }
-    }
-
-    /**
-     * \brief Sets vector elements from array.
-     * \param elements input array
-     */
-    void SetFromArray(const double elements[])
-    {
-        std::memcpy(_elements, elements, sizeof(_elements));
+        assert(elements.size() == kSize);
+        std::copy(elements.begin(), elements.end(), _elements);
     }
 
     /**
@@ -142,24 +112,27 @@ public:
      */
     void SetFromString(const char* str)
     {
-        double elements[kSize];
+        std::vector<TYPE> elements(kSize);
 
         for (unsigned int i = 0; i < kSize; ++i)
         {
-             elements[i] = std::numeric_limits<double>::quiet_NaN();
             _elements[i] = std::numeric_limits<double>::quiet_NaN();
         }
 
         std::stringstream ss(String::StripSpaces(str));
         bool valid = true;
-
-        for (unsigned int i = 0; i < kSize; ++i)
+        for (unsigned int i = 0; i < kSize && valid; ++i)
         {
-            ss >> elements[i];
-            valid &= mc::IsValid(elements[i]);
+            double temp = std::numeric_limits<double>::quiet_NaN();
+            ss >> temp;
+            valid &= mc::IsValid(temp);
+            elements[i] = TYPE{temp};
         }
 
-        if (valid) SetFromArray(elements);
+        if (valid)
+        {
+            SetFromVector(elements);
+        }
     }
 
     /** \brief Swaps vector rows. */
@@ -188,7 +161,7 @@ public:
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
-            _elements[i] = 0.0;
+            _elements[i] = TYPE{0};
         }
     }
 
@@ -198,7 +171,7 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double operator()(unsigned int index) const
+    inline TYPE operator()(unsigned int index) const
     {
         return _elements[index];
     }
@@ -209,45 +182,45 @@ public:
      * If you want bound-checked item accessor use getItem(int) or
      * setItem(int,double) functions.
      */
-    inline double& operator()(unsigned int index)
+    inline TYPE& operator()(unsigned int index)
     {
         return _elements[index];
     }
 
     /** \brief Addition operator. */
-    VectorN<SIZE> operator+(const VectorN<SIZE>& vect) const
+    VectorN<TYPE, SIZE> operator+(const VectorN<TYPE, SIZE>& vect) const
     {
-        VectorN<SIZE> result(*this);
+        VectorN<TYPE, SIZE> result(*this);
         result.Add(vect);
         return result;
     }
 
     /** \brief Negation operator. */
-    VectorN<SIZE> operator-() const
+    VectorN<TYPE, SIZE> operator-() const
     {
-        VectorN<SIZE> result(*this);
+        VectorN<TYPE, SIZE> result(*this);
         result.Negate();
         return result;
     }
 
     /** \brief Subtraction operator. */
-    VectorN<SIZE> operator-(const VectorN<SIZE>& vect) const
+    VectorN<TYPE, SIZE> operator-(const VectorN<TYPE, SIZE>& vect) const
     {
-        VectorN<SIZE> result(*this);
+        VectorN<TYPE, SIZE> result(*this);
         result.Substract(vect);
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
-    VectorN<SIZE> operator*(double value) const
+    /** \brief Multiplication operator (by number). */
+    VectorN<TYPE, SIZE> operator*(double value) const
     {
-        VectorN<SIZE> result(*this);
+        VectorN<TYPE, SIZE> result(*this);
         result.MultiplyByValue(value);
         return result;
     }
 
     /** \brief Dot product operator. */
-    double operator*(const VectorN<SIZE>& vect) const
+    double operator*(const VectorN<TYPE, SIZE>& vect) const
     {
         double result = 0.0;
         for (unsigned int i = 0; i < kSize; ++i)
@@ -257,44 +230,44 @@ public:
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
-    VectorN<SIZE> operator/(double val) const
+    /** \brief Division operator (by number). */
+    VectorN<TYPE, SIZE> operator/(double val) const
     {
-        VectorN<SIZE> result(*this);
+        VectorN<TYPE, SIZE> result(*this);
         result.DivideByValue(val);
         return result;
     }
 
     /** \brief Unary addition operator. */
-    VectorN<SIZE>& operator+=(const VectorN<SIZE>& vect)
+    VectorN<TYPE, SIZE>& operator+=(const VectorN<TYPE, SIZE>& vect)
     {
         Add(vect);
         return *this;
     }
 
     /** \brief Unary subtraction operator. */
-    VectorN<SIZE>& operator-=(const VectorN<SIZE>& vect)
+    VectorN<TYPE, SIZE>& operator-=(const VectorN<TYPE, SIZE>& vect)
     {
         Substract(vect);
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
-    VectorN<SIZE>& operator*=(double value)
+    /** \brief Unary multiplication operator (by number). */
+    VectorN<TYPE, SIZE>& operator*=(double value)
     {
         MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
-    VectorN<SIZE>& operator/=(double value)
+    /** \brief Unary division operator (by number). */
+    VectorN<TYPE, SIZE>& operator/=(double value)
     {
         DivideByValue(value);
         return *this;
     }
 
     /** \brief Equality operator. */
-    bool operator==(const VectorN<SIZE>& vect) const
+    bool operator==(const VectorN<TYPE, SIZE>& vect) const
     {
         bool result = true;
         for (unsigned int i = 0; i < kSize; ++i)
@@ -305,17 +278,17 @@ public:
     }
 
     /** \brief Inequality operator. */
-    bool operator!=(const VectorN<SIZE>& vect) const
+    bool operator!=(const VectorN<TYPE, SIZE>& vect) const
     {
         return !(*this == vect);
     }
 
 protected:
 
-    double _elements[kSize] = { 0.0 };  ///< vector items
+    TYPE _elements[kSize] = { TYPE{0} };    ///< vector items
 
     /** \brief Adds vector. */
-    void Add(const VectorN<SIZE>& vect)
+    void Add(const VectorN<TYPE, SIZE>& vect)
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
@@ -333,7 +306,7 @@ protected:
     }
 
     /** \brief Substracts vector. */
-    void Substract(const VectorN<SIZE>& vect)
+    void Substract(const VectorN<TYPE, SIZE>& vect)
     {
         for (unsigned int i = 0; i < kSize; ++i)
         {
@@ -360,6 +333,13 @@ protected:
         }
     }
 };
+
+/** \brief Multiplication operator (by number). */
+template <typename TYPE, unsigned int SIZE>
+inline VectorN<TYPE, SIZE> operator*(double value, const VectorN<TYPE, SIZE>& vect)
+{
+    return vect * value;
+}
 
 } // namespace mc
 

@@ -1,4 +1,4 @@
-set(TARGET_NAME astro)
+set(TARGET_NAME mcutils-astro)
 
 ################################################################################
 
@@ -10,22 +10,15 @@ set(HEADERS
     Utils.h
 )
 
-set(SOURCES
-    Ephemeris.cpp
-    GregorianCal.cpp
-    JulianDate.cpp
-    Utils.cpp
-)
-
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

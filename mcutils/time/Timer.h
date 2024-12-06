@@ -23,15 +23,14 @@
 #define MCUTILS_TIME_TIMER_H_
 
 #include <chrono>
-
-#include <mcutils/defs.h>
+#include <thread>
 
 namespace mc {
 
 /**
  * \brief Timer class.
  */
-class MCUTILSAPI Timer
+class Timer
 {
 public:
 
@@ -39,13 +38,33 @@ public:
      * \brief Start the timer.
      * \param interval timer interval expressed in seconds.
      */
-    void Start(double interval);
+    void Start(double interval)
+    {
+        _interval = std::chrono::nanoseconds(static_cast<int>(interval * 1.0e9));
+        _last_time = std::chrono::steady_clock::now();
+    }
 
     /**
      * \brief Wait for the timeout.
      * \return elapsed time since the last timeout expressed in seconds.
      */
-    double WaitForTimeout();
+    double WaitForTimeout()
+    {
+        std::chrono::time_point<std::chrono::steady_clock> now = std::chrono::steady_clock::now();
+        std::chrono::nanoseconds elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
+        if (elapsed < _interval)
+        {
+            std::chrono::nanoseconds duration = _interval - elapsed;
+            std::this_thread::sleep_for(duration);
+        }
+
+        now = std::chrono::steady_clock::now();
+        elapsed = std::chrono::duration_cast<std::chrono::nanoseconds>(now - _last_time);
+
+        _last_time = now;
+
+        return static_cast<double>(elapsed.count()) * 1.0e-9;
+    }
 
 private:
 

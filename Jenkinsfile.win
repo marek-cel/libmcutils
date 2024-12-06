@@ -7,7 +7,7 @@ pipeline {
 
     triggers {
         cron('0 1 * * 6')
-        pollSCM('0 1 * * *')
+        pollSCM('0 2 * * *')
     }
 
     options {
@@ -17,8 +17,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'cmake . -DCMAKE_BUILD_TYPE=Release -B build'
-                bat 'cmake --build build --config Release -j 4'
+                bat 'cmake . --preset=windows-release-conf -DCMAKE_TOOLCHAIN_FILE=%VCPKG_ROOT%/scripts/buildsystems/vcpkg.cmake -B build'
+                bat 'cmake --build --preset=windows-release-build'
             }
         }
         stage('Test') {

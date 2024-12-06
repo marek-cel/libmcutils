@@ -24,19 +24,22 @@
 
 #include <cfloat>
 
+#include <units.h>
+
 #include <mcutils/ctrl/PID.h>
+#include <mcutils/math/Math.h>
 
 namespace mc {
 
 /**
- * \brief Proportional-Integral-Derivative controller with conditional 
- * calculation anti-windup method.
+ * \brief PID controller with conditional calculation anti-windup method.
  *
  * ### Refernces:
  * - Anirban G., Vinod J.: Anti-windup Schemes for Proportional Integral and Proportional Resonant Controller, 2010
  * - [Integral windup - Wikipedia](https://en.wikipedia.org/wiki/Integral_windup)
  */
-class MCUTILSAPI PID_CondCalc : public PID
+template <typename T>
+class PID_CondCalc : public PID<T>
 {
 public:
 
@@ -48,23 +51,33 @@ public:
      * \param min minimal value for saturation
      * \param max maximal value for saturation
      */
-    PID_CondCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
-                 double min = DBL_MIN, double max = DBL_MAX);
+    explicit PID_CondCalc(double kp = 1.0, double ki = 0.0, double kd = 0.0,
+                          T min = T{DBL_MIN}, T max = {DBL_MAX})
+        : PID<T>(kp, ki, kd)
+        , _min(min)
+        , _max(max)
+    {}
 
-    double min() const { return _min; }
-    double max() const { return _max; }
+    T min() const { return _min; }
+    T max() const { return _max; }
 
-    inline void set_min(double min) { _min = min; }
-    inline void set_max(double max) { _max = max; }
+    inline void set_min(T min) { _min = min; }
+    inline void set_max(T max) { _max = max; }
 
 protected:
 
-    double _min = DBL_MIN;      ///< minimum output value
-    double _max = DBL_MAX;      ///< maximum output value
+    T _min = T{DBL_MIN};    ///< minimum output value
+    T _max = T{DBL_MAX};    ///< maximum output value
 
-    double _error_i_prev = 0.0; ///< error integral sum previous value
+    double _error_i_prev = T{0};    ///< error integral sum previous value
 
-    void UpdateFinal(double dt, double y_p, double y_i, double y_d) override;
+    void UpdateFinal(units::time::second_t dt, T y_p, T y_i, T y_d) override
+    {
+        T y = y_p + y_i + y_d;
+        this->_value = Satur(_min, _max, y);
+        if (y != this->_value) this->_error_i = _error_i_prev;
+        _error_i_prev = this->_error_i;
+    }
 };
 
 } // namespace mc

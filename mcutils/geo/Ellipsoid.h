@@ -22,7 +22,7 @@
 #ifndef MCUTILS_GEO_ELLIPSOID_H_
 #define MCUTILS_GEO_ELLIPSOID_H_
 
-#include <mcutils/defs.h>
+#include <cmath>
 
 namespace mc {
 
@@ -32,7 +32,7 @@ namespace mc {
  * ### Refernces:
  * - [Ellipsoid - Wikipedia](https://en.wikipedia.org/wiki/Ellipsoid)
  */
-class MCUTILSAPI Ellipsoid
+class Ellipsoid
 {
 public:
 
@@ -41,7 +41,20 @@ public:
      * \param a [m] equatorial radius
      * \param f [-] ellipsoid flattening
      */
-    Ellipsoid(double a, double f);
+    Ellipsoid(double a, double f)
+    {
+        _a = a;
+        _f = f;
+
+        _b   = _a - _f*_a;
+        _r1  = (2.0 * _a + _b) / 3.0;
+        _a2  = _a * _a;
+        _b2  = _b * _b;
+        _e2  = 1.0 - _b2 / _a2;
+        _e   = sqrt(_e2);
+        _ep2 = _a2 / _b2 - 1.0;
+        _ep  = sqrt(_ep2);
+    }
 
     inline double a   () const { return _a;   }
     inline double f   () const { return _f;   }

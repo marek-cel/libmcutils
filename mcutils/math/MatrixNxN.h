@@ -1,5 +1,5 @@
 /****************************************************************************//*
- * Copyright (C) 2022 Marek M. Cel
+ * Copyright (C) 2024 Marek M. Cel
  *
  * Permission is hereby granted, free of charge, to any person obtaining
  * a copy of this software and associated documentation files (the "Software"),
@@ -22,113 +22,122 @@
 #ifndef MCUTILS_MATH_MATRIXNXN_H_
 #define MCUTILS_MATH_MATRIXNXN_H_
 
-#include <mcutils/defs.h>
-
 #include <mcutils/math/MatrixMxN.h>
 
 namespace mc {
 
 /**
  * \brief Square matrix class template.
- * \tparam N number of rows and columns
+ * \tparam TYPE matrix element type
+ * \tparam SIZE number of rows and columns
  */
-template <unsigned int N>
-class MatrixNxN : public MatrixMxN<N,N>
+template <typename TYPE, unsigned int SIZE>
+class MatrixNxN : public MatrixMxN<TYPE, SIZE, SIZE>
 {
 public:
+
+    /** \brief Creates identity matrix. */
+    static MatrixNxN<TYPE, SIZE> GetIdentityMatrix()
+    {
+        MatrixNxN<TYPE, SIZE> result;
+        for (unsigned int i = 0; i < SIZE; ++i)
+        {
+            result(i,i) = 1.0;
+        }
+        return result;
+    }
 
     /** \brief Transposes matrix. */
     void Transpose()
     {
-        MatrixNxN<N> temp(*this);
-        for (unsigned int r = 0; r < N; ++r)
+        for (unsigned int r = 0; r < SIZE; ++r)
         {
-            for (unsigned int c = 0; c < N; ++c)
+            for (unsigned int c = r + 1; c < SIZE; ++c)
             {
-                this->_elements[c*N + r] = temp._elements[r*N + c];
+                std::swap(this->_elements[c*SIZE + r], this->_elements[r*SIZE + c]);
             }
         }
     }
 
     /** \brief Returns transposed matrix. */
-    MatrixNxN<N> GetTransposed() const
+    MatrixNxN<TYPE, SIZE> GetTransposed() const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.Transpose();
         return result;
     }
 
     /** \brief Addition operator. */
-    MatrixNxN<N> operator+(const MatrixNxN<N>& matrix) const
+    MatrixNxN<TYPE, SIZE> operator+(const MatrixNxN<TYPE, SIZE>& matrix) const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.Add(matrix);
         return result;
     }
 
     /** \brief Negation operator. */
-    MatrixNxN<N> operator-() const
+    MatrixNxN<TYPE, SIZE> operator-() const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.Negate();
         return result;
     }
 
     /** \brief Subtraction operator. */
-    MatrixNxN<N> operator-(const MatrixNxN<N>& matrix) const
+    MatrixNxN<TYPE, SIZE> operator-(const MatrixNxN<TYPE, SIZE>& matrix) const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.Substract(matrix);
         return result;
     }
 
-    /** \brief Multiplication operator (by scalar). */
-    MatrixNxN<N> operator*(double value) const
+    /** \brief Multiplication operator (by number). */
+    MatrixNxN<TYPE, SIZE> operator*(double value) const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.MultiplyByValue(value);
         return result;
     }
 
     /** \brief Multiplication operator (by matrix). */
-    MatrixNxN<N> operator*(const MatrixNxN<N>& matrix) const
+    MatrixNxN<TYPE, SIZE> operator*(const MatrixNxN<TYPE, SIZE>& matrix) const
     {
-        MatrixNxN<N> result( *this );
+        MatrixNxN<TYPE, SIZE> result( *this );
         MultiplyByMatrix(matrix, &result);
         return result;
     }
 
-    /** \brief Division operator (by scalar). */
-    MatrixNxN<N> operator/(double value) const
+    /** \brief Division operator (by number). */
+    MatrixNxN<TYPE, SIZE> operator/(double value) const
     {
-        MatrixNxN<N> result(*this);
+        MatrixNxN<TYPE, SIZE> result(*this);
         result.DivideByValue(value);
         return result;
     }
 
     /** \brief Unary addition operator. */
-    MatrixNxN<N>& operator+=(const MatrixNxN<N>& matrix)
+    MatrixNxN<TYPE, SIZE>& operator+=(const MatrixNxN<TYPE, SIZE>& matrix)
     {
         this->Add(matrix);
         return *this;
     }
 
     /** \brief Unary subtraction operator. */
-    MatrixNxN<N>& operator-=(const MatrixNxN<N>& matrix)
+    MatrixNxN<TYPE, SIZE>& operator-=(const MatrixNxN<TYPE, SIZE>& matrix)
     {
         this->Substract(matrix);
         return *this;
     }
 
-    /** \brief Unary multiplication operator (by scalar). */
-    MatrixNxN<N>& operator*=(double value)
+    /** \brief Unary multiplication operator (by number). */
+    MatrixNxN<TYPE, SIZE>& operator*=(double value)
     {
         this->MultiplyByValue(value);
         return *this;
     }
 
-    /** \brief Unary division operator (by scalar). */
-    MatrixNxN<N>& operator/=(double value)
+    /** \brief Unary division operator (by number). */
+    MatrixNxN<TYPE, SIZE>& operator/=(double value)
     {
         this->DivideByValue(value);
         return *this;
@@ -141,21 +150,28 @@ protected:
      * \param matrix
      * \param result
      */
-    void MultiplyByMatrix(const MatrixNxN<N>& matrix, MatrixNxN<N>* result) const
+    void MultiplyByMatrix(const MatrixNxN<TYPE, SIZE>& matrix, MatrixNxN<TYPE, SIZE>* result) const
     {
-        for (unsigned int r = 0; r < N; ++r)
+        for (unsigned int r = 0; r < SIZE; ++r)
         {
-            for (unsigned int c = 0; c < N; ++c)
+            for (unsigned int c = 0; c < SIZE; ++c)
             {
                 (*result)(r,c) = 0.0;
-                for (unsigned int i = 0; i < N; ++i)
+                for (unsigned int i = 0; i < SIZE; ++i)
                 {
-                    (*result)(r,c) += (this->_elements[r*N + i] * matrix(i,c));
+                    (*result)(r,c) += (this->_elements[r*SIZE + i] * matrix(i,c));
                 }
             }
         }
     }
 };
+
+/** \brief Multiplication operator (by number). */
+template <typename TYPE, unsigned int SIZE>
+inline MatrixNxN<TYPE, SIZE> operator*(double value, const MatrixNxN<TYPE, SIZE>& matrix)
+{
+    return matrix * value;
+}
 
 } // namespace mc
 

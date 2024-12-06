@@ -1,4 +1,4 @@
-set(TARGET_NAME math)
+set(TARGET_NAME mcutils-math)
 
 ################################################################################
 
@@ -8,50 +8,32 @@ set(HEADERS
     EulerRect.h
     GaussJordan.h
     Math.h
+    Matrix.h
     Matrix3x3.h
-    Matrix4x4.h
-    Matrix6x6.h
     MatrixMxN.h
     MatrixNxN.h
     Quaternion.h
     Random.h
+    RMatrix.h
     RungeKutta4.h
     SegPlaneIsect.h
     Table2.h
     Table.h
+    UVector3.h
     Vector.h
     Vector3.h
-    Vector4.h
-    Vector6.h
     VectorN.h
-)
-
-set(SOURCES
-    Angles.cpp
-    DegMinSec.cpp
-    Matrix3x3.cpp
-    Matrix4x4.cpp
-    Matrix6x6.cpp
-    Quaternion.cpp
-    Random.cpp
-    SegPlaneIsect.cpp
-    Table2.cpp
-    Table.cpp
-    Vector.cpp
-    Vector3.cpp
-    Vector4.cpp
-    Vector6.cpp
 )
 
 ################################################################################
 
-add_library(${TARGET_NAME} OBJECT ${SOURCES})
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
 include(GNUInstallDirs)
 
-set_target_properties(${TARGET_NAME} PROPERTIES 
+set_target_properties(${TARGET_NAME} PROPERTIES
     PUBLIC_HEADER "${HEADERS}"
 )
 

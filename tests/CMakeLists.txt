@@ -1,4 +1,4 @@
-set(TARGET_NAME tests)
+set(TARGET_NAME tests-mcutils)
 
 ################################################################################
 
@@ -48,25 +48,17 @@ set(SOURCES
     math/TestGaussJordan.cpp
     math/TestMath.cpp
     math/TestMatrix3x3.cpp
-    math/TestMatrix3x3_Armadillo.cpp
-    math/TestMatrix4x4.cpp
-    math/TestMatrix4x4_Armadillo.cpp
-    math/TestMatrix6x6.cpp
-    math/TestMatrix6x6_Armadillo.cpp
     math/TestMatrixMxN.cpp
-    math/TestMatrixMxN_Armadillo.cpp
     math/TestMatrixNxN.cpp
-    math/TestMatrixNxN_Armadillo.cpp
     math/TestQuaternion.cpp
+    math/TestRMatrix.cpp
     math/TestRandom.cpp
     math/TestRungeKutta4.cpp
     math/TestSegPlaneIsect.cpp
     math/TestTable.cpp
     math/TestTable2.cpp
-    math/TestVector.cpp
+    math/TestUVector3.cpp
     math/TestVector3.cpp
-    math/TestVector4.cpp
-    math/TestVector6.cpp
     math/TestVectorN.cpp
 
     misc/TestCheck.cpp
@@ -91,13 +83,12 @@ set(SOURCES
 add_executable(${TARGET_NAME} ${SOURCES})
 
 set(LIBS
-    mcutils
     GTest::gtest
     GTest::gtest_main
 )
 
 if (UNIX)
-    set(LIBS ${LIBS} ${ARMADILLO_LIBRARIES} gcov)
+    set(LIBS ${LIBS} gcov)
 elseif(WIN32)
     set(LIBS ${LIBS} ws2_32)
 endif()

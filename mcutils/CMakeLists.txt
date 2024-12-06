@@ -2,22 +2,9 @@ set(TARGET_NAME mcutils)
 
 ################################################################################
 
-if(WIN32)
-    if(BUILD_SHARED_LIBS)
-        add_definitions(-DMCUTILS_DLL_EXPORTS)
-    endif()
-endif()
-
-################################################################################
-
 set(HEADERS
     defs.h
     Result.h
-    Types.h
-)
-
-set(SOURCES
-    mcutils.cpp
 )
 
 ################################################################################
@@ -33,15 +20,7 @@ add_subdirectory(time)
 
 ################################################################################
 
-add_library(${TARGET_NAME} ${SOURCES}
-    $<TARGET_OBJECTS:astro>
-    $<TARGET_OBJECTS:ctrl>
-    $<TARGET_OBJECTS:geo>
-    $<TARGET_OBJECTS:math>
-    $<TARGET_OBJECTS:misc>
-    $<TARGET_OBJECTS:net>
-    $<TARGET_OBJECTS:time>
-)
+add_library(${TARGET_NAME} INTERFACE)
 
 ################################################################################
 
@@ -57,14 +36,3 @@ install(TARGETS ${TARGET_NAME}
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/mcutils
 )
-
-################################################################################
-
-if(WIN32)
-    set(LIBS ws2_32)
-endif()
-
-################################################################################
-
-target_link_libraries(${TARGET_NAME} ${LIBS})
-

@@ -4,6 +4,9 @@
 
 #include <DiffEquationSolver.h>
 
+ // Use mc::Vector<double,3> instead of mc::Vector<double,2> in the following
+ // tests, to achieve full test coverage of mc::Vector template class.
+
 class TestRungeKutta4 : public ::testing::Test
 {
 protected:
@@ -21,28 +24,28 @@ TEST_F(TestRungeKutta4, CanInstantiate)
 
 TEST_F(TestRungeKutta4, CanSolve)
 {
-    mc::RungeKutta4<mc::Vector> rk1;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des1(1.0, 1.0, 3.0, &rk1);
+    mc::RungeKutta4<mc::Vector3d> rk1;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des1(1.0, 1.0, 3.0, &rk1);
     EXPECT_TRUE(des1.Solve(0.0, 1.0));
 
-    mc::RungeKutta4<mc::Vector> rk2;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des2(1.0, 1.0, 3.0, &rk2);
+    mc::RungeKutta4<mc::Vector3d> rk2;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des2(1.0, 1.0, 3.0, &rk2);
     EXPECT_TRUE(des2.Solve(1.0, 0.0));
 
-    mc::RungeKutta4<mc::Vector> rk3;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des3(1.0, 1.0, 3.0, &rk3);
+    mc::RungeKutta4<mc::Vector3d> rk3;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des3(1.0, 1.0, 3.0, &rk3);
     EXPECT_TRUE(des3.Solve(1.0, 1.0));
 
-    mc::RungeKutta4<mc::Vector> rk4;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des4(1.0, 1.0, 1.0, &rk4);
+    mc::RungeKutta4<mc::Vector3d> rk4;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des4(1.0, 1.0, 1.0, &rk4);
     EXPECT_TRUE(des4.Solve(0.0, 1.0));
 
-    mc::RungeKutta4<mc::Vector> rk5;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des5(1.0, 1.0, 1.0, &rk5);
+    mc::RungeKutta4<mc::Vector3d> rk5;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des5(1.0, 1.0, 1.0, &rk5);
     EXPECT_TRUE(des5.Solve(1.0, 0.0));
 
-    mc::RungeKutta4<mc::Vector> rk6;
-    DiffEquationSolver<mc::RungeKutta4<mc::Vector>> des6(1.0, 1.0, 1.0, &rk6);
+    mc::RungeKutta4<mc::Vector3d> rk6;
+    DiffEquationSolver<mc::RungeKutta4<mc::Vector3d>> des6(1.0, 1.0, 1.0, &rk6);
     EXPECT_TRUE(des6.Solve(1.0, 1.0));
 }
 

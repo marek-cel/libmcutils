@@ -10,9 +10,9 @@ class TestOscillator : public ::testing::Test
 {
 protected:
 
-    static constexpr double TIME_STEP { 0.01 };
+    static constexpr units::time::second_t TIME_STEP = 0.01_s;
 
-    static constexpr double OMEGA { 2.0 };
+    static constexpr units::angular_velocity::radians_per_second_t OMEGA = 2.0_rad_per_s;
     static constexpr double ZETA  { 1.0/50.0 };
 
     TestOscillator() {}
@@ -23,20 +23,28 @@ protected:
 
 TEST_F(TestOscillator, CanInstantiate)
 {
-    mc::Oscillator oscillator;
+    mc::Oscillator<double> oscillator;
 
-    EXPECT_DOUBLE_EQ(oscillator.omega() , 1.0);
+    EXPECT_DOUBLE_EQ(oscillator.omega()(), 2.0 * M_PI);
+
     EXPECT_DOUBLE_EQ(oscillator.zeta()  , 1.0);
     EXPECT_DOUBLE_EQ(oscillator.value() , 0.0);
 }
 
 TEST_F(TestOscillator, CanInstantiateAndSetData)
 {
-    mc::Oscillator oscillator(2.0, 3.0, 4.0);
+    mc::Oscillator<double> oscillator(2.0_rad_per_s, 0.5, 4.0);
 
-    EXPECT_DOUBLE_EQ(oscillator.omega() , 2.0);
-    EXPECT_DOUBLE_EQ(oscillator.zeta()  , 3.0);
+    EXPECT_DOUBLE_EQ(oscillator.omega()(), 2.0);
+
+    EXPECT_DOUBLE_EQ(oscillator.zeta()  , 0.5);
     EXPECT_DOUBLE_EQ(oscillator.value() , 4.0);
+
+    mc::Oscillator<double> oscillator2(2.0_rad_per_s, 2.0, 4.0);
+    EXPECT_DOUBLE_EQ(oscillator2.zeta()  , 1.0); // zeta is clamped to <0.0;1.0>
+
+    mc::Oscillator<double> oscillator3(2.0_rad_per_s, -1.0, 4.0);
+    EXPECT_DOUBLE_EQ(oscillator3.zeta()  , 0.0); // zeta is clamped to <0.0;1.0>
 }
 
 TEST_F(TestOscillator, CanUpdateStep)
@@ -49,9 +57,9 @@ TEST_F(TestOscillator, CanUpdateStep)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::Oscillator oscillator(OMEGA, ZETA);
+    mc::Oscillator<double> oscillator(OMEGA, ZETA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for ( unsigned int i = 0; i < vals.size(); i++ )
@@ -78,14 +86,14 @@ TEST_F(TestOscillator, CanUpdateSine)
 
     EXPECT_GT(vals.size(), 0) << "No input data.";
 
-    mc::Oscillator oscillator(OMEGA, ZETA);
+    mc::Oscillator<double> oscillator(OMEGA, ZETA);
 
-    double t = 0.0;
+    units::time::second_t t = 0.0_s;
     double y = 0.0;
 
     for (unsigned int i = 0; i < vals.size(); i++)
     {
-        double u = sin(t);
+        double u = sin(t());
 
         oscillator.Update(TIME_STEP, u);
         y = oscillator.value();
@@ -99,42 +107,42 @@ TEST_F(TestOscillator, CanUpdateSine)
 
 TEST_F(TestOscillator, CanGetOmega)
 {
-    mc::Oscillator oscillator(2.0, 3.0, 4.0);
-    EXPECT_DOUBLE_EQ(oscillator.omega(), 2.0);
+    mc::Oscillator<double> oscillator(2.0_rad_per_s, 0.5, 4.0);
+    EXPECT_DOUBLE_EQ(oscillator.omega()(), 2.0);
 }
 
 TEST_F(TestOscillator, CanGetZeta)
 {
-    mc::Oscillator oscillator(2.0, 3.0, 4.0);
-    EXPECT_DOUBLE_EQ(oscillator.zeta(), 3.0);
+    mc::Oscillator<double> oscillator(2.0_rad_per_s, 0.5, 4.0);
+    EXPECT_DOUBLE_EQ(oscillator.zeta(), 0.5);
 }
 
 TEST_F(TestOscillator, CanGetValue)
 {
-    mc::Oscillator oscillator(2.0, 3.0, 4.0);
+    mc::Oscillator<double> oscillator(2.0_rad_per_s, 0.5, 4.0);
     EXPECT_DOUBLE_EQ(oscillator.value(), 4.0);
 }
 
 TEST_F(TestOscillator, CanSetOmega)
 {
-    mc::Oscillator oscillator;
+    mc::Oscillator<double> oscillator;
 
-    oscillator.set_omega(2.0);
-    EXPECT_DOUBLE_EQ(oscillator.omega(), 2.0);
+    oscillator.set_omega(2.0_rad_per_s);
+    EXPECT_DOUBLE_EQ(oscillator.omega()(), 2.0);
 
-    oscillator.set_omega(-1.0);
-    EXPECT_DOUBLE_EQ(oscillator.omega(), 0.0);
+    oscillator.set_omega(-1.0_rad_per_s);
+    EXPECT_DOUBLE_EQ(oscillator.omega()(), 0.0);
 }
 
 TEST_F(TestOscillator, CanSetDamping)
 {
-    mc::Oscillator oscillator;
+    mc::Oscillator<double> oscillator;
 
     oscillator.set_zeta(2.0);
-    EXPECT_DOUBLE_EQ(oscillator.zeta(), 1.0);
+    EXPECT_DOUBLE_EQ(oscillator.zeta(), 1.0); // zeta is clamped to <0.0;1.0>
 
     oscillator.set_zeta(-1.0);
-    EXPECT_DOUBLE_EQ(oscillator.zeta(), 0.0);
+    EXPECT_DOUBLE_EQ(oscillator.zeta(), 0.0); // zeta is clamped to <0.0;1.0>
 
     oscillator.set_zeta(0.5);
     EXPECT_DOUBLE_EQ(oscillator.zeta(), 0.5);
@@ -142,7 +150,7 @@ TEST_F(TestOscillator, CanSetDamping)
 
 TEST_F(TestOscillator, CanSetValue)
 {
-    mc::Oscillator oscillator;
+    mc::Oscillator<double> oscillator;
     oscillator.set_value(3.0);
     EXPECT_DOUBLE_EQ(oscillator.value(), 3.0);
 }

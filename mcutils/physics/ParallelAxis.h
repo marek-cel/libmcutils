@@ -22,8 +22,8 @@
 #ifndef MCUTILS_PHYSICS_PARALLELAXIS_H_
 #define MCUTILS_PHYSICS_PARALLELAXIS_H_
 
-#include <mcutils/math/Matrix3x3.h>
-#include <mcutils/math/Vector3.h>
+#include <mcutils/math/Matrix.h>
+#include <mcutils/math/Vector.h>
 
 namespace mc {
 
@@ -38,9 +38,9 @@ namespace mc {
  * - Awrejcewicz J.: Classical Mechanics: Kinematics and Statics, 2012, p.163
  * - [Parallel axis theorem - Wikipedia](https://en.wikipedia.org/wiki/Parallel_axis_theorem)
  */
-inline Matrix3x3 ParallelAxisInertia(double m, const Matrix3x3& i, const Vector3& r)
+inline Matrix3x3d ParallelAxisInertia(double m, const Matrix3x3d& i, const Vector3d& r)
 {
-    Matrix3x3 a(
+    Matrix3x3d a(
         r.y()*r.y() + r.z()*r.z() , -r.x()*r.y()               , -r.x()*r.z(),
        -r.y()*r.x()               ,  r.x()*r.x() + r.z()*r.z() , -r.y()*r.z(),
        -r.z()*r.x()               , -r.z()*r.y()               ,  r.x()*r.x() + r.y()*r.y()

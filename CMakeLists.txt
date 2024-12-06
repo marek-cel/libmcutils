@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.22)
 
 project(mcutils)
 
+include(CTest)
+include(FetchContent)
+include(GoogleTest)
+
 set(MCUTILS_VERSION_MAJOR 1)
 set(MCUTILS_VERSION_MINOR 0)
 set(MCUTILS_VERSION_PATCH 0)
@@ -17,18 +21,13 @@ option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 ################################################################################
 
-include(CTest)
-include(GoogleTest)
-
-enable_testing()
-
-################################################################################
-
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 ################################################################################
@@ -52,6 +51,20 @@ endif()
 
 ################################################################################
 
+FetchContent_Declare(LIBUNITS
+    GIT_REPOSITORY https://github.com/nholthaus/units.git
+    GIT_TAG origin/master
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/units")
+    FetchContent_MakeAvailable(LIBUNITS)
+include_directories(${CMAKE_BINARY_DIR}/units/include)
+
+################################################################################
+
+set(BUILD_TESTING ON)
+enable_testing()
+
+################################################################################
+
 if(UNIX)
     set(CMAKE_CXX_FLAGS "-Wall -std=c++17")
     if (BUILD_TESTING)
@@ -63,8 +76,8 @@ if(UNIX)
         set(CMAKE_CXX_FLAGS_RELEASE "-O2")
     endif()
 elseif(WIN32)
-    set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -std=c++1z")
-    set(CMAKE_CXX_FLAGS_RELEASE "-Wall -std=c++1z -O2")
+    set(CMAKE_CXX_FLAGS_DEBUG   "-Wall -std=c++17")
+    set(CMAKE_CXX_FLAGS_RELEASE "-Wall -std=c++17 -O2")
     if (MSVC_VERSION GREATER_EQUAL "1900")
         include(CheckCXXCompilerFlag)
         CHECK_CXX_COMPILER_FLAG("/std:c++17" _cpp_latest_flag_supported)

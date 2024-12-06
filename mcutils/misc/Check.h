@@ -27,6 +27,7 @@
 #endif
 
 #include <cmath>
+#include <vector>
 
 #include <mcutils/defs.h>
 
@@ -34,49 +35,69 @@ namespace mc {
 
 /**
  * \brief Checks if given varaible is Infinite.
- * \param val double precision value to test
- * \return function returns TRUE if tested value is Infinite
+ * \param val value to test
+ * \return function returns TRUE if tested value is Infinite, TRUE otherwise
  */
-MCUTILSAPI inline bool IsInf(const double& val)
+template <typename T>
+inline bool IsInf(const T& val)
 {
 #   ifdef _MSC_VER
-    return !_finite(val);
+    return !_finite(static_cast<double>(val));
 #   else
-    return std::isinf(val);
+    return std::isinf(static_cast<double>(val));
 #   endif
 }
 
 /**
  * \brief Checks if given varaible is NaN.
- * \param val double precision value to test
- * \return function returns TRUE if tested value is NaN
+ * \param val value to test
+ * \return function returns TRUE if tested value is NaN, TRUE otherwise
  */
-MCUTILSAPI inline bool IsNaN(const double& val)
+template <typename T>
+inline bool IsNaN(const T& val)
 {
     return val != val;
 }
 
 /**
  * \brief Checks if given varaible is Infinite or NaN.
- * \param val double precision value to test
- * \return function returns FALSE if tested value is Infinite or NaN
+ * \param val value to test
+ * \return function returns FALSE if tested value is Infinite or NaN, TRUE otherwise
  */
-MCUTILSAPI inline bool IsValid(const double& val)
+template <typename T>
+inline bool IsValid(const T& val)
 {
     return !( IsNaN(val) || IsInf(val) );
 }
 
 /**
  * \brief Checks if given array is Infinite or NaN.
- * \param array double precision array to test
+ * \param array array to test
  * \param size the size of given array
- * \return function returns FALSE if tested array is Infinite or NaN
+ * \return function returns FALSE if tested array is Infinite or NaN, TRUE otherwise
  */
-MCUTILSAPI inline bool IsValid(const double array[], unsigned int size)
+template <typename T>
+inline bool IsValid(const T array[], unsigned int size)
 {
     for (unsigned int i = 0; i < size; ++i)
     {
         if (IsNaN(array[i]) || IsInf(array[i])) return false;
+    }
+
+    return true;
+}
+
+/**
+ * \brief Checks if given vector is Infinite or NaN.
+ * \param vect vector to test
+ * \return function returns FALSE if tested array is Infinite or NaN, TRUE otherwise
+ */
+template <typename T>
+inline bool IsValid(const std::vector<T> vect[])
+{
+    for (const auto& val : vect)
+    {
+        if (IsNaN(val) || IsInf(val)) return false;
     }
 
     return true;
