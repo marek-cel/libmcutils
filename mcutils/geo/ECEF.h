@@ -151,6 +151,7 @@ public:
                          units::angle::radian_t* lon,
                          units::length::meter_t* alt) const
     {
+        // units not used due to performance reasons
         double z2 = Pow<2>(z)();
         double r  = sqrt(Pow<2>(x)() + Pow<2>(y)());
         double r2 = r*r;
@@ -198,8 +199,8 @@ public:
         units::angle::radian_t tht = units::math::atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
         double ed2 = (_ellipsoid.a2() - _ellipsoid.b2()) / _ellipsoid.b2();
 
-        double sinTht = units::math::sin(tht);
-        double cosTht = units::math::cos(tht);
+        double sinTht = sin(tht());
+        double cosTht = cos(tht());
 
         *lat = units::math::atan(
             (z + _ellipsoid.b()*ed2*Pow<3>(sinTht))
@@ -209,7 +210,7 @@ public:
         *lon = units::math::atan2(y, x);
 
         double sinLat = sin((*lat)());
-        units::length::meter_t n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
+        units::length::meter_t n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*Pow<2>(sinLat));
 
         *alt = p / cos((*lat)()) - n;
     }
