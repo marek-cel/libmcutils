@@ -586,9 +586,9 @@ private:
         return key_value >= _key_values[index] && key_value < _key_values[index+1];
     }
 
-    double CalculateInterpolatedValue(int index, KEY_TYPE key_value) const
+    VAL_TYPE CalculateInterpolatedValue(int index, KEY_TYPE key_value) const
     {
-        return (key_value - _key_values[index]) * _inter_data[index] + _table_data[index];
+        return (key_value - _key_values[index]) * VAL_TYPE{_inter_data[index]} + _table_data[index];
     }
 
     /**
