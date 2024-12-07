@@ -13,7 +13,6 @@ include_directories(.)
 set(SOURCES
     CsvFileReader.cpp
     TestingEnvironment.cpp
-    TestingUtils.cpp
     XcosBinFileReader.cpp
     main.cpp
 
