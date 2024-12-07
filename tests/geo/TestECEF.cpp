@@ -38,21 +38,21 @@ TEST_F(TestECEF, CanInstantiate)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
 
-    EXPECT_NEAR(ecef.pos_cart().x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(ecef.pos_cart().y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(ecef.pos_cart().z(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(ecef.pos_cart().x()(), mc::WGS84::ellipsoid.a()(), LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(ecef.pos_cart().y()(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(ecef.pos_cart().z()(), 0.0, LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertFromCartToGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 0N 0E
     pos_cart.x() = mc::WGS84::ellipsoid.a();
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
+    pos_cart.y() = 0_m;
+    pos_cart.z() = 0_m;
 
     pos_geo = ecef.ConvertCart2Geo(pos_cart);
     EXPECT_NEAR(pos_geo.lat(), 0.0, LAT_LON_TOLERANCE);
@@ -64,14 +64,14 @@ TEST_F(TestECEF, CanConvertFromCartToGeoAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
     // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 3194469.1450605746;
-    pos_cart.y() = 3194469.145060574;
-    pos_cart.z() = 4487419.119544039;
+    pos_cart.x() = 3194469.1450605746_m;
+    pos_cart.y() = 3194469.145060574_m;
+    pos_cart.z() = 4487419.119544039_m;
 
     pos_geo = ecef.ConvertCart2Geo(pos_cart);
     EXPECT_NEAR(pos_geo.lat(), M_PI_4 , LAT_LON_TOLERANCE);
@@ -83,43 +83,43 @@ TEST_F(TestECEF, CanConvertFromGeoToCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
 
     pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), mc::WGS84::ellipsoid.a()(), LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 0.0, LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanConvertFromGeoToCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 45.0_deg;
-    pos_geo.lon = 45.0_deg;
-    pos_geo.alt = 100.0_m;
+    pos_geo.lat = 45_deg;
+    pos_geo.lon = 45_deg;
+    pos_geo.alt = 100_m;
 
     pos_cart = ecef.ConvertGeo2Cart(pos_geo);
-    EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanGetGeoOffsetHeading0)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
+    constexpr units::length::nauticalMile_t nautical_mile = 1_nmi;
     constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
 
     // as one nautical mile is equal to one arc minute only on the great circle
@@ -129,25 +129,25 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading0)
     mc::Geo pos_geo;
     mc::Geo pos_geo_off;
 
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
     // HDG = 0
-    pos_geo_off = ecef.GetGeoOffset(0.0_deg, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(0_deg, nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0_deg, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(0_deg, -nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0_deg, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(0_deg, 0_m, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(0.0_deg, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(0_deg, 0_m, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() - arc_min, tolerance);
 }
@@ -156,7 +156,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading90)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
+    constexpr units::length::nauticalMile_t nautical_mile = 1_nmi;
     constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
 
     // as one nautical mile is equal to one arc minute only on the great circle
@@ -166,25 +166,25 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading90)
     mc::Geo pos_geo;
     mc::Geo pos_geo_off;
 
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
     // HDG = 90
-    pos_geo_off = ecef.GetGeoOffset(90.0_deg, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(90_deg, nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(90.0_deg, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(90_deg, -nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(90.0_deg, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(90_deg, 0_m, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(90.0_deg, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(90_deg, 0_m, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 }
@@ -193,7 +193,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeadingMinus90)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
+    constexpr units::length::nauticalMile_t nautical_mile = 1_nmi;
     constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
 
     // as one nautical mile is equal to one arc minute only on the great circle
@@ -203,25 +203,25 @@ TEST_F(TestECEF, CanGetGeoOffsetHeadingMinus90)
     mc::Geo pos_geo;
     mc::Geo pos_geo_off;
 
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
     // HDG = -90
-    pos_geo_off = ecef.GetGeoOffset(-90.0_deg, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(-90_deg, nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-90.0_deg, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(-90_deg, -nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() + arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-90.0_deg, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(-90_deg, 0_m, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(-90.0_deg, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(-90_deg, 0_m, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 }
@@ -230,7 +230,7 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading180)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
+    constexpr units::length::nauticalMile_t nautical_mile = 1_nmi;
     constexpr double arc_min = (1.0 / 60.0) * M_PI / 180.0;
 
     // as one nautical mile is equal to one arc minute only on the great circle
@@ -240,25 +240,25 @@ TEST_F(TestECEF, CanGetGeoOffsetHeading180)
     mc::Geo pos_geo;
     mc::Geo pos_geo_off;
 
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
     // HDG = 180
-    pos_geo_off = ecef.GetGeoOffset(180.0_deg, nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(180_deg, nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() - arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(180.0_deg, -nautical_mile, 0.0);
+    pos_geo_off = ecef.GetGeoOffset(180_deg, -nautical_mile, 0_m);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat() + arc_min, tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon(), tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(180.0_deg, 0.0, nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(180_deg, 0_m, nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() - arc_min, tolerance);
 
-    pos_geo_off = ecef.GetGeoOffset(180.0_deg, 0.0, -nautical_mile);
+    pos_geo_off = ecef.GetGeoOffset(180_deg, 0_m, -nautical_mile);
     EXPECT_NEAR(pos_geo_off.lat(), pos_geo.lat(), tolerance);
     EXPECT_NEAR(pos_geo_off.lon(), pos_geo.lon() + arc_min, tolerance);
 }
@@ -271,12 +271,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N0E)
     mc::Angles angles_enu;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
     EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
@@ -292,12 +292,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90E)
     mc::Angles angles_enu;
 
     // 0N 90E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
     EXPECT_NEAR(angles_enu.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
@@ -313,12 +313,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N90W)
     mc::Angles angles_enu;
 
     // 0N 90W
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
     EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
@@ -334,12 +334,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2ENUAt0N180E)
     mc::Angles angles_enu;
 
     // 0N 180E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_enu = ecef.ConvertAttitudeECEF2ENU(angles_ecef);
 
     EXPECT_NEAR(angles_enu.phi()(), -M_PI_2 , ATTITUDE_TOLERANCE);
@@ -355,12 +355,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N0E)
     mc::Angles angles_enu;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_enu.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
     EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
@@ -376,12 +376,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90E)
     mc::Angles angles_enu;
 
     // 0N 90E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_enu.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
     EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
@@ -397,12 +397,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N90W)
     mc::Angles angles_enu;
 
     // 0N 90W
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_enu.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
     EXPECT_NEAR(angles_ecef.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
@@ -418,12 +418,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesENU2ECEFAt0N180E)
     mc::Angles angles_enu;
 
     // 0N 180E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_enu.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_enu.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeENU2ECEF(angles_ecef);
 
     EXPECT_NEAR(angles_ecef.phi()(),  M_PI_2 , ATTITUDE_TOLERANCE);
@@ -439,12 +439,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N0E)
     mc::Angles angles_ned;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
     EXPECT_NEAR(angles_ned.phi()(), 0.0    , ATTITUDE_TOLERANCE);
@@ -460,12 +460,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90E)
     mc::Angles angles_ned;
 
     // 0N 90E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
     EXPECT_NEAR(angles_ned.phi()(), -M_PI_2    , ATTITUDE_TOLERANCE);
@@ -481,12 +481,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N90W)
     mc::Angles angles_ned;
 
     // 0N 90W
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
     EXPECT_NEAR(angles_ned.phi()(), M_PI_2 , ATTITUDE_TOLERANCE);
@@ -502,12 +502,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesECEF2NEDAt0N180E)
     mc::Angles angles_ned;
 
     // 0N 180E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ecef.Set(0_deg, 0_deg, 0_deg);
     angles_ned = ecef.ConvertAttitudeECEF2NED(angles_ecef);
 
     EXPECT_NEAR(angles_ned.phi()(),  M_PI   , ATTITUDE_TOLERANCE);
@@ -523,12 +523,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N0E)
     mc::Angles angles_ned;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ned.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
     EXPECT_NEAR(angles_ecef.phi()(),  0.0    , ATTITUDE_TOLERANCE);
@@ -544,12 +544,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90E)
     mc::Angles angles_ned;
 
     // 0N 90E
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ned.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
     EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
@@ -565,12 +565,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N90W)
     mc::Angles angles_ned;
 
     // 0N 90W
-    pos_geo.lat =   0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =   0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ned.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
     EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
@@ -586,12 +586,12 @@ TEST_F(TestECEF, CanConvertAttitudeAnglesNED2ECEFAt0N180E)
     mc::Angles angles_ned;
 
     // 0N 180E
-    pos_geo.lat =   0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt =   0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ned.Set(0.0_deg, 0.0_deg, 0.0_deg);
+    angles_ned.Set(0_deg, 0_deg, 0_deg);
     angles_ecef = ecef.ConvertAttitudeNED2ECEF(angles_ned);
 
     EXPECT_NEAR(angles_ecef.psi()(),  0.0    , ATTITUDE_TOLERANCE);
@@ -608,14 +608,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N0E)
     mc::Quaternion ned2bas;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.phi() =   0.0_deg;
-    angles_ecef.tht() = -90.0_deg;
-    angles_ecef.psi() =   0.0_deg;
+    angles_ecef.phi() =   0_deg;
+    angles_ecef.tht() = -90_deg;
+    angles_ecef.psi() =   0_deg;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
@@ -635,14 +635,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90E)
     mc::Quaternion ned2bas;
 
     // 0N 90E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.phi() =   0.0_deg;
-    angles_ecef.tht() = -90.0_deg;
-    angles_ecef.psi() =  90.0_deg;
+    angles_ecef.phi() =   0_deg;
+    angles_ecef.tht() = -90_deg;
+    angles_ecef.psi() =  90_deg;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
@@ -662,14 +662,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N90W)
     mc::Quaternion ned2bas;
 
     // 0N 90W
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.phi() =   0.0_deg;
-    angles_ecef.tht() = -90.0_deg;
-    angles_ecef.psi() = -90.0_deg;
+    angles_ecef.phi() =   0_deg;
+    angles_ecef.tht() = -90_deg;
+    angles_ecef.psi() = -90_deg;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
@@ -689,14 +689,14 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsECEF2NEDAt0N180E)
     mc::Quaternion ned2bas;
 
     // 0N 180E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
-    angles_ecef.phi() =   0.0_deg;
-    angles_ecef.tht() = -90.0_deg;
-    angles_ecef.psi() = 180.0_deg;
+    angles_ecef.phi() =   0_deg;
+    angles_ecef.tht() = -90_deg;
+    angles_ecef.psi() = 180_deg;
 
     ned2bas = ecef.ConvertAttitudeECEF2NED(mc::Quaternion(angles_ecef));
     angles_ned = ned2bas.GetAngles();
@@ -715,9 +715,9 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N0E)
     mc::Quaternion ecef2bas;
 
     // 0N 0E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 0.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat = 0_deg;
+    pos_geo.lon = 0_deg;
+    pos_geo.alt = 0_m;
     ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
@@ -737,9 +737,9 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90E)
     mc::Quaternion ecef2bas;
 
     // 0N 90E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 90.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =  0_deg;
+    pos_geo.lon = 90_deg;
+    pos_geo.alt =  0_m;
     ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
@@ -759,9 +759,9 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N90W)
     mc::Quaternion ecef2bas;
 
     // 0N 90W
-    pos_geo.lat =  0.0_deg;
-    pos_geo.lon = -90.0_deg;
-    pos_geo.alt =  0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = -90_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
@@ -781,9 +781,9 @@ TEST_F(TestECEF, CanConvertAttitudeQuaternionsNED2ECEFAt0N180E)
     mc::Quaternion ecef2bas;
 
     // 0N 180E
-    pos_geo.lat = 0.0_deg;
-    pos_geo.lon = 180.0_deg;
-    pos_geo.alt = 0.0_m;
+    pos_geo.lat =   0_deg;
+    pos_geo.lon = 180_deg;
+    pos_geo.alt =   0_m;
     ecef.SetPosition(pos_geo);
 
     ecef2bas = ecef.ConvertAttitudeNED2ECEF(mc::Quaternion());
@@ -799,12 +799,12 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 0N 0E
     pos_cart.x() = mc::WGS84::ellipsoid.a();
-    pos_cart.y() = 0.0;
-    pos_cart.z() = 0.0;
+    pos_cart.y() = 0_m;
+    pos_cart.z() = 0_m;
     ecef.SetPosition(pos_cart);
 
     pos_geo = ecef.pos_geo();
@@ -818,14 +818,14 @@ TEST_F(TestECEF, CanUpdateAndGetPosGeoAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
     // tests/geo/python/test_geo_ecef.py
-    pos_cart.x() = 3194469.1450605746;
-    pos_cart.y() = 3194469.145060574;
-    pos_cart.z() = 4487419.119544039;
+    pos_cart.x() = 3194469.1450605746_m;
+    pos_cart.y() = 3194469.145060574_m;
+    pos_cart.z() = 4487419.119544039_m;
     ecef.SetPosition(pos_cart);
 
     pos_geo = ecef.pos_geo();
@@ -839,7 +839,7 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 0N 0E
     pos_geo.lat = 0.0_deg;
@@ -848,29 +848,29 @@ TEST_F(TestECEF, CanUpdateAndGetPosCartAt0N0E0H)
 
     ecef.SetPosition(pos_geo);
     pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), mc::WGS84::ellipsoid.a()(), LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 0.0, LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanUpdateAndGetPosCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::Geo pos_geo;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart;
 
     // 45N 45E H=100m
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_ecef.py
-    pos_geo.lat = 45.0_deg;
-    pos_geo.lon = 45.0_deg;
+    pos_geo.lat =  45.0_deg;
+    pos_geo.lon =  45.0_deg;
     pos_geo.alt = 100.0_m;
 
     ecef.SetPosition(pos_geo);
     pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanGetENU2NED)
@@ -878,7 +878,7 @@ TEST_F(TestECEF, CanGetENU2NED)
     mc::ECEF ecef(mc::WGS84::ellipsoid);
     mc::RMatrix enu2ned = ecef.enu2ned();
 
-    const mc::Vector3d v_enu(1.0, 2.0, 3.0);
+    const mc::Vector3 v_enu(1.0, 2.0, 3.0);
     mc::Vector3d v_ned = enu2ned * v_enu;
 
     EXPECT_DOUBLE_EQ(v_ned.x(),  2.0);
@@ -1308,37 +1308,37 @@ TEST_F(TestECEF, CanSetPositionFromGeoAt45N45E100H)
 TEST_F(TestECEF, CanSetPositionFromCartAt0N0E0H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Vector3d pos_cart_in;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart_in;
+    mc::Vector3_m pos_cart;
 
     // 0N 0E
     pos_cart_in.x() = mc::WGS84::ellipsoid.a();
-    pos_cart_in.y() = 0.0;
-    pos_cart_in.z() = 0.0;
+    pos_cart_in.y() = 0.0_m;
+    pos_cart_in.z() = 0.0_m;
     ecef.SetPosition(pos_cart_in);
 
     pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), mc::WGS84::ellipsoid.a(), LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 0.0, LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), mc::WGS84::ellipsoid.a()(), LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 0.0, LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestECEF, CanSetPositionFromCartAt45N45E100H)
 {
     mc::ECEF ecef(mc::WGS84::ellipsoid);
-    mc::Vector3d pos_cart_in;
-    mc::Vector3d pos_cart;
+    mc::Vector3_m pos_cart_in;
+    mc::Vector3_m pos_cart;
 
     // 45N 45E H=100m
     // values calculated with PROJ4
     // tests/geo/python/test_geo_ecef.py
-    pos_cart_in.x() = 3194469.1450605746;
-    pos_cart_in.y() = 3194469.145060574;
-    pos_cart_in.z() = 4487419.119544039;
+    pos_cart_in.x() = 3194469.1450605746_m;
+    pos_cart_in.y() = 3194469.145060574_m;
+    pos_cart_in.z() = 4487419.119544039_m;
     ecef.SetPosition(pos_cart_in);
 
     pos_cart = ecef.pos_cart();
-    EXPECT_NEAR(pos_cart.x(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.y(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
-    EXPECT_NEAR(pos_cart.z(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.x()(), 3194469.1450605746 , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.y()(), 3194469.145060574  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(pos_cart.z()(), 4487419.119544039  , LINEAR_POSITION_TOLERANCE);
 }

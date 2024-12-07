@@ -26,8 +26,6 @@
 
 #include <mcutils/geo/Ellipsoid.h>
 
-#include <mcutils/misc/Units.h>
-
 using namespace units::literals;
 
 namespace mc {
@@ -66,7 +64,7 @@ public:
                                         unsigned int max_iterations = 10)
     {
         // for lat_ts=0 k0=a
-        return CalculateT_inv(exp(-y() / _e.a()), max_error(), max_iterations);
+        return CalculateT_inv(exp((-y / _e.a())()), max_error(), max_iterations);
     }
 
     /**
@@ -77,7 +75,7 @@ public:
     units::angle::radian_t CalculateLon(units::length::meter_t x)
     {
         // for lat_ts=0 k0=a
-        return units::angle::radian_t(x() / _e.a());
+        return units::angle::radian_t(static_cast<double>(x / _e.a()));
     }
 
     /**
@@ -88,7 +86,7 @@ public:
     units::length::meter_t CalculateX(units::angle::radian_t lon)
     {
         // for lat_ts=0 k0=a
-        return _e.a() * 1_m * lon();
+        return _e.a() * lon();
     }
 
     /**
@@ -99,7 +97,7 @@ public:
     units::length::meter_t CalculateY(units::angle::radian_t lat)
     {
         // for lat_ts=0 k0=a
-        return _e.a() * 1_m * log(CalculateT(lat));
+        return _e.a() * log(CalculateT(lat));
     }
 
     /**

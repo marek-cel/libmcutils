@@ -30,7 +30,7 @@
 namespace mc {
 
 /**
- * \brief Martian Coordinate System ellipsoid according to the IAU WGCCRE 
+ * \brief Martian Coordinate System ellipsoid according to the IAU WGCCRE
  * Martian Coordinate System (MCS) and other physical data.
  *
  * Martian prime merdian goes through the Airy-0 crater.
@@ -43,7 +43,7 @@ namespace mc {
  */
 namespace Mars2015 {
 
-static const Ellipsoid ellipsoid(3396190.0, 1.0 / 169.894447223612);    ///< datum ellipsoid
+static const Ellipsoid ellipsoid(3396190.0_m, 1.0 / 169.894447223612);    ///< datum ellipsoid
 
 static constexpr double omega = 7.0900303093e-5;        ///< [rad/s] angular velocity of the Mars ( 360deg / 24:37:22.7 )
 static constexpr double gamma = 3.72076;                ///< [m/s^2] theoretical (normal) gravity mean value

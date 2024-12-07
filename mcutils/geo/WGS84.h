@@ -36,7 +36,7 @@ namespace mc {
  */
 namespace WGS84 {
 
-static const Ellipsoid ellipsoid(6378137.0, 1.0 / 298.257223563);   ///< datum ellipsoid
+static const Ellipsoid ellipsoid(6378137.0_m, 1.0 / 298.257223563);   ///< datum ellipsoid
 
 static constexpr double me      = 5.9733328e24;         ///< [kg] mass of the Earth (including atmosphere)
 static constexpr double gm      = 3986004.418e8;        ///< [m^3/s^2] Earth’s gravitational constant (mass of Earth’s atmosphere included)

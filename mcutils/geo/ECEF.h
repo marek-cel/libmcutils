@@ -75,8 +75,8 @@ public:
         _pos_geo.alt = 0.0_m;
 
         _pos_cart.x() = _ellipsoid.a();
-        _pos_cart.y() = 0.0;
-        _pos_cart.z() = 0.0;
+        _pos_cart.y() = 0_m;
+        _pos_cart.z() = 0_m;
 
         UpdateMatrices();
     }
@@ -93,18 +93,20 @@ public:
     void ConvertGeo2Cart(units::angle::radian_t lat,
                          units::angle::radian_t lon,
                          units::length::meter_t alt,
-                         double* x, double* y, double* z) const
+                         units::length::meter_t* x,
+                         units::length::meter_t* y,
+                         units::length::meter_t* z) const
     {
         double sinLat = units::math::sin(lat);
         double cosLat = units::math::cos(lat);
         double sinLon = units::math::sin(lon);
         double cosLon = units::math::cos(lon);
 
-        double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2() * sinLat*sinLat);
+        units::length::meter_t n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2() * sinLat*sinLat);
 
-        *x = (n + alt()) * cosLat * cosLon;
-        *y = (n + alt()) * cosLat * sinLon;
-        *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt()) * sinLat;
+        *x = (n + alt) * cosLat * cosLon;
+        *y = (n + alt) * cosLat * sinLon;
+        *z = (n * (_ellipsoid.b2() / _ellipsoid.a2()) + alt) * sinLat;
     }
 
     /**
@@ -114,11 +116,11 @@ public:
      * \param alt [m] altitude above mean sea level
      * \return [m] resulting cartesian coordinates vector
      */
-    Vector3d ConvertGeo2Cart(units::angle::radian_t lat,
-                             units::angle::radian_t lon,
-                             units::length::meter_t alt) const
+    Vector3_m ConvertGeo2Cart(units::angle::radian_t lat,
+                              units::angle::radian_t lon,
+                              units::length::meter_t alt) const
     {
-        Vector3d pos_cart;
+        Vector3_m pos_cart;
         ConvertGeo2Cart(lat, lon, alt, &pos_cart.x(), &pos_cart.y(), &pos_cart.z());
         return pos_cart;
     }
@@ -128,7 +130,7 @@ public:
      * \param pos_geo [m] geodetic coordinates
      * \return [m] resulting cartesian coordinates vector
      */
-    Vector3d ConvertGeo2Cart(const Geo& pos_geo) const
+    Vector3_m ConvertGeo2Cart(const Geo& pos_geo) const
     {
         return ConvertGeo2Cart(pos_geo.lat, pos_geo.lon, pos_geo.alt);
     }
@@ -142,16 +144,18 @@ public:
      * \param lon [rad] resulting geodetic longitude pointer
      * \param alt [m] resulting altitude above mean sea level pointer
      */
-    void ConvertCart2Geo(double x, double y, double z,
+    void ConvertCart2Geo(units::length::meter_t x,
+                         units::length::meter_t y,
+                         units::length::meter_t z,
                          units::angle::radian_t* lat,
                          units::angle::radian_t* lon,
                          units::length::meter_t* alt) const
     {
-        double z2 = z*z;
-        double r  = sqrt(x*x + y*y);
+        double z2 = Pow<2>(z)();
+        double r  = sqrt(Pow<2>(x)() + Pow<2>(y)());
         double r2 = r*r;
-        double e2 = _ellipsoid.a2() - _ellipsoid.b2();
-        double f  = 54.0 * _ellipsoid.b2() * z2;
+        double e2 = _ellipsoid.a2()() - _ellipsoid.b2()();
+        double f  = 54.0 * _ellipsoid.b2()() * z2;
         double g  = r2 + (1.0 - _ellipsoid.e2())*z2 - _ellipsoid.e2()*e2;
         double c  = _ellipsoid.e2()*_ellipsoid.e2() * f * r2 / Pow<3>(g);
         double s  = pow(1.0 + c + sqrt(c*c + 2.0*c), 1.0/3.0);
@@ -160,17 +164,17 @@ public:
         double q  = sqrt(1.0 + 2.0*(_ellipsoid.e2()*_ellipsoid.e2())*p);
         double r0 = -(p * _ellipsoid.e2() * r)/(1.0 + q)
                     + sqrt(
-                        0.5*_ellipsoid.a2()*(1.0 + 1.0/q)
+                        0.5*_ellipsoid.a2()()*(1.0 + 1.0/q)
                         - p*(1.0 - _ellipsoid.e2())*z2/(q + q*q) - 0.5*p*r2
                     );
         double uv = r - _ellipsoid.e2()*r0;
         double u  = sqrt(uv*uv + z2);
         double v  = sqrt(uv*uv + (1.0 - _ellipsoid.e2())*z2);
-        double z0 = _ellipsoid.b2() * z / (_ellipsoid.a() * v);
+        double z0 = _ellipsoid.b2()() * z() / (_ellipsoid.a()() * v);
 
-        *alt = 1.0_m * u * (1.0 - _ellipsoid.b2() / (_ellipsoid.a() * v));
-        *lat = units::angle::radian_t(atan((z + _ellipsoid.ep2()*z0)/r));
-        *lon = units::angle::radian_t(atan2(y, x));
+        *alt = units::length::meter_t(u * (1.0 - _ellipsoid.b2()() / (_ellipsoid.a()() * v)));
+        *lat = units::angle::radian_t(atan((z() + _ellipsoid.ep2()*z0)/r));
+        *lon = units::angle::radian_t(atan2(y(), x()));
     }
 
     /**
@@ -183,28 +187,31 @@ public:
      * \param lon [rad] resulting geodetic longitude pointer
      * \param alt [m] resulting altitude above mean sea level pointer
      */
-    void ConvertCart2GeoFast(double x, double y, double z,
+    void ConvertCart2GeoFast(units::length::meter_t x,
+                             units::length::meter_t y,
+                             units::length::meter_t z,
                              units::angle::radian_t* lat,
                              units::angle::radian_t* lon,
                              units::length::meter_t* alt) const
     {
-        double p   = sqrt(x*x + y*y);
-        double tht = atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
+        units::length::meter_t p   = units::math::sqrt(x*x + y*y);
+        units::angle::radian_t tht = units::math::atan2(z*_ellipsoid.a(), p*_ellipsoid.b());
         double ed2 = (_ellipsoid.a2() - _ellipsoid.b2()) / _ellipsoid.b2();
 
-        double sinTht = sin(tht);
-        double cosTht = cos(tht);
+        double sinTht = units::math::sin(tht);
+        double cosTht = units::math::cos(tht);
 
-        *lat = units::angle::radian_t(atan(
-            (z + ed2*_ellipsoid.b()*sinTht*sinTht*sinTht)
-            / (p - _ellipsoid.e2()*_ellipsoid.a()*cosTht*cosTht*cosTht)
-        ));
-        *lon = units::angle::radian_t(atan2(y, x));
+        *lat = units::math::atan(
+            (z + _ellipsoid.b()*ed2*Pow<3>(sinTht))
+            /
+            (p - _ellipsoid.e2()*_ellipsoid.a()*Pow<3>(cosTht))
+        );
+        *lon = units::math::atan2(y, x);
 
         double sinLat = sin((*lat)());
-        double n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
+        units::length::meter_t n = _ellipsoid.a() / sqrt(1.0 - _ellipsoid.e2()*sinLat*sinLat);
 
-        *alt = units::length::meter_t(p / cos((*lat)()) - n);
+        *alt = p / cos((*lat)()) - n;
     }
 
     /**
@@ -214,7 +221,9 @@ public:
      * \param z [m] cartesian z-coordinate
      * \return resulting geodetic coordinates
      */
-    Geo ConvertCart2Geo(double x, double y, double z) const
+    Geo ConvertCart2Geo(units::length::meter_t x,
+                        units::length::meter_t y,
+                        units::length::meter_t z) const
     {
         Geo pos_geo;
         ConvertCart2Geo(x, y, z, &pos_geo.lat, &pos_geo.lon, &pos_geo.alt);
@@ -226,7 +235,7 @@ public:
      * \param pos_cart [m] cartesian coordinates vector
      * \return resulting geodetic coordinates
      */
-    Geo ConvertCart2Geo(const Vector3d& pos_cart) const
+    Geo ConvertCart2Geo(const Vector3_m& pos_cart) const
     {
         return ConvertCart2Geo(pos_cart.x(), pos_cart.y(), pos_cart.z());
     }
@@ -238,15 +247,17 @@ public:
      * \param offset_y [m] lateral offset
      * \return resulting geodetic coordinates
      */
-    Geo GetGeoOffset(units::angle::radian_t heading, double offset_x, double offset_y) const
+    Geo GetGeoOffset(units::angle::radian_t heading,
+                     units::length::meter_t offset_x,
+                     units::length::meter_t offset_y) const
     {
-        RMatrix ned2bas(Angles(0.0_rad, 0.0_rad, heading));
+        RMatrix ned2bas(Angles(0_rad, 0_rad, heading));
         RMatrix bas2ned = ned2bas.GetTransposed();
 
-        Vector3d r_bas(offset_x, offset_y, 0.0);
-        Vector3d r_ned = bas2ned * r_bas;
+        Vector3_m r_bas(offset_x, offset_y, 0_m);
+        Vector3_m r_ned = bas2ned * r_bas;
 
-        Vector3d pos_cart = _pos_cart + _ned2ecef * r_ned;
+        Vector3_m pos_cart = _pos_cart + _ned2ecef * r_ned;
 
         return ConvertCart2Geo(pos_cart);
     }
@@ -349,7 +360,7 @@ public:
      * \brief Sets position from cartesian coordinates
      * \param pos_geo position expressed in geodetic coordinates
      */
-    void SetPosition(const Vector3d& pos_cart)
+    void SetPosition(const Vector3_m& pos_cart)
     {
         _pos_cart = pos_cart;
         _pos_geo = ConvertCart2Geo(_pos_cart);
@@ -358,7 +369,7 @@ public:
 
     inline const Geo& pos_geo() const { return _pos_geo; }
 
-    inline const Vector3d& pos_cart() const { return _pos_cart; }
+    inline const Vector3_m& pos_cart() const { return _pos_cart; }
 
     inline const RMatrix& enu2ned() const { return _enu2ned; }
     inline const RMatrix& ned2enu() const { return _ned2enu; }
@@ -372,8 +383,8 @@ protected:
 
     Ellipsoid _ellipsoid;       ///< datum ellipsoid
 
-    Geo      _pos_geo;          ///< geodetic coordinates (latitude, longitude, altitude)
-    Vector3d _pos_cart;         ///< [m] cartesian coordinates vector (x, y, z)
+    Geo       _pos_geo;         ///< geodetic coordinates (latitude, longitude, altitude)
+    Vector3_m _pos_cart;        ///< [m] cartesian coordinates vector (x, y, z)
 
     RMatrix _enu2ecef;          ///< rotation matrix from ENU to ECEF
     RMatrix _ned2ecef;          ///< rotation matrix from NED to ECEF

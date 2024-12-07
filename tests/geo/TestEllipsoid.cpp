@@ -14,13 +14,13 @@ protected:
 TEST_F(TestEllipsoid, CanConstruct)
 {
     mc::Ellipsoid *ellipsoid = nullptr;
-    EXPECT_NO_THROW(ellipsoid = new mc::Ellipsoid(1.0, 0.0));
+    EXPECT_NO_THROW(ellipsoid = new mc::Ellipsoid(1.0_m, 0.0));
     delete ellipsoid;
 }
 
 TEST_F(TestEllipsoid, CanDestruct)
 {
-    mc::Ellipsoid *ellipsoid = new mc::Ellipsoid(1.0, 0.0);
+    mc::Ellipsoid *ellipsoid = new mc::Ellipsoid(1.0_m, 0.0);
     EXPECT_NO_THROW(delete ellipsoid);
 }
 
@@ -40,16 +40,16 @@ TEST_F(TestEllipsoid, CanInstantiate)
     constexpr double ep2 = 6.7394967422800e-3;  // [-] ellipsoid second eccentricity squared
     constexpr double ep  = 8.2094437949696e-2;  // [-] ellipsoid second eccentricity
 
-    mc::Ellipsoid ellipsoid(a, f);
+    mc::Ellipsoid ellipsoid(units::length::meter_t(a), f);
 
-    EXPECT_NEAR(ellipsoid.a()   , a   , 1.0e-3);
-    EXPECT_NEAR(ellipsoid.f()   , f   , 1.0e-9);
-    EXPECT_NEAR(ellipsoid.b()   , b   , 1.0e-3);
-    EXPECT_NEAR(ellipsoid.r1()  , r1  , 1.0e-3);
-    EXPECT_NEAR(ellipsoid.a2()  , a2  , 1.0e3); // sic!
-    EXPECT_NEAR(ellipsoid.b2()  , b2  , 1.0e3); // sic!
-    EXPECT_NEAR(ellipsoid.e2()  , e2  , 1.0e-9);
-    EXPECT_NEAR(ellipsoid.e()   , e   , 1.0e-9);
-    EXPECT_NEAR(ellipsoid.ep2() , ep2 , 1.0e-9);
-    EXPECT_NEAR(ellipsoid.ep()  , ep  , 1.0e-9);
+    EXPECT_NEAR(ellipsoid.a()()   , a   , 1.0e-3);
+    EXPECT_NEAR(ellipsoid.f()     , f   , 1.0e-9);
+    EXPECT_NEAR(ellipsoid.b()()   , b   , 1.0e-3);
+    EXPECT_NEAR(ellipsoid.r1()()  , r1  , 1.0e-3);
+    EXPECT_NEAR(ellipsoid.a2()()  , a2  , 1.0e3); // sic!
+    EXPECT_NEAR(ellipsoid.b2()()  , b2  , 1.0e3); // sic!
+    EXPECT_NEAR(ellipsoid.e2()    , e2  , 1.0e-9);
+    EXPECT_NEAR(ellipsoid.e()     , e   , 1.0e-9);
+    EXPECT_NEAR(ellipsoid.ep2()   , ep2 , 1.0e-9);
+    EXPECT_NEAR(ellipsoid.ep()    , ep  , 1.0e-9);
 }

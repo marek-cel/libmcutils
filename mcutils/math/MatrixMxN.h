@@ -326,11 +326,12 @@ protected:
     }
 
     /** \brief Multiplies by vector. */
-    void MultiplyByVector(const VectorN<TYPE, COLS>& vect, VectorN<TYPE, ROWS>* result) const
+    template <typename LHS_TYPE, typename RHS_TYPE>
+    void MultiplyByVector(const VectorN<LHS_TYPE, COLS>& vect, VectorN<RHS_TYPE, ROWS>* result) const
     {
         for (unsigned int r = 0; r < kRows; ++r)
         {
-            (*result)(r) = 0.0;
+            (*result)(r) = RHS_TYPE{0};
             for (unsigned int c = 0; c < kCols; ++c)
             {
                 (*result)(r) += (_elements[r*kCols + c] * vect(c));

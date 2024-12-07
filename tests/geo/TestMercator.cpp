@@ -28,13 +28,13 @@ TEST_F(TestMercator, CanCalculateLat)
 {
     mc::Mercator merc(mc::WGS84::ellipsoid);
 
-    units::length::meter_t nautical_mile = 1_nmi;
-    units::length::meter_t arc_deg = 60.0 * nautical_mile;
+    constexpr units::length::meter_t nautical_mile = 1_nmi;
+    constexpr units::length::meter_t arc_deg = 60.0 * nautical_mile;
 
-    units::length::meter_t arc_deg30 = 30.0 * arc_deg;
-    units::length::meter_t arc_deg45 = 45.0 * arc_deg;
-    units::length::meter_t arc_deg60 = 60.0 * arc_deg;
-    units::length::meter_t arc_deg90 = 90.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg30 = 30.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg45 = 45.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg60 = 60.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg90 = 90.0 * arc_deg;
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
@@ -56,16 +56,16 @@ TEST_F(TestMercator, CanCalculateLon)
 {
     mc::Mercator merc(mc::WGS84::ellipsoid);
 
-    units::length::meter_t nautical_mile = 1_nmi;
-    units::length::meter_t arc_deg = 60.0 * nautical_mile;
+    constexpr units::length::meter_t nautical_mile = 1_nmi;
+    constexpr units::length::meter_t arc_deg = 60.0 * nautical_mile;
 
-    units::length::meter_t arc_deg30  =  30.0 * arc_deg;
-    units::length::meter_t arc_deg45  =  45.0 * arc_deg;
-    units::length::meter_t arc_deg60  =  60.0 * arc_deg;
-    units::length::meter_t arc_deg90  =  90.0 * arc_deg;
-    units::length::meter_t arc_deg120 = 120.0 * arc_deg;
-    units::length::meter_t arc_deg150 = 150.0 * arc_deg;
-    units::length::meter_t arc_deg180 = 180.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg30  =  30.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg45  =  45.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg60  =  60.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg90  =  90.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg120 = 120.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg150 = 150.0 * arc_deg;
+    constexpr units::length::meter_t arc_deg180 = 180.0 * arc_deg;
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
