@@ -22,8 +22,8 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'echo ">>> Building..."'
-                sh 'cmake . -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-O0 -fno-elide-constructors -fno-default-inline -fprofile-arcs -ftest-coverage" -B build'
-                sh 'cmake --build build -j 4'
+                sh 'cmake . -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=On -DCMAKE_CXX_FLAGS="-O0 -fno-elide-constructors -fno-default-inline -fprofile-arcs -ftest-coverage" -B build'
+                sh 'cmake --build build -j 4 --target all tests-mcutils --'
             }
         }
         stage('Test') {

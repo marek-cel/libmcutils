@@ -2,7 +2,11 @@
 
 #include <cmath>
 
+#include <units.h>
+
 #include <mcutils/math/Table.h>
+
+using namespace units::literals;
 
 class TestTable : public ::testing::Test
 {
@@ -165,17 +169,17 @@ TEST_F(TestTable, CanGetKeyOfValueMaxRanged)
 
 TEST_F(TestTable, CanGetValue)
 {
-    mc::Table<double,double> tab0;
-    EXPECT_DOUBLE_EQ(tab0.GetValue(0.0), 0.0);
-    EXPECT_DOUBLE_EQ(tab0.GetValue(1.7), 0.0);
+    mc::Table<double,units::length::meter_t> tab0;
+    EXPECT_DOUBLE_EQ(tab0.GetValue(0.0)(), 0.0);
+    EXPECT_DOUBLE_EQ(tab0.GetValue(1.7)(), 0.0);
 
     // y = x^2 - 1
-    std::vector<double> key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
-    std::vector<double> table_data {  1.0,  0.0, -1.0,  0.0,  3.0,  8.0 };
+    std::vector<double>                 key_values { -2.0, -1.0,  0.0,  1.0,  2.0,  3.0 };
+    std::vector<units::length::meter_t> table_data {  1_m,  0_m, -1_m,  0_m,  3_m,  8_m };
 
-    mc::Table<double,double> tab(key_values, table_data);
+    mc::Table<double,units::length::meter_t> tab(key_values, table_data);
 
-    EXPECT_DOUBLE_EQ(tab.GetValue(2.0), 3.0);
+    EXPECT_DOUBLE_EQ(tab.GetValue(2.0)(), 3.0);
 }
 
 TEST_F(TestTable, CanGetValueFromEmptyTable)

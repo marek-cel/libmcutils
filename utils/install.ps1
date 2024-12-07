@@ -1,1 +1,0 @@
-Start-Process python install.py -Verb runAs

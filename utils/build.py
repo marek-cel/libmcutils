@@ -31,7 +31,8 @@ def buildForLinux(with_tests):
         '-B', build_dir
     ]
     if with_tests:
-        cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 \
+        cmake_cmd.append('-DBUILD_TESTING=On \
+                         -DCMAKE_CXX_FLAGS=-O0 \
                          -fno-elide-constructors \
                          -fno-default-inline \
                          -fprofile-arcs -ftest-coverage')
@@ -40,7 +41,7 @@ def buildForLinux(with_tests):
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
         subprocess.run(
-            "cmake --build " + build_dir + " --config Release -j 4",
+            "cmake --build " + build_dir + " --config Release -j 4 --target all tests-mcutils --",
             shell=True
         )
 
@@ -55,12 +56,14 @@ def buildForWindows(with_tests):
         install_dir = os.getenv('LIBMCUTILS_DIR')
         cmake_cmd.append('-DCMAKE_PREFIX_PATH=' + install_dir)
     if with_tests:
-        cmake_cmd.append('-DCMAKE_CXX_FLAGS=-O0 \
+        cmake_cmd.append('-DBUILD_TESTING=On \
+                         -DCMAKE_CXX_FLAGS=-O0 \
                          -fno-elide-constructors \
                          -fno-default-inline \
                          -fprofile-arcs -ftest-coverage')
     else:
         cmake_cmd.append('-DBUILD_TESTING=Off')
+    print(" ".join(cmake_cmd))
     result = subprocess.run(cmake_cmd)
     if result.returncode == 0:
         subprocess.run(

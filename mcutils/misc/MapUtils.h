@@ -25,7 +25,6 @@
 #include <map>
 #include <utility>
 
-#include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
 namespace mc {

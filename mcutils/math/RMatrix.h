@@ -244,6 +244,15 @@ public:
     }
 
     /** \brief Multiplication operator (by vector). */
+    template <class T>
+    UVector3<T> operator*(const UVector3<T>& vect) const
+    {
+        UVector3<T> result;
+        MultiplyByVector(vect, &result);
+        return result;
+    }
+
+    /** \brief Multiplication operator (by vector). */
     Vector3d operator*(const Vector3d& vect) const
     {
         Vector3d result;

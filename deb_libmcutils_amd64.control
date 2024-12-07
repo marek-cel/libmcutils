@@ -1,8 +1,0 @@
-Package: libmcutils
-Version: 0.1
-Architecture: amd64
-Maintainer: Marek M. Cel <marekcel@marekcel.pl>
-Depends: 
-Installed-Size: 3686
-Homepage: http://marekcel.pl
-Description: Vehicle simulation utilities library.

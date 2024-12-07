@@ -237,7 +237,8 @@ inline UVector3<TYPE> operator*(double value, const UVector3<TYPE>& vect)
 }
 
 /** \brief Multiplication operator (by scalar). */
-template <class LHS_TYPE, class RHS_TYPE>
+// enable if LHS_TYPE is a unit type
+template <class LHS_TYPE, class RHS_TYPE, typename std::enable_if<units::traits::is_unit_t<LHS_TYPE>::value, int>::type = 0>
 inline auto operator*(const LHS_TYPE& value, const UVector3<RHS_TYPE>& vect)
 {
     return vect * value;
