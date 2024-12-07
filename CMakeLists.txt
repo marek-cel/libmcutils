@@ -60,11 +60,13 @@ endif()
 
 ################################################################################
 
+# fetch units library and exclude from build
 FetchContent_Declare(LIBUNITS
     GIT_REPOSITORY https://github.com/nholthaus/units.git
     GIT_TAG origin/master
-    SOURCE_DIR "${CMAKE_BINARY_DIR}/units")
-    FetchContent_MakeAvailable(LIBUNITS)
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/units"
+    EXCLUDE_FROM_ALL)
+FetchContent_MakeAvailable(LIBUNITS)
 include_directories(${CMAKE_BINARY_DIR}/units/include)
 
 ################################################################################
