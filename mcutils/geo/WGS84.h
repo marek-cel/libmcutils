@@ -22,7 +22,6 @@
 #ifndef MCUTILS_GEO_WGS84_H_
 #define MCUTILS_GEO_WGS84_H_
 
-#include <mcutils/defs.h>
 #include <mcutils/geo/Ellipsoid.h>
 
 namespace mc {

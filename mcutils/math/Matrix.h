@@ -28,8 +28,6 @@
 #include <string>
 #include <utility>
 
-#include <mcutils/defs.h>
-
 #include <mcutils/math/MatrixMxN.h>
 #include <mcutils/math/MatrixNxN.h>
 #include <mcutils/math/Matrix3x3.h>

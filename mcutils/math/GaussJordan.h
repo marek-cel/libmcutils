@@ -22,7 +22,6 @@
 #ifndef MCUTILS_MATH_GAUSSJORDAN_H_
 #define MCUTILS_MATH_GAUSSJORDAN_H_
 
-#include <mcutils/defs.h>
 #include <mcutils/Result.h>
 
 #include <mcutils/math/Matrix.h>

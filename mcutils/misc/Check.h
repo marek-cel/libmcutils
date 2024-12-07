@@ -29,8 +29,6 @@
 #include <cmath>
 #include <vector>
 
-#include <mcutils/defs.h>
-
 namespace mc {
 
 /**

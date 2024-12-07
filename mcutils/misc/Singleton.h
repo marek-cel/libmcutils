@@ -22,8 +22,6 @@
 #ifndef MCUTILS_MISC_SINGLETON_H_
 #define MCUTILS_MISC_SINGLETON_H_
 
-#include <mcutils/defs.h>
-
 namespace mc {
 
 /**

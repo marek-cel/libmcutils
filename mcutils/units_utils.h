@@ -24,8 +24,6 @@
 
 #include <units.h>
 
-#include <mcutils/defs.h>
-
 namespace units {
 
 	//------------------------------
