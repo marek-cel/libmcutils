@@ -33,6 +33,13 @@ namespace units {
 	UNIT_ADD(velocity, feet_per_minute, feet_per_minute, fpm, compound_unit<length::feet, inverse<time::minutes>>)
 #   endif
 
+	//------------------------------
+	// STANDARD GRAVITATIONAL PARAMETER
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_STANDARD_GRAVITATIONAL_PARAMETER_UNITS)
+	UNIT_ADD(standard_gravitational_parameter, cubic_meters_per_second_squared, cubic_meters_per_second_squared, cu_m_per_s_sq, compound_unit<cubed<length::meter>, inverse<squared<time::second>>>)
+#   endif
+
 } // namespace units
 
 #endif // MCUTILS_TYPES_H_

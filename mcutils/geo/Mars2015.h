@@ -22,10 +22,11 @@
 #ifndef MCUTILS_GEO_MARS2015_H_
 #define MCUTILS_GEO_MARS2015_H_
 
-#include <cmath>
+#include <units.h>
 
-#include <mcutils/defs.h>
 #include <mcutils/geo/Ellipsoid.h>
+
+using namespace units::literals;
 
 namespace mc {
 
@@ -45,9 +46,9 @@ namespace Mars2015 {
 
 static const Ellipsoid ellipsoid(3396190.0_m, 1.0 / 169.894447223612);    ///< datum ellipsoid
 
-static constexpr double omega = 7.0900303093e-5;        ///< [rad/s] angular velocity of the Mars ( 360deg / 24:37:22.7 )
-static constexpr double gamma = 3.72076;                ///< [m/s^2] theoretical (normal) gravity mean value
-static constexpr double mm    = 6.4171e23;              ///< [kg] mass of the Mars
+static constexpr units::angular_velocity::degrees_per_second_t omega = 360_deg / (24_hr + 37_min + 22.7_s); ///< [rad/s] angular velocity of the Mars ( 360deg / 24:37:22.7 )
+static constexpr units::acceleration::meters_per_second_squared_t gamma = 3.72076_mps_sq;   ///< [m/s^2] theoretical (normal) gravity mean value
+static constexpr units::mass::kilogram_t mm  = 6.4171e23_kg;    ///< [kg] mass of the Mars
 
 } // namespace Mars2015
 } // namespace mc
