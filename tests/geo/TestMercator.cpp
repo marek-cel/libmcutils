@@ -28,65 +28,65 @@ TEST_F(TestMercator, CanCalculateLat)
 {
     mc::Mercator merc(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
-    constexpr double arc_deg = 60.0 * nautical_mile;
+    units::length::meter_t nautical_mile = 1_nmi;
+    units::length::meter_t arc_deg = 60.0 * nautical_mile;
 
-    constexpr double arc_deg30 = 30.0 * arc_deg;
-    constexpr double arc_deg45 = 45.0 * arc_deg;
-    constexpr double arc_deg60 = 60.0 * arc_deg;
-    constexpr double arc_deg90 = 90.0 * arc_deg;
+    units::length::meter_t arc_deg30 = 30.0 * arc_deg;
+    units::length::meter_t arc_deg45 = 45.0 * arc_deg;
+    units::length::meter_t arc_deg60 = 60.0 * arc_deg;
+    units::length::meter_t arc_deg90 = 90.0 * arc_deg;
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
 
-    EXPECT_NEAR(merc.CalculateLat( 0.0 ), 0.0, 1.0e-6);
+    EXPECT_NEAR(merc.CalculateLat(0_m)(), 0.0, 1.0e-6);
 
-    EXPECT_NEAR(merc.CalculateLat(arc_deg30), 0.503202371118002  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(arc_deg45), 0.7174954798366173 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(arc_deg60), 0.8979087261408331 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(arc_deg90), 1.1622044409794392 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( arc_deg30 )(), 0.503202371118002  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( arc_deg45 )(), 0.7174954798366173 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( arc_deg60 )(), 0.8979087261408331 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( arc_deg90 )(), 1.1622044409794392 , LAT_LON_TOLERANCE);
 
-    EXPECT_NEAR(merc.CalculateLat(-arc_deg30), -0.5032023711180025 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(-arc_deg45), -0.7174954798366175 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(-arc_deg60), -0.8979087261408334 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLat(-arc_deg90), -1.1622044409794392 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( -arc_deg30 )(), -0.5032023711180025 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( -arc_deg45 )(), -0.7174954798366175 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( -arc_deg60 )(), -0.8979087261408334 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLat( -arc_deg90 )(), -1.1622044409794392 , LAT_LON_TOLERANCE);
 }
 
 TEST_F(TestMercator, CanCalculateLon)
 {
     mc::Mercator merc(mc::WGS84::ellipsoid);
 
-    constexpr double nautical_mile = 1852.0;
-    constexpr double arc_deg = 60.0 * nautical_mile;
+    units::length::meter_t nautical_mile = 1_nmi;
+    units::length::meter_t arc_deg = 60.0 * nautical_mile;
 
-    constexpr double arc_deg30  =  30.0 * arc_deg;
-    constexpr double arc_deg45  =  45.0 * arc_deg;
-    constexpr double arc_deg60  =  60.0 * arc_deg;
-    constexpr double arc_deg90  =  90.0 * arc_deg;
-    constexpr double arc_deg120 = 120.0 * arc_deg;
-    constexpr double arc_deg150 = 150.0 * arc_deg;
-    constexpr double arc_deg180 = 180.0 * arc_deg;
+    units::length::meter_t arc_deg30  =  30.0 * arc_deg;
+    units::length::meter_t arc_deg45  =  45.0 * arc_deg;
+    units::length::meter_t arc_deg60  =  60.0 * arc_deg;
+    units::length::meter_t arc_deg90  =  90.0 * arc_deg;
+    units::length::meter_t arc_deg120 = 120.0 * arc_deg;
+    units::length::meter_t arc_deg150 = 150.0 * arc_deg;
+    units::length::meter_t arc_deg180 = 180.0 * arc_deg;
 
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
 
-    EXPECT_NEAR(merc.CalculateLon( 0.0 ), 0.0, 1.0e-6);
+    EXPECT_NEAR(merc.CalculateLon(0_m)(), 0.0, 1.0e-6);
 
-    EXPECT_NEAR(merc.CalculateLon(arc_deg30)  , 0.522660457120943  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg45)  , 0.7839906856814144 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg60)  , 1.045320914241886  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg90)  , 1.5679813713628288 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg120) , 2.090641828483772  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg150) , 2.613302285604715  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(arc_deg180) , 3.1359627427256576 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg30  )() , 0.522660457120943  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg45  )() , 0.7839906856814144 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg60  )() , 1.045320914241886  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg90  )() , 1.5679813713628288 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg120 )() , 2.090641828483772  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg150 )() , 2.613302285604715  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( arc_deg180 )() , 3.1359627427256576 , LAT_LON_TOLERANCE);
 
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg30)  , -0.522660457120943  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg45)  , -0.7839906856814144 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg60)  , -1.045320914241886  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg90)  , -1.5679813713628288 , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg120) , -2.090641828483772  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg150) , -2.613302285604715  , LAT_LON_TOLERANCE);
-    EXPECT_NEAR(merc.CalculateLon(-arc_deg180) , -3.1359627427256576 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg30  )() , -0.522660457120943  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg45  )() , -0.7839906856814144 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg60  )() , -1.045320914241886  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg90  )() , -1.5679813713628288 , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg120 )() , -2.090641828483772  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg150 )() , -2.613302285604715  , LAT_LON_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateLon( -arc_deg180 )() , -3.1359627427256576 , LAT_LON_TOLERANCE);
 }
 
 TEST_F(TestMercator, CanCalculateX)
@@ -96,50 +96,21 @@ TEST_F(TestMercator, CanCalculateX)
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
 
-    double lon = 0.0;
-    EXPECT_NEAR(merc.CalculateX(lon), 0.0, LINEAR_POSITION_TOLERANCE);
-
-    lon = 30.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 3339584.723798207, LINEAR_POSITION_TOLERANCE);
-
-    lon = 45.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 5009377.085697311, LINEAR_POSITION_TOLERANCE);
-
-    lon = 60.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 6679169.447596414, LINEAR_POSITION_TOLERANCE);
-
-    lon = 90.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 10018754.171394622, LINEAR_POSITION_TOLERANCE);
-
-    lon = 120.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 13358338.895192828, LINEAR_POSITION_TOLERANCE);
-
-    lon = 150.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 16697923.618991036, LINEAR_POSITION_TOLERANCE);
-
-    lon = 180.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), 20037508.342789244, LINEAR_POSITION_TOLERANCE);
-
-    lon = -30.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -3339584.723798207, LINEAR_POSITION_TOLERANCE);
-
-    lon = -45.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -5009377.085697311, LINEAR_POSITION_TOLERANCE);
-
-    lon = -60.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -6679169.447596414, LINEAR_POSITION_TOLERANCE);
-
-    lon = -90.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -10018754.171394622, LINEAR_POSITION_TOLERANCE);
-
-    lon = -120.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -13358338.895192828, LINEAR_POSITION_TOLERANCE);
-
-    lon = -150.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -16697923.618991036, LINEAR_POSITION_TOLERANCE);
-
-    lon = -180.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateX(lon), -20037508.342789244, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(    0_deg )(),         0.000000000, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(   30_deg )(),   3339584.723798207, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(   45_deg )(),   5009377.085697311, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(   60_deg )(),   6679169.447596414, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(   90_deg )(),  10018754.171394622, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  120_deg )(),  13358338.895192828, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  150_deg )(),  16697923.618991036, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  180_deg )(),  20037508.342789244, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  -30_deg )(),  -3339584.723798207, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  -45_deg )(),  -5009377.085697311, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  -60_deg )(),  -6679169.447596414, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX(  -90_deg )(), -10018754.171394622, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX( -120_deg )(), -13358338.895192828, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX( -150_deg )(), -16697923.618991036, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateX( -180_deg )(), -20037508.342789244, LINEAR_POSITION_TOLERANCE);
 }
 
 TEST_F(TestMercator, CanCalculateY)
@@ -149,30 +120,15 @@ TEST_F(TestMercator, CanCalculateY)
     // expected values calculated with PROJ4
     // tests/geo/python/test_geo_mercator.py
 
-    double lat = 0.0;
-    EXPECT_NEAR(merc.CalculateY(lat), 0.0, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( 0_deg )(), 0.0, LINEAR_POSITION_TOLERANCE);
 
-    lat = 30.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), 3482189.0854086173, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( 30_deg )(), 3482189.0854086173 , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( 45_deg )(), 5591295.918553392  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( 60_deg )(), 8362698.548500749  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( 85_deg )(), 19929239.113379154 , LINEAR_POSITION_TOLERANCE);
 
-    lat = 45.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), 5591295.918553392, LINEAR_POSITION_TOLERANCE);
-
-    lat = 60.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), 8362698.548500749, LINEAR_POSITION_TOLERANCE);
-
-    lat = 85.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), 19929239.113379154, LINEAR_POSITION_TOLERANCE);
-
-    lat = -30.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), -3482189.085408616, LINEAR_POSITION_TOLERANCE);
-
-    lat = -45.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), -5591295.9185533915, LINEAR_POSITION_TOLERANCE);
-
-    lat = -60.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), -8362698.548500745, LINEAR_POSITION_TOLERANCE);
-
-    lat = -85.0 * (M_PI / 180.0);
-    EXPECT_NEAR(merc.CalculateY(lat), -19929239.113379147, LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( -30_deg )(), -3482189.085408616  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( -45_deg )(), -5591295.9185533915 , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( -60_deg )(), -8362698.548500745  , LINEAR_POSITION_TOLERANCE);
+    EXPECT_NEAR(merc.CalculateY( -85_deg )(), -19929239.113379147 , LINEAR_POSITION_TOLERANCE);
 }

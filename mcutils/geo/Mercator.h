@@ -22,9 +22,13 @@
 #ifndef MCUTILS_GEO_MERCATOR_H_
 #define MCUTILS_GEO_MERCATOR_H_
 
+#include <units.h>
+
 #include <mcutils/geo/Ellipsoid.h>
 
 #include <mcutils/misc/Units.h>
+
+using namespace units::literals;
 
 namespace mc {
 
@@ -46,8 +50,8 @@ public:
      */
     Mercator(const Ellipsoid& e)
         : _e(e)
-        , _max_x(CalculateX(Units::deg2rad( 180.0 )))
-        , _max_y(CalculateY(Units::deg2rad(  85.0 )))
+        , _max_x(CalculateX( 180.0_deg ))
+        , _max_y(CalculateY(  85.0_deg ))
     {}
 
     /**
@@ -57,11 +61,12 @@ public:
      * \param max_iterations maximum number of iterations
      * \return geodetic latitude [rad]
      */
-    double CalculateLat(double y, double max_error = 1.0e-9,
-                        unsigned int max_iterations = 10)
+    units::angle::radian_t CalculateLat(units::length::meter_t y,
+                                        units::angle::radian_t max_error = 1.0e-9_rad,
+                                        unsigned int max_iterations = 10)
     {
         // for lat_ts=0 k0=a
-        return CalculateT_inv(exp(-y / _e.a()), max_error, max_iterations);
+        return CalculateT_inv(exp(-y() / _e.a()), max_error(), max_iterations);
     }
 
     /**
@@ -69,10 +74,10 @@ public:
      * \param x [m] Mercator x-coordinate
      * \return geodetic longitude [rad]
      */
-    double CalculateLon(double x)
+    units::angle::radian_t CalculateLon(units::length::meter_t x)
     {
         // for lat_ts=0 k0=a
-        return x / _e.a();
+        return units::angle::radian_t(x() / _e.a());
     }
 
     /**
@@ -80,10 +85,10 @@ public:
      * \param lon [rad] geodetic longitude
      * \return Mercator x-coordinate [m]
      */
-    double CalculateX(double lon)
+    units::length::meter_t CalculateX(units::angle::radian_t lon)
     {
         // for lat_ts=0 k0=a
-        return _e.a() * lon;
+        return _e.a() * 1_m * lon();
     }
 
     /**
@@ -91,10 +96,10 @@ public:
      * \param lat [rad] geodetic latitude
      * \return Mercator y-coordinate [m]
      */
-    double CalculateY(double lat)
+    units::length::meter_t CalculateY(units::angle::radian_t lat)
     {
         // for lat_ts=0 k0=a
-        return _e.a() * log(CalculateT(lat));
+        return _e.a() * 1_m * log(CalculateT(lat));
     }
 
     /**
@@ -102,10 +107,10 @@ public:
      * \param lat [rad] geodetic latitude
      * \return Isometric Latitude kernel
      */
-    double CalculateT(double lat)
+    double CalculateT(units::angle::radian_t lat)
     {
-        double e_sinLat = _e.e() * sin(lat);
-        return tan(M_PI_4 + 0.5 * lat) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * _e.e());
+        double e_sinLat = _e.e() * sin(lat());
+        return tan(M_PI_4 + 0.5 * lat()) * pow((1.0 - e_sinLat) / (1.0 + e_sinLat), 0.5 * _e.e());
     }
 
     /**
@@ -115,8 +120,8 @@ public:
      * \param max_iterations maximum number of iterations
      * \return geodetic latitude [rad]
      */
-    double CalculateT_inv(double t, double max_error = 1.0e-9,
-                          unsigned int max_iterations = 10)
+    units::angle::radian_t CalculateT_inv(double t, double max_error = 1.0e-9,
+                                          unsigned int max_iterations = 10)
     {
         double lat = M_PI_2 - 2.0 * atan(t);
         double ex = 0.5 * _e.e();
@@ -136,18 +141,18 @@ public:
             iteration++;
         }
 
-        return lat;
+        return units::angle::radian_t(lat);
     }
 
-    double max_x() const { return _max_x; }
-    double max_y() const { return _max_y; }
+    units::length::meter_t max_x() const { return _max_x; }
+    units::length::meter_t max_y() const { return _max_y; }
 
 private:
 
     Ellipsoid _e;       ///< datum ellipsoid
 
-    double _max_x;      ///< [m] maximum Mercator x-coordinate for longitude 180 deg
-    double _max_y;      ///< [m] maximum Mercator y-coordinate for latitude 85 deg
+    units::length::meter_t _max_x = 0_m;    ///< [m] maximum Mercator x-coordinate for longitude 180 deg
+    units::length::meter_t _max_y = 0_m;    ///< [m] maximum Mercator y-coordinate for latitude 85 deg
 };
 
 } // namespace mc
