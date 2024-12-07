@@ -6,13 +6,13 @@ project(mcutils)
 
 ################################################################################
 
-set(BUILD_LIBMCUTILS_TESTS OFF CACHE BOOL "Build libmcutils tests")
+set(BUILD_TESTING ON)
 
 ################################################################################
 
 include(FetchContent)
 
-if (BUILD_LIBMCUTILS_TESTS)
+if (BUILD_TESTING)
     include(CTest)
     include(GoogleTest)
 endif()
@@ -28,13 +28,11 @@ set(MCUTILS_VERSION_STRING
 
 ################################################################################
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-
-################################################################################
-
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+
+################################################################################
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -55,7 +53,7 @@ elseif(WIN32)
     add_definitions(-D_USE_MATH_DEFINES)
 endif()
 
-if (BUILD_LIBMCUTILS_TESTS)
+if (BUILD_TESTING)
     add_definitions(-D_GTEST_)
     add_definitions(-D_TESTS_)
 endif()
@@ -71,7 +69,7 @@ include_directories(${CMAKE_BINARY_DIR}/units/include)
 
 ################################################################################
 
-if (BUILD_LIBMCUTILS_TESTS)
+if (BUILD_TESTING)
     enable_testing()
 endif()
 
@@ -109,6 +107,6 @@ add_subdirectory(mcutils)
 
 ################################################################################
 
-if (BUILD_LIBMCUTILS_TESTS)
+if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()

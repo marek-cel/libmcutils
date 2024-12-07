@@ -95,6 +95,8 @@ endif()
 
 target_link_libraries(${TARGET_NAME} ${LIBS})
 
+set_target_properties(${TARGET_NAME} PROPERTIES EXCLUDE_FROM_ALL True)
+
 ################################################################################
 
 gtest_discover_tests(${TARGET_NAME}
