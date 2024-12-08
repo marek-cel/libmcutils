@@ -34,10 +34,20 @@ namespace units {
 #   endif
 
 	//------------------------------
-	// STANDARD GRAVITATIONAL PARAMETER
+	// STANDARD GRAVITATIONAL PARAMETER UNITS
 	//------------------------------
 #   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_STANDARD_GRAVITATIONAL_PARAMETER_UNITS)
 	UNIT_ADD(standard_gravitational_parameter, cubic_meters_per_second_squared, cubic_meters_per_second_squared, cu_m_per_s_sq, compound_unit<cubed<length::meter>, inverse<squared<time::second>>>)
+#   endif
+
+	//------------------------------
+	// RECIPROCAL LENGTH UNITS
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_STANDARD_GRAVITATIONAL_PARAMETER_UNITS)
+	UNIT_ADD(reciprocal_length, reciprocal_metre, reciprocal_metre, per_m, compound_unit<inverse<length::meter>>)
+	UNIT_ADD(reciprocal_length, reciprocal_centimetre, reciprocal_centimetre, per_cm, compound_unit<inverse<length::centimeter>>)
+	UNIT_ADD(reciprocal_length, reciprocal_foot, reciprocal_foot, per_ft, compound_unit<inverse<length::foot>>)
+	UNIT_ADD(reciprocal_length, reciprocal_inch, reciprocal_inch, per_in, compound_unit<inverse<length::inch>>)
 #   endif
 
 } // namespace units
