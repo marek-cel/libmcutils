@@ -43,11 +43,27 @@ namespace units {
 	//------------------------------
 	// RECIPROCAL LENGTH UNITS
 	//------------------------------
-#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_STANDARD_GRAVITATIONAL_PARAMETER_UNITS)
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_RECIPROCAL_LENGTH_UNITS)
 	UNIT_ADD(reciprocal_length, reciprocal_metre, reciprocal_metre, per_m, compound_unit<inverse<length::meter>>)
 	UNIT_ADD(reciprocal_length, reciprocal_centimetre, reciprocal_centimetre, per_cm, compound_unit<inverse<length::centimeter>>)
 	UNIT_ADD(reciprocal_length, reciprocal_foot, reciprocal_foot, per_ft, compound_unit<inverse<length::foot>>)
 	UNIT_ADD(reciprocal_length, reciprocal_inch, reciprocal_inch, per_in, compound_unit<inverse<length::inch>>)
+#   endif
+
+	//------------------------------
+	// STIFFNESS UNITS
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_STIFFNESS_UNITS)
+	UNIT_ADD(stiffness, newtons_per_meter, newtons_per_meter, N_per_m, compound_unit<force::newton, inverse<length::meter>>)
+	UNIT_ADD(stiffness, pounds_per_foot, pounds_per_foot, lbf_per_ft, compound_unit<force::pound, inverse<length::foot>>)
+#   endif
+
+	//------------------------------
+	// VISCOUS DAMPING UNITS
+	//------------------------------
+#   if !defined(DISABLE_PREDEFINED_UNITS) || defined(ENABLE_PREDEFINED_VISCOUS_DAMPING_UNITS)
+	UNIT_ADD(viscous_damping, newtons_per_meters_per_second, newtons_per_meters_per_second, N_per_mps, compound_unit<force::newton, time::second, inverse<length::meter>>)
+	UNIT_ADD(viscous_damping, pounds_per_feet_per_second, pounds_per_feet_per_second, lbf_per_fps, compound_unit<force::pound, time::second, inverse<length::foot>>)
 #   endif
 
 } // namespace units
